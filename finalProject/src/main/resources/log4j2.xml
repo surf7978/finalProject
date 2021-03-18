@@ -35,8 +35,6 @@
         </Logger>
         <Root level="debug">
             <AppenderRef ref="console_com" />
-            <!-- <AppenderRef ref="MyFile" />
-            <AppenderRef ref="MyFile1" /> -->
         </Root>
     </Loggers>
 </Configuration>

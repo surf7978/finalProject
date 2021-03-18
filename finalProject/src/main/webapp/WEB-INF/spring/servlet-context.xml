@@ -53,7 +53,7 @@
 	
 	<!-- TransactionManager AOP 설정 -->
 	<aop:config>
-		<aop:pointcut id="trPointcut" expression="execution(* com.yedam..*impl.*(..))" />
+		<aop:pointcut id="trPointcut" expression="execution(* com.company..*impl.*(..))" />
 		<aop:advisor pointcut-ref="trPointcut" advice-ref="txAdvice" />
 	</aop:config>
 	
