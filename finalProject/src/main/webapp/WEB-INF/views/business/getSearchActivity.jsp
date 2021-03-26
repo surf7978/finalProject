@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>문의내역</h2>
+	<h2>문의내역 리스트</h2>
 	<table>
 		<tr>
 			<td>보낸사람</td>
