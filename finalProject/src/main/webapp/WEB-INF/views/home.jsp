@@ -8,7 +8,7 @@
 <h1>
 	Hello world!  
 </h1>
-asd
 <P>  The time on the server is ${serverTime}. </P>
+<a href="login">로그인</a>
 </body>
 </html>

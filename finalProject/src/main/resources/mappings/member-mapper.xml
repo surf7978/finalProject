@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.member.service.impl.MemberMapper">
+	<insert id="insertMember" parameterType="memberVO">
+		INSERT INTO MEMBER(
+					memberId
+					, password
+					, email
+					, name
+					, post
+					, address
+					, address2
+					, phone
+					, auth
+					, startDate
+					, endDate
+					) VALUES(
+					#{memberId}
+					, #{password}
+					, #{email}
+					, #{name}
+					, #{post}
+					, #{address}
+					, #{address2}
+					, #{phone}
+					, #{auth}
+					, #{startDate}
+					, #{endDate}
+					)
+	</insert>
+	<select id="getMember" parameterType="memberVO" resultType="memberVO">
+		SELECT 
+			memberId
+			, password
+			, email
+			, name
+			, post
+			, address
+			, address2
+			, phone
+			, auth
+			, startDate
+			, endDate
+		FROM MEMBER
+		WHERE memberId = #{memberId}
+	</select>
+
+	<select id="getSearchMember" parameterType="memberVO" resultType="memberVO">
+		SELECT 
+			memberId
+			, password
+			, email
+			, name
+			, post
+			, address
+			, address2
+			, phone
+			, auth
+			, startDate
+			, endDate
+		FROM MEMBER
+	</select>
+
+	<update id="updateMember" parameterType="memberVO">
+		UPDATE MEMBER 
+			<set>
+			 <if test="memberId != null">			 memberId = #{memberId}</if>
+			 <if test="password != null">			 , password = #{password}</if>
+			 <if test="email != null">				 , email = #{email}</if>
+			 <if test="name != null">				 , name = #{name}</if>
+			 <if test="post != null">				 , post = #{post}</if>
+			 <if test="address != null">			 , address = #{address}</if>
+			 <if test="address2 != null">			 , address2 = #{address2}</if>
+			 <if test="phone != null">		 		 , phone = #{phone}</if>
+			 <if test="auth != null">		 		 , auth = #{auth}</if>
+			 <if test="startDate != null">		 	 , startDate = #{startDate}</if>
+			 <if test="endDate != null">			 , endDate = #{endDate}</if>
+			</set>
+		WHERE memberId = #{memberId}
+	</update>
+
+	<delete id="deleteMember" parameterType="memberVO">
+		DELETE 
+		FROM MEMBER
+		WHERE memberId = #{memberId}
+	</delete>
+</mapper>
