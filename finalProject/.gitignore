@@ -38,3 +38,5 @@ release.properties
 *.war
 *.ear
 # virtual machine crash logs, see 
+/target/
+.classpath
