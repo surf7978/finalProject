@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,5 +26,11 @@
 	</table>
 	<input type="search" id="search" name="search" placeholder="검색">
 	<!-- 페이징 영역 -->
+	<my:paging paging="${paging}" jsFunc="goPage" />
+	<script>
+		function goPage(p) {
+
+		}
+	</script>
 </body>
 </html>

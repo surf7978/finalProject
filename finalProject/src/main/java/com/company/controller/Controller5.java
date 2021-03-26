@@ -28,24 +28,27 @@ public class Controller5 {
 
 	// 마이페이지-사업자-본인정보수정 페이지
 	@RequestMapping("/updateBusiness")
-	public String businessInfo() {
+	public String updateBusiness(BusinessVO vo, Model model) {
+		vo = dao.getBusiness(vo);
+		model.addAttribute("vo", vo);
 		return "business/updateBusiness";
 	}
 
-	// 마이페이지-사업자-활동내역-문의내역 리스트
-	@RequestMapping("/getSearchActivity")
-	public String activity() {
-		return "business/getSearchActivity";
+	// 마이페이지-사업자-문의내역 리스트
+	@RequestMapping("/getSearchQuestion")
+	public String getSearchQuestion(BusinessVO vo) {
+
+		return "business/getSearchQuestion";
 	}
 
-	// 마이페이지-사업자-활동내역-특정 문의내역조회
-	@RequestMapping("/getActivity")
-	public String getActivity() {
-		return "business/getActivity";
+	// 마이페이지-사업자-특정 문의내역조회
+	@RequestMapping("/getQuestion")
+	public String getQuestion(BusinessVO vo) {
+		return "business/getQuestion";
 	}
-	// 마이페이지-사업자-활동내역-답변
+	// 마이페이지-사업자-답변
 
-	// 마이페이지-사업자-활동내역-답변리스트
+	// 마이페이지-사업자-답변리스트
 
 	// 마이페이지-사업자-예약내역조회
 
