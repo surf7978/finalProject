@@ -18,7 +18,7 @@ local.properties
 # PDT-specific
 .buildpath
 # sbteclipse plugin 
-.target
+#.target
 # TeXlipse plugin
 .texlipse
 ### Maven ###
@@ -28,7 +28,7 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 ### Java ###
-*.class
+#*.class
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 # Package Files #
