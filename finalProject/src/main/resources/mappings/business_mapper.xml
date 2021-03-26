@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.service.impl.BusinessMapper">
+<mapper namespace="com.company.business.service.impl.BusinessMapper">
 	<!-- 마이페이지-사업자-본인정보 -->
 	<select id="getBusiness" resultType="businessVO">
 		SELECT * FROM BUSINESS

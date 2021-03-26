@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.question.service.impl.QuestionMapper">
+	<!-- 페이징용 카운트 변수 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM QUESTION
+		<!-- 수정필요 -->
+	</select>
+	
+	<!--사업자-문의내역 전체조회 -->
+	<select id="getSearchQuestion" resultType="questionVO">
+	SELECT B.* FROM (SELECT ROWNUM RN ,A.* FROM (
+		<!-- 첫줄 -->
+		SELECT Q.* FROM QUESTION Q ,MEMBER M
+		WHERE M.MEMBERID = Q.MEMBERID
+		<!-- 막줄 -->
+		)A )B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
+</mapper>

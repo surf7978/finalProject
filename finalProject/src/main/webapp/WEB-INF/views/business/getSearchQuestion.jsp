@@ -16,11 +16,10 @@
 			<td>제목</td>
 			<td>받은 날짜</td>
 		</tr>
-		<c:forEach items="">
+		<c:forEach items="${list}" var="q">
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td>${q.memberId}</td>
+				<td>${q.title}</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -29,7 +28,7 @@
 	<my:paging paging="${paging}" jsFunc="goPage" />
 	<script>
 		function goPage(p) {
-
+			
 		}
 	</script>
 </body>

@@ -1,18 +1,26 @@
 package com.company.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.company.service.BusinessVO;
-import com.company.service.impl.BusinessMapper;
+import com.company.business.service.BusinessVO;
+import com.company.business.service.impl.BusinessMapper;
+import com.company.common.Paging;
+import com.company.question.service.QuestionVO;
+import com.company.question.service.impl.QuestionMapper;
 
 @Controller
 public class Controller5 {
 
 	@Autowired
-	BusinessMapper dao;
+	BusinessMapper bMapper;
+
+	@Autowired
+	QuestionMapper qMapper;
 
 	// 로그인 후 마이페이지 눌렀을 때의 상황
 	// 세션의 id로 조회하기(Session.get사용하기)
@@ -21,31 +29,46 @@ public class Controller5 {
 	@RequestMapping("/getBusiness")
 	public String getBusiness(BusinessVO vo, Model model) {
 		// 본인 정보 조회
-		vo = dao.getBusiness(vo);
+		vo = bMapper.getBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/getBusiness";
-	}
+	}// end of getBusiness
 
 	// 마이페이지-사업자-본인정보수정 페이지
 	@RequestMapping("/updateBusiness")
 	public String updateBusiness(BusinessVO vo, Model model) {
-		vo = dao.getBusiness(vo);
+		vo = bMapper.getBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/updateBusiness";
-	}
+	}// end of updateBusiness
 
 	// 마이페이지-사업자-문의내역 리스트
 	@RequestMapping("/getSearchQuestion")
-	public String getSearchQuestion(BusinessVO vo) {
+	public String getSearchQuestion(QuestionVO vo, Paging paging, Model model) {
+		//
+		paging.setPageUnit(5);// page record view
+		paging.setPageSize(3);// page number
+		// paging
+		if (vo.getPage() == null)
+			vo.setPage(1);
 
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		// 전체 페이지 조회
+		paging.setTotalRecord(qMapper.getCount(vo));
+		model.addAttribute("paging", paging);
+		// 조회한 값 list형태로
+		List<QuestionVO> list = qMapper.getSearchQuestion(vo);
+		model.addAttribute("list", list);
 		return "business/getSearchQuestion";
-	}
+	}// end of getSearchQuestion
 
 	// 마이페이지-사업자-특정 문의내역조회
 	@RequestMapping("/getQuestion")
 	public String getQuestion(BusinessVO vo) {
 		return "business/getQuestion";
-	}
+	}// end of getQuestion
+
 	// 마이페이지-사업자-답변
 
 	// 마이페이지-사업자-답변리스트
