@@ -6,7 +6,7 @@ import com.company.member.service.MemberVO;
 
 public interface MemberMapper {
 
-	public List<MemberVO> getMemberList();
+	public List<MemberVO> getSearchMember();
 	
 	public MemberVO getMember( MemberVO vo);
 	

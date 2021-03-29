@@ -2,11 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.member.service.impl.MemberMapper">
-	<select id="getMemberList" resultType="com.company.member.service.MemberVO">
+	
+	<select id="getSearchMember" resultType="memberVO">
 	SELECT * FROM MEMBER
 	</select>
-	<select id="getMember" resultType="com.company.member.service.MemberVO"
-							parameterType="com.company.member.service.MemberVO"			>
+	
+	
+	<select id="getMember" resultType="memberVO"
+							parameterType="memberVO"			>
 		
 		SELECT *
 			
@@ -16,7 +19,7 @@
 	</select>
 	
 	<insert id="insertMember"
-			parameterType="com.company.member.service.MemberVO"	>
+			parameterType="memberVO"	>
 		INSERT INTO MEMBER(MEMBERID,PASSWORD,EMAIL,NAME,POST,ADDRESS,ADDRESS2,PHONE,AUTH,STARTDATE,ENDDATE)
 		VALUE(
 		  #{memberId}
@@ -30,13 +33,15 @@
 		 ,#{startDate}
 		 ,#{endDate}
 		)	
-			</insert>
-		<delete id="deleteMember" parameterType="com.company.member.service.MemberVO">
+	</insert>
+	<!--삭제  -->
+		<delete id="deleteMember" 
+			parameterType="memberVO">
 			DELETE FROM MEMBER WHERE MEMBERID=#{memberId}
 		</delete>
 		
 		<update id="updateMember"
-					parameterType="com.company.member.service.MemberVO">
+					parameterType="memberVO">
 			UPDATE MEMBER SET password=#{password}
 		 , EMAIL=#{email}
 		 , NAME=#{name}
