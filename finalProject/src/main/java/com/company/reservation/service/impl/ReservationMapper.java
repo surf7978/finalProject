@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.reservation.service.ReservationVO;
 
 public interface ReservationMapper {
-	public int insertMember(ReservationVO vo);
-	public ReservationVO getMember(ReservationVO vo);
-	public List<ReservationVO> getSearchMember(ReservationVO vo);
-	public int updateMember(ReservationVO vo);
-	public int deleteMember(ReservationVO vo);
+	public int insertReservation(ReservationVO vo);
+	public ReservationVO getReservation(ReservationVO vo);
+	public List<ReservationVO> getSearchReservation(ReservationVO vo);
+	public int updateReservation(ReservationVO vo);
+	public int deleteReservation(ReservationVO vo);
 }

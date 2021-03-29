@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.comment.service.CommentVO;
 
 public interface CommentMapper {
-	public int insertMember(CommentVO vo);
-	public CommentVO getMember(CommentVO vo);
-	public List<CommentVO> getSearchMember(CommentVO vo);
-	public int updateMember(CommentVO vo);
-	public int deleteMember(CommentVO vo);
+	public int insertComment(CommentVO vo);
+	public CommentVO getComment(CommentVO vo);
+	public List<CommentVO> getSearchComment(CommentVO vo);
+	public int updateComment(CommentVO vo);
+	public int deleteComment(CommentVO vo);
 }

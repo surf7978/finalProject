@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.cart.service.CartVO;
 
 public interface CartMapper {
-	public int insertMember(CartVO vo);
-	public CartVO getMember(CartVO vo);
-	public List<CartVO> getSearchMember(CartVO vo);
-	public int updateMember(CartVO vo);
-	public int deleteMember(CartVO vo);
+	public int insertCart(CartVO vo);
+	public CartVO getCart(CartVO vo);
+	public List<CartVO> getSearchCart(CartVO vo);
+	public int updateCart(CartVO vo);
+	public int deleteCart(CartVO vo);
 }

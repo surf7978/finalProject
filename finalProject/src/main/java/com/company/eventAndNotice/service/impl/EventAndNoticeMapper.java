@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.eventAndNotice.service.EventAndNoticeVO;
 
 public interface EventAndNoticeMapper {
-	public int insertMember(EventAndNoticeVO vo);
-	public EventAndNoticeVO getMember(EventAndNoticeVO vo);
-	public List<EventAndNoticeVO> getSearchMember(EventAndNoticeVO vo);
-	public int updateMember(EventAndNoticeVO vo);
-	public int deleteMember(EventAndNoticeVO vo);
+	public int insertEventAndNotice(EventAndNoticeVO vo);
+	public EventAndNoticeVO getEventAndNotice(EventAndNoticeVO vo);
+	public List<EventAndNoticeVO> getSearchEventAndNotice(EventAndNoticeVO vo);
+	public int updateEventAndNotice(EventAndNoticeVO vo);
+	public int deleteEventAndNotice(EventAndNoticeVO vo);
 }

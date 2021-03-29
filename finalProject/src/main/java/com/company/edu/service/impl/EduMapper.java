@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.edu.service.EduVO;
 
 public interface EduMapper {
-	public int insertMember(EduVO vo);
-	public EduVO getMember(EduVO vo);
-	public List<EduVO> getSearchMember(EduVO vo);
-	public int updateMember(EduVO vo);
-	public int deleteMember(EduVO vo);
+	public int insertEdu(EduVO vo);
+	public EduVO getEdu(EduVO vo);
+	public List<EduVO> getSearchEdu(EduVO vo);
+	public int updateEdu(EduVO vo);
+	public int deleteEdu(EduVO vo);
 }
