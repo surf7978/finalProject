@@ -9,9 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.company.member.service.MemberVO;
 import com.company.member.service.impl.MemberMapper;
 
 @Controller
@@ -33,9 +36,16 @@ public class Controller1 {
 	}
 	
 	//일반사용자 회원가입화면
-	@RequestMapping("/signUpUser")
+	@GetMapping("/signUpUser")
 	public String signUpUser() {
 		return "member/signUpUser";
+	}
+	
+	//일반사용자 회원가입 처리
+	@PostMapping("/signUpUser")
+	public String signUpUserProc(MemberVO vo) {
+		dao.insertMember(vo);
+		return "redirect:/login";
 	}
 	
 	//사업자 회원가입화면

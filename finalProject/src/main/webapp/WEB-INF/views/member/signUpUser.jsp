@@ -16,7 +16,7 @@
 	주소<input id="address" name="address">
 	상세주소<input id="address2" name="address2">
 	핸드폰번호<input id="phone" name="phone">
-	이메일<input id="email" name="email">
+	이메일<input type="email" id="email" name="email">
 	<button type="submit">회원가입</button>
 	</form>
 </body>
