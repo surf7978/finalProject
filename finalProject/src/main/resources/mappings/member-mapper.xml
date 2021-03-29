@@ -12,9 +12,6 @@
 					, address
 					, address2
 					, phone
-					, auth
-					, startDate
-					, endDate
 					) VALUES(
 					#{memberId}
 					, #{password}
@@ -24,9 +21,6 @@
 					, #{address}
 					, #{address2}
 					, #{phone}
-					, #{auth}
-					, #{startDate}
-					, #{endDate}
 					)
 	</insert>
 	<select id="getMember" parameterType="memberVO" resultType="memberVO">

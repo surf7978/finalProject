@@ -20,16 +20,29 @@ public class Controller1 {
 	@Autowired
 	MemberMapper dao;
 	
+	//로그인화면 이동
 	@RequestMapping("/login")
 	public String login() {
 		return "member/login";
 	}
 
+	//회원가입 선택 화면
+	@RequestMapping("/signUpSelect")
+	public String signUpSelect() {
+		return "member/signUpSelect";
+	}
 	
+	//일반사용자 회원가입화면
+	@RequestMapping("/signUpUser")
+	public String signUpUser() {
+		return "member/signUpUser";
+	}
 	
-	
-	
-	
+	//사업자 회원가입화면
+	@RequestMapping("/signUpBusiness")
+	public String signUpBusiness() {
+		return "member/signUpBusiness";
+	}
 	
 	
 	// 홈화면 출력(스프링 기본세팅)
