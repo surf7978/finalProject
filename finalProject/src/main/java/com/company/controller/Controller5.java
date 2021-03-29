@@ -154,25 +154,27 @@ public class Controller5 {
 	}// end of getSearchAnswer
 		// end of answer
 
+	// start of hotel
 	// 사업자-전체리스트(호텔)
 	@RequestMapping("/getSearchHotel")
 	public String getSearchHotel(HotelVO vo, Model model) {
 		List<HotelVO> list = hotelService.getSearchHotel(vo);
 		model.addAttribute("list", list);
 		return "hotel/getSearchHotel";
-	}
-
-	// ajax 단건조회의 응용
-	@RequestMapping("/getHotel")
-	@ResponseBody // ajax형태로 내보냄
-	public Map<String, Object> getSearchHotel2(HotelVO vo) {
-		Map<String, Object> map = (Map<String, Object>) hotelService.getHotel(vo);
-		return map;
-	}
+	}// end of getSearchHotel
 
 	// 사업자-상세리스트
+	@RequestMapping("/getHotel")
+	public String getHotel(HotelVO vo, Model model) {
+		// 결과 vo
+		vo = hotelService.getHotel(vo);
+		// 페이지에 전달
+		model.addAttribute("vo", vo);
+		return "hotel/getHotel";
+	}// end of getHotel
 
 	// 사업자-등록페이지
+	// end of hotel
 
 	// 장바구니-페이지
 
