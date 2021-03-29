@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.buy.service.BuyVO;
 
 public interface BuyMapper {
-	public int insertMember(BuyVO vo);
-	public BuyVO getMember(BuyVO vo);
-	public List<BuyVO> getSearchMember(BuyVO vo);
-	public int updateMember(BuyVO vo);
-	public int deleteMember(BuyVO vo);
+	public int insertBuy(BuyVO vo);
+	public BuyVO getBuy(BuyVO vo);
+	public List<BuyVO> getSearchBuy(BuyVO vo);
+	public int updateBuy(BuyVO vo);
+	public int deleteBuy(BuyVO vo);
 }

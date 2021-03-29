@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.taxi.service.TaxiVO;
 
 public interface TaxiMapper {
-	public int insertMember(TaxiVO vo);
-	public TaxiVO getMember(TaxiVO vo);
-	public List<TaxiVO> getSearchMember(TaxiVO vo);
-	public int updateMember(TaxiVO vo);
-	public int deleteMember(TaxiVO vo);
+	public int insertTaxi(TaxiVO vo);
+	public TaxiVO getTaxi(TaxiVO vo);
+	public List<TaxiVO> getSearchTaxi(TaxiVO vo);
+	public int updateTaxi(TaxiVO vo);
+	public int deleteTaxi(TaxiVO vo);
 }

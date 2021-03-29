@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.beauty.service.BeautyVO;
 
 public interface BeautyMapper {
-	public int insertMember(BeautyVO vo);
-	public BeautyVO getMember(BeautyVO vo);
-	public List<BeautyVO> getSearchMember(BeautyVO vo);
-	public int updateMember(BeautyVO vo);
-	public int deleteMember(BeautyVO vo);
+	public int insertBeauty(BeautyVO vo);
+	public BeautyVO getBeauty(BeautyVO vo);
+	public List<BeautyVO> getSearchBeauty(BeautyVO vo);
+	public int updateBeauty(BeautyVO vo);
+	public int deleteBeauty(BeautyVO vo);
 }

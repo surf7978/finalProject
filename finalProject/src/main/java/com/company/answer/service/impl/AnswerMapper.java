@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.answer.service.AnswerVO;
 
 public interface AnswerMapper {
-	public int insertMember(AnswerVO vo);
-	public AnswerVO getMember(AnswerVO vo);
-	public List<AnswerVO> getSearchMember(AnswerVO vo);
-	public int updateMember(AnswerVO vo);
-	public int deleteMember(AnswerVO vo);
+	public int insertAnswer(AnswerVO vo);
+	public AnswerVO getAnswer(AnswerVO vo);
+	public List<AnswerVO> getSearchAnswer(AnswerVO vo);
+	public int updateAnswer(AnswerVO vo);
+	public int deleteAnswer(AnswerVO vo);
 }

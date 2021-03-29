@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.cafe.service.CafeVO;
 
 public interface CafeMapper {
-	public int insertMember(CafeVO vo);
-	public CafeVO getMember(CafeVO vo);
-	public List<CafeVO> getSearchMember(CafeVO vo);
-	public int updateMember(CafeVO vo);
-	public int deleteMember(CafeVO vo);
+	public int insertCafe(CafeVO vo);
+	public CafeVO getCafe(CafeVO vo);
+	public List<CafeVO> getSearchCafe(CafeVO vo);
+	public int updateCafe(CafeVO vo);
+	public int deleteCafe(CafeVO vo);
 }

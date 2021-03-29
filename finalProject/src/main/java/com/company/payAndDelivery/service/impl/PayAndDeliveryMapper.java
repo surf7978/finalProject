@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
 
 public interface PayAndDeliveryMapper {
-	public int insertMember(PayAndDeliveryVO vo);
-	public PayAndDeliveryVO getMember(PayAndDeliveryVO vo);
-	public List<PayAndDeliveryVO> getSearchMember(PayAndDeliveryVO vo);
-	public int updateMember(PayAndDeliveryVO vo);
-	public int deleteMember(PayAndDeliveryVO vo);
+	public int insertPayAndDelivery(PayAndDeliveryVO vo);
+	public PayAndDeliveryVO getPayAndDelivery(PayAndDeliveryVO vo);
+	public List<PayAndDeliveryVO> getSearchPayAndDelivery(PayAndDeliveryVO vo);
+	public int updatePayAndDelivery(PayAndDeliveryVO vo);
+	public int deletePayAndDelivery(PayAndDeliveryVO vo);
 }

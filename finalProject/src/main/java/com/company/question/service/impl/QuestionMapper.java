@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.question.service.QuestionVO;
 
 public interface QuestionMapper {
-	public int insertMember(QuestionVO vo);
-	public QuestionVO getMember(QuestionVO vo);
-	public List<QuestionVO> getSearchMember(QuestionVO vo);
-	public int updateMember(QuestionVO vo);
-	public int deleteMember(QuestionVO vo);
+	public int insertQuestion(QuestionVO vo);
+	public QuestionVO getQuestion(QuestionVO vo);
+	public List<QuestionVO> getSearchQuestion(QuestionVO vo);
+	public int updateQuestion(QuestionVO vo);
+	public int deleteQuestion(QuestionVO vo);
 }

@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.board.service.BoardVO;
 
 public interface BoardMapper {
-	public int insertMember(BoardVO vo);
-	public BoardVO getMember(BoardVO vo);
-	public List<BoardVO> getSearchMember(BoardVO vo);
-	public int updateMember(BoardVO vo);
-	public int deleteMember(BoardVO vo);
+	public int insertBoard(BoardVO vo);
+	public BoardVO getBoard(BoardVO vo);
+	public List<BoardVO> getSearchBoard(BoardVO vo);
+	public int updateBoard(BoardVO vo);
+	public int deleteBoard(BoardVO vo);
 }

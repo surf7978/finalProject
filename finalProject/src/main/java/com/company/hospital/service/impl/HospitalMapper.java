@@ -5,9 +5,9 @@ import java.util.List;
 import com.company.hospital.service.HospitalVO;
 
 public interface HospitalMapper {
-	public int insertMember(HospitalVO vo);
-	public HospitalVO getMember(HospitalVO vo);
-	public List<HospitalVO> getSearchMember(HospitalVO vo);
-	public int updateMember(HospitalVO vo);
-	public int deleteMember(HospitalVO vo);
+	public int insertHospital(HospitalVO vo);
+	public HospitalVO getHospital(HospitalVO vo);
+	public List<HospitalVO> getSearchHospital(HospitalVO vo);
+	public int updateHospital(HospitalVO vo);
+	public int deleteHospital(HospitalVO vo);
 }
