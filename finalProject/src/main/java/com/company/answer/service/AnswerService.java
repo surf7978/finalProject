@@ -1,10 +1,8 @@
-package com.company.answer.service.impl;
+package com.company.answer.service;
 
 import java.util.List;
 
-import com.company.answer.service.AnswerVO;
-
-public interface AnswerMapper {
+public interface AnswerService {
 	// 답변-등록
 	public void insertAnswer(AnswerVO vo);
 
@@ -19,5 +17,4 @@ public interface AnswerMapper {
 
 	// 답변-전체조회
 	public List<AnswerVO> getSearchAnswer(AnswerVO vo);
-
 }

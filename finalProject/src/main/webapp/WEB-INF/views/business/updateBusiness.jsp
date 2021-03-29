@@ -52,15 +52,14 @@
 				</tr>
 				<tr>
 					<td>상세주소</td>
-					<td><input id="address2" name="" value="${vo.address2}"></td>
+					<td><input id="address2" name="address2" value="${vo.address2}"></td>
 				</tr>
 			</table>
 			<p>
-				<button type="submit">저장</button>
+				<button type="submit">수정</button>
 				&nbsp;&nbsp;&nbsp;
 				<button type="reset">취소</button>
 		</form>
 	</div>
-
 </body>
 </html>

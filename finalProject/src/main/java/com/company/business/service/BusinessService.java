@@ -1,8 +1,6 @@
-package com.company.business.service.impl;
+package com.company.business.service;
 
-import com.company.business.service.BusinessVO;
-
-public interface BusinessMapper {
+public interface BusinessService {
 	// RUD
 	// 마이페이지-사업자-본인정보 단건조회
 	public BusinessVO getBusiness(BusinessVO vo);

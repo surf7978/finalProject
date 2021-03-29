@@ -9,26 +9,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
-import com.company.answer.service.impl.AnswerMapper;
+import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
-import com.company.business.service.impl.BusinessMapper;
 import com.company.common.Paging;
+import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
-import com.company.question.service.impl.QuestionMapper;
 
 @Controller
 public class Controller5 {
 
 	// start of beans
 	@Autowired
-	BusinessMapper bMapper;
+	BusinessService bService;
 
 	@Autowired
-	QuestionMapper qMapper;
+	QuestionService qService;
 
 	@Autowired
-	AnswerMapper aMapper;
+	AnswerService aService;
 	// end of beans
 
 	// 로그인 후 마이페이지 눌렀을 때의 상황
@@ -39,7 +39,7 @@ public class Controller5 {
 	@RequestMapping("/getBusiness")
 	public String getBusiness(BusinessVO vo, Model model) {
 		// 본인 정보 조회
-		vo = bMapper.getBusiness(vo);
+		vo = bService.getBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/getBusiness";
 	}// end of getBusiness
@@ -47,7 +47,7 @@ public class Controller5 {
 	// 마이페이지-사업자-본인정보수정 페이지
 	@GetMapping("/updateBusiness")
 	public String updateBusiness(BusinessVO vo, Model model) {
-		vo = bMapper.getBusiness(vo);
+		vo = bService.getBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/updateBusiness";
 	}// end of updateBusiness
@@ -57,7 +57,7 @@ public class Controller5 {
 	@PostMapping("/updateBusiness")
 	public String updateBusinessProc(BusinessVO vo, Model model) {
 		// 결과값이 1이면 업데이트 된 것
-		bMapper.updateBusiness(vo);
+		bService.updateBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/updateBusiness";
 	}// end of updateBusiness
@@ -75,33 +75,32 @@ public class Controller5 {
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
 		// 전체 페이지 조회
-		paging.setTotalRecord(qMapper.getCount(vo));
+		paging.setTotalRecord(qService.getCount(vo));
 		model.addAttribute("paging", paging);
 		// 조회한 값 list형태로
-		List<QuestionVO> list = qMapper.getSearchQuestion(vo);
+		List<QuestionVO> list = qService.getSearchQuestion(vo);
 		model.addAttribute("list", list);
 		return "question/getSearchQuestion";
 	}// end of getSearchQuestion
-	// end of business
+		// end of business
 
 	// start of question
-	// 마이페이지-사업자-특정사용자-문의내역조회
+	// 마이페이지-사업자-문의내역 단건조회
 	@GetMapping("/getQuestion")
 	public String getQuestion(QuestionVO vo, Model model) {
 		// 조회결과 vo에 담기
-		vo = qMapper.getQuestion(vo);
+		vo = qService.getQuestion(vo);
 		// model객체 사용하여 값 전달
 		model.addAttribute("vo", vo);
 		return "question/getQuestion";
 	}// end of getQuestion
-	//end of question
-	
-	
-	//start of answer
+	// end of question
+
+	// start of answer
 	// 마이페이지-사업자-답변 등록 페이지
 	@GetMapping("/insertAnswer")
 	public String insertAnswer(AnswerVO vo) {
-		vo = aMapper.getAnswer(vo);
+		vo = aService.getAnswer(vo);
 		// return value 수정하기
 		return "insertAnswer";
 	}// end of insertAnswer
@@ -109,27 +108,27 @@ public class Controller5 {
 	// 마이페이지-사업자-답변 등록 기능
 	@PostMapping("/insertAnswer")
 	public void insertAnswerProc(AnswerVO vo) {
-		aMapper.insertAnswer(vo);
+		aService.insertAnswer(vo);
 	}// end of insertAnswerProc
 
 	// 마이페이지-사업자-답변 수정
 	@PostMapping("/updateAnswer")
 	public void updateAnswer(AnswerVO vo) {
-		aMapper.updateAnswer(vo);
+		aService.updateAnswer(vo);
 		// 기능 처리 후 alert 박스 뜨게 하기
 	}// end of updateAnswer
 
 	// 마이페이지-사업자-답변 삭제
 	@PostMapping("/deleteAnswer")
 	public void deleteAnswer(AnswerVO vo) {
-		aMapper.deleteAnswer(vo);
+		aService.deleteAnswer(vo);
 		// 기능 처리 후 alert 박스 뜨게 하기
 	}// end of deleteAnswer
 
-	// 마이페이지-사업자-특정답변조회
+	// 마이페이지-사업자-답변 단건조회
 	@RequestMapping("/getAnswer")
 	public String getAnswer(AnswerVO vo, Model model) {
-		vo = aMapper.getAnswer(vo);
+		vo = aService.getAnswer(vo);
 		model.addAttribute("vo", vo);
 		return "answer/getAnswer";
 	}// end of getAnswer
@@ -138,17 +137,12 @@ public class Controller5 {
 	@RequestMapping("/getSearchAnswer")
 	public String getSearchAnswer(AnswerVO vo, Model model) {
 		// 값 조회 후 list에 담기
-		List<AnswerVO> list = aMapper.getSearchAnswer(vo);
+		List<AnswerVO> list = aService.getSearchAnswer(vo);
 		model.addAttribute("list", list);
 		return "answer/getSearchAnswer";
 	}// end of getSearchAnswer
-	//end of answer
-	
-	
-	//start of reservation
-	// 마이페이지-사업자-예약내역조회
-	//end of reservation
-	
+		// end of answer
+
 	// 마이페이지-사업자-통계현황
 
 	// 사업자-전체리스트
@@ -158,6 +152,11 @@ public class Controller5 {
 	// 사업자-등록페이지
 
 	// 장바구니-페이지
+
+	// start of reservation
+	// 마이페이지-사업자-예약내역조회
+	// 아마 조회 필요할듯
+	// end of reservation
 
 	// 나중에
 	// 마이페이지-사업자-실시간화장진료 페이지
