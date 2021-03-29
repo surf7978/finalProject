@@ -1,6 +1,7 @@
 package com.company.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
@@ -19,6 +21,10 @@ import com.company.hotel.service.HotelVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
+/*
+ * @author 박세민
+ * 21.03.29 마이페이지-사업자(Business,Question,Answer)
+ */
 @Controller
 public class Controller5 {
 
@@ -154,6 +160,14 @@ public class Controller5 {
 		List<HotelVO> list = hotelService.getSearchHotel(vo);
 		model.addAttribute("list", list);
 		return "hotel/getSearchHotel";
+	}
+
+	// ajax 단건조회의 응용
+	@RequestMapping("/getHotel")
+	@ResponseBody // ajax형태로 내보냄
+	public Map<String, Object> getSearchHotel2(HotelVO vo) {
+		Map<String, Object> map = (Map<String, Object>) hotelService.getHotel(vo);
+		return map;
 	}
 
 	// 사업자-상세리스트

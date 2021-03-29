@@ -40,8 +40,7 @@
 	<select id="getHotel" resultType="hotelVO">
 		SELECT * FROM HOTEL
 		<where>BUSINESSNUMBER = #{businessNumber}
-			AND HOTELNUMBER =
-			#{hotelNumber}
+			AND HOTELNUMBER = #{hotelNumber}
 		</where>
 	</select>
 	<!-- 전체조회 -->
