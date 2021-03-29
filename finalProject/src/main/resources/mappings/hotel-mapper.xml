@@ -4,8 +4,9 @@
 <mapper namespace="com.company.hotel.service.impl.HotelMapper">
 	<!-- 등록 -->
 	<insert id="insertHotel">
-		INSERT INTO HOTEL(NAME, optionName, price, location)
+		INSERT INTO HOTEL(HOTELNUMBER, NAME, optionName, price, location)
 		VALUES(
+		(SELECT NVL(MAX(HOTELNUMBER),0)+1 FROM hotel),
 		#{name},
 		#{optionName},
 		#{price},

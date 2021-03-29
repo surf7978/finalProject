@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
+import com.company.bCart.service.BCartService;
+import com.company.bCart.service.BCartVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
 import com.company.common.Paging;
@@ -40,6 +42,9 @@ public class Controller5 {
 
 	@Autowired
 	HotelService hotelService;
+
+	@Autowired
+	BCartService bCartService;
 	// end of beans
 
 	// 로그인 후 마이페이지 눌렀을 때의 상황
@@ -173,17 +178,32 @@ public class Controller5 {
 		return "hotel/getHotel";
 	}// end of getHotel
 
-	// 사업자-등록페이지
-	// end of hotel
+	// 사업자-호텔제품등록 페이지
+	@GetMapping("/insertHotel")
+	public String insertHotel(HotelVO vo) {
+		return "hotel/insertHotel";
+	}// end of insertHotel
+
+	// 사업자-호텔제품등록 기능
+	@PostMapping("/insertHotel")
+	public String insertHotelProc(HotelVO vo) {
+		hotelService.insertHotel(vo);
+		return "redirect:/";
+		// 기능 처리 후 등록여부 alert로 알려주기
+	}// end of insertHotelProc
+		// end of hotel
 
 	// 장바구니-페이지
-
+	@RequestMapping("/getBCart")
+	public String getBCart(BCartVO vo, Model model) {
+		vo = bCartService.getBCart(vo);
+		model.addAttribute("vo", vo);
+		return "bCart/getBCart";
+	}
+	// 장바구니-제품등록 기능
 	// 마이페이지-사업자-통계현황
 
-	// start of reservation
 	// 마이페이지-사업자-예약내역조회
-	// 아마 조회 필요할듯
-	// end of reservation
 
 	// 나중에
 	// 마이페이지-사업자-실시간화장진료 페이지

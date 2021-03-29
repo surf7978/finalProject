@@ -1,5 +1,4 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
-<%@ attribute name="ajax" type="com.company.common.ajaxTest"%>
 <%@ attribute name="jsFunc" required="false" type="java.lang.String"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
@@ -32,7 +31,7 @@ a {
 			<li>수술3</li>
 			<li>수술4</li>
 		</ul>
-		<br>
+		<br><br>
 		<div>
 			<span>
 			<label> <input type="checkbox"> 중성화수술</label>
