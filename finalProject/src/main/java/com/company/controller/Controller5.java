@@ -14,6 +14,8 @@ import com.company.answer.service.AnswerVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
 import com.company.common.Paging;
+import com.company.hotel.service.HotelService;
+import com.company.hotel.service.HotelVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -22,13 +24,16 @@ public class Controller5 {
 
 	// start of beans
 	@Autowired
-	BusinessService bService;
+	BusinessService businessService;
 
 	@Autowired
-	QuestionService qService;
+	QuestionService questionService;
 
 	@Autowired
-	AnswerService aService;
+	AnswerService answerService;
+
+	@Autowired
+	HotelService hotelService;
 	// end of beans
 
 	// 로그인 후 마이페이지 눌렀을 때의 상황
@@ -39,7 +44,7 @@ public class Controller5 {
 	@RequestMapping("/getBusiness")
 	public String getBusiness(BusinessVO vo, Model model) {
 		// 본인 정보 조회
-		vo = bService.getBusiness(vo);
+		vo = businessService.getBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/getBusiness";
 	}// end of getBusiness
@@ -47,7 +52,7 @@ public class Controller5 {
 	// 마이페이지-사업자-본인정보수정 페이지
 	@GetMapping("/updateBusiness")
 	public String updateBusiness(BusinessVO vo, Model model) {
-		vo = bService.getBusiness(vo);
+		vo = businessService.getBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/updateBusiness";
 	}// end of updateBusiness
@@ -57,7 +62,7 @@ public class Controller5 {
 	@PostMapping("/updateBusiness")
 	public String updateBusinessProc(BusinessVO vo, Model model) {
 		// 결과값이 1이면 업데이트 된 것
-		bService.updateBusiness(vo);
+		businessService.updateBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/updateBusiness";
 	}// end of updateBusiness
@@ -75,10 +80,10 @@ public class Controller5 {
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
 		// 전체 페이지 조회
-		paging.setTotalRecord(qService.getCount(vo));
+		paging.setTotalRecord(questionService.getCount(vo));
 		model.addAttribute("paging", paging);
 		// 조회한 값 list형태로
-		List<QuestionVO> list = qService.getSearchQuestion(vo);
+		List<QuestionVO> list = questionService.getSearchQuestion(vo);
 		model.addAttribute("list", list);
 		return "question/getSearchQuestion";
 	}// end of getSearchQuestion
@@ -89,18 +94,18 @@ public class Controller5 {
 	@GetMapping("/getQuestion")
 	public String getQuestion(QuestionVO vo, Model model) {
 		// 조회결과 vo에 담기
-		vo = qService.getQuestion(vo);
+		vo = questionService.getQuestion(vo);
 		// model객체 사용하여 값 전달
 		model.addAttribute("vo", vo);
 		return "question/getQuestion";
 	}// end of getQuestion
-	// end of question
+		// end of question
 
 	// start of answer
 	// 마이페이지-사업자-답변 등록 페이지
 	@GetMapping("/insertAnswer")
 	public String insertAnswer(AnswerVO vo) {
-		vo = aService.getAnswer(vo);
+		vo = answerService.getAnswer(vo);
 		// return value 수정하기
 		return "insertAnswer";
 	}// end of insertAnswer
@@ -108,27 +113,27 @@ public class Controller5 {
 	// 마이페이지-사업자-답변 등록 기능
 	@PostMapping("/insertAnswer")
 	public void insertAnswerProc(AnswerVO vo) {
-		aService.insertAnswer(vo);
+		answerService.insertAnswer(vo);
 	}// end of insertAnswerProc
 
 	// 마이페이지-사업자-답변 수정
 	@PostMapping("/updateAnswer")
 	public void updateAnswer(AnswerVO vo) {
-		aService.updateAnswer(vo);
+		answerService.updateAnswer(vo);
 		// 기능 처리 후 alert 박스 뜨게 하기
 	}// end of updateAnswer
 
 	// 마이페이지-사업자-답변 삭제
 	@PostMapping("/deleteAnswer")
 	public void deleteAnswer(AnswerVO vo) {
-		aService.deleteAnswer(vo);
+		answerService.deleteAnswer(vo);
 		// 기능 처리 후 alert 박스 뜨게 하기
 	}// end of deleteAnswer
 
 	// 마이페이지-사업자-답변 단건조회
 	@RequestMapping("/getAnswer")
 	public String getAnswer(AnswerVO vo, Model model) {
-		vo = aService.getAnswer(vo);
+		vo = answerService.getAnswer(vo);
 		model.addAttribute("vo", vo);
 		return "answer/getAnswer";
 	}// end of getAnswer
@@ -137,21 +142,27 @@ public class Controller5 {
 	@RequestMapping("/getSearchAnswer")
 	public String getSearchAnswer(AnswerVO vo, Model model) {
 		// 값 조회 후 list에 담기
-		List<AnswerVO> list = aService.getSearchAnswer(vo);
+		List<AnswerVO> list = answerService.getSearchAnswer(vo);
 		model.addAttribute("list", list);
 		return "answer/getSearchAnswer";
 	}// end of getSearchAnswer
 		// end of answer
 
-	// 마이페이지-사업자-통계현황
-
-	// 사업자-전체리스트
+	// 사업자-전체리스트(호텔)
+	@RequestMapping("/getSearchHotel")
+	public String getSearchHotel(HotelVO vo, Model model) {
+		List<HotelVO> list = hotelService.getSearchHotel(vo);
+		model.addAttribute("list", list);
+		return "hotel/getSearchHotel";
+	}
 
 	// 사업자-상세리스트
 
 	// 사업자-등록페이지
 
 	// 장바구니-페이지
+
+	// 마이페이지-사업자-통계현황
 
 	// start of reservation
 	// 마이페이지-사업자-예약내역조회

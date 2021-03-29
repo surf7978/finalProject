@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.hotel.service.impl.HotelMapper">
+	<!-- 등록 -->
+	<insert id="insertHotel">
+		INSERT INTO HOTEL(NAME, optionName, price, location)
+		VALUES(
+		#{name},
+		#{optionName},
+		#{price},
+		#{location}
+		)
+	</insert>
+	<!-- 수정 -->
+	<update id="updateHotel">
+		UPDATE HOTEL
+		<set>
+			<if test="name !=null and name != ''">
+				NAME = #{name}
+			</if>
+			<if test="optionName !=null and optionName != ''">
+				OPTIONNAME = #{optionName}
+			</if>
+			<if test="price != null and price != ''">
+				PRICE = #{price}
+			</if>
+			<if test="location != null and location != ''">
+				LOCATION = #{location}
+			</if>
+		</set>
+	</update>
+
+	<!-- 삭제 -->
+	<delete id="deleteHotel">
+		DELETE FROM HOTEL
+		WHERE hotelNumber = #{hotelNumber}
+	</delete>
+	<!-- 단건조회 -->
+	<select id="getHotel" resultType="hotelVO">
+		SELECT * FROM HOTEL
+		<where>BUSINESSNUMBER = #{businessNumber}
+			AND HOTELNUMBER =
+			#{hotelNumber}
+		</where>
+	</select>
+	<!-- 전체조회 -->
+	<select id="getSearchHotel" resultType="hotelVO">
+		SELECT * FROM HOTEL
+		<where>BUSINESSNUMBER = #{businessNumber}</where>
+	</select>
+</mapper>
