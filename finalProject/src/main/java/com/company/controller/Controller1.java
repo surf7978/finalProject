@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
-import com.company.business.service.impl.BusinessMapper;
+import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
-import com.company.member.service.impl.MemberMapper;
 
 @Controller
 public class Controller1 {
 
 	@Autowired
-	MemberMapper memberMapper;
+	MemberService memberService;
 	@Autowired
-	BusinessMapper businessMapper;
+	BusinessService businessService;
 	
 	//로그인화면 이동
 	@GetMapping("/login")
@@ -38,8 +38,8 @@ public class Controller1 {
 	//로그인 처리
 	@PostMapping("/login")
 	public String loginProc(MemberVO vo, HttpSession session) {
-		if(memberMapper.getMember(vo).getMemberId().equals(vo.getMemberId()) && memberMapper.getMember(vo).getPassword().equals(vo.getPassword())){
-			session.setAttribute("member", memberMapper.getMember(vo));
+		if(memberService.getMember(vo).getMemberId().equals(vo.getMemberId()) && memberService.getMember(vo).getPassword().equals(vo.getPassword())){
+			session.setAttribute("member", memberService.getMember(vo));
 			return "/home";
 		} else {
 			return "redirect:/login";
@@ -68,7 +68,7 @@ public class Controller1 {
 	//일반사용자 회원가입 처리
 	@PostMapping("/signUpUser")
 	public String signUpUserProc(MemberVO vo) {
-		memberMapper.insertMember(vo);
+		memberService.insertMember(vo);
 		return "redirect:/login";
 	}
 	
@@ -81,7 +81,7 @@ public class Controller1 {
 	//사업자 회원가입 처리
 		@PostMapping("/signUpBusiness")
 		public String signUpBusinessProc(BusinessVO vo) {
-			businessMapper.insertBusiness(vo);
+			businessService.insertBusiness(vo);
 			return "redirect:/login";
 	}
 	
