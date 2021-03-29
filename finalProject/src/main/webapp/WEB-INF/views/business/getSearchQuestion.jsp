@@ -17,9 +17,10 @@
 			<td>받은 날짜</td>
 		</tr>
 		<c:forEach items="${list}" var="q">
-			<tr>
+			<tr onclick="location.href='getQuestion?memberId=${q.memberId}'"> 
 				<td>${q.memberId}</td>
 				<td>${q.title}</td>
+				<td></td>
 			</tr>
 		</c:forEach>
 	</table>

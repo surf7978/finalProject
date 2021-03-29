@@ -16,13 +16,13 @@
 				<td>받은날짜</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
+				<td>${vo.writer}</td>
+				<td>${vo.title}</td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td></td>
+				<td>${vo.content}</td>
 			</tr>
 		</table>
 		<button type="button">답장하기</button>
