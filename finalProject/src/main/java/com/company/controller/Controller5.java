@@ -57,9 +57,7 @@ public class Controller5 {
 	@PostMapping("/updateBusiness")
 	public String updateBusinessProc(BusinessVO vo, Model model) {
 		// 결과값이 1이면 업데이트 된 것
-		int r = bMapper.updateBusiness(vo);
-		// 확인용
-		System.out.println(r + "건 업데이트");
+		bMapper.updateBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/updateBusiness";
 	}// end of updateBusiness
@@ -82,9 +80,9 @@ public class Controller5 {
 		// 조회한 값 list형태로
 		List<QuestionVO> list = qMapper.getSearchQuestion(vo);
 		model.addAttribute("list", list);
-		return "business/getSearchQuestion";
+		return "question/getSearchQuestion";
 	}// end of getSearchQuestion
-		// end of business
+	// end of business
 
 	// start of question
 	// 마이페이지-사업자-특정사용자-문의내역조회
@@ -94,9 +92,12 @@ public class Controller5 {
 		vo = qMapper.getQuestion(vo);
 		// model객체 사용하여 값 전달
 		model.addAttribute("vo", vo);
-		return "business/getQuestion";
+		return "question/getQuestion";
 	}// end of getQuestion
-
+	//end of question
+	
+	
+	//start of answer
 	// 마이페이지-사업자-답변 등록 페이지
 	@GetMapping("/insertAnswer")
 	public String insertAnswer(AnswerVO vo) {
@@ -141,7 +142,8 @@ public class Controller5 {
 		model.addAttribute("list", list);
 		return "answer/getSearchAnswer";
 	}// end of getSearchAnswer
-	// end of question
+	//end of answer
+	
 	
 	//start of reservation
 	// 마이페이지-사업자-예약내역조회
