@@ -7,8 +7,8 @@
 <title>signUpSelect</title>
 </head>
 <body>
-	회원가입선택
-	<a href="signUpUser">일반사용자</a>
-	<a href="signUpBusiness">사업자</a>
+	회원가입선택<br>
+	<a href="signUpUser">일반사용자</a><br>
+	<a href="signUpBusiness">사업자</a><br>
 </body>
 </html>

@@ -9,8 +9,8 @@
 <body>
 	로그인화면
 	<form action="login" method="post">
-	아이디<input id="memberId" name="memberId">
-	패스워드<input id="password" name="password">
+	아이디<input id="memberId" name="memberId"><br>
+	패스워드<input id="password" name="password"><br>
 	<button type="submit">로그인</button>
 	</form>
 	<a href="signUpSelect">회원가입</a>
