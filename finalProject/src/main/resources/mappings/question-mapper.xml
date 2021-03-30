@@ -10,7 +10,6 @@
 		<!-- 수정필요 -->
 	</select>
 	<!-- 문의내역 등록 -->
-
 	<insert id="insertQuestion">
 		INSERT INTO QUESTION(
 		TITLE,
@@ -47,9 +46,7 @@
 	<!--문의내역 단건조회 -->
 	<select id="getQuestion" resultType="questionVO">
 		SELECT * FROM QUESTION
-		WHERE
-		MEMBERID = #{memberId}
-		AND CATEGORY = #{category}
+		WHERE QUESTIONNUMBER = #{questionNumber}
 	</select>
 	<!--문의내역 전체조회 -->
 	<select id="getSearchQuestion"  resultType="questionVO">

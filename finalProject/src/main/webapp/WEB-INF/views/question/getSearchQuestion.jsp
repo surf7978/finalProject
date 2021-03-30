@@ -14,6 +14,7 @@
 	<h2>문의내역 리스트</h2>
 	<table id='tbl'>
 		<tr>
+			<td>글번호</td>
 			<td>작성자</td>
 			<td>제목</td>
 			<td>내용</td>
@@ -31,10 +32,10 @@
 					toPerson : 'admin'
 				},
 				success : function(response) {
-					console.log(response)
-					for (i in response) {
 						var tbody = $("#tbody");
+					for (i = 1; i < response.length; i++) {
 						var tr = $("<tr>");
+						tr.attr("id", "tr" + i);
 						//보낸사람=작성자
 						tr.append("<td>" + response[i].writer + "</td>")
 						//제목
@@ -42,9 +43,13 @@
 						//내용
 						.append("<td>" + response[i].content + "</td><br>");
 						tbody.append(tr);
-					}
+						}
 				}//end of success
-			}) //end of ajax	
+			}) //end of ajax
+			$("#tbody").on("click",$('tr'), function() {
+				var questionNumber = $(this).closest("tr").find("#questionNumber").val();
+				console.log(.questionNumber)
+			});//id값이 tr 클릭시
 		})//end of function
 	</script>
 </body>
