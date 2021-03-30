@@ -1,7 +1,6 @@
 package com.company.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
@@ -17,7 +15,6 @@ import com.company.bCart.service.BCartService;
 import com.company.bCart.service.BCartVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
-import com.company.common.Paging;
 import com.company.hotel.service.HotelService;
 import com.company.hotel.service.HotelVO;
 import com.company.question.service.QuestionService;
@@ -80,19 +77,8 @@ public class Controller5 {
 
 	// 마이페이지-사업자-문의내역 리스트
 	@RequestMapping("/getSearchQuestion")
-	public String getSearchQuestion(QuestionVO vo, Paging paging, Model model) {
-		//
-		paging.setPageUnit(5);// page record view
-		paging.setPageSize(3);// page number
-		// paging
-		if (vo.getPage() == null)
-			vo.setPage(1);
+	public String getSearchQuestion(QuestionVO vo, Model model) {
 
-		vo.setStart(paging.getFirst());
-		vo.setEnd(paging.getLast());
-		// 전체 페이지 조회
-		paging.setTotalRecord(questionService.getCount(vo));
-		model.addAttribute("paging", paging);
 		// 조회한 값 list형태로
 		List<QuestionVO> list = questionService.getSearchQuestion(vo);
 		model.addAttribute("list", list);

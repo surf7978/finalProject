@@ -5,19 +5,9 @@ import java.util.List;
 import com.company.answer.service.AnswerVO;
 
 public interface AnswerMapper {
-	// 답변-등록
-	public void insertAnswer(AnswerVO vo);
-
-	// 답변-수정
-	public void updateAnswer(AnswerVO vo);
-
-	// 답변-삭제
-	public void deleteAnswer(AnswerVO vo);
-
-	// 답변-단건조회
+	public int insertAnswer(AnswerVO vo);
 	public AnswerVO getAnswer(AnswerVO vo);
-
-	// 답변-전체조회
 	public List<AnswerVO> getSearchAnswer(AnswerVO vo);
-
+	public int updateAnswer(AnswerVO vo);
+	public int deleteAnswer(AnswerVO vo);
 }

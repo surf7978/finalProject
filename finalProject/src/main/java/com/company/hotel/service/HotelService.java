@@ -3,18 +3,13 @@ package com.company.hotel.service;
 import java.util.List;
 
 public interface HotelService {
-	// 등록
-	public void insertHotel(HotelVO vo);
+	public int insertHotel(HotelVO vo); // 화원등록
 
-	// 수정
-	public void updateHotel(HotelVO vo);
+	public HotelVO getHotel(HotelVO vo); // 단건조회
 
-	// 삭제
-	public void deleteHotel(HotelVO vo);
+	public List<HotelVO> getSearchHotel(HotelVO vo); // 전체조회
 
-	// 단건조회
-	public HotelVO getHotel(HotelVO vo);
+	public int updateHotel(HotelVO vo); // 회원수정
 
-	// 전체조회
-	public List<HotelVO> getSearchHotel(HotelVO vo);
+	public int deleteHotel(HotelVO vo); // 화원탈퇴
 }

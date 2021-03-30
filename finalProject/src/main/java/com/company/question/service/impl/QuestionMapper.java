@@ -5,13 +5,13 @@ import java.util.List;
 import com.company.question.service.QuestionVO;
 
 public interface QuestionMapper {
+	public int insertQuestion(QuestionVO vo);
 
-	// 특정리스트조회
 	public QuestionVO getQuestion(QuestionVO vo);
 
-	// 전체리스트조회
 	public List<QuestionVO> getSearchQuestion(QuestionVO vo);
 
-	// DB레코드 카운트
-	public int getCount(QuestionVO vo);
+	public int updateQuestion(QuestionVO vo);
+
+	public int deleteQuestion(QuestionVO vo);
 }

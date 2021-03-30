@@ -1,15 +1,18 @@
+
 package com.company.business.service.impl;
+
+import java.util.List;
 
 import com.company.business.service.BusinessVO;
 
 public interface BusinessMapper {
-	// RUD
-	// 마이페이지-사업자-본인정보 단건조회
+	public int insertBusiness(BusinessVO vo);
+
 	public BusinessVO getBusiness(BusinessVO vo);
 
-	// 마이페이지-사업자-본인정보 수정
+	public List<BusinessVO> getSearchBusiness(BusinessVO vo);
+
 	public int updateBusiness(BusinessVO vo);
 
-	// 마이페이지-사업자-본인정보 삭제(탈퇴)
 	public int deleteBusiness(BusinessVO vo);
 }

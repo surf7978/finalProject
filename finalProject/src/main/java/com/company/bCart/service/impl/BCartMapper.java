@@ -1,16 +1,18 @@
+
 package com.company.bCart.service.impl;
+
+import java.util.List;
 
 import com.company.bCart.service.BCartVO;
 
 public interface BCartMapper {
-	// 사업자 장바구니
-	// 등록
-	public void insertBCart(BCartVO vo);
+	public int insertBCart(BCartVO vo);
 
-	// 삭제
-	public void deleteBCart(BCartVO vo);
-
-	// 단건조회
 	public BCartVO getBCart(BCartVO vo);
 
+	public List<BCartVO> getSearchBCart(BCartVO vo);
+
+	public int updateBCart(BCartVO vo);
+
+	public int deleteBCart(BCartVO vo);
 }
