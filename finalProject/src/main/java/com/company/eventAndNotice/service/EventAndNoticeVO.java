@@ -1,11 +1,11 @@
+
 package com.company.eventAndNotice.service;
 
 import lombok.Data;
 
 @Data
 public class EventAndNoticeVO {
-
-	String eAnNumber;
+	String eanNumber;
 	String writer;
 	String title;
 	String content;
@@ -16,5 +16,5 @@ public class EventAndNoticeVO {
 	String category;
 	String memberId;
 
-	
+
 }

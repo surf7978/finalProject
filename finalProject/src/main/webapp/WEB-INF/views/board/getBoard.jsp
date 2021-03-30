@@ -32,8 +32,9 @@ td {
 <h3 align="center">게시글 조회</h3>
 
 <div align="center">
+<form action="deleteBoard?boardNumber=${board.boardNumber}" method="post" >
+<table>
 
-<table >
 <tr>
 <th>작성번호</th>
 <td>${board.boardNumber}</td>
@@ -51,7 +52,7 @@ td {
 
 <tr>
 <th>날짜</th>
-<td> ${board.calender}</td>
+<td> ${board.calendar}</td>
 </tr>
 
 <tr>
@@ -81,8 +82,9 @@ td {
 </table> 
 <p></p>
 <button type="button" onclick="location.href='getSearchBoard'">게시글목록으로</button>
-<button>수정</button>
-<button>삭제</button>
+<button type="button" onclick="location.href='updateBoard?boardNumber=${board.boardNumber}'">수정</button>
+<button type="submit" >삭제</button>
+</form>
 <h3>댓글이랑, 조회수기능 넣으시오. </h3>
 </div>
 

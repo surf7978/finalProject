@@ -6,13 +6,10 @@ import com.company.member.service.MemberVO;
 
 public interface MemberMapper {
 
-	public List<MemberVO> getSearchMember();
-	
-	public MemberVO getMember( MemberVO vo);
-	
-	public int insertMember(MemberVO vo);
-	
-	public int deleteMember(MemberVO vo);
-	
-	public int updateMember(MemberVO vo);
+	public int insertMember(MemberVO vo); //일반사용자 등록
+	public MemberVO getMember(MemberVO vo); //일반사용자 단건조회
+	public List<MemberVO> getSearchMember(MemberVO vo); //일반사용자 전체조회
+	public int updateMember(MemberVO vo); //일반사용자 수정
+	public int deleteMember(MemberVO vo); //일반사용자 탈퇴
+	public MemberVO getViewMember(MemberVO vo); //전체회원 단건조회
 }

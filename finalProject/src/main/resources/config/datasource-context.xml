@@ -9,6 +9,12 @@
 		<property name="url" value="jdbc:oracle:thin:@192.168.0.74:1521:xe"></property>
 		<property name="username" value="final"></property>
 		<property name="password" value="final"></property>
+		<!-- 
+		<property name="driverClassName" value="${jsbc.driver}"></property>
+		<property name="url" value="${jsbc.url}"></property>
+		<property name="username" value="${jsbc.username}"></property>
+		<property name="password" value="${jsbc.password}"></property>
+		 -->
 	</bean>
 	
 	<!-- Mybtis쓸꺼라 이거 없어도됨 -->

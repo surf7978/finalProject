@@ -53,7 +53,7 @@ border: 1px solid black;
 <tr onclick="location.href='getBoard?boardNumber=${list.boardNumber}'">
  <td>${list.views}</td>
  <td>${list.title}</td>
- <td>${list.calender}</td>
+ <td>${list.calendar}</td>
  <td>${list.writer}</td>
 </tr>
 </c:forEach>

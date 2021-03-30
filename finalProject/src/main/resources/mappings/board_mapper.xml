@@ -12,5 +12,18 @@
 	WHERE BOARDNUMBER=#{boardNumber}		
 	</select>
 	
+	<update id="updateBoard" parameterType="boardVO">
+	UPDATE BOARD SET 
+	 TITLE=#{title} ,
+	  IMAGE=#{image} , 
+	CONTENT=#{content} , 
+	CATEGORY= #{category} 
+	WHERE BOARDNUMBER= #{boardNumber}
+	</update>
+	<delete id="deleteBoard" parameterType="boardVO">
+	DELETE FROM BOARD
+	WHERE BOARDNUMBER=#{boardNumber}
+	</delete>
 </mapper>
+
 <!-- 스프링 초기설정 오류방지용 -->

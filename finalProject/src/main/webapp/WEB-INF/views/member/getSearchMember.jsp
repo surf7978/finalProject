@@ -35,14 +35,19 @@ border: 1px solid black;
  <td>권한</td>
  <td>아이디</td>
  <td>비밀번호</td>
+ <td>선택</td>
  <td>관리</td>
  </tr>
  </thead>
 <c:forEach var="list" items="${list}" >
 <tr>
+
  <td>${list.auth}</td>
  <td>${list.memberId}</td>
  <td>${list.password}</td>
+ <td> <a href="getMember?memberId=${list.memberId}">선택</a></td>
+
+
  <td>
  <form action="deleteMember?memberId=${list.memberId}" method="post">
  <button type="submit">삭제</button>
