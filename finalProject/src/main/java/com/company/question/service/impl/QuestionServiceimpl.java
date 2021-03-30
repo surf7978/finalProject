@@ -28,7 +28,8 @@ public class QuestionServiceimpl implements QuestionService {
 	}
 
 	// 전체조회
-	public List<QuestionVO> getSearchQuestion(BusinessVO vo) {
+	@Override
+	public List<QuestionVO> getSearchQuestion(QuestionVO vo) {
 		return QuestionMapper.getSearchQuestion(vo);
 	}
 
@@ -47,7 +48,7 @@ public class QuestionServiceimpl implements QuestionService {
 	// 레코드
 	@Override
 	public int getCount(QuestionVO vo) {
-		return 0;
+		return QuestionMapper.getCount(vo);
 	}
 
 }

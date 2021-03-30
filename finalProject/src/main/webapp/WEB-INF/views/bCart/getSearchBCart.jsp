@@ -57,9 +57,11 @@
 <script>
 	$("#shopping").on("click", function() {
 		confirm("쇼핑을 계속하시겠습니까?");
+		//페이지 이동할 url 써줘야함
 	});//end of shopping
 	$("#pay").on("click", function() {
 		confirm("결제하시겠습니까?");
+		//페이지 이동할 url 써줘야함
 	})//end of pay
 </script>
 </html>

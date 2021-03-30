@@ -56,7 +56,7 @@
 		<!-- SELECT B.* FROM (SELECT ROWNUM RN ,A.* FROM ( -->
 		<!-- 첫줄 -->
 		SELECT * FROM QUESTION
-		WHERE TOPERSON = #{businessId}
+		WHERE TOPERSON = #{toPerson}
 		<!-- 사업자가 문의내역 조회하면 자기 사업체에 대한 문의만 보여야함 -->
 		<!-- 막줄 -->
 		<!-- )A )B WHERE RN BETWEEN #{start} AND #{end} -->

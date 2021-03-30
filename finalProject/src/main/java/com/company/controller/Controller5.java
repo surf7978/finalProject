@@ -72,15 +72,21 @@ public class Controller5 {
 		model.addAttribute("vo", vo);
 		return "redirect:/";
 	}// end of updateBusiness
+		// 마이페이지-사업자-문의내역 리스트
 
-	// 마이페이지-사업자-문의내역 리스트
-	@RequestMapping("/getSearchQuestion")
-	public String getSearchQuestion(BusinessVO vo, Model model) {// 사업자 아이디로 조회해야해서 BusinessVO를 사용
-		//Paging
+	@GetMapping("/getSearchQuestion")
+	public String getSearchQuestion(BusinessVO vo) {// 사업자 아이디로 조회해야해서 BusinessVO를 사용
+		return "question/getSearchQuestion";
+	}
+
+	// 마이페이지-사업자-문의내역 리스트 ajax
+	@PostMapping("/getSearchQuestion")
+	@ResponseBody
+	public List<QuestionVO> getSearchQuestionProc(QuestionVO vo, Model model) {// 사업자 아이디로 조회해야해서 BusinessVO를 사용
 		// 조회한 값 list형태로
 		List<QuestionVO> list = questionService.getSearchQuestion(vo);
 		model.addAttribute("list", list);
-		return "question/getSearchQuestion";
+		return list;
 	}// end of getSearchQuestion
 		// end of business
 
