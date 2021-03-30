@@ -3,6 +3,7 @@ package com.company.controller;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
+import com.company.member.common.KakaoAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 
@@ -28,6 +31,8 @@ public class Controller1 {
 	MemberService memberService;
 	@Autowired
 	BusinessService businessService;
+	@Autowired 
+	KakaoAPI kakaoAPI;
 	
 	//로그인화면 이동
 	@GetMapping("/login")
@@ -51,6 +56,8 @@ public class Controller1 {
 	//로그아웃처리
 	@RequestMapping("/logout")
 	public String logoutProc(HttpSession session) {
+		String access_token = (String) session.getAttribute("access_token");
+		kakaoAPI.kakaoLogout(access_token);
 		session.invalidate();
 		return "redirect:/";
 	}
@@ -87,6 +94,21 @@ public class Controller1 {
 		return "redirect:/login";
 	}
 	
+	//카카오로그인
+	@RequestMapping("/callback")
+	public String callback(@RequestParam Map<String, Object> map, HttpSession session) {
+		System.out.println("-----------"+map+"-----------");
+		System.out.println("-----------"+map.get("code")+"-----------");
+		String code = (String) map.get("code");
+		String access_token = kakaoAPI.getAccessToken(code);
+		System.out.println("access_token : "+access_token);
+		Map<String, Object> userInfo = kakaoAPI.getUserInfo(access_token);
+		System.out.println("userInfo : "+userInfo);
+		//token을 session저장(DB 저장)
+		session.setAttribute("access_token", access_token);
+		session.setAttribute("loginID", userInfo.get("nickname"));
+		return "redirect:/";
+	}
 	
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
