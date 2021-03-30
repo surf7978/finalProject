@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ import com.company.business.service.BusinessVO;
 import com.company.member.common.KakaoAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
+import com.company.member.service.impl.MemberServiceimpl;
 
 @Controller
 public class Controller1 {
@@ -35,21 +37,24 @@ public class Controller1 {
 	KakaoAPI kakaoAPI;
 	
 	//로그인화면 이동
-	@GetMapping("/login")
-	public String login() {
+	@GetMapping("/loginForm")
+	public String loginForm() {
 		return "member/login";
 	}
 	
 	//일반사용자 로그인 처리
 	@PostMapping("/login")
 	public String loginProc(MemberVO vo, HttpSession session) {
-		if(memberService.getViewMember(vo).getMemberId().equals(vo.getMemberId()) //입력한 아이디와 DB의 아이디 일치체크
-		&& memberService.getViewMember(vo).getPassword().equals(vo.getPassword())){ //입력한 비밀번호와 DB의 비밀번호 일치체크
+		MemberServiceimpl memberServiceimpl = new MemberServiceimpl();
+		String rawPassword1 = vo.getPassword();
+        String rawPassword2 = memberService.getViewMember(vo).getPassword();
+        String newPassword2 = memberServiceimpl.encode(rawPassword2);
+        System.out.println(rawPassword1+" "+newPassword2);
+		if(memberServiceimpl.matches(rawPassword1, newPassword2)){ //입력한 아이디/비밀번호와 DB의 아이디/비밀번호 일치체크
 			session.setAttribute("loginID", memberService.getViewMember(vo).getMemberId()); //세션에 로그인한 아이디 담아줌
-			session.setAttribute("loginName", memberService.getViewMember(vo).getName()); //세션에 로그인한 이름 담아줌
 			return "/home";
 		} else {
-			return "redirect:/login";
+			return "redirect:/loginForm";
 		}
 	}
 	
@@ -77,8 +82,11 @@ public class Controller1 {
 	//일반사용자 회원가입 처리
 	@PostMapping("/signUpUser")
 	public String signUpUserProc(MemberVO vo) {
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		String pw = bcrypt.encode(vo.getPassword());
+		vo.setPassword(pw);
 		memberService.insertMember(vo);
-		return "redirect:/login";
+		return "redirect:/loginForm";
 	}
 	
 	//사업자 회원가입화면
@@ -91,7 +99,7 @@ public class Controller1 {
 	@PostMapping("/signUpBusiness")
 	public String signUpBusinessProc(BusinessVO vo) {
 		businessService.insertBusiness(vo);
-		return "redirect:/login";
+		return "redirect:/loginForm";
 	}
 	
 	//카카오로그인
