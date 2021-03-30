@@ -2,8 +2,6 @@ package com.company.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +24,7 @@ import com.company.question.service.QuestionVO;
 /*
  * @author 박세민
  * 21.03.29 마이페이지-사업자(Business,Question,Answer)
- * 21.03.30 
+ * 21.03.30 장바구니 1차 수정/택시 API대용으로 T map API or Kakao map API 사용 생각중
  */
 @Controller
 public class Controller5 {
@@ -183,6 +181,7 @@ public class Controller5 {
 	}// end of insertHotelProc
 		// end of hotel
 
+	// start of bCart
 	// 장바구니-페이지 호출
 	@GetMapping("/getSearchBCart")
 	public String getSearchBCart(BCartVO vo) {
@@ -208,13 +207,17 @@ public class Controller5 {
 	public void deleteBCart(BCartVO vo) {
 		bCartService.deleteBCart(vo);
 	}
-	// 장바구니-제품등록 기능??
-	// 마이페이지-사업자-통계현황
 
-	// 마이페이지-사업자-예약내역조회
+	// 지도-샘플페이지
+	@RequestMapping("/map")
+	public String map() {
+		return "map/map";
+	}
 
+	// end of bCart
 	// 나중에
+	// 마이페이지-사업자-통계현황
+	// 마이페이지-사업자-예약내역조회
 	// 마이페이지-사업자-실시간화장진료 페이지
-	// 택시-샘플페이지
 	// 동물정보-샘플페이지
 }

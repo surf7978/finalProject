@@ -1,22 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.company.question.service.impl.QuestionMapper">
+<mapper namespace="com.company.question.service.impl.QuestionMapper">
 	<!-- 페이징용 카운트 변수 -->
 	<select id="getCount" resultType="int">
 		SELECT COUNT(*)
 		FROM QUESTION
 		<!-- 수정필요 -->
 	</select>
+	<!-- 문의내역 등록 -->
 
-	<!--사업자-문의내역 특정사용자조회 -->
-	<select id="getQuestion" parameterType="questionVO" resultType="questionVO">
-		SELECT * FROM QUESTION
+	<insert id="insertQuestion">
+		INSERT INTO QUESTION(
+		TITLE,
+		CONTENT,
+		TOPERSON,
+		WRITER
+		)
+		VALUES(
+		#{title},
+		#{content},
+		#{toPerson},
+		#{memberId})
+	</insert>
+	<!-- 문의내역 수정 -->
+	<update id="updateQuestion">
+		UPDATE QUESTION
+		<set>
+			<if test="title != null and title !=''">
+				TITLE = #{title},
+			</if>
+			<if test="content != null and content !=''">
+				AND CONTENT = #{content},
+			</if>
+			AND CALENDAR = SYSDATE
+			AND CATEGORY = #{category}
+		</set>
+		<where>MEMBERID = #{memberId}</where>
+	</update>
+	<!-- 문의내역 삭제 -->
+	<delete id="deleteQuestion">
+		DELETE FROM QUESTION
 		WHERE MEMBERID = #{memberId}
+	</delete>
+	<!--문의내역 단건조회 -->
+	<select id="getQuestion" resultType="questionVO">
+		SELECT * FROM QUESTION
+		WHERE
+		MEMBERID = #{memberId}
 		AND CATEGORY = 1
 	</select>
-	<!--사업자-문의내역 전체리스트조회 -->
+	<!--문의내역 전체조회 -->
 	<select id="getSearchQuestion" resultType="questionVO">
 		SELECT B.* FROM (SELECT ROWNUM RN ,A.* FROM (
 		<!-- 첫줄 -->
