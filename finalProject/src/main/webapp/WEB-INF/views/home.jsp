@@ -12,7 +12,7 @@
 		<a href="login">로그인</a>
 	</c:if>
 	<c:if test="${not empty loginID}">
-		<h3>${loginID}(${loginID})님 로그인 중</h3>
+		<h3>${loginID}님 로그인 중</h3>
 		<a href="logout">로그아웃</a>
 	</c:if>
 </body>
