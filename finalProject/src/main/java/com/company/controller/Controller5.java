@@ -46,9 +46,6 @@ public class Controller5 {
 	BCartService bCartService;
 	// end of beans
 
-	// 로그인 후 마이페이지 눌렀을 때의 상황
-	// 세션의 id로 조회하기(Session.get사용하기)
-
 	// start of business
 	// 마이페이지-사업자-본인정보
 	@RequestMapping("/getBusiness")
@@ -59,14 +56,13 @@ public class Controller5 {
 		return "business/getBusiness";
 	}// end of getBusiness
 
-	// 마이페이지-사업자-본인정보수정 페이지
+	// 마이페이지-사업자-본인정보수정 페이지 호출
 	@GetMapping("/updateBusiness")
 	public String updateBusiness(BusinessVO vo, Model model) {
 		vo = businessService.getBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/updateBusiness";
 	}// end of updateBusiness
-		// 마이페이지-사업자-본인정보수정 페이지
 
 	// 마이페이지-사업자-본인정보수정 기능
 	@PostMapping("/updateBusiness")
@@ -74,13 +70,13 @@ public class Controller5 {
 		// 결과값이 1이면 업데이트 된 것
 		businessService.updateBusiness(vo);
 		model.addAttribute("vo", vo);
-		return "business/updateBusiness";
+		return "redirect:/";
 	}// end of updateBusiness
 
 	// 마이페이지-사업자-문의내역 리스트
 	@RequestMapping("/getSearchQuestion")
-	public String getSearchQuestion(QuestionVO vo, Model model) {
-
+	public String getSearchQuestion(BusinessVO vo, Model model) {// 사업자 아이디로 조회해야해서 BusinessVO를 사용
+		//Paging
 		// 조회한 값 list형태로
 		List<QuestionVO> list = questionService.getSearchQuestion(vo);
 		model.addAttribute("list", list);

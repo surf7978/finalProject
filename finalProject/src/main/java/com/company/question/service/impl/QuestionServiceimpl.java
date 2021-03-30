@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.company.business.service.BusinessVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -27,8 +28,7 @@ public class QuestionServiceimpl implements QuestionService {
 	}
 
 	// 전체조회
-	@Override
-	public List<QuestionVO> getSearchQuestion(QuestionVO vo) {
+	public List<QuestionVO> getSearchQuestion(BusinessVO vo) {
 		return QuestionMapper.getSearchQuestion(vo);
 	}
 

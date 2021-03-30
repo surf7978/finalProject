@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<h2>사업자</h2>
@@ -53,13 +55,12 @@
 				<td>${vo.post}</td>
 			</tr>
 		</table>
-		<p>
-			<button type="button" onclick="updateBusiness()">수정</button>
+		<button type="button" id="updateBusiness">수정</button>
 	</div>
 </body>
 <script>
-	function updateBusiness() {
-		location.href = "updateBusiness?businessNumber=${vo.businessNumber}";
-	}
+	$("#updateBusiness").on("click", function() {
+		location.href = "updateBusiness?businessId=${vo.businessId}";
+	});
 </script>
 </html>

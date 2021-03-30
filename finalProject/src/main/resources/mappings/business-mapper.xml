@@ -52,7 +52,7 @@
 		businessId
 		, password
 		, email
-		, name
+		, businessName
 		, post
 		, address
 		, address2
@@ -66,10 +66,9 @@
 	<update id="updateBusiness" parameterType="businessVO">
 		UPDATE business
 		<set>
-			<if test="businessId != null"> businessId = #{businessId}</if>
 			<if test="password != null"> , password = #{password}</if>
 			<if test="email != null"> , email = #{email}</if>
-			<if test="name != null"> , name = #{name}</if>
+			<if test="businessName != null"> , businessName = #{businessName}</if>
 			<if test="post != null"> , post = #{post}</if>
 			<if test="address != null"> , address = #{address}</if>
 			<if test="address2 != null"> , address2 = #{address2}</if>
