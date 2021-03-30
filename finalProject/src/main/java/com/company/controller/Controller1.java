@@ -35,11 +35,13 @@ public class Controller1 {
 		return "member/login";
 	}
 	
-	//로그인 처리
+	//일반사용자 로그인 처리
 	@PostMapping("/login")
 	public String loginProc(MemberVO vo, HttpSession session) {
-		if(memberService.getMember(vo).getMemberId().equals(vo.getMemberId()) && memberService.getMember(vo).getPassword().equals(vo.getPassword())){
-			session.setAttribute("member", memberService.getMember(vo));
+		if(memberService.getViewMember(vo).getMemberId().equals(vo.getMemberId()) //입력한 아이디와 DB의 아이디 일치체크
+		&& memberService.getViewMember(vo).getPassword().equals(vo.getPassword())){ //입력한 비밀번호와 DB의 비밀번호 일치체크
+			session.setAttribute("loginID", memberService.getViewMember(vo).getMemberId()); //세션에 로그인한 아이디 담아줌
+			session.setAttribute("loginName", memberService.getViewMember(vo).getName()); //세션에 로그인한 이름 담아줌
 			return "/home";
 		} else {
 			return "redirect:/login";
@@ -79,10 +81,10 @@ public class Controller1 {
 	}
 	
 	//사업자 회원가입 처리
-		@PostMapping("/signUpBusiness")
-		public String signUpBusinessProc(BusinessVO vo) {
-			businessService.insertBusiness(vo);
-			return "redirect:/login";
+	@PostMapping("/signUpBusiness")
+	public String signUpBusinessProc(BusinessVO vo) {
+		businessService.insertBusiness(vo);
+		return "redirect:/login";
 	}
 	
 	

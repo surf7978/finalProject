@@ -10,4 +10,5 @@ public interface MemberMapper {
 	public List<MemberVO> getSearchMember(MemberVO vo); //일반사용자 전체조회
 	public int updateMember(MemberVO vo); //일반사용자 수정
 	public int deleteMember(MemberVO vo); //일반사용자 탈퇴
+	public MemberVO getViewMember(MemberVO vo); //전체회원 단건조회
 }

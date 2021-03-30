@@ -37,7 +37,6 @@
 			, address
 			, address2
 			, phone
-			, auth
 			, startDate
 			, endDate
 			, businessNumber
@@ -55,7 +54,6 @@
 			, address
 			, address2
 			, phone
-			, auth
 			, startDate
 			, endDate
 			, businessNumber
@@ -73,7 +71,6 @@
 			 <if test="address != null">			 , address = #{address}</if>
 			 <if test="address2 != null">			 , address2 = #{address2}</if>
 			 <if test="phone != null">		 		 , phone = #{phone}</if>
-			 <if test="auth != null">		 		 , auth = #{auth}</if>
 			 <if test="startDate != null">		 	 , startDate = #{startDate}</if>
 			 <if test="endDate != null">			 , endDate = #{endDate}</if>
 			 <if test="businessNumber != null">		 , businessNumber = #{businessNumber}</if>

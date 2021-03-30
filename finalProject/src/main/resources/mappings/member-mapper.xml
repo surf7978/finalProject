@@ -79,4 +79,11 @@
 		FROM MEMBER
 		WHERE memberId = #{memberId}
 	</delete>
+	<select id="getViewMember" parameterType="memberVO" resultType="memberVO">
+		SELECT 
+			memberId
+			, password
+		FROM UNIONID
+		WHERE memberId = #{memberId}
+	</select>
 </mapper>
