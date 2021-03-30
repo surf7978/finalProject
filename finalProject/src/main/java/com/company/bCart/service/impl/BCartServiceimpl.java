@@ -38,7 +38,7 @@ public class BCartServiceimpl implements BCartService {
 		return BCartMapper.updateBCart(vo);
 	}
 
-	// 탈퇴
+	// 삭제
 	@Override
 	public int deleteBCart(BCartVO vo) {
 		return BCartMapper.deleteBCart(vo);

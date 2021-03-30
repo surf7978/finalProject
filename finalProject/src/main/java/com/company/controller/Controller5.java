@@ -2,6 +2,8 @@ package com.company.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -184,17 +186,29 @@ public class Controller5 {
 	// 장바구니-페이지 호출
 	@GetMapping("/getSearchBCart")
 	public String getSearchBCart(BCartVO vo) {
-		return "bCart/getBCart";
+		return "bCart/getSearchBCart";
 	}
 
 	// 장바구니-페이지 기능
 	@PostMapping("/getSearchBCart")
 	@ResponseBody
-	public BCartVO getSearchBCartProc(BCartVO vo) {
-		vo = bCartService.getBCart(vo);
-		return vo;
+	public List<BCartVO> getSearchBCartProc(BCartVO vo) {
+		List<BCartVO> list = bCartService.getSearchBCart(vo);
+		return list;
 	}
-	// 장바구니-제품등록 기능
+
+	// 장바구니-등록
+	@RequestMapping("/insertBCart")
+	public void insertBCart(BCartVO vo) {
+		bCartService.insertBCart(vo);
+	}
+
+	// 장바구니-삭제
+	@RequestMapping("/deleteBCart")
+	public void deleteBCart(BCartVO vo) {
+		bCartService.deleteBCart(vo);
+	}
+	// 장바구니-제품등록 기능??
 	// 마이페이지-사업자-통계현황
 
 	// 마이페이지-사업자-예약내역조회
