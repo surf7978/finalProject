@@ -182,15 +182,15 @@ public class Controller5 {
 		// end of hotel
 
 	// 장바구니-페이지 호출
-	@GetMapping("/getBCart")
-	public String getBCart(BCartVO vo) {
+	@GetMapping("/getSearchBCart")
+	public String getSearchBCart(BCartVO vo) {
 		return "bCart/getBCart";
 	}
 
 	// 장바구니-페이지 기능
-	@PostMapping("/getBCart")
+	@PostMapping("/getSearchBCart")
 	@ResponseBody
-	public BCartVO getBCartProc(BCartVO vo) {
+	public BCartVO getSearchBCartProc(BCartVO vo) {
 		vo = bCartService.getBCart(vo);
 		return vo;
 	}

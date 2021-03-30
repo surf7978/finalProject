@@ -1,52 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.business.service.impl.BusinessMapper">
-	<insert id="insertBusiness" parameterType="businessVO">
-		INSERT INTO business(
-					businessId
+<mapper namespace="com.company.member.service.impl.MemberMapper">
+	<insert id="insertMember" parameterType="memberVO">
+		INSERT INTO MEMBER(
+					memberId
 					, password
 					, email
-					, businessName
+					, name
 					, post
 					, address
 					, address2
 					, phone
-					, businessNumber
-					, businessCode
 					) VALUES(
-					#{businessId}
+					#{memberId}
 					, #{password}
 					, #{email}
-					, #{businessName}
+					, #{name}
 					, #{post}
 					, #{address}
 					, #{address2}
 					, #{phone}
-					, #{businessNumber}
-					, #{businessCode}
 					)
 	</insert>
-	<select id="getBusiness" parameterType="businessVO" resultType="businessVO">
+	<select id="getMember" parameterType="memberVO" resultType="memberVO">
 		SELECT 
-			businessId
-			, password
-			, email
-			, businessName
-			, post
-			, address
-			, address2
-			, phone
-			, startDate
-			, endDate
-			, businessNumber
-		FROM business
-		WHERE businessId = #{businessId}
-	</select>
-
-	<select id="getSearchBusiness" parameterType="businessVO" resultType="businessVO">
-		SELECT 
-			businessId
+			memberId
 			, password
 			, email
 			, name
@@ -54,16 +33,33 @@
 			, address
 			, address2
 			, phone
+			, auth
 			, startDate
 			, endDate
-			, businessNumber
-		FROM business
+		FROM MEMBER
+		WHERE memberId = #{memberId}
 	</select>
 
-	<update id="updateBusiness" parameterType="businessVO">
-		UPDATE business 
+	<select id="getSearchMember" parameterType="memberVO" resultType="memberVO">
+		SELECT 
+			memberId
+			, password
+			, email
+			, name
+			, post
+			, address
+			, address2
+			, phone
+			, auth
+			, startDate
+			, endDate
+		FROM MEMBER
+	</select>
+
+	<update id="updateMember" parameterType="memberVO">
+		UPDATE MEMBER 
 			<set>
-			 <if test="businessId != null">			 businessId = #{businessId}</if>
+			 <if test="memberId != null">			 memberId = #{memberId}</if>
 			 <if test="password != null">			 , password = #{password}</if>
 			 <if test="email != null">				 , email = #{email}</if>
 			 <if test="name != null">				 , name = #{name}</if>
@@ -71,16 +67,23 @@
 			 <if test="address != null">			 , address = #{address}</if>
 			 <if test="address2 != null">			 , address2 = #{address2}</if>
 			 <if test="phone != null">		 		 , phone = #{phone}</if>
+			 <if test="auth != null">		 		 , auth = #{auth}</if>
 			 <if test="startDate != null">		 	 , startDate = #{startDate}</if>
 			 <if test="endDate != null">			 , endDate = #{endDate}</if>
-			 <if test="businessNumber != null">		 , businessNumber = #{businessNumber}</if>
 			</set>
-		WHERE businessId = #{businessId}
+		WHERE memberId = #{memberId}
 	</update>
 
-	<delete id="deleteBusiness" parameterType="businessVO">
+	<delete id="deleteMember" parameterType="memberVO">
 		DELETE 
-		FROM business
-		WHERE businessId = #{businessId}
+		FROM MEMBER
+		WHERE memberId = #{memberId}
 	</delete>
+	<select id="getViewMember" parameterType="memberVO" resultType="memberVO">
+		SELECT 
+			memberId
+			, password
+		FROM UNIONID
+		WHERE memberId = #{memberId}
+	</select>
 </mapper>

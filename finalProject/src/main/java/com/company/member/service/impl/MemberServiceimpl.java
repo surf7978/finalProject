@@ -38,6 +38,12 @@ public class MemberServiceimpl implements MemberService{
 	public int deleteMember(MemberVO vo) {
 		return memberMapper.deleteMember(vo);
 	}
+	
+	//전체회원 단건조회
+	@Override
+	public MemberVO getViewMember(MemberVO vo) {
+		return memberMapper.getViewMember(vo);
+	}
 
 
 }
