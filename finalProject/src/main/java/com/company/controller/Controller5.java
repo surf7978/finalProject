@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
@@ -23,6 +24,7 @@ import com.company.question.service.QuestionVO;
 /*
  * @author 박세민
  * 21.03.29 마이페이지-사업자(Business,Question,Answer)
+ * 21.03.30 
  */
 @Controller
 public class Controller5 {
@@ -179,12 +181,18 @@ public class Controller5 {
 	}// end of insertHotelProc
 		// end of hotel
 
-	// 장바구니-페이지
-	@RequestMapping("/getBCart")
-	public String getBCart(BCartVO vo, Model model) {
-		vo = bCartService.getBCart(vo);
-		model.addAttribute("vo", vo);
+	// 장바구니-페이지 호출
+	@GetMapping("/getBCart")
+	public String getBCart(BCartVO vo) {
 		return "bCart/getBCart";
+	}
+
+	// 장바구니-페이지 기능
+	@PostMapping("/getBCart")
+	@ResponseBody
+	public BCartVO getBCartProc(BCartVO vo) {
+		vo = bCartService.getBCart(vo);
+		return vo;
 	}
 	// 장바구니-제품등록 기능
 	// 마이페이지-사업자-통계현황
