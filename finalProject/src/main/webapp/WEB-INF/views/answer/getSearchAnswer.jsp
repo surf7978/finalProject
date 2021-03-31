@@ -15,7 +15,7 @@
 				<td>${answer.answerNumber}</td>
 				<td>${answer.writer}</td>
 				<td>${answer.content}</td>
-				<td>${answer.calender}</td>
+				<td>${answer.calendar}</td>
 				<td>${answer.memberId}</td>
 				<td>${answer.questionNumber}</td>
 			</tr>
