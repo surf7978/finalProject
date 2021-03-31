@@ -79,10 +79,18 @@
 		FROM MEMBER
 		WHERE memberId = #{memberId}
 	</delete>
+	<!-- 로그인 기능 -->
 	<select id="getViewMember" parameterType="memberVO" resultType="memberVO">
 		SELECT 
 			memberId
 			, password
+		FROM UNIONID
+		WHERE memberId = #{memberId}
+	</select>
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" resultType="int">
+		SELECT 
+			COUNT(*)
 		FROM UNIONID
 		WHERE memberId = #{memberId}
 	</select>

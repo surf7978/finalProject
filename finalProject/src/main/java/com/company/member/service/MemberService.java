@@ -11,4 +11,7 @@ public interface MemberService {
 	public int deleteMember(MemberVO vo);	//화원탈퇴
 	
 	public MemberVO getViewMember(MemberVO vo);	//뷰 단건조회
+	
+	public int idCheck(MemberVO vo);	//아이디 중복체크
+	
 }
