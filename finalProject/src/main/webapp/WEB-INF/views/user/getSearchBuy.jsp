@@ -17,8 +17,15 @@
 		<th>옵션명</th>
 		<th>수량</th>
 		<th>금액</th>
+		<th>보낸사람</th>
+		<th>받는사람</th>
+		<th>우편번호</th>
+		<th>주소</th>
+		<th>상세주소</th>
+		<th>전화번호</th>
 		<th>구매상태</th>	
 		<th>구매평</th>	
+		<th>환불하기</th>
 	</thead>
 	<tbody>
 	<c:forEach items="${buys }" var="buy" varStatus="status">
@@ -28,8 +35,15 @@
 		<td><c:out value="${buy.optionName}"/></td>
 		<td><c:out value="${buy.count}"/></td>
 		<td><c:out value="${buy.price}"/></td>
+		<td><c:out value="${buy.fromPerson}"/></td>
+		<td><c:out value="${buy.toPerson}"/></td>
+		<td><c:out value="${buy.post}"/></td>
+		<td><c:out value="${buy.address}"/></td>
+		<td><c:out value="${buy.address2}"/></td>
+		<td><c:out value="${buy.phone}"/></td>
 		<td><c:out value="${buy.buyState}"/></td>
-		<td><button type="button" id="">구매평쓰기</button></td>
+		<td><button type="button" class="">구매평쓰기</button></td>
+		<td><button type="button" class="">환불하기</button></td>
 	</tr>
 	</c:forEach>
 	</tbody>

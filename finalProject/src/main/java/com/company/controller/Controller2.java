@@ -85,4 +85,9 @@ public class Controller2 {
 		return "user/getSearchBuy";
 	}
 	
+	//환불&반품내역리스트 조회
+	
+	
+	
+	
 }
