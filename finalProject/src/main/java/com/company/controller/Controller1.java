@@ -96,6 +96,9 @@ public class Controller1 {
 	//사업자 회원가입 처리
 	@PostMapping("/signUpBusiness")
 	public String signUpBusinessProc(BusinessVO vo) {
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		String pw = bcrypt.encode(vo.getPassword());
+		vo.setPassword(pw);
 		businessService.insertBusiness(vo);
 		return "redirect:/loginForm";
 	}
