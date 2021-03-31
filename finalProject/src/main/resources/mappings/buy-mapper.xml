@@ -11,4 +11,8 @@
 		WHERE PNDNUMBER=#{pndNumber}
 	</select>
 
+	<!-- 환불하기 -->
+	<update id="updateBoard" parameterType="BuyVO">
+		
+	</update>
 </mapper>
