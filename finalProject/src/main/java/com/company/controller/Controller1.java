@@ -102,7 +102,7 @@ public class Controller1 {
 		businessService.insertBusiness(vo);
 		return "redirect:/loginForm";
 	}
-	
+	 
 	//카카오로그인
 	@RequestMapping("/callback")
 	public String callback(@RequestParam Map<String, Object> map, HttpSession session) {
