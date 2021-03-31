@@ -9,7 +9,7 @@
 	<h1>Hello world!</h1>
 	<P>The time on the server is ${serverTime}.</P>
 	<c:if test="${empty loginID }">
-		<a href="login">로그인</a>
+		<a href="loginForm">로그인</a>
 	</c:if>
 	<c:if test="${not empty loginID}">
 		<h3>${loginID}님 로그인 중</h3>
