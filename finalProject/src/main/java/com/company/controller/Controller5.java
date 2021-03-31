@@ -1,7 +1,10 @@
 package com.company.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,12 +127,16 @@ public class Controller5 {
 
 	// 마이페이지-사업자-답변 등록 기능
 	@PostMapping("/insertAnswer")
-	public String insertAnswerProc(AnswerVO vo, HttpSession session) {
+	public void insertAnswerProc(AnswerVO vo, HttpSession session, HttpServletResponse response) throws IOException {
 		// 작성자만 vo에 담기
 		String id = session.getAttribute("loginID").toString();
 		vo.setWriter(id);
 		answerService.insertAnswer(vo);
-		return "redirect:/";
+		// alert
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('답변이 등록되었습니다');window.close();</script>");
+		writer.close();
 	}// end of insertAnswerProc
 
 	// 마이페이지-사업자-답변 수정
@@ -137,6 +144,7 @@ public class Controller5 {
 	public void updateAnswer(AnswerVO vo) {
 		answerService.updateAnswer(vo);
 		// 기능 처리 후 alert 박스 뜨게 하기
+
 	}// end of updateAnswer
 
 	// 마이페이지-사업자-답변 삭제

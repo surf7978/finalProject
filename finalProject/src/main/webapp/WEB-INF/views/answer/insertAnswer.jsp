@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>답변등록페이지</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<div align="center">
@@ -28,13 +27,8 @@
 							placeholder="내용을 입력해주세요"></textarea></td>
 				</tr>
 			</table>
-			<button type="submit" id="insertAnswer">답장</button>
+			<button type="submit">답장</button>
 		</form>
 	</div>
 </body>
-<script>
-		//submit true/false 판별하는 법 알아보기
-		//alert("답변이 등록되었습니다");
-		//window.close();
-</script>
 </html>
