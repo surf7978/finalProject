@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+body{font-family: 'Noto Sans KR', sans-serif;}
+::selection{background:#e7ab3c;}
+a{color:#000;}
+#contents{width:1140px;margin:10px;}
+#contents h1{margin-bottom:10px;text-align: center;font-size:1.9em;width:100%;padding:30px 0;border-bottom:2px solid #e7ab3c;}
+li{list-style:none;}
+/* 유기동물 API LIST */
+#show ul{width:100%;align-items: stretch;display:table;}
+#show ul li {float:left;margin:20px;cursor:pointer;box-sizing: border-box;width:29%;border:1px solid #ddd;}
+#show ul li div{width:100%;height:300px;overflow: hidden;box-sizing:border-box;}
+#show ul li nav{text-align:left;margin-top:15px;height:100px;padding:10px;}
+#show ul li nav h3{font-size:0.95em;}
+#show ul li nav p{font-size:12px;line-height:20px;margin-top:10px;}
+#show ul li div img {height:100%;}
+/* PAGING */
+#paging {display: inline-block;}
+
+#paging a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  font-size: 22px;
+}
+
+#paging a.active {
+  background-color: #e7ab3c;
+  color: white;
+  border: 1px solid #e7ab3c;
+}
+#paging a:hover:not(.active) {background-color: #ddd;}
+/* 카테고리 */
+#aban_location {width:100%;border:1px solid #e0e0e0;box-sizing:border-box;display:flex;
+  justify-content: center;align-items: center;}
+#aban_location .tit {width:125px;background:#f8f8f8;float:left;padding:15px;}
+#aban_location #con{float:left;padding:10px;text-align:left;width:90%;}
+#aban_location #con input {margin-left:10px;}
+#aban_location #con label{margin-left:5px;}
+#aban_location2 {width:100%;border:1px solid #e0e0e0;box-sizing:border-box;display:flex;
+  justify-content: center;align-items: center;margin-top:10px;}
+#aban_location2 .tit {width:125px;background:#f8f8f8;float:left;padding:15px;}
+#aban_location2 #con2{float:left;padding:10px;text-align:left;width:90%;}
+#aban_location2 #con2 input {margin-left:10px;}
+#aban_location2 #con2 label{margin-left:5px;}
+#searchshow{width:100%;border:1px solid #f8f8f8;display:flex;margin:50px 0;}
+#searchshow table {border-collapse: collapse;width:50%;margin-left:2%;}
+#searchshow table tr th{background:#e7ab3c;padding:10px;}
+#searchshow table tr td{padding:10px;color:#6d6d6d;}
+#searchshow nav{width:48%;float:left;border-radius: 5px;overflow:hidden;}
+#searchshow nav img{width:100%;}
