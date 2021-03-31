@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function formCheck(){
-		if(memberId.value==""){
+		if(businessId.value==""){
 			alert("아이디 미입력");
 			return false;
 		}
@@ -49,13 +49,13 @@
 <script>
 	$(function(){
 		$("#idCheck").on("click", function(){
-			console.log($("#memberId").val());
-			if($("#memberId").val()!=""){
+			console.log($("#businessId").val());
+			if($("#businessId").val()!=""){
 				$.ajax({
 					url:"idCheck",
 					type:"post",
 					dataType:"json",
-					data:{"memberId":$("#memberId").val()},
+					data:{"memberId":$("#businessId").val()},
 					success:function(data){
 						console.log(data);
 						if(data==1){
@@ -82,7 +82,9 @@
 <body>
 	사업자회원가입화면<br>
 	<form id="frm" name="frm" onsubmit="return formCheck()" action="signUpBusiness" method="post">
-	아이디<input id="businessId" name="businessId"><br>
+	아이디<input id="businessId" name="businessId">
+	<button type="button" id="idCheck">중복조회</button>
+	<div id="idCheckResult" name="idCheckResult" style="color:red;"></div><br>
 	패스워드<input type="password" id="password" name="password"><br>
 	패스워드 확인<input type="password" id="passwordCheck" name="passwordCheck"><br>
 	이름<input id="businessName" name="businessName"><br>
