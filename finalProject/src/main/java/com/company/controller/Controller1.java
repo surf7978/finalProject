@@ -26,7 +26,7 @@ import com.company.member.common.KakaoAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.member.service.impl.MemberServiceimpl;
-
+ 
 @Controller
 public class Controller1 {
 
