@@ -18,16 +18,9 @@ public class Controller3 {
 		
 		//유기동물 API
 		@RequestMapping("/getAban")
-		public void getAban(HttpServletResponse response,  String pageNo) throws IOException{
+		public void getAban(HttpServletResponse response,  String pageNo, String upr_cd) throws IOException{
 			response.setContentType("text/xml; charset=UTF-8");
-			response.getWriter().print(abanAPI.getAban(pageNo));
-		}
-		
-		//유기동물 API LIST(시도군)
-		@RequestMapping("/getAbanSidoGun")
-		public void getAbanSidoGun(HttpServletResponse response,String upr_cd) throws IOException{
-			response.setContentType("text/xml; charset=UTF-8");
-			response.getWriter().print(abanAPI.getAbanSidoGun(upr_cd));
+			response.getWriter().print(abanAPI.getAban(pageNo, upr_cd));
 		}
 		
 		//유기동물 LIST
@@ -36,12 +29,6 @@ public class Controller3 {
 			return "abandonment/getabandonment";
 		}
 		
-		//유기동물 시군구 API
-		@RequestMapping("/getAbanSigungu")
-		public void getAbanSigungu(HttpServletResponse response,  String uprCd) throws IOException{
-			response.setContentType("text/xml; charset=UTF-8");
-			response.getWriter().print(abanAPI.getAbanSigungu(uprCd));
-		}
 		
 		//유기동물 API 시도
 		@RequestMapping("/getAbanSido")
@@ -52,9 +39,10 @@ public class Controller3 {
 		
 		//유기동물 상세보기
 		@RequestMapping("/getSearchAban")
-		public String getSearchAban(String desertionNo, Model model, String pageNo) {
+		public String getSearchAban(String desertionNo, Model model, String pageNo, String upr_cd) {
 			model.addAttribute("desertionNo", desertionNo);
 			model.addAttribute("pageNo", pageNo);
+			model.addAttribute("upr_cd", upr_cd);
 			return "abandonment/getSearchAban";
 		}
 	

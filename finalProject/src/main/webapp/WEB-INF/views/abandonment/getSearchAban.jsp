@@ -13,7 +13,7 @@
 			url:"getAban",
 			type:"Get",
 			dataType:"xml",
-			data:{pageNo:${pageNo}},
+			data:{pageNo:${pageNo},upr_cd: ${upr_cd}},
 			error:function(){
 				alert("Error");
 			},
