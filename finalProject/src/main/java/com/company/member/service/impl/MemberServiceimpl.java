@@ -62,6 +62,13 @@ public class MemberServiceimpl implements MemberService, UserDetailsService, Pas
 		return vo;
 	}
 	
+	//아이디 중복체크
+	@Override
+	public int idCheck(MemberVO vo) {
+		int result = memberMapper.idCheck(vo);
+		return result;
+	}
+	
 	// spring Security의 암호화된 패스워드와 일치하는지 확인하는 기능
 	PasswordEncoder passwordEncoder;
 	public MemberServiceimpl() {

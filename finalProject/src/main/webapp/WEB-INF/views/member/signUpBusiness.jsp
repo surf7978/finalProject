@@ -9,8 +9,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function formCheck(){
-		if(businessId.value==""){
+		if(memberId.value==""){
 			alert("아이디 미입력");
+			return false;
+		}
+		else if(idCheckResult.value=="중복된 아이디가 존재합니다."){
+			alert("다른 아이디를 입력");
 			return false;
 		}
 		else if(password.value==""){
@@ -19,14 +23,6 @@
 		}
 		else if(passwordCheck.value==""){
 			alert("패스워드 확인 미입력");
-			return false;
-		}
-		else if(businessNumber.value==""){
-			alert("사업자번호 미입력");
-			return false;
-		}
-		else if(businessCode.value==""){
-			alert("사업체분류 미입력");
 			return false;
 		}
 		else if(password.value!=passwordCheck.value){
@@ -48,6 +44,34 @@
 			}
 		}).open();
 	}
+</script>
+<!-- 아이디 중복체크 -->
+<script>
+	$(function(){
+		$("#idCheck").on("click", function(){
+			console.log($("#memberId").val());
+			if($("#memberId").val()!=""){
+				$.ajax({
+					url:"idCheck",
+					type:"post",
+					dataType:"json",
+					data:{"memberId":$("#memberId").val()},
+					success:function(data){
+						console.log(data);
+						if(data==1){
+							alert("중복된 아이디가 존재합니다.");
+							$("#idCheckResult").html("중복된 아이디가 존재합니다.");
+						}else{
+							alert("사용가능한 아이디입니다.");
+							$("#idCheckResult").html("사용가능한 아이디입니다.");
+						}
+					}
+				});	
+			}else{
+				alert("아이디 미입력");
+			}
+		});
+	});
 </script>
 <!-- 사업자조회 -->
 <script>

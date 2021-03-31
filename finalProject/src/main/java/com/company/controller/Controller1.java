@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
@@ -117,6 +118,15 @@ public class Controller1 {
 		session.setAttribute("loginID", userInfo.get("nickname"));
 		return "redirect:/";
 	}
+	
+	//아이디 중복체크 기능
+	@ResponseBody
+	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
+	public int idCheck(MemberVO vo) {
+		int result = memberService.idCheck(vo);
+		return result;
+	}
+	
 	
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
