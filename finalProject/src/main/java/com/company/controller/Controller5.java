@@ -164,7 +164,10 @@ public class Controller5 {
 
 	// 마이페이지-사업자-답변리스트
 	@RequestMapping("/getSearchAnswer")
-	public String getSearchAnswer(AnswerVO vo, Model model) {
+	public String getSearchAnswer(AnswerVO vo, Model model, HttpSession session) {
+		// 세션 ID 값
+		String id = session.getAttribute("loginID").toString();
+		vo.setWriter(id);
 		// 값 조회 후 list에 담기
 		List<AnswerVO> list = answerService.getSearchAnswer(vo);
 		model.addAttribute("list", list);
