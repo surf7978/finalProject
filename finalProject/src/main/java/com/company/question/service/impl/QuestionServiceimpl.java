@@ -27,6 +27,11 @@ public class QuestionServiceimpl implements QuestionService{
 	public List<QuestionVO> getSearchQuestion(QuestionVO vo) {
 		return QuestionMapper.getSearchQuestion(vo);
 	}
+	//문의하기 항목 하나 전체조회
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestionSelect(vo);
+	}
 	//수정
 	@Override
 	public int updateQuestion(QuestionVO vo) {

@@ -63,7 +63,7 @@ border: 1px solid black;
 
 
 </table>
-
+<h1><a href="/temp">홈으로 돌아가기</a></h1>
  <h3>검색기능 만들구요, 페이지 넘기는 기능 만드시오. </h3>
 </div>
 </body>

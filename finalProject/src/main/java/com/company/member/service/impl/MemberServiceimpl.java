@@ -3,13 +3,18 @@ package com.company.member.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 
-@Service
-public class MemberServiceimpl implements MemberService{
+@Service("memberService")
+public class MemberServiceimpl implements MemberService, UserDetailsService, PasswordEncoder{
 	
 	@Autowired MemberMapper memberMapper;
 	//등록
@@ -44,6 +49,36 @@ public class MemberServiceimpl implements MemberService{
 	public MemberVO getViewMember(MemberVO vo) {
 		return memberMapper.getViewMember(vo);
 	}
+	
+	// spring Security
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		MemberVO vo = new MemberVO();
+		vo.setMemberId(username);
+		vo = memberMapper.getViewMember(vo);
+		if(vo == null) {
+			throw new UsernameNotFoundException("NO USER!!!");
+		}
+		return vo;
+	}
+	
+	// spring Security의 암호화된 패스워드와 일치하는지 확인하는 기능
+	PasswordEncoder passwordEncoder;
+	public MemberServiceimpl() {
+		this.passwordEncoder = new BCryptPasswordEncoder();
+	}
 
+	public MemberServiceimpl(PasswordEncoder passwordEncoder) {
+	   this.passwordEncoder = passwordEncoder;
+	}
 
+	@Override
+	public String encode(CharSequence rawPassword) {
+	   return passwordEncoder.encode(rawPassword);
+	}
+
+	@Override
+	public boolean matches(CharSequence rawPassword, String encodedPassword) {
+	   return passwordEncoder.matches(rawPassword, encodedPassword);
+	}
 }

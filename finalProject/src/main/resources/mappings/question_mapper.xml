@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.question.service.impl.QuestionMapper">
+
+	<select id="getSearchQuestion" resultType="questionVO">
+	SELECT * FROM QUESTION
+	</select>
+	<select id="getSearchQuestionSelect" resultType="questionVO">
+	SELECT * FROM QUESTION 
+	WHERE CATEGORY=#{category}
+	ORDER BY WRITER ASC	
+	</select>
+	<select id="getQuestion" resultType="questionVO"
+						  parameterType="questionVO">
+	SELECT * FROM QUESTION 
+	WHERE TITLE=#{title}
+	</select>
+	
+</mapper>
+
+<!-- 스프링 초기설정 오류방지용 -->
