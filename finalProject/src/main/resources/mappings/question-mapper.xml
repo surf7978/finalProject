@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.company.question.service.impl.QuestionMapper">
+	<!-- 페이징용 카운트 변수 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM QUESTION
+		<!-- 수정필요 -->
+	</select>
+	<!-- 문의내역 등록 -->
+	<insert id="insertQuestion">
+		INSERT INTO QUESTION(
+		TITLE,
+		CONTENT,
+		TOPERSON,
+		WRITER
+		)
+		VALUES(
+		#{title},
+		#{content},
+		#{toPerson},
+		#{memberId})
+	</insert>
+	<!-- 문의내역 수정 -->
+	<update id="updateQuestion">
+		UPDATE QUESTION
+		<set>
+			<if test="title != null">
+				TITLE = #{title},
+			</if>
+			<if test="content != null">
+				AND CONTENT = #{content},
+			</if>
+			AND CALENDAR = SYSDATE
+			AND CATEGORY = #{category}
+		</set>
+		<where>MEMBERID = #{memberId}</where>
+	</update>
+	<!-- 문의내역 삭제 -->
+	<delete id="deleteQuestion">
+		DELETE FROM QUESTION
+		WHERE MEMBERID = #{memberId}
+	</delete>
+	<!--문의내역 단건조회 -->
+	<select id="getQuestion" resultType="questionVO">
+		SELECT * FROM QUESTION
+		WHERE QUESTIONNUMBER = #{questionNumber}
+	</select>
+	<!--문의내역 전체조회 -->
+	<select id="getSearchQuestion"  resultType="questionVO">
+		<!-- SELECT B.* FROM (SELECT ROWNUM RN ,A.* FROM ( -->
+		<!-- 첫줄 -->
+		SELECT * FROM QUESTION
+		WHERE TOPERSON = #{toPerson}
+		<!-- 사업자가 문의내역 조회하면 자기 사업체에 대한 문의만 보여야함 -->
+		<!-- 막줄 -->
+		<!-- )A )B WHERE RN BETWEEN #{start} AND #{end} -->
+	</select>
+
+</mapper>
