@@ -2,6 +2,8 @@ package com.company.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,7 @@ import com.company.question.service.QuestionVO;
  * @author 박세민
  * 21.03.29 마이페이지-사업자(Business,Question,Answer)
  * 21.03.30 장바구니 1차 수정/택시 API대용으로 T map API or Kakao map API 사용 생각중
+ * 21.03.31 마이페이지-사업자-3차 수정
  */
 @Controller
 public class Controller5 {
@@ -49,23 +52,28 @@ public class Controller5 {
 	// start of business
 	// 마이페이지-사업자-본인정보
 	@RequestMapping("/getBusiness")
-	public String getBusiness(BusinessVO vo, Model model) {
-		// 본인 정보 조회
+	public String getBusiness(BusinessVO vo, Model model, HttpSession session) {
+		// session값 조회
+		vo.setBusinessId((String) session.getAttribute("loginID"));
+		// 본인정보조회
 		vo = businessService.getBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/getBusiness";
 	}// end of getBusiness
 
 	// 마이페이지-사업자-본인정보수정 페이지 호출
-	@GetMapping("/updateBusiness")
-	public String updateBusiness(BusinessVO vo, Model model) {
+	@PostMapping("/updateBusiness")
+	public String updateBusiness(BusinessVO vo, Model model, HttpSession session) {
+		// session값 조회
+		vo.setBusinessId((String) session.getAttribute("loginID"));
+		// 본인정보조회
 		vo = businessService.getBusiness(vo);
 		model.addAttribute("vo", vo);
 		return "business/updateBusiness";
 	}// end of updateBusiness
 
 	// 마이페이지-사업자-본인정보수정 기능
-	@PostMapping("/updateBusiness")
+	@GetMapping("/updateBusiness")
 	public String updateBusinessProc(BusinessVO vo, Model model) {
 		// 결과값이 1이면 업데이트 된 것
 		businessService.updateBusiness(vo);

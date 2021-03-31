@@ -10,7 +10,7 @@
 <body>
 	<h2>사업자</h2>
 	<div id="bis">
-		<form id="frm" action="updateBusiness" method="post">
+		<form id="frm" action="updateBusiness" method="get">
 			<input type="hidden" id="businessNumber" name="businessNumber"
 				value="${vo.businessNumber}">
 			<table>
@@ -69,4 +69,7 @@
 		</form>
 	</div>
 </body>
+<script>
+
+</script>
 </html>
