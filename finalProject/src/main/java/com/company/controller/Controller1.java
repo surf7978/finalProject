@@ -46,11 +46,9 @@ public class Controller1 {
 	@PostMapping("/login")
 	public String loginProc(MemberVO vo, HttpSession session) {
 		MemberServiceimpl memberServiceimpl = new MemberServiceimpl();
-		String rawPassword1 = vo.getPassword();
-        String rawPassword2 = memberService.getViewMember(vo).getPassword();
-        String newPassword2 = memberServiceimpl.encode(rawPassword2);
-        System.out.println(rawPassword1+" "+newPassword2);
-		if(memberServiceimpl.matches(rawPassword1, newPassword2)){ //입력한 아이디/비밀번호와 DB의 아이디/비밀번호 일치체크
+		String insertPW = vo.getPassword(); //로그인화면에 입력한 비밀번호
+        String DBinPW = memberService.getViewMember(vo).getPassword(); //DB안에 암호화된 비밀번호
+		if(memberServiceimpl.matches(insertPW, DBinPW)){ //입력한 비밀번호와 DB의 비밀번호 일치체크
 			session.setAttribute("loginID", memberService.getViewMember(vo).getMemberId()); //세션에 로그인한 아이디 담아줌
 			return "/home";
 		} else {
@@ -105,8 +103,7 @@ public class Controller1 {
 	//카카오로그인
 	@RequestMapping("/callback")
 	public String callback(@RequestParam Map<String, Object> map, HttpSession session) {
-		System.out.println("-----------"+map+"-----------");
-		System.out.println("-----------"+map.get("code")+"-----------");
+		System.out.println("code값 : "+map.get("code"));
 		String code = (String) map.get("code");
 		String access_token = kakaoAPI.getAccessToken(code);
 		System.out.println("access_token : "+access_token);
