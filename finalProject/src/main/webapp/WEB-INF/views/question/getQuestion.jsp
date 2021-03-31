@@ -18,7 +18,8 @@
 			<tr>
 				<td>${vo.writer}</td>
 				<td>${vo.title}</td>
-				<td></td>
+				<!-- 받은날짜 계산하는 법 알아보고 되면 하기 -->
+				<td>${vo.calendar}</td>
 			</tr>
 			<tr>
 				<td>내용</td>

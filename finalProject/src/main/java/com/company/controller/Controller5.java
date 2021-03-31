@@ -7,9 +7,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.answer.service.AnswerService;
@@ -90,7 +92,9 @@ public class Controller5 {
 	// 마이페이지-사업자-문의내역 리스트 ajax
 	@PostMapping("/getSearchQuestion")
 	@ResponseBody
-	public List<QuestionVO> getSearchQuestionProc(QuestionVO vo, Model model) {// 사업자 아이디로 조회해야해서 BusinessVO를 사용
+	public List<QuestionVO> getSearchQuestionProc(QuestionVO vo, Model model, HttpSession session) {// 사업자 아이디로 조회
+		// toPerson=사업자아이디를 의미함
+		vo.setToPerson((String) session.getAttribute("loginID"));
 		// 조회한 값 list형태로
 		List<QuestionVO> list = questionService.getSearchQuestion(vo);
 		model.addAttribute("list", list);
@@ -100,7 +104,7 @@ public class Controller5 {
 
 	// start of question
 	// 마이페이지-사업자-문의내역 단건조회
-	@GetMapping("/getQuestion")
+	@RequestMapping("/getQuestion")
 	public String getQuestion(QuestionVO vo, Model model) {
 		// 조회결과 vo에 담기
 		vo = questionService.getQuestion(vo);

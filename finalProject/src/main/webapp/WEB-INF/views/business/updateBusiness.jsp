@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<h2>사업자</h2>
@@ -63,13 +65,16 @@
 				</tr>
 			</table>
 			<p>
-				<button type="submit">수정</button>
+				<button type="button" id="updateBtn">수정</button>
 				&nbsp;&nbsp;&nbsp;
 				<button type="reset">취소</button>
 		</form>
 	</div>
 </body>
 <script>
-
+	$("#updateBtn").on("click", function() {
+		frm.submit();
+		alert("수정되었습니다");
+	})//end of function
 </script>
 </html>
