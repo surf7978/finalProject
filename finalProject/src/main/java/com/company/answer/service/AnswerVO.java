@@ -11,5 +11,4 @@ public class AnswerVO {
 	String calendar;
 	String memberId;
 	String questionNumber;
-
 }

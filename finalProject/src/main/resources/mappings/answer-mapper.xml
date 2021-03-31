@@ -4,11 +4,21 @@
 <mapper namespace="com.company.answer.service.impl.AnswerMapper">
 	<!-- 답변 등록 -->
 	<insert id="insertAnswer">
-		INSERT INTO ANSWER(writer, content, calendar)
+		INSERT INTO ANSWER(
+		ANSWERNUMBER,
+		WRITER,
+		CONTENT,
+		CALENDAR,
+		MEMBERID,
+		QUESTIONNUMBER)
 		VALUES(
+		(SELECT
+		NVL(MAX(ANSWERNUMBER),0)+1 FROM ANSWER),
 		#{writer},
 		#{content},
-		#{calendar}
+		SYSDATE,
+		#{memberId},
+		#{questionNumber}
 		)
 	</insert>
 	<!-- 답변 수정 -->

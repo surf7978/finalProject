@@ -7,11 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.answer.service.AnswerService;
@@ -117,16 +115,21 @@ public class Controller5 {
 	// start of answer
 	// 마이페이지-사업자-답변 등록 페이지
 	@GetMapping("/insertAnswer")
-	public String insertAnswer(AnswerVO vo) {
-		vo = answerService.getAnswer(vo);
-		// return value 수정하기
-		return "insertAnswer";
+	public String insertAnswer(QuestionVO vo, Model model) {
+		vo = questionService.getQuestion(vo);
+		// questionNumber,memberId가져와야함
+		model.addAttribute("vo", vo);
+		return "answer/insertAnswer";
 	}// end of insertAnswer
 
 	// 마이페이지-사업자-답변 등록 기능
 	@PostMapping("/insertAnswer")
-	public void insertAnswerProc(AnswerVO vo) {
+	public String insertAnswerProc(AnswerVO vo, HttpSession session) {
+		// 작성자만 vo에 담기
+		String id = session.getAttribute("loginID").toString();
+		vo.setWriter(id);
 		answerService.insertAnswer(vo);
+		return "redirect:/";
 	}// end of insertAnswerProc
 
 	// 마이페이지-사업자-답변 수정
