@@ -77,7 +77,7 @@ public class Controller2 {
 		model.addAttribute("buys", buyService.getSearchBuy(vo));
 		return "user/getSearchBuy";
 	}
-	
+	 
 	//구매내역 삭제
 	@DeleteMapping("/deleteBuy")
 	public String deleteBuy(BuyVO vo) {
