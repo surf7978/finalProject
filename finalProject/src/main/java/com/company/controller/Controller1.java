@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
@@ -25,7 +26,7 @@ import com.company.member.common.KakaoAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.member.service.impl.MemberServiceimpl;
-
+ 
 @Controller
 public class Controller1 {
 
@@ -96,10 +97,13 @@ public class Controller1 {
 	//사업자 회원가입 처리
 	@PostMapping("/signUpBusiness")
 	public String signUpBusinessProc(BusinessVO vo) {
+		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+		String pw = bcrypt.encode(vo.getPassword());
+		vo.setPassword(pw);
 		businessService.insertBusiness(vo);
 		return "redirect:/loginForm";
 	}
-	
+	 
 	//카카오로그인
 	@RequestMapping("/callback")
 	public String callback(@RequestParam Map<String, Object> map, HttpSession session) {
@@ -113,6 +117,55 @@ public class Controller1 {
 		session.setAttribute("access_token", access_token);
 		session.setAttribute("loginID", userInfo.get("nickname"));
 		return "redirect:/";
+	}
+	
+	//아이디 중복체크 기능
+	@ResponseBody
+	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
+	public int idCheck(MemberVO vo) {
+		int result = memberService.idCheck(vo);
+		return result;
+	}
+	
+	//아이디/비밀번호찾기 이동
+	@GetMapping("/searchID&PW")
+	public String searchIDnPW() {
+		return "member/searchID&PW";
+	}
+	
+	//아이디 찾기
+	@ResponseBody
+	@RequestMapping(value="/searchID", method=RequestMethod.POST)
+	public String searchID(MemberVO vo) {
+		String result = memberService.searchID(vo);
+		return result;
+	}
+		
+	//비밀번호 찾기
+	@ResponseBody
+	@RequestMapping(value="/searchPW", method=RequestMethod.POST)
+	public String searchPW(MemberVO vo) {
+		String result = memberService.searchPW(vo);
+		return result;
+	}
+	
+	//비밀번호 변경
+	@RequestMapping("/changePW")
+	public String changePW(MemberVO vo) {
+		if(memberService.getViewMember(vo).getAuth().equals("m")) {
+			BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+			String pw = bcrypt.encode(vo.getPassword());
+			vo.setPassword(pw);
+			memberService.updateMember(vo);
+		}else {
+			BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+			String pw = bcrypt.encode(vo.getPassword());
+			BusinessVO vo1 = new BusinessVO();
+			vo1.setPassword(pw);
+			vo1.setBusinessId(vo.getMemberId());
+			businessService.updateBusiness(vo1);
+		}
+		return "redirect:/loginForm";
 	}
 	
 	// 홈화면 출력(스프링 기본세팅)

@@ -13,20 +13,16 @@
 			alert("아이디 미입력");
 			return false;
 		}
+		else if(idCheckResult.value=="중복된 아이디가 존재합니다."){
+			alert("다른 아이디를 입력");
+			return false;
+		}
 		else if(password.value==""){
 			alert("패스워드 미입력");
 			return false;
 		}
 		else if(passwordCheck.value==""){
 			alert("패스워드 확인 미입력");
-			return false;
-		}
-		else if(businessNumber.value==""){
-			alert("사업자번호 미입력");
-			return false;
-		}
-		else if(businessCode.value==""){
-			alert("사업체분류 미입력");
 			return false;
 		}
 		else if(password.value!=passwordCheck.value){
@@ -49,6 +45,34 @@
 		}).open();
 	}
 </script>
+<!-- 아이디 중복체크 -->
+<script>
+	$(function(){
+		$("#idCheck").on("click", function(){
+			console.log($("#businessId").val());
+			if($("#businessId").val()!=""){
+				$.ajax({
+					url:"idCheck",
+					type:"post",
+					dataType:"json",
+					data:{"memberId":$("#businessId").val()},
+					success:function(data){
+						console.log(data);
+						if(data==1){
+							alert("중복된 아이디가 존재합니다.");
+							$("#idCheckResult").html("중복된 아이디가 존재합니다.");
+						}else{
+							alert("사용가능한 아이디입니다.");
+							$("#idCheckResult").html("사용가능한 아이디입니다.");
+						}
+					}
+				});	
+			}else{
+				alert("아이디 미입력");
+			}
+		});
+	});
+</script>
 <!-- 사업자조회 -->
 <script>
 	function businessSearch(){
@@ -58,7 +82,9 @@
 <body>
 	사업자회원가입화면<br>
 	<form id="frm" name="frm" onsubmit="return formCheck()" action="signUpBusiness" method="post">
-	아이디<input id="businessId" name="businessId"><br>
+	아이디<input id="businessId" name="businessId">
+	<button type="button" id="idCheck">중복조회</button>
+	<div id="idCheckResult" name="idCheckResult" style="color:red;"></div><br>
 	패스워드<input type="password" id="password" name="password"><br>
 	패스워드 확인<input type="password" id="passwordCheck" name="passwordCheck"><br>
 	이름<input id="businessName" name="businessName"><br>

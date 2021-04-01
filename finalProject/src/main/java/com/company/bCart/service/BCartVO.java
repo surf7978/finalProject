@@ -1,3 +1,4 @@
+
 package com.company.bCart.service;
 
 import lombok.Data;
@@ -12,6 +13,4 @@ public class BCartVO {
 	String count;
 	String bIsNumber;
 	String memberId;
-
-
 }

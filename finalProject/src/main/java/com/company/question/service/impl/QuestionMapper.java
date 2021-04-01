@@ -13,4 +13,6 @@ public interface QuestionMapper {
 	public List<QuestionVO> getSearchQuestionSelect3(QuestionVO vo);	// 문의하기항목 선택. 3번신고하기
 	public int updateQuestion(QuestionVO vo);
 	public int deleteQuestion(QuestionVO vo);
+	
+	public int getCount(QuestionVO vo); // DB레코드 카운트
 }
