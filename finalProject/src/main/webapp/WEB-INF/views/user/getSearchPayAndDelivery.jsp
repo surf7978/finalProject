@@ -12,6 +12,7 @@
 <body>
 <table border="1">
 	<thead>
+	<tr>
 		<th>구매번호</th>
 		<th>분류</th>
 		<th>구매날짜</th>
@@ -19,6 +20,7 @@
 		<th>구매상태</th>
 		<th>상세조회</th>
 		<th>배송조회</th>	
+	</tr>
 	</thead>
 	<tbody>
 	<c:forEach items="${pads }" var="pad">

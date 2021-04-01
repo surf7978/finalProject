@@ -1,11 +1,9 @@
 package com.company.controller;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +19,6 @@ import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 
@@ -42,9 +38,10 @@ public class Controller2 {
 	@Autowired
 	AnimalService animalService;
 
-	// 단건조회
+	// 일반회원 본인정보 조회
 	@RequestMapping("/getMember")
-	public String getMember(MemberVO vo, Model model) {
+	public String getMember(MemberVO vo, Model model, HttpSession session) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
 		vo = memberService.getMember(vo);
 		model.addAttribute("member", vo);
 		return "user/memberInfo";
@@ -52,7 +49,8 @@ public class Controller2 {
 
 	// 수정페이지로
 	@GetMapping("/updateMember")
-	public String updateMember(MemberVO vo, Model model) {
+	public String updateMember(MemberVO vo, Model model, HttpSession session) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
 		vo = memberService.getMember(vo);
 		model.addAttribute("member", vo);
 		return "user/updateMember";
@@ -63,7 +61,7 @@ public class Controller2 {
 	public String updateMemberProc(MemberVO vo, Model model) {
 		memberService.updateMember(vo);
 		model.addAttribute("member", vo);
-		return "user/memberInfo";
+		return "redirect:/";
 	}
 
 	// 회원탈퇴
@@ -76,7 +74,8 @@ public class Controller2 {
 
 	// 구매내역리스트조회
 	@RequestMapping("/getSearchPayAndDelivery")
-	public String getSearchPayAndDelivery(PayAndDeliveryVO vo, Model model) {
+	public String getSearchPayAndDelivery(PayAndDeliveryVO vo, Model model, HttpSession session) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
 		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery(vo));
 		return "user/getSearchPayAndDelivery";
 	}
@@ -98,7 +97,8 @@ public class Controller2 {
 	/////////// 마이펫 수첩/////////
 	// 반려동물 리스트 조회
 	@RequestMapping("/getSearchAnimal")
-	public String getSearchAnimal(AnimalVO vo, Model model) {
+	public String getSearchAnimal(AnimalVO vo, Model model, HttpSession session) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
 		model.addAttribute("animal", animalService.getSearchAnimal(vo));
 		return "animal/getSearchAnimal";
 	}
@@ -119,21 +119,33 @@ public class Controller2 {
 	}
 
 	// 반려동물 등록 페이지
-	
-	//반려동물 등록
-	
-	//반려동물 수정페이지
+	@GetMapping("/insertAnimal")
+	public String insertAnimal(AnimalVO vo, Model model) {
+		model.addAttribute("animal", vo);
+		return "animal/insertAnimal";
+	}
+
+	// 반려동물 등록
+	@PostMapping("/insertAnimal")
+	public String insertAnimalProc(AnimalVO vo, Model model) {
+		animalService.insertAnimal(vo);
+		model.addAttribute("animal", vo);
+		return "redirect:/getSearchAnimal?memberId=" + vo.getMemberId();
+	}
+
+	// 반려동물 수정페이지
 	@GetMapping("/updateAnimal")
 	public String updateAnimal(AnimalVO vo, Model model) {
 		vo = animalService.getAnimal(vo);
 		model.addAttribute("animal", vo);
 		return "animal/updateAnimal";
 	}
-	//반려동물 수정
+
+	// 반려동물 수정
 	@PostMapping("/updateAnimal")
 	public String updateAnimalProc(AnimalVO vo, Model model) {
 		animalService.updateAnimal(vo);
 		model.addAttribute("animal", vo);
-		return "animal/getSearchAnimal";
+		return "redirect:/getSearchAnimal?memberId=" + vo.getMemberId();
 	}
 }

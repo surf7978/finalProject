@@ -9,7 +9,7 @@
 <body>
 <div align="center">
 ${member.memberId} 님 회원탈퇴 되었습니다.
-<button type="button" onclick="/">홈으로</button>
+<a href="http://localhost/temp/">홈으로</a>
 
 
 </div>

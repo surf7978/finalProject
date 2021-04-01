@@ -12,8 +12,8 @@
 			, KIND
 			, BIRTH
 			, MEMBERID
-		FROM ANIMAL
-		WHERE MEMBERID=#{memberId}
+			FROM ANIMAL
+			WHERE MEMBERID=#{memberId}
 	</select>
 	
 	<!-- 반려동물 상세조회(의료수첩에 포함) -->
@@ -31,30 +31,29 @@
 	<!-- 반려동물 등록 -->
 	<insert id="insertAnimal" parameterType="AnimalVO">
 		INSERT INTO ANIMAL (
-		ANIMALNUMBER
-		, NAME
-		, GENDER
-		, KIND
-		, BIRTH
-		, MEMBERID
-		)VALUES(
-		#{animalNumber}
-		#{name}
-		#{gender}
-		#{kind}
-		#{birth}
-		#{memberId})
+					ANIMALNUMBER
+				  , NAME
+				  , GENDER
+				  , KIND
+				  ,BIRTH
+				  , MEMBERID
+				  ) VALUES(
+				  ANI_SEQ.NEXTVAL
+				  , #{name}
+				  , #{gender}
+				  , #{kind}
+				  , #{birth}
+				  , #{memberId})
 	</insert>
 	
 	<!-- 반려동물 정보 수정 -->
 	<update id="updateAnimal" parameterType="AnimalVO">
-		UPDATE ANIMAL 
-			<set>
-			 <if test="name != null">			 , name = #{name}</if>
-			 <if test="gender != null">			 , gender = #{gender}</if>
-			 <if test="kind != null">			 , kind = #{kind}</if>
-			 <if test="birth != null">			 , birth = #{birth}</if>
-			</set>
+		UPDATE ANIMAL SET 
+				NAME = #{name}
+			, GENDER = #{gender}
+			,KIND = #{kind}
+			, BIRTH = #{birth}
+			, MEMBERID = #{memberId}
 		WHERE ANIMALNUMBER = #{animalNumber}
 	</update>
 	

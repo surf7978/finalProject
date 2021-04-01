@@ -12,6 +12,7 @@
 <body>
 	<table border="1">
 		<thead>
+		<tr>
 			<th>마이펫</th>
 			<th>이름(애칭)</th>
 			<th>견종</th>
@@ -19,6 +20,7 @@
 			<th>생일</th>
 			<th>관리</th>
 			<th>생애주기 의료수첩</th>
+		</tr>
 		</thead>
 		<tbody>
 		<c:forEach items="${animal }" var="ani">
@@ -33,8 +35,6 @@
 				<tr>
 		</c:forEach>	
 	</table>
-	<button>반려견 추가등록</button>
-	
-	
+	<input type="button" value="반려견 추가등록" onclick="location.href='insertAnimal?memberId='+'user2'">
 </body>
 </html>

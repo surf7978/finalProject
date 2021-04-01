@@ -18,8 +18,8 @@
 상세주소: ${member.address2} <br> 
 가입일: ${member.startDate} <br> 
 	
-	<a href="updateMember">수정하기</a>
+	<a href="updateMember?memberId=${member.memberId}">수정하기</a>
 	<a href="deleteMember?memberId=${member.memberId}">탈퇴</a>
-	<a href="">홈으로</a>
+	<a href="/home">홈으로</a>
 </body>
 </html>
