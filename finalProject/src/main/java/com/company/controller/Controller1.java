@@ -169,9 +169,6 @@ public class Controller1 {
 		}
 		return "redirect:/loginForm";
 	}
-<<<<<<< HEAD
-   
-=======
 	
 	//아이디/비밀번호찾기 이동
 	@GetMapping("/coolsms")
@@ -198,8 +195,6 @@ public class Controller1 {
         return numStr;
     }
 	
-	
->>>>>>> refs/remotes/origin/YTH
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
 	@RequestMapping(value = "/", method = RequestMethod.GET)
