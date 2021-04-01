@@ -146,12 +146,12 @@ public class Controller4 {
 		model.addAttribute("getSearchQuestion" , questionService.getSearchQuestion(vo));
 		return "question/getSearchQuestion";
 	}
-	@RequestMapping("/getSearchQuestionSelect1")	//3번은 신고하기
+	@RequestMapping("/getSearchQuestionSelect1")	//1번은 상품문의
 	public String getSearchQuestionSelect1(QuestionVO vo, Model model) {
 		model.addAttribute("getSearchQuestionSelect1", questionService.getSearchQuestionSelect1(vo));
 		return "question/getSearchQuestionSelect1";
 	}
-	@RequestMapping("/getSearchQuestionSelect2")	//3번은 신고하기
+	@RequestMapping("/getSearchQuestionSelect2")	//2번은 고객센터문의
 	public String getSearchQuestionSelect2(QuestionVO vo, Model model) {
 		model.addAttribute("getSearchQuestionSelect2", questionService.getSearchQuestionSelect2(vo));
 		return "question/getSearchQuestionSelect2";
