@@ -194,7 +194,7 @@ public class Controller1 {
         certificationService.certifiedPhoneNumber(phoneNumber,numStr);
         return numStr;
     }
-	
+	 
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
 	@RequestMapping(value = "/", method = RequestMethod.GET)
