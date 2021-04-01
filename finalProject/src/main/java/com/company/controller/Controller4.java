@@ -146,11 +146,24 @@ public class Controller4 {
 		model.addAttribute("getSearchQuestion" , questionService.getSearchQuestion(vo));
 		return "question/getSearchQuestion";
 	}
-	@RequestMapping("/getSearchQuestionSelect")
-	public String getSearchQuestionSelect(QuestionVO vo, Model model) {
-		model.addAttribute("getSearchQuestionSelect", questionService.getSearchQuestionSelect(vo));
-		return "question/getSearchQuestionSelect";
+	@RequestMapping("/getSearchQuestionSelect1")	//3번은 신고하기
+	public String getSearchQuestionSelect1(QuestionVO vo, Model model) {
+		model.addAttribute("getSearchQuestionSelect1", questionService.getSearchQuestionSelect1(vo));
+		return "question/getSearchQuestionSelect1";
 	}
+	@RequestMapping("/getSearchQuestionSelect2")	//3번은 신고하기
+	public String getSearchQuestionSelect2(QuestionVO vo, Model model) {
+		model.addAttribute("getSearchQuestionSelect2", questionService.getSearchQuestionSelect2(vo));
+		return "question/getSearchQuestionSelect2";
+	}
+	
+	
+	@RequestMapping("/getSearchQuestionSelect3")	//3번은 신고하기
+	public String getSearchQuestionSelect3(QuestionVO vo, Model model) {
+		model.addAttribute("getSearchQuestionSelect3", questionService.getSearchQuestionSelect3(vo));
+		return "question/getSearchQuestionSelect3";
+	}
+	
 	
 	@GetMapping("/getQuestion")	// 문의하기 상세조회
 	public String getQuestion(QuestionVO vo , Model model) {

@@ -8,10 +8,20 @@
 <title>문의하기(찬영&나경)</title>
 </head>
 <body>
-
-	<form action="getSearchQuestionSelect?category=3" method="post">
-		<button type="submit">신고하기</button>
+	<form action="getSearchQuestionSelect1" method="post">
+		<button type="submit">1.상품문의</button>
 	</form>
+	
+	<form action="getSearchQuestionSelect2" method="post">
+		<button type="submit">2.고객센터문의</button>
+	</form>
+	
+
+
+	<form action="getSearchQuestionSelect3" method="post">
+		<button type="submit">3.신고하기</button>
+	</form>
+
 
 ${getSearchQuestion }
 </body>

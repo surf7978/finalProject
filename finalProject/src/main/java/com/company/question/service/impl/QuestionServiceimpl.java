@@ -27,10 +27,20 @@ public class QuestionServiceimpl implements QuestionService{
 	public List<QuestionVO> getSearchQuestion(QuestionVO vo) {
 		return QuestionMapper.getSearchQuestion(vo);
 	}
-	//문의하기 항목 하나 전체조회
+	//문의하기 항목 하나 전체조회  1 상품문의
 	@Override
-	public List<QuestionVO> getSearchQuestionSelect(QuestionVO vo) {
-		return QuestionMapper.getSearchQuestionSelect(vo);
+	public List<QuestionVO> getSearchQuestionSelect1(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestionSelect1(vo);
+	}
+	//문의하기 항목 하나 전체조회  1 고객센터 문의
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect2(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestionSelect2(vo);
+	}
+	//문의하기 항목 하나 전체조회  1 신고하기
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect3(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestionSelect3(vo);
 	}
 	//수정
 	@Override

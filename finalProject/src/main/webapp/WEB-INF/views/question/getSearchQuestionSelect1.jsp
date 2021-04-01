@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>문의하기-신고하기(관리자 찬영)</h3>
+	<h3>문의하기-상품문의(나경)</h3>
 
- 	${getSearchQuestionSelect3}
+ 	${getSearchQuestionSelect1}
 
 
 

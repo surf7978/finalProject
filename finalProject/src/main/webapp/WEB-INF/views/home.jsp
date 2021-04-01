@@ -29,8 +29,8 @@
 <h3> <a href="getSearchMember">마이페이지-관리자-회원관리</a> </h3>
 <h3> <a href="getSearchBoard">마이페이지-관리자-게시글관리</a> </h3>
 <h3> <a href="getSearchEventAndNotice">이벤트 와 공지사항</a> </h3>
-<h3> <a href="getSearchQuestion">문의하기 전체조회 </a>  </h3>
-<h3> <a href="getSearchQuestion">신고하기 전체조회  </a>  </h3>
+<h3> <a href="getSearchQuestion">문의하기 전체조회-1.상품문의 2.고객센터문의 3.신고하기 </a>  </h3>
+
 
 
 </body>
