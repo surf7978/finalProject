@@ -26,11 +26,12 @@
 		UPDATE FROM ANSWER
 		<set> CONTENT = #{content}
 		</set>
+		<where>ANSWERNUMBER = #{answerNumber}</where>
 	</update>
 	<!-- 답변 삭제 -->
 	<delete id="deleteAnswer">
 		DELETE FROM ANSWER
-		<where>MEMBERID = #{memberId}</where>
+		<where>ANSWERNUMBER = #{answerNumber}</where>
 	</delete>
 	<!-- 특정 답변 조회 -->
 	<select id="getAnswer" resultType="answerVO">
