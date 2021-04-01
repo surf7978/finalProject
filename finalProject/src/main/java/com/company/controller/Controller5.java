@@ -1,7 +1,10 @@
 package com.company.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,7 @@ import com.company.question.service.QuestionVO;
  * 21.03.29 마이페이지-사업자(Business,Question,Answer)
  * 21.03.30 장바구니 1차 수정/택시 API대용으로 T map API or Kakao map API 사용 생각중
  * 21.03.31 마이페이지-사업자-3차 수정
+ * 21.04.01 마이페이지-사업자(본인정보,문의,답변 마무리)
  */
 @Controller
 public class Controller5 {
@@ -74,10 +78,14 @@ public class Controller5 {
 
 	// 마이페이지-사업자-본인정보수정 기능
 	@GetMapping("/updateBusiness")
-	public String updateBusinessProc(BusinessVO vo, Model model) {
+	public String updateBusinessProc(BusinessVO vo, Model model, HttpServletResponse response) throws IOException {
 		// 결과값이 1이면 업데이트 된 것
 		businessService.updateBusiness(vo);
 		model.addAttribute("vo", vo);
+		// alert박스 뜨게 하기
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('수정되었습니다')</script>");
 		return "redirect:/";
 	}// end of updateBusiness
 		// 마이페이지-사업자-문의내역 리스트
@@ -90,7 +98,9 @@ public class Controller5 {
 	// 마이페이지-사업자-문의내역 리스트 ajax
 	@PostMapping("/getSearchQuestion")
 	@ResponseBody
-	public List<QuestionVO> getSearchQuestionProc(QuestionVO vo, Model model) {// 사업자 아이디로 조회해야해서 BusinessVO를 사용
+	public List<QuestionVO> getSearchQuestionProc(QuestionVO vo, Model model, HttpSession session) {// 사업자 아이디로 조회
+		// toPerson=사업자아이디를 의미함
+		vo.setToPerson((String) session.getAttribute("loginID"));
 		// 조회한 값 list형태로
 		List<QuestionVO> list = questionService.getSearchQuestion(vo);
 		model.addAttribute("list", list);
@@ -100,7 +110,7 @@ public class Controller5 {
 
 	// start of question
 	// 마이페이지-사업자-문의내역 단건조회
-	@GetMapping("/getQuestion")
+	@RequestMapping("/getQuestion")
 	public String getQuestion(QuestionVO vo, Model model) {
 		// 조회결과 vo에 담기
 		vo = questionService.getQuestion(vo);
@@ -113,16 +123,25 @@ public class Controller5 {
 	// start of answer
 	// 마이페이지-사업자-답변 등록 페이지
 	@GetMapping("/insertAnswer")
-	public String insertAnswer(AnswerVO vo) {
-		vo = answerService.getAnswer(vo);
-		// return value 수정하기
-		return "insertAnswer";
+	public String insertAnswer(QuestionVO vo, Model model) {
+		vo = questionService.getQuestion(vo);
+		// questionNumber,memberId가져와야함
+		model.addAttribute("vo", vo);
+		return "answer/insertAnswer";
 	}// end of insertAnswer
 
 	// 마이페이지-사업자-답변 등록 기능
 	@PostMapping("/insertAnswer")
-	public void insertAnswerProc(AnswerVO vo) {
+	public void insertAnswerProc(AnswerVO vo, HttpSession session, HttpServletResponse response) throws IOException {
+		// 작성자만 vo에 담기
+		String id = session.getAttribute("loginID").toString();
+		vo.setWriter(id);
 		answerService.insertAnswer(vo);
+		// alert
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('답변이 등록되었습니다');window.close();</script>");
+		writer.close();
 	}// end of insertAnswerProc
 
 	// 마이페이지-사업자-답변 수정
@@ -130,6 +149,7 @@ public class Controller5 {
 	public void updateAnswer(AnswerVO vo) {
 		answerService.updateAnswer(vo);
 		// 기능 처리 후 alert 박스 뜨게 하기
+
 	}// end of updateAnswer
 
 	// 마이페이지-사업자-답변 삭제
@@ -149,7 +169,10 @@ public class Controller5 {
 
 	// 마이페이지-사업자-답변리스트
 	@RequestMapping("/getSearchAnswer")
-	public String getSearchAnswer(AnswerVO vo, Model model) {
+	public String getSearchAnswer(AnswerVO vo, Model model, HttpSession session) {
+		// 세션 ID 값
+		String id = session.getAttribute("loginID").toString();
+		vo.setWriter(id);
 		// 값 조회 후 list에 담기
 		List<AnswerVO> list = answerService.getSearchAnswer(vo);
 		model.addAttribute("list", list);
