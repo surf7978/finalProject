@@ -14,13 +14,12 @@
 		<tr>
 			<td>보낸사람</td>
 			<td>제목</td>
-			<td>받은날짜</td>
+			<td>보낸날짜</td>
 		</tr>
 		<tr>
 			<td>${vo.writer}</td>
 			<td>${vo.title}</td>
 			<td>${vo.calendar}</td>
-			<!-- 받은날짜 계산하는 법 알아보고 되면 하기 -->
 		</tr>
 		<tr>
 			<td>내용</td>

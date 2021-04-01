@@ -25,24 +25,40 @@ tr {
 			<td>아이디</td>
 			<td>문의번호</td>
 		</tr>
-		<tbody id="tbody" name="tbody">
-			<c:forEach items="${list}" var="answer">
-				<tr>
-					<td>${answer.answerNumber}</td>
-					<td>${answer.writer}</td>
-					<td>${answer.content}</td>
-					<td>${answer.calendar}</td>
-					<td>${answer.memberId}</td>
-					<td>${answer.questionNumber}</td>
-				</tr>
-			</c:forEach>
-		</tbody>
+		<tbody id="tbody"></tbody>
 	</table>
 </body>
 <script>
+	//global 변수
+	var tbody = $("#tbody");
+	//전체내역조회 ajax
+	$.ajax({
+		url : "getSearchAnswer",
+		method : "post",
+		dataType : "json",
+		success : function(response) {
+			//console.log(response);
+			for(ans of  response){
+				var tr=$("<tr>");
+				td="<td>"+ans.answerNumber+"</td>";
+				td+="<td>"+ans.writer+"</td>";
+				td+="<td>"+ans.content+"</td>";
+				td+="<td>"+ans.calendar+"</td>";
+				td+="<td>"+ans.memberId+"</td>";
+				td+="<td>"+ans.questionNumber+"</td>";
+				tr.append(td);
+				tbody.append(tr);
+				//tbody에 있는 모든 tr 태그에 answerNumber를 넣어줘야함
+				//일반 elements에선 안보임 DOM객체 안에 들어감
+				tr.data("value",ans.answerNumber);
+			}//end of for
+		}//end of success
+	})//end of ajax
+	
+	//getAnswer
 	$("#tbody").on("click", "tr", function() {
-		//var에 있는 answer.questionNumber값을 어떻게 가져올 것인지 생각하기
-		location.href = "getAnswer?questionNumber=";
+		//클릭한 위치의 data값을 가져온다는 의미
+		location.href = "getAnswer?answerNumber="+$(this).data("value");	
 	});
 </script>
 </html>
