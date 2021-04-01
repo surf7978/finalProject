@@ -84,6 +84,7 @@
 		SELECT 
 			memberId
 			, password
+			, auth
 		FROM UNIONID
 		WHERE memberId = #{memberId}
 	</select>
@@ -93,5 +94,23 @@
 			COUNT(*)
 		FROM UNIONID
 		WHERE memberId = #{memberId}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="searchID" resultType="String">
+		SELECT 
+			memberId
+		FROM UNIONID
+		WHERE name = #{name}
+		AND phone = #{phone}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="searchPW" resultType="String">
+		SELECT 
+			password
+		FROM UNIONID
+		WHERE memberId = #{memberId}
+		AND phone = #{phone}
 	</select>
 </mapper>
