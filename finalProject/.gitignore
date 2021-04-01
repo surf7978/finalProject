@@ -1,4 +1,4 @@
-/.settings/
+.settings/
 ### Eclipse ###
 *.pydevproject
 .metadata
@@ -38,5 +38,5 @@ release.properties
 *.war
 *.ear
 # virtual machine crash logs, see 
-/target/
+target/ 
 .classpath

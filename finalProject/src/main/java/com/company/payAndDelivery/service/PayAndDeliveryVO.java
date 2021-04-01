@@ -6,16 +6,13 @@ import lombok.Data;
 public class PayAndDeliveryVO {
 	String pndNumber;
 	String category;
-	String fromPerson;
-	String toPerson;
-	String post;
-	String address;
-	String address2;
-	String phone;
 	String courierCompany;
 	String payDate;
 	String invoiceNumber;
 	String sumPrice;
 	String memberId;
+	
+	//DB컬럼 수정
+	String buyState;
 
 }

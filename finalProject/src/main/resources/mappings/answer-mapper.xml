@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.answer.service.impl.AnswerMapper">
+	<!-- 답변 등록 -->
+	<insert id="insertAnswer">
+		INSERT INTO ANSWER(
+		ANSWERNUMBER,
+		WRITER,
+		CONTENT,
+		CALENDAR,
+		MEMBERID,
+		QUESTIONNUMBER)
+		VALUES(
+		(SELECT
+		NVL(MAX(ANSWERNUMBER),0)+1 FROM ANSWER),
+		#{writer},
+		#{content},
+		SYSDATE,
+		#{memberId},
+		#{questionNumber}
+		)
+	</insert>
+	<!-- 답변 수정 -->
+	<update id="updateAnswer">
+		UPDATE FROM ANSWER
+		<set> CONTENT = #{content}
+		</set>
+	</update>
+	<!-- 답변 삭제 -->
+	<delete id="deleteAnswer">
+		DELETE FROM ANSWER
+		<where>MEMBERID = #{memberId}</where>
+	</delete>
+	<!-- 특정 답변 조회 -->
+	<select id="getAnswer" resultType="answerVO">
+		SELECT * FROM ANSWER
+		<where>ANSWERNUMBER = #{answerNumber}
+		</where>
+		ORDER BY ANSWERNUMBER
+	</select>
+	<!-- 답변 전체 조회 -->
+	<select id="getSearchAnswer" resultType="answerVO">
+		SELECT * FROM ANSWER
+		WHERE WRITER =#{writer}
+		ORDER BY ANSWERNUMBER
+	</select>
+</mapper>

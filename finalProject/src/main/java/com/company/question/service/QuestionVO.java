@@ -9,7 +9,7 @@ public class QuestionVO {
 	String calendar;
 	String content;
 	String writer;
-	String fromPerson;
+	String toPerson;
 	String category;
 	String memberId;
 

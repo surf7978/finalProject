@@ -1,3 +1,4 @@
+
 package com.company.answer.service;
 
 import lombok.Data;
@@ -10,5 +11,4 @@ public class AnswerVO {
 	String calendar;
 	String memberId;
 	String questionNumber;
-
 }

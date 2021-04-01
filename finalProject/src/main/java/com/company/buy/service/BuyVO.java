@@ -12,4 +12,12 @@ public class BuyVO {
 	String buyState;
 	String productNumber;
 	String pndNumber;
+	
+	//DB컬럼 수정
+	String fromPerson;
+	String toPerson;
+	String post;
+	String address;
+	String address2;
+	String phone;
 }
