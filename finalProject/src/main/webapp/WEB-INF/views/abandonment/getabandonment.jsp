@@ -86,9 +86,7 @@ function sidoCheckbox(){
 			});
 			var orgdownNm = $(this).find("orgdownNm").text();
 			var label = $("<label>").attr("for", orgCd).text(orgdownNm);
-			$("#con").append(input, label);
-			
-			
+			$("#con").append(input, label);			
 				
 			})
 		}	
