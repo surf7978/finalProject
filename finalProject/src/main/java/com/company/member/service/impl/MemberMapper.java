@@ -14,4 +14,7 @@ public interface MemberMapper {
 	public MemberVO getViewMember(MemberVO vo); //전체회원(일반사용자+사업자) 단건조회
 	
 	public int idCheck(MemberVO vo);//아이디 중복체크
+	
+	public String searchID(MemberVO vo);	//아이디 찾기
+	public String searchPW(MemberVO vo);	//비밀번호 찾기
 }

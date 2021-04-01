@@ -14,4 +14,7 @@ public interface MemberService {
 	
 	public int idCheck(MemberVO vo);	//아이디 중복체크
 	
+	public String searchID(MemberVO vo);	//아이디 찾기
+	public String searchPW(MemberVO vo);	//비밀번호 찾기
+	
 }

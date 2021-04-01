@@ -10,7 +10,9 @@
 		<config>src/main/webapp/WEB-INF/spring/servlet-context.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/config/transaction-context.xml</config>
 		<config>src/main/resources/config/datasource-context.xml</config>
+		<config>src/main/resources/config/security-context.xml</config>
 		<config>src/main/resources/config/mybatis-context.xml</config>
 	</autoconfigs>
 	<configSets>
