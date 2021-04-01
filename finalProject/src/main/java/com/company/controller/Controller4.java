@@ -141,35 +141,46 @@ public class Controller4 {
 	
 	// ####★★문의하기-신고하기 에 관한 컨트롤러 ★★
 	
-	@RequestMapping("/getSearchQuestion")	//문의하기 전체조회
+	@GetMapping("/insertQuestion3")			//문의하기 3.신고접수 페이지 넘기기	
+	public String insertQuestion3(QuestionVO vo ) {
+		return "admin/insertQuestion3";
+	}
+	@PostMapping("/insertQuestion3")		//문의하기 3.신고접수 값 집어넣기
+	public String insertQuestion3Proc(QuestionVO vo) {
+		System.out.println(vo);
+		questionService.insertQuestion3(vo);
+		return "redirect:/getSearchQuestionSelect3";
+	}
+	
+	@RequestMapping("/getSearchQuestionCr4")	//문의하기 전체조회
 	public String getSearchQuestion(QuestionVO vo , Model model) {
-		model.addAttribute("getSearchQuestion" , questionService.getSearchQuestion(vo));
-		return "question/getSearchQuestion";
+		model.addAttribute("getSearchQuestionCr4" , questionService.getSearchQuestionCr4(vo));
+		return "admin/getSearchQuestionCr4";
 	}
 	@RequestMapping("/getSearchQuestionSelect1")	//1번은 상품문의
 	public String getSearchQuestionSelect1(QuestionVO vo, Model model) {
 		model.addAttribute("getSearchQuestionSelect1", questionService.getSearchQuestionSelect1(vo));
-		return "question/getSearchQuestionSelect1";
+		return "admin/getSearchQuestionSelect1";
 	}
 	@RequestMapping("/getSearchQuestionSelect2")	//2번은 고객센터문의
 	public String getSearchQuestionSelect2(QuestionVO vo, Model model) {
 		model.addAttribute("getSearchQuestionSelect2", questionService.getSearchQuestionSelect2(vo));
-		return "question/getSearchQuestionSelect2";
+		return "admin/getSearchQuestionSelect2";
 	}
 	
 	
 	@RequestMapping("/getSearchQuestionSelect3")	//3번은 신고하기
 	public String getSearchQuestionSelect3(QuestionVO vo, Model model) {
 		model.addAttribute("getSearchQuestionSelect3", questionService.getSearchQuestionSelect3(vo));
-		return "question/getSearchQuestionSelect3";
+		return "admin/getSearchQuestionSelect3";
 	}
 	
 	
-	@GetMapping("/getQuestion")	// 문의하기 상세조회
+	@GetMapping("/getQuestion3")	// 문의하기 상세조회 신고하기
 	public String getQuestion(QuestionVO vo , Model model) {
-		questionService.getQuestion(vo);
-		model.addAttribute("getQuestion" , questionService.getQuestion(vo));
-		return "question/getQuestion";
+		questionService.getQuestion3(vo);
+		model.addAttribute("getQuestion3" , questionService.getQuestion3(vo));
+		return "admin/getQuestion3";
 	}
 	
 	

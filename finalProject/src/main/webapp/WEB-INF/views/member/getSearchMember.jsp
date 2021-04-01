@@ -7,23 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-div{
-	margin: 100px;
-}
-table {
-	text-align: center;
-	width:100%
-	border:1px solid #444444;
-}
-#head td{
-	background-color: orange;
-	color: white;
-}
-td {
-
-padding:15px;
-border: 1px solid black;
- }
+table , tr, td{
+		border: 1px dotted black;
+			  }
 </style>
 </head>
 <body>
@@ -34,7 +20,6 @@ border: 1px solid black;
  <thead> <tr id="head"> 
  <td>권한</td>
  <td>아이디</td>
- <td>비밀번호</td>
  <td>선택</td>
  <td>관리</td>
  </tr>
@@ -44,7 +29,6 @@ border: 1px solid black;
 
  <td>${list.auth}</td>
  <td>${list.memberId}</td>
- <td>${list.password}</td>
  <td> <a href="getMember?memberId=${list.memberId}">선택</a></td>
 
 

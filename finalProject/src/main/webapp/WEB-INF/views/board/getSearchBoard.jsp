@@ -7,41 +7,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-div{
-	margin: 100px;
-}
-table {
-	text-align: center;
-	width:100%;
-	border:1px solid #444444;
-}
-#head td{
-	
-}
- td {
-
-padding:15px;
-border: 1px solid black;
- }
-#upperhead td {
- background-color: orange;
- color: white;
- }
- 
+table , tr, td{
+		
+		border: 1px dotted black;
+			}
 </style>
 </head>
 <body>
-<h3 align="center">마이페이지 관리자-게시글관리</h3>
-<div align="center">
+<h3 >마이페이지 관리자-게시글관리</h3>
+<div >
 <table>
-<thead >
-<tr id="upperhead">
-<td colspan="4">게시글관리</td>
 
-</tr>
-</thead>
 <thead>
-<tr id="head">
+<tr>
 <td>조회수</td>
 <td>제목</td>
 <td>작성날짜</td> 

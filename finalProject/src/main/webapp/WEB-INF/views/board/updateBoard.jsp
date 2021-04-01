@@ -7,26 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-div{
-	margin: 100px;
-}
-table {
-	text-align: center;
-	width:100%;
-	border:1px solid #444444;
-}
-#head td{
-	
-}
- td {
 
-padding:15px;
-border: 1px solid black;
- }
-#upperhead td {
- background-color: orange;
- color: white;
- }
 </style>
 </head>
 <body>

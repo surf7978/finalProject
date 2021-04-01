@@ -6,24 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-button{
- 	background-color: orange;
- 	color: white;
-}
-div{
-	margin: 100px;
-}
-table {
- 	border : 1px solid #444444;
-}
-th{
-	color: white;
-	background-color: orange;
-}
-td {
-	border: 1px solid black;
-	color: black;
-}
+table , tr , td{
+		border : 1px dotted black;
+				}
 </style>
 
 </head>
