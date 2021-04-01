@@ -161,10 +161,13 @@ public class Controller5 {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		if (r == 1) {
-			writer.println("<script>alert('답변이 등록되었습니다');opener.location.href='getSearchAnswer';window.close();</script>");
+			writer.println(
+					"<script>alert('답변이 등록되었습니다');opener.location.href='getSearchAnswer';window.close();</script>");
 		} else {
-			writer.println("<script>alert('오류..다시 등록해주세요..');opener.location.href='getSearchAnswer';window.close();</script>");
+			writer.println(
+					"<script>alert('오류..다시 등록해주세요..');opener.location.href='getSearchAnswer';window.close();</script>");
 		}
+		writer.close();
 	}// end of insertAnswerProc
 
 	// 마이페이지-사업자-답변 수정
@@ -179,6 +182,7 @@ public class Controller5 {
 		} else {
 			writer.println("<script>alert('오류..다시 수정해주세요..');window.close();</script>");
 		}
+		writer.close();
 		// 기능 처리 후 alert 박스 뜨게 하기
 	}// end of updateAnswer
 
@@ -194,6 +198,7 @@ public class Controller5 {
 		} else {
 			writer.println("<script>alert('오류..다시 삭제해주세요..');window.close();</script>");
 		}
+		writer.close();
 	}// end of deleteAnswer
 
 	// 마이페이지-사업자-답변 단건조회
@@ -205,15 +210,21 @@ public class Controller5 {
 	}// end of getAnswer
 
 	// 마이페이지-사업자-답변리스트
-	@RequestMapping("/getSearchAnswer")
-	public String getSearchAnswer(AnswerVO vo, Model model, HttpSession session) {
+	@GetMapping("/getSearchAnswer")
+	public String getSearchAnswer() {
+		return "answer/getSearchAnswer";
+	}
+
+	// 마이페이지-사업자-답변리스트
+	@PostMapping("/getSearchAnswer")
+	@ResponseBody
+	public List<AnswerVO> getSearchAnswer(AnswerVO vo, Model model, HttpSession session) {
 		// 세션 ID 값
 		String id = session.getAttribute("loginID").toString();
 		vo.setWriter(id);
 		// 값 조회 후 list에 담기
 		List<AnswerVO> list = answerService.getSearchAnswer(vo);
-		model.addAttribute("list", list);
-		return "answer/getSearchAnswer";
+		return list;
 	}// end of getSearchAnswer
 		// end of answer
 
