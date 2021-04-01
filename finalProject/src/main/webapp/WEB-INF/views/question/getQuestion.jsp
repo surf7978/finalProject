@@ -27,6 +27,7 @@
 			<td>${vo.content}</td>
 		</tr>
 	</table>
+	<button type="button" id="getSearchQuestion">문의 리스트</button>
 	<button type="button" id="insertAnswer">답장하기</button>
 </body>
 <script>
@@ -34,5 +35,8 @@
 		window.open("insertAnswer?memberId=${vo.writer}&questionNumber=${vo.questionNumber}",
 				"답변등록페이지","width=500px, height=400px,top=200px, left=600px, scrollbars=yes, resizable=no");
 	})//end of insertAnswer
+	$("#getSearchQuestion").on("click",function(){
+		location.href="getSearchQuestion";
+	});
 </script>
 </html>

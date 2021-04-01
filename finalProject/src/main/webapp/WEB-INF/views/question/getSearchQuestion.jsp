@@ -15,7 +15,6 @@
 	<form id="frm" action="getQuestion">
 		<table id='tbl'>
 			<tr>
-				<td>글번호</td>
 				<td>작성자</td>
 				<td>제목</td>
 				<td>내용</td>

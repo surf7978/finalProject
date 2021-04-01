@@ -31,6 +31,7 @@ import com.company.question.service.QuestionVO;
  * 21.03.29 마이페이지-사업자(Business,Question,Answer)
  * 21.03.30 장바구니 1차 수정/택시 API대용으로 T map API or Kakao map API 사용 생각중
  * 21.03.31 마이페이지-사업자-3차 수정
+ * 21.04.01 마이페이지-사업자(본인정보,문의,답변 마무리)
  */
 @Controller
 public class Controller5 {
@@ -77,10 +78,14 @@ public class Controller5 {
 
 	// 마이페이지-사업자-본인정보수정 기능
 	@GetMapping("/updateBusiness")
-	public String updateBusinessProc(BusinessVO vo, Model model) {
+	public String updateBusinessProc(BusinessVO vo, Model model, HttpServletResponse response) throws IOException {
 		// 결과값이 1이면 업데이트 된 것
 		businessService.updateBusiness(vo);
 		model.addAttribute("vo", vo);
+		// alert박스 뜨게 하기
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('수정되었습니다')</script>");
 		return "redirect:/";
 	}// end of updateBusiness
 		// 마이페이지-사업자-문의내역 리스트

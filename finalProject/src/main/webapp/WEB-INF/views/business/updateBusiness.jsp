@@ -65,16 +65,10 @@
 				</tr>
 			</table>
 			<p>
-				<button type="button" id="updateBtn">수정</button>
+				<button type="submit">수정</button>
 				&nbsp;&nbsp;&nbsp;
 				<button type="reset">취소</button>
 		</form>
 	</div>
 </body>
-<script>
-	$("#updateBtn").on("click", function() {
-		frm.submit();
-		alert("수정되었습니다");
-	})//end of function
-</script>
 </html>
