@@ -25,6 +25,8 @@
 	</form>
 	<script>
 		$(function() {
+			var tbody = $("#tbody");
+			//전체조회 ajax
 			$.ajax({//ajax
 				url : "getSearchQuestion",
 				type : "post",
@@ -33,8 +35,6 @@
 					toPerson : "${sessionScope.loginID}"
 				},
 				success : function(response) {
-					var tbody = $("#tbody");
-
 					//넘어온 결과값이 list형태의 1개일 경우가 있으니 i=0부터 시작해야함
 					for (i = 0; i < response.length; i++) {
 						var tr = $("<tr>");
@@ -48,13 +48,13 @@
 						.append("<td>" + response[i].content + "</td><br>");
 						tbody.append(tr);
 					}//end of for
-					//tr 누를 시 넘어갈 페이지
-					tbody.on("click", "tr",function() {
-								var qNumber = $(this).closest("tr").attr("data-value");
-								location.href = "getQuestion?questionNumber="+ qNumber;
-							});//end of tbody
 				}//end of success
 			}) //end of ajax
+			//tr 누를 시 넘어갈 페이지
+			tbody.on("click", "tr", function() {
+				var qNumber = $(this).closest("tr").attr("data-value");
+				location.href = "getQuestion?questionNumber=" + qNumber;
+			});//end of tbody
 		})//end of function
 	</script>
 </body>

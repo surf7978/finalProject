@@ -54,20 +54,34 @@ public class Controller5 {
 	// end of beans
 
 	// start of business
-	// 마이페이지-사업자-본인정보
-	@RequestMapping("/getBusiness")
-	public String getBusiness(BusinessVO vo, Model model, HttpSession session) {
+	// 마이페이지-사업자-본인정보 페이지
+	@GetMapping("/getBusiness")
+	public String getBusiness() {
+		return "business/getBusiness";
+	}
+
+	// 마이페이지-사업자-본인정보 기능
+	@PostMapping("/getBusiness")
+	@ResponseBody // json타입으로 변환
+	public BusinessVO getBusinessProc(BusinessVO vo, Model model, HttpSession session) {
 		// session값 조회
 		vo.setBusinessId((String) session.getAttribute("loginID"));
 		// 본인정보조회
 		vo = businessService.getBusiness(vo);
-		model.addAttribute("vo", vo);
-		return "business/getBusiness";
+		// null값 없애기(주소,사업자코드,사업자명)
+		if (vo.getAddress() == null)
+			vo.setAddress(" ");
+		if (vo.getBusinessCode() == null)
+			vo.setBusinessCode(" ");
+		if (vo.getBusinessCompanyName() == null)
+			vo.setBusinessCompanyName(" ");
+		return vo;
 	}// end of getBusiness
 
 	// 마이페이지-사업자-본인정보수정 페이지 호출
-	@PostMapping("/updateBusiness")
+	@GetMapping("/updateBusiness")
 	public String updateBusiness(BusinessVO vo, Model model, HttpSession session) {
+		// 본인정보 조회 후 vo 재사용 가능한지
 		// session값 조회
 		vo.setBusinessId((String) session.getAttribute("loginID"));
 		// 본인정보조회
@@ -77,21 +91,27 @@ public class Controller5 {
 	}// end of updateBusiness
 
 	// 마이페이지-사업자-본인정보수정 기능
-	@GetMapping("/updateBusiness")
-	public String updateBusinessProc(BusinessVO vo, Model model, HttpServletResponse response) throws IOException {
+	@PostMapping("/updateBusiness")
+	public void updateBusinessProc(BusinessVO vo, Model model, HttpServletResponse response) throws Exception {
 		// 결과값이 1이면 업데이트 된 것
-		businessService.updateBusiness(vo);
-		model.addAttribute("vo", vo);
-		// alert박스 뜨게 하기
+		int r = businessService.updateBusiness(vo);
+		System.out.println("확인용:" + r);
+		// alert
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('수정되었습니다')</script>");
-		return "redirect:/";
+		if (r == 1) {
+			writer.println("<script>alert('수정되었습니다')");
+		} else {
+			writer.println("<script>alert('오류..다시입력해주세요..')");
+		}
+		writer.println("location.href='getBusiness'");
+		writer.println("</script>");
+		writer.close();
 	}// end of updateBusiness
-		// 마이페이지-사업자-문의내역 리스트
 
+	// 마이페이지-사업자-문의내역 리스트
 	@GetMapping("/getSearchQuestion")
-	public String getSearchQuestion(BusinessVO vo) {// 사업자 아이디로 조회해야해서 BusinessVO를 사용
+	public String getSearchQuestion() {
 		return "question/getSearchQuestion";
 	}
 
@@ -132,31 +152,53 @@ public class Controller5 {
 
 	// 마이페이지-사업자-답변 등록 기능
 	@PostMapping("/insertAnswer")
-	public void insertAnswerProc(AnswerVO vo, HttpSession session, HttpServletResponse response) throws IOException {
+	public void insertAnswerProc(AnswerVO vo, HttpSession session, HttpServletResponse response) throws Exception {
 		// 작성자만 vo에 담기
 		String id = session.getAttribute("loginID").toString();
 		vo.setWriter(id);
-		answerService.insertAnswer(vo);
+		int r = answerService.insertAnswer(vo);
 		// alert
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('답변이 등록되었습니다');window.close();</script>");
+		if (r == 1) {
+			writer.println(
+					"<script>alert('답변이 등록되었습니다');opener.location.href='getSearchAnswer';window.close();</script>");
+		} else {
+			writer.println(
+					"<script>alert('오류..다시 등록해주세요..');opener.location.href='getSearchAnswer';window.close();</script>");
+		}
 		writer.close();
 	}// end of insertAnswerProc
 
 	// 마이페이지-사업자-답변 수정
 	@PostMapping("/updateAnswer")
-	public void updateAnswer(AnswerVO vo) {
-		answerService.updateAnswer(vo);
+	public void updateAnswer(AnswerVO vo, HttpServletResponse response) throws Exception {
+		int r = answerService.updateAnswer(vo);
+		// alert
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		if (r == 1) {
+			writer.println("<script>alert('수정되었습니다..');window.close();</script>");
+		} else {
+			writer.println("<script>alert('오류..다시 수정해주세요..');window.close();</script>");
+		}
+		writer.close();
 		// 기능 처리 후 alert 박스 뜨게 하기
-
 	}// end of updateAnswer
 
 	// 마이페이지-사업자-답변 삭제
 	@PostMapping("/deleteAnswer")
-	public void deleteAnswer(AnswerVO vo) {
-		answerService.deleteAnswer(vo);
-		// 기능 처리 후 alert 박스 뜨게 하기
+	public void deleteAnswer(AnswerVO vo, HttpServletResponse response) throws Exception {
+		int r = answerService.deleteAnswer(vo);
+		// alert
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		if (r == 1) {
+			writer.println("<script>alert('삭제되었습니다..');window.close();</script>");
+		} else {
+			writer.println("<script>alert('오류..다시 삭제해주세요..');window.close();</script>");
+		}
+		writer.close();
 	}// end of deleteAnswer
 
 	// 마이페이지-사업자-답변 단건조회
@@ -168,15 +210,21 @@ public class Controller5 {
 	}// end of getAnswer
 
 	// 마이페이지-사업자-답변리스트
-	@RequestMapping("/getSearchAnswer")
-	public String getSearchAnswer(AnswerVO vo, Model model, HttpSession session) {
+	@GetMapping("/getSearchAnswer")
+	public String getSearchAnswer() {
+		return "answer/getSearchAnswer";
+	}
+
+	// 마이페이지-사업자-답변리스트
+	@PostMapping("/getSearchAnswer")
+	@ResponseBody
+	public List<AnswerVO> getSearchAnswer(AnswerVO vo, Model model, HttpSession session) {
 		// 세션 ID 값
 		String id = session.getAttribute("loginID").toString();
 		vo.setWriter(id);
 		// 값 조회 후 list에 담기
 		List<AnswerVO> list = answerService.getSearchAnswer(vo);
-		model.addAttribute("list", list);
-		return "answer/getSearchAnswer";
+		return list;
 	}// end of getSearchAnswer
 		// end of answer
 

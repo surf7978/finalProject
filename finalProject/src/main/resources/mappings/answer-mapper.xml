@@ -35,13 +35,14 @@
 	<!-- 특정 답변 조회 -->
 	<select id="getAnswer" resultType="answerVO">
 		SELECT * FROM ANSWER
-		<where>QUESTIONNUMBER = #{questionNumber}
+		<where>ANSWERNUMBER = #{answerNumber}
 		</where>
+		ORDER BY ANSWERNUMBER
 	</select>
 	<!-- 답변 전체 조회 -->
 	<select id="getSearchAnswer" resultType="answerVO">
 		SELECT * FROM ANSWER
 		WHERE WRITER =#{writer}
-		ORDER BY QUESTIONNUMBER
+		ORDER BY ANSWERNUMBER
 	</select>
 </mapper>
