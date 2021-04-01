@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
 import com.company.member.common.KakaoAPI;
+import com.company.member.common.coolsmsAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.member.service.impl.MemberServiceimpl;
@@ -167,6 +169,32 @@ public class Controller1 {
 		}
 		return "redirect:/loginForm";
 	}
+	
+	//아이디/비밀번호찾기 이동
+	@GetMapping("/coolsms")
+	public String phone() {
+		return "member/coolsms";
+	}
+	
+	@Autowired coolsmsAPI certificationService;
+	//휴대폰인증-문자전송
+	@GetMapping("/sendSMS")
+    public @ResponseBody
+    String sendSMS(String phoneNumber) {
+
+        Random rand  = new Random();
+        String numStr = "";
+        for(int i=0; i<4; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            numStr+=ran;
+        }
+
+        System.out.println("수신자 번호 : " + phoneNumber);
+        System.out.println("인증번호 : " + numStr);
+        certificationService.certifiedPhoneNumber(phoneNumber,numStr);
+        return numStr;
+    }
+	
 	
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);

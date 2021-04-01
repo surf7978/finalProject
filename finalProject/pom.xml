@@ -258,6 +258,12 @@
 			<artifactId>tiles-template</artifactId>
 			<version>${org.apache.tiles-version}</version>
 		</dependency>
+		<!-- 휴대폰인증 - coolsms -->
+		<dependency>
+			<groupId>net.nurigo</groupId>
+			<artifactId>javaSDK</artifactId>
+			<version>2.2</version>
+		</dependency>
 
 	</dependencies>
 	<build>
