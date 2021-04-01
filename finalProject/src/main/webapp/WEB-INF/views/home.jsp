@@ -9,7 +9,6 @@
 	<h1>Hello world!</h1>
 	<P>The time on the server is ${serverTime}.</P>
 
-
 	<c:if test="${empty loginID }">
 		<a href="loginForm">로그인</a>
 	</c:if>
