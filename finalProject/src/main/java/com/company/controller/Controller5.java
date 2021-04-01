@@ -81,6 +81,7 @@ public class Controller5 {
 	// 마이페이지-사업자-본인정보수정 페이지 호출
 	@GetMapping("/updateBusiness")
 	public String updateBusiness(BusinessVO vo, Model model, HttpSession session) {
+		// 본인정보 조회 후 vo 재사용 가능한지
 		// session값 조회
 		vo.setBusinessId((String) session.getAttribute("loginID"));
 		// 본인정보조회
@@ -100,20 +101,17 @@ public class Controller5 {
 		PrintWriter writer = response.getWriter();
 		if (r == 1) {
 			writer.println("<script>alert('수정되었습니다')");
-			writer.print("location.href='getBusiness'");
-			writer.print("</script>");
-			writer.close();
 		} else {
-			writer.println("<script>alert('오류..다시입력해주세요..')</script>");
-			writer.print("location.href='getBusiness'");
-			writer.print("</script>");
-			writer.close();
+			writer.println("<script>alert('오류..다시입력해주세요..')");
 		}
+		writer.println("location.href='getBusiness'");
+		writer.println("</script>");
+		writer.close();
 	}// end of updateBusiness
-		// 마이페이지-사업자-문의내역 리스트
 
+	// 마이페이지-사업자-문의내역 리스트
 	@GetMapping("/getSearchQuestion")
-	public String getSearchQuestion(BusinessVO vo) {// 사업자 아이디로 조회해야해서 BusinessVO를 사용
+	public String getSearchQuestion() {
 		return "question/getSearchQuestion";
 	}
 
@@ -160,16 +158,12 @@ public class Controller5 {
 		vo.setWriter(id);
 		int r = answerService.insertAnswer(vo);
 		// alert
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
 		if (r == 1) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('답변이 등록되었습니다');window.close();</script>");
-			writer.close();
+			writer.println("<script>alert('답변이 등록되었습니다');opener.location.href='getSearchAnswer';window.close();</script>");
 		} else {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('오류..다시 등록해주세요..');window.close();</script>");
-			writer.close();
+			writer.println("<script>alert('오류..다시 등록해주세요..');opener.location.href='getSearchAnswer';window.close();</script>");
 		}
 	}// end of insertAnswerProc
 
@@ -178,16 +172,12 @@ public class Controller5 {
 	public void updateAnswer(AnswerVO vo, HttpServletResponse response) throws Exception {
 		int r = answerService.updateAnswer(vo);
 		// alert
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
 		if (r == 1) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('수정되었습니다..')</script>");
-			writer.close();
+			writer.println("<script>alert('수정되었습니다..');window.close();</script>");
 		} else {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('오류..다시 수정해주세요..')</script>");
-			writer.close();
+			writer.println("<script>alert('오류..다시 수정해주세요..');window.close();</script>");
 		}
 		// 기능 처리 후 alert 박스 뜨게 하기
 	}// end of updateAnswer
@@ -197,16 +187,12 @@ public class Controller5 {
 	public void deleteAnswer(AnswerVO vo, HttpServletResponse response) throws Exception {
 		int r = answerService.deleteAnswer(vo);
 		// alert
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
 		if (r == 1) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('삭제되었습니다..')</script>");
-			writer.close();
+			writer.println("<script>alert('삭제되었습니다..');window.close();</script>");
 		} else {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter writer = response.getWriter();
-			writer.println("<script>alert('오류..다시 삭제해주세요..')</script>");
-			writer.close();
+			writer.println("<script>alert('오류..다시 삭제해주세요..');window.close();</script>");
 		}
 	}// end of deleteAnswer
 
