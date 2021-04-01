@@ -13,7 +13,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
         		
         <property name="java-output-path" value="target/classes"/>
-                
+               
         <property name="context-root" value="temp"/>
         	
     </wb-module>
