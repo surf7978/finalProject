@@ -19,7 +19,7 @@
 				<tr>
 					<td>대표이름</td>
 					<td><input id="businessName" name="businessName"
-						value="${vo.businessName}" readonly="readonly"></td>
+						value="${vo.businessName}"></td>
 				</tr>
 				<tr>
 					<td>아이디</td>
@@ -65,7 +65,7 @@
 				</tr>
 			</table>
 			<p>
-				<button type="submit">수정</button>
+				<button type="submit">저장</button>
 				&nbsp;&nbsp;&nbsp;
 				<button type="reset">취소</button>
 		</form>
