@@ -54,19 +54,32 @@ public class Controller5 {
 	// end of beans
 
 	// start of business
-	// 마이페이지-사업자-본인정보
-	@RequestMapping("/getBusiness")
-	public String getBusiness(BusinessVO vo, Model model, HttpSession session) {
+	// 마이페이지-사업자-본인정보 페이지
+	@GetMapping("/getBusiness")
+	public String getBusiness() {
+		return "business/getBusiness";
+	}
+
+	// 마이페이지-사업자-본인정보 기능
+	@PostMapping("/getBusiness")
+	@ResponseBody // json타입으로 변환
+	public BusinessVO getBusinessProc(BusinessVO vo, Model model, HttpSession session) {
 		// session값 조회
 		vo.setBusinessId((String) session.getAttribute("loginID"));
 		// 본인정보조회
 		vo = businessService.getBusiness(vo);
-		model.addAttribute("vo", vo);
-		return "business/getBusiness";
+		// null값 없애기(주소,사업자코드,사업자명)
+		if (vo.getAddress() == null)
+			vo.setAddress(" ");
+		if (vo.getBusinessCode() == null)
+			vo.setBusinessCode(" ");
+		if (vo.getBusinessCompanyName() == null)
+			vo.setBusinessCompanyName(" ");
+		return vo;
 	}// end of getBusiness
 
 	// 마이페이지-사업자-본인정보수정 페이지 호출
-	@PostMapping("/updateBusiness")
+	@GetMapping("/updateBusiness")
 	public String updateBusiness(BusinessVO vo, Model model, HttpSession session) {
 		// session값 조회
 		vo.setBusinessId((String) session.getAttribute("loginID"));
@@ -77,7 +90,7 @@ public class Controller5 {
 	}// end of updateBusiness
 
 	// 마이페이지-사업자-본인정보수정 기능
-	@GetMapping("/updateBusiness")
+	@PostMapping("/updateBusiness")
 	public void updateBusinessProc(BusinessVO vo, Model model, HttpServletResponse response) throws Exception {
 		// 결과값이 1이면 업데이트 된 것
 		int r = businessService.updateBusiness(vo);
