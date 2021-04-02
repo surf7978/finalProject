@@ -170,17 +170,25 @@ public class Controller5 {
 		writer.close();
 	}// end of insertAnswerProc
 
-	// 마이페이지-사업자-답변 수정
-	@RequestMapping("/updateAnswer")
-	public void updateAnswer(AnswerVO vo, HttpServletResponse response) throws Exception {
+	// 마이페이지-사업자-답변 수정 페이지
+	@GetMapping("/updateAnswer")
+	public String updateAnswer(AnswerVO vo, Model model) {
+		vo = answerService.getAnswer(vo);
+		model.addAttribute("vo", vo);
+		return "answer/updateAnswer";
+	}
+
+	// 마이페이지-사업자-답변 수정 기능
+	@PostMapping("/updateAnswer")
+	public void updateAnswerProc(AnswerVO vo, HttpServletResponse response) throws Exception {
 		int r = answerService.updateAnswer(vo);
 		// alert
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		if (r == 1) {
-			writer.println("<script>alert('수정되었습니다..');window.close();</script>");
+			writer.println("<script>alert('수정되었습니다..');location.href='getSearchAnswer';</script>");
 		} else {
-			writer.println("<script>alert('오류..다시 수정해주세요..');window.close();</script>");
+			writer.println("<script>alert('오류..다시 수정해주세요..');location.href='getSearchAnswer';</script>");
 		}
 		writer.close();
 		// 기능 처리 후 alert 박스 뜨게 하기
@@ -196,13 +204,14 @@ public class Controller5 {
 		if (r == 1) {
 			writer.println("<script>alert('삭제되었습니다..');location.href='getSearchAnswer';window.close();</script>");
 		} else {
-			writer.println("<script>alert('오류..다시 삭제해주세요..');location.href='getSearchAnswer';window.close();window.close();</script>");
+			writer.println(
+					"<script>alert('오류..다시 삭제해주세요..');location.href='getSearchAnswer';window.close();window.close();</script>");
 		}
 		writer.close();
 	}// end of deleteAnswer
 
 	// 마이페이지-사업자-답변 단건조회
-	@RequestMapping("/getAnswer")
+	@GetMapping("/getAnswer")
 	public String getAnswer(AnswerVO vo, Model model) {
 		vo = answerService.getAnswer(vo);
 		model.addAttribute("vo", vo);

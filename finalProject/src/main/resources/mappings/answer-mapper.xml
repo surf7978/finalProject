@@ -23,7 +23,7 @@
 	</insert>
 	<!-- 답변 수정 -->
 	<update id="updateAnswer">
-		UPDATE FROM ANSWER
+		UPDATE ANSWER
 		<set> CONTENT = #{content}
 		</set>
 		<where>ANSWERNUMBER = #{answerNumber}</where>
