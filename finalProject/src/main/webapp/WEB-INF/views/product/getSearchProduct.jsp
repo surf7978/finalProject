@@ -9,6 +9,15 @@
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+	function pageFunc(pageNo){
+		
+		$.ajax({
+			url: "getSearchProduct",
+			
+		});		
+	}
+
+
 	$(function(){
 		$("#btn").on("click", function(){
 			location.href="insertProduct";
@@ -31,7 +40,7 @@
 		<c:forEach items="${product }" var="pro"> 
 			<li>
 				<input value="${pro.productNumber }" type="hidden" name="productNumber">
-				<div class="product_img"><img src="resources/images/${pro.t_image }" > </div>
+				<div class="product_img"><img src="resources/images/products/${pro.t_image }" > </div>
 				<nav>
 					<strong>${pro.productName }</strong>
 					<p>${pro.optionPrice }원</p>

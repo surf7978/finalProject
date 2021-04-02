@@ -12,13 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.abandonment.common.AbandonmentAPI;
 import com.company.common.FileRenamePolicy;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
-import com.company.product.service.impl.ProductMapper;
 
 @Controller
 public class Controller3 {
@@ -64,8 +64,9 @@ public class Controller3 {
 		return "product/getSearchProduct";
 	}
 
-	// 쇼핑몰 리스트보기
+	// 쇼핑몰 리스트
 	@RequestMapping("/getSearchProduct")
+	@ResponseBody
 	public ProductVO getSearchProduct(ProductVO vo) {
 		return productService.getProduct(vo);		
 	}

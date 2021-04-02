@@ -41,8 +41,8 @@
 	</beans:bean>
 	<!-- 이미지 파일 업로드(내소스에) -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-  <beans:property name="maxUploadSize" value="-1"></beans:property>
-</beans:bean>
+  	<beans:property name="maxUploadSize" value="-1"></beans:property>
+	</beans:bean>
 	
 	<!-- @Component, @Controller, @Service, @Repsitory 스캔함  나머지는 <annotation-driven />에서 스캔함-->
 	<context:component-scan base-package="com.company" />
