@@ -50,7 +50,7 @@
 		IMAGE	
 		FROM CAFE
 		<where>BUSINESSNUMBER = #{businessNumber}
-			AND location = #{location}
+			AND CAFENUMBER = #{cafeNumber}
 		</where>
 	</select>
 	<!-- 전체 리스트 -->
