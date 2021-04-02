@@ -170,7 +170,7 @@
 						<!-- 
 						<li class="active"><a href="./index.html">Home</a></li>
 						 -->
-						<li><a href="getSearchProduct">쇼핑몰</a></li>
+						<li><a href="getSearchProductForm">쇼핑몰</a></li>
 						<li><a href="#">Collection</a>
 							<ul class="dropdown">
 								<li><a href="#">Men's</a></li>
