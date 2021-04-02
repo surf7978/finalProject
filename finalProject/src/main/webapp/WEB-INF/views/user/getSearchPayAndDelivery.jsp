@@ -12,13 +12,15 @@
 <body>
 <table border="1">
 	<thead>
+	<tr>
 		<th>구매번호</th>
 		<th>분류</th>
-		<th>받는사람</th>
 		<th>구매날짜</th>
 		<th>구매가격</th>
+		<th>구매상태</th>
 		<th>상세조회</th>
 		<th>배송조회</th>	
+	</tr>
 	</thead>
 	<tbody>
 	<c:forEach items="${pads }" var="pad">
@@ -47,33 +49,32 @@
 		</c:if>
 		<td><c:out value="${pad.payDate}"/></td>
 		<td><c:out value="${pad.sumPrice}"/></td>
+		<td><c:out value="${pad.buyState}"/></td>
 		<td><button type="button" class="getSearchBuy">상세조회</button></td>
 		<c:if test="${pad.category eq '70' }">
-		<td><button type="button" class="getDelevery">배송조회</button></td>
+		<c:if test="${pad.buyState !='반품완료' }">
+		<td>
+		<input type="hidden" id="t_key" name="t_key" value="ooo6aOm5bqvE5wog0VTMGQ">
+		<input type="hidden" name="t_code" id="t_code" value="${pad.courierCompany}">
+		<input type="hidden" name="t_invoice" id="t_invoice" value="${pad.invoiceNumber}">
+		<button type="button" onclick="dview()">배송조회</button>
+		</td>
+		</c:if>
 		</c:if>
 		<c:if test="${pad.category != '70' }">
+		<c:if test="${pad.buyState !='환불완료' }">
 		<td><button type="button" class="get">예약하기</button></td>
 		</c:if>
+		</c:if>
+		
 	</tr>
 	</c:forEach>
 	</tbody>
 </table>
 <br/>
- 	<form action="http://info.sweettracker.co.kr/tracking/5" method="post">
-    	<div class="form-group">
-        	<label for="t_key">API key</label>
-            <input type="text" class="form-control" id="t_key" name="t_key" placeholder="ooo6aOm5bqvE5wog0VTMGQ">
-      	</div>
-        <div class="form-group">
-         	<label for="t_code">택배사 코드</label>
-           	<input type="text" class="form-control" name="t_code" id="t_code" placeholder="01">
-       	</div>
-        <div class="form-group">
-      		<label for="t_invoice">운송장 번호</label>
-        	<input type="text" class="form-control" name="t_invoice" id="t_invoice" placeholder="6066276957492">
-       	</div>
-            <button type="submit" class="btn btn-default">조회하기</button>
-       </form>
+
+
+		
 <script>
 	$(function(){
 		$(".getSearchBuy").on("click", function(){
@@ -82,7 +83,13 @@
 		})
 	});
 	
-	
+	function dview(){
+		var td = $(event.target).parent();
+		var t_key1 = td.find('input[name=t_key]').val();
+	    var t_code1 = td.find('input[name=t_code]').val();
+	    var t_invoice1 = td.find('input[name=t_invoice]').val();	
+	  	var gsWin = window.open("http://info.sweettracker.co.kr/tracking/5?t_key="+t_key1+"&t_code="+t_code1+"&t_invoice="+t_invoice1, "dview", "width=800,height=800");
+	}
 </script>
 </body>
 </html>
