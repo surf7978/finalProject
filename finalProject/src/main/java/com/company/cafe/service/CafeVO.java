@@ -10,6 +10,7 @@ public class CafeVO {
 	String price;
 	String location;
 	String businessNumber;
-
+	String tImage;
+	String image;
 
 }

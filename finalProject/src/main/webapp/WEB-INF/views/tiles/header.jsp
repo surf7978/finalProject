@@ -149,10 +149,10 @@
 			</div>
 		</div>
 		<div class="nav-item">
-			<div class="container" style=" max-width:100%; display:flex;justify-content: center;">
+			<div class="container">
 				<div class="nav-depart">
 					<div class="depart-btn">
-						<i class="ti-menu"></i> <span>All departments</span>
+						<i class="ti-menu"></i> <span>메뉴</span>
 						<ul class="depart-hover">
 							<li class="active"><a href="#">Women’s Clothing</a></li>
 							<li><a href="#">Men’s Clothing</a></li>
@@ -170,15 +170,28 @@
 						<!-- 
 						<li class="active"><a href="./index.html">Home</a></li>
 						 -->
-						<li><a href="getSearchProductForm">쇼핑몰</a></li>
-						<li><a href="#">Collection</a>
+						<li><a href="getSearchProduct">쇼핑몰</a></li>
+						<li><a href="./blog.html">병원</a></li>
+						<li><a href="#">카페/호텔/펫택시</a>
 							<ul class="dropdown">
 								<li><a href="#">Men's</a></li>
 								<li><a href="#">Women's</a></li>
 								<li><a href="#">Kid's</a></li>
 							</ul></li>
-						<li><a href="./blog.html">Blog</a></li>
-						<li><a href="./contact.html">Contact</a></li>
+						<li><a href="#">교육/미용/보호소</a>
+							<ul class="dropdown">
+								<li><a href="#">Men's</a></li>
+								<li><a href="#">Women's</a></li>
+								<li><a href="#">Kid's</a></li>
+							</ul></li>
+						<li><a href="#">커뮤니티</a>
+							<ul class="dropdown">
+								<li><a href="getSearchQuestion">공지사항</a></li>
+								<li><a href="getSearchAnswer">이벤트</a></li>
+								<li><a href="getMember">자유게시판</a></li>
+								<li><a href="getSearchPayAndDelivery">자랑하기</a></li>
+							</ul></li>
+						<li><a href="./contact.html">고객센터</a></li>
 						<li><a href="#">마이페이지</a>
 							<ul class="dropdown">
 								<li><a href="getSearchQuestion">문의내역보기</a></li>
