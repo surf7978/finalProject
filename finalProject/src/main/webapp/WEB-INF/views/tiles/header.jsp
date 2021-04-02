@@ -45,14 +45,14 @@
 						<a href="logout" class="login-panel">Logout</a>
 						<c:if test="${loginAuth eq 'm'}">
 							<c:if test="${loginID ne 'admin'}">
-								<a href="getBusiness" class="login-panel"><i class="fa fa-user" style="color:black;"></i>${loginID}님&nbsp;&nbsp;&nbsp;&nbsp;</a>
+								<a href="#" class="login-panel"><i class="fa fa-user" style="color:black;"></i>${loginID}님&nbsp;&nbsp;&nbsp;&nbsp;</a>
 							</c:if>
 							<c:if test="${loginID eq 'admin'}">
-							<a href="getBusiness" class="login-panel"><i class="fa fa-user" style="color:red;"></i>${loginID}님&nbsp;&nbsp;&nbsp;&nbsp;</a>
+							<a href="#" class="login-panel"><i class="fa fa-user" style="color:red;"></i>${loginID}님&nbsp;&nbsp;&nbsp;&nbsp;</a>
 							</c:if>
 						</c:if>
 						<c:if test="${loginAuth eq 'b'}">
-							<a href="getBusiness" class="login-panel"><i class="fa fa-user" style="color:gold;"></i>${loginID}님&nbsp;&nbsp;&nbsp;&nbsp;</a>
+							<a href="#" class="login-panel"><i class="fa fa-user" style="color:gold;"></i>${loginID}님&nbsp;&nbsp;&nbsp;&nbsp;</a>
 						</c:if>
 					</c:if>
 					<!-- 
@@ -149,10 +149,10 @@
 			</div>
 		</div>
 		<div class="nav-item">
-			<div class="container">
+			<div class="container" style=" max-width:100%;display:flex;justify-content: center;">
 				<div class="nav-depart">
 					<div class="depart-btn">
-						<i class="ti-menu"></i> <span>All departments</span>
+						<i class="ti-menu"></i> <span>메뉴</span>
 						<ul class="depart-hover">
 							<li class="active"><a href="#">Women’s Clothing</a></li>
 							<li><a href="#">Men’s Clothing</a></li>
@@ -171,19 +171,48 @@
 						<li class="active"><a href="./index.html">Home</a></li>
 						 -->
 						<li><a href="getSearchProduct">쇼핑몰</a></li>
-						<li><a href="#">Collection</a>
+						<li><a href="./blog.html">병원</a></li>
+						<li><a href="#">카페/호텔/펫택시</a>
 							<ul class="dropdown">
 								<li><a href="#">Men's</a></li>
 								<li><a href="#">Women's</a></li>
 								<li><a href="#">Kid's</a></li>
 							</ul></li>
-						<li><a href="./blog.html">Blog</a></li>
-						<li><a href="./contact.html">Contact</a></li>
+						<li><a href="#">교육/미용/보호소</a>
+							<ul class="dropdown">
+								<li><a href="#">Men's</a></li>
+								<li><a href="#">Women's</a></li>
+								<li><a href="#">Kid's</a></li>
+							</ul></li>
+						<li><a href="#">커뮤니티</a>
+							<ul class="dropdown">
+								<li><a href="#">공지사항</a></li>
+								<li><a href="#">이벤트</a></li>
+								<li><a href="#">자유게시판</a></li>
+								<li><a href="#">자랑하기</a></li>
+							</ul></li>
+						<li><a href="#">고객센터</a>
+							<ul class="dropdown">
+								<li><a href="#">자주하는질문</a></li>
+								<li><a href="#">문의하기</a></li>
+								<li><a href="#">환불규정</a></li>
+								<li><a href="#">회원혜택</a></li>
+							</ul></li>
 						<li><a href="#">마이페이지</a>
 							<ul class="dropdown">
 								<li><a href="getSearchQuestion">문의내역보기</a></li>
 								<li><a href="getSearchAnswer">답변내역보기</a></li>
-								<li><a href="getMember">회원정보조회</a></li>
+								<c:if test="${loginAuth eq 'm'}">
+									<c:if test="${loginID ne 'admin'}">
+										<li><a href="getMember1">회원정보조회</a></li>
+									</c:if>
+									<c:if test="${loginID eq 'admin'}">
+										<li><a href="getMember1">회원정보조회</a></li>
+									</c:if>
+								</c:if>
+								<c:if test="${loginAuth eq 'b'}">
+									<li><a href="getBusiness">회원정보조회</a></li>
+								</c:if>
 								<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
 								<li><a href="getSearchAnimal">마이펫수첩</a></li>
 								<li><a href="logout">로그아웃</a></li>

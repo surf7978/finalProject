@@ -284,8 +284,23 @@
 </h1>
 	<h1>Hello world!</h1>
 	<P>The time on the server is ${serverTime}.</P>
-
 	
+	<c:if test="${empty loginID }">
+		<a href="loginForm">로그인</a>
+	</c:if>
+	<c:if test="${not empty loginID}">
+		<h3>${loginID}님로그인 중</h3>
+		<a href="getBusiness">내 정보보기</a><br>
+		<a href="getSearchQuestion">문의내역보기</a><br>
+		<a href="getSearchAnswer">답변내역보기</a><br>
+		<a href="getSearchCafe">카페,호텔,택시</a>
+		<a href="insertCafe">카페상품등록</a>
+		<a href="getSearchBeauty">미용,교육</a>
+		<a href="logout">로그아웃</a>
+	</c:if>
+	<a href="getMember">회원정보조회</a>
+	<a href="getSearchPayAndDelivery">구매내역조회</a>
+	<a href="getSearchAnimal">마이펫수첩</a>
 	
 <hr>
 <h3>김찬영파트</h3>

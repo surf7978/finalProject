@@ -33,7 +33,7 @@ public class CafeServiceimpl implements CafeService{
 		return CafeMapper.updateCafe(vo);
 	}
 	
-	//탈퇴
+	//삭제
 	@Override
 	public int deleteCafe(CafeVO vo) {
 		return CafeMapper.deleteCafe(vo);
