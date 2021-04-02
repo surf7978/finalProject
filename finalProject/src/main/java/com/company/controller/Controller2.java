@@ -15,6 +15,7 @@ import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
+import com.company.hospital.service.HospitalService;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
@@ -22,8 +23,12 @@ import com.company.payAndDelivery.service.PayAndDeliveryVO;
 
 /**
  * 
- * @author 이나경 21.03.29 회원정보 조회, 수정, 삭제, 구매내역리스트 21.03.30 구매내역 상세리스트 21.03.31
- *         택배API, 반려동물리스트
+ * @author 이나경 
+ * 21.03.29 회원정보 조회, 수정, 삭제, 구매내역리스트 
+ * 21.03.30 구매내역 상세리스트 
+ * 21.03.31 택배API, 반려동물리스트
+ * 21.04.01 마이펫수첩CRUD
+ * 21.04.02 병원CRUD
  *
  */
 @Controller
@@ -37,6 +42,8 @@ public class Controller2 {
 	BuyService buyService;
 	@Autowired
 	AnimalService animalService;
+	@Autowired
+	HospitalService hospitalService;
 
 	// 일반회원 본인정보 조회
 	@RequestMapping("/getMember")
@@ -94,6 +101,8 @@ public class Controller2 {
 		return "user/getSearchBuy";
 	}
 
+	
+	
 	/////////// 마이펫 수첩/////////
 	// 반려동물 리스트 조회
 	@RequestMapping("/getSearchAnimal")
@@ -148,4 +157,17 @@ public class Controller2 {
 		model.addAttribute("animal", vo);
 		return "redirect:/getSearchAnimal?memberId=" + vo.getMemberId();
 	}
+	
+	
+	
+	////////병원상품//////////
+	//병원상품 전체리스트 조회
+	
+	//병원상품 상세조회
+	
+	//병원상품 등록
+	
+	//병원상품 수정
+	
+	//병원상품 삭제
 }

@@ -4,5 +4,63 @@
 
 <mapper namespace="com.company.hospital.service.impl.HospitalMapper">
 
-<!-- 병원조회 -->
+<!-- 병원상품 리스트조회 -->
+	<select id="getSearchHospital" parameterType="HospitalVO" resultType="HospitalVO">
+	SELECT HOSPITALNUMBER
+		 , CATEGORY
+		 , NAME
+		 , OPTIONNAME
+		 , PRICE
+		 , LOCATION
+		 , BUSINESSNUMBER 
+	  FROM HOSPITAL
+	</select>
+<!-- 병원상품 상세화면조회 -->
+	<select id="getHospital" parameterType="HospitalVO" resultType="HospitalVO">
+		SELECT HOSPITALNUMBER
+			 , CATEGORY
+			 , NAME
+			 , OPTIONNAME
+			 , PRICE
+			 , LOCATION
+			 , BUSINESSNUMBER 
+	 	 FROM HOSPITAL
+	 	 WHERE HOSPITALNUMBER=#{hospitalNumber}
+	</select>
+<!-- 병원상품 등록 -->
+	<insert id="insertHospital" parameterType="HospitalVO">
+	insert into hospital(
+				HOSPITALNUMBER
+			  , CATEGORY
+			  , NAME
+			  , OPTIONNAME
+			  , PRICE
+			  , LOCATION
+			  , BUSINESSNUMBER
+			  ) values(
+			  20||hospi_seq.nextval
+			  , #{category}
+			  , #{name}
+			  , #{optionName}
+			  , #{price}
+			  , #{location}
+			  , #{businessNumber})
+		</insert>
+<!-- 병원상품 수정 -->
+	<update id="updateHospital" parameterType="HospitalVO">
+	UPDATE HOSPITAL SET 
+		   CATEGORY=#{category}
+		,  NAME=#{name}
+		, OPTIONNAME=#{optionName}
+		, PRICE=#{price}
+		, LOCATION=#{location}
+	WHERE HOSPITALNUMBER=#{hospitalNumber}
+	</update>
+
+<!-- 병원상품 삭제 -->
+	<delete id="deleteHospital">
+		DELETE FROM HOSPITAL
+		WHERE HOSPITALNUMBER=#{hospitalNumber}
+	</delete>
+
 </mapper>
