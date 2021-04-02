@@ -283,12 +283,6 @@ public class Controller5 {
 	@PostMapping("/getSearchCafe")
 	@ResponseBody // 값을 json타입으로 변환
 	public List<CafeVO> getSearchCafeProc(CafeVO vo, BusinessVO bvo, Model model, HttpSession session) {
-		// sessionID로 조회
-		String id = session.getAttribute("loginID").toString();
-		bvo.setBusinessId(id);
-		bvo = businessService.getBusiness(bvo);
-		// 사업자 번호 가져오기
-		vo.setBusinessNumber(bvo.getBusinessNumber());
 		// Cafe List
 		List<CafeVO> list = cafeService.getSearchCafe(vo);
 		return list;
@@ -304,12 +298,6 @@ public class Controller5 {
 	@PostMapping("/getCafe")
 	@ResponseBody
 	public CafeVO getCafeProc(CafeVO vo, BusinessVO bvo, HttpSession session) {
-		// 세션 아이디 가져옴
-		String id = session.getAttribute("loginID").toString();
-		bvo.setBusinessId(id);
-		// 사업자 번호 조회
-		bvo = businessService.getBusiness(bvo);
-		vo.setBusinessNumber(bvo.getBusinessNumber());
 		// 카페 상세 정보조회
 		vo = cafeService.getCafe(vo);
 		return vo;
