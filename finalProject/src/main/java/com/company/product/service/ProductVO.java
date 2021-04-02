@@ -13,7 +13,4 @@ public class ProductVO {
 	String optionPrice;
 	String productState;
 	String memberId;
-
-
-
 }
