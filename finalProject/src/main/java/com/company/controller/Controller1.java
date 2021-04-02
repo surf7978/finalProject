@@ -191,7 +191,7 @@ public class Controller1 {
 
         System.out.println("수신자 번호 : " + phoneNumber);
         System.out.println("인증번호 : " + numStr);
-        certificationService.certifiedPhoneNumber(phoneNumber,numStr);
+        //이게 문자보내는 기능 돈들어가니까 일단 주석처리 함 certificationService.certifiedPhoneNumber(phoneNumber,numStr);
         return numStr;
     }
 	
