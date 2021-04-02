@@ -19,20 +19,24 @@
 		url : "getSearchCafe",
 		method : "post",
 		dataType : "json",
-		success : function(data) {
+		success : function(datas) {
 			var html = "";
 				html +="<table>";
-				//key값만 1줄 반복시키기
-				console.log(data)
-				console.log(data[0].businessNumber);
-				//
-			for(key of data){
+				//title
+				//영문으로 담고 나중에 한글로 바꿀거라면 배열 사용해서 값 가져오기
+				for(data of datas){}
+					for(key in data){
+						html += "<td>"+key+"</td>";
+						}
+			//content
+			for(data of datas){
 				html += "<tr>";
-				for(field in key){
-					html += "<td>"+key[field]+"</td>";	
-				}//end of field
+				console.log(data);
+				for(key in data){
+					html += "<td>"+data[key]+"</td>";	
+				}//end of key
 				html+"</tr>";
-			}//end of key
+			}//end of data
 			html+="</table>";
 			cafe.empty();
 			cafe.append(html);

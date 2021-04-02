@@ -277,11 +277,11 @@ public class Controller5 {
 	@GetMapping("/getSearchCafe")
 	public String getSearchCafe() {
 		return "cafe/getSearchCafe";
-	}
+	}// end of getSearchCafe
 
 	@PostMapping("/getSearchCafe")
 	@ResponseBody // 값을 json타입으로 변환
-	public List<CafeVO> getSearchCafeProc(CafeVO vo, Model model, BusinessVO bvo, HttpSession session) {
+	public List<CafeVO> getSearchCafeProc(CafeVO vo, BusinessVO bvo, Model model, HttpSession session) {
 		// sessionID로 조회
 		String id = session.getAttribute("loginID").toString();
 		bvo.setBusinessId(id);
@@ -291,7 +291,7 @@ public class Controller5 {
 		// Cafe List
 		List<CafeVO> list = cafeService.getSearchCafe(vo);
 		return list;
-	}
+	}// end of getSearchCafeProc
 
 	// start of hotel
 	// 사업자-전체리스트(호텔)
