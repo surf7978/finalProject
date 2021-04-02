@@ -12,52 +12,32 @@
 <body>
 	<h2>사업자</h2>
 	<div id="bis">
-		<form id="frm" action="updateBusiness" method="post">
-			<table>
-				<tr>
-					<td>대표이름</td>
-					<td>${vo.businessName}</td>
-				</tr>
-				<tr>
-					<td>아이디</td>
-					<td>${vo.businessId}</td>
-				</tr>
-				<tr>
-					<td>비밀번호</td>
-					<td>${vo.password}</td>
-				</tr>
-				<tr>
-					<td>이메일</td>
-					<td>${vo.email}</td>
-				</tr>
-				<tr>
-					<td>핸드폰번호</td>
-					<td>${vo.phone}</td>
-					<td><button type="button" onclick="">본인인증</button></td>
-				</tr>
-				<tr>
-					<td>사업자코드</td>
-					<td>${vo.businessCode}</td>
-				</tr>
-				<tr>
-					<td>사업자명</td>
-					<td>${vo.businessCompanyName}</td>
-				</tr>
-				<tr>
-					<td>주소</td>
-					<td>${vo.address}</td>
-				</tr>
-				<tr>
-					<td>상세주소</td>
-					<td>${vo.address2}</td>
-				</tr>
-				<tr>
-					<td>우편번호</td>
-					<td>${vo.post}</td>
-				</tr>
-			</table>
-			<button type="submit">수정</button>
-		</form>
 	</div>
 </body>
+<script>
+	$.ajax({//start of ajax
+		url : "getBusiness",
+		method : "post",
+		dataType : "json",
+		success : function(response) {
+			console.log(response);
+			var form="<form>";
+			var table="<table>";
+				table+="<tr><td>"+"대표이름</td><td>"+response.businessName+"</td></tr>"//
+				table+="<tr><td>"+"아이디</td><td>"+response.businessId+"</td></tr>"//
+				table+="<tr><td>"+"이메일</td><td>"+response.email+"</td></tr>"//
+				table+="<tr><td>"+"핸드폰번호</td><td>"+response.phone+"</td></tr>"//
+				table+="<tr><td>"+"사업자코드</td><td>"+response.businessCode+"</td></tr>"//
+				table+="<tr><td>"+"사업자명</td><td>"+response.businessCompanyName+"</td></tr>"//
+				table+="<tr><td>"+"주소</td><td>"+response.address+"</td></tr></table>";
+				form+=table;
+				form+="<button type=button id='updateBusiness'>수정</button>";
+				$("#bis").append(form);	
+		}//end of success
+	})//end of ajax
+	$("#bis").on("click","button",function(){
+		location.href="updateBusiness";
+	})//end of updateBusiness
+</script>
+
 </html>

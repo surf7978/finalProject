@@ -7,6 +7,7 @@
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
 		<property name="url" value="jdbc:oracle:thin:@192.168.0.74:1521:xe"></property>
+		<!-- <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
 		<property name="username" value="final"></property>
 		<property name="password" value="final"></property>
 		<!-- 

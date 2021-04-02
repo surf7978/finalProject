@@ -18,11 +18,11 @@
 				<td>문의번호</td>
 			</tr>
 			<tr>
-				<td>${answer.answerNumber}</td>
-				<td>${answer.content}</td>
-				<td>${answer.calendar}</td>
-				<td>${answer.memberId}</td>
-				<td>${answer.questionNumber}</td>
+				<td>${vo.answerNumber}</td>
+				<td>${vo.content}</td>
+				<td>${vo.calendar}</td>
+				<td>${vo.memberId}</td>
+				<td>${vo.questionNumber}</td>
 			</tr>
 		</table>
 		<button type="button" onclick="updateAnswer()">수정</button>
@@ -41,7 +41,7 @@
 	function deleteAnswer() {
 		var y = confirm("삭제하시겠습니까?");
 		if (y) {
-			location.href = "deleteAnswer";
+			location.href = "deleteAnswer?answerNumber="+${vo.answerNumber};
 		}
 	}
 </script>
