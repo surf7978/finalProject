@@ -73,10 +73,10 @@
 		});
 	});
 </script>
-<!-- 사업자조회 -->
+<!-- 휴대폰인증페이지 출력 -->
 <script>
-	function businessSearch(){
-		window.open("https://www.bizno.net/", "사업자번호조회", "width=1000, height=200");
+	function coolsms(){
+		window.open("coolsms", "본인인증", "width=1000px, height=200px");
 	}
 </script>
 <body>
@@ -93,7 +93,7 @@
 	주소<input id="address" name="address" readonly><br>
 	상세주소<input id="address2" name="address2"><br>
 	핸드폰번호<input id="phone" name="phone">
-	<button type="button">본인인증</button><br>
+	<button  type="button" onclick="coolsms()">본인인증</button><br>
 	이메일<input type="email" id="email" name="email"><br>
 	사업자번호<input id="businessNumber" name="businessNumber">
 	<button type="button" onclick="businessSearch()">검색</button><br>

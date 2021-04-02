@@ -37,7 +37,7 @@
 					</div>
 				</div>
 				<div class="ht-right">
-					<a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
+					<a href="loginForm" class="login-panel"><i class="fa fa-user"></i>Login</a>
 					<div class="lan-selector">
 						<select class="language_drop" name="countries" id="countries"
 							style="width: 300px;">
@@ -61,7 +61,7 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2">
 						<div class="logo">
-							<a href="#no"> <img src="resources/img/logo.png" alt="">
+							<a href="/temp"> <img src="resources/img/logo.png" alt="">
 							</a>
 						</div>
 					</div>
