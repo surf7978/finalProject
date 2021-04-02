@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.cafe.service.impl.CafeMapper">
+	<!-- 제품 등록 -->
 	<insert id="insertCafe">
 		INSERT INTO CAFE(
 		CAFENUMBER,
@@ -12,8 +13,9 @@
 		BUSINESSNUMBER,
 		TIMAGE,
 		IMAGE
-		)VALUES( 
-		(SELECT NVL(MAX(cafeNUMBER),0)+1 FROM CAFE),
+		)VALUES(
+		(SELECT
+		NVL(MAX(cafeNUMBER),0)+1 FROM CAFE),
 		#{name},
 		#{optionName},
 		#{price},
@@ -23,4 +25,31 @@
 		#{image}
 		)
 	</insert>
+	<!-- 제품 수정 -->
+	<!-- NAME,OPTIONNAME,PRICE,LOCATION,TIMAGE,IMAGE -->
+	<update id="updateCafe">
+		UPDATE CAFE
+		<set></set>
+		<where></where>
+	</update>
+	<!-- 제품 삭제 -->
+	<delete id="deleteCafe">
+		DELETE FROM CAFE
+		<!-- 제품번호 -->
+		WHERE CAFENUMBER = #{cafeNumber}
+	</delete>
+	<!-- 특정 지역 리스트 -->
+	<select id="getCafe" resultType="cafeVO">
+		SELECT * FROM CAFE
+		<where>BUSINESSNUMBER = #{businessNumber}
+			AND location = #{location}
+		</where>
+	</select>
+	<!-- 전체 리스트 -->
+	<select id="getSearchCafe" resultType="cafeVO">
+		SELECT * FROM CAFE
+		<where>
+			BUSINESSNUMBER = #{businessNumber}
+		</where>
+	</select>
 </mapper>

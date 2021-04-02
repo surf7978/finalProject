@@ -1,6 +1,5 @@
 package com.company.controller;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -243,11 +242,6 @@ public class Controller5 {
 		// end of answer
 
 	// start of Cafe
-	@RequestMapping("/getSearchCafe")
-	public String getSearchCafe() {
-		return "cafe/getSearchCafe";
-	}
-
 	// 사업체-카페-상품등록 페이지
 	@GetMapping("/insertCafe")
 	public String insertCafe() {
@@ -256,7 +250,8 @@ public class Controller5 {
 
 	// 사업체-카페-상품등록 기능
 	@PostMapping("/insertCafe")
-	public void insertCafe(CafeVO vo, BusinessVO bvo, HttpSession session) {
+	public void insertCafe(CafeVO vo, BusinessVO bvo, HttpSession session, HttpServletResponse response)
+			throws Exception {
 		// 사업자 번호를 어디서 가져올 것인지
 		// 1.session
 		// 2. id로 businessTable 조회
@@ -267,7 +262,35 @@ public class Controller5 {
 		vo.setBusinessNumber(bvo.getBusinessNumber());
 		//
 		int r = cafeService.insertCafe(vo);
-		System.out.println(r + "건이 등록됨");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		if (r == 1) {
+			writer.print("<script>alert('등록되었습니다')location.href='getSearchCafe'</script>");
+		} else {
+			writer.print("<script>alert('오류..다시등록해주세요')location.href='insertCafe'</script>");
+		}
+		writer.close();
+
+	}// end of insertCafe
+
+	// 사업자-카페-전체리스트 페이지 호출
+	@GetMapping("/getSearchCafe")
+	public String getSearchCafe() {
+		return "cafe/getSearchCafe";
+	}
+
+	@PostMapping("/getSearchCafe")
+	@ResponseBody // 값을 json타입으로 변환
+	public List<CafeVO> getSearchCafeProc(CafeVO vo, Model model, BusinessVO bvo, HttpSession session) {
+		// sessionID로 조회
+		String id = session.getAttribute("loginID").toString();
+		bvo.setBusinessId(id);
+		bvo = businessService.getBusiness(bvo);
+		// 사업자 번호 가져오기
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		// Cafe List
+		List<CafeVO> list = cafeService.getSearchCafe(vo);
+		return list;
 	}
 
 	// start of hotel
