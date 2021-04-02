@@ -52,3 +52,12 @@ li{list-style:none;}
 /* 쇼핑몰 페이지 */
 /* 쇼핑몰 제품추가 페이지 */
 
+/* 쇼핑몰 상세페이지 */
+#contents #getproduct{width:100%;margin-top:100px;}
+#contents #getproduct .pro_title ul li {float: left;text-align:left;display:inline-block;}
+#contents #getproduct .pro_title ul li:nth-child(1){width:53%;}
+#contents #getproduct .pro_title ul li:nth-child(2){width:42%;padding-left:5%;}
+#contents #getproduct .pro_title ul li img{width:100%;}
+#contents #getproduct .pro_title ul li h3{width:100%;border-bottom:1px solid #f0f1f2;padding-bottom:20px;}
+
+

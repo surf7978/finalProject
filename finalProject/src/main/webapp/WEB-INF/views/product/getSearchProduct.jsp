@@ -13,6 +13,11 @@
 		$("#btn").on("click", function(){
 			location.href="insertProduct";
 		});
+		$("#show li").on("click", function(){
+			var productNumber = $(this).find("input[type=hidden]").val();
+			console.log(productNumber);
+			location.href="getProduct?productNumber=" + productNumber;
+		});
 	});
 </script>
 </head>
@@ -25,6 +30,7 @@
 		<ul>
 		<c:forEach items="${product }" var="pro"> 
 			<li>
+				<input value="${pro.productNumber }" type="hidden" name="productNumber">
 				<div class="product_img"><img src="resources/images/${pro.t_image }" > </div>
 				<nav>
 					<strong>${pro.productName }</strong>

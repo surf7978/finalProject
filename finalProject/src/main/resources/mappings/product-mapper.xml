@@ -45,7 +45,7 @@
 			,PRODUCTSTATE
 			,MEMBERID
 		) VALUES(
-			70000+pro_seq.nextval
+			70 || pro_seq.nextval
 			,#{category}
 			,#{category2}
 			,#{image}
