@@ -16,6 +16,7 @@
 		<h3>${loginID}님로그인 중</h3>
 		<a href="getBusiness">내 정보보기</a><br>
 		<a href="getSearchQuestion">문의내역보기</a><br>
+		<a href="getSearchAnswer">답변내역보기</a><br>
 		<a href="logout">로그아웃</a>
 	</c:if>
 </body>
