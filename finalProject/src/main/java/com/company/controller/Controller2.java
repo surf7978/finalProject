@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
+import com.company.business.service.BusinessService;
+import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.member.service.MemberService;
@@ -37,9 +39,11 @@ public class Controller2 {
 	BuyService buyService;
 	@Autowired
 	AnimalService animalService;
+	@Autowired
+	BusinessService businessService;
 
 	// 일반회원 본인정보 조회
-	@RequestMapping("/getMember")
+	@RequestMapping("/getMember1")
 	public String getMember(MemberVO vo, Model model, HttpSession session) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
 		vo = memberService.getMember(vo);
@@ -66,9 +70,10 @@ public class Controller2 {
 
 	// 회원탈퇴
 	@GetMapping("/deleteMember")
-	public String deleteMember(MemberVO vo, Model model) {
-		memberService.deleteMember(vo);
+	public String deleteMember(MemberVO vo, Model model, HttpSession session) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
 		model.addAttribute("member", vo);
+		memberService.deleteMember(vo);
 		return "user/deleteMember";
 	}
 
