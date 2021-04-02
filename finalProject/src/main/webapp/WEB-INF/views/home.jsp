@@ -19,5 +19,8 @@
 		<a href="getSearchAnswer">답변내역보기</a><br>
 		<a href="logout">로그아웃</a>
 	</c:if>
+	<a href="getMember">회원정보조회</a>
+	<a href="getSearchPayAndDelivery">구매내역조회</a>
+	<a href="getSearchAnimal">마이펫수첩</a>
 </body>
 </html>
