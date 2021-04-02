@@ -1,3 +1,4 @@
+
 package com.company.board.service.impl;
 
 import java.util.List;
@@ -11,3 +12,4 @@ public interface BoardMapper {
 	public int updateBoard(BoardVO vo);
 	public int deleteBoard(BoardVO vo);
 }
+

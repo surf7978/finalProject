@@ -1,9 +1,10 @@
+
 package com.company.eventAndNotice.service;
 
 import lombok.Data;
 
 @Data
-public class EventAndNoticeVO {
+public class EventAndNoticeVO{
 	String eanNumber;
 	String writer;
 	String title;

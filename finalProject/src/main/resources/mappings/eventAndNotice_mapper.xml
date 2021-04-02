@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.eventAndNotice.service.impl.EventAndNoticeMapper">
+
+	<select id="getSearchEventAndNotice" resultType="eventAndNoticeVO">
+	SELECT * FROM eventAndNotice
+	</select>
+	
+	<select id="getSearchEventAndNoticeSelect" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" > 
+	SELECT * 
+	FROM eventAndNotice
+	WHERE CATEGORY= #{category}
+	</select>
+	
+	<select id="getEventAndNotice" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" > 
+	SELECT * 
+	FROM eventAndNotice
+	WHERE TITLE= #{title}
+	</select>
+	
+</mapper>
+
+<!-- 스프링 초기설정 오류방지용 -->

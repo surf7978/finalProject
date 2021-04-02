@@ -46,4 +46,12 @@
 		WHERE WRITER =#{writer}
 		ORDER BY ANSWERNUMBER
 	</select>
+	
+	<!-- 김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영 -->
+	
+	
+	<select id="">
+	
+	</select>
+	
 </mapper>
