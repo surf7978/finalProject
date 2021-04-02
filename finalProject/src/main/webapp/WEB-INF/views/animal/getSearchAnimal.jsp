@@ -35,6 +35,6 @@
 				<tr>
 		</c:forEach>	
 	</table>
-	<input type="button" value="반려견 추가등록" onclick="location.href='insertAnimal?memberId='+'user2'">
+	<input type="button" value="반려견 추가등록" onclick="location.href='insertAnimal'">
 </body>
 </html>

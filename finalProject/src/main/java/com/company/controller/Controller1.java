@@ -53,6 +53,7 @@ public class Controller1 {
         String DBinPW = memberService.getViewMember(vo).getPassword(); //DB안에 암호화된 비밀번호
 		if(memberServiceimpl.matches(insertPW, DBinPW)){ //입력한 비밀번호와 DB의 비밀번호 일치체크
 			session.setAttribute("loginID", memberService.getViewMember(vo).getMemberId()); //세션에 로그인한 아이디 담아줌
+			session.setAttribute("loginAuth", memberService.getViewMember(vo).getAuth()); //권한 확인
 			return "/home";
 		} else {
 			return "redirect:/loginForm";
@@ -118,6 +119,7 @@ public class Controller1 {
 		//token을 session저장(DB 저장)
 		session.setAttribute("access_token", access_token);
 		session.setAttribute("loginID", userInfo.get("nickname"));
+		session.setAttribute("loginAuth", "m");
 		return "redirect:/";
 	}
 	

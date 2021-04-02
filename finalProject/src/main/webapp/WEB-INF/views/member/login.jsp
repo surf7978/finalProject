@@ -16,6 +16,10 @@
 	?response_type=code
 	&client_id=8b88c20e8232de584d13f04e421f2b48
 	&redirect_uri=http://localhost/temp/callback"><img src="resources/img/kakao_login_small.png"></a>
+	<a href="https://kauth.kakao.com/oauth/authorize
+	?response_type=code
+	&client_id=8b88c20e8232de584d13f04e421f2b48
+	&redirect_uri=http://localhost/temp/callback"><img src="resources/img/kakao_login_medium_narrow.png"></a>
 	</form>
 	<a href="signUpSelect">회원가입</a><br>
 	
