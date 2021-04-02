@@ -23,7 +23,7 @@
 <body>
 <h3>회원 수정</h3>
 <form action="updateMember" onsubmit="return formCheck()" method="post" name="frm">
-	memberId <input name="memberId" value="${member.memberId}"><br>
+	memberId <input name="memberId" value="${member.memberId}" readonly><br>
 	password <input type = "password" name="password" value="${member.password}"><br>
 	password2 <input type = "password" name="password2"><br>
 	name <input name="name" value="${member.name}"><br>
