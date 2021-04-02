@@ -149,7 +149,7 @@
 			</div>
 		</div>
 		<div class="nav-item">
-			<div class="container">
+			<div class="container" style=" max-width:100%; display:flex;justify-content: center;">
 				<div class="nav-depart">
 					<div class="depart-btn">
 						<i class="ti-menu"></i> <span>All departments</span>

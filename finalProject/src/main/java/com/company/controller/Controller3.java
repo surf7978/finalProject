@@ -2,6 +2,7 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,8 +68,8 @@ public class Controller3 {
 	// 쇼핑몰 리스트
 	@RequestMapping("/getSearchProduct")
 	@ResponseBody
-	public ProductVO getSearchProduct(ProductVO vo) {
-		return productService.getProduct(vo);		
+	public List<ProductVO> getSearchProduct(ProductVO vo) {
+		return productService.getSearchProduct(vo);		
 	}
 
 	// 쇼핑몰 상세보기
