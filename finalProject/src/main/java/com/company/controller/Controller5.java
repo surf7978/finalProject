@@ -171,7 +171,7 @@ public class Controller5 {
 	}// end of insertAnswerProc
 
 	// 마이페이지-사업자-답변 수정
-	@PostMapping("/updateAnswer")
+	@RequestMapping("/updateAnswer")
 	public void updateAnswer(AnswerVO vo, HttpServletResponse response) throws Exception {
 		int r = answerService.updateAnswer(vo);
 		// alert
@@ -187,16 +187,16 @@ public class Controller5 {
 	}// end of updateAnswer
 
 	// 마이페이지-사업자-답변 삭제
-	@PostMapping("/deleteAnswer")
+	@RequestMapping("/deleteAnswer")
 	public void deleteAnswer(AnswerVO vo, HttpServletResponse response) throws Exception {
 		int r = answerService.deleteAnswer(vo);
 		// alert
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		if (r == 1) {
-			writer.println("<script>alert('삭제되었습니다..');window.close();</script>");
+			writer.println("<script>alert('삭제되었습니다..');location.href='getSearchAnswer';window.close();</script>");
 		} else {
-			writer.println("<script>alert('오류..다시 삭제해주세요..');window.close();</script>");
+			writer.println("<script>alert('오류..다시 삭제해주세요..');location.href='getSearchAnswer';window.close();window.close();</script>");
 		}
 		writer.close();
 	}// end of deleteAnswer

@@ -41,7 +41,7 @@
 	function deleteAnswer() {
 		var y = confirm("삭제하시겠습니까?");
 		if (y) {
-			location.href = "deleteAnswer";
+			location.href = "deleteAnswer?answerNumber="+${vo.answerNumber};
 		}
 	}
 </script>
