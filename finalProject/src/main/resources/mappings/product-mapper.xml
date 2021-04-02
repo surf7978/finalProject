@@ -9,6 +9,7 @@
 			,CATEGORY
 			,CATEGORY2
 			,IMAGE
+			,T_IMAGE
 			,PRODUCTNAME
 			,OPTIONNAME
 			,OPTIONPRICE
@@ -16,27 +17,44 @@
 			,MEMBERID
 		FROM PRODUCT
 	</select>
-	<insert id="insertProduct" parameterType="ProductVO">
+	<select id="getProduct" resultType="ProductVO" parameterType="ProductVO">
+		SELECT
+			PRODUCTNUMBER
+			,CATEGORY
+			,CATEGORY2
+			,IMAGE
+			,T_IMAGE
+			,PRODUCTNAME
+			,OPTIONNAME
+			,OPTIONPRICE
+			,PRODUCTSTATE
+			,MEMBERID
+		FROM PRODUCT
+		WHERE PRODUCTNUMBER = #{productNumber}
+	</select>
+	<insert id="insertProduct" parameterType="ProductVO" >
 		INSERT INTO PRODUCT(	 	
-			<if test="productNumber != null">PRODUCTNUMBER</if>
-			<if test="category != null">,CATEGORY</if>
-			<if test="category2 != null">,CATEGORY2</if>
-			<if test="image != null">,IMAGE</if>
-			<if test="productName != null">,PRODUCTNAME</if>
-			<if test="optionName != null">,OPTIONNAME</if>
-			<if test="optionPrice != null">,OPTIONPRICE</if>
-			<if test="productState != null">,PRODUCTSTATE</if>
-			<if test="memberId != null">,MEMBERID</if>
+			PRODUCTNUMBER
+			,CATEGORY
+			,CATEGORY2
+			,IMAGE
+			,T_IMAGE
+			,PRODUCTNAME
+			,OPTIONNAME
+			,OPTIONPRICE
+			,PRODUCTSTATE
+			,MEMBERID
 		) VALUES(
-			<if test="productNumber != null">#{productNumber}</if>
-			<if test="category != null">,#{category}</if>
-			<if test="category2 != null">,#{category2}</if>
-			<if test="image != null">,#{image}</if>
-			<if test="productName != null">,#{productName}</if>
-			<if test="optionName != null">,#{optionName}</if>
-			<if test="optionPrice != null">,#{optionPrice}</if>
-			<if test="productState != null">,#{productState}</if>
-			<if test="memberId != null">,#{memberId}</if>
+			70000+pro_seq.nextval
+			,#{category}
+			,#{category2}
+			,#{image}
+			,#{t_image}
+			,#{productName}
+			,#{optionName}
+			,#{optionPrice}
+			,#{productState}
+			,#{memberId}
 		)		
 	</insert>
 </mapper>
