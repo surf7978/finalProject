@@ -282,7 +282,7 @@ public class Controller5 {
 	// 사업자-카페-전체리스트 페이지 기능
 	@PostMapping("/getSearchCafe")
 	@ResponseBody // 값을 json타입으로 변환
-	public List<CafeVO> getSearchCafeProc(CafeVO vo, BusinessVO bvo, Model model, HttpSession session) {
+	public List<CafeVO> getSearchCafeProc(CafeVO vo) {
 		// Cafe List
 		List<CafeVO> list = cafeService.getSearchCafe(vo);
 		return list;
@@ -297,7 +297,7 @@ public class Controller5 {
 	// 사업자-카페-상세리스트 페이지 기능(ajax)
 	@PostMapping("/getCafe")
 	@ResponseBody
-	public CafeVO getCafeProc(CafeVO vo, BusinessVO bvo, HttpSession session) {
+	public CafeVO getCafeProc(CafeVO vo) {
 		// 카페 상세 정보조회
 		vo = cafeService.getCafe(vo);
 		return vo;
