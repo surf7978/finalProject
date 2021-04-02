@@ -2,6 +2,8 @@
 body{font-family: 'Noto Sans KR', sans-serif;}
 ::selection{background:#e7ab3c;}
 a{color:#000;}
+
+/* 유기동물 페이지 */
 #contents{width:1140px;margin:10px;}
 #contents h1{margin-bottom:10px;text-align: center;font-size:1.9em;width:100%;padding:30px 0;border-bottom:2px solid #e7ab3c;}
 li{list-style:none;}
@@ -13,6 +15,7 @@ li{list-style:none;}
 #show ul li nav h3{font-size:0.95em;}
 #show ul li nav p{font-size:12px;line-height:20px;margin-top:10px;}
 #show ul li div img {height:100%;}
+#show ul li .product_img img{width:100%;height:auto;}
 /* PAGING */
 #paging {display: inline-block;}
 
@@ -45,3 +48,7 @@ li{list-style:none;}
 #searchshow table tr td{padding:10px;color:#6d6d6d;}
 #searchshow nav{width:48%;float:left;border-radius: 5px;overflow:hidden;}
 #searchshow nav img{width:100%;}
+
+/* 쇼핑몰 페이지 */
+/* 쇼핑몰 제품추가 페이지 */
+

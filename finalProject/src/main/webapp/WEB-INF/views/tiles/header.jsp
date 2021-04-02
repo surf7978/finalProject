@@ -187,9 +187,6 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="footer-left">
-						<div class="footer-logo">
-							<a href="#"><img src="img/footer-logo.png" alt=""></a>
-						</div>
 						<ul>
 							<li>Address: 60-49 Road 11378 New York</li>
 							<li>Phone: +65 11.188.888</li>

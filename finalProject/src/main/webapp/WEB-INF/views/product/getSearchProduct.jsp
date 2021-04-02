@@ -21,7 +21,19 @@
 		<h1>우리몰</h1>
 		<div id="pro_location">
 		</div>
-		<div id="show"></div>
+		<div id="show">
+		<ul>
+		<c:forEach items="${product }" var="pro"> 
+			<li>
+				<div class="product_img"><img src="resources/images/${pro.t_image }" > </div>
+				<nav>
+					<strong>${pro.productName }</strong>
+					<p>${pro.optionPrice }원</p>
+				</nav>
+			</li>
+		</c:forEach>
+		</ul>
+		</div>
 		<div id="paging"></div>
 		<button id="btn">상품등록</button>
 	</div>
