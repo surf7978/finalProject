@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.company.business.service.BusinessVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -20,17 +19,51 @@ public class QuestionServiceimpl implements QuestionService {
 	public int insertQuestion(QuestionVO vo) {
 		return QuestionMapper.insertQuestion(vo);
 	}
+	// 고객센터 문의-신고하기 등록
+	@Override
+	public int insertQuestion3(QuestionVO vo) {
+		return QuestionMapper.insertQuestion3(vo);
+		}
 
 	// 단건조회
 	@Override
 	public QuestionVO getQuestion(QuestionVO vo) {
 		return QuestionMapper.getQuestion(vo);
 	}
+	// 문의하기항목 3번 신고 단건조회
+	@Override
+	public QuestionVO getQuestion3(QuestionVO vo) {
+		return QuestionMapper.getQuestion3(vo);
+	}
 
 	// 전체조회
 	@Override
 	public List<QuestionVO> getSearchQuestion(QuestionVO vo) {
 		return QuestionMapper.getSearchQuestion(vo);
+	}
+
+	// 전체조회 - Cr4(김찬영)
+	@Override
+	public List<QuestionVO> getSearchQuestionCr4(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestionCr4(vo);
+	}
+
+	// 문의하기 항목 하나 전체조회 1 상품문의
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect1(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestionSelect1(vo);
+	}
+
+	// 문의하기 항목 하나 전체조회 2 고객센터 문의
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect2(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestionSelect2(vo);
+	}
+
+	// 문의하기 항목 하나 전체조회 3 신고하기
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect3(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestionSelect3(vo);
 	}
 
 	// 수정

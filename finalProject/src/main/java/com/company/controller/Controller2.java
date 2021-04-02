@@ -121,16 +121,15 @@ public class Controller2 {
 	// 반려동물 등록 페이지
 	@GetMapping("/insertAnimal")
 	public String insertAnimal(AnimalVO vo, Model model) {
-		model.addAttribute("animal", vo);
 		return "animal/insertAnimal";
 	}
 
 	// 반려동물 등록
 	@PostMapping("/insertAnimal")
-	public String insertAnimalProc(AnimalVO vo, Model model) {
+	public String insertAnimalProc(AnimalVO vo, HttpSession session) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
 		animalService.insertAnimal(vo);
-		model.addAttribute("animal", vo);
-		return "redirect:/getSearchAnimal?memberId=" + vo.getMemberId();
+		return "redirect:/getSearchAnimal";
 	}
 
 	// 반려동물 수정페이지

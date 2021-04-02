@@ -24,17 +24,12 @@
 					<td><input id="businessId" name="businessId" value="${vo.businessId}" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" value="${vo.password}"></td>
-				</tr>
-				<tr>
 					<td>이메일</td>
 					<td><input type="email" id="email" name="email"	value="${vo.email}"></td>
 				</tr>
 				<tr>
 					<td>핸드폰번호</td>
 					<td><input id="phone" name="phone" value="${vo.phone}"></td>
-					<td><button type="button" onclick="">본인인증</button></td>
 				</tr>
 				<tr>
 					<td>사업자코드</td>

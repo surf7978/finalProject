@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,24 @@
 					</div>
 				</div>
 				<div class="ht-right">
-					<a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
+					<c:if test="${empty loginID }">
+						<a href="loginForm" class="login-panel">Login</a>
+					</c:if>
+					<c:if test="${not empty loginID}">
+						<a href="logout" class="login-panel">Logout</a>
+						<c:if test="${loginAuth eq 'm'}">
+							<c:if test="${loginID ne 'admin'}">
+								<a href="getBusiness" class="login-panel"><i class="fa fa-user" style="color:black;"></i>${loginID}님&nbsp;&nbsp;&nbsp;&nbsp;</a>
+							</c:if>
+							<c:if test="${loginID eq 'admin'}">
+							<a href="getBusiness" class="login-panel"><i class="fa fa-user" style="color:red;"></i>${loginID}님&nbsp;&nbsp;&nbsp;&nbsp;</a>
+							</c:if>
+						</c:if>
+						<c:if test="${loginAuth eq 'b'}">
+							<a href="getBusiness" class="login-panel"><i class="fa fa-user" style="color:gold;"></i>${loginID}님&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						</c:if>
+					</c:if>
+					<!-- 
 					<div class="lan-selector">
 						<select class="language_drop" name="countries" id="countries"
 							style="width: 300px;">
@@ -48,6 +66,7 @@
 							</option>
 						</select>
 					</div>
+					 -->
 					<div class="top-social">
 						<a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
 							class="ti-twitter-alt"></i></a> <a href="#"><i
@@ -61,7 +80,7 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2">
 						<div class="logo">
-							<a href="#no"> <img src="resources/img/logo.png" alt="">
+							<a href="/temp"> <img src="resources/img/logo.png" alt="">
 							</a>
 						</div>
 					</div>
@@ -148,8 +167,10 @@
 				</div>
 				<nav class="nav-menu mobile-menu">
 					<ul>
+						<!-- 
 						<li class="active"><a href="./index.html">Home</a></li>
-						<li><a href="./shop.html">Shop</a></li>
+						 -->
+						<li><a href="getSearchProduct">쇼핑몰</a></li>
 						<li><a href="#">Collection</a>
 							<ul class="dropdown">
 								<li><a href="#">Men's</a></li>
@@ -158,14 +179,14 @@
 							</ul></li>
 						<li><a href="./blog.html">Blog</a></li>
 						<li><a href="./contact.html">Contact</a></li>
-						<li><a href="#">Pages</a>
+						<li><a href="#">마이페이지</a>
 							<ul class="dropdown">
-								<li><a href="./blog-details.html">Blog Details</a></li>
-								<li><a href="./shopping-cart.html">Shopping Cart</a></li>
-								<li><a href="./check-out.html">Checkout</a></li>
-								<li><a href="./faq.html">Faq</a></li>
-								<li><a href="./register.html">Register</a></li>
-								<li><a href="./login.html">Login</a></li>
+								<li><a href="getSearchQuestion">문의내역보기</a></li>
+								<li><a href="getSearchAnswer">답변내역보기</a></li>
+								<li><a href="getMember">회원정보조회</a></li>
+								<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
+								<li><a href="getSearchAnimal">마이펫수첩</a></li>
+								<li><a href="logout">로그아웃</a></li>
 							</ul></li>
 					</ul>
 				</nav>

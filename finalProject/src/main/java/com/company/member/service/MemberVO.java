@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Data;
 
 @Data
+
 public class MemberVO implements UserDetails{ //implements UserDetails = spring Security 추가용
 	String memberId; //아이디
 	String password; //패스워드

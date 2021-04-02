@@ -32,10 +32,7 @@
 <script>
 	//답변 수정
 	function updateAnswer() {
-		var y = confirm("수정하시겠습니까?");
-		if (y) {
-			location.href = "updateAnswer";
-		}
+			location.href = "updateAnswer?answerNumber="+${vo.answerNumber};
 	}
 	//답변 삭제
 	function deleteAnswer() {

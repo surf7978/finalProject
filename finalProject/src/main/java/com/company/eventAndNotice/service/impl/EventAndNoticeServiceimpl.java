@@ -22,10 +22,17 @@ public class EventAndNoticeServiceimpl implements EventAndNoticeService{
 	public EventAndNoticeVO getEventAndNotice(EventAndNoticeVO vo) {
 		return EventAndNoticeMapper.getEventAndNotice(vo);
 	}
+	
 	//전체조회
 	@Override
 	public List<EventAndNoticeVO> getSearchEventAndNotice(EventAndNoticeVO vo) {
+		// TODO Auto-generated method stub
 		return EventAndNoticeMapper.getSearchEventAndNotice(vo);
+	}
+	@Override //이벤트 혹은 공지사항인지 선택.
+	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect(EventAndNoticeVO vo) {
+		// TODO Auto-generated method stub
+		return EventAndNoticeMapper.getSearchEventAndNoticeSelect(vo);
 	}
 	//수정
 	@Override

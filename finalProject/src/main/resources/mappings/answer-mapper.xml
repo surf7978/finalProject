@@ -23,7 +23,7 @@
 	</insert>
 	<!-- 답변 수정 -->
 	<update id="updateAnswer">
-		UPDATE FROM ANSWER
+		UPDATE ANSWER
 		<set> CONTENT = #{content}
 		</set>
 		<where>ANSWERNUMBER = #{answerNumber}</where>
@@ -46,4 +46,12 @@
 		WHERE WRITER =#{writer}
 		ORDER BY ANSWERNUMBER
 	</select>
+	
+	<!-- 김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영 -->
+	
+	
+	<select id="">
+	
+	</select>
+	
 </mapper>
