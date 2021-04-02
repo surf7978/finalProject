@@ -10,14 +10,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-
 	$(function(){
 		$("#btn").on("click", function(){
 			location.href="insertProduct";
 		});
-		$("#show").on("click", $("li"), function(){
+		$("#contents").on("click", "#show li", function(productNumber){
+			console.log(this);
 			var productNumber = $(this).find("input[type=hidden]").val();
-			console.log(productNumber);
 			location.href="getProduct?productNumber=" + productNumber;
 		});
 		/* 리스트 ajax */
