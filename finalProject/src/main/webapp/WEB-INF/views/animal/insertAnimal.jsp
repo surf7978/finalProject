@@ -70,7 +70,7 @@
 	</select><br> 
 	생일 : <input type="date" name="birth" placeholder="YYYY-MM-DD"><br>
 	사진 선택 : <br>
-	<button type="submit">수정</button>
+	<button type="submit">등록</button>
 	<button type="reset">초기화</button>
 </form>
 
