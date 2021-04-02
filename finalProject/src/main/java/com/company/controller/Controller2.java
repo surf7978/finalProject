@@ -1,6 +1,5 @@
 package com.company.controller;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import com.company.animal.service.AnimalVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.hospital.service.HospitalService;
+import com.company.hospital.service.HospitalVO;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
@@ -23,12 +23,8 @@ import com.company.payAndDelivery.service.PayAndDeliveryVO;
 
 /**
  * 
- * @author 이나경 
- * 21.03.29 회원정보 조회, 수정, 삭제, 구매내역리스트 
- * 21.03.30 구매내역 상세리스트 
- * 21.03.31 택배API, 반려동물리스트
- * 21.04.01 마이펫수첩CRUD
- * 21.04.02 병원CRUD
+ * @author 이나경 21.03.29 회원정보 조회, 수정, 삭제, 구매내역리스트 21.03.30 구매내역 상세리스트 21.03.31
+ *         택배API, 반려동물리스트 21.04.01 마이펫수첩CRUD 21.04.02 병원CRUD
  *
  */
 @Controller
@@ -101,8 +97,6 @@ public class Controller2 {
 		return "user/getSearchBuy";
 	}
 
-	
-	
 	/////////// 마이펫 수첩/////////
 	// 반려동물 리스트 조회
 	@RequestMapping("/getSearchAnimal")
@@ -157,17 +151,44 @@ public class Controller2 {
 		model.addAttribute("animal", vo);
 		return "redirect:/getSearchAnimal?memberId=" + vo.getMemberId();
 	}
+
+	//////// 병원상품//////////
+	// 병원상품 전체리스트 조회
+	@RequestMapping("/getSearchHospital")
+	public String getSearchHospital(HospitalVO vo, Model model) {
+		model.addAttribute("hospital", hospitalService.getSearchHospital(vo));
+		return "hospital/getSearchHospital";
+	}
+
+	// 병원상품 상세조회
+	@RequestMapping("/getHospital")
+	public String getHospital(HospitalVO vo, Model model) {
+		model.addAttribute("hospital", hospitalService.getHospital(vo));
+		return "hospital/getSearchHospital";
+	}
+
+	// 병원상품 등록 페이지
+	@GetMapping("/insertHospital")
+	public String insertHospitalForm(HospitalVO vo, Model model) {
+		model.addAttribute("hospital", vo);
+		return "hospital/insertHospital";
+	}
+
+	// 병원상품 등록 처리
+	@PostMapping("/insertHospital")
+	public String insertHospital(HospitalVO vo) {
+		hospitalService.insertHospital(vo);
+		return "redirect:/getSearchHospital";
+	}
+	
+	// 병원상품 수정 페이지
+	
+	
+	//병원상품 수정 처리
+
+	
+	// 병원상품 삭제
 	
 	
 	
-	////////병원상품//////////
-	//병원상품 전체리스트 조회
-	
-	//병원상품 상세조회
-	
-	//병원상품 등록
-	
-	//병원상품 수정
-	
-	//병원상품 삭제
 }

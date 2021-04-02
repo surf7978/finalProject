@@ -6,22 +6,24 @@
 
 <!-- 병원상품 리스트조회 -->
 	<select id="getSearchHospital" parameterType="HospitalVO" resultType="HospitalVO">
-	SELECT HOSPITALNUMBER
-		 , CATEGORY
-		 , NAME
-		 , OPTIONNAME
-		 , PRICE
-		 , LOCATION
-		 , BUSINESSNUMBER 
-	  FROM HOSPITAL
+		SELECT HOSPITALNUMBER
+			 , CATEGORY1
+			 , CATEGORY2
+			 , NAME
+			 , OPTIONNAME
+			 , TO_CHAR(PRICE, '999,999,999')AS PRICE
+			 , LOCATION
+			 , BUSINESSNUMBER 
+	 	 FROM HOSPITAL
 	</select>
 <!-- 병원상품 상세화면조회 -->
 	<select id="getHospital" parameterType="HospitalVO" resultType="HospitalVO">
 		SELECT HOSPITALNUMBER
-			 , CATEGORY
+			 , CATEGORY1
+			 , CATEGORY2
 			 , NAME
 			 , OPTIONNAME
-			 , PRICE
+			 , TO_CHAR(PRICE, '999,999,999')AS PRICE
 			 , LOCATION
 			 , BUSINESSNUMBER 
 	 	 FROM HOSPITAL
@@ -29,17 +31,19 @@
 	</select>
 <!-- 병원상품 등록 -->
 	<insert id="insertHospital" parameterType="HospitalVO">
-	insert into hospital(
+	INSERT INTO HOSPITAL(
 				HOSPITALNUMBER
-			  , CATEGORY
+			  , CATEGORY1
+			  , CATEGORY2
 			  , NAME
 			  , OPTIONNAME
 			  , PRICE
 			  , LOCATION
 			  , BUSINESSNUMBER
-			  ) values(
-			  20||hospi_seq.nextval
-			  , #{category}
+			  ) VALUES(
+			  20||HOSPI_SEQ.NEXTVAL
+			  , #{category1}
+			  , #{category2}
 			  , #{name}
 			  , #{optionName}
 			  , #{price}
@@ -49,7 +53,8 @@
 <!-- 병원상품 수정 -->
 	<update id="updateHospital" parameterType="HospitalVO">
 	UPDATE HOSPITAL SET 
-		   CATEGORY=#{category}
+		   CATEGORY1=#{category1}
+		,  CATEGORY2=#{category2}
 		,  NAME=#{name}
 		, OPTIONNAME=#{optionName}
 		, PRICE=#{price}
