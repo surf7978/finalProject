@@ -74,27 +74,10 @@
 		});
 	});
 </script>
-<!-- email인증 -->
+<!-- 휴대폰인증페이지 출력 -->
 <script>
-	$(function(){
-		$("#sendMail").click(function() {// 메일 입력 유효성 검사
-			var mail = $("#email").val(); //사용자의 이메일 입력값. 
-			if (mail == "") {
-				alert("메일 주소가 입력되지 않았습니다.");
-			} else {
-				mail = mail+"@"+$("#domain").val(); //셀렉트 박스에 @뒤 값들을 더함.
-				$.ajax({
-					type : 'post',
-					url : 'CheckMail',
-					data : {
-						mail:mail
-						},
-					dataType :'json',
-				});
-				alert("인증번호가 전송되었습니다.") 
-				isCertification=true; //추후 인증 여부를 알기위한 값
-			}
-		});
+	function coolsms(){
+		window.open("coolsms", "본인인증", "width=1000px, height=200px");
 	}
 </script>
 <body>
@@ -110,7 +93,7 @@
 	주소<input id="address" name="address" readonly><br>
 	상세주소<input id="address2" name="address2"><br>
 	핸드폰번호<input id="phone" name="phone">
-	<button type="button">본인인증</button><br>
+	<button type="button" onclick="coolsms()">본인인증</button><br>
 	이메일<input id="email" name="email">@<input id="domain" name="domain">
 	<button type="button" id="sendMail">본인인증</button><br>
 	<button type="submit">회원가입</button>
