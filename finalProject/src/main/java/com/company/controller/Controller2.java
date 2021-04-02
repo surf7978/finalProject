@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
+import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.hospital.service.HospitalService;
@@ -169,19 +170,20 @@ public class Controller2 {
 	// 병원상품 등록 페이지
 	@GetMapping("/insertHospital")
 	public String insertHospitalForm(HospitalVO vo, Model model) {
-		model.addAttribute("hospital", vo);
 		return "hospital/insertHospital";
 	}
 
 	// 병원상품 등록 처리
 	@PostMapping("/insertHospital")
-	public String insertHospital(HospitalVO vo) {
+	public String insertHospital(HospitalVO vo, BusinessVO voo, HttpSession session) {
+		voo.setBusinessNumber((String) session.getAttribute("loginID"));
 		hospitalService.insertHospital(vo);
 		return "redirect:/getSearchHospital";
 	}
 	
 	// 병원상품 수정 페이지
 	
+		
 	
 	//병원상품 수정 처리
 
