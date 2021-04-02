@@ -1,3 +1,4 @@
+
 package com.company.board.service;
 
 import lombok.Data;
@@ -16,3 +17,4 @@ public class BoardVO {
 
 
 }
+
