@@ -21,6 +21,8 @@ import com.company.bCart.service.BCartService;
 import com.company.bCart.service.BCartVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
+import com.company.cafe.service.CafeService;
+import com.company.cafe.service.CafeVO;
 import com.company.hotel.service.HotelService;
 import com.company.hotel.service.HotelVO;
 import com.company.question.service.QuestionService;
@@ -51,6 +53,9 @@ public class Controller5 {
 
 	@Autowired
 	BCartService bCartService;
+	@Autowired
+	CafeService cafeService;
+
 	// end of beans
 
 	// start of business
@@ -236,6 +241,34 @@ public class Controller5 {
 		return list;
 	}// end of getSearchAnswer
 		// end of answer
+
+	// start of Cafe
+	@RequestMapping("/getSearchCafe")
+	public String getSearchCafe() {
+		return "cafe/getSearchCafe";
+	}
+
+	// 사업체-카페-상품등록 페이지
+	@GetMapping("/insertCafe")
+	public String insertCafe() {
+		return "cafe/insertCafe";
+	}
+
+	// 사업체-카페-상품등록 기능
+	@PostMapping("/insertCafe")
+	public void insertCafe(CafeVO vo, BusinessVO bvo, HttpSession session) {
+		// 사업자 번호를 어디서 가져올 것인지
+		// 1.session
+		// 2. id로 businessTable 조회
+		String id = session.getAttribute("loginID").toString();
+		bvo.setBusinessId(id);
+		bvo = businessService.getBusiness(bvo);
+		// 3. business의 사업자 번호 가져와 넣기
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		//
+		int r = cafeService.insertCafe(vo);
+		System.out.println(r + "건이 등록됨");
+	}
 
 	// start of hotel
 	// 사업자-전체리스트(호텔)
