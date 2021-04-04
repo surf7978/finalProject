@@ -2,7 +2,7 @@
 body{font-family: 'Noto Sans KR', sans-serif;}
 ::selection{background:#e7ab3c;}
 a{color:#000;}
-
+a:hover{color:#e7ab3c;transition:0.3s;}
 /* 유기동물 페이지 */
 #contents{width:1140px;margin:10px;}
 #contents h1{margin-bottom:10px;text-align: center;font-size:1.9em;width:100%;padding:30px 0;border-bottom:2px solid #e7ab3c;}
@@ -52,3 +52,23 @@ li{list-style:none;}
 /* 쇼핑몰 페이지 */
 /* 쇼핑몰 제품추가 페이지 */
 
+/* 쇼핑몰 상세페이지 */
+#contents #getproduct{width:100%;margin-top:100px;}
+#contents #getproduct .pro_title{width:100%;display:flex;}
+#contents #getproduct .pro_title ul li {float: left;text-align:left;display:inline-block;}
+#contents #getproduct .pro_title ul li:nth-child(1){width:50%;}
+#contents #getproduct .pro_title ul li:nth-child(2){width:45%;padding-left:5%;}
+#contents #getproduct .pro_title ul li img{width:100%;}
+#contents #getproduct .pro_title ul li dt{float:left;}
+#contents #getproduct .pro_title ul li dd{color:#cdcdcd;margin-left:90px;font-size:13px;}
+#contents #getproduct .pro_title ul li div{padding:20px 0;border-bottom:1px solid #f0f1f2;width:100%;}
+#contents #getproduct .pro_title ul li dd strong{color:#000;font-size:1.925em;}
+#contents #getproduct .pro_title ul li select{width:100%;}
+#contents #getproduct .pro_title button{width:48%;}
+#contents #getproduct .pro_title button:last-child{margin-left:2%;}
+#contents #getproduct #pro_contentwrap{width:100%;margin-top:50px;}
+#contents #getproduct #pro_contentwrap ul {width:100%;padding:20px 0;border-bottom:2px solid black;display:flex;line-height:30px;border-top:1px solid #f0f1f2;}
+#contents #getproduct #pro_contentwrap ul li{float:left;width:25%;border-left:1px solid #f0f1f2;}
+#pro_contentwrap ul li:last-child{border-right:1px solid #f0f1f2;}
+#contents #getproduct #pro_contentwrap ul li a{font-size:20px;}
+#contents #getproduct #pro_contentwrap  #pro_content{margin-top:50px;}
