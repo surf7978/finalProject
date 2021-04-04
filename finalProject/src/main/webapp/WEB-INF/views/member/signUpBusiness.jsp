@@ -79,6 +79,33 @@
 		window.open("coolsms", "본인인증", "width=1000px, height=200px");
 	}
 </script>
+<!-- 사업자번호 조회 -->
+<script>
+	$(function(){
+		$("#businessSearch").on("click", function(){
+			console.log($("#businessNumber").val());
+			if($("#businessNumber").val()!=""){
+				$.ajax({
+					url:"bizno",
+					type:"post",
+					dataType:"html",
+					data:{"businessNumber":$("#businessNumber").val()},
+					success:function(data){
+						console.log(data);
+						if(data!=""){
+							$("#businessSearchResult").html(data);
+						}else{
+							alert("검색결과 없음");
+							$("#businessSearchResult").html("검색결과 없음");
+						}
+					}
+				});	
+			}else{
+				alert("사업자번호 미입력");
+			}
+		});
+	});
+</script>
 <body>
 	<br><br><br><input value="사업자 가입" style="font-size:40px; text-align:center; width:300px; border:none;" readonly><br><br>
 	<form id="frm" name="frm" onsubmit="return formCheck()" action="signUpBusiness" method="post">
@@ -126,8 +153,12 @@
 				<td colspan="2"><input id="email" name="email" style="width:400px; border:none;"></td>
 			</tr>
 			<tr>
-				<td><input value="사업자번호" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
+				<td rowspan="2"><input value="사업자번호" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
 				<td><input id="businessNumber" name="businessNumber" style="border:none; width:300px;"></td>
+				<td><button type="button" id="businessSearch" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">번호조회</button></td>
+			</tr>
+			<tr>
+				<td><div id="businessSearchResult" style="color:red; height:20px;"></div></td>
 				<td>
 					<select id="businessCode" name="businessCode" style="font-size:20px;width: 100px; border:none;">
 						<option value="10">호텔</option>
@@ -138,9 +169,6 @@
 						<option value="60">택시</option>
 					</select>
 				</td>
-			</tr>
-			<tr>
-				<td><button type="button" onclick="businessSearch()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">번호조회</button></td>
 			</tr>
 		</table>
 		<br>
