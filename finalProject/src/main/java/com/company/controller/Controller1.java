@@ -2,9 +2,7 @@ package com.company.controller;
 
 import java.io.IOException;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -204,13 +202,15 @@ public class Controller1 {
     }
 	 
 	// 사업자번호 조회
-	@PostMapping("/bizno")
+	@PostMapping(value="/bizno", produces = "application/html; charset=utf-8")
+	@ResponseBody
 	public String bizno(@RequestParam String businessNumber) throws IOException {
 		// 사업자번호 입력
 		String url = "https://bizno.net/?query=" + businessNumber;
 		Document doc = Jsoup.connect(url).get();
 		Elements element = doc.select("div.titles a h4");
 		String bizName = element.text();
+		System.out.println(bizName);
 		return bizName;
 	}
 	
