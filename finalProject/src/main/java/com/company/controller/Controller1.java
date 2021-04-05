@@ -176,7 +176,7 @@ public class Controller1 {
 		return "redirect:/loginForm";
 	}
 	
-	//아이디/비밀번호찾기 이동
+	//휴대폰인증 페이지 이동
 	@GetMapping("/coolsms")
 	public String phone() {
 		return "member/coolsms";
