@@ -23,9 +23,11 @@ import com.company.bCart.service.BCartService;
 import com.company.bCart.service.BCartVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
+import com.company.cafe.service.CafeSearchVO;
 import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
 import com.company.common.FileRenamePolicy;
+import com.company.common.Paging;
 import com.company.hotel.service.HotelService;
 import com.company.hotel.service.HotelVO;
 import com.company.question.service.QuestionService;
@@ -286,8 +288,7 @@ public class Controller5 {
 			tImage.transferTo(rename);
 			vo.setTImage(rename.getName());
 		} // end of if
-
-		//
+			// 등록처리
 		int r = cafeService.insertCafe(vo);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
@@ -301,15 +302,26 @@ public class Controller5 {
 	}// end of insertCafe
 
 	// 사업자-카페-전체리스트 페이지 호출
-	@GetMapping("/getSearchCafe")
-	public String getSearchCafe() {
+	@GetMapping("/getSearchCafeForm")
+	public String getSearchCafe(CafeSearchVO vo) {
 		return "cafe/getSearchCafe";
 	}// end of getSearchCafe
 
 	// 사업자-카페-전체리스트 페이지 기능
-	@PostMapping("/getSearchCafe")
-	@ResponseBody 
-	public List<CafeVO> getSearchCafeProc(CafeVO vo) {
+	@GetMapping("/getSearchCafe")
+	@ResponseBody
+	public List<CafeVO> getSearchCafeProc(CafeSearchVO vo, Paging paging, Model model) {
+		// 1.페이지 설정
+		paging.setPageUnit(5);
+		paging.setPageSize(3);
+		// 2.초기페이지 설정
+		if (paging.getPage() != null)
+			paging.setPage(1);
+		// 3. 값 추가
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		paging.setTotalRecord(cafeService.getCount(vo));
+		model.addAttribute("paging", paging);
 		// Cafe List
 		List<CafeVO> list = cafeService.getSearchCafe(vo);
 		return list;
