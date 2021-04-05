@@ -42,6 +42,7 @@
 		, startDate
 		, endDate
 		, businessNumber
+		, businessCompanyName
 		FROM business
 		WHERE businessId = #{businessId}
 	</select>

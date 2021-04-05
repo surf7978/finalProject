@@ -14,6 +14,8 @@
 			 , TO_CHAR(PRICE, '999,999,999')AS PRICE
 			 , LOCATION
 			 , BUSINESSNUMBER 
+			 , T_IMAGE
+			 , IMAGE
 	 	 FROM HOSPITAL
 	</select>
 <!-- 병원상품 상세화면조회 -->
@@ -26,11 +28,13 @@
 			 , TO_CHAR(PRICE, '999,999,999')AS PRICE
 			 , LOCATION
 			 , BUSINESSNUMBER 
+			 , T_IMAGE
+			 , IMAGE
 	 	 FROM HOSPITAL
 	 	 WHERE HOSPITALNUMBER=#{hospitalNumber}
 	</select>
 <!-- 병원상품 등록 -->
-	<insert id="insertHospital" parameterType="HospitalVO">
+	<insert id="insertHospital" parameterType="hospitalVO">
 	INSERT INTO HOSPITAL(
 				HOSPITALNUMBER
 			  , CATEGORY1
@@ -39,16 +43,18 @@
 			  , OPTIONNAME
 			  , PRICE
 			  , LOCATION
-			  , BUSINESSNUMBER
+			  , T_IMAGE
+			  , IMAGE
 			  ) VALUES(
 			  20||HOSPI_SEQ.NEXTVAL
-			  , #{category1}
+			  , #{category1, jdbcType=VARCHAR}
 			  , #{category2}
 			  , #{name}
 			  , #{optionName}
 			  , #{price}
 			  , #{location}
-			  , #{businessNumber})
+			  , #{t_image}
+			  , #{image})
 		</insert>
 <!-- 병원상품 수정 -->
 	<update id="updateHospital" parameterType="HospitalVO">
@@ -59,6 +65,8 @@
 		, OPTIONNAME=#{optionName}
 		, PRICE=#{price}
 		, LOCATION=#{location}
+		, T_IMAGE=#{t_image}
+	 	, IMAGE=#{image}
 	WHERE HOSPITALNUMBER=#{hospitalNumber}
 	</update>
 
@@ -67,5 +75,16 @@
 		DELETE FROM HOSPITAL
 		WHERE HOSPITALNUMBER=#{hospitalNumber}
 	</delete>
+
+<!-- 사업자별 병원조회  -->
+	<select id="bGetSearchHospital" parameterType="HospitalVO">
+	  SELECT CATEGORY1
+	  	   , CATEGORY2
+	  	   , NAME
+	  	   , OPTIONNAME  
+	  FROM HOSPITAL
+	  WHERE BUSINESSNUMBER=#{businessNumber}
+	
+	</select>
 
 </mapper>

@@ -24,11 +24,12 @@
 		<div id="show">
 		<ul>
 		<c:forEach items="${hospital }" var="hospi"> 
-			<li>
-				<div class="hospital_img"><img src="resources/images/hospital/${hospi.t_image }" > </div>
+			<li onclick="location.href='getHospital?hospitalNumber=${hospi.hospitalNumber}'">
+				<div class="hospital_img"><img src="resources/img/hospital/${hospi.t_image }" > </div>
 				<nav>
 					<strong>${hospi.name }</strong>
 					<p>${hospi.price }원</p>
+					
 				</nav>
 			</li>
 		</c:forEach>
