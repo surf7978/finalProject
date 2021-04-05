@@ -72,16 +72,43 @@
 </script>
 
 <body>
-	아이디찾기<br>
-	이름<input id="name" name="name"><br>
-	핸드폰번호<input id="phone1" name="phone1"><br>
-	<button id="searchID">찾기</button>
-	<div id="searchIDResult" style="color:red;"></div>
+	<br><br><br><input value="아이디 찾기" style="font-size:40px; text-align:center; width:300px; border:none;" readonly><br><br>
+	<table border="1" style="text-align:center;">
+		<tr>
+			<td><input value="이 름" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
+			<td colspan="2"><input id="name" name="name" style="width:300px; border:none;"></td>
+		</tr>
+		<tr>
+			<td><input value="연 락 처" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
+			<td><input id="phone1" name="phone1" style="border:none; width:300px;"></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="height:25px;"><div id="searchIDResult" style="color:red;"></div></td>
+		</tr>
+	</table>
+	<br>
+	<button id="searchID" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#e7ab3c;">아이디 찾기</button>
+	&nbsp;
+	<button type="button" onclick="location.href='loginForm'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
+	<br><br>
 	<hr>
-	비밀번호찾기<br>
-	아이디<input id="memberId" name="memberId"><br>
-	핸드폰번호<input id="phone2" name="phone2"><br>
-	<button id="searchPW">찾기</button>
-	<div id="searchPWResult" style="color:red;"></div>
+	<br><input value="패스워드 찾기" style="font-size:40px; text-align:center; width:300px; border:none;" readonly><br><br>
+	<table border="1">
+		<tr>
+			<td><input value="아 이 디" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
+			<td><input id="memberId" name="memberId" style="border:none; width:300px;"></td>
+		</tr>
+		<tr>
+			<td><input value="연 락 처" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
+			<td><input id="phone2" name="phone2" style="border:none; width:300px;"></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="height:25px;"><div id="searchPWResult" style="color:red;"></div></td>
+		</tr>
+	</table>
+	<br>
+	<button id="searchPW" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#e7ab3c;">패스워드 찾기</button>
+	&nbsp;
+	<button type="button" onclick="location.href='loginForm'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 </body>
 </html>

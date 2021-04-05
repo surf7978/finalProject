@@ -1,13 +1,19 @@
 package com.company.controller;
 
+import java.io.IOException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -197,6 +203,17 @@ public class Controller1 {
         return numStr;
     }
 	 
+	// 사업자번호 조회
+	@PostMapping("/bizno")
+	public String bizno(@RequestParam String businessNumber) throws IOException {
+		// 사업자번호 입력
+		String url = "https://bizno.net/?query=" + businessNumber;
+		Document doc = Jsoup.connect(url).get();
+		Elements element = doc.select("div.titles a h4");
+		String bizName = element.text();
+		return bizName;
+	}
+	
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
 	@RequestMapping(value = "/", method = RequestMethod.GET)
