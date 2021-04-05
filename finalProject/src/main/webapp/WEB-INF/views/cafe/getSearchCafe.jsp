@@ -10,7 +10,12 @@
 </head>
 <body>
 	<h2>카페 리스트</h2>
-	<div id="cafe"></div>
+	<div id="contents">
+		<div id="pro_location"></div>
+		<div id="show"></div>
+		<div id="paging"></div>
+		<button id="btn">상품등록</button>
+	</div>
 </body>
 <script>
 	var cafe = $("#cafe");
@@ -19,28 +24,27 @@
 		url : "getSearchCafe",
 		method : "post",
 		dataType : "json",
-		success : function(datas) {
-			var html = "";
-				html +="<table>";
-				//title
-				//영문으로 담고 나중에 한글로 바꿀거라면 배열 사용해서 값 가져오기
-				for(data of datas){}
-					for(key in data){
-						html += "<td>"+key+"</td>";
-						}
-			//content
-			for(data of datas){
-				html += "<tr>";
-				console.log(data);
-				for(key in data){
-					html += "<td>"+data[key]+"</td>";	
-				}//end of key
-				html+"</tr>";
-			}//end of data
-			html+="</table>";
-			cafe.empty();
-			cafe.append(html);
-		}//end of success
-	})//end of ajax
+		success : function(response) {
+			var ul = $("<ul>");
+			$("#show").append(ul);
+			$(response).each(function(i) {
+						var cafeNumber = response[i].cafeNumber;
+						var tImage = response[i].tImage;
+
+						var li = $("<li>");
+						var input = $("<input>").attr({
+							"value" : cafeNumber,
+							"type" : "hidden",
+							"name" : "cafeNumber"});
+						var div = $("<div>").attr("class", "product_img").append($("<img>").attr("src","resources/images/cafe/"+ tImage));
+						var nav = $("<nav>");
+						var strong = $("<strong>").text(response[i].name);
+						var p = $("<p>").text(response[i].price + "원");
+						$(nav).append(strong, p);
+						$(li).append(input, div, nav);
+						$(ul).append(li);
+					})
+		} //end of success
+	}) //end of ajax
 </script>
 </html>

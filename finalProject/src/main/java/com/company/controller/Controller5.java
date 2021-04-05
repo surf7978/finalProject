@@ -1,8 +1,10 @@
 package com.company.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
@@ -22,6 +25,7 @@ import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
 import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
+import com.company.common.FileRenamePolicy;
 import com.company.hotel.service.HotelService;
 import com.company.hotel.service.HotelVO;
 import com.company.question.service.QuestionService;
@@ -250,8 +254,32 @@ public class Controller5 {
 
 	// 사업체-카페-상품등록 기능
 	@PostMapping("/insertCafe")
-	public void insertCafe(CafeVO vo, BusinessVO bvo, HttpSession session, HttpServletResponse response)
-			throws Exception {
+	public void insertCafe(CafeVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
+			HttpServletResponse response) throws Exception {
+		// 첨부파일처리
+		// 1.vo값 가져오기
+		MultipartFile tImage = vo.getT_uploadFile();
+		MultipartFile image = vo.getUploadFile();
+		// 2.저장될path설정
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/cafe");
+		System.out.println("경로:" + path);
+		// 3.중복채크
+		if (image != null && image.isEmpty() && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			//
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			image.transferTo(rename);
+			vo.setImage(rename.getName());
+		} // end of if
+
+		if (tImage != null && tImage.isEmpty() && tImage.getSize() > 0) {
+			String filename = tImage.getOriginalFilename();
+			//
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			tImage.transferTo(rename);
+			vo.setTImage(rename.getName());
+		} // end of if
+
 		// 사업자 번호를 어디서 가져올 것인지
 		// 1.session
 		// 2. id로 businessTable 조회
