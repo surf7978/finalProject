@@ -279,6 +279,7 @@ public class Controller5 {
 		return "cafe/getSearchCafe";
 	}// end of getSearchCafe
 
+	// 사업자-카페-전체리스트 페이지 기능
 	@PostMapping("/getSearchCafe")
 	@ResponseBody // 값을 json타입으로 변환
 	public List<CafeVO> getSearchCafeProc(CafeVO vo, BusinessVO bvo, Model model, HttpSession session) {
@@ -292,6 +293,27 @@ public class Controller5 {
 		List<CafeVO> list = cafeService.getSearchCafe(vo);
 		return list;
 	}// end of getSearchCafeProc
+
+	// 사업자-카페-상세리스트 페이지 호출
+	@GetMapping("/getCafe")
+	public String getCafe() {
+		return "cafe/getCafe";
+	}
+
+	// 사업자-카페-상세리스트 페이지 기능(ajax)
+	@PostMapping("/getCafe")
+	@ResponseBody
+	public CafeVO getCafeProc(CafeVO vo, BusinessVO bvo, HttpSession session) {
+		// 세션 아이디 가져옴
+		String id = session.getAttribute("loginID").toString();
+		bvo.setBusinessId(id);
+		// 사업자 번호 조회
+		bvo = businessService.getBusiness(bvo);
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		// 카페 상세 정보조회
+		vo = cafeService.getCafe(vo);
+		return vo;
+	}
 
 	// start of hotel
 	// 사업자-전체리스트(호텔)

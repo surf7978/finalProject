@@ -79,34 +79,104 @@
 		window.open("coolsms", "본인인증", "width=1000px, height=200px");
 	}
 </script>
+<!-- 사업자번호 조회 -->
+<script>
+	$(function(){
+		$("#businessSearch").on("click", function(){
+			console.log($("#businessNumber").val());
+			if($("#businessNumber").val()!=""){
+				$.ajax({
+					url:"bizno",
+					type:"post",
+					dataType:"html",
+					data:{"businessNumber":$("#businessNumber").val()},
+					success:function(data){
+						console.log(data);
+						if(data!=""){
+							$("#businessSearchResult").html(data);
+						}else{
+							alert("검색결과 없음");
+							$("#businessSearchResult").html("검색결과 없음");
+						}
+					}
+				});	
+			}else{
+				alert("사업자번호 미입력");
+			}
+		});
+	});
+</script>
 <body>
-	사업자회원가입화면<br>
+	<br><br><br><input value="사업자 가입" style="font-size:40px; text-align:center; width:300px; border:none;" readonly><br><br>
 	<form id="frm" name="frm" onsubmit="return formCheck()" action="signUpBusiness" method="post">
-	아이디<input id="businessId" name="businessId">
-	<button type="button" id="idCheck">중복조회</button>
-	<div id="idCheckResult" name="idCheckResult" style="color:red;"></div><br>
-	패스워드<input type="password" id="password" name="password"><br>
-	패스워드 확인<input type="password" id="passwordCheck" name="passwordCheck"><br>
-	이름<input id="businessName" name="businessName"><br>
-	우편번호<input id="post" name="post" readonly>
-	<button type="button" onclick="addressSearch()">검색</button><br>
-	주소<input id="address" name="address" readonly><br>
-	상세주소<input id="address2" name="address2"><br>
-	핸드폰번호<input id="phone" name="phone">
-	<button  type="button" onclick="coolsms()">본인인증</button><br>
-	이메일<input type="email" id="email" name="email"><br>
-	사업자번호<input id="businessNumber" name="businessNumber">
-	<button type="button" onclick="businessSearch()">검색</button><br>
-	사업체분류
-			<select id="businessCode" name="businessCode">
-				<option value="10">호텔</option>
-				<option value="20">병원</option>
-				<option value="30">카페</option>
-				<option value="40">미용</option>
-				<option value="50">교육</option>
-				<option value="60">택시</option>
-			</select><br>
-	<button type="submit">회원가입</button>
+		<table border="1" style="text-align:center;">
+			<tr>
+				<td rowspan="2"><input value="아 이 디" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
+				<td><input id="businessId" name="businessId" style="border:none; width:300px;"></td>
+				<td><button type="button" id="idCheck" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">중복조회</button></td>
+			</tr>
+			<tr>
+				<td colspan="2"><div id="idCheckResult" style="color:red; height:20px;"></div></td>
+			</tr>
+			<tr>
+				<td><input value="패스워드" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
+				<td colspan="2"><input type="password"  id="password" name="password" style="width:400px; border:none;"></td>
+			</tr>
+			<tr>
+				<td><input value="PW확인" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
+				<td colspan="2"><input type="password" id="passwordCheck" name="passwordCheck" style="width:400px; border:none;"></td>
+			</tr>
+			<tr>
+				<td><input value="이 름" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
+				<td colspan="2"><input id="businessName" name="businessName" style="width:400px; border:none;"></td>
+			</tr>
+			<tr>
+				<td><input value="우편번호" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
+				<td><input id="post" name="post" style="border:none; width:300px;"></td>
+				<td><button type="button" onclick="addressSearch()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">번호검색</button></td>
+			</tr>
+			<tr>
+				<td><input value="주 소" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
+				<td colspan="2"><input id="address" name="address"  style="width:400px; border:none;" readonly></td>
+			</tr>
+			<tr>
+				<td><input value="상세주소" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
+				<td colspan="2"><input id="address2" name="address2" style="width:400px; border:none;"></td>
+			</tr>
+			<tr>
+				<td><input value="연 락 처" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
+				<td><input id="phone" name="phone" style="border:none; width:300px;"></td>
+				<td><button type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">본인인증</button></td>
+			</tr>
+			<tr>
+				<td><input value="이 메 일" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
+				<td colspan="2"><input id="email" name="email" style="width:400px; border:none;"></td>
+			</tr>
+			<tr>
+				<td rowspan="2"><input value="사업자번호" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
+				<td><input id="businessNumber" name="businessNumber" style="border:none; width:300px;"></td>
+				<td><button type="button" id="businessSearch" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">번호조회</button></td>
+			</tr>
+			<tr>
+				<td><div id="businessSearchResult" style="color:red; height:20px;"></div></td>
+				<td>
+					<select id="businessCode" name="businessCode" style="font-size:20px;width: 100px; border:none;">
+						<option value="10">호텔</option>
+						<option value="20">병원</option>
+						<option value="30">카페</option>
+						<option value="40">미용</option>
+						<option value="50">교육</option>
+						<option value="60">택시</option>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<button type="submit" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#e7ab3c;">회원가입</button>
+		&nbsp;
+		<button type="reset" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#ff6347; color:white;">취 소</button>
+		&nbsp;
+		<button type="button" onclick="location.href='loginForm'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 	</form>
 </body>
 </html>
