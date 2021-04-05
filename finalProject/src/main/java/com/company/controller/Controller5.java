@@ -265,9 +265,9 @@ public class Controller5 {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		if (r == 1) {
-			writer.print("<script>alert('등록되었습니다')location.href='getSearchCafe'</script>");
+			writer.print("<script>alert('등록되었습니다');location.href='getSearchCafe'</script>");
 		} else {
-			writer.print("<script>alert('오류..다시등록해주세요')location.href='insertCafe'</script>");
+			writer.print("<script>alert('오류..다시등록해주세요');location.href='insertCafe'</script>");
 		}
 		writer.close();
 
