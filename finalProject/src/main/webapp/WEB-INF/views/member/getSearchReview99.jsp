@@ -28,7 +28,7 @@
 			})
 		})
 		//내용 닫기
-		$(".getReviewResult").on("click", ".ESC", function(){
+		$(".getReviewResult").on("click", ".ESC", function(){//이렇게 그룹이벤트로 해줘야 생성된 버튼 동작함
 			var ESCbtn = $(this);
 			ESCbtn.parent().empty();
 		})
