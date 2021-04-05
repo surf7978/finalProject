@@ -32,6 +32,8 @@ import com.company.member.common.coolsmsAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.member.service.impl.MemberServiceimpl;
+import com.company.review.service.ReviewService;
+import com.company.review.service.ReviewVO;
  
 @Controller
 public class Controller1 {
@@ -212,6 +214,20 @@ public class Controller1 {
 		String bizName = element.text();
 		System.out.println(bizName);
 		return bizName;
+	}
+	
+	@Autowired ReviewService reviewService;
+	//구매평 전체리스트 출력
+	@GetMapping("/getSearchReview99")
+	public String getSearchReview99(ReviewVO vo, Model model) {
+		model.addAttribute("review", reviewService.getSearchReview(vo));
+		return "member/getSearchReview99";
+	}
+	//구매평 단건리스트 출력(ajax로 같은 페이지 출력)
+	@RequestMapping("/getReview99")
+	@ResponseBody
+	public ReviewVO getReview99(ReviewVO vo) {
+		return reviewService.getReview(vo);
 	}
 	
 	// 홈화면 출력(스프링 기본세팅)
