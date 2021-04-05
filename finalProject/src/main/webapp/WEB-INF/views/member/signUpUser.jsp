@@ -87,7 +87,7 @@
 			<tr>
 				<td rowspan="2"><input value="아 이 디" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
 				<td><input id="memberId" name="memberId" style="border:none; width:300px;"></td>
-				<td><button type="button" id="idCheck" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">중복조회</button></td>
+				<td><button type="button" id="idCheck" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">중복조회</button></td>
 			</tr>
 			<tr>
 				<td colspan="2"><div id="idCheckResult" style="color:red; height:20px;"></div></td>
@@ -107,7 +107,7 @@
 			<tr>
 				<td><input value="우편번호" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
 				<td><input id="post" name="post" style="border:none; width:300px;"></td>
-				<td><button type="button" onclick="addressSearch()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">번호검색</button></td>
+				<td><button type="button" onclick="addressSearch()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">번호검색</button></td>
 			</tr>
 			<tr>
 				<td><input value="주 소" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
@@ -120,7 +120,7 @@
 			<tr>
 				<td><input value="연 락 처" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
 				<td><input id="phone" name="phone" style="border:none; width:300px;"></td>
-				<td><button type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">본인인증</button></td>
+				<td><button type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">본인인증</button></td>
 			</tr>
 			<tr>
 				<td><input value="이 메 일" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
