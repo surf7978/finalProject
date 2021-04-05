@@ -5,13 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>카페 상품 등록 폼</title>
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<h2>상품등록</h2>
 	<div id="cafe">
-		<form id="frm" action="insertCafe" method="post">
+		<form id="frm" action="insertCafe" encType="multipart/form-data"
+			method="post">
 			<table id="tbl" border="1">
 				<tr>
 					<td>제품명</td>
@@ -60,11 +62,13 @@
 					</select></td>
 				<tr>
 					<td>대표이미지</td>
-					<td><input type="file" name="tImage"></td>
+					<td><input type="file" id="tImage" name="t_uploadFile"
+						multiple="multiple"></td>
 				</tr>
 				<tr>
 					<td>이미지</td>
-					<td><input type="file" name="image"></td>
+					<td><input type="file" id="image" name="uploadFile"
+						multiple="multiple"></td>
 				</tr>
 			</table>
 			<button type="submit">등록</button>

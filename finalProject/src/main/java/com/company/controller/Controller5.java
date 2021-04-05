@@ -254,32 +254,8 @@ public class Controller5 {
 
 	// 사업체-카페-상품등록 기능
 	@PostMapping("/insertCafe")
-	public void insertCafe(CafeVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
+	public void insertCafeProc(CafeVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
 			HttpServletResponse response) throws Exception {
-		// 첨부파일처리
-		// 1.vo값 가져오기
-		MultipartFile tImage = vo.getT_uploadFile();
-		MultipartFile image = vo.getUploadFile();
-		// 2.저장될path설정
-		String path = request.getSession().getServletContext().getRealPath("/resources/images/cafe");
-		System.out.println("경로:" + path);
-		// 3.중복채크
-		if (image != null && image.isEmpty() && image.getSize() > 0) {
-			String filename = image.getOriginalFilename();
-			//
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			image.transferTo(rename);
-			vo.setImage(rename.getName());
-		} // end of if
-
-		if (tImage != null && tImage.isEmpty() && tImage.getSize() > 0) {
-			String filename = tImage.getOriginalFilename();
-			//
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			tImage.transferTo(rename);
-			vo.setTImage(rename.getName());
-		} // end of if
-
 		// 사업자 번호를 어디서 가져올 것인지
 		// 1.session
 		// 2. id로 businessTable 조회
@@ -288,6 +264,29 @@ public class Controller5 {
 		bvo = businessService.getBusiness(bvo);
 		// 3. business의 사업자 번호 가져와 넣기
 		vo.setBusinessNumber(bvo.getBusinessNumber());
+		// 첨부파일처리
+		// 1.vo값 가져오기
+		MultipartFile tImage = vo.getT_uploadFile();
+		MultipartFile image = vo.getUploadFile();
+		// 2.저장될path설정
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/cafe");
+		// 3.중복채크
+		if (image != null && !image.isEmpty() && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			// 파일명
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			image.transferTo(rename);
+			vo.setImage(rename.getName());
+		} // end of if
+
+		if (tImage != null && !tImage.isEmpty() && tImage.getSize() > 0) {
+			String filename = tImage.getOriginalFilename();
+			// 파일명
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			tImage.transferTo(rename);
+			vo.setTImage(rename.getName());
+		} // end of if
+
 		//
 		int r = cafeService.insertCafe(vo);
 		response.setContentType("text/html; charset=utf-8");
@@ -309,7 +308,7 @@ public class Controller5 {
 
 	// 사업자-카페-전체리스트 페이지 기능
 	@PostMapping("/getSearchCafe")
-	@ResponseBody // 값을 json타입으로 변환
+	@ResponseBody 
 	public List<CafeVO> getSearchCafeProc(CafeVO vo) {
 		// Cafe List
 		List<CafeVO> list = cafeService.getSearchCafe(vo);
