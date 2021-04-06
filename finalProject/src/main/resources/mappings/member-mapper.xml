@@ -113,4 +113,10 @@
 		WHERE memberId = #{memberId}
 		AND phone = #{phone}
 	</select>
+	
+	<select id="getSearchViewMember" parameterType="memberVO" resultType="memberVO">
+		SELECT 
+			*
+		FROM UNIONID
+	</select>
 </mapper>

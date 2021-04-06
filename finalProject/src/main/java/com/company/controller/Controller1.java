@@ -231,6 +231,28 @@ public class Controller1 {
 		return reviewService.getReview(vo);
 	}
 	
+	//회원탈퇴
+	@PostMapping("/membershipCancel")
+	public String membershipCancel(String ID) {
+		MemberVO vo = new MemberVO();
+		vo.setMemberId(ID);
+		if(memberService.getViewMember(vo).getAuth().equals("m")) {
+			memberService.deleteMember(vo);
+		}else {
+			BusinessVO vo1 = new BusinessVO();
+			vo1.setBusinessId(ID);
+			businessService.deleteBusiness(vo1);
+		}
+		return "redirect:/getSearchViewMember";
+	}
+	
+	//관리자-전체회원 조회
+	@RequestMapping("/getSearchViewMember")
+	public String getSearchMember(MemberVO vo, Model model) {
+		model.addAttribute("list", memberService.getSearchViewMember(vo));
+		return "member/getSearchMember";
+	}
+	
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
 	@RequestMapping(value = "/", method = RequestMethod.GET)
