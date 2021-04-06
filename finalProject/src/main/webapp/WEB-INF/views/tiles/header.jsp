@@ -170,8 +170,8 @@
 						<!-- 
 						<li class="active"><a href="./index.html">Home</a></li>
 						 -->
-						<li><a href="getSearchProduct">쇼핑몰</a></li>
-						<li><a href="./blog.html">병원</a></li>
+						<li><a href="getSearchProductForm">쇼핑몰</a></li>
+						<li><a href="#">병원</a></li>
 						<li><a href="#">카페/호텔/펫택시</a>
 							<ul class="dropdown">
 								<li><a href="#">Men's</a></li>

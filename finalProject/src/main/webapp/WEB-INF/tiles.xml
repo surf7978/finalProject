@@ -6,11 +6,20 @@
 	<definition name="mainTemplate" template="/WEB-INF/views/tiles/header.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/index.jsp" />
 	</definition>
+	
+	<!-- 미적용 -->
+	<definition name="empty/*/*"  template="/WEB-INF/views/tiles/layout.jsp">
+          <put-attribute name="contents" value="/WEB-INF/views/{1}/{2}.jsp" />
+    </definition>
+    
+	<!-- 타일즈 적용 -->
 	<definition name="*/*" extends="mainTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 	<definition name="*" extends="mainTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
 	</definition>
+	
+	
 	<!-- layout페이지에 top페이지를 끼워서?? 보여줌 layout은 고정??-->
 </tiles-definitions>

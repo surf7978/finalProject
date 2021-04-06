@@ -2,9 +2,7 @@ package com.company.controller;
 
 import java.io.IOException;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -34,6 +32,8 @@ import com.company.member.common.coolsmsAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.member.service.impl.MemberServiceimpl;
+import com.company.review.service.ReviewService;
+import com.company.review.service.ReviewVO;
  
 @Controller
 public class Controller1 {
@@ -178,7 +178,7 @@ public class Controller1 {
 		return "redirect:/loginForm";
 	}
 	
-	//아이디/비밀번호찾기 이동
+	//휴대폰인증 페이지 이동
 	@GetMapping("/coolsms")
 	public String phone() {
 		return "member/coolsms";
@@ -204,14 +204,30 @@ public class Controller1 {
     }
 	 
 	// 사업자번호 조회
-	@PostMapping("/bizno")
+	@PostMapping(value="/bizno", produces = "application/html; charset=utf-8")
+	@ResponseBody
 	public String bizno(@RequestParam String businessNumber) throws IOException {
 		// 사업자번호 입력
 		String url = "https://bizno.net/?query=" + businessNumber;
 		Document doc = Jsoup.connect(url).get();
 		Elements element = doc.select("div.titles a h4");
 		String bizName = element.text();
+		System.out.println(bizName);
 		return bizName;
+	}
+	 
+	@Autowired ReviewService reviewService;
+	//구매평 전체리스트 출력
+	@GetMapping("/getSearchReview99")
+	public String getSearchReview99(ReviewVO vo, Model model) {
+		model.addAttribute("review", reviewService.getSearchReview(vo));
+		return "member/getSearchReview99";
+	}
+	//구매평 단건리스트 출력(ajax로 같은 페이지 출력)
+	@RequestMapping("/getReview99")
+	@ResponseBody
+	public ReviewVO getReview99(ReviewVO vo) {
+		return reviewService.getReview(vo);
 	}
 	
 	// 홈화면 출력(스프링 기본세팅)
