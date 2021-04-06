@@ -38,6 +38,19 @@ public class BoardServiceimpl implements BoardService{
 	public int deleteBoard(BoardVO vo) {
 		return BoardMapper.deleteBoard(vo);
 	}
+	@Override
+	public List<BoardVO> getSearchBoardCategiry1(BoardVO vo) {
+		return null;
+	}
+	@Override
+	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo) {
+		return null;
+	}
+	@Override
+	public int insertBoard2(BoardVO vo) {
+		// TODO Auto-generated method stub
+		return BoardMapper.insertBoard2(vo);
+	}
 
 
 }

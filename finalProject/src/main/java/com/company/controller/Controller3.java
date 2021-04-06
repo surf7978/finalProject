@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.abandonment.common.AbandonmentAPI;
+import com.company.board.service.BoardVO;
 import com.company.common.FileRenamePolicy;
 import com.company.member.service.MemberService;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
-import com.company.product.service.impl.ProductMapper;
 
 @Controller
 public class Controller3 {
@@ -139,5 +139,11 @@ public class Controller3 {
 		model.addAttribute("resultPrice", vo.getResultPrice());
 		return "pay/PayInfo";
 	}	
+	
+	//자유게시판시작
+	@RequestMapping("/getSearchBoard1")
+	public String getSearchBoard1(){
+		return "board/getSearchBoard1";
+	}
 
 }
