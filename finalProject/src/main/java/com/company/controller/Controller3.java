@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.company.abandonment.common.AbandonmentAPI;
 import com.company.common.FileRenamePolicy;
+import com.company.member.service.MemberService;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 
@@ -28,6 +29,8 @@ public class Controller3 {
 	AbandonmentAPI abanAPI;
 	@Autowired
 	ProductService productService;
+	@Autowired
+	MemberService memberService;
 
 	// 유기동물 API
 	@RequestMapping("/getAban")
@@ -126,5 +129,13 @@ public class Controller3 {
 		productService.insertProduct(vo);
 		return "redirect:/getSearchProductForm";
 	}
+
+	//결제API
+	@RequestMapping("/PayInfo")
+	public String PayInfo(HttpServletRequest request) {
+		return "pay/PayInfo";
+	}
+	
+	
 
 }
