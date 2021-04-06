@@ -33,7 +33,7 @@ table , tr ,td {
 	</div>
 	<c:forEach var="getSearchEventAndNoticeSelect" items="${getSearchEventAndNoticeSelect}"> 
 	<div class="fff">
-	<table onclick="location.href='getEventAndNotice?title=${getSearchEventAndNoticeSelect.title}'">
+	<table onclick="location.href='getEventAndNotice?eanNumber=${getSearchEventAndNoticeSelect.eanNumber}'">
 	<!--이벤트 혹은 공지사항 중 하나 선택하기 기능  -->
 	<tr>
 	<td>글쓴이</td> 

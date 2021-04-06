@@ -38,6 +38,11 @@ public class BoardServiceimpl implements BoardService{
 	public int deleteBoard(BoardVO vo) {
 		return BoardMapper.deleteBoard(vo);
 	}
+	@Override
+	public int insertBoardCr4(BoardVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 }
