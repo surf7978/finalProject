@@ -16,8 +16,8 @@
 		PRICE,
 		LOCATION,
 		BUSINESSNUMBER,
-		TIMAGE,
-		IMAGE
+		IMAGE1,
+		IMAGE2
 		)VALUES(
 		(SELECT
 		NVL(MAX(cafeNUMBER),0)+1 FROM CAFE),
@@ -26,8 +26,8 @@
 		#{price},
 		#{location},
 		#{businessNumber},
-		#{tImage},
-		#{image}
+		#{image1},
+		#{image2}
 		)
 	</insert>
 	<!-- 제품 수정 -->
@@ -46,13 +46,13 @@
 	<!-- 상세 리스트 -->
 	<select id="getCafe" resultType="cafeVO">
 		SELECT
-			CAFENUMBER,
-			NAME,
-			OPTIONNAME,
-			PRICE,
-			LOCATION,
-			TIMAGE,
-			IMAGE
+		CAFENUMBER,
+		NAME,
+		OPTIONNAME,
+		PRICE,
+		LOCATION,
+		IMAGE1,
+		IMAGE2
 		FROM CAFE
 		<where>CAFENUMBER = #{cafeNumber}
 		</where>
@@ -62,16 +62,34 @@
 		SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
 		<!-- start of query -->
 		SELECT
-			CAFENUMBER,
-			NAME,
-			OPTIONNAME,
-			PRICE,
-			LOCATION,
-			TIMAGE,
-			IMAGE
+		CAFENUMBER,
+		NAME,
+		OPTIONNAME,
+		PRICE,
+		LOCATION,
+		IMAGE1,
+		IMAGE2
 		FROM CAFE
+			<include refid="search"></include>
 		ORDER BY CAFENUMBER
 		<!-- end of query -->
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	<!-- 검색기능 -->
+	<sql id="search">
+		<choose>
+			<!-- 전체 -->
+			<when test="search == 'all' ">
+				WHERE NAME LIKE '%' || #{searchValue} || '%'
+				OR PRICE LIKE '%' || #{searchValue} || '%'
+				OR LOCATION LIKE '%' || #{searchValue} || '%'
+			</when>
+			<!-- 전체가 아닌 경우 -->
+			<when test="search != null">
+				WHERE #{search} LIKE '%' || #{searchValue} || '%'
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</sql>
 </mapper>

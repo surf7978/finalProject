@@ -14,21 +14,26 @@
 	$(function() {
 		//등록
 		insertCafe();
-		//상단 검색
-		searchTop();
-		//하단 검색
+		//페이지 내 검색
+		searchInPage();
+		//전체 페이지 검색
+		searchAllPage();
 		//상세보기
 		getCafe();
 		//전체 리스트
 		getSearchCafe();
-		//start end 설정해줘야함
 	});//end of function
 
-	//상단 검색
-	function searchTop() {
-		$("#searchData").on(
-				"keyup",
-				function() {
+	//등록 폼
+	function insertCafe() {
+		$("#insertCafe").on("click", function() {
+			location.href = "insertCafe";
+		});
+	}//end of insertCafe
+
+	//페이지 내 검색
+	function searchInPage() {
+		$("#searchData").on("keyup",function() {
 					//입력된 value 소문자로 변경
 					var value = $(this).val().toLowerCase();
 					//show안의 li태그에서 필터링
@@ -37,35 +42,23 @@
 								$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 							});
 				});//end of searchData
+	}//end of searchInPage
+	
+	//전체 페이지 조회
+	function searchAllPage(){
+		$("#searchAllPage").on("click", function() {
+			getSearchCafe();
+		})
 	}
-
-	//등록 폼
-	function insertCafe() {
-		$("#btn").on("click", function() {
-			location.href = "insertCafe";
-		});
-	}//end of insertCafe
-
+	
 	//상세보기
 	function getCafe() {
 		//li 태그 클릭 로직 짜기
-		$("ul").on("click", "li", function() {
-			var cafeNumber = $(this).attr("name");
-			console.log(cafeNumber);
-			//cafeNumber
-			//ajax
-			$.ajax({
-				url : "getCafe",
-				method : "get",
-				data : {
-					cafeNumber : cafeNumber
-				},
-				success : function(response) {
-					console.log(response);
-				}
-			})//end of ajax
+		$("#contents").on("click","#show li",function() {
+			location.href = "getCafe?cafeNumber="+ $(this).find("[name=cafeNumber]").val();
 		})
 	}//end of getCafe
+
 	//전체 리스트
 	function getSearchCafe(p) {
 		//cafe 리스트
@@ -73,35 +66,35 @@
 			url : "getSearchCafe",
 			method : "get",
 			//검색기능 넣을 시 data값에 추가해야 됨
-			data : {page : p},
+			data : {page : p},'$("#searchAndInsert").serialize()',
 			dataType : "json",
 			success : function(datas) {
 				var ul = $("<ul>");
 				$("#show").empty();
 				$("#show").append(ul);
 				var response = datas.list;
-				$(response).each(function(i) {
-					
-					var cafeNumber = response[i].cafeNumber;
-					var tImage = response[i].timage;
-					var li = $("<li>");
-					var input = $("<input>").attr(
-							{"value" : cafeNumber,
+				$(response).each(
+						function(i) {
+
+							var cafeNumber = response[i].cafeNumber;
+							var image1 = response[i].image1;
+							var li = $("<li>");
+							var input = $("<input>").attr({
+								"value" : cafeNumber,
 								"type" : "hidden",
 								"name" : "cafeNumber"
 							});
-						//div in img
-						var div = $("<div>").attr("class","product_img").append($("<img>")//
-							.attr("src","resources/images/cafe/"+ tImage));
+							//div in img
+							var div = $("<div>").attr("class", "product_img").append($("<img>")//
+											.attr("src","resources/images/cafe/"+ image1));
 							var nav = $("<nav>");
 							var strong = $("<strong>").text(response[i].name);
 							var p = $("<p>").text(response[i].price + "원");
 							$(nav).append(strong, p);
 							$(li).append(input, div, nav);
 							$(ul).append(li);
-				})//end of each				
-				console.log(response);
-				
+						})//end of each			
+						
 				//paging버튼
 				$("#paging").empty();
 				var totalRecord = datas.paging.totalRecord;
@@ -111,16 +104,13 @@
 				var endPage = datas.paging.endPage;
 				var startPage = datas.paging.startPage;
 				if (startPage > 1) {
-					$("#paging").append("<a href='#' onclick='getSearchCafe("+ (startPage - 1) + ")'>"
-						+ "&laquo;" + "</a>");
+					$("#paging").append("<a href='#' onclick='getSearchCafe("+ (startPage - 1) + ")'>" + "&laquo;"+ "</a>");
 				}
 				for (i = startPage; i <= endPage; i++) {
-					$("#paging").append("<a href='#' onclick='getSearchCafe(" + (i)
-						+ ")'>" + i + "</a>");
+					$("#paging").append("<a href='#' onclick='getSearchCafe(" + (i) + ")'>"+ i + "</a>");
 				}
 				if (lastPage > endPage) {
-					$("#paging").append("<a href='#' onclick='getSearchCafe("+ 
-					(endPage + 1) + ")'>" + "&raquo;"+ "</a>");
+					$("#paging").append("<a href='#' onclick='getSearchCafe("+ (endPage + 1) + ")'>" + "&raquo;"+ "</a>");
 				}
 			} //end of success
 		}) //end of ajax
@@ -130,15 +120,22 @@
 <body>
 	<div id="contents">
 		<h2>카페 리스트</h2>
-		<input type="text" id="searchData" name="searchData"
-			placeholder="search..">
+		<input type="text" id="searchData" name="searchData" placeholder="search..">
 		<div id="pro_location"></div>
 		<div id="show"></div>
-		<div id="searchAndInsert">
-			<input type="text">
-			<button>검색</button>
-			<button id="btn">상품등록</button>
+		<div id="searchDiv">
+			<form id="searchAndInsert">
+				<select name="search">
+					<option value="all">이름+가격+지역</option>
+					<option value="name">이름</option>
+					<option value="price">가격</option>
+					<option value="location">지역</option>
+				</select>
+				<input type="text" name ="searchValue">
+				<button type="button" id="searchAllPage">검색</button>
+			</form>
 		</div>
+		<button type="button" id="insertCafe">상품등록</button>
 		<div id="paging"></div>
 	</div>
 </body>

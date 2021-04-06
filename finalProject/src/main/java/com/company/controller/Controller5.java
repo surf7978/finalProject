@@ -272,25 +272,25 @@ public class Controller5 {
 		vo.setBusinessNumber(bvo.getBusinessNumber());
 		// 첨부파일처리
 		// 1.vo값 가져오기
-		MultipartFile tImage = vo.getT_uploadFile();
-		MultipartFile image = vo.getUploadFile();
+		MultipartFile image1 = vo.getT_uploadFile();
+		MultipartFile image2 = vo.getUploadFile();
 		// 2.저장될path설정
 		String path = request.getSession().getServletContext().getRealPath("/resources/images/cafe");
 		// 3.중복채크
-		if (image != null && !image.isEmpty() && image.getSize() > 0) {
-			String filename = image.getOriginalFilename();
+		if (image1 != null && !image1.isEmpty() && image1.getSize() > 0) {
+			String filename = image1.getOriginalFilename();
 			// 파일명
 			File rename = FileRenamePolicy.rename(new File(path, filename));
-			image.transferTo(rename);
-			vo.setImage(rename.getName());
+			image1.transferTo(rename);
+			vo.setImage1(rename.getName());
 		} // end of if
 
-		if (tImage != null && !tImage.isEmpty() && tImage.getSize() > 0) {
-			String filename = tImage.getOriginalFilename();
+		if (image2 != null && !image2.isEmpty() && image2.getSize() > 0) {
+			String filename = image2.getOriginalFilename();
 			// 파일명
 			File rename = FileRenamePolicy.rename(new File(path, filename));
-			tImage.transferTo(rename);
-			vo.setTImage(rename.getName());
+			image2.transferTo(rename);
+			vo.setImage2(rename.getName());
 		} // end of if
 			// 등록처리
 		int r = cafeService.insertCafe(vo);
@@ -316,7 +316,6 @@ public class Controller5 {
 	@ResponseBody
 	public Map<String, Object> getSearchCafeProc(CafeSearchVO vo, Paging paging) {
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		// 1.페이지 설정
 		paging.setPageUnit(5);//
 		paging.setPageSize(3);// 페이지 번호 수
@@ -327,8 +326,9 @@ public class Controller5 {
 		paging.setTotalRecord(cafeService.getCount(vo));
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
-		map.put("paging", paging);
 		List<CafeVO> list = cafeService.getSearchCafe(vo);
+		// map에 넘겨주는 이유:model보다 사용이 편리해서
+		map.put("paging", paging);
 		map.put("list", list);
 		// Cafe List
 		return map;
@@ -336,17 +336,11 @@ public class Controller5 {
 
 	// 사업자-카페-상세리스트 페이지 호출
 	@GetMapping("/getCafe")
-	public String getCafe() {
-		return "cafe/getCafe";
-	}
-
-	// 사업자-카페-상세리스트 페이지 기능(ajax)
-	@PostMapping("/getCafe")
-	@ResponseBody
-	public CafeVO getCafeProc(CafeVO vo) {
+	public String getCafeProc(CafeVO vo, Model model) {
 		// 카페 상세 정보조회
 		vo = cafeService.getCafe(vo);
-		return vo;
+		model.addAttribute("vo", vo);
+		return "cafe/getCafe";
 	}
 
 	// start of hotel
