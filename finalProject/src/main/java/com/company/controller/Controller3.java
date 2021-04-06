@@ -21,6 +21,7 @@ import com.company.common.FileRenamePolicy;
 import com.company.member.service.MemberService;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
+import com.company.product.service.impl.ProductMapper;
 
 @Controller
 public class Controller3 {
@@ -132,10 +133,11 @@ public class Controller3 {
 
 	//결제API
 	@RequestMapping("/PayInfo")
-	public String PayInfo(HttpServletRequest request) {
+	public String PayInfo(ProductVO vo, Model model, String productNumber,String resultPrice) {
+		model.addAttribute("product", productService.getProduct(vo));
+		vo.setResultPrice(resultPrice);
+		model.addAttribute("resultPrice", vo.getResultPrice());
 		return "pay/PayInfo";
-	}
-	
-	
+	}	
 
 }

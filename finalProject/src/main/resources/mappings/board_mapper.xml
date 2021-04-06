@@ -3,8 +3,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.board.service.impl.BoardMapper">
 
-	<select id="getSearchBoard" resultType="boardVO">
-	SELECT * FROM BOARD
+	<!-- 자유게시판 전체 리스트 조회 -->
+	<select id="getSearchBoard1" resultType="boardVO">
+	SELECT * FROM BOARD WHERE CATEGORY = 1
 	</select>
 	<select id="getBoard" resultType="boardVO"
 						  parameterType="boardVO">

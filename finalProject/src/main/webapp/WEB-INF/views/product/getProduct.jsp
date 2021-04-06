@@ -36,6 +36,9 @@
 			result.empty();
 			result.text("${product.optionPrice }" * plu)
 		});
+		$("b_btn").on("click", function(){
+			 onclick="location.href='PayInfo?productNumber=${product.productNumber}"
+		})
 	});
 </script>
 </head>
@@ -81,7 +84,7 @@
 							<div id="pro_result"></div>
 							<div>
 								<button>장바구니 담기</button>
-								<button type="button" onclick="location.href='PayInfo'">바로구매</button>
+								<button type="button" id="b_btn">바로구매</button>
 							</div>
 						</li>
 					</ul>
