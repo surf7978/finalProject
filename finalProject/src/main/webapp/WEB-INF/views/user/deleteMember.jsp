@@ -9,7 +9,7 @@
 <body>
 <div align="center">
 ${member.memberId} 님 회원탈퇴 되었습니다.
-<a href="http://localhost/temp/">홈으로</a>
+<a href="/finalProject">홈으로</a>
 
 
 </div>

@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.company.animal.service.AnimalService;
+import com.company.animal.service.AnimalVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
 import com.company.member.common.KakaoAPI;
@@ -54,15 +56,20 @@ public class Controller1 {
 	//일반사용자 로그인 처리
 	@PostMapping("/login")
 	public String loginProc(MemberVO vo, HttpSession session) {
-		MemberServiceimpl memberServiceimpl = new MemberServiceimpl();
-		String insertPW = vo.getPassword(); //로그인화면에 입력한 비밀번호
-        String DBinPW = memberService.getViewMember(vo).getPassword(); //DB안에 암호화된 비밀번호
-		if(memberServiceimpl.matches(insertPW, DBinPW)){ //입력한 비밀번호와 DB의 비밀번호 일치체크
-			session.setAttribute("loginID", memberService.getViewMember(vo).getMemberId()); //세션에 로그인한 아이디 담아줌
-			session.setAttribute("loginAuth", memberService.getViewMember(vo).getAuth()); //권한 확인
-			return "/home";
-		} else {
+		String idCheck = memberService.getViewMember(vo).getMemberId();
+		if(idCheck.equals(null)) {
 			return "redirect:/loginForm";
+		}else {
+			MemberServiceimpl memberServiceimpl = new MemberServiceimpl();
+			String insertPW = vo.getPassword(); //로그인화면에 입력한 비밀번호
+			String DBinPW = memberService.getViewMember(vo).getPassword(); //DB안에 암호화된 비밀번호
+			if(memberServiceimpl.matches(insertPW, DBinPW)){ //입력한 비밀번호와 DB의 비밀번호 일치체크
+				session.setAttribute("loginID", memberService.getViewMember(vo).getMemberId()); //세션에 로그인한 아이디 담아줌
+				session.setAttribute("loginAuth", memberService.getViewMember(vo).getAuth()); //권한 확인
+				return "/home";
+			} else {
+				return "redirect:/loginForm";
+			}
 		}
 	}
 	
@@ -231,13 +238,19 @@ public class Controller1 {
 		return reviewService.getReview(vo);
 	}
 	
+	@Autowired AnimalService animalService;
+	
 	//회원탈퇴
 	@PostMapping("/membershipCancel")
-	public String membershipCancel(String ID) {
+	public String membershipCancel(String ID, HttpSession session) {
 		MemberVO vo = new MemberVO();
 		vo.setMemberId(ID);
 		if(memberService.getViewMember(vo).getAuth().equals("m")) {
+			AnimalVO voAnimal = new AnimalVO();
+			voAnimal.setMemberId(ID);
+			animalService.deleteAnimal(voAnimal);
 			memberService.deleteMember(vo);
+			session.invalidate();
 		}else {
 			BusinessVO vo1 = new BusinessVO();
 			vo1.setBusinessId(ID);
