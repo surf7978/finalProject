@@ -23,6 +23,6 @@
 	</form>
 
 
-${getSearchQuestion }
+<a href="/finalProject">홈으로</a>
 </body>
 </html>

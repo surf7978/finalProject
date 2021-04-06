@@ -27,6 +27,11 @@ public class MemberServiceimpl implements MemberService, UserDetailsService, Pas
 	public MemberVO getMember(MemberVO vo) {
 		return memberMapper.getMember(vo);
 	}
+	//관리자가 일반 사용자 단건조회
+	@Override
+	public MemberVO getMemberCr4(MemberVO vo) {
+		return memberMapper.getMemberCr4(vo);
+	}
 	//전체조회
 	@Override
 	public List<MemberVO> getSearchMember(MemberVO vo) {
