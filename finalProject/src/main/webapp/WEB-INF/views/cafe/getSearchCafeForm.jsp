@@ -47,9 +47,10 @@
 	//전체 페이지 조회
 	function searchAllPage(){
 		$("#searchAllPage").on("click", function() {
-			getSearchCafe();
+			searchAndInsert.page.value;
+			searchAndInsert.submit();
 		})
-	}
+	}//end of searchAllPage
 	
 	//상세보기
 	function getCafe() {
@@ -66,15 +67,14 @@
 			url : "getSearchCafe",
 			method : "get",
 			//검색기능 넣을 시 data값에 추가해야 됨
-			data : {page : p},'$("#searchAndInsert").serialize()',
+			data : $("#searchAndInsert").serialize(),
 			dataType : "json",
 			success : function(datas) {
 				var ul = $("<ul>");
 				$("#show").empty();
 				$("#show").append(ul);
 				var response = datas.list;
-				$(response).each(
-						function(i) {
+				$(response).each(function(i) {
 
 							var cafeNumber = response[i].cafeNumber;
 							var image1 = response[i].image1;
@@ -124,7 +124,8 @@
 		<div id="pro_location"></div>
 		<div id="show"></div>
 		<div id="searchDiv">
-			<form id="searchAndInsert">
+			<form id="searchAndInsert" action="">
+				<input type = "hidden" name = "page" value = "1">
 				<select name="search">
 					<option value="all">이름+가격+지역</option>
 					<option value="name">이름</option>
