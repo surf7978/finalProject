@@ -1,8 +1,12 @@
 package com.company.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -301,30 +305,33 @@ public class Controller5 {
 
 	}// end of insertCafe
 
-	// 사업자-카페-전체리스트 페이지 호출
+	// 사업자-카페-전체리스트(form)
 	@GetMapping("/getSearchCafeForm")
 	public String getSearchCafe(CafeSearchVO vo) {
 		return "cafe/getSearchCafeForm";
 	}// end of getSearchCafe
 
-	// 사업자-카페-전체리스트 페이지 기능
+	// 사업자-카페-전체리스트(ajax)
 	@GetMapping("/getSearchCafe")
 	@ResponseBody
-	public List<CafeVO> getSearchCafeProc(CafeSearchVO vo, Paging paging, Model model) {
+	public Map<String, Object> getSearchCafeProc(CafeSearchVO vo, Paging paging) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
 		// 1.페이지 설정
-		paging.setPageUnit(5);
-		paging.setPageSize(3);
+		paging.setPageUnit(5);//
+		paging.setPageSize(3);// 페이지 번호 수
 		// 2.초기페이지 설정
-		if (paging.getPage() != null)
+		if (paging.getPage() == null)
 			paging.setPage(1);
 		// 3. 값 추가
+		paging.setTotalRecord(cafeService.getCount(vo));
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
-		paging.setTotalRecord(cafeService.getCount(vo));
-		model.addAttribute("paging", paging);
-		// Cafe List
+		map.put("paging", paging);
 		List<CafeVO> list = cafeService.getSearchCafe(vo);
-		return list;
+		map.put("list", list);
+		// Cafe List
+		return map;
 	}// end of getSearchCafeProc
 
 	// 사업자-카페-상세리스트 페이지 호출
