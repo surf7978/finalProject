@@ -10,5 +10,6 @@ public class ReservationVO {
 	String reservationState;
 	String memberId;
 	String deliveryNumber;
-	String businessNumber;
+	String bisNumber;
+	String name;
 }

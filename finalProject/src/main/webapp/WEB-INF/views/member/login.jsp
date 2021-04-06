@@ -33,10 +33,10 @@
                         <a href="https://kauth.kakao.com/oauth/authorize
 								?response_type=code
 								&client_id=8b88c20e8232de584d13f04e421f2b48
-								&redirect_uri=http://localhost/temp/callback">
+								&redirect_uri=http://localhost/finalProject/callback">
 						<img src="resources/img/kakao_login_medium_narrow.png"></a>
                         <div class="switch-login">
-                            <a href="./register.html" class="or-login">회원가입</a>
+                            <a href="signUpSelect" class="or-login">회원가입</a>
                         </div>
                     </div>
                 </div>

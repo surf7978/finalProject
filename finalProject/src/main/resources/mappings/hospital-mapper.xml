@@ -4,8 +4,7 @@
 
 <mapper namespace="com.company.hospital.service.impl.HospitalMapper">
 
-
-<!-- 병원상품 리스트조회 -->
+	<!-- 병원상품 리스트조회 -->
 	<select id="getSearchHospital" parameterType="HospitalVO" resultType="HospitalVO">
 		SELECT HOSPITALNUMBER
 			 , CATEGORY1
@@ -19,7 +18,7 @@
 			 , IMAGE
 	 	 FROM HOSPITAL
 	</select>
-<!-- 병원상품 상세화면조회 -->
+	<!-- 병원상품 상세화면조회 -->
 	<select id="getHospital" parameterType="HospitalVO" resultType="HospitalVO">
 		SELECT HOSPITALNUMBER
 			 , CATEGORY1
@@ -34,7 +33,7 @@
 	 	 FROM HOSPITAL
 	 	 WHERE HOSPITALNUMBER=#{hospitalNumber}
 	</select>
-<!-- 병원상품 등록 -->
+	<!-- 병원상품 등록 -->
 	<insert id="insertHospital" parameterType="hospitalVO">
 	INSERT INTO HOSPITAL(
 				HOSPITALNUMBER
@@ -57,7 +56,7 @@
 			  , #{t_image}
 			  , #{image})
 		</insert>
-<!-- 병원상품 수정 -->
+	<!-- 병원상품 수정 -->
 	<update id="updateHospital" parameterType="HospitalVO">
 	UPDATE HOSPITAL SET 
 		   CATEGORY1=#{category1}
@@ -71,13 +70,13 @@
 	WHERE HOSPITALNUMBER=#{hospitalNumber}
 	</update>
 
-<!-- 병원상품 삭제 -->
+	<!-- 병원상품 삭제 -->
 	<delete id="deleteHospital">
 		DELETE FROM HOSPITAL
 		WHERE HOSPITALNUMBER=#{hospitalNumber}
 	</delete>
 
-<!-- 사업자별 병원조회  -->
+	<!-- 사업자별 병원조회  -->
 	<select id="bGetSearchHospital" parameterType="HospitalVO">
 	  SELECT CATEGORY1
 	  	   , CATEGORY2
@@ -85,8 +84,6 @@
 	  	   , OPTIONNAME  
 	  FROM HOSPITAL
 	  WHERE BUSINESSNUMBER=#{businessNumber}
-	
 	</select>
-
 
 </mapper>
