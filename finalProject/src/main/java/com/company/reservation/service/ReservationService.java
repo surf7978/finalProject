@@ -8,4 +8,7 @@ public interface ReservationService {
 	public List<ReservationVO> getSearchReservation(ReservationVO vo);	//전체조회
 	public int updateReservation(ReservationVO vo);	//회원수정
 	public int deleteReservation(ReservationVO vo);	//화원탈퇴
+	
+	public ReservationVO getViewReservation(ReservationVO vo); //뷰 조회
+	public ReservationVO getViewReservation2(ReservationVO vo);
 }

@@ -50,7 +50,12 @@
 		<td><c:out value="${pad.payDate}"/></td>
 		<td><c:out value="${pad.sumPrice}"/></td>
 		<td><c:out value="${pad.buyState}"/></td>
+		<c:if test="${pad.category eq '70' }">
 		<td><button type="button" class="getSearchBuy">상세조회</button></td>
+		</c:if>
+		<c:if test="${pad.category != '70' }">
+		<td><button type="button" class="getSearchReservation">상세조회</button></td>
+		</c:if>
 		<c:if test="${pad.category eq '70' }">
 		<c:if test="${pad.buyState !='반품완료' }">
 		<td>
@@ -80,6 +85,13 @@
 		$(".getSearchBuy").on("click", function(){
 			var pndNum = $(this).closest('tr').find('td').eq(0).text();
 			location.href="getSearchBuy?pndNumber="+pndNum;
+		})
+	});
+	
+	$(function(){
+		$(".getSearchReservation").on("click", function(){
+			var pndNum = $(this).closest('tr').find('td').eq(0).text();
+			location.href="getSearchReservation?deliveryNumber="+pndNum;
 		})
 	});
 	

@@ -24,5 +24,11 @@ public class BuyServiceimpl implements BuyService{
 	public int deleteBuy(BuyVO vo) {
 		return buyMapper.deleteBuy(vo);
 	}
+	
+	//뷰 단건 조회
+	@Override
+	public BuyVO getViewBuy(BuyVO vo) {
+		return buyMapper.getViewBuy(vo);
+	}
 
 }
