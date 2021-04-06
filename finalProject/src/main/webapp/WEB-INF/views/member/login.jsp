@@ -36,7 +36,7 @@
 								&redirect_uri=http://localhost/finalProject/callback">
 						<img src="resources/img/kakao_login_medium_narrow.png"></a>
                         <div class="switch-login">
-                            <a href="./register.html" class="or-login">회원가입</a>
+                            <a href="signUpSelect" class="or-login">회원가입</a>
                         </div>
                     </div>
                 </div>

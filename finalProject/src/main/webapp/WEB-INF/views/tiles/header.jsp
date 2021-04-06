@@ -200,23 +200,29 @@
 							</ul></li>
 						<li><a href="#">마이페이지</a>
 							<ul class="dropdown">
-								<li><a href="getSearchQuestion">문의내역보기</a></li>
-								<li><a href="getSearchAnswer">답변내역보기</a></li>
-								<c:if test="${loginAuth eq 'm'}">
-									<c:if test="${loginID ne 'admin'}">
-										<li><a href="getMember1">회원정보조회</a></li>
-									</c:if>
-									<c:if test="${loginID eq 'admin'}">
-										<li><a href="getMember1">회원정보조회</a></li>
-									</c:if>
+								<c:if test="${empty loginID}">
+									<li><a href="loginForm">로그인</a></li>
 								</c:if>
-								<c:if test="${loginAuth eq 'b'}">
-									<li><a href="getBusiness">회원정보조회</a></li>
+								<c:if test="${not empty loginID}">
+										<li><a href="getSearchQuestion">문의내역보기</a></li>
+										<li><a href="getSearchAnswer">답변내역보기</a></li>
+										<c:if test="${loginAuth eq 'm'}">
+											<c:if test="${loginID ne 'admin'}">
+												<li><a href="getMember1">회원정보조회</a></li>
+											</c:if>
+											<c:if test="${loginID eq 'admin'}">
+												<li><a href="getMember1">회원정보조회</a></li>
+											</c:if>
+										</c:if>
+										<c:if test="${loginAuth eq 'b'}">
+											<li><a href="getBusiness">회원정보조회</a></li>
+										</c:if>
+										<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
+										<li><a href="getSearchAnimal">마이펫수첩</a></li>
+										<li><a href="logout">로그아웃</a></li>
 								</c:if>
-								<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
-								<li><a href="getSearchAnimal">마이펫수첩</a></li>
-								<li><a href="logout">로그아웃</a></li>
-							</ul></li>
+							</ul>
+						</li>
 					</ul>
 				</nav>
 				<div id="mobile-menu-wrap"></div>

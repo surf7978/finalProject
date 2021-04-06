@@ -126,6 +126,7 @@ public class Controller1 {
 		session.setAttribute("access_token", access_token);
 		session.setAttribute("loginID", userInfo.get("nickname"));
 		session.setAttribute("loginAuth", "m");
+		System.out.println(session.getAttribute("loginID")+" "+session.getAttribute("loginAuth"));
 		return "redirect:/";
 	}
 	

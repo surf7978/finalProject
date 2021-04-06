@@ -51,7 +51,8 @@
 							},
 						success:function(data){
 							$("#searchPWResult").html("인증완료<br>");
-							$("#searchPWResult").append("변경할 비밀번호<input id='password' name='password'><br>");
+							$("#searchPWResult").append("변경할 비밀번호<br>");
+							$("#searchPWResult").append("<input id='password' name='password'><br><br>");
 							$("#searchPWResult").append("<button onclick='changePW()'>비밀번호변경</button><br>");
 						}
 					});	
@@ -103,7 +104,7 @@
 			<td><input id="phone2" name="phone2" style="border:none; width:300px;"></td>
 		</tr>
 		<tr>
-			<td colspan="2" style="height:25px;"><div id="searchPWResult" style="color:red;"></div></td>
+			<td colspan="2" style="height:25px; text-align:center;"><div id="searchPWResult" style="color:red;"></div></td>
 		</tr>
 	</table>
 	<br>
