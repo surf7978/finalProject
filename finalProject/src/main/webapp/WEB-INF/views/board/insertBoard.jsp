@@ -6,18 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<style>
-	th{
-		color: white;
-		background-color:orange;
-	}
-	table, tr , th {
-		border : 1px solid black
-	}
-</style>
-<body><p>
-	<h3 align="center">고객센터 문의하기</h3> <p>
-	<form action="insertQuestion2" method="post">
+<body>
+<p>
+	<h3 align="center">자유게시판 글쓰기</h3> <p>
+	<form action="insertBoard" method="post">
 	<table> 
 	<tr>
 	<th>제목</th>
@@ -37,7 +29,7 @@
 	</tr>  
 	</table> 
 	<p></p> 	<p></p>
-		<button type="submit">고객센터문의접수</button>
+		<button type="submit">등록</button>
 	<p>
 		
 		

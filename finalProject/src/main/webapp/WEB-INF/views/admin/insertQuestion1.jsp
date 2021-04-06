@@ -20,7 +20,7 @@
 		<button type="submit">고객센터문의접수</button>
 		
 		
-		<!--이거안됨.  -->
+		
 	</form>
 </body>
 </html>

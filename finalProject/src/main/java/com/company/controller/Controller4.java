@@ -50,6 +50,26 @@ public class Controller4 {
 		
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// ####★★맴버에 관한 컨트롤러★★
 	//맴버전체조회
 	@RequestMapping("/getSearchMember")
@@ -94,10 +114,29 @@ public class Controller4 {
 		return "redirect:getSearchMember";
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// ###★★게시판에 관한 컨트롤러★★
 	
-	//  게시판 전체조회
-	@RequestMapping("/getSearchBoard")	//매퍼를 가져온다.
+	//  게시판 전체조회 관리자
+	@RequestMapping("/getSearchBoard")	
 	public String getSearchBoard(Model model, BoardVO vo) {
 		
 		model.addAttribute("list" , boardService.getSearchBoard(vo));
@@ -105,12 +144,18 @@ public class Controller4 {
 		return "board/getSearchBoard";
 		
 	} 
+	
+	
+	
+	
 	//게시판 단건조회
 	@GetMapping("/getBoard")
 	public String getBoard(Model model, BoardVO vo) {
 		model.addAttribute("board",boardService.getBoard(vo));
 		return "board/getBoard";
 	}
+	
+	
 	
 	//게시판 수정버튼 
 	@GetMapping("/updateBoard")
@@ -120,6 +165,8 @@ public class Controller4 {
 		model.addAttribute("board" , boardService.getBoard(vo));		
 		return "board/updateBoard";
 	}
+	
+	
 	//수정 폼 
 	@PostMapping("/updateBoard")
 	public String updateBoardProc(BoardVO vo) {
@@ -127,6 +174,9 @@ public class Controller4 {
 		boardService.updateBoard(vo);
 		return "redirect:getSearchBoard";
 	}
+	
+	
+	
 	//게시판 삭제
 	@PostMapping("/deleteBoard")
 	public String deleteBoard(BoardVO vo , Model model ) {
@@ -134,6 +184,80 @@ public class Controller4 {
 		model.addAttribute("deleteBoard", boardService.deleteBoard(vo));
 		return "redirect:getSearchBoard";
 	}
+	
+	
+	//1번 자유게시판 조회
+	@RequestMapping("/getSearchBoardCategiry1")	
+	public String getSearchBoardCategiry1(Model model, BoardVO vo) {
+		
+		model.addAttribute("board" , boardService.getSearchBoardCategiry1(vo));
+		System.out.println(vo);
+		return "board/getSearchBoardCategiry1";
+		
+	} 
+	
+	
+	//2번 자랑하기 조회
+	
+	@RequestMapping("/getSearchBoardCategiry2")	
+	public String getSearchBoardCategiry2(Model model, BoardVO vo) {
+		
+		model.addAttribute("board" , boardService.getSearchBoardCategiry2(vo));
+		System.out.println(vo);
+		return "board/getSearchBoardCategiry2";
+		
+	} 
+	
+	
+	// 1번 자유게시판 글쓰기
+	@GetMapping("/insertBoard")	
+	public String insertBoard() {
+	
+		return "board/insertBoard";
+	}
+	
+	// 1번 자유게시판 글쓰기 처리
+	@PostMapping("/insertBoard")	
+	public String insertBoardProc(BoardVO vo) {
+		System.out.println(vo);
+		boardService.insertBoard(vo);
+		return "redirect:/getSearchBoardCategiry1";
+	}
+	
+	
+	
+	
+	// 2번 자랑하기 글쓰기
+	@GetMapping("/insertBoard2")	
+	public String insertBoard2() {
+		
+		return "board/insertBoard2";
+	}
+	
+	//2번 자랑하기 글쓰기 글쓰기 처리
+	@PostMapping("/insertBoard2")	
+	public String insertBoard2Proc(BoardVO vo) {
+		System.out.println(vo);
+		boardService.insertBoard2(vo);
+		return "redirect:/getSearchBoardCategiry2";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// ####★★이벤트&공지사항 에 관한 컨트롤러 ★★
 	
@@ -194,6 +318,26 @@ public class Controller4 {
 		model.addAttribute("deleteEventAndNotice" , eventAndNoticeService.deleteEventAndNotice(vo));
 		return "redirect:/";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// ####★★문의하기-신고하기 에 관한 컨트롤러 ★★ (question & answer 테이블 함께 사용)

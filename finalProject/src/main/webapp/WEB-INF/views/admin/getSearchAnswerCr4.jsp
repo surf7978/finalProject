@@ -19,7 +19,12 @@ $(".delete").on("click" , function(){
  -->
 </head>
  <style> 
- 
+
+ 	th{
+ 		background-color: orange;
+ 		color : white;
+ 	}
+ 	
  	#tabl {
  		margin-top : 30px;
  	}
