@@ -19,4 +19,6 @@ public interface MemberMapper {
 	
 	public String searchID(MemberVO vo);	//아이디 찾기
 	public String searchPW(MemberVO vo);	//비밀번호 찾기
+	
+	public List<MemberVO> getSearchViewMember(MemberVO vo);	//뷰 전체조회
 }

@@ -27,13 +27,25 @@ table , tr, td{
 <c:forEach var="list" items="${list}" >
 <tr>
 
- <td>${list.auth}</td>
+ <td>
+ 	<c:if test="${list.auth eq 'b'}">
+ 		BUSINESS
+ 	</c:if>
+ 	<c:if test="${list.auth eq 'm'}">
+ 		<c:if test="${list.memberId ne 'admin'}">
+ 			USER
+ 		</c:if>
+ 		<c:if test="${list.memberId eq 'admin'}">
+ 			ADMIN
+ 		</c:if>
+ 	</c:if>
+ </td>
  <td>${list.memberId}</td>
  <td> <a href="getMember?memberId=${list.memberId}">선택</a></td>
 
 
  <td>
- <form action="deleteMember?memberId=${list.memberId}" method="post">
+ <form action="membershipCancel?ID=${list.memberId}" method="post">
  <button type="submit">삭제</button>
  </form>
  </td> 
