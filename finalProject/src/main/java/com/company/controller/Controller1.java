@@ -72,7 +72,7 @@ public class Controller1 {
 			}
 		}
 	}
-	 
+	  
 	//로그아웃처리
 	@RequestMapping("/logout")
 	public String logoutProc(HttpSession session) {
