@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.cafe.service.impl.CafeMapper">
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM CAFE
+	</select>
+
 	<!-- 제품 등록 -->
 	<insert id="insertCafe">
 		INSERT INTO CAFE(
@@ -38,23 +43,8 @@
 		<!-- 제품번호 -->
 		WHERE CAFENUMBER = #{cafeNumber}
 	</delete>
-	<!-- 특정 지역 리스트 -->
+	<!-- 상세 리스트 -->
 	<select id="getCafe" resultType="cafeVO">
-		SELECT
-		CAFENUMBER,
-		NAME,
-		OPTIONNAME,
-		PRICE,
-		LOCATION,
-		TIMAGE,
-		IMAGE	
-		FROM CAFE
-		<where>BUSINESSNUMBER = #{businessNumber}
-			AND CAFENUMBER = #{cafeNumber}
-		</where>
-	</select>
-	<!-- 전체 리스트 -->
-	<select id="getSearchCafe" resultType="cafeVO">
 		SELECT
 		CAFENUMBER,
 		NAME,
@@ -64,8 +54,22 @@
 		TIMAGE,
 		IMAGE
 		FROM CAFE
-		<where>
-			BUSINESSNUMBER = #{businessNumber}
+		<where>CAFENUMBER = #{cafeNumber}
 		</where>
+	</select>
+	<!-- 전체 리스트 -->
+	<select id="getSearchCafe" resultType="cafeVO">
+		SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+		SELECT
+		CAFENUMBER,
+		NAME,
+		OPTIONNAME,
+		PRICE,
+		LOCATION,
+		TIMAGE,
+		IMAGE
+		FROM CAFE
+		ORDER BY CAFENUMBER
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 </mapper>

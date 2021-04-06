@@ -12,4 +12,6 @@ public interface CafeService {
 	public CafeVO getCafe(CafeVO vo); // 단건조회
 
 	public List<CafeVO> getSearchCafe(CafeVO vo); // 전체조회
+
+	public int getCount(CafeVO vo);// 레코드 조회
 }

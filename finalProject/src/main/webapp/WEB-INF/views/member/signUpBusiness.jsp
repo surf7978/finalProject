@@ -104,7 +104,7 @@
 				alert("사업자번호 미입력");
 			}
 		});
-	});
+	}); 
 </script>
 <body>
 	<br><br><br><input value="사업자 가입" style="font-size:40px; text-align:center; width:300px; border:none;" readonly><br><br>

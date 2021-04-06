@@ -215,7 +215,7 @@ public class Controller1 {
 		System.out.println(bizName);
 		return bizName;
 	}
-	
+	 
 	@Autowired ReviewService reviewService;
 	//구매평 전체리스트 출력
 	@GetMapping("/getSearchReview99")
