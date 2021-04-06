@@ -80,7 +80,7 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2">
 						<div class="logo">
-							<a href="/temp"> <img src="resources/img/logo.png" alt="">
+							<a href="/finalProject"> <img src="resources/img/logo.png" alt="">
 							</a>
 						</div>
 					</div>
@@ -186,9 +186,8 @@
 							</ul></li>
 						<li><a href="#">커뮤니티</a>
 							<ul class="dropdown">
-								<li><a href="#">공지사항</a></li>
-								<li><a href="#">이벤트</a></li>
-								<li><a href="#">자유게시판</a></li>
+								<li><a href="getSearchEventAndNotice">공지사항&이벤트</a></li>
+								<li><a href="getSearchBoard">자유게시판</a></li>
 								<li><a href="#">자랑하기</a></li>
 							</ul></li>
 						<li><a href="#">고객센터</a>
@@ -200,23 +199,31 @@
 							</ul></li>
 						<li><a href="#">마이페이지</a>
 							<ul class="dropdown">
-								<li><a href="getSearchQuestion">문의내역보기</a></li>
-								<li><a href="getSearchAnswer">답변내역보기</a></li>
-								<c:if test="${loginAuth eq 'm'}">
-									<c:if test="${loginID ne 'admin'}">
-										<li><a href="getMember1">회원정보조회</a></li>
-									</c:if>
-									<c:if test="${loginID eq 'admin'}">
-										<li><a href="getMember1">회원정보조회</a></li>
-									</c:if>
+								<c:if test="${empty loginID}">
+									<li><a href="loginForm">로그인</a></li>
 								</c:if>
-								<c:if test="${loginAuth eq 'b'}">
-									<li><a href="getBusiness">회원정보조회</a></li>
+								<c:if test="${not empty loginID}">
+										<li><a href="getSearchQuestion">문의내역보기</a></li>
+										<li><a href="getSearchAnswer">답변내역보기</a></li>
+										<c:if test="${loginAuth eq 'm'}">
+											<c:if test="${loginID ne 'admin'}">
+												<li><a href="getMember1">회원정보조회</a></li>
+											</c:if>
+											<c:if test="${loginID eq 'admin'}">
+												<li><a href="getSearchViewMember">회원정보조회</a></li>
+												<li><a href="getSearchBoard">게시글관리</a></li>
+											</c:if>
+										</c:if>
+										<c:if test="${loginAuth eq 'b'}">
+											<li><a href="getBusiness">회원정보조회</a></li>
+											<li><a href="#">게시글관리</a></li>
+										</c:if>
+										<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
+										<li><a href="getSearchAnimal">마이펫수첩</a></li>
+										<li><a href="logout">로그아웃</a></li>
 								</c:if>
-								<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
-								<li><a href="getSearchAnimal">마이펫수첩</a></li>
-								<li><a href="logout">로그아웃</a></li>
-							</ul></li>
+							</ul>
+						</li>
 					</ul>
 				</nav>
 				<div id="mobile-menu-wrap"></div>

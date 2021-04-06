@@ -1,6 +1,9 @@
 package com.company.controller;
 
+import java.io.File;
+import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +13,18 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
+
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
+import com.company.common.FileRenamePolicy;
+import com.company.hospital.service.HospitalService;
+import com.company.hospital.service.HospitalVO;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
@@ -25,7 +33,7 @@ import com.company.payAndDelivery.service.PayAndDeliveryVO;
 /**
  * 
  * @author 이나경 21.03.29 회원정보 조회, 수정, 삭제, 구매내역리스트 21.03.30 구매내역 상세리스트 21.03.31
- *         택배API, 반려동물리스트
+ *         택배API, 반려동물리스트 21.04.01 마이펫수첩CRUD 21.04.02 병원CRUD
  *
  */
 @Controller
@@ -39,6 +47,8 @@ public class Controller2 {
 	BuyService buyService;
 	@Autowired
 	AnimalService animalService;
+	@Autowired
+	HospitalService hospitalService;
 	@Autowired
 	BusinessService businessService;
 
@@ -125,7 +135,7 @@ public class Controller2 {
 
 	// 반려동물 등록 페이지
 	@GetMapping("/insertAnimal")
-	public String insertAnimal(AnimalVO vo, Model model) {
+	public String insertAnimal() {
 		return "animal/insertAnimal";
 	}
 
@@ -152,4 +162,80 @@ public class Controller2 {
 		model.addAttribute("animal", vo);
 		return "redirect:/getSearchAnimal?memberId=" + vo.getMemberId();
 	}
+
+	//////// 병원상품//////////
+	// 병원상품 전체리스트 조회
+	@RequestMapping("/getSearchHospital")
+	public String getSearchHospital(HospitalVO vo, BusinessVO voo, Model model, HttpSession session) {
+		System.out.println(vo);
+		voo.setBusinessNumber((String) session.getAttribute("loginID"));
+		model.addAttribute("hospital", hospitalService.getSearchHospital(vo));
+		return "hospital/getSearchHospital";
+	}
+
+	// 병원상품 상세조회
+	@RequestMapping("/getHospital")
+	public String getHospital(HospitalVO vo, Model model, String hospitalNumber) {
+		vo.setHospitalNumber(hospitalNumber);
+		model.addAttribute("hospital", hospitalService.getHospital(vo));
+		return "hospital/getHospital";
+	}
+
+	// 병원상품 등록 페이지
+	@GetMapping("/insertHospital")
+	public String insertHospitalForm(BusinessVO vo, Model model, HttpSession session) {
+		vo.setBusinessId((String) session.getAttribute("loginID"));
+		model.addAttribute("businessCompanyName", businessService.getBusiness(vo).getBusinessCompanyName());
+		return "hospital/insertHospital";
+	}
+
+	// 병원상품 등록 처리
+	@PostMapping("/insertHospital")
+	public String insertHospital(HospitalVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		System.out.println(vo);
+		// 첨부파일처리
+		MultipartFile image = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String path =  request.getSession().getServletContext().getRealPath("resources/img/hospital/");
+		System.out.println("경로: " +path);
+		if (image != null && !image.isEmpty() && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			//파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			//rename.getName()				
+			//파일명을 읽어내는게 getName()
+			//임시폴더에서 업로드 폴더로 파일이동
+			image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+			vo.setImage(rename.getName());
+		}
+		
+		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+			String filename = t_image.getOriginalFilename();
+			//파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			//rename.getName()				
+			//파일명을 읽어내는게 getName()
+			//임시폴더에서 업로드 폴더로 파일이동
+			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+			vo.setT_image(rename.getName());
+		}
+		hospitalService.insertHospital(vo);
+		return "redirect:/getSearchHospital";
+	}
+	//병원상품 사업자별 조회(수정페이지로 가기 위한)
+	
+	
+	// 병원상품 수정 페이지
+	
+		
+	
+	//병원상품 수정 처리
+
+	
+	// 병원상품 삭제
+	
+	
+	
 }

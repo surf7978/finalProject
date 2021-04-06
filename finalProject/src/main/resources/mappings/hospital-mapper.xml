@@ -3,7 +3,86 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.company.hospital.service.impl.HospitalMapper">
+	<!-- 병원상품 리스트조회 -->
+	<select id="getSearchHospital" parameterType="HospitalVO" resultType="HospitalVO">
+		SELECT HOSPITALNUMBER
+			 , CATEGORY1
+			 , CATEGORY2
+			 , NAME
+			 , OPTIONNAME
+			 , TO_CHAR(PRICE, '999,999,999')AS PRICE
+			 , LOCATION
+			 , BUSINESSNUMBER 
+			 , T_IMAGE
+			 , IMAGE
+	 	 FROM HOSPITAL
+	</select>
+	<!-- 병원상품 상세화면조회 -->
+	<select id="getHospital" parameterType="HospitalVO" resultType="HospitalVO">
+		SELECT HOSPITALNUMBER
+			 , CATEGORY1
+			 , CATEGORY2
+			 , NAME
+			 , OPTIONNAME
+			 , TO_CHAR(PRICE, '999,999,999')AS PRICE
+			 , LOCATION
+			 , BUSINESSNUMBER 
+			 , T_IMAGE
+			 , IMAGE
+	 	 FROM HOSPITAL
+	 	 WHERE HOSPITALNUMBER=#{hospitalNumber}
+	</select>
+	<!-- 병원상품 등록 -->
+	<insert id="insertHospital" parameterType="hospitalVO">
+	INSERT INTO HOSPITAL(
+				HOSPITALNUMBER
+			  , CATEGORY1
+			  , CATEGORY2
+			  , NAME
+			  , OPTIONNAME
+			  , PRICE
+			  , LOCATION
+			  , T_IMAGE
+			  , IMAGE
+			  ) VALUES(
+			  20||HOSPI_SEQ.NEXTVAL
+			  , #{category1, jdbcType=VARCHAR}
+			  , #{category2}
+			  , #{name}
+			  , #{optionName}
+			  , #{price}
+			  , #{location}
+			  , #{t_image}
+			  , #{image})
+		</insert>
+	<!-- 병원상품 수정 -->
+	<update id="updateHospital" parameterType="HospitalVO">
+	UPDATE HOSPITAL SET 
+		   CATEGORY1=#{category1}
+		,  CATEGORY2=#{category2}
+		,  NAME=#{name}
+		, OPTIONNAME=#{optionName}
+		, PRICE=#{price}
+		, LOCATION=#{location}
+		, T_IMAGE=#{t_image}
+	 	, IMAGE=#{image}
+	WHERE HOSPITALNUMBER=#{hospitalNumber}
+	</update>
 
+	<!-- 병원상품 삭제 -->
+	<delete id="deleteHospital">
+		DELETE FROM HOSPITAL
+		WHERE HOSPITALNUMBER=#{hospitalNumber}
+	</delete>
 
+	<!-- 사업자별 병원조회  -->
+	<select id="bGetSearchHospital" parameterType="HospitalVO">
+	  SELECT CATEGORY1
+	  	   , CATEGORY2
+	  	   , NAME
+	  	   , OPTIONNAME  
+	  FROM HOSPITAL
+	  WHERE BUSINESSNUMBER=#{businessNumber}
+	</select>
 
 </mapper>
