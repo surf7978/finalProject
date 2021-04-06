@@ -304,7 +304,7 @@ public class Controller5 {
 	// 사업자-카페-전체리스트 페이지 호출
 	@GetMapping("/getSearchCafeForm")
 	public String getSearchCafe(CafeSearchVO vo) {
-		return "cafe/getSearchCafe";
+		return "cafe/getSearchCafeForm";
 	}// end of getSearchCafe
 
 	// 사업자-카페-전체리스트 페이지 기능
