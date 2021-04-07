@@ -56,9 +56,7 @@ public class Controller1 {
 	//일반사용자 로그인 처리
 	@PostMapping("/login")
 	public String loginProc(MemberVO vo, HttpSession session) {
-		if(memberService.getViewMember(vo).getMemberId() == null) {
-			return "redirect:/loginForm";
-		}else {
+		if(memberService.getViewMember(vo) != null) {
 			MemberServiceimpl memberServiceimpl = new MemberServiceimpl();
 			String insertPW = vo.getPassword(); //로그인화면에 입력한 비밀번호
 			String DBinPW = memberService.getViewMember(vo).getPassword(); //DB안에 암호화된 비밀번호
@@ -69,6 +67,8 @@ public class Controller1 {
 			} else {
 				return "redirect:/loginForm";
 			}
+		}else {
+			return "redirect:/loginForm";
 		}
 	}
 	
