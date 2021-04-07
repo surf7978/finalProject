@@ -30,10 +30,12 @@ import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
+import com.company.hotel.service.HotelSearchVO;
 import com.company.hotel.service.HotelService;
 import com.company.hotel.service.HotelVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
+import com.company.taxi.service.TaxiService;
 
 /*
  * @author 박세민
@@ -56,12 +58,16 @@ public class Controller5 {
 	AnswerService answerService;
 
 	@Autowired
+	BCartService bCartService;
+	// 사업자
+	@Autowired
+	CafeService cafeService;
+
+	@Autowired
 	HotelService hotelService;
 
 	@Autowired
-	BCartService bCartService;
-	@Autowired
-	CafeService cafeService;
+	TaxiService taxiService;
 
 	// end of beans
 
@@ -273,7 +279,7 @@ public class Controller5 {
 		MultipartFile image1 = vo.getT_uploadFile();
 		MultipartFile image2 = vo.getUploadFile();
 		// 2.저장될path설정
-		String path = request.getSession().getServletContext().getRealPath("/resources/images/cafe");
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/business");
 		// 3.중복채크
 		if (image1 != null && !image1.isEmpty() && image1.getSize() > 0) {
 			String filename = image1.getOriginalFilename();
@@ -340,40 +346,43 @@ public class Controller5 {
 		model.addAttribute("vo", vo);
 		return "cafe/getCafe";
 	}
+	//
 
-	// start of hotel
-	// 사업자-전체리스트(호텔)
-	@RequestMapping("/getSearchHotel")
-	public String getSearchHotel(HotelVO vo, Model model) {
-		List<HotelVO> list = hotelService.getSearchHotel(vo);
-		model.addAttribute("list", list);
-		return "hotel/getSearchHotel";
-	}// end of getSearchHotel
+	@RequestMapping("/getSearchListForm")
+	public String getSearchBusinessForm() {
+		return "business/getSearchListForm";
+	}
 
-	// 사업자-상세리스트
-	@RequestMapping("/getHotel")
-	public String getHotel(HotelVO vo, Model model) {
-		// 결과 vo
-		vo = hotelService.getHotel(vo);
-		// 페이지에 전달
-		model.addAttribute("vo", vo);
-		return "hotel/getHotel";
-	}// end of getHotel
+	// 공통 메뉴얼 test
+	@RequestMapping("/menual")
+	public String menual() {
+		return "../tags/menual";
+	}
 
-	// 사업자-호텔제품등록 페이지
-	@GetMapping("/insertHotel")
-	public String insertHotel(HotelVO vo) {
-		return "hotel/insertHotel";
-	}// end of insertHotel
+	//
 
-	// 사업자-호텔제품등록 기능
-	@PostMapping("/insertHotel")
-	public String insertHotelProc(HotelVO vo) {
-		hotelService.insertHotel(vo);
-		return "redirect:/";
-		// 기능 처리 후 등록여부 alert로 알려주기
-	}// end of insertHotelProc
-		// end of hotel
+	// 사업자-카페-전체리스트(ajax)
+	@GetMapping("/getSearchList1")
+	@ResponseBody
+	public Map<String, Object> getSearchList1(CafeSearchVO vo, Paging paging) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 1.페이지 설정
+		paging.setPageUnit(5);//
+		paging.setPageSize(3);// 페이지 번호 수
+		// 2.초기페이지 설정
+		if (paging.getPage() == null)
+			paging.setPage(1);
+		// 3. 값 추가
+		paging.setTotalRecord(cafeService.getCountList1(vo));
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		List<CafeVO> list = cafeService.getSearchList1(vo);
+		// map에 넘겨주는 이유:model보다 사용이 편리해서
+		map.put("paging", paging);
+		map.put("list", list);
+		// Cafe List
+		return map;
+	}// end of getSearchCafeProc
 
 	// start of bCart
 	// 장바구니-페이지 호출

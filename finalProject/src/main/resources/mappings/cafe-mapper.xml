@@ -6,7 +6,13 @@
 		SELECT COUNT(*)
 		FROM CAFE
 	</select>
-
+	<select id="getCountList1" resultType="int">
+	SELECT a.a + b.a + c.a
+	FROM
+	(SELECT COUNT(*) a from HOTEL )a
+	,(SELECT COUNT(*) a from CAFE)b
+	,(SELECT COUNT(*) a from TAXI)c
+	</select>
 	<!-- 제품 등록 -->
 	<insert id="insertCafe">
 		INSERT INTO CAFE(
@@ -62,6 +68,23 @@
 		SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
 		<!-- start of query -->
 		SELECT
+			CAFENUMBER,
+			NAME,
+			OPTIONNAME,
+			PRICE,
+			LOCATION,
+			IMAGE1,
+			IMAGE2
+		FROM CAFE
+			<include refid="search"></include>
+		ORDER BY CAFENUMBER
+		<!-- end of query -->
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	<select id="getSearchList1" resultType="cafeVO">
+	SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+		<!-- start of query -->
+	SELECT
 		CAFENUMBER,
 		NAME,
 		OPTIONNAME,
@@ -69,11 +92,31 @@
 		LOCATION,
 		IMAGE1,
 		IMAGE2
-		FROM CAFE
-			<include refid="search"></include>
-		ORDER BY CAFENUMBER
-		<!-- end of query -->
-		) A) B WHERE RN BETWEEN #{start} AND #{end}
+	FROM CAFE
+	UNION
+	SELECT 
+		HOTELNUMBER,
+		NAME,
+		OPTIONNAME,
+		PRICE,
+		LOCATION,
+		IMAGE1,
+		IMAGE2
+	FROM HOTEL
+	UNION
+	SELECT
+		TAXINUMBER,
+		NAME,
+		OPTIONNAME,
+		PRICE,
+		LOCATION,
+		IMAGE1,
+		IMAGE2
+	FROM TAXI
+	<include refid="search"></include>
+	ORDER BY LOCATION
+	<!-- end of query -->
+	) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	<!-- 검색기능 -->
 	<sql id="search">
