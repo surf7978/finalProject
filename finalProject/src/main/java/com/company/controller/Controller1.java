@@ -72,7 +72,7 @@ public class Controller1 {
 			}
 		}
 	}
-	  
+	
 	//로그아웃처리
 	@RequestMapping("/logout")
 	public String logoutProc(HttpSession session) {
@@ -231,6 +231,12 @@ public class Controller1 {
 		model.addAttribute("review", reviewService.getSearchReview(vo));
 		return "member/getSearchReview99";
 	}
+	
+	//구매평 전체리스트 다른 컨트롤러에 쓰는 메소드용
+	public Model getSearchReviewD(ReviewVO vo, Model model) {
+		return model.addAttribute("review", reviewService.getSearchReview(vo));
+	}
+	
 	//구매평 단건리스트 출력(ajax로 같은 페이지 출력)
 	@RequestMapping("/getReview99")
 	@ResponseBody

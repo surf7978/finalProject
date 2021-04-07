@@ -24,7 +24,7 @@
 		<div id="show">
 		<ul>
 		<c:forEach items="${hospital }" var="hospi"> 
-			<li onclick="location.href='getHospital?hospitalNumber=${hospi.hospitalNumber}'">
+			<li onclick="location.href='getHospital99?hospitalNumber=${hospi.hospitalNumber}'">
 				<div class="hospital_img"><img src="resources/img/hospital/${hospi.t_image }" > </div>
 				<nav>
 					<strong>${hospi.name }</strong>
