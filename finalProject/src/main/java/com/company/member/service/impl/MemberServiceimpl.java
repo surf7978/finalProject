@@ -27,6 +27,11 @@ public class MemberServiceimpl implements MemberService, UserDetailsService, Pas
 	public MemberVO getMember(MemberVO vo) {
 		return memberMapper.getMember(vo);
 	}
+	//관리자가 일반 사용자 단건조회
+	@Override
+	public MemberVO getMemberCr4(MemberVO vo) {
+		return memberMapper.getMemberCr4(vo);
+	}
 	//전체조회
 	@Override
 	public List<MemberVO> getSearchMember(MemberVO vo) {
@@ -80,7 +85,12 @@ public class MemberServiceimpl implements MemberService, UserDetailsService, Pas
 		String result = memberMapper.searchPW(vo);
 		return result;
 	}
-	
+	//뷰 전체조회
+	@Override
+	public List<MemberVO> getSearchViewMember(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return  memberMapper.getSearchViewMember(vo);
+	}
 	// spring Security의 암호화된 패스워드와 일치하는지 확인하는 기능
 	PasswordEncoder passwordEncoder;
 	public MemberServiceimpl() {

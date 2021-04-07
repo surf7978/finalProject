@@ -15,6 +15,7 @@
 		, phone
 		, businessNumber
 		, businessCode
+		, businessCompanyName
 		) VALUES(
 		#{businessId}
 		, #{password}
@@ -26,6 +27,7 @@
 		, #{phone}
 		, #{businessNumber}
 		, #{businessCode}
+		, #{businessCompanyName}
 		)
 	</insert>
 	<select id="getBusiness" parameterType="businessVO"
@@ -42,6 +44,7 @@
 		, startDate
 		, endDate
 		, businessNumber
+		, businessCompanyName
 		FROM business
 		WHERE businessId = #{businessId}
 	</select>

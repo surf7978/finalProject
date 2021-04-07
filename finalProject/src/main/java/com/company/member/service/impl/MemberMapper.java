@@ -8,6 +8,7 @@ public interface MemberMapper {
 
 	public int insertMember(MemberVO vo); //일반사용자 등록
 	public MemberVO getMember(MemberVO vo); //일반사용자 단건조회
+	public MemberVO getMemberCr4(MemberVO vo); //관리자가 일반사용자 단건조회
 	public List<MemberVO> getSearchMember(MemberVO vo); //일반사용자 전체조회
 	public int updateMember(MemberVO vo); //일반사용자 수정
 	public int deleteMember(MemberVO vo); //일반사용자 탈퇴
@@ -18,4 +19,6 @@ public interface MemberMapper {
 	
 	public String searchID(MemberVO vo);	//아이디 찾기
 	public String searchPW(MemberVO vo);	//비밀번호 찾기
+	
+	public List<MemberVO> getSearchViewMember(MemberVO vo);	//뷰 전체조회
 }

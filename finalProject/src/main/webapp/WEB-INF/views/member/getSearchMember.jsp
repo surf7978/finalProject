@@ -27,13 +27,25 @@ table , tr, td{
 <c:forEach var="list" items="${list}" >
 <tr>
 
- <td>${list.auth}</td>
+ <td>
+ 	<c:if test="${list.auth eq 'b'}">
+ 		BUSINESS
+ 	</c:if>
+ 	<c:if test="${list.auth eq 'm'}">
+ 		<c:if test="${list.memberId ne 'admin'}">
+ 			USER
+ 		</c:if>
+ 		<c:if test="${list.memberId eq 'admin'}">
+ 			ADMIN
+ 		</c:if>
+ 	</c:if>
+ </td>
  <td>${list.memberId}</td>
  <td> <a href="getMember?memberId=${list.memberId}">선택</a></td>
 
 
  <td>
- <form action="deleteMember?memberId=${list.memberId}" method="post">
+ <form action="membershipCancel?ID=${list.memberId}" method="post">
  <button type="submit">삭제</button>
  </form>
  </td> 
@@ -41,7 +53,7 @@ table , tr, td{
 </c:forEach>
 </table>
  <h4>페이지 넘기는기능 , 검색기능 추가하십시오.</h4>
-<h1><a href="/temp">홈으로 돌아가기</a></h1> <!-- /로 가면 메인화면으로 가진다.  -->
+<a href="/finalProject">홈으로 돌아가기</a> <!-- /로 가면 메인화면으로 가진다.  -->
 </div>
 
  <!--페이지 넘기는 기능 , 검색기능 추가해야 합니다. 태현이형 로그인의  for each if 관리자를 받아서

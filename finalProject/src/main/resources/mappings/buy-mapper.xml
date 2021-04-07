@@ -11,8 +11,17 @@
 		WHERE PNDNUMBER=#{pndNumber}
 	</select>
 
-	<!-- 환불하기 -->
-	<update id="updateBoard" parameterType="BuyVO">
-		
-	</update>
+	<!-- reviewProduct VIEW 한건 조회하기 -->
+	<select id="getViewBuy" parameterType="BuyVO" resultType="BuyVO">
+		SELECT MEMBERID
+			 , NAME
+			 ,BUYNUMBER
+			 ,CATEGORY
+			 ,OPTIONNAME
+			 ,COUNT
+			 ,PRICE
+			 ,PRODUCTNUMBER
+       FROM REVIEWPRODUCT
+	   WHERE BUYNUMBER=#{buyNumber}
+	</select>
 </mapper>

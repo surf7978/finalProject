@@ -293,26 +293,17 @@
 		<a href="getBusiness">내 정보보기</a><br>
 		<a href="getSearchQuestion">문의내역보기</a><br>
 		<a href="getSearchAnswer">답변내역보기</a><br>
-		<a href="getSearchCafe">카페,호텔,택시</a>
+		<a href="getSearchCafeForm">카페,호텔,택시</a>
 		<a href="insertCafe">카페상품등록</a>
 		<a href="getSearchBeauty">미용,교육</a>
 		<a href="logout">로그아웃</a>
 	</c:if>
 	<a href="getMember">회원정보조회</a>
 	<a href="getSearchPayAndDelivery">구매내역조회</a>
-	<a href="getSearchAnimal">마이펫수첩</a>
+	<a href="getSearchAnimal">마이펫수첩</a> <p></p>
 	
-<hr>
-<h3>김찬영파트</h3>
-<h3>관리자용</h3>	
+	<a href="getSearchCr4">컨트롤러4(김찬영)의 페이지</a>
 
-<h3> <a href="getSearchMember">마이페이지-관리자-회원관리</a> </h3>
-<h3> <a href="getSearchBoard">마이페이지-관리자-게시글관리</a> </h3>
-<h3> <a href="getSearchEventAndNotice">이벤트 와 공지사항</a> </h3>
-<h3> <a href="getSearchQuestionCr4">문의하기 전체조회-1.상품문의 2.고객센터문의 3.신고하기 </a>  </h3>
-<hr>
-<h3>유저용</h3>
-<h3> <a href="insertQuestion3">고객센터 문의 3.신고하기 접수</a>  </h3>
 
 </body>
 </html>

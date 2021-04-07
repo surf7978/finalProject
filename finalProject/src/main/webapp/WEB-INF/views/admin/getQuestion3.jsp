@@ -12,7 +12,7 @@
 </style>
 </head>
 <body>
-	<h3>신고하기 단건조회</h3>
+	<h3>신고문의(관리자) 단건조회</h3>
 	<table>
 	<tr>
 	<td>제목</td>
@@ -35,6 +35,6 @@
 	<td>${getQuestion3.memberId}</td> 
 	</tr>		
 	</table>
-	<button onclick="location.href='insertAnswer'"> 유저에게 답장하기 </button>
+	<button onclick="location.href='getQuestion3Ans?questionNumber=${getQuestion3.questionNumber}'"> 유저에게 답장하기 </button>
 </body>
 </html>

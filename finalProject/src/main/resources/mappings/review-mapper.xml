@@ -4,19 +4,36 @@
 
 <mapper namespace="com.company.review.service.impl.ReviewMapper">
 
-
-
-	<!-- 병원전체조회 -->
+<!-- 구매평 등록 -->
+<insert id="insertReview" parameterType="reviewVO">
+	insert into review(
+				REVIEWNUMBER
+			    , CATEGORY
+			    , TITLE
+			    , CONTENT
+				, WRITER
+				, CALENDAR
+				, PROBISNUMBER
+				, MEMBERID
+				) VALUES(
+				review_seq.NEXTVAL
+				, 1
+				, #{title}
+				, #{content}
+				, #{writer}
+				, sysdate
+				, #{probisNumber}
+				, #{memberId}	)
+</insert>
 	<select id="getSearchReview" parameterType="reviewVO" resultType="reviewVO">
 		SELECT 
 			*
 		FROM Review
 	</select>
-	<!-- 병원단건조회 -->
 	<select id="getReview" parameterType="reviewVO" resultType="reviewVO">
 		SELECT 
 			*
-		FROM REVIEW
-		WHERE reviewNumber = #{reviewNumber}
+		FROM Review
+		WHERE REVIEWNUMBER = #{reviewNumber}
 	</select>
 </mapper>

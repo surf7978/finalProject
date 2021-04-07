@@ -1,5 +1,7 @@
 package com.company.cafe.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -10,7 +12,10 @@ public class CafeVO {
 	String price;
 	String location;
 	String businessNumber;
-	String tImage;
-	String image;
+	String image1;
+	String image2;
+	// upload
+	MultipartFile uploadFile;
+	MultipartFile t_uploadFile;
 
 }

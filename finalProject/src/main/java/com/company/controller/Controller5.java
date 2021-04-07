@@ -1,8 +1,14 @@
 package com.company.controller;
 
-import java.io.PrintWriter;
-import java.util.List;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
@@ -20,8 +27,11 @@ import com.company.bCart.service.BCartService;
 import com.company.bCart.service.BCartVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
+import com.company.cafe.service.CafeSearchVO;
 import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
+import com.company.common.FileRenamePolicy;
+import com.company.common.Paging;
 import com.company.hotel.service.HotelService;
 import com.company.hotel.service.HotelVO;
 import com.company.question.service.QuestionService;
@@ -250,8 +260,8 @@ public class Controller5 {
 
 	// 사업체-카페-상품등록 기능
 	@PostMapping("/insertCafe")
-	public void insertCafe(CafeVO vo, BusinessVO bvo, HttpSession session, HttpServletResponse response)
-			throws Exception {
+	public void insertCafeProc(CafeVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
+			HttpServletResponse response) throws Exception {
 		// 사업자 번호를 어디서 가져올 것인지
 		// 1.session
 		// 2. id로 businessTable 조회
@@ -260,59 +270,77 @@ public class Controller5 {
 		bvo = businessService.getBusiness(bvo);
 		// 3. business의 사업자 번호 가져와 넣기
 		vo.setBusinessNumber(bvo.getBusinessNumber());
-		//
+		// 첨부파일처리
+		// 1.vo값 가져오기
+		MultipartFile image1 = vo.getT_uploadFile();
+		MultipartFile image2 = vo.getUploadFile();
+		// 2.저장될path설정
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/cafe");
+		// 3.중복채크
+		if (image1 != null && !image1.isEmpty() && image1.getSize() > 0) {
+			String filename = image1.getOriginalFilename();
+			// 파일명
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			image1.transferTo(rename);
+			vo.setImage1(rename.getName());
+		} // end of if
+
+		if (image2 != null && !image2.isEmpty() && image2.getSize() > 0) {
+			String filename = image2.getOriginalFilename();
+			// 파일명
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			image2.transferTo(rename);
+			vo.setImage2(rename.getName());
+		} // end of if
+			// 등록처리
 		int r = cafeService.insertCafe(vo);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		if (r == 1) {
-			writer.print("<script>alert('등록되었습니다')location.href='getSearchCafe'</script>");
+			writer.print("<script>alert('등록되었습니다');location.href='getSearchCafe'</script>");
 		} else {
-			writer.print("<script>alert('오류..다시등록해주세요')location.href='insertCafe'</script>");
+			writer.print("<script>alert('오류..다시등록해주세요');location.href='insertCafe'</script>");
 		}
 		writer.close();
 
 	}// end of insertCafe
 
-	// 사업자-카페-전체리스트 페이지 호출
-	@GetMapping("/getSearchCafe")
-	public String getSearchCafe() {
-		return "cafe/getSearchCafe";
+	// 사업자-카페-전체리스트(form)
+	@GetMapping("/getSearchCafeForm")
+	public String getSearchCafe(CafeSearchVO vo) {
+		return "cafe/getSearchCafeForm";
 	}// end of getSearchCafe
 
-	// 사업자-카페-전체리스트 페이지 기능
-	@PostMapping("/getSearchCafe")
-	@ResponseBody // 값을 json타입으로 변환
-	public List<CafeVO> getSearchCafeProc(CafeVO vo, BusinessVO bvo, Model model, HttpSession session) {
-		// sessionID로 조회
-		String id = session.getAttribute("loginID").toString();
-		bvo.setBusinessId(id);
-		bvo = businessService.getBusiness(bvo);
-		// 사업자 번호 가져오기
-		vo.setBusinessNumber(bvo.getBusinessNumber());
-		// Cafe List
+	// 사업자-카페-전체리스트(ajax)
+	@GetMapping("/getSearchCafe")
+	@ResponseBody
+	public Map<String, Object> getSearchCafeProc(CafeSearchVO vo, Paging paging) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 1.페이지 설정
+		paging.setPageUnit(5);//
+		paging.setPageSize(3);// 페이지 번호 수
+		// 2.초기페이지 설정
+		if (paging.getPage() == null)
+			paging.setPage(1);
+		// 3. 값 추가
+		paging.setTotalRecord(cafeService.getCount(vo));
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
 		List<CafeVO> list = cafeService.getSearchCafe(vo);
-		return list;
+		// map에 넘겨주는 이유:model보다 사용이 편리해서
+		map.put("paging", paging);
+		map.put("list", list);
+		// Cafe List
+		return map;
 	}// end of getSearchCafeProc
 
 	// 사업자-카페-상세리스트 페이지 호출
 	@GetMapping("/getCafe")
-	public String getCafe() {
-		return "cafe/getCafe";
-	}
-
-	// 사업자-카페-상세리스트 페이지 기능(ajax)
-	@PostMapping("/getCafe")
-	@ResponseBody
-	public CafeVO getCafeProc(CafeVO vo, BusinessVO bvo, HttpSession session) {
-		// 세션 아이디 가져옴
-		String id = session.getAttribute("loginID").toString();
-		bvo.setBusinessId(id);
-		// 사업자 번호 조회
-		bvo = businessService.getBusiness(bvo);
-		vo.setBusinessNumber(bvo.getBusinessNumber());
+	public String getCafeProc(CafeVO vo, Model model) {
 		// 카페 상세 정보조회
 		vo = cafeService.getCafe(vo);
-		return vo;
+		model.addAttribute("vo", vo);
+		return "cafe/getCafe";
 	}
 
 	// start of hotel
