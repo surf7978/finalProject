@@ -16,12 +16,10 @@
 		insertCafe();
 		//페이지 내 검색
 		searchInPage();
-		//전체 페이지 검색
-		searchAllPage();
 		//상세보기
 		getCafe();
 		//전체 리스트
-		getSearchCafe();
+		getSearchCafe(1);
 	});//end of function
 
 	//등록 폼
@@ -44,14 +42,6 @@
 				});//end of searchData
 	}//end of searchInPage
 	
-	//전체 페이지 조회
-	function searchAllPage(){
-		$("#searchAllPage").on("click", function() {
-			searchAndInsert.page.value;
-			searchAndInsert.submit();
-		})
-	}//end of searchAllPage
-	
 	//상세보기
 	function getCafe() {
 		//li 태그 클릭 로직 짜기
@@ -62,20 +52,22 @@
 
 	//전체 리스트
 	function getSearchCafe(p) {
-		//cafe 리스트
+		//page버튼 누를시 p값으로 들어옴
+		searchAndInsert.page.value=p;
+		//cafe 리스트 호출 ajax
 		$.ajax({
 			url : "getSearchCafe",
 			method : "get",
-			//검색기능 넣을 시 data값에 추가해야 됨
+			//form태그 안의 값을 queryString으로 변환시켜줌
 			data : $("#searchAndInsert").serialize(),
 			dataType : "json",
 			success : function(datas) {
 				var ul = $("<ul>");
 				$("#show").empty();
 				$("#show").append(ul);
+				//datas = Object 즉, datas란 Object 안의 list값을 가져온다는 의미
 				var response = datas.list;
 				$(response).each(function(i) {
-
 							var cafeNumber = response[i].cafeNumber;
 							var image1 = response[i].image1;
 							var li = $("<li>");
@@ -124,16 +116,17 @@
 		<div id="pro_location"></div>
 		<div id="show"></div>
 		<div id="searchDiv">
-			<form id="searchAndInsert" action="">
+			<form id="searchAndInsert">
 				<input type = "hidden" name = "page" value = "1">
 				<select name="search">
+					<option value=""></option>
 					<option value="all">이름+가격+지역</option>
 					<option value="name">이름</option>
 					<option value="price">가격</option>
 					<option value="location">지역</option>
 				</select>
 				<input type="text" name ="searchValue">
-				<button type="button" id="searchAllPage">검색</button>
+				<button type="button" id = "searchAllPage" onclick="getSearchCafe(1)">검색</button>
 			</form>
 		</div>
 		<button type="button" id="insertCafe">상품등록</button>

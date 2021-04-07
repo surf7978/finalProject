@@ -1,10 +1,9 @@
-package com.company.cafe.service;
+package com.company.hotel.service;
 
 import lombok.Data;
 
 @Data
-public class CafeSearchVO extends CafeVO {
-	String searchLocation;
+public class HotelSearchVO extends HotelVO {
 	String search;
 	String searchValue;
 	// paging
