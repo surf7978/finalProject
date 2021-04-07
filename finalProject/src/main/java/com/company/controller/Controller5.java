@@ -346,22 +346,14 @@ public class Controller5 {
 		model.addAttribute("vo", vo);
 		return "cafe/getCafe";
 	}
-	//
-
+	//사업자-카페/호텔/택시 페이지 호출
 	@RequestMapping("/getSearchListForm")
 	public String getSearchBusinessForm() {
 		return "business/getSearchListForm";
 	}
-
-	// 공통 메뉴얼 test
-	@RequestMapping("/menual")
-	public String menual() {
-		return "../tags/menual";
-	}
-
 	//
 
-	// 사업자-카페-전체리스트(ajax)
+	// 사업자-통합리스트1
 	@GetMapping("/getSearchList1")
 	@ResponseBody
 	public Map<String, Object> getSearchList1(CafeSearchVO vo, Paging paging) {
@@ -383,7 +375,10 @@ public class Controller5 {
 		// Cafe List
 		return map;
 	}// end of getSearchCafeProc
-
+	
+	//사업자-통합리스트2
+	
+	
 	// start of bCart
 	// 장바구니-페이지 호출
 	@GetMapping("/getSearchBCart")

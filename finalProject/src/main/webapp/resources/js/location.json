@@ -1,0 +1,10 @@
+[
+{"location":"서울전체"},{"location":"강남구"}, {"location":"강동구"}, {"location":"강북구"},
+{"location":"강서구"}, {"location":"관악구"}, {"location":"광진구"}, {"location":"노원구"},
+{"location":"도봉구"}, {"location":"동작구"},{"location":"마포구"}, {"location":"서대문구"},
+{"location":"서초구"}, {"location":"성동구"}, {"location":"성북구"},{"location":"송파구"}, 
+{"location":"양천구"}, {"location":"영등포구"}, {"location":"용산구"}, {"location":"은평구"}, 
+{"location":"중랑구"}, {"location":"경기전체"}, {"location":"경기북부"}, {"location":"경기남부"},
+{"location":"인천전체"}, {"location":"경상도전체"}, {"location":"대구/북부"}, {"location":"부산/남부"},
+ {"location":"강원도전체"}, {"location":"충청도전체"},{"location":"전라도전체"}
+]

@@ -23,20 +23,50 @@ a {
 <script>
 	//호출시 첫 화면
 	$(function() {
-		//등록
-		insertCafe();
+		//채크박스
+		checkbox();
+		//채크박스2
+		checkbox2();
 		//상세보기
 		getCafe();
 		//전체 리스트
 		getSearchList1(1);
 	});//end of function
-
-	//등록 폼
-	function insertCafe() {
-		$("#insertCafe").on("click", function() {
-			location.href = "insertCafe";
-		});
-	}//end of insertCafe
+	
+	//채크박스
+	function checkbox(){
+		var length = $("input[type=checkbox]").is(":checked");
+		$("input[type=checkbox]").on("click",function(){
+			for(var i = 0; i< length; i++) {
+			var val = $("input[type=checkbox]")[i].value;
+			console.log(val);
+			}
+			//getSearchList1();
+		})//end of input
+	}//end of checkbox
+	
+	
+	function checkbox2(){
+		$.ajax({
+			url:"resources/js/location.json",
+			dataType:"json",
+			success:function(response){
+				$(response).each(function(i,idx){
+					//idx의 의미:각각의 Object
+					var location = idx.location;
+					var input = $("<input>").attr({
+						type : "checkbox",
+						value : location,
+						id : location,
+						class: "location"
+					});
+				var label = $("<label>").attr("for", location).text(location);
+				$("#checkbox").append(input, label);	
+				})//end of each
+			}//end of success
+		});//enf of ajax
+	}//enf of checkbox2
+	
 	//상세보기
 	function getCafe() {
 		//li 태그 클릭 로직 짜기
@@ -48,7 +78,7 @@ a {
 	//전체 리스트
 	function getSearchList1(p) {
 		//page버튼 누를시 p값으로 들어옴
-		searchAndInsert.page.value=p;
+		searchAndInsert.page.value = p;
 		//cafe 리스트 호출 ajax
 		$.ajax({
 			url : "getSearchList1",
@@ -105,6 +135,7 @@ a {
 </script>
 </head>
 <body>
+	<div id="checkbox"></div>
 	<div id="contents">
 		<h2>전체 리스트</h2>
 		<div id="menu" align="left">
@@ -117,43 +148,42 @@ a {
 			<br>
 			<ul>
 				<li><strong>지역구분</strong>
-					<div class="con" id="contents">
-						<span>
-						<label><input type="checkbox" name="location">서울전체</label>
-						<span><label><input type="checkbox" value="강남구">강남구</label></span>
-						<span><label><input type="checkbox" value="강동구">강동구</label></span>
-						<span><label><input type="checkbox" value="강북구">강북구</label></span>
-						<span><label><input type="checkbox" value="강서구">강서구</label></span>
-						<span><label><input type="checkbox" value="관악구">관악구</label></span>
-						<span><label><input type="checkbox" value="광진구">광진구</label></span>
-						<span><label><input type="checkbox" value="노원구">노원구</label></span>
-						<span><label><input type="checkbox" value="도봉구">도봉구</label></span>
-						<span><label><input type="checkbox" value="동작구">동작구</label></span>
-						<span><label><input type="checkbox" value="마포구">마포구</label></span>
-						<span><label><input type="checkbox" value="서대문구">서대문구</label></span>
-						<span><label><input type="checkbox" value="서초구">서초구</label></span>
-						<span><label><input type="checkbox" value="성동구">성동구</label></span>
-						<span><label><input type="checkbox" value="성북구">성북구</label></span>
+					<div class="con">
+						<label><input type="checkbox" value="서울전체">서울전체</label>
+						<label><input type="checkbox" value="강남구">강남구</label>
+						<label><input type="checkbox" value="강동구">강동구</label>
+						<label><input type="checkbox" value="강북구">강북구</label>
+						<label><input type="checkbox" value="강서구">강서구</label>
+						<label><input type="checkbox" value="관악구">관악구</label>
+						<label><input type="checkbox" value="광진구">광진구</label>
+						<label><input type="checkbox" value="노원구">노원구</label>
+						<label><input type="checkbox" value="도봉구">도봉구</label>
+						<label><input type="checkbox" value="동작구">동작구</label>
+						<label><input type="checkbox" value="마포구">마포구</label>
+						<label><input type="checkbox" value="서대문구">서대문구</label>
+						<label><input type="checkbox" value="서초구">서초구</label>
+						<label><input type="checkbox" value="성동구">성동구</label>
+						<label><input type="checkbox" value="성북구">성북구</label>
 						<br>
-						<span><label><input type="checkbox" value="송파구">송파구</label></span>
-						<span><label><input type="checkbox" value="양천구">양천구</label></span>
-						<span><label><input type="checkbox" value="영등포구">영등포구</label></span>
-						<span><label><input type="checkbox" value="용산구">용산구</label></span>
-						<span><label><input type="checkbox" value="은평구">은평구</label></span>
-						<span><label><input type="checkbox" value="중랑구">중랑구</label></span>
-						<span><label><input type="checkbox" value="경기전체">경기전체</label></span>
-						<span><label><input type="checkbox" value="경기북부">경기북부</label></span>
-						<span><label><input type="checkbox" value="경기남부">경기남부</label></span>
-						<span><label><input type="checkbox" value="인천전체">인천전체</label></span>
-						<span><label><input type="checkbox" value="경상도전체">경상도전체</label></span>
-						<span><label><input type="checkbox" value="대구/북부">대구/북부</label></span>
-						<span><label><input type="checkbox" value="부산/남부">부산/남부</label></span>
+						<label><input type="checkbox" value="송파구">송파구</label>
+						<label><input type="checkbox" value="양천구">양천구</label>
+						<label><input type="checkbox" value="영등포구">영등포구</label>
+						<label><input type="checkbox" value="용산구">용산구</label>
+						<label><input type="checkbox" value="은평구">은평구</label>
+						<label><input type="checkbox" value="중랑구">중랑구</label>
+						<label><input type="checkbox" value="경기전체">경기전체</label>
+						<label><input type="checkbox" value="경기북부">경기북부</label>
+						<label><input type="checkbox" value="경기남부">경기남부</label>
+						<label><input type="checkbox" value="인천전체">인천전체</label>
+						<label><input type="checkbox" value="경상도전체">경상도전체</label>
+						<label><input type="checkbox" value="대구/북부">대구/북부</label>
+						<label><input type="checkbox" value="부산/남부">부산/남부</label>
 						<br>
 						<span><label><input type="checkbox" value="강원도전체">강원도전체</label></span>
 						<span><label><input type="checkbox" value="충청도전체">충청도전체</label></span>
 						<span><label><input type="checkbox" value="전라도전체">전라도전체</label></span>
-						</span>
-					</div></li>
+					</div>
+				</li>
 			</ul>
 			<br>	
 			<br>
@@ -176,9 +206,7 @@ a {
 		</div>
 		<div id="pro_location"></div>
 		<div id="show"></div>
-		<div id="searchDiv">
-		</div>
-		<button type="button" id="insertCafe">상품등록</button>
+		<div id="searchDiv"></div>
 		<div id="paging"></div>
 	</div>
 </body>
