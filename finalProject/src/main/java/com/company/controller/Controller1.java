@@ -284,7 +284,7 @@ public class Controller1 {
 		}
 		return "redirect:/getSearchViewMember";
 	}
-	
+	 
 	//관리자-전체회원 조회
 	@RequestMapping("/getSearchViewMember")
 	public String getSearchMember(MemberVO vo, Model model) {
