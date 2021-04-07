@@ -213,9 +213,7 @@ public class Controller2 {
 		model.addAttribute("reservation", reservationService.getViewReservation(vo1));
 		
 		ReviewVO vo2 = new ReviewVO();
-		Controller1 c1 = new Controller1();
-		c1.getSearchReviewD(vo2, model);
-		model.addAttribute("review", c1.getSearchReviewD(vo2, model));
+		model.addAttribute("review", reviewService.getSearchReview(vo2));
 		return "hospital/getHospital99";
 	}
 	

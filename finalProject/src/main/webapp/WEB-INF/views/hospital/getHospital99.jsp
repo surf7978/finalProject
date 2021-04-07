@@ -10,7 +10,7 @@
 <!-- 단건조회 아작스 -->
 <script>
 	$(function(){
-		$(".getReview").on("click", function(){
+		$(".reviewNumber").on("click", ".getReview", function(){
 			var btn = $(this);
 			console.log(btn.prev().prev().prev().text()[0]);//span개수만큼 해줘야함
 			$.ajax({
@@ -23,19 +23,20 @@
 					btn.closest(".reviewNumber").next().text("");
 					btn.closest(".reviewNumber").next().append(data.content);
 					btn.closest(".reviewNumber").next().append("<input type='button' class='ESC' value='닫기'>");//닫기 버튼 생성
+					btn.remove();
 				}
 			})
 		})
 		//내용 닫기
 		$(".getReviewResult").on("click", ".ESC", function(){//이렇게 그룹이벤트로 해줘야 생성된 버튼 동작함
 			var ESCbtn = $(this);
+			ESCbtn.parent().prev().append("<input type='button' class='getReview' value='상세조회'>")
 			ESCbtn.parent().empty();
 		})
 	})
 </script>
 </head>
 <body>
-
 대표사진:<img src="resources/img/hospital/${hospital.t_image }"><br>
 진료구분: ${hospital.category1 }<br>
 상세구분: ${hospital.category2 }<br>
