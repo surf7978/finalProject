@@ -34,6 +34,11 @@ table, tr, td {
 	
 	<table>
 	<tr>
+	<td>번호</td> 
+	<td>${getEventAndNotice.eanNumber}</td>
+	</tr>
+
+	<tr>
 	<td>글쓴이</td> 
 	<td>${getEventAndNotice.writer}</td>
 	</tr>
@@ -63,5 +68,6 @@ table, tr, td {
 	</tr>
 	</table>
 	</div>
+	<a href="getSearchCr4">관리자 메인으로 돌아가기</a>
 </body>
 </html>

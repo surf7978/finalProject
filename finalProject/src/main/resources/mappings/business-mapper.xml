@@ -86,4 +86,15 @@
 		FROM business
 		WHERE businessId = #{businessId}
 	</delete>
+	
+	<!-- 나경 -->
+	<!-- 문의글등록시 필요한 정보select -->
+	<select id="getBusinessId" parameterType="businessVO" resultType="businessVO">
+		SELECT
+		  BUSINESSID
+		, BUSINESSNUMBER
+		, BUSINESSCOMPANYNAME
+		FROM BUSINESS
+		WHERE BUSINESSNUMBER = #{businessNumber}
+	</select>
 </mapper>
