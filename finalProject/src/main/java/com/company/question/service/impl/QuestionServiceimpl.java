@@ -14,6 +14,12 @@ public class QuestionServiceimpl implements QuestionService {
 	@Autowired
 	QuestionMapper QuestionMapper;
 
+	
+	
+	
+	
+	
+	
 	// 등록
 	@Override
 	public int insertQuestion(QuestionVO vo) {
@@ -37,12 +43,19 @@ public class QuestionServiceimpl implements QuestionService {
 		return QuestionMapper.insertQuestion3(vo);
 		}
 
+	
+	
+	
+	
+	
+	
+	
 	// 단건조회
 	@Override
 	public QuestionVO getQuestion(QuestionVO vo) {
 		return QuestionMapper.getQuestion(vo);
 	}
-
+	
 	
 	// 문의하기항목 1번 상품문의 단건조회
 	@Override
@@ -66,6 +79,11 @@ public class QuestionServiceimpl implements QuestionService {
 	}
 	
  	
+	
+	
+	
+	
+	
 	// 문의하기항목 1번 상품 문의 답장하기로 넘기기 by 관리자
 	@Override
 	public QuestionVO getQuestion1Ans(QuestionVO vo) {
@@ -86,6 +104,12 @@ public class QuestionServiceimpl implements QuestionService {
 		return QuestionMapper.getQuestion3Ans(vo);
 	}
 
+	
+	
+	
+	
+	
+	
 	// 전체조회
 	@Override
 	public List<QuestionVO> getSearchQuestion(QuestionVO vo) {
@@ -97,7 +121,7 @@ public class QuestionServiceimpl implements QuestionService {
 	public List<QuestionVO> getSearchQuestionCr4(QuestionVO vo) {
 		return QuestionMapper.getSearchQuestionCr4(vo);
 	}
-
+	
 	// 문의하기 항목 하나 전체조회 1 상품문의
 	@Override
 	public List<QuestionVO> getSearchQuestionSelect1(QuestionVO vo) {
@@ -116,6 +140,9 @@ public class QuestionServiceimpl implements QuestionService {
 		return QuestionMapper.getSearchQuestionSelect3(vo);
 	}
 
+	
+	
+	
 	// 수정
 	@Override
 	public int updateQuestion(QuestionVO vo) {
