@@ -1,11 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	
+	$(function() {
+		$("#btn").on("click" , function(){
+			location.href="insertBoard2";
+		});
+		
+	});
+
+</script>
 <style>
 table , tr, td{
 		
@@ -45,7 +56,7 @@ table , tr, td{
 
 </table>
 <p><p>
-<a href="insertBoard2">자랑하기 글쓰기 </a> <p>
+<button id="btn">자랑 글쓰기 </button> <p>
 <a href="/finalProject">홈으로 돌아가기</a>
 </body>
 </html>

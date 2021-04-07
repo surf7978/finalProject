@@ -6,6 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+	
+	$(function() {
+		$("#btn").on("click" , function(){
+			location.href="insertBoard";
+		});
+		
+	});
+
+</script>
+
 <style>
 table , tr, td{
 		
@@ -14,9 +27,10 @@ table , tr, td{
 </style>
 </head>
 <body>
-<table> <p><p>
-<h3 align="center">자유게시판</h3> 
 <p>
+<h3>자유게시판</h3> <p><p>
+<table>  
+
 
 <thead>
 <tr>
@@ -43,7 +57,7 @@ table , tr, td{
 
 
 </table> <p><p>
-<a href="insertBoard">자유게시판 글쓰기 </a> <p>
+<button id="btn">자유게시판 글쓰기</button> <p>
 <a href="/finalProject">홈으로 돌아가기</a>
 </body>
 </html>

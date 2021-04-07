@@ -5,7 +5,9 @@ import java.util.List;
 public interface BoardService {
 	
 	
-	public BoardVO getBoard(BoardVO vo);	
+	public BoardVO getBoard(BoardVO vo);	// 자유게시판 한건조회
+	
+	
 	public List<BoardVO> getSearchBoard(BoardVO vo);	//구매내역 상세리스트
 	public int updateBoard(BoardVO vo);	//환불하기
 	public int deleteBoard(BoardVO vo);

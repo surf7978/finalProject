@@ -17,6 +17,9 @@ public class BoardServiceimpl implements BoardService{
 	public BoardVO getBoard(BoardVO vo) {
 		return BoardMapper.getBoard(vo);
 	}
+	
+
+	
 	//전체조회
 	@Override
 	public List<BoardVO> getSearchBoard(BoardVO vo) {
