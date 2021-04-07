@@ -140,10 +140,9 @@ public class Controller3 {
 		return "pay/PayInfo";
 	}	
 	
-	//자유게시판시작
-	@RequestMapping("/getSearchBoard1")
-	public String getSearchBoard1(){
-		return "board/getSearchBoard1";
+	@RequestMapping("/updateProduct")
+	public String updateProduct(ProductVO vo, Model model, String productNumber) {
+		model.addAttribute("product", productService.getProduct(vo));
+		return "product/updateProduct";
 	}
-
 }

@@ -10,4 +10,5 @@ public interface CafeMapper {
 	public List<CafeVO> getSearchCafe(CafeVO vo);
 	public int updateCafe(CafeVO vo);
 	public int deleteCafe(CafeVO vo);
+	public int getCount(CafeVO vo);// 레코드 조회
 }

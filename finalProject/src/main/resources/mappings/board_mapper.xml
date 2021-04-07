@@ -24,58 +24,6 @@
 		DELETE FROM BOARD
 		WHERE BOARDNUMBER=#{boardNumber}
 	</delete>
-
-	<select id="getSearchBoardCategiry1" resultType="boardVO"
-		parameterType="boardVO">
-		SELECT * FROM BOARD
-		WHERE category=1
-	</select>
-
-	<select id="getSearchBoardCategiry2" resultType="boardVO"
-		parameterType="boardVO">
-		SELECT * FROM BOARD
-		WHERE category=2
-	</select>
-	<insert id="insertBoard" parameterType="boardVO">
-		  insert into board(BOARDNUMBER
-		  					, IMAGE
-		  					, TITLE
-		  					, CALENDAR
-		  					, CONTENT
-		  					, WRITER
-		  					, VIEWS
-		  					, CATEGORY
-		  					, MEMBERID)
-		  			 values(board1_seq.nextval
-		  			 		, #{image}
-		  			 		, #{title}
-		  			 		, sysdate
-		  			 		, #{content}
-		  			 		, #{writer}
-		  			 		, 0
-		  			 		, 1
-		  			 		,#{memberId})
-	</insert>
-	<insert id="insertBoard2" parameterType="boardVO">
-		  insert into board(BOARDNUMBER
-		  					, IMAGE
-		  					, TITLE
-		  					, CALENDAR
-		  					, CONTENT
-		  					, WRITER
-		  					, VIEWS
-		  					, CATEGORY
-		  					, MEMBERID)
-		  			 values(board1_seq.nextval
-		  			 		, #{image}
-		  			 		, #{title}
-		  			 		, sysdate
-		  			 		, #{content}
-		  			 		, #{writer}
-		  			 		, 0
-		  			 		, 2
-		  			 		,#{memberId})
-	</insert>
 	
 </mapper>
 

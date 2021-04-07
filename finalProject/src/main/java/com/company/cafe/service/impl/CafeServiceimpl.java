@@ -38,6 +38,10 @@ public class CafeServiceimpl implements CafeService{
 	public int deleteCafe(CafeVO vo) {
 		return CafeMapper.deleteCafe(vo);
 	}
+	@Override
+	public int getCount(CafeVO vo) {
+		return CafeMapper.getCount(vo);
+	}
 
 
 }

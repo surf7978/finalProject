@@ -104,7 +104,7 @@
 				alert("사업자번호 미입력");
 			}
 		});
-	});
+	}); 
 </script>
 <body>
 	<br><br><br><input value="사업자 가입" style="font-size:40px; text-align:center; width:300px; border:none;" readonly><br><br>
@@ -113,10 +113,10 @@
 			<tr>
 				<td rowspan="2"><input value="아 이 디" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
 				<td><input id="businessId" name="businessId" style="border:none; width:300px;"></td>
-				<td><button type="button" id="idCheck" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">중복조회</button></td>
+				<td><button type="button" id="idCheck" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">중복조회</button></td>
 			</tr>
 			<tr>
-				<td colspan="2"><div id="idCheckResult" style="color:red; height:20px;"></div></td>
+				<td colspan="2"><div id="idCheckResult" style="color:red; height:30px;"></div></td>
 			</tr>
 			<tr>
 				<td><input value="패스워드" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
@@ -133,7 +133,7 @@
 			<tr>
 				<td><input value="우편번호" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
 				<td><input id="post" name="post" style="border:none; width:300px;"></td>
-				<td><button type="button" onclick="addressSearch()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">번호검색</button></td>
+				<td><button type="button" onclick="addressSearch()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">번호검색</button></td>
 			</tr>
 			<tr>
 				<td><input value="주 소" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
@@ -146,7 +146,7 @@
 			<tr>
 				<td><input value="연 락 처" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
 				<td><input id="phone" name="phone" style="border:none; width:300px;"></td>
-				<td><button type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">본인인증</button></td>
+				<td><button type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">본인인증</button></td>
 			</tr>
 			<tr>
 				<td><input value="이 메 일" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
@@ -155,7 +155,7 @@
 			<tr>
 				<td rowspan="2"><input value="사업자번호" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
 				<td><input id="businessNumber" name="businessNumber" style="border:none; width:300px;"></td>
-				<td><button type="button" id="businessSearch" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#191970; color:white;">번호조회</button></td>
+				<td><button type="button" id="businessSearch" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">번호조회</button></td>
 			</tr>
 			<tr>
 				<td><div id="businessSearchResult" style="color:red; height:20px;"></div></td>

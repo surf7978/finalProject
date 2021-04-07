@@ -2,9 +2,7 @@ package com.company.controller;
 
 import java.io.IOException;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -27,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.company.animal.service.AnimalService;
+import com.company.animal.service.AnimalVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
 import com.company.member.common.KakaoAPI;
@@ -34,6 +34,8 @@ import com.company.member.common.coolsmsAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.member.service.impl.MemberServiceimpl;
+import com.company.review.service.ReviewService;
+import com.company.review.service.ReviewVO;
  
 @Controller
 public class Controller1 {
@@ -54,15 +56,20 @@ public class Controller1 {
 	//일반사용자 로그인 처리
 	@PostMapping("/login")
 	public String loginProc(MemberVO vo, HttpSession session) {
-		MemberServiceimpl memberServiceimpl = new MemberServiceimpl();
-		String insertPW = vo.getPassword(); //로그인화면에 입력한 비밀번호
-        String DBinPW = memberService.getViewMember(vo).getPassword(); //DB안에 암호화된 비밀번호
-		if(memberServiceimpl.matches(insertPW, DBinPW)){ //입력한 비밀번호와 DB의 비밀번호 일치체크
-			session.setAttribute("loginID", memberService.getViewMember(vo).getMemberId()); //세션에 로그인한 아이디 담아줌
-			session.setAttribute("loginAuth", memberService.getViewMember(vo).getAuth()); //권한 확인
-			return "/home";
-		} else {
+		String idCheck = memberService.getViewMember(vo).getMemberId();
+		if(idCheck.equals(null)) {
 			return "redirect:/loginForm";
+		}else {
+			MemberServiceimpl memberServiceimpl = new MemberServiceimpl();
+			String insertPW = vo.getPassword(); //로그인화면에 입력한 비밀번호
+			String DBinPW = memberService.getViewMember(vo).getPassword(); //DB안에 암호화된 비밀번호
+			if(memberServiceimpl.matches(insertPW, DBinPW)){ //입력한 비밀번호와 DB의 비밀번호 일치체크
+				session.setAttribute("loginID", memberService.getViewMember(vo).getMemberId()); //세션에 로그인한 아이디 담아줌
+				session.setAttribute("loginAuth", memberService.getViewMember(vo).getAuth()); //권한 확인
+				return "/home";
+			} else {
+				return "redirect:/loginForm";
+			}
 		}
 	}
 	
@@ -126,6 +133,7 @@ public class Controller1 {
 		session.setAttribute("access_token", access_token);
 		session.setAttribute("loginID", userInfo.get("nickname"));
 		session.setAttribute("loginAuth", "m");
+		System.out.println(session.getAttribute("loginID")+" "+session.getAttribute("loginAuth"));
 		return "redirect:/";
 	}
 	
@@ -178,7 +186,7 @@ public class Controller1 {
 		return "redirect:/loginForm";
 	}
 	
-	//아이디/비밀번호찾기 이동
+	//휴대폰인증 페이지 이동
 	@GetMapping("/coolsms")
 	public String phone() {
 		return "member/coolsms";
@@ -204,14 +212,58 @@ public class Controller1 {
     }
 	 
 	// 사업자번호 조회
-	@PostMapping("/bizno")
+	@PostMapping(value="/bizno", produces = "application/html; charset=utf-8")
+	@ResponseBody
 	public String bizno(@RequestParam String businessNumber) throws IOException {
 		// 사업자번호 입력
 		String url = "https://bizno.net/?query=" + businessNumber;
 		Document doc = Jsoup.connect(url).get();
 		Elements element = doc.select("div.titles a h4");
 		String bizName = element.text();
+		System.out.println(bizName);
 		return bizName;
+	}
+	 
+	@Autowired ReviewService reviewService;
+	//구매평 전체리스트 출력
+	@GetMapping("/getSearchReview99")
+	public String getSearchReview99(ReviewVO vo, Model model) {
+		model.addAttribute("review", reviewService.getSearchReview(vo));
+		return "member/getSearchReview99";
+	}
+	//구매평 단건리스트 출력(ajax로 같은 페이지 출력)
+	@RequestMapping("/getReview99")
+	@ResponseBody
+	public ReviewVO getReview99(ReviewVO vo) {
+		return reviewService.getReview(vo);
+	}
+	
+	@Autowired AnimalService animalService;
+	
+	//회원탈퇴
+	@PostMapping("/membershipCancel")
+	public String membershipCancel(String ID, HttpSession session) {
+		MemberVO vo = new MemberVO();
+		vo.setMemberId(ID);
+		if(memberService.getViewMember(vo).getAuth().equals("m")) {
+			AnimalVO voAnimal = new AnimalVO();
+			voAnimal.setMemberId(ID);
+			animalService.deleteAnimal(voAnimal);
+			memberService.deleteMember(vo);
+			session.invalidate();
+		}else {
+			BusinessVO vo1 = new BusinessVO();
+			vo1.setBusinessId(ID);
+			businessService.deleteBusiness(vo1);
+		}
+		return "redirect:/getSearchViewMember";
+	}
+	
+	//관리자-전체회원 조회
+	@RequestMapping("/getSearchViewMember")
+	public String getSearchMember(MemberVO vo, Model model) {
+		model.addAttribute("list", memberService.getSearchViewMember(vo));
+		return "member/getSearchMember";
 	}
 	
 	// 홈화면 출력(스프링 기본세팅)

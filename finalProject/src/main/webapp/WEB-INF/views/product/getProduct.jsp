@@ -104,7 +104,7 @@
 				</div>
 			</div>
 		</div>
-
+		<button>수정하기</button>
 	</div>
 </body>
 </html>
