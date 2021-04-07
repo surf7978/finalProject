@@ -293,7 +293,7 @@
 		<a href="getBusiness">내 정보보기</a><br>
 		<a href="getSearchQuestion">문의내역보기</a><br>
 		<a href="getSearchAnswer">답변내역보기</a><br>
-		<a href="getSearchCafe">카페,호텔,택시</a>
+		<a href="getSearchCafeForm">카페,호텔,택시</a>
 		<a href="insertCafe">카페상품등록</a>
 		<a href="getSearchBeauty">미용,교육</a>
 		<a href="logout">로그아웃</a>

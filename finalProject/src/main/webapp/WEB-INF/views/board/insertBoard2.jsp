@@ -8,12 +8,16 @@
 </head>
 <body>
 <p>
-	<h3 align="center">자유게시판 글쓰기</h3> <p>
+	<h3 align="center">자랑하기 글쓰기</h3> <p>
 	<form action="insertBoard2" method="post">
 	<table> 
 	<tr>
 	<th>제목</th>
 	<td><input id="title" name="title"></td>
+	</tr> 
+	<tr>
+	<th>이미지</th>
+	<td><input id="image" name="image"></td>
 	</tr> 
 	<tr>
 	<th>내용</th>

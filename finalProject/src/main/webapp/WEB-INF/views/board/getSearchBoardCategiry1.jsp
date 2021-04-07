@@ -14,10 +14,14 @@ table , tr, td{
 </style>
 </head>
 <body>
-<table>
+<table> <p><p>
+<h3 align="center">자유게시판</h3> 
+<p>
+
 <thead>
 <tr>
 <td>조회수</td>
+<td>이미지</td>
 <td>제목</td>
 <td>작성날짜</td> 
 <td>작성자</td> 
@@ -27,6 +31,7 @@ table , tr, td{
 
 <tr onclick="location.href='getBoard?boardNumber=${board.boardNumber}'">
  <td>${board.views}</td>
+ <td>${board.image}</td>
  <td>${board.title}</td>
  <td>${board.calendar}</td>
  <td>${board.writer}</td>
@@ -37,8 +42,8 @@ table , tr, td{
 
 
 
-</table>
-<a href="insertBoard1">자유게시판 글쓰기 </a>
+</table> <p><p>
+<a href="insertBoard">자유게시판 글쓰기 </a> <p>
 <a href="/finalProject">홈으로 돌아가기</a>
 </body>
 </html>

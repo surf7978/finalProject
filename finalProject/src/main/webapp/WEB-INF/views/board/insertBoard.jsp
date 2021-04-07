@@ -16,6 +16,10 @@
 	<td><input id="title" name="title"></td>
 	</tr> 
 	<tr>
+	<th>이미지</th>
+	<td><input id="image" name="image"></td>
+	</tr> 
+	<tr>
 	<th>내용</th>
 	<td><input id="content" name="content"></td>
 	</tr> 

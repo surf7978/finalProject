@@ -1,8 +1,12 @@
 package com.company.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -268,25 +272,25 @@ public class Controller5 {
 		vo.setBusinessNumber(bvo.getBusinessNumber());
 		// 첨부파일처리
 		// 1.vo값 가져오기
-		MultipartFile tImage = vo.getT_uploadFile();
-		MultipartFile image = vo.getUploadFile();
+		MultipartFile image1 = vo.getT_uploadFile();
+		MultipartFile image2 = vo.getUploadFile();
 		// 2.저장될path설정
 		String path = request.getSession().getServletContext().getRealPath("/resources/images/cafe");
 		// 3.중복채크
-		if (image != null && !image.isEmpty() && image.getSize() > 0) {
-			String filename = image.getOriginalFilename();
+		if (image1 != null && !image1.isEmpty() && image1.getSize() > 0) {
+			String filename = image1.getOriginalFilename();
 			// 파일명
 			File rename = FileRenamePolicy.rename(new File(path, filename));
-			image.transferTo(rename);
-			vo.setImage(rename.getName());
+			image1.transferTo(rename);
+			vo.setImage1(rename.getName());
 		} // end of if
 
-		if (tImage != null && !tImage.isEmpty() && tImage.getSize() > 0) {
-			String filename = tImage.getOriginalFilename();
+		if (image2 != null && !image2.isEmpty() && image2.getSize() > 0) {
+			String filename = image2.getOriginalFilename();
 			// 파일명
 			File rename = FileRenamePolicy.rename(new File(path, filename));
-			tImage.transferTo(rename);
-			vo.setTImage(rename.getName());
+			image2.transferTo(rename);
+			vo.setImage2(rename.getName());
 		} // end of if
 			// 등록처리
 		int r = cafeService.insertCafe(vo);
@@ -301,45 +305,42 @@ public class Controller5 {
 
 	}// end of insertCafe
 
-	// 사업자-카페-전체리스트 페이지 호출
+	// 사업자-카페-전체리스트(form)
 	@GetMapping("/getSearchCafeForm")
 	public String getSearchCafe(CafeSearchVO vo) {
-		return "cafe/getSearchCafe";
+		return "cafe/getSearchCafeForm";
 	}// end of getSearchCafe
 
-	// 사업자-카페-전체리스트 페이지 기능
+	// 사업자-카페-전체리스트(ajax)
 	@GetMapping("/getSearchCafe")
 	@ResponseBody
-	public List<CafeVO> getSearchCafeProc(CafeSearchVO vo, Paging paging, Model model) {
+	public Map<String, Object> getSearchCafeProc(CafeSearchVO vo, Paging paging) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		// 1.페이지 설정
-		paging.setPageUnit(5);
-		paging.setPageSize(3);
+		paging.setPageUnit(5);//
+		paging.setPageSize(3);// 페이지 번호 수
 		// 2.초기페이지 설정
-		if (paging.getPage() != null)
+		if (paging.getPage() == null)
 			paging.setPage(1);
 		// 3. 값 추가
+		paging.setTotalRecord(cafeService.getCount(vo));
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
-		paging.setTotalRecord(cafeService.getCount(vo));
-		model.addAttribute("paging", paging);
-		// Cafe List
 		List<CafeVO> list = cafeService.getSearchCafe(vo);
-		return list;
+		// map에 넘겨주는 이유:model보다 사용이 편리해서
+		map.put("paging", paging);
+		map.put("list", list);
+		// Cafe List
+		return map;
 	}// end of getSearchCafeProc
 
 	// 사업자-카페-상세리스트 페이지 호출
 	@GetMapping("/getCafe")
-	public String getCafe() {
-		return "cafe/getCafe";
-	}
-
-	// 사업자-카페-상세리스트 페이지 기능(ajax)
-	@PostMapping("/getCafe")
-	@ResponseBody
-	public CafeVO getCafeProc(CafeVO vo) {
+	public String getCafeProc(CafeVO vo, Model model) {
 		// 카페 상세 정보조회
 		vo = cafeService.getCafe(vo);
-		return vo;
+		model.addAttribute("vo", vo);
+		return "cafe/getCafe";
 	}
 
 	// start of hotel
