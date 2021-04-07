@@ -12,29 +12,30 @@
 </style>
 </head>
 <body>
-	<h3>신고문의(관리자) 단건조회</h3>
+	<h3>고객센터문의(관리자) 단건조회</h3>
 	<table>
 	<tr>
 	<td>제목</td>
-	<td>${getQuestion3.title}</td> 
+	<td>${getQuestion2.title}</td> 
 	</tr>
 	<tr>
 	<td>날짜</td>
-	<td>${getQuestion3.calendar}</td> 
+	<td>${getQuestion2.calendar}</td> 
 	</tr>
 	<tr>
 	<td>내용</td>
-	<td>${getQuestion3.content}</td> 
+	<td>${getQuestion2.content}</td> 
 	</tr>		
 	<tr>
 	<td>글쓴이</td>
-	<td>${getQuestion3.writer}</td> 
+	<td>${getQuestion2.writer}</td> 
 	</tr>
 	<tr>
 	<td>아이디</td>
-	<td>${getQuestion3.memberId}</td> 
+	<td>${getQuestion2.memberId}</td> 
 	</tr>		
 	</table>
-	<button onclick="location.href='getQuestion3Ans?questionNumber=${getQuestion3.questionNumber}'"> 유저에게 답장하기 </button>
+		<!-- 답장하기 페이지 insertAnswer2Cr4로 넘어간다.  -->
+	<button onclick="location.href='getQuestion2Ans?questionNumber=${getQuestion2.questionNumber}'"> 유저에게 답장하기 </button>
 </body>
 </html>

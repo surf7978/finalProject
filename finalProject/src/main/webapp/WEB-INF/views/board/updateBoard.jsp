@@ -12,7 +12,7 @@
 </head>
 <body>
 <h3>리스트</h3>
-${board }
+
 <hr>
 <h3>수정폼</h3>
 </head>

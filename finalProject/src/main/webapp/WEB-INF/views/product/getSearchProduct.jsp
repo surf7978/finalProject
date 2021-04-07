@@ -28,10 +28,11 @@
 				alert("Error");
 			},
 			success:function(response){
+				/* ul태그 선언 */
 				var ul = $("<ul>");
+				/* div#show */
 				$("#show").append(ul);
-				var i=0;
-				$(response).each(function(){
+				$(response).each(function(i){
 					var productNumber = response[i].productNumber;
 					var t_img = response[i].t_image;
 					
@@ -49,7 +50,6 @@
 					$(nav).append(strong, p);					
 					$(li).append(input,div, nav);
 					$(ul).append(li);
-					i++;
 				})
 			}
 		});	

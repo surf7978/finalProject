@@ -47,11 +47,86 @@
 		ORDER BY ANSWERNUMBER
 	</select>
 	
-	<!-- 김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영 -->
+<!-- 김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영 -->
 	
 	
-	<select id="">
 	
+	<!-- 관리자가  신고하기답장에 사용  -->
+	<insert id="insertAnswer1Cr4"
+										parameterType="answerVO"		>	
+			INSERT INTO ANSWER(
+		ANSWERNUMBER,
+		WRITER,
+		CONTENT,
+		CALENDAR,
+		MEMBERID,
+		QUESTIONNUMBER)
+		VALUES(
+		(SELECT
+		NVL(MAX(ANSWERNUMBER),0)+1 FROM ANSWER),
+		 'admin' ,
+		#{content},
+		SYSDATE,
+		'admin' ,
+		#{questionNumber}
+		)
+	</insert>	
+	<insert id="insertAnswer2Cr4"
+										parameterType="answerVO"		>	
+			INSERT INTO ANSWER(
+		ANSWERNUMBER,
+		WRITER,
+		CONTENT,
+		CALENDAR,
+		MEMBERID,
+		QUESTIONNUMBER)
+		VALUES(
+		(SELECT
+		NVL(MAX(ANSWERNUMBER),0)+1 FROM ANSWER),
+		 'admin' ,
+		#{content},
+		SYSDATE,
+		'admin' ,
+		#{questionNumber}
+		)
+	</insert>
+	
+	<insert id="insertAnswer3Cr4"
+										parameterType="answerVO"		>	
+			INSERT INTO ANSWER(
+		ANSWERNUMBER,
+		WRITER,
+		CONTENT,
+		CALENDAR,
+		MEMBERID,
+		QUESTIONNUMBER)
+		VALUES(
+		(SELECT
+		NVL(MAX(ANSWERNUMBER),0)+1 FROM ANSWER),
+		 'admin' ,
+		#{content},
+		SYSDATE,
+		'admin' ,
+		#{questionNumber}
+		)
+	</insert>
+
+		<!-- 답변전체조회 관리자-->
+	<select id="getSearchAnswerCr4" resultType="answerVO"
+								>
+		SELECT * FROM ANSWER 
+		WHERE WRITER='admin'
 	</select>
+	
+	<select id="getSearchAnswer2Cr4" resultType="answerVO"
+								>
+		SELECT * FROM ANSWER
+	</select>
+	
+	<!-- 관리자 답변 한건 삭제 -->
+	<delete id="deleteAnswerCr4" parameterType="answerVO">	
+		DELETE FROM ANSWER
+		WHERE ANSWERNUMBER = #{answerNumber}
+	</delete>
 	
 </mapper>

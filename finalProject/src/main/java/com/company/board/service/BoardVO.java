@@ -14,7 +14,5 @@ public class BoardVO {
 	String views;
 	String category;
 	String memberId;
-
-
 }
 
