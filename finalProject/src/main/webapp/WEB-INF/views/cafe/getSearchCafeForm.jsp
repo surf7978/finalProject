@@ -52,21 +52,22 @@
 
 	//전체 리스트
 	function getSearchCafe(p) {
+		//page버튼 누를시 p값으로 들어옴
 		searchAndInsert.page.value=p;
-		//cafe 리스트
+		//cafe 리스트 호출 ajax
 		$.ajax({
 			url : "getSearchCafe",
 			method : "get",
-			//검색기능 넣을 시 data값에 추가해야 됨
+			//form태그 안의 값을 queryString으로 변환시켜줌
 			data : $("#searchAndInsert").serialize(),
 			dataType : "json",
 			success : function(datas) {
 				var ul = $("<ul>");
 				$("#show").empty();
 				$("#show").append(ul);
+				//datas = Object 즉, datas란 Object 안의 list값을 가져온다는 의미
 				var response = datas.list;
 				$(response).each(function(i) {
-
 							var cafeNumber = response[i].cafeNumber;
 							var image1 = response[i].image1;
 							var li = $("<li>");
