@@ -12,12 +12,12 @@
 	$(function(){
 		$(".reviewNumber").on("click", ".getReview", function(){
 			var btn = $(this);
-			console.log(btn.prev().prev().prev().text()[0]);//span개수만큼 해줘야함
+			console.log(btn.prev().prev().prev().val());//span개수만큼 해줘야함
 			$.ajax({
 				url:"getReview99",
 				type:"post",
 				dataType:"json",
-				data:{"reviewNumber":btn.prev().prev().prev().text()[0]},
+				data:{"reviewNumber":btn.prev().prev().prev().val()},
 				success:function(data){
 					console.log(data);
 					btn.closest(".reviewNumber").next().text("");
@@ -37,13 +37,13 @@
 	
 	$(function(){
 		$(".questionNumber").on("click", ".getQuestion", function(){
-			var btn = $(this);
-			console.log(btn.prev().prev().prev().text()[0]);//span개수만큼 해줘야함
+			var btn1 = $(this);
+			console.log(btn1.prev().prev().prev().text()[0]);//span개수만큼 해줘야함
 			$.ajax({
 				url:"getQuestion",
 				type:"post",
 				dataType:"json",
-				data:{"questionNumber":btn.prev().prev().prev().text()[0]},
+				data:{"questionNumber":btn1.prev().prev().prev().text()},
 				success:function(data){
 					console.log(data);
 					btn.closest(".questionNumber").next().text("");
@@ -80,7 +80,7 @@
 <br>
 	<c:forEach items="${review }" var="list">
 		<div class="reviewNumber">
-			<span>${list.reviewNumber}</span>
+			<input type="hidden" value="${list.reviewNumber}">
 			<span>${list.title}</span>
 			<span>${list.writer}</span>
 			<input type="button" class="getReview" value="상세조회">
