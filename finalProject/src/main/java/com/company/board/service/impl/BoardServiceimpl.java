@@ -34,9 +34,6 @@ public class BoardServiceimpl implements BoardService{
 		return BoardMapper.deleteBoard(vo);
 	}
 	
-	
-	
-	
 	//자유게시판 글쓰기
 	@Override
 	public int insertBoard(BoardVO vo) {

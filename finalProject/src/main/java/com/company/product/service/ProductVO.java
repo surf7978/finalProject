@@ -18,4 +18,5 @@ public class ProductVO {
 	String t_image;
 	MultipartFile uploadFile;
 	MultipartFile t_uploadFile;
+	String resultPrice;
 }

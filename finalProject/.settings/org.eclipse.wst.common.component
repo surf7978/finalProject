@@ -15,7 +15,11 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
                 
         <property name="java-output-path" value="target/classes"/>
+<<<<<<< HEAD
         <property name="context-root" value="/"/>
+=======
+        <property name="context-root" value="/temp"/>
+>>>>>>> refs/remotes/origin/kuj
             
     </wb-module>
     
