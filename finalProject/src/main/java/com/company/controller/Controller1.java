@@ -229,7 +229,7 @@ public class Controller1 {
 	public ReviewVO getReview99(ReviewVO vo) {
 		return reviewService.getReview(vo);
 	}
-	
+	 
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
 	@RequestMapping(value = "/", method = RequestMethod.GET)
