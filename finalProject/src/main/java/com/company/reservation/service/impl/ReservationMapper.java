@@ -10,4 +10,7 @@ public interface ReservationMapper {
 	public List<ReservationVO> getSearchReservation(ReservationVO vo);
 	public int updateReservation(ReservationVO vo);
 	public int deleteReservation(ReservationVO vo);
+	
+	public ReservationVO getViewReservation(ReservationVO vo);
+	public ReservationVO getViewReservation2(ReservationVO vo);
 }

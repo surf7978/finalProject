@@ -38,6 +38,14 @@ public class ReservationServiceimpl implements ReservationService{
 	public int deleteReservation(ReservationVO vo) {
 		return ReservationMapper.deleteReservation(vo);
 	}
+	@Override
+	public ReservationVO getViewReservation(ReservationVO vo) {
+		return ReservationMapper.getViewReservation(vo);
+	}
+	@Override
+	public ReservationVO getViewReservation2(ReservationVO vo) {
+		return ReservationMapper.getViewReservation2(vo);
+	}
 
 
 }
