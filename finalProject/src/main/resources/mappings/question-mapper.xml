@@ -9,7 +9,7 @@
 		FROM QUESTION
 		<!-- 수정필요 -->
 	</select>
-	<!-- 문의내역 등록 -->
+	<!-- 사업자가 관리자에게 문의내역 등록 -->
 	<insert id="insertQuestion">
 		INSERT INTO QUESTION(
 		TITLE,
@@ -46,10 +46,11 @@
 	<!--문의내역 단건조회 -->
 	<select id="getQuestion" resultType="questionVO">
 		SELECT * FROM QUESTION
-		WHERE QUESTIONNUMBER = #{questionNumber}
+		WHERE
+		QUESTIONNUMBER = #{questionNumber}
 	</select>
 	<!--문의내역 전체조회 -->
-	<select id="getSearchQuestion"  resultType="questionVO">
+	<select id="getSearchQuestion" resultType="questionVO">
 		<!-- SELECT B.* FROM (SELECT ROWNUM RN ,A.* FROM ( -->
 		<!-- 첫줄 -->
 		SELECT * FROM QUESTION
@@ -57,142 +58,220 @@
 		<!-- 사업자가 문의내역 조회하면 자기 사업체에 대한 문의만 보여야함 -->
 		<!-- 막줄 -->
 		<!-- )A )B WHERE RN BETWEEN #{start} AND #{end} -->
-		
+
 	</select>
-	
-<!-- 찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영-->
-	
+
+	<!-- 찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영 -->
+
 	<select id="getSearchQuestionCr4" resultType="questionVO">	<!-- 문의하기 전체조회 -->
-	SELECT * FROM QUESTION
+		SELECT * FROM QUESTION
 	</select>
 	<select id="getSearchQuestionSelect1" resultType="questionVO"> <!-- 1번 상품문의전체조회 -->
-	SELECT * FROM QUESTION 
-	WHERE CATEGORY=1
-	ORDER BY WRITER ASC	
+		SELECT * FROM QUESTION
+		WHERE CATEGORY=1
+		ORDER BY WRITER ASC
 	</select>
-	
+
 	<select id="getSearchQuestionSelect2" resultType="questionVO"> <!-- 2번 고객센터문의전체조회 -->
-	SELECT * FROM QUESTION 
-	WHERE CATEGORY=2
-	AND TOPERSON='admin'
-	ORDER BY WRITER ASC	
+		SELECT * FROM QUESTION
+		WHERE CATEGORY=2
+		AND TOPERSON='admin'
+		ORDER BY WRITER ASC
 	</select>
-	
-	
-	
-	
-	
+
+
+
+
+
 	<select id="getSearchQuestionSelect3" resultType="questionVO"> <!-- 3번 신고하기전체조회 -->
-	SELECT * FROM QUESTION 
-	WHERE CATEGORY=3
-	AND TOPERSON='admin'
-	ORDER BY WRITER ASC	
+		SELECT * FROM QUESTION
+		WHERE CATEGORY=3
+		AND TOPERSON='admin'
+		ORDER BY WRITER ASC
 	</select>
 
 	<select id="getQuestion1" resultType="questionVO"
-						  parameterType="questionVO">	<!-- 문의하기 1번 상품문의 단건조회  -->
-	SELECT * FROM QUESTION 
-	WHERE QUESTIONNUMBER=#{questionNumber}
+		parameterType="questionVO">	<!-- 문의하기 1번 상품문의 단건조회 -->
+		SELECT * FROM QUESTION
+		WHERE QUESTIONNUMBER=#{questionNumber}
 	</select>
-	
+
 	<select id="getQuestion2" resultType="questionVO"
-						  parameterType="questionVO">	<!-- 문의하기 2번 문희하기 단건조회  -->
-	SELECT * FROM QUESTION 
-	WHERE QUESTIONNUMBER=#{questionNumber}
+		parameterType="questionVO">	<!-- 문의하기 2번 문희하기 단건조회 -->
+		SELECT * FROM QUESTION
+		WHERE QUESTIONNUMBER=#{questionNumber}
 	</select>
-	
+
 	<select id="getQuestion3" resultType="questionVO"
-						  parameterType="questionVO">	<!-- 문의하기 3번 신고하기 단건조회  -->
-	SELECT * FROM QUESTION 
-	WHERE QUESTIONNUMBER=#{questionNumber}
+		parameterType="questionVO">	<!-- 문의하기 3번 신고하기 단건조회 -->
+		SELECT * FROM QUESTION
+		WHERE QUESTIONNUMBER=#{questionNumber}
 	</select>
-	
-		<select id="getQuestion1Ans" resultType="questionVO"
-						  parameterType="questionVO">	<!-- 문의하기 1번 상품 문의 하기 단건조회  -->
-	SELECT * FROM QUESTION 
-	WHERE QUESTIONNUMBER=#{questionNumber}
-	</select>	
-	
-	
-	
-	
+
+	<select id="getQuestion1Ans" resultType="questionVO"
+		parameterType="questionVO">	<!-- 문의하기 1번 상품 문의 하기 단건조회 -->
+		SELECT * FROM QUESTION
+		WHERE QUESTIONNUMBER=#{questionNumber}
+	</select>
+
+
+
+
 	<select id="getQuestion2Ans" resultType="questionVO"
-						  parameterType="questionVO">	<!-- 문의하기 2번 신고하기 단건조회  -->
-	SELECT * FROM QUESTION 
-	WHERE QUESTIONNUMBER=#{questionNumber}
-	</select>	
-	
-	
-	
-	
-	
+		parameterType="questionVO">	<!-- 문의하기 2번 신고하기 단건조회 -->
+		SELECT * FROM QUESTION
+		WHERE QUESTIONNUMBER=#{questionNumber}
+	</select>
+
+
+
+
+
 	<select id="getQuestion3Ans" resultType="questionVO"
-						  parameterType="questionVO">	<!-- 문의하기 3번 신고하기 단건조회  -->
-	SELECT * FROM QUESTION 
-	WHERE QUESTIONNUMBER=#{questionNumber}
+		parameterType="questionVO">	<!-- 문의하기 3번 신고하기 단건조회 -->
+		SELECT * FROM QUESTION
+		WHERE QUESTIONNUMBER=#{questionNumber}
+	</select>
+
+	<insert id="insertQuestion1" parameterType="questionVO">  <!--상품문의 문의내역 문의 등록 -->
+		INSERT INTO QUESTION
+		(QUESTIONNUMBER ,
+		TITLE,
+		CONTENT,
+		TOPERSON,
+		WRITER ,
+		CATEGORY,
+		MEMBERID)
+		VALUES
+		(pro_seq.nextval,
+		#{title},
+		#{content},
+		'admin' ,
+		#{writer} ,
+		3,
+		#{memberId})
+	</insert>
+
+
+	<insert id="insertQuestion2" parameterType="questionVO">  <!--고객센터에 문의내역 고객센터 문의 등록 -->
+		INSERT INTO QUESTION
+		(QUESTIONNUMBER ,
+		TITLE,
+		CONTENT,
+		TOPERSON,
+		WRITER ,
+		CATEGORY,
+		MEMBERID)
+		VALUES
+		(pro_seq.nextval,
+		#{title},
+		#{content},
+		'admin' ,
+		#{writer} ,
+		2,
+		#{memberId})
+	</insert>
+
+
+
+	<insert id="insertQuestion3" parameterType="questionVO">  <!--고객센터에 문의내역 신고하기 등록 -->
+		INSERT INTO QUESTION
+		(QUESTIONNUMBER ,
+		TITLE,
+		CONTENT,
+		TOPERSON,
+		WRITER ,
+		CATEGORY,
+		MEMBERID)
+		VALUES
+		(QUE_SEQ.NEXTVAL,
+		#{title},
+		#{content},
+		'admin' ,
+		#{writer} ,
+		3,
+		#{memberId})
+	</insert>
+
+
+	<!-- 나경 -->
+	<!-- 상품문의등록(사업자 상세보기에서 문의글 등록) -->
+	<insert id="insertQuestionBusi" parameterType="questionVO">
+		INSERT INTO
+		QUESTION (
+		QUESTIONNUMBER
+		, TITLE
+		, CALENDAR
+		, CONTENT
+		, WRITER
+		, TOPERSON
+		, CATEGORY
+		, MEMBERID
+		, PROBISNUMBER
+		) VALUES(
+		QUE_SEQ.NEXTVAL
+		, #{title}
+		, SYSDATE
+		, #{content}
+		, #{writer}
+		, #{toPerson}
+		, 1
+		, #{memberId}
+		, #{probisNumber})
+	</insert>
+
+	<!-- 상품문의등록(쇼핑몰 상세보기에서 문의글 등록) -->
+	<insert id="insertQuestionPro" parameterType="questionVO">
+		INSERT INTO
+		QUESTION (
+		QUESTIONNUMBER
+		, TITLE
+		, CALENDAR
+		, CONTENT
+		, WRITER
+		, TOPERSON
+		, CATEGORY
+		, MEMBERID
+		, PROBISNUMBER
+		) VALUES(
+		QUE_SEQ.NEXTVAL
+		, #{title}
+		, SYSDATE
+		, #{content}
+		, #{writer}
+		, #{memberId}
+		, 1
+		, #{memberId}
+		, #{probisNumber})
+	</insert>
+
+	<!--상세보기별 문의리스트 출력 -->
+	<select id='getSearchQuestionProbis' resultType="questionVO">
+		SELECT QUESTIONNUMBER
+		, TITLE
+		, CALENDAR
+		, CONTENT
+		, WRITER
+		, TOPERSON
+		, CATEGORY
+		, MEMBERID
+		, PROBISNUMBER
+		FROM QUESTION
+		WHERE PROBISNUMBER=#{probisNumber}
 	</select>
 	
-		<insert id="insertQuestion1"
-				parameterType="questionVO"	>  <!--상품문의 문의내역 문의 등록  -->
-		INSERT INTO QUESTION
-		(QUESTIONNUMBER ,
-		 TITLE,
-		 CONTENT,
-		 TOPERSON,
-		 WRITER ,
-		 CATEGORY,
-		 MEMBERID) 
-		 VALUES
-		 (pro_seq.nextval,
-		  #{title},
-		  #{content},
-		  'admin' ,
-		  #{writer} , 
-		   3,
-		  #{memberId})
-	</insert>
-	
-	
-	<insert id="insertQuestion2"
-				parameterType="questionVO"	>  <!--고객센터에 문의내역 고객센터 문의 등록  -->
-		INSERT INTO QUESTION
-		(QUESTIONNUMBER ,
-		 TITLE,
-		 CONTENT,
-		 TOPERSON,
-		 WRITER ,
-		 CATEGORY,
-		 MEMBERID) 
-		 VALUES
-		 (pro_seq.nextval,
-		  #{title},
-		  #{content},
-		  'admin' ,
-		  #{writer} , 
-		   2,
-		  #{memberId})
-	</insert>
-	
-	
-	
-	<insert id="insertQuestion3"
-				parameterType="questionVO"	>  <!--고객센터에 문의내역 신고하기 등록  -->
-		INSERT INTO QUESTION
-		(QUESTIONNUMBER ,
-		 TITLE,
-		 CONTENT,
-		 TOPERSON,
-		 WRITER ,
-		 CATEGORY,
-		 MEMBERID) 
-		 VALUES
-		 (pro_seq.nextval,
-		  #{title},
-		  #{content},
-		  'admin' ,
-		  #{writer} , 
-		   3,
-		  #{memberId})
-	</insert>
-	
+	<!--상세보기별 문의 단건 조회 -->
+	<select id='getQuestionProbis' resultType="questionVO">
+		SELECT QUESTIONNUMBER
+		, TITLE
+		, CALENDAR
+		, CONTENT
+		, WRITER
+		, TOPERSON
+		, CATEGORY
+		, MEMBERID
+		, PROBISNUMBER
+		FROM QUESTION
+		WHERE QUESTIONNUMBER=#{questionNumber}
+	</select>
 </mapper>

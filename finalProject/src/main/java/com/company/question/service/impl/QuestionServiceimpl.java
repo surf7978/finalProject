@@ -160,5 +160,23 @@ public class QuestionServiceimpl implements QuestionService {
 	public int getCount(QuestionVO vo) {
 		return QuestionMapper.getCount(vo);
 	}
+	
+	
+	//나경
+	//병원, 카페 등 상품 상세보기에서 상품문의글 등록
+	@Override
+	public int insertQuestionBusi(QuestionVO vo) {
+		return QuestionMapper.insertQuestionBusi(vo);
+	}
+	//병원, 카페 등 상품 상세보기에서 상품문의글 리스트조회
+	@Override
+	public List<QuestionVO> getSearchQuestionProbis(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestionProbis(vo);
+	}
+	//병원, 카페 등 상품 상세보기에서 상품문의글 단건조회
+	@Override
+	public QuestionVO getQuestionProbis(QuestionVO vo) {
+		return QuestionMapper.getQuestionProbis(vo);	
+	}
 
 }
