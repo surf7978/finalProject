@@ -107,5 +107,8 @@
 		  #{memberId})
 	</insert>
 	
+	<!-- 나경 -->
+	<insert id="insertQuestionNK" parameterType="questionVO"	>
+	</insert>
 	
 </mapper>

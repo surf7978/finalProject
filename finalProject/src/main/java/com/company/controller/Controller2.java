@@ -275,6 +275,9 @@ public class Controller2 {
 		writer.close();
 	}
 	
+	//상세조회에서 상품문의 등록페이지 이동
+	
+	//상세조회에서 상품문의 등록처리
 	
 	
 	
