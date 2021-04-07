@@ -236,7 +236,7 @@ public class Controller1 {
 	public Model getSearchReviewD(ReviewVO vo, Model model) {
 		return model.addAttribute("review", reviewService.getSearchReview(vo));
 	}
-	 
+	
 	//구매평 단건리스트 출력(ajax로 같은 페이지 출력)
 	@RequestMapping("/getReview99")
 	@ResponseBody
