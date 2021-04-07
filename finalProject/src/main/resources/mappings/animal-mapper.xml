@@ -60,6 +60,6 @@
 	<!-- 반려동물 삭제 -->
 	<delete id="deleteAnimal" parameterType="AnimalVO">
 		DELETE FROM ANIMAL
-		WHERE ANIMALNUMBER = #{animalNumber}
+		WHERE memberId = #{memberId}
 	</delete>
 </mapper>

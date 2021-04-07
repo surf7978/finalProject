@@ -154,14 +154,45 @@
 					<div class="depart-btn">
 						<i class="ti-menu"></i> <span>메뉴</span>
 						<ul class="depart-hover">
-							<li class="active"><a href="#">Women’s Clothing</a></li>
-							<li><a href="#">Men’s Clothing</a></li>
-							<li><a href="#">Underwear</a></li>
-							<li><a href="#">Kid's Clothing</a></li>
-							<li><a href="#">Brand Fashion</a></li>
-							<li><a href="#">Accessories/Shoes</a></li>
-							<li><a href="#">Luxury Brands</a></li>
-							<li><a href="#">Brand Outdoor Apparel</a></li>
+							<li><a href="getSearchProductForm">쇼핑몰</a></li>
+							<li><a href="getSearchHospital">병원</a></li>
+							<li><a href="#">카페</a></li>
+							<li><a href="#">호텔</a></li>
+							<li><a href="#">펫택시</a></li>
+							<li><a href="#">교육</a></li>
+							<li><a href="#">미용</a></li>
+							<li><a href="#">보호소</a></li>
+							<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>
+							<li><a href="getSearchEventAndNoticeSelect?category=1">이벤트</a></li>
+							<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
+							<li><a href="getSearchBoardCategiry2">자랑하기</a></li>
+							<li><a href="#">자주하는질문</a></li>
+							<li><a href="getSearchQuestionCr4">문의하기</a></li>
+							<li><a href="#">환불규정</a></li>
+							<li><a href="#">회원혜택</a></li>
+							<c:if test="${empty loginID}">
+								<li><a href="loginForm">로그인</a></li>
+							</c:if>
+							<c:if test="${not empty loginID}">
+									<li><a href="getSearchQuestion">문의내역보기</a></li>
+									<li><a href="getSearchAnswer">답변내역보기</a></li>
+									<c:if test="${loginAuth eq 'm'}">
+										<c:if test="${loginID ne 'admin'}">
+											<li><a href="getMember1">회원정보조회</a></li>
+										</c:if>
+										<c:if test="${loginID eq 'admin'}">
+											<li><a href="getSearchViewMember">회원정보조회</a></li>
+											<li><a href="getSearchBoard">게시글관리</a></li>
+										</c:if>
+									</c:if>
+									<c:if test="${loginAuth eq 'b'}">
+										<li><a href="getBusiness">회원정보조회</a></li>
+										<li><a href="#">게시글관리</a></li>
+									</c:if>
+									<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
+									<li><a href="getSearchAnimal">마이펫수첩</a></li>
+									<li><a href="logout">로그아웃</a></li>
+							</c:if>
 						</ul>
 					</div>
 				</div>
@@ -174,26 +205,27 @@
 						<li><a href="getSearchHospital">병원</a></li>
 						<li><a href="#">카페/호텔/펫택시</a>
 							<ul class="dropdown">
-								<li><a href="#">Men's</a></li>
-								<li><a href="#">Women's</a></li>
-								<li><a href="#">Kid's</a></li>
+								<li><a href="#">카페</a></li>
+								<li><a href="#">호텔</a></li>
+								<li><a href="#">펫택시</a></li>
 							</ul></li>
 						<li><a href="#">교육/미용/보호소</a>
 							<ul class="dropdown">
-								<li><a href="#">Men's</a></li>
-								<li><a href="#">Women's</a></li>
-								<li><a href="#">Kid's</a></li>
+								<li><a href="#">교육</a></li>
+								<li><a href="#">미용</a></li>
+								<li><a href="#">보호소</a></li>
 							</ul></li>
 						<li><a href="#">커뮤니티</a>
 							<ul class="dropdown">
-								<li><a href="getSearchEventAndNotice">공지사항&이벤트</a></li>
-								<li><a href="getSearchBoard">자유게시판</a></li>
-								<li><a href="#">자랑하기</a></li>
+								<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>
+								<li><a href="getSearchEventAndNoticeSelect?category=1">이벤트</a></li>
+								<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
+								<li><a href="getSearchBoardCategiry2">자랑하기</a></li>
 							</ul></li>
 						<li><a href="#">고객센터</a>
 							<ul class="dropdown">
 								<li><a href="#">자주하는질문</a></li>
-								<li><a href="#">문의하기</a></li>
+								<li><a href="getSearchQuestionCr4">문의하기</a></li>
 								<li><a href="#">환불규정</a></li>
 								<li><a href="#">회원혜택</a></li>
 							</ul></li>
