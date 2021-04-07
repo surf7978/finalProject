@@ -85,11 +85,9 @@
 				OR LOCATION LIKE '%' || #{searchValue} || '%'
 			</when>
 			<!-- 전체가 아닌 경우 -->
-			<when test="search != null">
-				WHERE #{search} LIKE '%' || #{searchValue} || '%'
+			<when test="search != null and search != ''">
+				WHERE ${search} LIKE '%' || #{searchValue} || '%'
 			</when>
-			<otherwise>
-			</otherwise>
 		</choose>
 	</sql>
 </mapper>

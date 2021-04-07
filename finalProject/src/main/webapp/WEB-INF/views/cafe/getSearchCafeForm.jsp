@@ -16,12 +16,10 @@
 		insertCafe();
 		//페이지 내 검색
 		searchInPage();
-		//전체 페이지 검색
-		searchAllPage();
 		//상세보기
 		getCafe();
 		//전체 리스트
-		getSearchCafe();
+		getSearchCafe(1);
 	});//end of function
 
 	//등록 폼
@@ -44,14 +42,6 @@
 				});//end of searchData
 	}//end of searchInPage
 	
-	//전체 페이지 조회
-	function searchAllPage(){
-		$("#searchAllPage").on("click", function() {
-			searchAndInsert.page.value;
-			searchAndInsert.submit();
-		})
-	}//end of searchAllPage
-	
 	//상세보기
 	function getCafe() {
 		//li 태그 클릭 로직 짜기
@@ -62,6 +52,7 @@
 
 	//전체 리스트
 	function getSearchCafe(p) {
+		searchAndInsert.page.value=p;
 		//cafe 리스트
 		$.ajax({
 			url : "getSearchCafe",
@@ -124,16 +115,17 @@
 		<div id="pro_location"></div>
 		<div id="show"></div>
 		<div id="searchDiv">
-			<form id="searchAndInsert" action="">
+			<form id="searchAndInsert">
 				<input type = "hidden" name = "page" value = "1">
 				<select name="search">
+					<option value=""></option>
 					<option value="all">이름+가격+지역</option>
 					<option value="name">이름</option>
 					<option value="price">가격</option>
 					<option value="location">지역</option>
 				</select>
 				<input type="text" name ="searchValue">
-				<button type="button" id="searchAllPage">검색</button>
+				<button type="button" id = "searchAllPage" onclick="getSearchCafe(1)">검색</button>
 			</form>
 		</div>
 		<button type="button" id="insertCafe">상품등록</button>
