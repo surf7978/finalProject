@@ -32,7 +32,7 @@
 	WHERE BOARDNUMBER=#{boardNumber}
 	</delete>
 
-	<!--여기서 부터 만드러야됨! 							 -->
+
 	
 	<!--  1번 자유게시판 조회 -->
 	<select id="getSearchBoardCategiry1" resultType="boardVO"
