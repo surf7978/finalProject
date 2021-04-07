@@ -9,7 +9,7 @@
 		FROM QUESTION
 		<!-- 수정필요 -->
 	</select>
-	<!-- 문의내역 등록 -->
+	<!-- 사업자가 관리자에게 문의내역 등록 -->
 	<insert id="insertQuestion">
 		INSERT INTO QUESTION(
 		TITLE,
@@ -98,7 +98,7 @@
 		 CATEGORY,
 		 MEMBERID) 
 		 VALUES
-		 (pro_seq.nextval,
+		 (QUE_SEQ.NEXTVAL,
 		  #{title},
 		  #{content},
 		  'admin' ,
@@ -108,7 +108,48 @@
 	</insert>
 	
 	<!-- 나경 -->
-	<insert id="insertQuestionNK" parameterType="questionVO"	>
+	<!-- 상품문의등록(사업자 상세보기에서 문의글 등록) -->
+	<insert id="insertQuestionBusi" parameterType="questionVO">
+		INSERT INTO QUESTION (
+					QUESTIONNUMBER
+				  , TITLE
+				  , CALENDAR
+				  , CONTENT
+				  , WRITER
+				  , TOPERSON
+				  , CATEGORY
+				  , MEMBERID
+					) VALUES(
+					QUE_SEQ.NEXTVAL
+				  , #{title}
+				  , SYSDATE
+				  , #{content}
+				  , #{writer}
+				  , #{businessId}
+				  , 1
+				  , #{memberId})
+	</insert>
+	
+	<!-- 상품문의등록(쇼핑몰 상세보기에서 문의글 등록) -->
+	<insert id="insertQuestionPro" parameterType="questionVO">
+		INSERT INTO QUESTION (
+					QUESTIONNUMBER
+				  , TITLE
+				  , CALENDAR
+				  , CONTENT
+				  , WRITER
+				  , TOPERSON
+				  , CATEGORY
+				  , MEMBERID
+					) VALUES(
+					QUE_SEQ.NEXTVAL
+				  , #{title}
+				  , SYSDATE
+				  , #{content}
+				  , #{writer}
+				  , #{memberId}
+				  , 1
+				  , #{memberId})
 	</insert>
 	
 </mapper>

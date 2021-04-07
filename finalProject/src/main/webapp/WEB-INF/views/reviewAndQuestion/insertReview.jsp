@@ -34,6 +34,7 @@
 </tr>
 </table>
 <button type="submit">등록하기</button>
+<button type="button" onclick="window.close()">취소</button>
 </form>
 </body>
 </html>

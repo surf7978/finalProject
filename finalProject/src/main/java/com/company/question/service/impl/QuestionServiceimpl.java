@@ -83,5 +83,11 @@ public class QuestionServiceimpl implements QuestionService {
 	public int getCount(QuestionVO vo) {
 		return QuestionMapper.getCount(vo);
 	}
+	
+	//병원, 카페 등 상품 상세보기에서 상품문의글 등록
+	@Override
+	public int insertQuestionBusi(QuestionVO vo) {
+		return QuestionMapper.insertQuestionBusi(vo);
+	}
 
 }

@@ -30,6 +30,7 @@ import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
+import com.company.question.service.QuestionService;
 import com.company.reservation.service.ReservationService;
 import com.company.reservation.service.ReservationVO;
 import com.company.review.service.ReviewService;
@@ -60,6 +61,8 @@ public class Controller2 {
 	ReservationService reservationService;
 	@Autowired
 	ReviewService reviewService;
+	@Autowired
+	QuestionService questionService;
 
 	// 일반회원 본인정보 조회
 	@RequestMapping("/getMember1")
@@ -293,6 +296,12 @@ public class Controller2 {
 	}
 	
 	//상세조회에서 상품문의 등록페이지 이동
+	@GetMapping("/insertQuestionBusi")
+	public String insertQuestionBusi(MemberVO vo, Model model, HttpSession session ) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
+		model.addAttribute("member", memberService.getMember(vo));
+		return "reviewAndQuestion/insertQuestion";
+	}
 	
 	//상세조회에서 상품문의 등록처리
 	

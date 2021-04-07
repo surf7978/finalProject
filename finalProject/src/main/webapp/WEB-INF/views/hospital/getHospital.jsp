@@ -58,7 +58,7 @@
 		</div>
 		<div class="getReviewResult"></div>
 	</c:forEach>
-문의내역: <button type="button" id="insertQuestion" onclick="window.open('insertQuestion','insertReview','width=800, height=800')">상품 문의하기</button>
+문의내역: <button type="button" id="insertQuestion" onclick="window.open('insertQuestionBusi','insertReview','width=800, height=800')">상품 문의하기</button>
 
 </body>
 </html>

@@ -18,4 +18,7 @@ public interface QuestionMapper {
 	public int deleteQuestion(QuestionVO vo);
 	
 	public int getCount(QuestionVO vo); // DB레코드 카운트
+	
+	//나경
+	public int insertQuestionBusi(QuestionVO vo);	//병원, 카페 등 상품 상세보기에서 상품문의글 등록
 }
