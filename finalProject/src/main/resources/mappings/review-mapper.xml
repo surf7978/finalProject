@@ -25,4 +25,9 @@
 				, #{probisNumber}
 				, #{memberId}	)
 </insert>
+	<select id="getSearchReview" parameterType="reviewVO" resultType="reviewVO">
+		SELECT 
+			*
+		FROM Review
+	</select>
 </mapper>

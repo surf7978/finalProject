@@ -60,7 +60,7 @@
 		
 	</select>
 	
-	<!-- 찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영-->
+<!-- 찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영-->
 	
 	<select id="getSearchQuestionCr4" resultType="questionVO">	<!-- 문의하기 전체조회 -->
 	SELECT * FROM QUESTION
@@ -70,21 +70,109 @@
 	WHERE CATEGORY=1
 	ORDER BY WRITER ASC	
 	</select>
+	
 	<select id="getSearchQuestionSelect2" resultType="questionVO"> <!-- 2번 고객센터문의전체조회 -->
 	SELECT * FROM QUESTION 
 	WHERE CATEGORY=2
+	AND TOPERSON='admin'
 	ORDER BY WRITER ASC	
 	</select>
+	
+	
+	
+	
+	
 	<select id="getSearchQuestionSelect3" resultType="questionVO"> <!-- 3번 신고하기전체조회 -->
 	SELECT * FROM QUESTION 
 	WHERE CATEGORY=3
+	AND TOPERSON='admin'
 	ORDER BY WRITER ASC	
 	</select>
+
+	<select id="getQuestion1" resultType="questionVO"
+						  parameterType="questionVO">	<!-- 문의하기 1번 상품문의 단건조회  -->
+	SELECT * FROM QUESTION 
+	WHERE QUESTIONNUMBER=#{questionNumber}
+	</select>
+	
+	<select id="getQuestion2" resultType="questionVO"
+						  parameterType="questionVO">	<!-- 문의하기 2번 문희하기 단건조회  -->
+	SELECT * FROM QUESTION 
+	WHERE QUESTIONNUMBER=#{questionNumber}
+	</select>
+	
 	<select id="getQuestion3" resultType="questionVO"
 						  parameterType="questionVO">	<!-- 문의하기 3번 신고하기 단건조회  -->
 	SELECT * FROM QUESTION 
-	WHERE TITLE=#{title}
+	WHERE QUESTIONNUMBER=#{questionNumber}
 	</select>
+	
+		<select id="getQuestion1Ans" resultType="questionVO"
+						  parameterType="questionVO">	<!-- 문의하기 1번 상품 문의 하기 단건조회  -->
+	SELECT * FROM QUESTION 
+	WHERE QUESTIONNUMBER=#{questionNumber}
+	</select>	
+	
+	
+	
+	
+	<select id="getQuestion2Ans" resultType="questionVO"
+						  parameterType="questionVO">	<!-- 문의하기 2번 신고하기 단건조회  -->
+	SELECT * FROM QUESTION 
+	WHERE QUESTIONNUMBER=#{questionNumber}
+	</select>	
+	
+	
+	
+	
+	
+	<select id="getQuestion3Ans" resultType="questionVO"
+						  parameterType="questionVO">	<!-- 문의하기 3번 신고하기 단건조회  -->
+	SELECT * FROM QUESTION 
+	WHERE QUESTIONNUMBER=#{questionNumber}
+	</select>
+	
+		<insert id="insertQuestion1"
+				parameterType="questionVO"	>  <!--상품문의 문의내역 문의 등록  -->
+		INSERT INTO QUESTION
+		(QUESTIONNUMBER ,
+		 TITLE,
+		 CONTENT,
+		 TOPERSON,
+		 WRITER ,
+		 CATEGORY,
+		 MEMBERID) 
+		 VALUES
+		 (pro_seq.nextval,
+		  #{title},
+		  #{content},
+		  'admin' ,
+		  #{writer} , 
+		   3,
+		  #{memberId})
+	</insert>
+	
+	
+	<insert id="insertQuestion2"
+				parameterType="questionVO"	>  <!--고객센터에 문의내역 고객센터 문의 등록  -->
+		INSERT INTO QUESTION
+		(QUESTIONNUMBER ,
+		 TITLE,
+		 CONTENT,
+		 TOPERSON,
+		 WRITER ,
+		 CATEGORY,
+		 MEMBERID) 
+		 VALUES
+		 (pro_seq.nextval,
+		  #{title},
+		  #{content},
+		  'admin' ,
+		  #{writer} , 
+		   2,
+		  #{memberId})
+	</insert>
+	
 	
 	
 	<insert id="insertQuestion3"
@@ -106,6 +194,5 @@
 		   3,
 		  #{memberId})
 	</insert>
-	
 	
 </mapper>

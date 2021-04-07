@@ -203,7 +203,7 @@ public class Controller2 {
 	
 	//병원 상세조회 + 구매평 전체리스트 출력
 	@RequestMapping("/getHospital99")
-	public String getHospital99(HospitalVO vo, Model model, String hospitalNumber, HttpSession session, ReviewVO vo2) {
+	public String getHospital99(HospitalVO vo, Model model, String hospitalNumber, HttpSession session) {
 		vo.setHospitalNumber(hospitalNumber);
 		model.addAttribute("hospital", hospitalService.getHospital(vo));
 			
@@ -212,9 +212,11 @@ public class Controller2 {
 		vo1.setBisNumber(hospitalNumber);
 		model.addAttribute("reservation", reservationService.getViewReservation(vo1));
 		
+		ReviewVO vo2 = new ReviewVO();
 		Controller1 c1 = new Controller1();
 		c1.getSearchReviewD(vo2, model);
-		return "hospital/getHospital";
+		model.addAttribute("review", c1.getSearchReviewD(vo2, model));
+		return "hospital/getHospital99";
 	}
 	
 	
