@@ -20,7 +20,7 @@
 가입일: ${member.startDate} <br> 
 	
 	<a href="updateMember">수정하기</a>
-	<a href="deleteMember">탈퇴</a>
+	<a href="membershipCancel?ID=${member.memberId}">탈퇴</a>
 	<a href="/home">홈으로</a>
 </body>
 </html>

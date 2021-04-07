@@ -200,7 +200,24 @@ public class Controller2 {
 		model.addAttribute("reservation", reservationService.getViewReservation(vo1));
 		return "hospital/getHospital";
 	}
-
+	
+	//병원 상세조회 + 구매평 전체리스트 출력
+	@RequestMapping("/getHospital99")
+	public String getHospital99(HospitalVO vo, Model model, String hospitalNumber, HttpSession session, ReviewVO vo2) {
+		vo.setHospitalNumber(hospitalNumber);
+		model.addAttribute("hospital", hospitalService.getHospital(vo));
+			
+		ReservationVO vo1 = new ReservationVO();
+		vo1.setMemberId((String) session.getAttribute("loginID"));
+		vo1.setBisNumber(hospitalNumber);
+		model.addAttribute("reservation", reservationService.getViewReservation(vo1));
+		
+		Controller1 c1 = new Controller1();
+		c1.getSearchReviewD(vo2, model);
+		return "hospital/getHospital";
+	}
+	
+	
 	// 병원상품 등록 페이지
 	@GetMapping("/insertHospital")
 	public String insertHospitalForm(BusinessVO vo, Model model, HttpSession session) {

@@ -210,7 +210,7 @@
 												<li><a href="getMember1">회원정보조회</a></li>
 											</c:if>
 											<c:if test="${loginID eq 'admin'}">
-												<li><a href="getSearchMember">회원정보조회</a></li>
+												<li><a href="getSearchViewMember">회원정보조회</a></li>
 												<li><a href="getSearchBoard">게시글관리</a></li>
 											</c:if>
 										</c:if>

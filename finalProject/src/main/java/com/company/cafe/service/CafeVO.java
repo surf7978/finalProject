@@ -12,8 +12,8 @@ public class CafeVO {
 	String price;
 	String location;
 	String businessNumber;
-	String tImage;
-	String image;
+	String image1;
+	String image2;
 	// upload
 	MultipartFile uploadFile;
 	MultipartFile t_uploadFile;
