@@ -12,5 +12,6 @@ public class QuestionVO {
 	String toPerson;
 	String category;
 	String memberId;
-
+	String businessId;	//insertQuestionBusi쿼리용으로 추가
+	String probisNumber;	//제품번호별 문의글 리스트출력하기위해 추가
 }

@@ -29,45 +29,45 @@
 				<tr>
 					<td>지역</td>
 					<td><select name="location">
-							<option value="강남구">강남구</option>
-							<option value="강동구">강동구</option>
-							<option value="강북구">강북구</option>
-							<option value="강서구">강서구</option>
-							<option value="관악구">관악구</option>
-							<option value="광진구">광진구</option>
-							<option value="노원구">노원구</option>
-							<option value="도봉구">도봉구</option>
-							<option value="동작구">동작구</option>
-							<option value="마포구">마포구</option>
-							<option value="서대문구">서대문구</option>
-							<option value="서초구">서초구</option>
-							<option value="성동구">성동구</option>
-							<option value="성북구">성북구</option>
-							<option value="송파구">송파구</option>
-							<option value="양천구">양천구</option>
-							<option value="영등포구">영등포구</option>
-							<option value="용산구">용산구</option>
-							<option value="은평구">은평구</option>
-							<option value="중랑구">중랑구</option>
-							<option value="경기전체">경기전체</option>
-							<option value="경기북부">경기북부</option>
-							<option value="경기남부">경기남부</option>
-							<option value="인천전체">인천전체</option>
-							<option value="경상도전체">경상도전체</option>
-							<option value="대구/북부">대구/북부</option>
-							<option value="부산/남부">부산/남부</option>
-							<option value="강원도전체">강원도전체</option>
-							<option value="충청도전체">충청도전체</option>
-							<option value="전라도전체">전라도전체</option>
+							<option value="서울 강남구">강남구</option>
+							<option value="서울 강동구">강동구</option>
+							<option value="서울 강북구">강북구</option>
+							<option value="서울 강서구">강서구</option>
+							<option value="서울 관악구">관악구</option>
+							<option value="서울 광진구">광진구</option>
+							<option value="서울 노원구">노원구</option>
+							<option value="서울 도봉구">도봉구</option>
+							<option value="서울 동작구">동작구</option>
+							<option value="서울 마포구">마포구</option>
+							<option value="서울 서대문구">서대문구</option>
+							<option value="서울 서초구">서초구</option>
+							<option value="서울 성동구">성동구</option>
+							<option value="서울 성북구">성북구</option>
+							<option value="서울 송파구">송파구</option>
+							<option value="서울 양천구">양천구</option>
+							<option value="서울 영등포구">영등포구</option>
+							<option value="서울 용산구">용산구</option>
+							<option value="서울 은평구">은평구</option>
+							<option value="서울 중랑구">중랑구</option>
+							<option value="경기">경기전체</option>
+							<option value="경기 북부">경기북부</option>
+							<option value="경기 남부">경기남부</option>
+							<option value="인천">인천전체</option>
+							<option value="경상도">경상도전체</option>
+							<option value="대구">대구/북부</option>
+							<option value="부산">부산/남부</option>
+							<option value="강원도">강원도전체</option>
+							<option value="충청도">충청도전체</option>
+							<option value="전라도">전라도전체</option>
 					</select></td>
 				<tr>
 					<td>대표이미지</td>
-					<td><input type="file" id="tImage" name="t_uploadFile"
+					<td><input type="file" id="image1" name="t_uploadFile"
 						multiple="multiple"></td>
 				</tr>
 				<tr>
 					<td>이미지</td>
-					<td><input type="file" id="image" name="uploadFile"
+					<td><input type="file" id="image2" name="uploadFile"
 						multiple="multiple"></td>
 				</tr>
 			</table>

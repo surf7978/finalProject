@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.board.service.impl.BoardMapper">
-
+	
+	<!--관리자가 게시판을 전체 조회  -->
 	<select id="getSearchBoard" resultType="boardVO">
 		SELECT * FROM BOARD
 	</select>

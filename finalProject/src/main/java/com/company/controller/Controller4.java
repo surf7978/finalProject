@@ -1,6 +1,9 @@
 package com.company.controller;
 
-import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,12 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
-import com.company.answer.service.AnswerVO;
 import com.company.board.service.BoardService;
 import com.company.board.service.BoardVO;
+import com.company.common.FileRenamePolicy;
 import com.company.eventAndNotice.service.EventAndNoticeService;
 import com.company.eventAndNotice.service.EventAndNoticeVO;
 import com.company.member.service.MemberService;
@@ -79,7 +83,7 @@ public class Controller4 {
 	}
 	//맴버 단건조회
 	@GetMapping("/getMemberCr4")
-	public String getMember(MemberVO vo , Model model, HttpSession session) {
+	public String getMember(MemberVO vo , Model model) {
 		// session 값 조회
 		System.out.println(vo);
 		//맴버정보 조회
@@ -154,7 +158,7 @@ public class Controller4 {
 		model.addAttribute("board",boardService.getBoard(vo));
 		return "board/getBoard";
 	}
-	
+
 	
 	
 	//게시판 수정버튼 
@@ -212,14 +216,45 @@ public class Controller4 {
 	// 1번 자유게시판 글쓰기
 	@GetMapping("/insertBoard")	
 	public String insertBoard() {
-	
 		return "board/insertBoard";
 	}
 	
 	// 1번 자유게시판 글쓰기 처리
 	@PostMapping("/insertBoard")	
-	public String insertBoardProc(BoardVO vo) {
+	public String insertBoardProc(BoardVO vo , HttpServletRequest request) throws IllegalStateException, IOException {
 		System.out.println(vo);
+		//첨부파일처리
+		//pom , servlet에 추가
+		MultipartFile image = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/board1");
+		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+		System.out.println("경로: "+ path);
+		if(image != null && !image.isEmpty() && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			//파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			image.transferTo(rename);	// transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함) 
+			vo.setImage(rename.getName());
+			
+		}
+		
+		if(t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+			String filename = t_image.getOriginalFilename();
+			//파일명 중복체크 ->rename
+			File rename = FileRenamePolicy.rename(new File(path ,filename));
+			//업로드된 파일명
+			//rename.getName()
+			//파일명을 읽어내는게 getName()
+			//임시폴더에서 업로드 폴더로 파일이동
+			t_image.transferTo(rename);//transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+			vo.setT_image(rename.getName());
+		}
+	// 			String path = "resources/images";
 		boardService.insertBoard(vo);
 		return "redirect:/getSearchBoardCategiry1";
 	}
@@ -236,8 +271,40 @@ public class Controller4 {
 	
 	//2번 자랑하기 글쓰기 글쓰기 처리
 	@PostMapping("/insertBoard2")	
-	public String insertBoard2Proc(BoardVO vo) {
+	public String insertBoard2Proc(BoardVO vo , HttpServletRequest request) throws IllegalStateException, IOException{
 		System.out.println(vo);
+		//첨부파일처리
+		//pom , servlet에 추가
+		MultipartFile image = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/board2");
+		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+		System.out.println("경로: "+ path);
+		if(image != null && !image.isEmpty() && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			//파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			image.transferTo(rename);	// transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함) 
+			vo.setImage(rename.getName());
+			
+		}
+		
+		if(t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+			String filename = t_image.getOriginalFilename();
+			//파일명 중복체크 ->rename
+			File rename = FileRenamePolicy.rename(new File(path ,filename));
+			//업로드된 파일명
+			//rename.getName()
+			//파일명을 읽어내는게 getName()
+			//임시폴더에서 업로드 폴더로 파일이동
+			t_image.transferTo(rename);//transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+			vo.setT_image(rename.getName());
+		}
+	// 			String path = "resources/images";
 		boardService.insertBoard2(vo);
 		return "redirect:/getSearchBoardCategiry2";
 	}

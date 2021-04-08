@@ -156,7 +156,7 @@
 						<ul class="depart-hover">
 							<li><a href="getSearchProductForm">쇼핑몰</a></li>
 							<li><a href="getSearchHospital">병원</a></li>
-							<li><a href="#">카페</a></li>
+							<li><a href="getSearchCafeForm">카페</a></li>
 							<li><a href="#">호텔</a></li>
 							<li><a href="#">펫택시</a></li>
 							<li><a href="#">교육</a></li>
@@ -203,7 +203,7 @@
 						 -->
 						<li><a href="getSearchProductForm">쇼핑몰</a></li>
 						<li><a href="getSearchHospital">병원</a></li>
-						<li><a href="#">카페/호텔/펫택시</a>
+						<li><a href="getSearchListForm">카페/호텔/펫택시</a>
 							<ul class="dropdown">
 								<li><a href="#">카페</a></li>
 								<li><a href="#">호텔</a></li>
