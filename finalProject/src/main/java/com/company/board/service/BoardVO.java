@@ -16,18 +16,9 @@ public class BoardVO {
 	String views;
 	String category;
 	String memberId;
-<<<<<<< HEAD
-=======
 	String t_image;
->>>>>>> branch 'master' of https://github.com/surf7978/finalProject.git
 	MultipartFile uploadFile;
 	MultipartFile t_uploadFile;
-<<<<<<< HEAD
-	
-	
 
-
-=======
->>>>>>> branch 'master' of https://github.com/surf7978/finalProject.git
 }
 
