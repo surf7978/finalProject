@@ -107,6 +107,10 @@
 			<when test="searchLocation != null">
 				WHERE LOCATION LIKE '%' || #{searchLocation} || '%'
 			</when>
+			<!-- 카테고리 3개 분류 -->
+			<when test="category1 != null and category1 != '' ">
+				WHERE CATEGORY1 = #{category1}
+			</when>
 		</choose>
 	</sql>
 </mapper>

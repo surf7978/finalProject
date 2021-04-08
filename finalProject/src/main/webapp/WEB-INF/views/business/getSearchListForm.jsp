@@ -19,14 +19,13 @@ a {
 }
 </style>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	//호출시 첫 화면
 	$(function() {
 		//채크박스
 		checkbox();
-		//채크박스2
-		checkbox2();
 		//상세보기
 		getCafe();
 		//전체 리스트
@@ -35,11 +34,6 @@ a {
 	
 	//채크박스
 	function checkbox(){
-		
-	}//end of checkbox
-	
-	//채크박스2
-	function checkbox2(){
 		$.ajax({
 			url:"resources/js/location.json",
 			dataType:"json",
@@ -64,7 +58,7 @@ a {
 			//console.log(val);
 			getSearchList1(1);
 		})//end of input
-	}//enf of checkbox2
+	}//enf of checkbox
 	
 	//상세보기
 	function getCafe() {
@@ -75,9 +69,15 @@ a {
 	}//end of getCafe
 
 	//전체 리스트
-	function getSearchList1(p) {
+	//매개변수값이 들어오는 이유를 명확하게 구분하기
+	//category1이라는 매개변수는 form 태그의 button 'cafe','hotel','taxi'를 눌렀을 때 들어오는 값을 의미함
+	//들어온 매개변수 값이 null이 아니며 undefined도 아닐 때 input type hidden의 value값에 넣어준다는 의미
+	//그때 mapper에 있는 where 조건절이 실행되며 쿼리문이 정상 작동함
+	function getSearchList1(p,category1) {
 		//page버튼 누를시 p값으로 들어옴
 		searchAndInsert.page.value = p;
+		if(category1 !=null && category1 !='undefined')
+			searchAndInsert.category1.value = category1;
 		//cafe 리스트 호출 ajax
 		$.ajax({
 			url : "getSearchList1",
@@ -138,35 +138,34 @@ a {
 	<div id="contents">
 		<h2>전체 리스트</h2>
 		<div id="menu" align="left">
-		<form id="searchAndInsert">
-			<ul>
-				<li><a href="">카페</a></li>
-				<li><a href="">호텔</a></li>
-				<li><a href="">택시</a></li>
-			</ul>
-			<br>
-			<ul>
-				<li><strong>지역구분</strong>
-					<div class="con">
-					</div>
-				</li>
-			</ul>
-			<br>	
-			<br>
+			<form id="searchAndInsert">
+				<input type="hidden" name="category1">
 				<ul>
-				<li><strong>결과 내 재검색</strong></li>
+					<li><a onclick="getSearchList1(1,'cafe')">카페</a></li>
+					<li><a onclick="getSearchList1(1,'hotel')">호텔</a></li>
+					<li><a onclick="getSearchList1(1,'taxi')">택시</a></li>
+				</ul>
+				<br>
+				<ul>
+					<li><strong>지역구분</strong>
+						<div class="con"></div></li>
+				</ul>
+				<br> <br>
+				<ul>
+					<li><strong>결과 내 재검색</strong></li>
 					<li><div>
-						<input type = "hidden" name = "page" value = "1">
+							<input type="hidden" name="page" value="1">
 							<select name="search">
-							<option value=""></option>
-							<option value="all">이름+가격+지역</option>
-							<option value="name">이름</option>
-							<option value="price">가격</option>
-							<option value="location">지역</option>
-						</select>
-						<input type="text" name ="searchValue"  placeholder="검색어 입력">
-						<button type="button" id = "searchAllPage" onclick="getSearchList1(1)">검색</button>
-					</div></li>
+								<option value=""></option>
+								<option value="all">이름+가격+지역</option>
+								<option value="name">이름</option>
+								<option value="price">가격</option>
+								<option value="location">지역</option>
+							</select>
+							<input type="text" name="searchValue" placeholder="검색어 입력">
+							<button type="button" id="searchAllPage" onclick="getSearchList1(1)">검색</button>
+						</div>
+					</li>
 				</ul>
 			</form>
 		</div>
