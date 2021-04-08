@@ -72,3 +72,13 @@ li{list-style:none;}
 #pro_contentwrap ul li:last-child{border-right:1px solid #f0f1f2;}
 #contents #getproduct #pro_contentwrap ul li a{font-size:20px;}
 #contents #getproduct #pro_contentwrap  #pro_content{margin-top:50px;}
+#contents #pro_location{display:flex;position:relative;height:100px;}
+#contents #pro_location ul {width:100%;width:100%;}
+#contents #pro_location ul li{float: left;padding:5px 20px;cursor:pointer;}
+#contents #pro_location ul li a{font-size:13px;}
+#contents #pro_location ul li a:hover{color:#e7ab3c;text-decoration: underline;}
+#contents #pro_location ul li label{margin:0 10px;cursor:pointer;}
+#contents #pro_location ul li div {bottom:0;position:absolute;width:100%;left:0;text-align:left;display:none;font-size:13px;border-top:#e0e0e0 1px solid;border-bottom:#e0e0e0 1px solid;padding:20px;}
+#contents #pro_location ul li:first-child div{display:block;}
+#contents #pro_location ul li a.after{color:#e7ab3c;text-decoration: underline;}
+
