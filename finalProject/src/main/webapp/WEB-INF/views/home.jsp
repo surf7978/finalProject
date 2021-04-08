@@ -286,7 +286,6 @@
 </h1>
 	<h1>Hello world!</h1>
 	<P>The time on the server is ${serverTime}.</P>
-	<button onclick="window.open('calendar','예약','width=500; height:500;')">예약</button>
 	<c:if test="${empty loginID }">
 		<a href="loginForm">로그인</a>
 	</c:if>
