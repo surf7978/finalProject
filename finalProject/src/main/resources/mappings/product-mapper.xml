@@ -73,5 +73,25 @@
 		,#{memberId}
 		)
 	</insert>
+	<delete id="deleteProduct">
+		DELETE FROM PRODUCT
+		WHERE PRODUCTNUMBER = #{productNumber}
+	</delete>
+	<update id="updateProduct">
+		UPDATE PRODUCT
+			<set>				
+				<if test="productNumber">PRODUCTNUMBER = #{productNumber}</if>
+				<if test="category">,CATEGORY = #{category}</if>
+				<if test="category2">,CATEGORY2 = #{category2}</if>
+				<if test="image">,IMAGE = #{image}</if>
+				<if test="t_image">,T_IMAGE = #{t_image}</if>
+				<if test="productName">,PRODUCTNAME = #{productName}</if>
+				<if test="optionName">,OPTIONNAME = #{optionName}</if>
+				<if test="optionPrice">,OPTIONPRICE = #{optionPrice}</if>
+				<if test="productState">,PRODUCTSTATE = #{productState}</if>
+				<if test="memberId">,MEMBERID = #{memberId}</if>
+			</set>
+		WHERE PRODUCTNUMBER = #{productNumber}
+	</update>
 </mapper>
 <!-- 스프링 초기설정 오류방지용 -->

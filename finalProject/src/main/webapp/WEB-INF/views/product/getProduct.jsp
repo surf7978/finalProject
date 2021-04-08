@@ -39,11 +39,24 @@
 			var resultPrice = $("[name=resultPrice]").text();
 			location.href="PayInfo?productNumber=${product.productNumber }&resultPrice="+resultPrice;
 		});
+		$("#d_btn").on("click",function(){
+			if(confirm("삭제하시겟습니까")==true){
+				location.href="deleteProduct?productNumber=${product.productNumber }";				
+			}else{
+				return false;
+			}
+		});
+		$("#u_btn").on("click",function(){
+			location.href="updateProduct?productNumber=${product.productNumber }"
+		})
 	});
 </script>
 </head>
 <body>
 	<div id="contents">
+	<div>
+		<button id="u_btn">수정하기</button>
+		<button id="d_btn">삭제하기</button></div>
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
@@ -104,8 +117,6 @@
 				</div>
 			</div>
 		</div>
-		<button>수정하기</button>
-		<button>삭제하기</button>
 	</div>
 </body>
 </html>
