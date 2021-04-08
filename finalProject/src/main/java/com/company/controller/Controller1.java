@@ -292,6 +292,22 @@ public class Controller1 {
 		return "member/getSearchMember";
 	}
 	
+	//사업자-개인정보 조회
+	@GetMapping("/getBusiness99")
+	public String getBusiness99(HttpSession session, Model model) {
+		BusinessVO vo = new BusinessVO();
+		vo.setBusinessId((String) session.getAttribute("loginID"));
+		model.addAttribute("business", businessService.getBusiness(vo));
+		return "business/getBusiness99";
+	}
+	
+	@PostMapping("/updateBusiness99")
+	public String updateBusiness99(BusinessVO vo) {
+		businessService.updateBusiness(vo);
+		return "redirect:/getBusiness99";
+	}
+	
+	
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
 	@RequestMapping(value = "/", method = RequestMethod.GET)

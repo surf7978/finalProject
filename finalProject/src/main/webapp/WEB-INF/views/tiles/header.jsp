@@ -186,7 +186,7 @@
 										</c:if>
 									</c:if>
 									<c:if test="${loginAuth eq 'b'}">
-										<li><a href="getBusiness">회원정보조회</a></li>
+										<li><a href="getBusiness99">회원정보조회</a></li>
 										<li><a href="#">게시글관리</a></li>
 									</c:if>
 									<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
@@ -247,7 +247,7 @@
 											</c:if>
 										</c:if>
 										<c:if test="${loginAuth eq 'b'}">
-											<li><a href="getBusiness">회원정보조회</a></li>
+											<li><a href="getBusiness99">회원정보조회</a></li>
 											<li><a href="#">게시글관리</a></li>
 										</c:if>
 										<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>

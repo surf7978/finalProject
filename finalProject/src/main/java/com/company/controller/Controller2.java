@@ -81,15 +81,14 @@ public class Controller2 {
 		vo.setMemberId((String) session.getAttribute("loginID"));
 		vo = memberService.getMember(vo);
 		model.addAttribute("member", vo);
-		return "user/updateMember";
+		return "user/memberInfo";
 	}
 
 	// 회원수정
 	@PostMapping("/updateMember")
 	public String updateMemberProc(MemberVO vo, Model model) {
 		memberService.updateMember(vo);
-		model.addAttribute("member", vo);
-		return "redirect:/";
+		return "redirect:/updateMember";
 	}
 
 	// 회원탈퇴
