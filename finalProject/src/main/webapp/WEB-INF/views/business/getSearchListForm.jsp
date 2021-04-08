@@ -24,7 +24,7 @@ a {
 <script>
 	//호출시 첫 화면
 	$(function() {
-		//채크박스
+		//채크박스 생성
 		checkbox();
 		//상세보기
 		getCafe();
@@ -32,7 +32,7 @@ a {
 		getSearchList1(1);
 	});//end of function
 	
-	//채크박스
+	//채크박스 생성
 	function checkbox(){
 		$.ajax({
 			url:"resources/js/location.json",
@@ -68,7 +68,7 @@ a {
 		})
 	}//end of getCafe
 
-	//전체 리스트
+	//통합 리스트(AJAX)
 	//매개변수값이 들어오는 이유를 명확하게 구분하기
 	//category1이라는 매개변수는 form 태그의 button 'cafe','hotel','taxi'를 눌렀을 때 들어오는 값을 의미함
 	//들어온 매개변수 값이 null이 아니며 undefined도 아닐 때 input type hidden의 value값에 넣어준다는 의미
@@ -169,9 +169,7 @@ a {
 				</ul>
 			</form>
 		</div>
-		<div id="pro_location"></div>
 		<div id="show"></div>
-		<div id="searchDiv"></div>
 		<div id="paging"></div>
 	</div>
 </body>
