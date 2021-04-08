@@ -13,14 +13,13 @@
 	<div id="contents">
 		<form id="frm" name="frm">
 			<ul>
-			<li><img src="resources/images/cafe/${vo.image1}"></li>
-			<li>
-				<div>
-				<h3>${vo.name}</h3>
-				</div>
-				<div>
-									
-				</div>
+				<li><img src="resources/images/cafe/${vo.image1}"></li>
+				<li>${vo}</li>
+				<li>
+					<div>
+						<h3>${vo.name}</h3>
+					</div>
+				</li>
 			</ul>
 		</form>
 		<div class="menu">

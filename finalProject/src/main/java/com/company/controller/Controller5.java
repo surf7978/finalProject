@@ -43,6 +43,12 @@ import com.company.taxi.service.TaxiService;
  * 21.03.30 장바구니 1차 수정/택시 API대용으로 T map API or Kakao map API 사용 생각중
  * 21.03.31 마이페이지-사업자-3차 수정
  * 21.04.01 마이페이지-사업자(본인정보,문의,답변 마무리)
+ * 21.04.02 사업체-카페-전체리스트 1차 수정
+ * 21.04.05 사업체-카페-전체리스트 2차 수정
+ * 21.04.06 사업체-카페-전체리스트 3차 수정(Ajax,paging)
+ * 21.04.07 사업체-통합 리스트(Ajax,paging,search,checkbox)
+ * 21.04.08 사업체-통합 리스트 세분화(카테고리 별 검색 완)
+ * 21.04.09 
  */
 @Controller
 public class Controller5 {
@@ -346,7 +352,8 @@ public class Controller5 {
 		model.addAttribute("vo", vo);
 		return "cafe/getCafe";
 	}
-	//사업자-카페/호텔/택시 페이지 호출
+
+	// 사업자-카페/호텔/택시 페이지 호출
 	@RequestMapping("/getSearchListForm")
 	public String getSearchBusinessForm() {
 		return "business/getSearchListForm";
@@ -375,10 +382,72 @@ public class Controller5 {
 		// Cafe List
 		return map;
 	}// end of getSearchCafeProc
-	
-	//사업자-통합리스트2
-	
-	
+		// 사업자-통합상세페이지
+
+	@GetMapping("/getSearchInfo")
+	public String getSearchInfo() {
+		return "business/getSearchInfo";
+	}
+
+	// 사업자-통합 등록 폼
+	@GetMapping("/insertInfo")
+	public String insertInfo() {
+		return "business/insertInfo";
+	}// end of insertInfo
+
+	// 사업체-통합 등록 기능
+	@PostMapping("/insertInfo")
+	//통합이라 vo값을 어떻게 처리해야할지 
+	public void insertInfoProc(CafeVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
+			HttpServletResponse response) throws Exception {
+		// 사업자 번호를 어디서 가져올 것인지
+		// 1.session
+		// 2. id로 businessTable 조회
+		String id = session.getAttribute("loginID").toString();
+		bvo.setBusinessId(id);
+		bvo = businessService.getBusiness(bvo);
+		// 3. business의 사업자 번호 가져와 넣기
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		// 첨부파일처리
+		// 1.vo값 가져오기
+		MultipartFile image1 = vo.getT_uploadFile();
+		MultipartFile image2 = vo.getUploadFile();
+		// 2.저장될path설정
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/business");
+		// 3.중복채크
+		if (image1 != null && !image1.isEmpty() && image1.getSize() > 0) {
+			String filename = image1.getOriginalFilename();
+			// 파일명
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			image1.transferTo(rename);
+			vo.setImage1(rename.getName());
+		} // end of if
+
+		if (image2 != null && !image2.isEmpty() && image2.getSize() > 0) {
+			String filename = image2.getOriginalFilename();
+			// 파일명
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			image2.transferTo(rename);
+			vo.setImage2(rename.getName());
+		} // end of if
+		//
+			// 등록처리
+		int r = cafeService.insertCafe(vo);
+		//
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		if (r == 1) {
+			writer.print("<script>alert('등록되었습니다');location.href='getSearchListForm'</script>");
+		} else {
+			writer.print("<script>alert('오류..다시등록해주세요');location.href='insertInfo'</script>");
+		}
+		writer.close();
+
+	}// end of insertInfoProc
+
+	// 사업자-통합리스트2
+
 	// start of bCart
 	// 장바구니-페이지 호출
 	@GetMapping("/getSearchBCart")
