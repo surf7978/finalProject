@@ -64,7 +64,12 @@
                             <li>Accessories</li>
                         </ul>
                     </div>
+                    
+                    
+                    
                     <div class="product-slider owl-carousel">
+                    	<c:if test="${not empty product }">
+                    		<c:forEach items="${product }" var="list">
                         <div class="product-item">
                             <div class="pi-pic">
                                 <img src="resources/img/products/women-1.jpg" alt="">
@@ -89,6 +94,9 @@
                                 </div>
                             </div>
                         </div>
+                    		</c:forEach>
+                    	</c:if>
+                       										 <!-- 
                         <div class="product-item">
                             <div class="pi-pic">
                                 <img src="resources/img/products/women-2.jpg" alt="">
@@ -102,6 +110,7 @@
                                 </ul>
                             </div>
                             <div class="pi-text">
+
                                 <div class="catagory-name">Shoes</div>
                                 <a href="#">
                                     <h5>Guangzhou sweater</h5>
@@ -155,7 +164,11 @@
                                 </div>
                             </div>
                         </div>
+                                                 -->
                     </div>
+                    
+                    
+                    
                 </div>
             </div>
         </div>

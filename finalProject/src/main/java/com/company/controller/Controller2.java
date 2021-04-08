@@ -146,11 +146,10 @@ public class Controller2 {
 	}
 
 	// 반려동물 삭제
-	@DeleteMapping("/deleteAnimal")
-	public String deleteAnimal(AnimalVO vo, Model model) {
+	@RequestMapping("/deleteAnimal")
+	public String deleteAnimal(AnimalVO vo) {
 		animalService.deleteAnimal(vo);
-		model.addAttribute("animal", vo);
-		return "user/deleteMember";
+		return "redirect:/";
 	}
 
 	// 반려동물 등록 페이지

@@ -42,6 +42,11 @@ public class ProductServiceimpl implements ProductService{
 	public int getCount(ProductVO vo) {
 		return ProductMapper.getCount(vo);
 	}
+	//홈화면용 전체조회
+	@Override
+	public List<ProductVO> getSearchProduct99(ProductVO vo) {
+		return ProductMapper.getSearchProduct(vo);
+	}
 
 
 }
