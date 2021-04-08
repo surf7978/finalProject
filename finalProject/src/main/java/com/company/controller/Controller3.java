@@ -2,7 +2,9 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,9 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.abandonment.common.AbandonmentAPI;
-import com.company.board.service.BoardVO;
 import com.company.common.FileRenamePolicy;
+import com.company.common.Paging;
 import com.company.member.service.MemberService;
+import com.company.product.service.ProductSearchVO;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 
@@ -64,18 +67,32 @@ public class Controller3 {
 
 	// 쇼핑몰 리스트로 가기
 	@RequestMapping("/getSearchProductForm")
-	public String getSearchProductForm(ProductVO vo, Model model) {
-		model.addAttribute("product", productService.getSearchProduct(vo));
+	public String getSearchProductForm(ProductVO vo) {
 		return "product/getSearchProduct";
 	}
-
-	// 쇼핑몰 리스트
-	@RequestMapping("/getSearchProduct")
+	
+	//쇼핑몰리스트(ajax)
+	@GetMapping("/getSearchProduct")
 	@ResponseBody
-	public List<ProductVO> getSearchProduct(ProductVO vo) {
-		return productService.getSearchProduct(vo);		
-	}
-
+	public Map<String, Object> getSearchProduct(ProductSearchVO vo, Paging paging, String category, String category2 ){
+		Map<String, Object> map = new HashMap<String, Object>();
+		//1. 페이지 설정
+		paging.setPageUnit(6); //한페이지에 출력되는 레코드 건수 
+		paging.setPageSize(10); //보이는 페이지 번호
+		//2.초기페이지 설정
+		if(paging.getPage() == null)
+			paging.setPage(1);
+		//3. 값 추가
+		paging.setTotalRecord(productService.getCount(vo));
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		List<ProductVO> list = productService.getSearchProduct(vo);
+		map.put("paging", paging);
+		map.put("list", list);
+		
+		return map;		
+	}// end of getSearchProduct
+	
 	// 쇼핑몰 상세보기
 	@RequestMapping("/getProduct")
 	public String getProduct(ProductVO vo, Model model, String productNumber) {

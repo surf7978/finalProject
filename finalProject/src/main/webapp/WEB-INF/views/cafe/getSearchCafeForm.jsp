@@ -75,7 +75,6 @@
 				$("#show").append(ul);
 				var response = datas.list;
 				$(response).each(function(i) {
-
 							var cafeNumber = response[i].cafeNumber;
 							var image1 = response[i].image1;
 							var li = $("<li>");

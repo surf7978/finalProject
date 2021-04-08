@@ -7,8 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function() {
 		$("#optionName").on(
@@ -36,9 +35,10 @@
 			result.empty();
 			result.text("${product.optionPrice }" * plu)
 		});
-		$("b_btn").on("click", function(){
-			 onclick="location.href='PayInfo?productNumber=${product.productNumber}"
-		})
+		$("#contents").on("click", "#b_btn", function(){
+			var resultPrice = $("[name=resultPrice]").text();
+			location.href="PayInfo?productNumber=${product.productNumber }&resultPrice="+resultPrice;
+		});
 	});
 </script>
 </head>
