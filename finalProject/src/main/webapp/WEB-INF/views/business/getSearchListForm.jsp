@@ -35,17 +35,10 @@ a {
 	
 	//채크박스
 	function checkbox(){
-		var length = $("input[type=checkbox]").is(":checked");
-		$("input[type=checkbox]").on("click",function(){
-			for(var i = 0; i< length; i++) {
-			var val = $("input[type=checkbox]")[i].value;
-			console.log(val);
-			}
-			//getSearchList1();
-		})//end of input
+		
 	}//end of checkbox
 	
-	
+	//채크박스2
 	function checkbox2(){
 		$.ajax({
 			url:"resources/js/location.json",
@@ -57,14 +50,20 @@ a {
 					var input = $("<input>").attr({
 						type : "checkbox",
 						value : location,
-						id : location,
+					//	id : location,
+						name:"searchLocation",
 						class: "location"
 					});
 				var label = $("<label>").attr("for", location).text(location);
-				$("#checkbox").append(input, label);	
+				$(".con").append(input, label);	
 				})//end of each
 			}//end of success
 		});//enf of ajax
+		$(".con").on("click","input[type=checkbox]",function(){
+			var val = $(this).val();
+			//console.log(val);
+			getSearchList1(1);
+		})//end of input
 	}//enf of checkbox2
 	
 	//상세보기
@@ -149,39 +148,6 @@ a {
 			<ul>
 				<li><strong>지역구분</strong>
 					<div class="con">
-						<label><input type="checkbox" value="서울전체">서울전체</label>
-						<label><input type="checkbox" value="강남구">강남구</label>
-						<label><input type="checkbox" value="강동구">강동구</label>
-						<label><input type="checkbox" value="강북구">강북구</label>
-						<label><input type="checkbox" value="강서구">강서구</label>
-						<label><input type="checkbox" value="관악구">관악구</label>
-						<label><input type="checkbox" value="광진구">광진구</label>
-						<label><input type="checkbox" value="노원구">노원구</label>
-						<label><input type="checkbox" value="도봉구">도봉구</label>
-						<label><input type="checkbox" value="동작구">동작구</label>
-						<label><input type="checkbox" value="마포구">마포구</label>
-						<label><input type="checkbox" value="서대문구">서대문구</label>
-						<label><input type="checkbox" value="서초구">서초구</label>
-						<label><input type="checkbox" value="성동구">성동구</label>
-						<label><input type="checkbox" value="성북구">성북구</label>
-						<br>
-						<label><input type="checkbox" value="송파구">송파구</label>
-						<label><input type="checkbox" value="양천구">양천구</label>
-						<label><input type="checkbox" value="영등포구">영등포구</label>
-						<label><input type="checkbox" value="용산구">용산구</label>
-						<label><input type="checkbox" value="은평구">은평구</label>
-						<label><input type="checkbox" value="중랑구">중랑구</label>
-						<label><input type="checkbox" value="경기전체">경기전체</label>
-						<label><input type="checkbox" value="경기북부">경기북부</label>
-						<label><input type="checkbox" value="경기남부">경기남부</label>
-						<label><input type="checkbox" value="인천전체">인천전체</label>
-						<label><input type="checkbox" value="경상도전체">경상도전체</label>
-						<label><input type="checkbox" value="대구/북부">대구/북부</label>
-						<label><input type="checkbox" value="부산/남부">부산/남부</label>
-						<br>
-						<span><label><input type="checkbox" value="강원도전체">강원도전체</label></span>
-						<span><label><input type="checkbox" value="충청도전체">충청도전체</label></span>
-						<span><label><input type="checkbox" value="전라도전체">전라도전체</label></span>
 					</div>
 				</li>
 			</ul>

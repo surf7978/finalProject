@@ -33,4 +33,9 @@ public interface QuestionMapper {
 	public int deleteQuestion(QuestionVO vo);	//화원탈퇴
 
 	public int getCount(QuestionVO vo); // DB레코드 카운트
+	
+	//나경
+	public int insertQuestionBusi(QuestionVO vo);	//병원, 카페 등 상품 상세보기에서 상품문의글 등록
+	public List<QuestionVO> getSearchQuestionProbis(QuestionVO vo); //병원, 카페 등 상품 상세보기에서 상품문의글 조회
+	public QuestionVO getQuestionProbis(QuestionVO vo);		//병원, 카페 등 상품 상세보기에서 상품문의글 단건조회
 }
