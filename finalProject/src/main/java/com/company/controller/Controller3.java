@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.abandonment.common.AbandonmentAPI;
-import com.company.board.service.BoardVO;
 import com.company.common.FileRenamePolicy;
 import com.company.member.service.MemberService;
 import com.company.product.service.ProductService;
