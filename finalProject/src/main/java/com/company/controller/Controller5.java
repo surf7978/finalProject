@@ -1,7 +1,5 @@
 package com.company.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -32,10 +30,12 @@ import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
+import com.company.hotel.service.HotelSearchVO;
 import com.company.hotel.service.HotelService;
 import com.company.hotel.service.HotelVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
+import com.company.taxi.service.TaxiService;
 
 /*
  * @author 박세민
@@ -43,6 +43,12 @@ import com.company.question.service.QuestionVO;
  * 21.03.30 장바구니 1차 수정/택시 API대용으로 T map API or Kakao map API 사용 생각중
  * 21.03.31 마이페이지-사업자-3차 수정
  * 21.04.01 마이페이지-사업자(본인정보,문의,답변 마무리)
+ * 21.04.02 사업체-카페-전체리스트 1차 수정
+ * 21.04.05 사업체-카페-전체리스트 2차 수정
+ * 21.04.06 사업체-카페-전체리스트 3차 수정(Ajax,paging)
+ * 21.04.07 사업체-통합 리스트(Ajax,paging,search,checkbox)
+ * 21.04.08 사업체-통합 리스트 세분화(카테고리 별 검색 완)
+ * 21.04.09 
  */
 @Controller
 public class Controller5 {
@@ -58,12 +64,16 @@ public class Controller5 {
 	AnswerService answerService;
 
 	@Autowired
+	BCartService bCartService;
+	// 사업자
+	@Autowired
+	CafeService cafeService;
+
+	@Autowired
 	HotelService hotelService;
 
 	@Autowired
-	BCartService bCartService;
-	@Autowired
-	CafeService cafeService;
+	TaxiService taxiService;
 
 	// end of beans
 
@@ -275,7 +285,7 @@ public class Controller5 {
 		MultipartFile image1 = vo.getT_uploadFile();
 		MultipartFile image2 = vo.getUploadFile();
 		// 2.저장될path설정
-		String path = request.getSession().getServletContext().getRealPath("/resources/images/cafe");
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/business");
 		// 3.중복채크
 		if (image1 != null && !image1.isEmpty() && image1.getSize() > 0) {
 			String filename = image1.getOriginalFilename();
@@ -343,39 +353,100 @@ public class Controller5 {
 		return "cafe/getCafe";
 	}
 
-	// start of hotel
-	// 사업자-전체리스트(호텔)
-	@RequestMapping("/getSearchHotel")
-	public String getSearchHotel(HotelVO vo, Model model) {
-		List<HotelVO> list = hotelService.getSearchHotel(vo);
-		model.addAttribute("list", list);
-		return "hotel/getSearchHotel";
-	}// end of getSearchHotel
+	// 사업자-카페/호텔/택시 페이지 호출
+	@RequestMapping("/getSearchListForm")
+	public String getSearchBusinessForm() {
+		return "business/getSearchListForm";
+	}
+	//
 
-	// 사업자-상세리스트
-	@RequestMapping("/getHotel")
-	public String getHotel(HotelVO vo, Model model) {
-		// 결과 vo
-		vo = hotelService.getHotel(vo);
-		// 페이지에 전달
-		model.addAttribute("vo", vo);
-		return "hotel/getHotel";
-	}// end of getHotel
+	// 사업자-통합리스트1
+	@GetMapping("/getSearchList1")
+	@ResponseBody
+	public Map<String, Object> getSearchList1(CafeSearchVO vo, Paging paging) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 1.페이지 설정
+		paging.setPageUnit(5);//
+		paging.setPageSize(3);// 페이지 번호 수
+		// 2.초기페이지 설정
+		if (paging.getPage() == null)
+			paging.setPage(1);
+		// 3. 값 추가
+		paging.setTotalRecord(cafeService.getCountList1(vo));
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		List<CafeVO> list = cafeService.getSearchList1(vo);
+		// map에 넘겨주는 이유:model보다 사용이 편리해서
+		map.put("paging", paging);
+		map.put("list", list);
+		// Cafe List
+		return map;
+	}// end of getSearchCafeProc
+		// 사업자-통합상세페이지
 
-	// 사업자-호텔제품등록 페이지
-	@GetMapping("/insertHotel")
-	public String insertHotel(HotelVO vo) {
-		return "hotel/insertHotel";
-	}// end of insertHotel
+	@GetMapping("/getSearchInfo")
+	public String getSearchInfo() {
+		return "business/getSearchInfo";
+	}
 
-	// 사업자-호텔제품등록 기능
-	@PostMapping("/insertHotel")
-	public String insertHotelProc(HotelVO vo) {
-		hotelService.insertHotel(vo);
-		return "redirect:/";
-		// 기능 처리 후 등록여부 alert로 알려주기
-	}// end of insertHotelProc
-		// end of hotel
+	// 사업자-통합 등록 폼
+	@GetMapping("/insertInfo")
+	public String insertInfo() {
+		return "business/insertInfo";
+	}// end of insertInfo
+
+	// 사업체-통합 등록 기능
+	@PostMapping("/insertInfo")
+	//통합이라 vo값을 어떻게 처리해야할지 
+	public void insertInfoProc(CafeVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
+			HttpServletResponse response) throws Exception {
+		// 사업자 번호를 어디서 가져올 것인지
+		// 1.session
+		// 2. id로 businessTable 조회
+		String id = session.getAttribute("loginID").toString();
+		bvo.setBusinessId(id);
+		bvo = businessService.getBusiness(bvo);
+		// 3. business의 사업자 번호 가져와 넣기
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		// 첨부파일처리
+		// 1.vo값 가져오기
+		MultipartFile image1 = vo.getT_uploadFile();
+		MultipartFile image2 = vo.getUploadFile();
+		// 2.저장될path설정
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/business");
+		// 3.중복채크
+		if (image1 != null && !image1.isEmpty() && image1.getSize() > 0) {
+			String filename = image1.getOriginalFilename();
+			// 파일명
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			image1.transferTo(rename);
+			vo.setImage1(rename.getName());
+		} // end of if
+
+		if (image2 != null && !image2.isEmpty() && image2.getSize() > 0) {
+			String filename = image2.getOriginalFilename();
+			// 파일명
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			image2.transferTo(rename);
+			vo.setImage2(rename.getName());
+		} // end of if
+		//
+			// 등록처리
+		int r = cafeService.insertCafe(vo);
+		//
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		if (r == 1) {
+			writer.print("<script>alert('등록되었습니다');location.href='getSearchListForm'</script>");
+		} else {
+			writer.print("<script>alert('오류..다시등록해주세요');location.href='insertInfo'</script>");
+		}
+		writer.close();
+
+	}// end of insertInfoProc
+
+	// 사업자-통합리스트2
 
 	// start of bCart
 	// 장바구니-페이지 호출

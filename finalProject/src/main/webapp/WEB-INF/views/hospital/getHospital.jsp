@@ -10,32 +10,61 @@
 <!-- 단건조회 아작스 -->
 <script>
 	$(function(){
-		$(".getReview").on("click", function(){
+		$(".reviewNumber").on("click", ".getReview", function(){
 			var btn = $(this);
-			console.log(btn.prev().prev().prev().text()[0]);//span개수만큼 해줘야함
+			console.log(btn.prev().prev().prev().val());//span개수만큼 해줘야함
 			$.ajax({
 				url:"getReview99",
 				type:"post",
 				dataType:"json",
-				data:{"reviewNumber":btn.prev().prev().prev().text()[0]},
+				data:{"reviewNumber":btn.prev().prev().prev().val()},
 				success:function(data){
 					console.log(data);
 					btn.closest(".reviewNumber").next().text("");
 					btn.closest(".reviewNumber").next().append(data.content);
 					btn.closest(".reviewNumber").next().append("<input type='button' class='ESC' value='닫기'>");//닫기 버튼 생성
+					btn.remove();
 				}
 			})
 		})
 		//내용 닫기
 		$(".getReviewResult").on("click", ".ESC", function(){//이렇게 그룹이벤트로 해줘야 생성된 버튼 동작함
 			var ESCbtn = $(this);
+			ESCbtn.parent().prev().append("<input type='button' class='getReview' value='상세조회'>")
 			ESCbtn.parent().empty();
 		})
 	})
+	
+	$(function(){
+		$(".questionNumber").on("click", ".getQuestion", function(){
+			var btn1 = $(this);
+			console.log(btn1.prev().prev().prev().val());//span개수만큼 해줘야함
+			$.ajax({
+				url:"getQuestionProbis",
+				type:"post",
+				dataType:"json",
+				data:{"questionNumber":btn1.prev().prev().prev().val()},
+				success:function(data){
+					console.log(data);
+					btn1.closest(".questionNumber").next().text("");
+					btn1.closest(".questionNumber").next().append(data.content);
+					btn1.closest(".questionNumber").next().append("<input type='button' class='ESC' value='닫기'>");//닫기 버튼 생성
+					btn1.remove();
+				}
+			})
+		})
+		//내용 닫기
+		$(".getQuestionResult").on("click", ".ESC", function(){//이렇게 그룹이벤트로 해줘야 생성된 버튼 동작함
+			var ESCbtn = $(this);
+			ESCbtn.parent().prev().append("<input type='button' class='getQuestion' value='상세조회'>")
+			ESCbtn.parent().empty();
+		})
+	})
+	
+	
 </script>
 </head>
-<body>
-
+<body >
 대표사진:<img src="resources/img/hospital/${hospital.t_image }"><br>
 진료구분: ${hospital.category1 }<br>
 상세구분: ${hospital.category2 }<br>
@@ -47,18 +76,41 @@
 금액:${hospital.price }<br>
 위치:${hospital.location }<br>
 사진:<img src="resources/img/hospital/${hospital.image}" ><br>
-구매평: <button type="button" id="insertReview" onclick="window.open('insertReview?deliveryNumber=${reservation.deliveryNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')">구매평 등록하기</button>
-구매평 전체리스트<br>
+<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+구매평
+<c:if test="${not empty reservation.deliveryNumber }">
+<button type="button" style="position:absolute;right:0;" id="insertReview" onclick="window.open('insertReview?deliveryNumber=${reservation.deliveryNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')">구매평 등록하기</button>
+</c:if>
+<hr style="align:center; text-align:left; background-color: black;">
+</div>
+<br>
 	<c:forEach items="${review }" var="list">
-		<div class="reviewNumber">
-			<span>${list.reviewNumber}</span>
-			<span>${list.title}</span>
-			<span>${list.writer}</span>
+		<div class="reviewNumber" style="align:center; width:55%; text-align:left;">
+			<input type="hidden" value="${list.reviewNumber}">
+			<span>${list.title}</span> &nbsp;
+			<span>작성자: ${list.writer}</span>
 			<input type="button" class="getReview" value="상세조회">
 		</div>
-		<div class="getReviewResult"></div>
+		<div class="getReviewResult" style="align:center; width:50%; text-align:left;"></div>
 	</c:forEach>
-문의내역: <button type="button" id="insertQuestion" onclick="window.open('insertQuestion','insertReview','width=800, height=800')">상품 문의하기</button>
-
+	<br>
+<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+문의내역
+<c:if test="${not empty loginID }">
+<button type="button" style="position:absolute;right:0;" id="insertQuestion" onclick="window.open('insertQuestionBusi?hospitalNumber=${hospital.hospitalNumber}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
+</c:if>
+<hr style="align:center; text-align:left; background-color: black;">
+</div>
+<br>
+	<c:forEach items="${question }" var="list">
+		<div class="questionNumber" style="align:center; width:55%; text-align:left;">
+			<input type="hidden" value="${list.questionNumber}">
+			<span>${list.title}</span> &nbsp;
+			<span>작성자: ${list.writer}</span>
+			<input type="button" class="getQuestion" value="상세조회">
+			</div>
+			<div class="getQuestionResult" style="align:center; width:50%; text-align:left;"></div>
+	</c:forEach>
+	<br>
 </body>
 </html>

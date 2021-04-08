@@ -15,6 +15,7 @@
 		, phone
 		, businessNumber
 		, businessCode
+		, businessCompanyName
 		) VALUES(
 		#{businessId}
 		, #{password}
@@ -26,6 +27,7 @@
 		, #{phone}
 		, #{businessNumber}
 		, #{businessCode}
+		, #{businessCompanyName}
 		)
 	</insert>
 	<select id="getBusiness" parameterType="businessVO"
@@ -43,6 +45,7 @@
 		, endDate
 		, businessNumber
 		, businessCompanyName
+		, businessCode
 		FROM business
 		WHERE businessId = #{businessId}
 	</select>
@@ -77,6 +80,8 @@
 			<if test="startDate != null"> , startDate = #{startDate}</if>
 			<if test="endDate != null"> , endDate = #{endDate}</if>
 			<if test="businessNumber != null"> , businessNumber = #{businessNumber}</if>
+			<if test="businessCompanyName != null"> , businessCompanyName = #{businessCompanyName}</if>
+			<if test="businessCode != null"> , businessCode = #{businessCode}</if>
 		</set>
 		WHERE businessId = #{businessId}
 	</update>
@@ -86,4 +91,15 @@
 		FROM business
 		WHERE businessId = #{businessId}
 	</delete>
+	
+	<!-- 나경 -->
+	<!-- 문의글등록시 필요한 정보select -->
+	<select id="getBusinessId" parameterType="businessVO" resultType="businessVO">
+		SELECT
+		  BUSINESSID
+		, BUSINESSNUMBER
+		, BUSINESSCOMPANYNAME
+		FROM BUSINESS
+		WHERE BUSINESSNUMBER = #{businessNumber}
+	</select>
 </mapper>

@@ -12,16 +12,17 @@ import com.company.board.service.BoardVO;
 public class BoardServiceimpl implements BoardService{
 	
 	@Autowired BoardMapper BoardMapper;
-	//등록
-	@Override
-	public int insertBoard(BoardVO vo) {
-		return BoardMapper.insertBoard(vo);
-	}
 	//단건조회
 	@Override
 	public BoardVO getBoard(BoardVO vo) {
 		return BoardMapper.getBoard(vo);
 	}
+	@Override
+	public BoardVO getBoard2(BoardVO vo) {
+		return BoardMapper.getBoard2(vo);
+	}
+
+	
 	//전체조회
 	@Override
 	public List<BoardVO> getSearchBoard(BoardVO vo) {
@@ -37,6 +38,34 @@ public class BoardServiceimpl implements BoardService{
 	@Override
 	public int deleteBoard(BoardVO vo) {
 		return BoardMapper.deleteBoard(vo);
+	}
+	
+	//자유게시판 글쓰기
+	@Override
+	public int insertBoard(BoardVO vo) {
+		return BoardMapper.insertBoard(vo);
+	}
+
+	
+	//자랑하기 글쓰기
+	@Override
+	public int insertBoard2(BoardVO vo) {
+		
+		return BoardMapper.insertBoard2(vo);
+	}
+	
+	//자유게시판 전체조회
+	@Override
+	public List<BoardVO> getSearchBoardCategiry1(BoardVO vo) {
+	
+		return BoardMapper.getSearchBoardCategiry1(vo);
+	}
+	
+	//자랑하기 전체조회
+	@Override
+	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo) {
+	
+		return BoardMapper.getSearchBoardCategiry2(vo);
 	}
 
 
