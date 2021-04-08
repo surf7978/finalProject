@@ -10,4 +10,5 @@ public interface ProductMapper {
 	public List<ProductVO> getSearchProduct(ProductVO vo);
 	public int updateProduct(ProductVO vo);
 	public int deleteProduct(ProductVO vo);
+	public int getCount(ProductVO vo);// 레코드 조회
 }

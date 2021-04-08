@@ -38,6 +38,10 @@ public class ProductServiceimpl implements ProductService{
 	public int deleteProduct(ProductVO vo) {
 		return ProductMapper.deleteProduct(vo);
 	}
+	@Override
+	public int getCount(ProductVO vo) {
+		return ProductMapper.getCount(vo);
+	}
 
 
 }

@@ -8,4 +8,5 @@ public interface ProductService {
 	public List<ProductVO> getSearchProduct(ProductVO vo);	//전체조회
 	public int updateProduct(ProductVO vo);	//제품수정
 	public int deleteProduct(ProductVO vo);	//제품삭제
+	public int getCount(ProductVO vo);// 레코드 조회
 }
