@@ -264,7 +264,7 @@ public class Controller1 {
 	public ReviewVO getReview99(ReviewVO vo) {
 		return reviewService.getReview(vo);
 	}
-	
+	 
 	@Autowired AnimalService animalService;
 	
 	//회원탈퇴
