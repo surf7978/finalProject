@@ -21,3 +21,4 @@ public interface BoardMapper {
 	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo); // 자랑하기 전체조회
 }
 
+

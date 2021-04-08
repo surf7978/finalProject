@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.abandonment.common.AbandonmentAPI;
+import com.company.board.service.BoardVO;
 import com.company.common.FileRenamePolicy;
+import com.company.member.service.MemberService;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 
@@ -28,6 +30,8 @@ public class Controller3 {
 	AbandonmentAPI abanAPI;
 	@Autowired
 	ProductService productService;
+	@Autowired
+	MemberService memberService;
 
 	// 유기동물 API
 	@RequestMapping("/getAban")
@@ -125,6 +129,21 @@ public class Controller3 {
 //			String path="resources/images";
 		productService.insertProduct(vo);
 		return "redirect:/getSearchProductForm";
+	}
+
+	//결제API
+	@RequestMapping("/PayInfo")
+	public String PayInfo(ProductVO vo, Model model, String productNumber,String resultPrice) {
+		model.addAttribute("product", productService.getProduct(vo));
+		vo.setResultPrice(resultPrice);
+		model.addAttribute("resultPrice", vo.getResultPrice());
+		return "pay/PayInfo";
+	}	
+	
+	//자유게시판시작
+	@RequestMapping("/getSearchBoard1")
+	public String getSearchBoard1(){
+		return "board/getSearchBoard1";
 	}
 
 }

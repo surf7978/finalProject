@@ -14,7 +14,11 @@
 			alert("아이디 미입력");
 			return false;
 		}
-		else if(idCheckResult.value=="중복된 아이디가 존재합니다."){
+		else if(document.getElementById('idCheckResult').innerHTML==""){
+			alert("아이디 중복체크 확인");
+			return false;
+		}
+		else if(document.getElementById('idCheckResult').innerHTML=="중복된 아이디가 존재합니다."){
 			alert("다른 아이디를 입력");
 			return false;
 		}
@@ -80,51 +84,66 @@
 		window.open("coolsms", "본인인증", "width=1000px, height=200px");
 	}
 </script>
+<style>
+	input{
+		margin-bottom: 20px;
+		display: block;
+		font-size: 18px;
+		color: #252525;
+		margin-bottom: 13px;
+		border: 1px solid #ebebeb;
+		height: 50px;
+		width: 100%;
+		padding-left: 20px;
+		padding-right: 15px;
+	}
+</style>
 <body>
-	<br><br><br><input value="일반사용자 가입" style="font-size:40px; text-align:center; width:300px; border:none;" readonly><br><br>
+	<br><br><br><input value="일반사용자 가입" style="font-size:40px; text-align:center; width:400px; border:none;" readonly><br><br>
 	<form id="frm" name="frm" onsubmit="return formCheck()" action="signUpUser" method="post">
-		<table border="1" style="text-align:center;">
+		<table style="text-align:center;">
 			<tr>
-				<td rowspan="2"><input value="아 이 디" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td><input id="memberId" name="memberId" style="border:none; width:300px;"></td>
-				<td><button type="button" id="idCheck" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">중복조회</button></td>
+				<td><input value="아 이 디" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td><input id="memberId" name="memberId"></td>
+				<td><input type="button" id="idCheck" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="중복조회"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><div id="idCheckResult" style="color:red; height:20px;"></div></td>
+				<td></td>
+				<td colspan="2"><div id="idCheckResult" style="color:red; height:30px;"></div></td>
 			</tr>
 			<tr>
-				<td><input value="패스워드" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td colspan="2"><input type="password"  id="password" name="password" style="width:400px; border:none;"></td>
+				<td><input value="패스워드" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td colspan="2"><input type="password"  id="password" name="password" style="width:400px;"></td>
 			</tr>
 			<tr>
-				<td><input value="PW확인" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td colspan="2"><input type="password" id="passwordCheck" name="passwordCheck" style="width:400px; border:none;"></td>
+				<td><input value="PW확인" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td colspan="2"><input type="password" id="passwordCheck" name="passwordCheck" style="width:400px;"></td>
 			</tr>
 			<tr>
-				<td><input value="이 름" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td colspan="2"><input id="name" name="name" style="width:400px; border:none;"></td>
+				<td><input value="이 름" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td colspan="2"><input id="name" name="name" style="width:400px;"></td>
 			</tr>
 			<tr>
-				<td><input value="우편번호" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td><input id="post" name="post" style="border:none; width:300px;"></td>
-				<td><button type="button" onclick="addressSearch()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">번호검색</button></td>
+				<td><input value="우편번호" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td><input id="post" name="post" style=" width:300px;"></td>
+				<td><input type="button" onclick="addressSearch()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="번호검색"></td>
 			</tr>
 			<tr>
-				<td><input value="주 소" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td colspan="2"><input id="address" name="address"  style="width:400px; border:none;" readonly></td>
+				<td><input value="주 소" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td colspan="2"><input id="address" name="address"  style="width:400px;" readonly></td>
 			</tr>
 			<tr>
-				<td><input value="상세주소" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td colspan="2"><input id="address2" name="address2" style="width:400px; border:none;"></td>
+				<td><input value="상세주소" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td colspan="2"><input id="address2" name="address2" style="width:400px;"></td>
 			</tr>
 			<tr>
-				<td><input value="연 락 처" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td><input id="phone" name="phone" style="border:none; width:300px;"></td>
-				<td><button type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">본인인증</button></td>
+				<td><input value="연 락 처" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td><input id="phone" name="phone" style="width:300px;"></td>
+				<td><input type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="본인인증"></td>
 			</tr>
 			<tr>
-				<td><input value="이 메 일" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td colspan="2"><input id="email" name="email" style="width:400px; border:none;"></td>
+				<td><input value="이 메 일" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td colspan="2"><input id="email" name="email" style="width:400px;"></td>
 			</tr>
 		</table>
 		<br>

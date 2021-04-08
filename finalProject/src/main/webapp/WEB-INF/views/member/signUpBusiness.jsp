@@ -13,7 +13,11 @@
 			alert("아이디 미입력");
 			return false;
 		}
-		else if(idCheckResult.value=="중복된 아이디가 존재합니다."){
+		else if(document.getElementById('idCheckResult').innerHTML==""){
+			alert("아이디 중복체크 확인");
+			return false;
+		}
+		else if(document.getElementById('idCheckResult').innerHTML=="중복된 아이디가 존재합니다."){
 			alert("다른 아이디를 입력");
 			return false;
 		}
@@ -27,6 +31,10 @@
 		}
 		else if(password.value!=passwordCheck.value){
 			alert("패스워드 불일치");
+			return false;
+		}
+		else if(businessNumber.value==""){
+			alert("사업자번호 미입력");
 			return false;
 		}
 		return true;
@@ -93,10 +101,10 @@
 					success:function(data){
 						console.log(data);
 						if(data!=""){
-							$("#businessSearchResult").html(data);
+							$("#businessCompanyName").val(data);
 						}else{
 							alert("검색결과 없음");
-							$("#businessSearchResult").html("검색결과 없음");
+							$("#businessCompanyName").val("검색결과 없음");
 						}
 					}
 				});	
@@ -106,61 +114,77 @@
 		});
 	}); 
 </script>
+<style>
+	input{
+		margin-bottom: 20px;
+		display: block;
+		font-size: 18px;
+		color: #252525;
+		margin-bottom: 13px;
+		border: 1px solid #ebebeb;
+		height: 50px;
+		width: 100%;
+		padding-left: 20px;
+		padding-right: 15px;
+	}
+</style>
 <body>
-	<br><br><br><input value="사업자 가입" style="font-size:40px; text-align:center; width:300px; border:none;" readonly><br><br>
+	<br><br><br><input value="사업자 가입" style="font-size:40px; text-align:center; width:300px; border:none;" readonly><br>
 	<form id="frm" name="frm" onsubmit="return formCheck()" action="signUpBusiness" method="post">
-		<table border="1" style="text-align:center;">
+		<table style="text-align:center;">
 			<tr>
-				<td rowspan="2"><input value="아 이 디" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
-				<td><input id="businessId" name="businessId" style="border:none; width:300px;"></td>
-				<td><button type="button" id="idCheck" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">중복조회</button></td>
+				<td><input value="아 이 디" style="font-size:20px; text-align:center; width:140px; border:none;" readonly></td>
+				<td><input id="businessId" name="businessId"></td>
+				<td><input type="button" id="idCheck" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="중복조회"></td>
 			</tr>
 			<tr>
+				<td></td>
 				<td colspan="2"><div id="idCheckResult" style="color:red; height:30px;"></div></td>
 			</tr>
 			<tr>
-				<td><input value="패스워드" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
-				<td colspan="2"><input type="password"  id="password" name="password" style="width:400px; border:none;"></td>
+				<td><input value="패스워드" style="font-size:20px; text-align:center; width:140px; border:none;" readonly></td>
+				<td colspan="2"><input type="password"  id="password" name="password"></td>
 			</tr>
 			<tr>
-				<td><input value="PW확인" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
-				<td colspan="2"><input type="password" id="passwordCheck" name="passwordCheck" style="width:400px; border:none;"></td>
+				<td><input value="PW확인" style="font-size:20px; text-align:center; width:140px; border:none;" readonly></td>
+				<td colspan="2"><input type="password" id="passwordCheck" name="passwordCheck" ></td>
 			</tr>
 			<tr>
-				<td><input value="이 름" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
-				<td colspan="2"><input id="businessName" name="businessName" style="width:400px; border:none;"></td>
+				<td><input value="이 름" style="font-size:20px; text-align:center; width:140px; border:none;" readonly></td>
+				<td colspan="2"><input id="businessName" name="businessName"></td>
 			</tr>
 			<tr>
-				<td><input value="우편번호" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
-				<td><input id="post" name="post" style="border:none; width:300px;"></td>
-				<td><button type="button" onclick="addressSearch()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">번호검색</button></td>
+				<td><input value="우편번호" style="font-size:20px; text-align:center; width:140px; border:none;" readonly></td>
+				<td><input id="post" name="post"></td>
+				<td><input type="button" onclick="addressSearch()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="번호검색"></td>
 			</tr>
 			<tr>
-				<td><input value="주 소" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
-				<td colspan="2"><input id="address" name="address"  style="width:400px; border:none;" readonly></td>
+				<td><input value="주 소" style="font-size:20px; text-align:center; width:140px; border:none;" readonly></td>
+				<td colspan="2"><input id="address" name="address" readonly></td>
 			</tr>
 			<tr>
-				<td><input value="상세주소" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td colspan="2"><input id="address2" name="address2" style="width:400px; border:none;"></td>
+				<td><input value="상세주소" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td colspan="2"><input id="address2" name="address2"></td>
 			</tr>
 			<tr>
-				<td><input value="연 락 처" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
-				<td><input id="phone" name="phone" style="border:none; width:300px;"></td>
-				<td><button type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">본인인증</button></td>
+				<td><input value="연 락 처" style="font-size:20px; text-align:center; width:140px; border:none;" readonly></td>
+				<td><input id="phone" name="phone"></td>
+				<td><input type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="본인인증"></td>
 			</tr>
 			<tr>
-				<td><input value="이 메 일" style="font-size:25px; text-align:center; width:120px; border:none;" readonly></td>
-				<td colspan="2"><input id="email" name="email" style="width:400px; border:none;"></td>
+				<td><input value="이 메 일" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
+				<td colspan="2"><input id="email" name="email"></td>
 			</tr>
 			<tr>
-				<td rowspan="2"><input value="사업자번호" style="font-size:25px; text-align:center; width:140px; border:none;" readonly></td>
-				<td><input id="businessNumber" name="businessNumber" style="border:none; width:300px;"></td>
-				<td><button type="button" id="businessSearch" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">번호조회</button></td>
+				<td><input value="사업자번호" style="font-size:20px; text-align:center; width:140px; border:none;" readonly></td>
+				<td><input id="businessNumber" name="businessNumber"></td>
+				<td><input type="button" id="businessSearch" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="번호조회"></td>
 			</tr>
 			<tr>
-				<td><div id="businessSearchResult" style="color:red; height:20px;"></div></td>
+				<td><input value="사업체분류" style="font-size:20px; text-align:center; width:140px; border:none;" readonly></td>
+				<td><input id="businessCompanyName" name="businessCompanyName" style="color:red; height:20px; border:0;" readonly></td>
 				<td>
-					<select id="businessCode" name="businessCode" style="font-size:20px;width: 100px; border:none;">
+					<select id="businessCode" name="businessCode" style="font-size:20px; width:100px; border:none; align:left;">
 						<option value="10">호텔</option>
 						<option value="20">병원</option>
 						<option value="30">카페</option>
@@ -178,5 +202,6 @@
 		&nbsp;
 		<button type="button" onclick="location.href='loginForm'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 	</form>
+	<br><br><br><br>
 </body>
 </html>
