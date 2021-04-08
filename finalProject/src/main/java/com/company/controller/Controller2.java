@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.animal.service.AnimalService;
@@ -30,6 +31,8 @@ import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
+import com.company.question.service.QuestionService;
+import com.company.question.service.QuestionVO;
 import com.company.reservation.service.ReservationService;
 import com.company.reservation.service.ReservationVO;
 import com.company.review.service.ReviewService;
@@ -60,6 +63,8 @@ public class Controller2 {
 	ReservationService reservationService;
 	@Autowired
 	ReviewService reviewService;
+	@Autowired
+	QuestionService questionService;
 
 	// 일반회원 본인정보 조회
 	@RequestMapping("/getMember1")
@@ -110,14 +115,13 @@ public class Controller2 {
 		model.addAttribute("buys", buyService.getSearchBuy(vo));
 		return "user/getSearchBuy";
 	}
-	
-	//예약내역 상세리스트 조회
+
+	// 예약내역 상세리스트 조회
 	@RequestMapping("/getSearchReservation")
 	public String getSearchReservation(ReservationVO vo, Model model) {
 		model.addAttribute("reservation", reservationService.getSearchReservation(vo));
 		return "reservation/getSearchReservation";
 	}
-
 
 	// 구매내역 삭제
 	@DeleteMapping("/deleteBuy")
@@ -188,38 +192,29 @@ public class Controller2 {
 		return "hospital/getSearchHospital";
 	}
 
-	// 병원상품 상세조회
-	@RequestMapping("/getHospital")
+	// 병원 상세조회 + 구매평 전체리스트 출력 + 문의내역 전체리스트 출력
+	@RequestMapping("/getHospital") // getSearchHospital에서 hospitalNumber를 담아놓았음
 	public String getHospital(HospitalVO vo, Model model, String hospitalNumber, HttpSession session) {
-		vo.setHospitalNumber(hospitalNumber);
-		model.addAttribute("hospital", hospitalService.getHospital(vo));
-		
+		vo.setHospitalNumber(hospitalNumber); // 담아놓은 hospitalNumber를 HospitalVO의 hospitalNumber에 담음
+		model.addAttribute("hospital", hospitalService.getHospital(vo)); // HospitalVO의 hospitalNumber로 getHospital한 값들을
+																			// 모델에 담음 변수명 "hospital"으로
+
 		ReservationVO vo1 = new ReservationVO();
-		vo1.setMemberId((String) session.getAttribute("loginID"));
-		vo1.setBisNumber(hospitalNumber);
-		model.addAttribute("reservation", reservationService.getViewReservation(vo1));
+		vo1.setMemberId((String) session.getAttribute("loginID")); // 로그인한 세션 아이디를 ReservationVO의 memberId에 담음
+		vo1.setBisNumber(hospitalNumber); // hospitalNumber를 BisNumber에 담음
+		model.addAttribute("reservation", reservationService.getViewReservation(vo1)); // 위의 두 값으로 getViewReservation해서
+																						// 조회된 값을 모델에 담음
+																						// 위의 두 값은 쿼리문 WHERE절에 필요한 값들
+		ReviewVO vo2 = new ReviewVO();
+		vo2.setProbisNumber(hospitalNumber);
+		model.addAttribute("review", reviewService.getSearchReview(vo2));
+
+		QuestionVO vo3 = new QuestionVO();
+		vo3.setProbisNumber(hospitalNumber);
+		model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
 		return "hospital/getHospital";
 	}
-	
-	//병원 상세조회 + 구매평 전체리스트 출력
-	@RequestMapping("/getHospital99")
-	public String getHospital99(HospitalVO vo, Model model, String hospitalNumber, HttpSession session) {
-		vo.setHospitalNumber(hospitalNumber);
-		model.addAttribute("hospital", hospitalService.getHospital(vo));
-			
-		ReservationVO vo1 = new ReservationVO();
-		vo1.setMemberId((String) session.getAttribute("loginID"));
-		vo1.setBisNumber(hospitalNumber);
-		model.addAttribute("reservation", reservationService.getViewReservation(vo1));
-		
-		ReviewVO vo2 = new ReviewVO();
-		Controller1 c1 = new Controller1();
-		c1.getSearchReviewD(vo2, model);
-		model.addAttribute("review", c1.getSearchReviewD(vo2, model));
-		return "hospital/getHospital99";
-	}
-	
-	
+
 	// 병원상품 등록 페이지
 	@GetMapping("/insertHospital")
 	public String insertHospitalForm(BusinessVO vo, Model model, HttpSession session) {
@@ -235,66 +230,94 @@ public class Controller2 {
 		// 첨부파일처리
 		MultipartFile image = vo.getUploadFile();
 		MultipartFile t_image = vo.getT_uploadFile();
-		String path =  request.getSession().getServletContext().getRealPath("resources/img/hospital/");
-		System.out.println("경로: " +path);
+		String path = request.getSession().getServletContext().getRealPath("resources/img/hospital/");
+		System.out.println("경로: " + path);
 		if (image != null && !image.isEmpty() && image.getSize() > 0) {
 			String filename = image.getOriginalFilename();
-			//파일명 중복체크 -> rename
+			// 파일명 중복체크 -> rename
 			File rename = FileRenamePolicy.rename(new File(path, filename));
 			// 업로드된 파일명
-			//rename.getName()				
-			//파일명을 읽어내는게 getName()
-			//임시폴더에서 업로드 폴더로 파일이동
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
 			image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
 			vo.setImage(rename.getName());
 		}
-		
+
 		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
 			String filename = t_image.getOriginalFilename();
-			//파일명 중복체크 -> rename
+			// 파일명 중복체크 -> rename
 			File rename = FileRenamePolicy.rename(new File(path, filename));
 			// 업로드된 파일명
-			//rename.getName()				
-			//파일명을 읽어내는게 getName()
-			//임시폴더에서 업로드 폴더로 파일이동
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
 			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
 			vo.setT_image(rename.getName());
 		}
 		hospitalService.insertHospital(vo);
 		return "redirect:/getSearchHospital";
 	}
-	//병원상품 사업자별 조회(수정페이지로 가기 위한)
-	
-	
-	// 병원상품 수정 페이지
-	
-		
-	
-	//병원상품 수정 처리
+	// 병원상품 사업자별 조회(수정페이지로 가기 위한)
 
-	
+	// 병원상품 수정 페이지
+
+	// 병원상품 수정 처리
+
 	// 병원상품 삭제
-	
-	//상세조회에서 구매평 등록페이지 이동
+
+	// 상세조회에서 구매평 등록페이지 이동
 	@GetMapping("/insertReview")
 	public String insertReview(ReservationVO vo, Model model, HttpSession session) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
 		model.addAttribute("reservation", reservationService.getViewReservation(vo));
 		return "reviewAndQuestion/insertReview";
 	}
-	
-	//상세조회에서 구매평 등록처리
+
+	// 상세조회에서 구매평 등록처리
 	@PostMapping("/insertReview")
 	public void insertReview(ReviewVO vo, HttpServletResponse response) throws IOException {
 		reviewService.insertReview(vo);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.println(
-				"<script>alert('등록되었습니다');window.close();</script>");
+		writer.println("<script>alert('등록되었습니다');window.close();</script>");
 		writer.close();
 	}
-	
-	
-	
-	
+
+	// 상세조회에서 상품문의 등록페이지 이동
+	@GetMapping("/insertQuestionBusi")
+	public String insertQuestionBusi(HospitalVO vo, MemberVO vo1, String hospitalNumber, String businessNumber,
+			Model model, HttpSession session) {
+		// 상품번호 담기
+		vo.setHospitalNumber(hospitalNumber);
+		model.addAttribute("hospital", hospitalService.getHospital(vo));
+
+		// 작성자 이름 담기
+		vo1.setMemberId((String) session.getAttribute("loginID"));
+		model.addAttribute("member", memberService.getMember(vo1));
+
+		// 사업자 아이디 담기
+		BusinessVO vo2 = new BusinessVO();
+		vo2.setBusinessNumber(businessNumber);
+		model.addAttribute("business", businessService.getBusinessId(vo2));
+		return "reviewAndQuestion/insertQuestion";
+	}
+
+	//상세조회에서 상품문의 등록처리
+	@PostMapping("/insertQuestionBusi")
+	public void insertQuestionBusi(QuestionVO vo, HttpServletResponse response) throws IOException {
+		questionService.insertQuestionBusi(vo);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('등록되었습니다');window.close();</script>");
+		writer.close();
+	}
+
+	//상품문의 단건리스트 출력(ajax로 같은 페이지 출력)
+	@RequestMapping("/getQuestionProbis")
+	@ResponseBody
+	public QuestionVO getQuestionProbis(QuestionVO vo) {
+		return questionService.getQuestionProbis(vo);
+	}
+
 }

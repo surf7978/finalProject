@@ -12,7 +12,7 @@
 		height:400px;
 	}
 	.image{
-		width:200px;
+		width:130px;
 	}
 	.btn{
 		border:none;

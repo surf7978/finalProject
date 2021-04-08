@@ -56,10 +56,7 @@ public class Controller1 {
 	//일반사용자 로그인 처리
 	@PostMapping("/login")
 	public String loginProc(MemberVO vo, HttpSession session) {
-		String idCheck = memberService.getViewMember(vo).getMemberId();
-		if(idCheck.equals(null)) {
-			return "redirect:/loginForm";
-		}else {
+		if(memberService.getViewMember(vo) != null) {
 			MemberServiceimpl memberServiceimpl = new MemberServiceimpl();
 			String insertPW = vo.getPassword(); //로그인화면에 입력한 비밀번호
 			String DBinPW = memberService.getViewMember(vo).getPassword(); //DB안에 암호화된 비밀번호
@@ -70,6 +67,8 @@ public class Controller1 {
 			} else {
 				return "redirect:/loginForm";
 			}
+		}else {
+			return "redirect:/loginForm";
 		}
 	}
 	
@@ -134,7 +133,34 @@ public class Controller1 {
 		session.setAttribute("loginID", userInfo.get("nickname"));
 		session.setAttribute("loginAuth", "m");
 		System.out.println(session.getAttribute("loginID")+" "+session.getAttribute("loginAuth"));
-		return "redirect:/";
+		//카톡로그인 DB에 저장하기
+		MemberVO vo = new MemberVO();
+		vo.setMemberId((String) userInfo.get("nickname"));
+		if(memberService.getViewMember(vo)!=null) { //DB체크했을때 값이없으면 DB에 추가, 있으면 비교 후 DB추가 다 있으면 로그인
+			if(memberService.getViewMember(vo).getMemberId().equals((String)userInfo.get("nickname"))) {
+				return "redirect:/";
+			}else {
+				vo.setPassword(" ");
+				vo.setEmail(" ");
+				vo.setName((String)userInfo.get("nickname"));
+				vo.setPost(" ");
+				vo.setAddress(" ");
+				vo.setAddress2(" ");
+				vo.setPhone(" ");
+				memberService.insertMember(vo);
+				return "redirect:/";
+			}
+		}else {
+			vo.setPassword(" ");
+			vo.setEmail(" ");
+			vo.setName((String)userInfo.get("nickname"));
+			vo.setPost(" ");
+			vo.setAddress(" ");
+			vo.setAddress2(" ");
+			vo.setPhone(" ");
+			memberService.insertMember(vo);
+			return "redirect:/";
+		}
 	}
 	
 	//아이디 중복체크 기능
@@ -232,11 +258,6 @@ public class Controller1 {
 		return "member/getSearchReview99";
 	}
 	
-	//구매평 전체리스트 다른 컨트롤러에 쓰는 메소드용
-	public Model getSearchReviewD(ReviewVO vo, Model model) {
-		return model.addAttribute("review", reviewService.getSearchReview(vo));
-	}
-	
 	//구매평 단건리스트 출력(ajax로 같은 페이지 출력)
 	@RequestMapping("/getReview99")
 	@ResponseBody
@@ -248,7 +269,7 @@ public class Controller1 {
 	
 	//회원탈퇴
 	@PostMapping("/membershipCancel")
-	public String membershipCancel(String ID, HttpSession session) {
+	public String membershipCancel(String ID) {
 		MemberVO vo = new MemberVO();
 		vo.setMemberId(ID);
 		if(memberService.getViewMember(vo).getAuth().equals("m")) {
@@ -256,7 +277,6 @@ public class Controller1 {
 			voAnimal.setMemberId(ID);
 			animalService.deleteAnimal(voAnimal);
 			memberService.deleteMember(vo);
-			session.invalidate();
 		}else {
 			BusinessVO vo1 = new BusinessVO();
 			vo1.setBusinessId(ID);
@@ -264,7 +284,7 @@ public class Controller1 {
 		}
 		return "redirect:/getSearchViewMember";
 	}
-	
+	 
 	//관리자-전체회원 조회
 	@RequestMapping("/getSearchViewMember")
 	public String getSearchMember(MemberVO vo, Model model) {

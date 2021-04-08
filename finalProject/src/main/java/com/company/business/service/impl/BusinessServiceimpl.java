@@ -38,6 +38,10 @@ public class BusinessServiceimpl implements BusinessService{
 	public int deleteBusiness(BusinessVO vo) {
 		return BusinessMapper.deleteBusiness(vo);
 	}
+	@Override
+	public BusinessVO getBusinessId(BusinessVO vo) {
+		return BusinessMapper.getBusinessId(vo);
+	}
 
 
 }

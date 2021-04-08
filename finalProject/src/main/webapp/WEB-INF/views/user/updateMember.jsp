@@ -19,13 +19,16 @@
 		return true;
 	}
 </script>
+<script>
+	function changePW(){
+		location.href="changePW?memberId="+memberId.value+"&password="+password.value;
+	}
+</script>
 </head>
 <body>
 <h3>회원 수정</h3>
 <form action="updateMember" onsubmit="return formCheck()" method="post" name="frm">
-	memberId <input name="memberId" value="${member.memberId}" readonly><br>
-	password <input type = "password" name="password" value="${member.password}"><br>
-	password2 <input type = "password" name="password2"><br>
+	memberId <input id="memberId" name="memberId" value="${member.memberId}" readonly><br>
 	name <input name="name" value="${member.name}"><br>
 	phone <input name="phone" value="${member.phone}"><br>
 	email <input name="email" value="${member.email}"><br>
@@ -35,5 +38,7 @@
 	<button type="submit">수정</button>
 	<button type="reset">초기화</button>
 </form>
+	<input id='password' name='password'>
+	<button onclick='changePW()'>비밀번호변경</button>
 </body>
 </html>
