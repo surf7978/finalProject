@@ -307,6 +307,11 @@ public class Controller1 {
 		return "redirect:/getBusiness99";
 	}
 	
+	@GetMapping("/calendar")
+	public String calendar() {
+		return "member/calendar";
+	}
+	
 	
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
