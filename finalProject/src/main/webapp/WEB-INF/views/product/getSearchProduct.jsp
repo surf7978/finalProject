@@ -14,15 +14,18 @@
 	function getSearchProduct(p) {
 		/* 리스트 ajax */
 		var category= $("#pro_location ul li a.after").text();
-		var category2= $("input[type=checkbox]:checked").val();
+		var category2 = [];
+		$("input[type=checkbox]:checked").each(function(){
+			category2.push($(this).val());
+		});
 		console.log(category2);
 		$.ajax({
 			url : "getSearchProduct",
-			type : "Get",
+			type : "Post",
 			data : {
 				page : p,
-				category:category,
-				category2:category2
+				category : category,
+				category2 : category2
 			},
 			dataType : "JSON",
 			success : function(datas) {
@@ -119,8 +122,6 @@
 			getSearchProduct(1)
 		})		
 		$("#pro_location ul li").on("click", "input[type=checkbox]", function(){	
-		    $('input[type=checkbox]').prop('checked', false);		
-		    $(this).prop("checked", true);
 			getSearchProduct(1)			
 		});
 	}); //end of getSearchProduct

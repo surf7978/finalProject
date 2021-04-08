@@ -112,7 +112,7 @@
 						<li><a href="#">취소/환불</a></li>
 					</ul>
 				</div>
-				<div id="pro_content">
+				<div id="content">
 					<img src="resources/images/products/${product.image }">
 				</div>
 			</div>

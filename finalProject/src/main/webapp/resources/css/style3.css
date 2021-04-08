@@ -71,7 +71,7 @@ li{list-style:none;}
 #contents #getproduct #pro_contentwrap ul li{float:left;width:25%;border-left:1px solid #f0f1f2;}
 #pro_contentwrap ul li:last-child{border-right:1px solid #f0f1f2;}
 #contents #getproduct #pro_contentwrap ul li a{font-size:20px;}
-#contents #getproduct #pro_contentwrap  #pro_content{margin-top:50px;}
+#contents #getproduct #pro_contentwrap  #content{margin-top:50px;}
 #contents #pro_location{display:flex;position:relative;height:100px;}
 #contents #pro_location ul {width:100%;width:100%;}
 #contents #pro_location ul li{float: left;padding:5px 20px;cursor:pointer;}

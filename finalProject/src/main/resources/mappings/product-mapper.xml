@@ -26,7 +26,13 @@
 		,MEMBERID
 		FROM PRODUCT
 		WHERE CATEGORY = #{category}
-		<if test="category2">AND CATEGORY2 = #{category2}</if>
+		<if test="category2">
+		AND CATEGORY2 IN
+			 <foreach item="category2" index="index" collection="category2"
+			      open="(" separator="," close=")" >
+			        #{category2}
+			  </foreach>
+		</if>
 		ORDER BY PRODUCTNUMBER
 		<!-- end of query -->
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
