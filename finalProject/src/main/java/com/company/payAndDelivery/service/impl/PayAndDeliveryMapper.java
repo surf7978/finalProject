@@ -10,4 +10,6 @@ public interface PayAndDeliveryMapper {
 	public List<PayAndDeliveryVO> getSearchPayAndDelivery(PayAndDeliveryVO vo);
 	public int updatePayAndDelivery(PayAndDeliveryVO vo);
 	public int deletePayAndDelivery(PayAndDeliveryVO vo);
+	
+	public int updateReservation2(PayAndDeliveryVO vo);	//예약수정(날짜선택)시 구매상태를 결제완료->예약완료변경
 }

@@ -12,4 +12,5 @@ public class ReservationVO {
 	String pndNumber;
 	String bisNumber;
 	String name;
+	String reservationTime;
 }

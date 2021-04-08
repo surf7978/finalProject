@@ -18,4 +18,14 @@
 	FROM PAYANDDELIVERY
 	WHERE MEMBERID=#{memberId}
 	</select>
+	
+	
+	<!-- 예약하기 버튼눌러서 날짜선택시 PAYANDDELIVERY DB update -->
+	<update id="updateReservation2" parameterType="PayAndDeliveryVO">
+		UPDATE PAYANDDELIVERY SET 
+		BUYSTATE='예약완료'
+		WHERE PNDNUMBER=#{pndNumber}
+	</update>
+	
+	
 </mapper>

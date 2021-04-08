@@ -78,7 +78,7 @@
 사진:<img src="resources/img/hospital/${hospital.image}" ><br>
 <div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
 구매평
-<c:if test="${not empty reservation.pndNumber }">
+<c:if test="${not empty reservation.reservationDate }">
 <button type="button" style="position:absolute;right:0;" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')">구매평 등록하기</button>
 </c:if>
 <hr style="align:center; text-align:left; background-color: black;">

@@ -38,4 +38,5 @@
 		FROM REVIEWPRODUCT
 		WHERE BUYNUMBER=#{buyNumber}
 	</select>
+	
 </mapper>

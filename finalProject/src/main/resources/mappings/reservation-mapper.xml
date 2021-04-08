@@ -5,14 +5,16 @@
 <mapper
 	namespace="com.company.reservation.service.impl.ReservationMapper">
 
-	<!-- 예약 리스트 조회 -->
-	<select id="getSearchReservation" parameterType="ReservationVO"
+	<!-- 예약 단건조회 -->
+	<select id="getReservation" parameterType="ReservationVO"
 		resultType="ReservationVO">
 		SELECT *
 		FROM Reservation
 		WHERE
 		PNDNUMBER=#{pndNumber}
 	</select>
+	
+
 
 	<!-- 예약내역 view 조회 구매평등록하기 버튼 클릭시 필요한 값 -->
 	<select id="getViewReservation" parameterType="ReservationVO"
@@ -22,19 +24,14 @@
 		AND BISNUMBER=#{bisNumber}
 	</select>
 
-	<!-- 예약내역 view 조회 구매평등록시 readonly값으로 출력 -->
-	<select id="getViewReservation2" parameterType="ReservationVO"
-		resultType="ReservationVO">
-		SELECT * FROM REVIEWRESERVATION
-		WHERE
-		PNDNUMBER=#{pndNumber}
-		AND BISNUMBER=#{bisNumber}
-	</select>
-
 	<!-- 예약하기 버튼눌러서 날짜선택시 Reservation DB update -->
-	<!--  <update id="insertReservation" parameterType="ReservationVO">
-		insert into 
-	</update> -->
+	<update id="updateReservation" parameterType="ReservationVO">
+		UPDATE RESERVATION SET 
+			RESERVATIONDATE = #{reservationDate}
+		  ,	RESERVATIONTIME = #{reservationTime}
+		  , RESERVATIONSTATE = '예약완료'
+	WHERE PNDNUMBER=#{pndNumber}
+	</update>
 
 
 

@@ -38,12 +38,6 @@ import com.company.reservation.service.ReservationVO;
 import com.company.review.service.ReviewService;
 import com.company.review.service.ReviewVO;
 
-/**
- * 
- * @author 이나경 21.03.29 회원정보 조회, 수정, 삭제, 구매내역리스트 21.03.30 구매내역 상세리스트 21.03.31
- *         택배API, 반려동물리스트 21.04.01 마이펫수첩CRUD 21.04.02 병원CRUD
- *
- */
 @Controller
 public class Controller2 {
 
@@ -65,8 +59,8 @@ public class Controller2 {
 	ReviewService reviewService;
 	@Autowired
 	QuestionService questionService;
-	
-	//////마이페이지-유저///////////
+
+	////// 마이페이지-유저///////////
 	// 일반회원 본인정보 조회
 	@RequestMapping("/getMember1")
 	public String getMember(MemberVO vo, Model model, HttpSession session) {
@@ -101,7 +95,8 @@ public class Controller2 {
 		memberService.deleteMember(vo);
 		return "user/deleteMember";
 	}
-
+	
+	////////////구매내역///////////////
 	// 구매내역리스트조회
 	@RequestMapping("/getSearchPayAndDelivery")
 	public String getSearchPayAndDelivery(PayAndDeliveryVO vo, Model model, HttpSession session) {
@@ -116,14 +111,31 @@ public class Controller2 {
 		model.addAttribute("buys", buyService.getSearchBuy(vo));
 		return "user/getSearchBuy";
 	}
-	//예약 페이지 호출
-	@GetMapping("/insert")
+	
+	//////////예약하기//////////////////
+	// 예약하기 날짜 페이지 호출
+	@GetMapping("/updateReservation")
+	public String updateReservation(ReservationVO vo, Model model, String pndNumber) {
+		vo.setPndNumber(pndNumber);
+		model.addAttribute("reservation", reservationService.getReservation(vo));
+		return "empty/reservation/updateReservation";
+	}
+	
+	//예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO vo1 update
+	@PostMapping("/updateReservation")
+	public String updateReservationProc(ReservationVO vo, PayAndDeliveryVO vo1) {
+		reservationService.updateReservation(vo);
+		payAndDeliveryService.updateReservation2(vo1);
+		return "redirect:/getSearchPayAndDelivery";
+	}
+	
+	
 
 	// 예약내역 상세리스트 조회
-	@RequestMapping("/getSearchReservation")
-	public String getSearchReservation(ReservationVO vo, Model model) {
-		model.addAttribute("reservation", reservationService.getSearchReservation(vo));
-		return "reservation/getSearchReservation";
+	@RequestMapping("/getReservation")
+	public String getReservation(ReservationVO vo, Model model) {
+		model.addAttribute("reservation", reservationService.getReservation(vo));
+		return "reservation/getReservation";
 	}
 
 	// 구매내역 삭제
@@ -133,7 +145,7 @@ public class Controller2 {
 		return "user/getSearchBuy";
 	}
 
-	/////////// 마이펫 수첩/////////
+	/////////// 마이펫 수첩/////////////
 	// 반려동물 리스트 조회
 	@RequestMapping("/getSearchAnimal")
 	public String getSearchAnimal(AnimalVO vo, Model model, HttpSession session) {
@@ -201,13 +213,15 @@ public class Controller2 {
 		vo.setHospitalNumber(hospitalNumber); // 담아놓은 hospitalNumber를 HospitalVO의 hospitalNumber에 담음
 		model.addAttribute("hospital", hospitalService.getHospital(vo)); // HospitalVO의 hospitalNumber로 getHospital한 값들을
 																			// 모델에 담음 변수명 "hospital"으로
-		if(session.getAttribute("loginID")!=null) {
+		if (session.getAttribute("loginID") != null) {
 			ReservationVO vo1 = new ReservationVO();
 			vo1.setMemberId((String) session.getAttribute("loginID")); // 로그인한 세션 아이디를 ReservationVO의 memberId에 담음
 			vo1.setBisNumber(hospitalNumber); // hospitalNumber를 BisNumber에 담음
-			model.addAttribute("reservation", reservationService.getViewReservation(vo1)); // 위의 두 값으로 getViewReservation해서
-																						   // 조회된 값을 모델에 담음
-																						   // 위의 두 값은 쿼리문 WHERE절에 필요한 값들
+			model.addAttribute("reservation", reservationService.getViewReservation(vo1)); // 위의 두 값으로
+																							// getViewReservation해서
+																							// 조회된 값을 모델에 담음
+																							// 위의 두 값은 쿼리문 WHERE절에 필요한
+																							// 값들
 		}
 		ReviewVO vo2 = new ReviewVO();
 		vo2.setProbisNumber(hospitalNumber);
@@ -275,7 +289,7 @@ public class Controller2 {
 	public String insertReview(ReservationVO vo, Model model, HttpSession session) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
 		model.addAttribute("reservation", reservationService.getViewReservation(vo));
-		return "reviewAndQuestion/insertReview";
+		return "empty/reviewAndQuestion/insertReview";
 	}
 
 	// 상세조회에서 구매평 등록처리
@@ -304,10 +318,10 @@ public class Controller2 {
 		BusinessVO vo2 = new BusinessVO();
 		vo2.setBusinessNumber(businessNumber);
 		model.addAttribute("business", businessService.getBusinessId(vo2));
-		return "reviewAndQuestion/insertQuestion";
+		return "empty/reviewAndQuestion/insertQuestion";
 	}
 
-	//상세조회에서 상품문의 등록처리
+	// 상세조회에서 상품문의 등록처리
 	@PostMapping("/insertQuestionBusi")
 	public void insertQuestionBusi(QuestionVO vo, HttpServletResponse response) throws IOException {
 		questionService.insertQuestionBusi(vo);
@@ -317,7 +331,7 @@ public class Controller2 {
 		writer.close();
 	}
 
-	//상품문의 단건리스트 출력(ajax로 같은 페이지 출력)
+	// 상품문의 단건리스트 출력(ajax로 같은 페이지 출력)
 	@RequestMapping("/getQuestionProbis")
 	@ResponseBody
 	public QuestionVO getQuestionProbis(QuestionVO vo) {
