@@ -16,7 +16,7 @@
 	<ul>
 	<li>
 
-	타이틀이미지: <img src="resources/images/board1/${board.t_image}">
+	타이틀이미지: <img src="resources/images/board2/${board.t_image}">
 
 	
 
@@ -30,12 +30,11 @@
 		날짜 : ${board.calendar}
 		</div>
 		<div>
-		${board.writer }
-		</div>
-		<div>
 		내용: ${board.content }	
 		</div>
-		
+		<div>
+		${board.writer }
+		</div>
 		<div>
 		${board.views }
 		</div>
@@ -51,7 +50,7 @@
 	<div>
 
 	
-	상세이미지: <img src="resources/images/board1/${board.image}">
+	상세이미지: <img src="resources/images/board2/${board.image}">
 	
 
 	</div>
