@@ -2,26 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.company.buy.service.impl.BuyMapper">
-	
+<mapper namespace="com.company.buy.service.impl.BuyMapper">
+
 	<!-- 구매내역 상세조회 -->
 	<select id="getSearchBuy" resultType="BuyVO">
-		SELECT * FROM BUY
+		SELECT BUYNUMBER
+		, CATEGORY
+		, OPTIONNAME
+		, COUNT
+		, TO_CHAR(PRICE, '999,999,999') AS PRICE
+		, BUYSTATE
+		, PRODUCTNUMBER
+		, PNDNUMBER
+		, FROMPERSON
+		, TOPERSON
+		, POST
+		, ADDRESS
+		, ADDRESS2
+		, PHONE 
+		FROM BUY
 		WHERE PNDNUMBER=#{pndNumber}
 	</select>
 
 	<!-- reviewProduct VIEW 한건 조회하기 -->
 	<select id="getViewBuy" parameterType="BuyVO" resultType="BuyVO">
-		SELECT MEMBERID
-			 , NAME
-			 ,BUYNUMBER
-			 ,CATEGORY
-			 ,OPTIONNAME
-			 ,COUNT
-			 ,PRICE
-			 ,PRODUCTNUMBER
-       FROM REVIEWPRODUCT
-	   WHERE BUYNUMBER=#{buyNumber}
+		SELECT
+		MEMBERID
+		, NAME
+		, BUYNUMBER
+		, CATEGORY
+		, OPTIONNAME
+		, COUNT
+		, TO_CHAR(PRICE, '999,999,999') AS PRICE
+		, PRODUCTNUMBER
+		FROM REVIEWPRODUCT
+		WHERE BUYNUMBER=#{buyNumber}
 	</select>
 </mapper>

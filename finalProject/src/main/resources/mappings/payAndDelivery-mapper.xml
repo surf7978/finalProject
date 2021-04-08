@@ -7,7 +7,15 @@
 
 	<!-- 구매내역리스트 조회 -->
 	<select id="getSearchPayAndDelivery" resultType="PayAndDeliveryVO">
-		SELECT * FROM PAYANDDELIVERY
-		WHERE MEMBERID=#{memberId}
+	SELECT PNDNUMBER
+	, CATEGORY
+	, COURIERCOMPANY
+	, PAYDATE
+	, INVOICENUMBER
+	, TO_CHAR(SUMPRICE, '999,999,999') AS SUMPRICE
+	, MEMBERID
+	, BUYSTATE 
+	FROM PAYANDDELIVERY
+	WHERE MEMBERID=#{memberId}
 	</select>
 </mapper>

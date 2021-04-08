@@ -9,7 +9,7 @@ public class ReservationVO {
 	String reservationDate;
 	String reservationState;
 	String memberId;
-	String deliveryNumber;
+	String pndNumber;
 	String bisNumber;
 	String name;
 }

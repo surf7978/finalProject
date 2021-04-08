@@ -10,25 +10,32 @@
 		resultType="ReservationVO">
 		SELECT *
 		FROM Reservation
-		WHERE DELIVERYNUMBER=#{deliveryNumber}
+		WHERE
+		PNDNUMBER=#{pndNumber}
 	</select>
-	
-	<!-- 예약내역 view 조회 -->
+
+	<!-- 예약내역 view 조회 구매평등록하기 버튼 클릭시 필요한 값 -->
 	<select id="getViewReservation" parameterType="ReservationVO"
 		resultType="ReservationVO">
 		SELECT * FROM REVIEWRESERVATION
 		WHERE MEMBERID=#{memberId}
 		AND BISNUMBER=#{bisNumber}
 	</select>
-	
-	<!-- 예약내역 view 조회 구매평등록시 readonly값 출력-->
+
+	<!-- 예약내역 view 조회 구매평등록시 readonly값으로 출력 -->
 	<select id="getViewReservation2" parameterType="ReservationVO"
 		resultType="ReservationVO">
 		SELECT * FROM REVIEWRESERVATION
-		WHERE DELIVERYNUMBER=#{deliveryNumber}
+		WHERE
+		PNDNUMBER=#{pndNumber}
 		AND BISNUMBER=#{bisNumber}
 	</select>
-	
-	
+
+	<!-- 예약하기 버튼눌러서 날짜선택시 Reservation DB update -->
+	<!--  <update id="insertReservation" parameterType="ReservationVO">
+		insert into 
+	</update> -->
+
+
 
 </mapper>

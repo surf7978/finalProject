@@ -65,7 +65,8 @@ public class Controller2 {
 	ReviewService reviewService;
 	@Autowired
 	QuestionService questionService;
-
+	
+	//////마이페이지-유저///////////
 	// 일반회원 본인정보 조회
 	@RequestMapping("/getMember1")
 	public String getMember(MemberVO vo, Model model, HttpSession session) {
@@ -115,6 +116,8 @@ public class Controller2 {
 		model.addAttribute("buys", buyService.getSearchBuy(vo));
 		return "user/getSearchBuy";
 	}
+	//예약 페이지 호출
+	@GetMapping("/insert")
 
 	// 예약내역 상세리스트 조회
 	@RequestMapping("/getSearchReservation")
