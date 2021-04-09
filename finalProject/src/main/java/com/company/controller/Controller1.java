@@ -310,7 +310,7 @@ public class Controller1 {
 	@PostMapping("/updateBusiness99")
 	public String updateBusiness99(BusinessVO vo) {
 		businessService.updateBusiness(vo);
-		return "redirect:/getBusiness99";
+		return "redirect:/getBusiness99?businessId="+vo.getBusinessId();
 	}
 	
 	@RequestMapping("/getSearchAnimal99")

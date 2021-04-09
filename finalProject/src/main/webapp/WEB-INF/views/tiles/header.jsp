@@ -178,7 +178,7 @@
 									<li><a href="getSearchAnswer">답변내역보기</a></li>
 									<c:if test="${loginAuth eq 'm'}">
 										<c:if test="${loginID ne 'admin'}">
-											<li><a href="getMember1">회원정보조회</a></li>
+											<li><a href="getMember1?memberId=${loginID}">회원정보조회</a></li>
 										</c:if>
 										<c:if test="${loginID eq 'admin'}">
 											<li><a href="getSearchViewMember">회원정보조회</a></li>
@@ -186,7 +186,7 @@
 										</c:if>
 									</c:if>
 									<c:if test="${loginAuth eq 'b'}">
-										<li><a href="getBusiness99">회원정보조회</a></li>
+										<li><a href="getBusiness99?businessId=${loginID}">회원정보조회</a></li>
 										<li><a href="#">게시글관리</a></li>
 									</c:if>
 									<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
@@ -244,7 +244,7 @@
 										<li><a href="getSearchAnswer">답변내역보기</a></li>
 										<c:if test="${loginAuth eq 'm'}">
 											<c:if test="${loginID ne 'admin'}">
-												<li><a href="getMember1">회원정보조회</a></li>
+												<li><a href="getMember1?memberId=${loginID}">회원정보조회</a></li>
 											</c:if>
 											<c:if test="${loginID eq 'admin'}">
 												<li><a href="getSearchViewMember">회원정보조회</a></li>
@@ -252,7 +252,7 @@
 											</c:if>
 										</c:if>
 										<c:if test="${loginAuth eq 'b'}">
-											<li><a href="getBusiness99">회원정보조회</a></li>
+											<li><a href="getBusiness99?businessId=${loginID}">회원정보조회</a></li>
 											<li><a href="#">게시글관리</a></li>
 										</c:if>
 										<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
