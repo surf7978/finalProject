@@ -2,6 +2,7 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.answer.service.AnswerService;
@@ -103,18 +105,12 @@ public class Controller4 {
 //		return "redirect:/getSearchMember";
 //	}
 	
-//	@GetMapping("/deleteMember")
-//	public String deleteMemeber(MemberVO vo , Model model) {
-//		memberService.deleteMember(vo);
-//		model.addAttribute("deleteMember" , memberService.deleteMember(vo));
-//		return "member/getMemberList";
-//		
+
 //	}
 	@PostMapping("/deleteMember")
-	public String deleteMemberProc(MemberVO vo , Model model) {
+	public String deleteMemberProc(MemberVO vo ) {
 		System.out.println("맴버삭제 vo "+ vo);
 		memberService.deleteMember(vo);
-		model.addAttribute("deleteMember" , memberService.deleteMember(vo));
 		return "redirect:getSearchMember";
 	}
 	
@@ -181,17 +177,16 @@ public class Controller4 {
 	public String updateBoardProc(BoardVO vo) {
 		System.out.println("관리자 게시판관리 수정 updateBoard의 vo의 2 "+ vo);
 		boardService.updateBoard(vo);
-		return "redirect:getSearchBoard";
+		return "redirect:/getSearchBoard";
 	}
 	
 	
 	
 	//게시판 삭제
 	@PostMapping("/deleteBoard")
-	public String deleteBoard(BoardVO vo , Model model ) {
+	public String deleteBoard(BoardVO vo ) {
 		boardService.deleteBoard(vo);
-		model.addAttribute("deleteBoard", boardService.deleteBoard(vo));
-		return "redirect:getSearchBoard";
+		return "redirect:/getSearchBoard";
 	}
 	
 	
@@ -206,16 +201,23 @@ public class Controller4 {
 	} 
 	
 	
-	//2번 자랑하기 조회
+	//2번 자랑하기게시판으로 가기
 	
-	@RequestMapping("/getSearchBoardCategiry2")	
-	public String getSearchBoardCategiry2(Model model, BoardVO vo) {
+	@RequestMapping("/getSearchBoardCategiry2Form")	
+	public String getSearchBoardCategiry2Form(Model model, BoardVO vo) {
 		
 		model.addAttribute("board" , boardService.getSearchBoardCategiry2(vo));
 		System.out.println(vo);
 		return "board/getSearchBoardCategiry2";
 		
 	} 
+	//2번 자랑하기게시판리스트
+	@RequestMapping("/getSearchBoardCategiry2")
+	@ResponseBody
+	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo){
+		
+		return boardService.getSearchBoardCategiry2(vo);
+	}
 	
 	
 	// 1번 자유게시판 글쓰기
@@ -311,7 +313,7 @@ public class Controller4 {
 		}
 	// 			String path = "resources/images";
 		boardService.insertBoard2(vo);
-		return "redirect:/getSearchBoardCategiry2";
+		return "redirect:/getSearchBoardCategiry2Form";
 	}
 	
 	
@@ -384,10 +386,9 @@ public class Controller4 {
 		return "redirect:/getSearchEventAndNotice";
 	}
 	@PostMapping("/deleteEventAndNotice")
-	public String deleteEventAndNoticeProc(EventAndNoticeVO vo , Model model) {
+	public String deleteEventAndNoticeProc(EventAndNoticeVO vo ) {
 		System.out.println("삭제 vo "+ vo);
 		eventAndNoticeService.deleteEventAndNotice(vo);
-		model.addAttribute("deleteEventAndNotice" , eventAndNoticeService.deleteEventAndNotice(vo));
 		return "redirect:/";
 	}
 	

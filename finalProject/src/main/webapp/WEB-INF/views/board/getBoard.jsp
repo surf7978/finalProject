@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -10,54 +10,80 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+<style>
+#content {
+	display: flex;
+	justify-content: center;
+	width: 40%;
+	margin: 0 auto;
+}
+
+#title {
+	font-family: sans-serif;
+	background-color: #e9e9e9;
+}
+
+table td {
+	padding-left: 10px;
+}
+
+#image {
+	background-image: 100px 100px;
+}
+</style>
 <body>
-<div>
-	<div>
-	<ul>
-	<li>
+	<div id="pro_contentwrap">
+		<div class="pro_menu">
+			<ul id="title">
+				<li><h2>${board.title }</h2></li>
+			</ul>
 
-	타이틀이미지: <img src="resources/images/board1/${board.t_image}">
+			<table>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr> 
+				<tr>
+					<td>작성자: ${board.writer }</td>
+					<td>날짜: ${board.calendar}</td>
+					<td>조회수:${board.views}</td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<div>
+			<img id="image" src="resources/images/board1/${board.image }">
+		</div>
+		<br>
+		<br>
+		<div id="content">
 
-	
-
-
-	</li>	
-	<li>	
-		<div>
-		제목: ${board.title }	
+			<p>${board.content }</p>
 		</div>
-		<div>
-		날짜 : ${board.calendar}
-		</div>
-		<div>
-		${board.writer }
-		</div>
-		<div>
-		내용: ${board.content }	
-		</div>
-		
-		<div>
-		${board.views }
-		</div>
-		<div>
-		${board.category}	
-		</div>
-		<div>
-		${board.memberId }
-		</div>
-	</li>
-	</ul>
-	</div>
-	<div>
-
-	
-	상세이미지: <img src="resources/images/board1/${board.image}">
-	
 
 	</div>
-	
-</div>
 
+	<div>
+		<input type="button"
+			onclick="location.href='updateBoard?boardNumber=${board.boardNumber}'"
+			value="수정하기">
+
+		<form action="deleteBoard?boardNumber=${board.boardNumber}"
+			method="post">
+			<input type="submit" value="삭제하기">
+		</form>
+	</div>
 
 
 
