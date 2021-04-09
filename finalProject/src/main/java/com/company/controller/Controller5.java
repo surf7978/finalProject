@@ -30,12 +30,8 @@ import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
-import com.company.hotel.service.HotelSearchVO;
-import com.company.hotel.service.HotelService;
-import com.company.hotel.service.HotelVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
-import com.company.taxi.service.TaxiService;
 
 /*
  * @author 박세민
@@ -48,7 +44,7 @@ import com.company.taxi.service.TaxiService;
  * 21.04.06 사업체-카페-전체리스트 3차 수정(Ajax,paging)
  * 21.04.07 사업체-통합 리스트(Ajax,paging,search,checkbox)
  * 21.04.08 사업체-통합 리스트 세분화(카테고리 별 검색 완)
- * 21.04.09 
+ * 21.04.09 Oracle Cloud DB 설정/
  */
 @Controller
 public class Controller5 {
@@ -68,12 +64,6 @@ public class Controller5 {
 	// 사업자
 	@Autowired
 	CafeService cafeService;
-
-	@Autowired
-	HotelService hotelService;
-
-	@Autowired
-	TaxiService taxiService;
 
 	// end of beans
 
@@ -397,7 +387,7 @@ public class Controller5 {
 
 	// 사업체-통합 등록 기능
 	@PostMapping("/insertInfo")
-	//통합이라 vo값을 어떻게 처리해야할지 
+	// 통합이라 vo값을 어떻게 처리해야할지
 	public void insertInfoProc(CafeVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
 			HttpServletResponse response) throws Exception {
 		// 사업자 번호를 어디서 가져올 것인지
@@ -430,11 +420,11 @@ public class Controller5 {
 			image2.transferTo(rename);
 			vo.setImage2(rename.getName());
 		} // end of if
-		//
+			//
 			// 등록처리
 		int r = cafeService.insertCafe(vo);
 		//
-		
+
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		if (r == 1) {
