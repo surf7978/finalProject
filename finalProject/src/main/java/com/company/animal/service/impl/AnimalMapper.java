@@ -10,4 +10,6 @@ public interface AnimalMapper {
 	public List<AnimalVO> getSearchAnimal(AnimalVO vo);
 	public int updateAnimal(AnimalVO vo);
 	public int deleteAnimal(AnimalVO vo);
+	
+	public List<AnimalVO> getSearchAnimal99(AnimalVO vo);	//관리자용 반려동물들 리스트 조회
 }

@@ -86,18 +86,23 @@
 	<update id="updateProduct">
 		UPDATE PRODUCT
 			<set>				
-				<if test="productNumber">PRODUCTNUMBER = #{productNumber}</if>
-				<if test="category">,CATEGORY = #{category}</if>
-				<if test="category2">,CATEGORY2 = #{category2}</if>
-				<if test="image">,IMAGE = #{image}</if>
-				<if test="t_image">,T_IMAGE = #{t_image}</if>
-				<if test="productName">,PRODUCTNAME = #{productName}</if>
-				<if test="optionName">,OPTIONNAME = #{optionName}</if>
-				<if test="optionPrice">,OPTIONPRICE = #{optionPrice}</if>
-				<if test="productState">,PRODUCTSTATE = #{productState}</if>
-				<if test="memberId">,MEMBERID = #{memberId}</if>
+				<if test="category != null">,CATEGORY = #{category}</if>
+				<if test="category2 != null">,CATEGORY2 = #{category2}</if>
+				<if test="image != null">,IMAGE = #{image}</if>
+				<if test="t_image != null">,T_IMAGE = #{t_image}</if>
+				<if test="productName != null">,PRODUCTNAME = #{productName}</if>
+				<if test="optionName != null">,OPTIONNAME = #{optionName}</if>
+				<if test="optionPrice != null">,OPTIONPRICE = #{optionPrice}</if>
+				<if test="productState != null">,PRODUCTSTATE = #{productState}</if>
+				<if test="memberId != null">,MEMBERID = #{memberId}</if>
 			</set>
 		WHERE PRODUCTNUMBER = #{productNumber}
 	</update>
+	<!-- 홈화면 쇼핑몰 전체 리스트 -->
+	<select id="getSearchProduct99" resultType="ProductVO"
+		parameterType="ProductVO">
+		SELECT *
+		FROM PRODUCT
+	</select>
 </mapper>
 <!-- 스프링 초기설정 오류방지용 -->

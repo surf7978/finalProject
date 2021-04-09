@@ -312,6 +312,7 @@
 <div id="contents" class="pro_form">
 	<h1>상품수정</h1>
 	<form id="frm" name="frm" method="post" encType="multipart/form-data" action="updateProduct">
+	<input type="hidden" name="productNumber" value="${product.productNumber }">
 		<table border="1">
 		<tr>
 			<th>작성자</th>

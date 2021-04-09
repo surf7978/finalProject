@@ -34,6 +34,8 @@ import com.company.member.common.coolsmsAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.member.service.impl.MemberServiceimpl;
+import com.company.product.service.ProductService;
+import com.company.product.service.ProductVO;
 import com.company.review.service.ReviewService;
 import com.company.review.service.ReviewVO;
  
@@ -294,10 +296,14 @@ public class Controller1 {
 	
 	//사업자-개인정보 조회
 	@GetMapping("/getBusiness99")
-	public String getBusiness99(HttpSession session, Model model) {
-		BusinessVO vo = new BusinessVO();
-		vo.setBusinessId((String) session.getAttribute("loginID"));
-		model.addAttribute("business", businessService.getBusiness(vo));
+	public String getBusiness99(HttpSession session, Model model, BusinessVO vo1) {
+		if(session.getAttribute("loginID").equals("admin")) {
+			model.addAttribute("business", businessService.getBusiness(vo1));
+		}else {
+			BusinessVO vo = new BusinessVO();
+			vo.setBusinessId((String) session.getAttribute("loginID"));
+			model.addAttribute("business", businessService.getBusiness(vo));
+		}
 		return "business/getBusiness99";
 	}
 	
@@ -307,7 +313,14 @@ public class Controller1 {
 		return "redirect:/getBusiness99";
 	}
 	
+	@RequestMapping("/getSearchAnimal99")
+	public String getSearchAnimal(AnimalVO vo, Model model) {
+		model.addAttribute("animal", animalService.getSearchAnimal99(vo));
+		return "animal/getSearchAnimal99";
+	}
 	
+	
+	@Autowired ProductService productService;
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -320,7 +333,11 @@ public class Controller1 {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-
+		
+		//쇼핑몰 물품 보이게 하기
+		ProductVO vo = new ProductVO();
+		model.addAttribute("product", productService.getSearchProduct99(vo));
+		
 		return "home";
 	}// end of home
 }

@@ -60,6 +60,17 @@
 	<!-- 반려동물 삭제 -->
 	<delete id="deleteAnimal" parameterType="AnimalVO">
 		DELETE FROM ANIMAL
-		WHERE memberId = #{memberId}
+		WHERE ANIMALNUMBER = #{animalNumber}
 	</delete>
+	
+	<!--관리자용 동물 리스트 조회 -->
+	<select id="getSearchAnimal99" parameterType="AnimalVO" resultType="AnimalVO">
+		SELECT ANIMALNUMBER
+			, NAME
+			, GENDER
+			, KIND
+			, BIRTH
+			, MEMBERID
+			FROM ANIMAL
+	</select>
 </mapper>

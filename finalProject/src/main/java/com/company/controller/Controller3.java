@@ -126,16 +126,17 @@ public class Controller3 {
 
 	@PostMapping("/updateProduct")
 	public String updateProduct(ProductVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
-		System.out.println(vo);
 		// 첨부파일처리
 		// pom, servlet에 추가
 		MultipartFile image = vo.getUploadFile();
 		MultipartFile t_image = vo.getT_uploadFile();
 		String path = request.getSession().getServletContext().getRealPath("/resources/images/products");
 		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
-		if(image != null) {
 		System.out.println("경로: " + path);
-		if (image != null && !image.isEmpty() && image.getSize() > 0) {
+		//새로운 파일이 등록되었는지 확인
+		String category = vo.getCategory();
+		if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
+			//기존파일 삭제			
 			String filename = image.getOriginalFilename();
 			// 파일명 중복체크 -> rename
 			File rename = FileRenamePolicy.rename(new File(path, filename));
@@ -145,10 +146,13 @@ public class Controller3 {
 			// 임시폴더에서 업로드 폴더로 파일이동
 			image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
 			vo.setImage(rename.getName());
+		}else {
+			//새로운 파일이 등록되지않았다면
+			//기존이미지를 그대로 사용
+			vo.setImage(request.getParameter("image"));
+			
 		}
-		}
-		if(t_image!= null) {
-		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+		if (t_image.getOriginalFilename() != null && !t_image.getOriginalFilename().equals("") && t_image.getSize() > 0) {
 			String filename = t_image.getOriginalFilename();
 			// 파일명 중복체크 -> rename
 			File rename = FileRenamePolicy.rename(new File(path, filename));
@@ -158,7 +162,10 @@ public class Controller3 {
 			// 임시폴더에서 업로드 폴더로 파일이동
 			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
 			vo.setT_image(rename.getName());
-		}
+		}else {
+			//새로운 파일이 등록되지않았다면
+			//기존이미지를 그대로 사용
+			vo.setImage(request.getParameter("t_image"));			
 		}
 //			String path="resources/images";
 		productService.updateProduct(vo);

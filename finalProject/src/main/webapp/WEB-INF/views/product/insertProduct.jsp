@@ -155,6 +155,15 @@
 				$("#category2").append(th, td);
 			}
 		});
+		  $("#gdsImg").change(function(){
+		         if(this.files && this.files[0]) {
+		          var reader = new FileReader;
+		          reader.onload = function(data) {
+		           $(".select_img img").attr("src", data.target.result).width(500);        
+		          }
+		          reader.readAsDataURL(this.files[0]);
+		        }
+		     });
 	});
 </script>
 </head>
@@ -209,6 +218,10 @@
 		<tr>
 			<th>상세이미지</th>
 			<td><input type="file" id="image" name="uploadFile" size="100%" multiple="multiple"></td>
+		</tr>
+		<tr>
+			<th>미리보기</th>
+			<td id="gdsImg"></td>
 		</tr>
 	</table>
 		<button type="submit">확인</button><button type="reset">초기화</button>
