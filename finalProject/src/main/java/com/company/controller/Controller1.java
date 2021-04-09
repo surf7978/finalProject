@@ -331,8 +331,8 @@ public class Controller1 {
 		model.addAttribute("serverTime", formattedDate);
 		
 		//쇼핑몰 물품 보이게 하기
-		//ProductVO vo = new ProductVO();
-		//model.addAttribute("product", productService.getSearchProduct99(vo));
+		ProductVO vo = new ProductVO();
+		model.addAttribute("product", productService.getSearchProduct99(vo));
 		
 		return "home";
 	}// end of home

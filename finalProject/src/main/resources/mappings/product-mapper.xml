@@ -77,7 +77,7 @@
 	<select id="getSearchProduct99" resultType="ProductVO"
 		parameterType="ProductVO">
 		SELECT *
-		FROM PRODUCTNUMBER 
+		FROM PRODUCT
 	</select>
 </mapper>
 <!-- 스프링 초기설정 오류방지용 -->

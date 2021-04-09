@@ -55,14 +55,17 @@
                         <a href="#">Discover More</a>
                     </div>
                 </div>
+                
                 <div class="col-lg-8 offset-lg-1">
                     <div class="filter-control">
+                <!-- 
                         <ul>
                             <li class="active">Clothings</li>
                             <li>HandBag</li>
                             <li>Shoes</li>
                             <li>Accessories</li>
                         </ul>
+                 -->
                     </div>
                     
                     
@@ -72,99 +75,36 @@
                     		<c:forEach items="${product }" var="list">
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="resources/img/products/women-1.jpg" alt="">
+                                <img src="resources/images/products/${list.t_image }" alt="">
+                                <!-- 
                                 <div class="sale">Sale</div>
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
                                 </div>
+                                 -->
                                 <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                	<!-- 
                                     <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                                	 -->
+                                    <li class="w-icon active"><a href="getProduct?productNumber=${list.productNumber }"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="getProduct?productNumber=${list.productNumber }">상세보기</a></li>
                                 </ul>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">Coat</div>
+                                <div class="catagory-name">${list.category2 } > ${list.category2 }</div>
                                 <a href="#">
-                                    <h5>Pure Pineapple</h5>
+                                    <h5>${list.optionName }</h5>
                                 </a>
                                 <div class="product-price">
-                                    $14.00
+                                    ${list.optionPrice }원
+                                    <!-- 
                                     <span>$35.00</span>
+                                     -->
                                 </div>
                             </div>
                         </div>
                     		</c:forEach>
                     	</c:if>
-                       										 <!-- 
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="resources/img/products/women-2.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-
-                                <div class="catagory-name">Shoes</div>
-                                <a href="#">
-                                    <h5>Guangzhou sweater</h5>
-                                </a>
-                                <div class="product-price">
-                                    $13.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="resources/img/products/women-3.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="resources/img/products/women-4.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Converse Shoes</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
-                                                 -->
                     </div>
                     
                     
