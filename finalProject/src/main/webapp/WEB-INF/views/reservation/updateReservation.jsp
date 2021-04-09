@@ -26,7 +26,12 @@
 		showMonthAfterYear : true,
 		yearSuffix : '년'
 	});
-
+	$(function() {
+	$("#pro_location").on("click","ul li", function(){
+		$("#pro_location ul li").removeClass("after");
+		$(this).addClass("after")
+		})	
+	});
 	$(function() {
 		$("#reservationDate").datepicker({
 			minDate : "0"
@@ -40,8 +45,9 @@
 	}
 </script>
 <style>
-	ul li {list-style-type: none; float: left; outline:2px; margin-left:20px; font-size: 20px;width:25%; cursor:pointer; background: #e7ab3c; margin: 5px;}
-	
+	ul li {list-style-type: none; float: left; outline:2px; margin-left:20px; font-size: 20px;width:25%; cursor:pointer; margin: 5px; border: 1px solid #e7ab3c;}
+	ul li:hover{background-color: #e7ab3c;}
+	.after{background-color: #e7ab3c;}
 </style>
 </head>
 <body>
@@ -51,6 +57,7 @@
 		날짜 선택:<input type="text" id="reservationDate" name="reservationDate"> <br>
 		시간 선택:<input type="text" id="reservationTime" name="reservationTime">
 		<br><br>
+		<div id="pro_location">
 		<ul style="width:290px;margin:0 auto;">
 			<li value="8:00"><a onclick="statusChange(this)">8:00</a></li>
 			<li value="9:00"><a onclick="statusChange(this)">9:00</a></li>
@@ -69,6 +76,8 @@
 			<li value="22:00"><a onclick="statusChange(this)">22:00</a></li>
 			<li value="23:00"><a onclick="statusChange(this)">23:00</a></li>
 		</ul>
+		</div>
+		<br><br><br>
 		<br><br><br>
 		<br><br><br>
 		<br><br><br>

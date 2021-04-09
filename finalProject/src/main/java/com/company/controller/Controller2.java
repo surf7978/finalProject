@@ -3,6 +3,9 @@ package com.company.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -131,7 +134,14 @@ public class Controller2 {
 	
 	//예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO vo1 update
 	@PostMapping("/updateReservation")
-	public String updateReservationProc(ReservationVO vo, PayAndDeliveryVO vo1) {
+	public String updateReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, Locale locale, Model model) {
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+		String formattedDate = dateFormat.format(date);
+
+		model.addAttribute("serverTime", formattedDate);
 		reservationService.updateReservation(vo);
 		payAndDeliveryService.updateReservation2(vo1);
 		return "redirect:/getSearchPayAndDelivery";
