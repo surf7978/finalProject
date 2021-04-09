@@ -62,6 +62,7 @@ public class Controller2 {
 
 	////// 마이페이지-유저///////////
 	// 일반회원 본인정보 조회
+	//admin이 로그인해서 회원들의 정보를 볼려고 클릭하면 자기정보가 나와서 .equals("admin")추가해서 자기정보가 아닌 회원의 정보조회하게 함
 	@GetMapping("/getMember1")
 	public String getMember(MemberVO vo1, Model model, HttpSession session) {
 		if(session.getAttribute("loginID").equals("admin")) {
