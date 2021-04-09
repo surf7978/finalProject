@@ -12,10 +12,15 @@ import com.company.eventAndNotice.service.EventAndNoticeVO;
 public class EventAndNoticeServiceimpl implements EventAndNoticeService{
 	
 	@Autowired EventAndNoticeMapper EventAndNoticeMapper;
-	//등록
+	//이벤트 등록
 	@Override
-	public int insertEventAndNotice(EventAndNoticeVO vo) {
-		return EventAndNoticeMapper.insertEventAndNotice(vo);
+	public int insertEventAndNotice1(EventAndNoticeVO vo) {
+		return EventAndNoticeMapper.insertEventAndNotice1(vo);
+	}
+	//공지사항 등록
+	@Override
+	public int insertEventAndNotice2(EventAndNoticeVO vo) {
+		return EventAndNoticeMapper.insertEventAndNotice2(vo);
 	}
 	//단건조회
 	@Override

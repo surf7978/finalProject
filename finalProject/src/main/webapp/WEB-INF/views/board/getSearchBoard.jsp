@@ -18,7 +18,7 @@ table , tr, td{
 <div >
 <a href="getSearchBoardCategiry1">1.자유게시판으로 가기</a>	<br>
 <a href="getSearchBoardCategiry2Form">2.자랑하기 게시판으로 가기</a> <br> 
-<a href="/finalProject">홈으로 돌아가기</a> <br>
+<a href="getSearchCr4">홈으로 돌아가기</a> <br>
 
 </div>
 </body>

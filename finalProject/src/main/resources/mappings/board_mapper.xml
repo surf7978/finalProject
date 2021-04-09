@@ -81,8 +81,7 @@
 	</select>
 	<insert id="insertBoard" parameterType="boardVO">
 		  insert into board(BOARDNUMBER
-		  					, IMAGE
-		  					
+		  					, IMAGE	  					
 		  					, TITLE
 		  					, CALENDAR
 		  					, CONTENT
@@ -92,7 +91,6 @@
 		  					, MEMBERID)
 		  			 values(board1_seq.nextval
 		  			 		, #{image}
-		  			 
 		  			 		, #{title}
 		  			 		, sysdate
 		  			 		, #{content}

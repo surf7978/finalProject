@@ -67,7 +67,7 @@
 	
 	</div>
 	<div id="paging"></div>
-	<button id="btn">글쓰기</button><a href="/finalProject">홈으로 돌아가기</a>
+	<button id="btn">글쓰기</button><a href="getSearchCr4">홈으로 돌아가기</a>
 </div>	
 
 

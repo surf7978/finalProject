@@ -347,19 +347,41 @@ public class Controller4 {
 		model.addAttribute("getSearchEventAndNoticeSelect", eventAndNoticeService.getSearchEventAndNoticeSelect(vo));
 		return "eventAndNotice/getSearchEventAndNoticeSelect";
 	}
-	@GetMapping("/insertEventAndNotice")
-	public String insertEventAndNotice() {
+	
+	// 이벤트 등록
+	
+	@GetMapping("/insertEventAndNotice1")
+	public String insertEventAndNotice1() {
 		
-		return "eventAndNotice/insertEventAndNotice";
+		return "eventAndNotice/insertEventAndNotice1";
 		
 	}
-	@PostMapping("/insertEventAndNotice")
-	public String insertEventAndNoticeProc(EventAndNoticeVO vo) {
-		eventAndNoticeService.insertEventAndNotice(vo);
+	@PostMapping("/insertEventAndNotice1")
+	public String insertEventAndNotice1Proc(EventAndNoticeVO vo) {
+		eventAndNoticeService.insertEventAndNotice1(vo);
 		System.out.println(vo);
 		return "redirect:/getSearchEventAndNotice";
 		
 	}
+	
+	// 공지사항 등록
+	
+	@GetMapping("/insertEventAndNotice2")
+	public String insertEventAndNotice2() {
+		
+		return "eventAndNotice/insertEventAndNotice2";
+		
+	}
+	@PostMapping("/insertEventAndNotice2")
+	public String insertEventAndNotice2Proc(EventAndNoticeVO vo) {
+		eventAndNoticeService.insertEventAndNotice2(vo);
+		System.out.println(vo);
+		return "redirect:/getSearchEventAndNotice";
+		
+	}
+	
+	
+	
 	
 	//이벤트 or 공지사항 단건조회
 	@GetMapping("/getEventAndNotice")
@@ -414,6 +436,17 @@ public class Controller4 {
 	
 	
 	// ####★★문의하기-신고하기 에 관한 컨트롤러 ★★ (question & answer 테이블 함께 사용)
+	
+	@GetMapping("/insertQuestion1")			//문의하기 1상품문의 접수
+	public String insertQuestion1(QuestionVO vo ) {
+		return "admin/insertQuestion1";
+	}
+	@PostMapping("/insertQuestion1")		//문의하기 1상품문의 접수 
+	public String insertQuestion1Proc(QuestionVO vo) {
+		System.out.println(vo);
+		questionService.insertQuestion1(vo);
+		return "redirect:/getSearchQuestionSelect1";
+	}
 	
 	@GetMapping("/insertQuestion2")			//문의하기 2.고객센터문의 접수 	로그인해서 세션넘기기
 	public String insertQuestion2(QuestionVO vo ) {

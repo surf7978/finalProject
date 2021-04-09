@@ -68,6 +68,6 @@ table, tr, td {
 	</tr>
 	</table>
 	</div>
-	<a href="getSearchCr4">관리자 메인으로 돌아가기</a>
+	
 </body>
 </html>

@@ -2,9 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.eventAndNotice.service.impl.EventAndNoticeMapper">
-
+	<!--이벤트 등록  -->
+	<insert id="insertEventAndNotice1" parameterType="eventAndNoticeVO">
+		
+	INSERT INTO eventAndNotice 
+     (EANNUMBER
+     ,WRITER 
+     ,TITLE
+	 ,CONTENT
+	 ,STARTDATE
+	 ,ENDDATE
+	 ,IMAGE
+	 ,VIEWS
+	 ,CATEGORY
+	 ,MEMBERID) VALUES(ean_seq.nextval 
+	 , 'admin' 
+	 , #{title} 
+	 , #{content}
+	 , #{startDate} 
+	 , #{endDate}  
+	 , #{image} 
+	 , 0 
+	 , 1 
+	 , 'admin')
+	</insert>
+	<!--공지사항 등록  -->
+	<insert id="insertEventAndNotice2" parameterType="eventAndNoticeVO">
+		
+	INSERT INTO eventAndNotice 
+     (EANNUMBER
+     ,WRITER 
+     ,TITLE
+	 ,CONTENT
+	 ,STARTDATE
+	 ,ENDDATE
+	 ,VIEWS
+	 ,CATEGORY
+	 ,MEMBERID) VALUES(ean_seq.nextval 
+	 , 'admin' 
+	 , #{title} 
+	 , #{content}
+	 , #{startDate} 
+	 , #{endDate}  
+	 , 0 
+	 , 2 
+	 , 'admin')
+	</insert>
+	
+	
 	<select id="getSearchEventAndNotice" resultType="eventAndNoticeVO">
 	SELECT * FROM eventAndNotice
+	
 	</select>
 	
 	<select id="getSearchEventAndNoticeSelect" resultType="eventAndNoticeVO"
