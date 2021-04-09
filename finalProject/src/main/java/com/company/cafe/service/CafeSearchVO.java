@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CafeSearchVO extends CafeVO {
 	String category1;
-	String searchLocation;
+	String[] searchLocation;
 	String search;
 	String searchValue;
 	// paging
