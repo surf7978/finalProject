@@ -41,7 +41,14 @@ table , tr, td{
  	</c:if>
  </td>
  <td>${list.memberId}</td>
- <td> <a href="getMember?memberId=${list.memberId}">선택</a></td>
+ <td> 
+ 	<c:if test="${list.auth eq 'b'}">
+ 		<a href="getBusiness99?businessId=${list.memberId}">선택</a>
+ 	</c:if>
+ 	<c:if test="${list.auth eq 'm'}">
+		 <a href="getMember1?memberId=${list.memberId}">선택</a>
+ 	</c:if>
+ </td>
 
 
  <td>

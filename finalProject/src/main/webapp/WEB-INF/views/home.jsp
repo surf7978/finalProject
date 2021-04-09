@@ -13,11 +13,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
+                            <span>카페/호텔/팻택시</span>
+                            <h1>??????</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                 incididunt ut labore et dolore</p>
-                            <a href="#" class="primary-btn">Shop Now</a>
+                            <a href="getSearchListForm" class="primary-btn">Go Now</a>
                         </div>
                     </div>
                     <div class="off-card">
@@ -29,11 +29,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
+                            <span>병원</span>
+                            <h1>?????????</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                 incididunt ut labore et dolore</p>
-                            <a href="#" class="primary-btn">Shop Now</a>
+                            <a href="getSearchHospital" class="primary-btn">Go Now</a>
                         </div>
                     </div>
                     <div class="off-card">
@@ -51,8 +51,8 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="product-large set-bg" data-setbg="resources/img/products/women-large.jpg">
-                        <h2>Women’s</h2>
-                        <a href="#">Discover More</a>
+                        <h2>쇼핑몰</h2>
+                        <a href="getSearchProductForm">Discover More</a>
                     </div>
                 </div>
                 
