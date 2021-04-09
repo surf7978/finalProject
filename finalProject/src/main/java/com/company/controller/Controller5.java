@@ -44,7 +44,7 @@ import com.company.question.service.QuestionVO;
  * 21.04.06 사업체-카페-전체리스트 3차 수정(Ajax,paging)
  * 21.04.07 사업체-통합 리스트(Ajax,paging,search,checkbox)
  * 21.04.08 사업체-통합 리스트 세분화(카테고리 별 검색 완)
- * 21.04.09 Oracle Cloud DB 설정/
+ * 21.04.09 Oracle Cloud DB 설정/ 사업자-통합 리스트(checkbox 여러개 채크시 포함되는 결과 전부 나오도록 변경)
  */
 @Controller
 public class Controller5 {
