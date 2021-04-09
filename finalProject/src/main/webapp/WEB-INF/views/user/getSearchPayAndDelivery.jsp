@@ -54,7 +54,7 @@
 		<td><button type="button" class="getSearchBuy">상세조회</button></td>
 		</c:if>
 		<c:if test="${pad.category != '70' }">
-		<td><button type="button" class="getSearchReservation">상세조회</button></td>
+		<td><button type="button" onclick="window.open('getReservation?pndNumber=${pad.pndNumber}','getReservation','width=400, height=300')">예약확인</button></td>
 		</c:if>
 		<c:if test="${pad.category eq '70' }">
 		<c:if test="${pad.buyState !='반품완료' }">
@@ -68,7 +68,7 @@
 		</c:if>
 		<c:if test="${pad.category != '70' }">
 		<c:if test="${pad.buyState !='환불완료' }">
-		<td><button type="button" class="get">예약하기</button></td>
+		<td><button type="button" class="updateReservation" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','updateReservation','width=500, height=500')">예약하기</button></td>
 		</c:if>
 		</c:if>
 		
@@ -89,9 +89,9 @@
 	});
 	
 	$(function(){
-		$(".getSearchReservation").on("click", function(){
+		$(".getReservation").on("click", function(){
 			var pndNum = $(this).closest('tr').find('td').eq(0).text();
-			location.href="getSearchReservation?deliveryNumber="+pndNum;
+			location.href="getReservation?pndNumber="+pndNum;
 		})
 	});
 	
