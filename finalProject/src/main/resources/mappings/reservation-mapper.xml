@@ -8,8 +8,15 @@
 	<!-- 예약 단건조회 -->
 	<select id="getReservation" parameterType="ReservationVO"
 		resultType="ReservationVO">
-		SELECT *
-		FROM Reservation
+		SELECT RESERVATIONNUMBER
+			, OPTIONNAME
+			, TO_CHAR(RESERVATIONDATE, 'yyyy-mm-dd') AS RESERVATIONDATE
+			, RESERVATIONSTATE
+			, MEMBERID
+			, PNDNUMBER
+			, BISNUMBER
+			, RESERVATIONTIME
+		FROM RESERVATION
 		WHERE
 		PNDNUMBER=#{pndNumber}
 	</select>

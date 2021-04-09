@@ -133,9 +133,10 @@ public class Controller2 {
 
 	// 예약내역 상세리스트 조회
 	@RequestMapping("/getReservation")
-	public String getReservation(ReservationVO vo, Model model) {
+	public String getReservation(ReservationVO vo, Model model, String pndNumber) {
+		vo.setPndNumber(pndNumber);
 		model.addAttribute("reservation", reservationService.getReservation(vo));
-		return "reservation/getReservation";
+		return "empty/reservation/getReservation";
 	}
 
 	// 구매내역 삭제

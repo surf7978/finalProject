@@ -29,6 +29,7 @@
         	minDate: "0"
         });
     });
+    
 </script>
 </head>
 <body>
@@ -54,6 +55,9 @@
 </select><br><br>
 <button type="submit">예약하기</button>
 <button type="button" onclick="window.close()">창 닫기</button>
+
+
+
 </form>
 </body>
 </html>

@@ -54,7 +54,7 @@
 		<td><button type="button" class="getSearchBuy">상세조회</button></td>
 		</c:if>
 		<c:if test="${pad.category != '70' }">
-		<td><button type="button" class="getReservation">상세조회</button></td>
+		<td><button type="button" onclick="window.open('getReservation?pndNumber=${pad.pndNumber}','getReservation','width=400, height=300')">예약확인</button></td>
 		</c:if>
 		<c:if test="${pad.category eq '70' }">
 		<c:if test="${pad.buyState !='반품완료' }">
