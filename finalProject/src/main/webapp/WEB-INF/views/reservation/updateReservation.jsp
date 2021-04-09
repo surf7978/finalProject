@@ -77,16 +77,20 @@ ul li:hover {
 	
 	//당일날짜 선택시 현재시간보다 이전시간은 예약불가
 	function statusChange(statusItem) {
+		console.log(curDate+"/"+reservationDate.value)
 		var strText = $(statusItem).text();
-		var idx = strText.indexOf(":");
-		console.log(strText.substring(0, idx));
-		
-		if (curTime >= strText.substring(0, idx)) {
-			alert("현재시간보다 이전시간은 예약 불가입니다.");
-		} else{
+		if(curDate==reservationDate.value){
+			var idx = strText.indexOf(":");
+			console.log(strText.substring(0, idx));
+			if (curTime >= strText.substring(0, idx)) {
+				alert("현재시간보다 이전시간은 예약 불가입니다.");
+			} else{
+				$("#reservationTime").val(strText);
+			}
+		}else{
+			console.log("이게되야지")
 			$("#reservationTime").val(strText);
 		}
-			
 	}
 
 	//var time = $(".time").text();
