@@ -33,6 +33,14 @@
 			alert("패스워드 불일치");
 			return false;
 		}
+		else if(businessName.value==""){
+			alert("이름 미입력");
+			return false;
+		}
+		else if(document.getElementById('phoneCheckResult').innerHTML==""){
+			alert("휴대폰 미인증");
+			return false;
+		}
 		else if(businessNumber.value==""){
 			alert("사업자번호 미입력");
 			return false;
@@ -84,7 +92,7 @@
 <!-- 휴대폰인증페이지 출력 -->
 <script>
 	function coolsms(){
-		window.open("coolsms", "본인인증", "width=1000px, height=200px");
+		window.open("coolsms", "본인인증", "width=500px, height=350px");
 	}
 </script>
 <!-- 사업자번호 조회 -->
@@ -168,8 +176,12 @@
 			</tr>
 			<tr>
 				<td><input value="연 락 처" style="font-size:20px; text-align:center; width:140px; border:none;" readonly></td>
-				<td><input id="phone" name="phone"></td>
+				<td><input id="phone" name="phone" style="width:300px;" readonly></td>
 				<td><input type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="본인인증"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2"><div id="phoneCheckResult" style="color:red; height:30px;"></div></td>
 			</tr>
 			<tr>
 				<td><input value="이 메 일" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>

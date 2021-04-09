@@ -11,7 +11,7 @@
 $(function(){
 	$('#sendPhoneNumber').click(function() {
 		let phoneNumber = $('#inputPhoneNumber').val();
-
+		$(this).remove();
 		$.ajax({
 			type : "GET",
 			url : "sendSMS",
@@ -24,6 +24,8 @@ $(function(){
 					if ($.trim(result) == $('#inputCertifiedNumber').val()) {
 						console.log("인증성공")
 						alert("인증성공")
+						$(opener.document).find('#phone').val($('#inputPhoneNumber').val());
+						$(opener.document).find('#phoneCheckResult').html("인증완료");
 						window.close()
 					} else {
 						console.log("인증실패")
@@ -35,10 +37,25 @@ $(function(){
 	});
 });
 </script>
+<style>
+	input{
+		margin-bottom: 20px;
+		display: block;
+		font-size: 18px;
+		color: #252525;
+		margin-bottom: 13px;
+		border: 1px solid #ebebeb;
+		height: 50px;
+		width: 100%;
+		padding-left: 20px;
+		padding-right: 15px;
+	}
+</style>
 <body>
-인증할 휴대폰번호입력 :<input id="inputPhoneNumber" name="inputPhoneNumber">
-<button id="sendPhoneNumber" name="sendPhoneNumber">인증번호받기</button>
-받은 인증번호입력 :<input id="inputCertifiedNumber" name="inputCertifiedNumber">
+<br><br>
+<input id="inputPhoneNumber" name="inputPhoneNumber" style="width:200px;" placeholder="인증할 휴대폰번호입력">
+<button id="sendPhoneNumber" name="sendPhoneNumber">인증번호받기</button><br><br>
+<input id="inputCertifiedNumber" name="inputCertifiedNumber" style="width:200px;" placeholder="받은 인증번호입력">
 <button id="checkBtn" name="checkBtn">인증하기</button>
 </body>
 </html>
