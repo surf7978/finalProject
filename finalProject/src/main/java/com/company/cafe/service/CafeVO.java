@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class CafeVO {
-	String cafeNumber;
+	String seq;
 	String name;
 	String optionName;
 	String price;

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.integrated.service.impl.IntegratedMapper">
+<mapper
+	namespace="com.company.integrated.service.impl.IntegratedMapper">
 	<!-- 통합 등록 -->
 	<insert id="insertIntegrated">
-	INSERT INTO ${code}
+		INSERT INTO ${code}
 		(
 		seq,
 		name,
@@ -14,7 +15,7 @@
 		businessNumber,
 		image1,
 		image2
-	)VALUES(
+		)VALUES(
 		integrate_seq.nextval,
 		#{name},
 		#{optionName},
@@ -25,4 +26,9 @@
 		#{image2}
 		)
 	</insert>
+	<!-- 상세 조회 -->
+	<select id="getIntegrated" resultType="IntegratedVO">
+		SELECT * FROM GETSEARCHLIST1
+		WHERE SEQ = #{seq}
+	</select>
 </mapper>

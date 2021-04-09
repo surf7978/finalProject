@@ -27,7 +27,7 @@ a {
 		//채크박스 생성
 		checkbox();
 		//상세보기
-		getCafe();
+		getSearchInfo();
 		//전체 리스트
 		getSearchList1(1);
 	});//end of function
@@ -61,10 +61,10 @@ a {
 	}//enf of checkbox
 	
 	//상세보기
-	function getCafe() {
+	function getSearchInfo() {
 		//li 태그 클릭 로직 짜기
 		$("#contents").on("click","#show li",function() {
-			location.href = "getCafe?cafeNumber="+ $(this).find("[name=cafeNumber]").val();
+			location.href = "getSearchInfo?seq="+ $(this).find("[name=seq]").val();
 		})
 	}//end of getCafe
 
@@ -92,13 +92,13 @@ a {
 				//datas = Object 즉, datas란 Object 안의 list값을 가져온다는 의미
 				var response = datas.list;
 				$(response).each(function(i) {
-							var cafeNumber = response[i].cafeNumber;
+							var seq = response[i].seq;
 							var image1 = response[i].image1;
 							var li = $("<li>");
 							var input = $("<input>").attr({
-								"value" : cafeNumber,
+								"value" : seq,
 								"type" : "hidden",
-								"name" : "cafeNumber"
+								"name" : "seq"
 							});
 							//div in img
 							var div = $("<div>").attr("class", "product_img").append($("<img>")//
