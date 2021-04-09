@@ -269,9 +269,9 @@ public class Controller1 {
 	 
 	@Autowired AnimalService animalService;
 	
-	//회원탈퇴
-	@PostMapping("/membershipCancel")
-	public String membershipCancel(String ID) {
+	//관리자용 회원탈퇴
+	@GetMapping("/deleteMember99")
+	public String deleteMember99(String ID) {
 		MemberVO vo = new MemberVO();
 		vo.setMemberId(ID);
 		if(memberService.getViewMember(vo).getAuth().equals("m")) {
@@ -285,6 +285,26 @@ public class Controller1 {
 			businessService.deleteBusiness(vo1);
 		}
 		return "redirect:/getSearchViewMember";
+	}
+	
+	//회원용 회원탈퇴
+	@GetMapping("/membershipCancel")
+	public String membershipCancel(String ID, HttpSession session) {
+		MemberVO vo = new MemberVO();
+		vo.setMemberId(ID);
+		if(memberService.getViewMember(vo).getAuth().equals("m")) {
+			AnimalVO voAnimal = new AnimalVO();
+			voAnimal.setMemberId(ID);
+			animalService.deleteAnimal(voAnimal);
+			memberService.deleteMember(vo);
+			session.invalidate();
+		}else {
+			BusinessVO vo1 = new BusinessVO();
+			vo1.setBusinessId(ID);
+			businessService.deleteBusiness(vo1);
+			session.invalidate();
+		}
+		return "redirect:/";
 	}
 	 
 	//관리자-전체회원 조회

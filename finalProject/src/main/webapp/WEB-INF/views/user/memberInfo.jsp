@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,7 +125,12 @@
 		&nbsp;
 		<button type="button" onclick="location.href='/finalProject'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 	</form>
-	<a href="membershipCancel?ID=${member.memberId}">탈퇴</a>
+	<c:if test="${loginID ne 'admin'}">
+		<a href="membershipCancel?ID=${member.memberId}">탈퇴</a>
+	</c:if>
+	<c:if test="${loginID eq 'admin'}">
+		<a href="deleteMember99?ID=${member.memberId}">탈퇴</a>
+	</c:if>
 	<button id="changePW">비밀번호 변경</button>
 	<div id="searchPWResult"></div>
 </body>

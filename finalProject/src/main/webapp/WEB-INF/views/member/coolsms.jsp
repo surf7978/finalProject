@@ -72,8 +72,8 @@ $(function(){
 				<option value="017">017</option>
 			</select>		
 		</td>
-		<td><input id="phone2" name="phone2" style="width:100px;"></td>
-		<td><input id="phone3" name="phone3" style="width:100px;"></td>
+		<td><input maxlength='4' id="phone2" name="phone2" style="width:100px;"></td>
+		<td><input maxlength='4' id="phone3" name="phone3" style="width:100px;"></td>
 		<td><input type="button" id="sendPhoneNumber" value="인증번호받기" name="sendPhoneNumber" style="padding:10px; width:140px; border:none; border-radius:5px; background-color:#87ceeb; color:white;"></td>
 	</tr>
 	<tr>
@@ -81,6 +81,6 @@ $(function(){
 		<td><input type="button" id="checkBtn" value="인증하기" name="checkBtn" style="padding:10px; width:140px; border:none; border-radius:5px; background-color:#87ceeb; color:white;"></td>		
 	</tr>
 </table>
-<input type="hidden" id="inputPhoneNumber" name="inputPhoneNumber" style="width:200px; border:none; height:30px;" placeholder="인증할 휴대폰번호입력" readonly>
+<input type="hidden" id="inputPhoneNumber" name="inputPhoneNumber">
 </body>
 </html>
