@@ -42,7 +42,7 @@
 </head>
 <body>
 	<div id="contents">
-		<div id="getvo">
+		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
 					<input value="${vo.seq}" type="hidden" name="seq">
