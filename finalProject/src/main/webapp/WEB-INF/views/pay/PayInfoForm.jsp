@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+</script>
 </head>
 <body>
 	<div id="contents">
@@ -35,7 +37,9 @@
 					</tr>
 					<tr>
 						<td>합계금액</td>
-						<td colspan="2"></td>
+						<td colspan="2" id="sumresult">
+							${resultPrice }
+						</td>
 					</tr>
 				</tbody>
 			</table>				
