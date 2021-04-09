@@ -30,6 +30,8 @@ import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
+import com.company.integrated.service.IntegratedService;
+import com.company.integrated.service.IntegratedVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -64,6 +66,9 @@ public class Controller5 {
 	// 사업자
 	@Autowired
 	CafeService cafeService;
+
+	@Autowired
+	IntegratedService integratedService;
 
 	// end of beans
 
@@ -388,7 +393,7 @@ public class Controller5 {
 	// 사업체-통합 등록 기능
 	@PostMapping("/insertInfo")
 	// 통합이라 vo값을 어떻게 처리해야할지
-	public void insertInfoProc(CafeVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
+	public void insertInfoProc(IntegratedVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
 			HttpServletResponse response) throws Exception {
 		// 사업자 번호를 어디서 가져올 것인지
 		// 1.session
@@ -398,6 +403,20 @@ public class Controller5 {
 		bvo = businessService.getBusiness(bvo);
 		// 3. business의 사업자 번호 가져와 넣기
 		vo.setBusinessNumber(bvo.getBusinessNumber());
+		vo.setCode(bvo.getBusinessCode());
+		System.out.println("코드값1:" + vo.getCode());
+		if (vo.getCode().equals("10"))
+			vo.setCode("HOTEL");
+		else if (vo.getCode().equals("30"))
+			vo.setCode("CAFE");
+		else if (vo.getCode().equals("40"))
+			vo.setCode("BEAUTY");
+		else if (vo.getCode().equals("50"))
+			vo.setCode("EDU");
+		else if (vo.getCode().equals("60"))
+			vo.setCode("TAXI");
+
+		System.out.println("코드값2:" + vo.getCode());
 		// 첨부파일처리
 		// 1.vo값 가져오기
 		MultipartFile image1 = vo.getT_uploadFile();
@@ -420,11 +439,8 @@ public class Controller5 {
 			image2.transferTo(rename);
 			vo.setImage2(rename.getName());
 		} // end of if
-			//
 			// 등록처리
-		int r = cafeService.insertCafe(vo);
-		//
-
+		int r = integratedService.insertIntegrated(vo);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		if (r == 1) {
