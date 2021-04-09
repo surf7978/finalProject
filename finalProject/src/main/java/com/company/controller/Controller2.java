@@ -67,20 +67,28 @@ public class Controller2 {
 	QuestionService questionService;
 
 	// 일반회원 본인정보 조회
-	@RequestMapping("/getMember1")
-	public String getMember(MemberVO vo, Model model, HttpSession session) {
-		vo.setMemberId((String) session.getAttribute("loginID"));
-		vo = memberService.getMember(vo);
-		model.addAttribute("member", vo);
+	@GetMapping("/getMember1")
+	public String getMember(MemberVO vo1, Model model, HttpSession session) {
+		if(session.getAttribute("loginID").equals("admin")) {
+			model.addAttribute("member", memberService.getMember(vo1));
+		}else {
+			MemberVO vo = new MemberVO();
+			vo.setMemberId((String) session.getAttribute("loginID"));
+			model.addAttribute("member", memberService.getMember(vo1));
+		}
 		return "user/memberInfo";
 	}
 
 	// 수정페이지로
 	@GetMapping("/updateMember")
-	public String updateMember(MemberVO vo, Model model, HttpSession session) {
-		vo.setMemberId((String) session.getAttribute("loginID"));
-		vo = memberService.getMember(vo);
-		model.addAttribute("member", vo);
+	public String updateMember(MemberVO vo1, Model model, HttpSession session) {
+		if(session.getAttribute("loginID").equals("admin")) {
+			model.addAttribute("member", memberService.getMember(vo1));
+		}else {
+			MemberVO vo = new MemberVO();
+			vo.setMemberId((String) session.getAttribute("loginID"));
+			model.addAttribute("member", memberService.getMember(vo1));
+		}
 		return "user/memberInfo";
 	}
 
@@ -88,7 +96,7 @@ public class Controller2 {
 	@PostMapping("/updateMember")
 	public String updateMemberProc(MemberVO vo, Model model) {
 		memberService.updateMember(vo);
-		return "redirect:/updateMember";
+		return "redirect:/getMember1?memberId="+vo.getMemberId();
 	}
 
 	// 회원탈퇴
