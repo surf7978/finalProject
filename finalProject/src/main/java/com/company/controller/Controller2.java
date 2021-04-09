@@ -62,29 +62,36 @@ public class Controller2 {
 
 	////// 마이페이지-유저///////////
 	// 일반회원 본인정보 조회
-	@RequestMapping("/getMember1")
-	public String getMember(MemberVO vo, Model model, HttpSession session) {
-		vo.setMemberId((String) session.getAttribute("loginID"));
-		vo = memberService.getMember(vo);
-		model.addAttribute("member", vo);
+	@GetMapping("/getMember1")
+	public String getMember(MemberVO vo1, Model model, HttpSession session) {
+		if(session.getAttribute("loginID").equals("admin")) {
+			model.addAttribute("member", memberService.getMember(vo1));
+		}else {
+			MemberVO vo = new MemberVO();
+			vo.setMemberId((String) session.getAttribute("loginID"));
+			model.addAttribute("member", memberService.getMember(vo1));
+		}
 		return "user/memberInfo";
 	}
 
 	// 수정페이지로
 	@GetMapping("/updateMember")
-	public String updateMember(MemberVO vo, Model model, HttpSession session) {
-		vo.setMemberId((String) session.getAttribute("loginID"));
-		vo = memberService.getMember(vo);
-		model.addAttribute("member", vo);
-		return "user/updateMember";
+	public String updateMember(MemberVO vo1, Model model, HttpSession session) {
+		if(session.getAttribute("loginID").equals("admin")) {
+			model.addAttribute("member", memberService.getMember(vo1));
+		}else {
+			MemberVO vo = new MemberVO();
+			vo.setMemberId((String) session.getAttribute("loginID"));
+			model.addAttribute("member", memberService.getMember(vo1));
+		}
+		return "user/memberInfo";
 	}
 
 	// 회원수정
 	@PostMapping("/updateMember")
 	public String updateMemberProc(MemberVO vo, Model model) {
 		memberService.updateMember(vo);
-		model.addAttribute("member", vo);
-		return "redirect:/";
+		return "redirect:/getMember1?memberId="+vo.getMemberId();
 	}
 
 	// 회원탈퇴
@@ -163,11 +170,10 @@ public class Controller2 {
 	}
 
 	// 반려동물 삭제
-	@DeleteMapping("/deleteAnimal")
-	public String deleteAnimal(AnimalVO vo, Model model) {
+	@RequestMapping("/deleteAnimal")
+	public String deleteAnimal(AnimalVO vo) {
 		animalService.deleteAnimal(vo);
-		model.addAttribute("animal", vo);
-		return "user/deleteMember";
+		return "redirect:/";
 	}
 
 	// 반려동물 등록 페이지

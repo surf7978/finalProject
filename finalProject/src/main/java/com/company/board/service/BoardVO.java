@@ -19,5 +19,6 @@ public class BoardVO {
 	String t_image;
 	MultipartFile uploadFile;
 	MultipartFile t_uploadFile;
+
 }
 

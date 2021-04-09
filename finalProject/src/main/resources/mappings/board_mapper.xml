@@ -5,14 +5,51 @@
 	
 	<!--관리자가 게시판을 전체 조회  -->
 	<select id="getSearchBoard" resultType="boardVO">
-		SELECT * FROM BOARD
+		SELECT BOARDNUMBER,
+		IMAGE,
+		TITLE,
+		CALENDAR,
+		CONTENT,
+		WRITER,
+		VIEWS,
+		CATEGORY,
+		MEMBERID,
+		T_IMAGE FROM BOARD
 	</select>
+	<!-- 자유 게시판을 한건조회 -->
 	<select id="getBoard" resultType="boardVO"
 		parameterType="boardVO">
-		SELECT * FROM BOARD
+		SELECT  BOARDNUMBER,
+		IMAGE,
+		TITLE,
+		CALENDAR,
+		CONTENT,
+		WRITER,
+		VIEWS,
+		CATEGORY,
+		MEMBERID,
+		T_IMAGE FROM BOARD
 		WHERE BOARDNUMBER=#{boardNumber}
 	</select>
-
+	
+	<select id="getBoard2" resultType="boardVO"
+		parameterType="boardVO">
+		SELECT  BOARDNUMBER,
+		IMAGE,
+		TITLE,
+		CALENDAR,
+		CONTENT,
+		WRITER,
+		VIEWS,
+		CATEGORY,
+		MEMBERID,
+		T_IMAGE FROM BOARD
+		WHERE BOARDNUMBER=#{boardNumber}
+	</select>
+	
+	
+	
+	<!-- 게시판 수정  -->
 	<update id="updateBoard" parameterType="boardVO">
 		UPDATE BOARD SET
 		TITLE=#{title} ,
@@ -21,11 +58,71 @@
 		CATEGORY= #{category}
 		WHERE BOARDNUMBER= #{boardNumber}
 	</update>
+	
+	<!-- 게시판 한건 삭제  -->
+	
 	<delete id="deleteBoard" parameterType="boardVO">
 		DELETE FROM BOARD
 		WHERE BOARDNUMBER=#{boardNumber}
 	</delete>
+
+
+	
+	<!--  1번 자유게시판 조회 -->
+	<select id="getSearchBoardCategiry1" resultType="boardVO"
+        parameterType="boardVO">
+        SELECT * FROM BOARD
+        WHERE category=1
+    </select>
+
+	<select id="getSearchBoardCategiry2" resultType="boardVO"
+		parameterType="boardVO">
+		SELECT * FROM BOARD
+		WHERE category=2
+	</select>
+	<insert id="insertBoard" parameterType="boardVO">
+		  insert into board(BOARDNUMBER
+		  					, IMAGE
+		  					, T_IMAGE
+		  					, TITLE
+		  					, CALENDAR
+		  					, CONTENT
+		  					, WRITER
+		  					, VIEWS
+		  					, CATEGORY
+		  					, MEMBERID)
+		  			 values(board1_seq.nextval
+		  			 		, #{image}
+		  			 		, #{t_image}
+		  			 		, #{title}
+		  			 		, sysdate
+		  			 		, #{content}
+		  			 		, #{writer}
+		  			 		, 0
+		  			 		, 1
+		  			 		,#{memberId})
+	</insert>
+	<insert id="insertBoard2" parameterType="boardVO">
+		  insert into board(BOARDNUMBER
+		  					, IMAGE
+		  					, T_IMAGE
+		  					, TITLE
+		  					, CALENDAR
+		  					, CONTENT
+		  					, WRITER
+		  					, VIEWS
+		  					, CATEGORY
+		  					, MEMBERID)
+		  			 values(board1_seq.nextval
+		  			 		, #{image}
+		  			 		, #{t_image}
+		  			 		, #{title}
+		  			 		, sysdate
+		  			 		, #{content}
+		  			 		, #{writer}
+		  			 		, 0
+		  			 		, 2
+		  			 		,#{memberId})
+	</insert>
 	
 </mapper>
-
-<!-- 스프링 초기설정 오류방지용 -->

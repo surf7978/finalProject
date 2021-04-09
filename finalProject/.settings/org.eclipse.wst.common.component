@@ -12,6 +12,5 @@
 
         <property name="context-root" value="/finalProject"/>
 
-           
     </wb-module>
 </project-modules>

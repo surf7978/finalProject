@@ -158,6 +158,11 @@ public class Controller4 {
 		model.addAttribute("board",boardService.getBoard(vo));
 		return "board/getBoard";
 	}
+	@GetMapping("/getBoard2")
+	public String getBoard2(Model model, BoardVO vo) {
+		model.addAttribute("board",boardService.getBoard(vo));
+		return "board/getBoard2";
+	}
 
 	
 	
