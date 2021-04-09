@@ -39,15 +39,10 @@
 				$(response).each(
 						function(i) {
 							var productNumber = response[i].productNumber;
-							var productNumber = response[i].productNumber;
 							var t_img = response[i].t_image;
 
 							var li = $("<li>");
-							var input = $("<input>").attr({
-								"value" : productNumber,
-								"type" : "hidden",
-								"name" : "productNumber"
-							});
+							
 							var input = $("<input>").attr({
 								"value" : productNumber,
 								"type" : "hidden",

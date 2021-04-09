@@ -55,7 +55,9 @@ li{list-style:none;}
 /* 쇼핑몰 상세페이지 */
 #contents #getproduct{width:100%;margin-top:100px;}
 #contents #getproduct .pro_title{width:100%;display:flex;}
-#contents #getproduct .pro_title ul li {float: left;text-align:left;display:inline-block;}
+#contents #getproduct .pro_title #frm{width:100%;}
+#contents #getproduct .pro_title ul{width:100%;}
+#contents #getproduct .pro_title ul li {text-align:left;float: left;width:50%;}
 #contents #getproduct .pro_title ul li:nth-child(1){width:50%;}
 #contents #getproduct .pro_title ul li:nth-child(2){width:45%;padding-left:5%;}
 #contents #getproduct .pro_title ul li img{width:100%;}

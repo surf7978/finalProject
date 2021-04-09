@@ -794,6 +794,7 @@ ol {
 .nav-item .nav-menu li .dropdown li {
 	display: block;
 	margin-left: 0;
+	width:100%;
 }
 
 .nav-item .nav-menu li .dropdown li:hover>a {

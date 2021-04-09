@@ -2,7 +2,6 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,15 +9,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +22,7 @@ import com.company.abandonment.common.AbandonmentAPI;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
 import com.company.member.service.MemberService;
+import com.company.member.service.MemberVO;
 import com.company.product.service.ProductSearchVO;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
@@ -224,10 +221,11 @@ public class Controller3 {
 		return "pay/PayInfo";
 	}
 	@RequestMapping("/PayInfoForm")
-	public String PayInfoForm(ProductVO vo, Model model, String productNumber, String resultPrice) {
+	public String PayInfoForm(ProductVO vo, Model model, String productNumber, String resultPrice, MemberVO mvo) {
 		model.addAttribute("product", productService.getProduct(vo));
 		vo.setResultPrice(resultPrice);
 		model.addAttribute("resultPrice", vo.getResultPrice());
+		model.addAttribute("member", memberService.getMember(mvo));
 		return "pay/PayInfoForm";
 	}
 
