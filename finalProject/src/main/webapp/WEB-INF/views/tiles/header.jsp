@@ -161,7 +161,7 @@
 							<li><a href="#">펫택시</a></li>
 							<li><a href="#">교육</a></li>
 							<li><a href="#">미용</a></li>
-							<li><a href="#">보호소</a></li>
+							<li><a href="getAbanList">보호소</a></li>
 							<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>
 							<li><a href="getSearchEventAndNoticeSelect?category=1">이벤트</a></li>
 							<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
@@ -178,7 +178,7 @@
 									<li><a href="getSearchAnswer">답변내역보기</a></li>
 									<c:if test="${loginAuth eq 'm'}">
 										<c:if test="${loginID ne 'admin'}">
-											<li><a href="getMember1">회원정보조회</a></li>
+											<li><a href="getMember1?memberId=${loginID}">회원정보조회</a></li>
 										</c:if>
 										<c:if test="${loginID eq 'admin'}">
 											<li><a href="getSearchViewMember">회원정보조회</a></li>
@@ -186,11 +186,16 @@
 										</c:if>
 									</c:if>
 									<c:if test="${loginAuth eq 'b'}">
-										<li><a href="getBusiness">회원정보조회</a></li>
+										<li><a href="getBusiness99?businessId=${loginID}">회원정보조회</a></li>
 										<li><a href="#">게시글관리</a></li>
 									</c:if>
 									<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
-									<li><a href="getSearchAnimal">마이펫수첩</a></li>
+									<c:if test="${loginID ne 'admin'}">
+											<li><a href="getSearchAnimal">마이펫수첩</a></li>
+										</c:if>
+										<c:if test="${loginID eq 'admin'}">
+											<li><a href="getSearchAnimal99">반려동물현황</a></li>
+										</c:if>
 									<li><a href="logout">로그아웃</a></li>
 							</c:if>
 						</ul>
@@ -213,7 +218,7 @@
 							<ul class="dropdown">
 								<li><a href="#">교육</a></li>
 								<li><a href="#">미용</a></li>
-								<li><a href="#">보호소</a></li>
+								<li><a href="getAbanList">보호소</a></li>
 							</ul></li>
 						<li><a href="#">커뮤니티</a>
 							<ul class="dropdown">
@@ -239,7 +244,7 @@
 										<li><a href="getSearchAnswer">답변내역보기</a></li>
 										<c:if test="${loginAuth eq 'm'}">
 											<c:if test="${loginID ne 'admin'}">
-												<li><a href="getMember1">회원정보조회</a></li>
+												<li><a href="getMember1?memberId=${loginID}">회원정보조회</a></li>
 											</c:if>
 											<c:if test="${loginID eq 'admin'}">
 												<li><a href="getSearchViewMember">회원정보조회</a></li>
@@ -247,11 +252,16 @@
 											</c:if>
 										</c:if>
 										<c:if test="${loginAuth eq 'b'}">
-											<li><a href="getBusiness">회원정보조회</a></li>
+											<li><a href="getBusiness99?businessId=${loginID}">회원정보조회</a></li>
 											<li><a href="#">게시글관리</a></li>
 										</c:if>
 										<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
-										<li><a href="getSearchAnimal">마이펫수첩</a></li>
+										<c:if test="${loginID ne 'admin'}">
+											<li><a href="getSearchAnimal">마이펫수첩</a></li>
+										</c:if>
+										<c:if test="${loginID eq 'admin'}">
+											<li><a href="getSearchAnimal99">반려동물현황</a></li>
+										</c:if>
 										<li><a href="logout">로그아웃</a></li>
 								</c:if>
 							</ul>

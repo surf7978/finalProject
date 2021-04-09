@@ -67,7 +67,6 @@ public class BoardServiceimpl implements BoardService{
 	
 		return BoardMapper.getSearchBoardCategiry2(vo);
 	}
-	
 
 
 }

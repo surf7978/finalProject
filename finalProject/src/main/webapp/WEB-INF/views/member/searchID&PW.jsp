@@ -54,6 +54,7 @@
 							$("#searchPWResult").append("변경할 비밀번호<br>");
 							$("#searchPWResult").append("<input id='password' name='password'><br><br>");
 							$("#searchPWResult").append("<button onclick='changePW()'>비밀번호변경</button><br>");
+							$("#searchPWResult").append("<button onclick='changePWCancel()'>취 소</button><br>");
 						}
 					});	
 				}else{
@@ -69,6 +70,9 @@
 <script>
 	function changePW(){
 		location.href="changePW?memberId="+memberId.value+"&password="+password.value;
+	}
+	function changePWCancel(){
+		$("#searchPWResult").empty();
 	}
 </script>
 

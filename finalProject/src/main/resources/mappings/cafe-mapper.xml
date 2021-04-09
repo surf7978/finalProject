@@ -105,7 +105,14 @@
 			</when>
 			<!-- 지역구분 채크박스 -->
 			<when test="searchLocation != null">
-				WHERE LOCATION LIKE '%' || #{searchLocation} || '%'
+				WHERE LOCATION IN 
+				 <foreach item="cate" collection="searchLocation" open="(" separator="," close=")" >
+						  #{cate}
+			  	</foreach>
+			</when>
+			<!-- 카테고리 3개 분류 -->
+			<when test="category1 != null and category1 != '' ">
+				WHERE CATEGORY1 = #{category1}
 			</when>
 		</choose>
 	</sql>

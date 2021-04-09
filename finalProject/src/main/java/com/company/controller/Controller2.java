@@ -67,29 +67,36 @@ public class Controller2 {
 	QuestionService questionService;
 
 	// 일반회원 본인정보 조회
-	@RequestMapping("/getMember1")
-	public String getMember(MemberVO vo, Model model, HttpSession session) {
-		vo.setMemberId((String) session.getAttribute("loginID"));
-		vo = memberService.getMember(vo);
-		model.addAttribute("member", vo);
+	@GetMapping("/getMember1")
+	public String getMember(MemberVO vo1, Model model, HttpSession session) {
+		if(session.getAttribute("loginID").equals("admin")) {
+			model.addAttribute("member", memberService.getMember(vo1));
+		}else {
+			MemberVO vo = new MemberVO();
+			vo.setMemberId((String) session.getAttribute("loginID"));
+			model.addAttribute("member", memberService.getMember(vo1));
+		}
 		return "user/memberInfo";
 	}
 
 	// 수정페이지로
 	@GetMapping("/updateMember")
-	public String updateMember(MemberVO vo, Model model, HttpSession session) {
-		vo.setMemberId((String) session.getAttribute("loginID"));
-		vo = memberService.getMember(vo);
-		model.addAttribute("member", vo);
-		return "user/updateMember";
+	public String updateMember(MemberVO vo1, Model model, HttpSession session) {
+		if(session.getAttribute("loginID").equals("admin")) {
+			model.addAttribute("member", memberService.getMember(vo1));
+		}else {
+			MemberVO vo = new MemberVO();
+			vo.setMemberId((String) session.getAttribute("loginID"));
+			model.addAttribute("member", memberService.getMember(vo1));
+		}
+		return "user/memberInfo";
 	}
 
 	// 회원수정
 	@PostMapping("/updateMember")
 	public String updateMemberProc(MemberVO vo, Model model) {
 		memberService.updateMember(vo);
-		model.addAttribute("member", vo);
-		return "redirect:/";
+		return "redirect:/getMember1?memberId="+vo.getMemberId();
 	}
 
 	// 회원탈퇴
@@ -147,11 +154,10 @@ public class Controller2 {
 	}
 
 	// 반려동물 삭제
-	@DeleteMapping("/deleteAnimal")
-	public String deleteAnimal(AnimalVO vo, Model model) {
+	@RequestMapping("/deleteAnimal")
+	public String deleteAnimal(AnimalVO vo) {
 		animalService.deleteAnimal(vo);
-		model.addAttribute("animal", vo);
-		return "user/deleteMember";
+		return "redirect:/";
 	}
 
 	// 반려동물 등록 페이지
@@ -198,13 +204,14 @@ public class Controller2 {
 		vo.setHospitalNumber(hospitalNumber); // 담아놓은 hospitalNumber를 HospitalVO의 hospitalNumber에 담음
 		model.addAttribute("hospital", hospitalService.getHospital(vo)); // HospitalVO의 hospitalNumber로 getHospital한 값들을
 																			// 모델에 담음 변수명 "hospital"으로
-
-		ReservationVO vo1 = new ReservationVO();
-		vo1.setMemberId((String) session.getAttribute("loginID")); // 로그인한 세션 아이디를 ReservationVO의 memberId에 담음
-		vo1.setBisNumber(hospitalNumber); // hospitalNumber를 BisNumber에 담음
-		model.addAttribute("reservation", reservationService.getViewReservation(vo1)); // 위의 두 값으로 getViewReservation해서
-																						// 조회된 값을 모델에 담음
-																						// 위의 두 값은 쿼리문 WHERE절에 필요한 값들
+		if(session.getAttribute("loginID")!=null) {
+			ReservationVO vo1 = new ReservationVO();
+			vo1.setMemberId((String) session.getAttribute("loginID")); // 로그인한 세션 아이디를 ReservationVO의 memberId에 담음
+			vo1.setBisNumber(hospitalNumber); // hospitalNumber를 BisNumber에 담음
+			model.addAttribute("reservation", reservationService.getViewReservation(vo1)); // 위의 두 값으로 getViewReservation해서
+																						   // 조회된 값을 모델에 담음
+																						   // 위의 두 값은 쿼리문 WHERE절에 필요한 값들
+		}
 		ReviewVO vo2 = new ReviewVO();
 		vo2.setProbisNumber(hospitalNumber);
 		model.addAttribute("review", reviewService.getSearchReview(vo2));
