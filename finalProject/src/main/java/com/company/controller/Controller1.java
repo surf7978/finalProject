@@ -217,7 +217,7 @@ public class Controller1 {
 	//휴대폰인증 페이지 이동
 	@GetMapping("/coolsms")
 	public String phone() {
-		return "member/coolsms";
+		return "empty/member/coolsms";
 	}
 	
 	@Autowired coolsmsAPI certificationService;
