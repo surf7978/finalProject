@@ -25,7 +25,7 @@
 			data : {
 				page : p,
 				category : category,
-				category2 : category2
+				categoryList : category2
 			},
 			dataType : "JSON",
 			success : function(datas) {

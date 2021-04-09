@@ -35,9 +35,10 @@
 			result.empty();
 			result.text("${product.optionPrice }" * plu)
 		});
+		//결제페이지로 이동
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
-			location.href="PayInfo?productNumber=${product.productNumber }&resultPrice="+resultPrice;
+			location.href="PayInfoForm?productNumber=${product.productNumber }&resultPrice="+resultPrice;
 		});
 		$("#d_btn").on("click",function(){
 			if(confirm("삭제하시겟습니까")==true){

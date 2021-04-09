@@ -26,11 +26,11 @@
 		,MEMBERID
 		FROM PRODUCT
 		WHERE CATEGORY = #{category}
-		<if test="category2">
+		<if test="categoryList != null">
 		AND CATEGORY2 IN
-			 <foreach item="category2" index="index" collection="category2"
+			 <foreach item="cate" collection="categoryList"
 			      open="(" separator="," close=")" >
-			        #{category2}
+			        #{cate}
 			  </foreach>
 		</if>
 		ORDER BY PRODUCTNUMBER

@@ -78,7 +78,7 @@ public class Controller3 {
 	// 쇼핑몰리스트(ajax)
 	@RequestMapping("/getSearchProduct")	
 	@ResponseBody
-	public Map<String, Object> getSearchProduct(ProductSearchVO vo, Paging paging, String category, String category2) {
+	public Map<String, Object> getSearchProduct(ProductSearchVO vo, Paging paging) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 1. 페이지 설정
 		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
@@ -93,7 +93,7 @@ public class Controller3 {
 		List<ProductVO> list = productService.getSearchProduct(vo);
 		map.put("paging", paging);
 		map.put("list", list);
-
+		//
 		return map;
 	}// end of getSearchProduct
 
@@ -215,6 +215,13 @@ public class Controller3 {
 		vo.setResultPrice(resultPrice);
 		model.addAttribute("resultPrice", vo.getResultPrice());
 		return "pay/PayInfo";
+	}
+	@RequestMapping("/PayInfoForm")
+	public String PayInfoForm(ProductVO vo, Model model, String productNumber, String resultPrice) {
+		model.addAttribute("product", productService.getProduct(vo));
+		vo.setResultPrice(resultPrice);
+		model.addAttribute("resultPrice", vo.getResultPrice());
+		return "pay/PayInfoForm";
 	}
 
 }
