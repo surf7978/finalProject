@@ -96,7 +96,8 @@ public class Controller2 {
 	@PostMapping("/updateMember")
 	public String updateMemberProc(MemberVO vo, Model model) {
 		memberService.updateMember(vo);
-		return "redirect:/getMember1?memberId="+vo.getMemberId();
+		model.addAttribute("member", memberService.getMember(vo));
+		return "user/memberInfo";
 	}
 
 	// 회원탈퇴

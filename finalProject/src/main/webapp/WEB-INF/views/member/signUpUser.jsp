@@ -89,7 +89,7 @@
 <!-- 휴대폰인증페이지 출력 -->
 <script>
 	function coolsms(){
-		window.open("coolsms", "본인인증", "width=500px, height=350px");
+		window.open("coolsms", "본인인증", "width=800px, height=250px");
 	}
 </script>
 <style>
@@ -106,6 +106,14 @@
 		padding-right: 15px;
 	}
 </style>
+<!-- 이메일 문자열 합침 -->
+<script>
+	$(function(){
+		$("#frm").on("click", function(){
+			$("#email").val($("#email1").val()+$("#email2").val());
+		})
+	})
+</script>
 <body>
 	<br><br><br><input value="일반사용자 가입" style="font-size:40px; text-align:center; width:400px; border:none;" readonly><br><br>
 	<form id="frm" name="frm" onsubmit="return formCheck()" action="signUpUser" method="post">
@@ -155,9 +163,18 @@
 			</tr>
 			<tr>
 				<td><input value="이 메 일" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
-				<td colspan="2"><input id="email" name="email" style="width:400px;"></td>
+				<td>
+					<input id="email1" name="email1">
+				</td>
+				<td>
+					<select id="email2" name="email2" style="font-size:20px; width:140px; border:none; align:left; padding-bottom:10px;">
+						<option value="@gmail.com">@gmail.com</option>
+						<option value="@naver.com">@naver.com</option>
+					</select>
+				</td>
 			</tr>
 		</table>
+		<input type="hidden" id="email" name="email">
 		<br>
 		<button type="submit" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#e7ab3c;">회원가입</button>
 		&nbsp;
