@@ -28,8 +28,10 @@ a {
 		checkbox();
 		//상세보기
 		getSearchInfo();
-		//전체 리스트
-		getSearchList1(1);
+		//전체리스트1
+		getSearchList1(1,1);
+		//전체리스트2
+		getSearchList1(2,1);
 	});//end of function
 	
 	//채크박스 생성
@@ -73,7 +75,8 @@ a {
 	//category1이라는 매개변수는 form 태그의 button 'cafe','hotel','taxi'를 눌렀을 때 들어오는 값을 의미함
 	//들어온 매개변수 값이 null이 아니며 undefined도 아닐 때 input type hidden의 value값에 넣어준다는 의미
 	//그때 mapper에 있는 where 조건절이 실행되며 쿼리문이 정상 작동함
-	function getSearchList1(p,category1) {
+	function getSearchList1(menu,p,category1) {
+		searchAndInsert.page.menu = menu;
 		//page버튼 누를시 p값으로 들어옴
 		searchAndInsert.page.value = p;
 		if(category1 !=null && category1 !='undefined')
@@ -139,6 +142,7 @@ a {
 		<h2>전체 리스트</h2>
 		<div id="menu" align="left">
 			<form id="searchAndInsert">
+				<input type="hidden" name="menu">
 				<input type="hidden" name="category1">
 				<ul>
 					<li><a onclick="getSearchList1(1,'cafe')">카페</a></li>
