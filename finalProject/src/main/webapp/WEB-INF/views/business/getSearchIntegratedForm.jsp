@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/style2.css" type="test/css">
+<link rel="stylesheet" href="resources/css/style2.css" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -44,14 +44,14 @@
 				thead.append(tr);
 				tbl.append(thead);
 				//contents
-				var item = datas.list;
 				var tbody = $("<tbody>");
-				$(item).each(function(i,idx){
-					var tr = makeTr(item,i);
-					console.log(tr)
-					tbody.appendTo(tr);
-					tbl.append(tbody);
+				//map으로 받아온 datas.list를 의미
+				$.each(datas.list,function(i,item){
+					var content = makeTr(item);
+					console.log(content)
+					content.appendTo(tbody);
 				})//end of each
+				tbl.append(tbody);
 				
 				//paging버튼
 				$("#paging").empty();
@@ -75,15 +75,14 @@
 	}//end of getSearchAdmin
 	
 	//Tr 생성
-	function makeTr(item,i){
-		return
-			$("<tr>")
-			.append($("<td>").html(item[i].name))
-			.append($("<td>").html(item[i].optionName))
-			.append($("<td>").html(item[i].price))
-			.append($("<td>").html(item[i].location))
-			.append($("<td>").html(item[i].image1))
-			.append($("<td>").html(item[i].image2))
+	function makeTr(item){
+		return $("<tr>")
+			.append($("<td>").html(item.name))
+			.append($("<td>").html(item.optionName))
+			.append($("<td>").html(item.price))
+			.append($("<td>").html(item.location))
+			.append($("<td>").html(item.image1))
+			.append($("<td>").html(item.image2))
 			.append($("<td>").html("<button id=\'btnSelect\'>조회</button>"))
 			.append($("<td>").html("<button id=\'btnDelete\'>삭제</button>"))
 			.append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.seq));
