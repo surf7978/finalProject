@@ -10,17 +10,17 @@
 </head>
 <body>
 	<h3>병원 수정</h3>
-	<form id="frm" action="insertHospital" encType="multipart/form-data" method="post">
+	<form id="frm" action="updateHospital" encType="multipart/form-data" method="post">
 		<input type="text" id="businessNumber" name="businessNumber" value="${business.businessNumber }">
 		<table border="1">
 			<tr>
 				<th>사업자명</th>
-				<td><input type="text" id="businessCompanyName" name="businessCompanyName" value="${businessCompanyName }" readonly="readonly"></td>
+				<td><input type="text" id="businessCompanyName" name="businessCompanyName" value="${business.businessCompanyName }" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th>위치</th>
 				<td><select id="location" name="location">
-						<option>선택해주세요</option>
+						<option>${hospital.location }</option>
 						<option value="서울특별시">서울특별시</option>
 						<option value="인천광역시">인천광역시</option>
 						<option value="부산광역시">부산광역시</option>
@@ -33,7 +33,7 @@
 			<tr>
 				<th>진료구분</th>
 				<td><select id="category1" name="category1">
-						<option>선택해주세요</option>
+						<option>${hospital.category1 }</option>
 						<option value="수술/치료">수술/치료</option>
 						<option value="예방접종">예방접종</option>
 						<option value="검진/검사">검진/검사</option>
@@ -42,21 +42,21 @@
 			</tr>
 			<tr>
 			<th>상세구분</th>
-			<td><select id="category2" name="category2">
-			<option>선택해주세요</option>
+			<td><select id="category2" name="category2" >
+			<option>${hospital.category2 }</option>
 			</select></td>
 			</tr>
 			<tr>
 				<th>진료명</th>
-				<td><input type="text" name="name" id="name"></td>
+				<td><input type="text" name="name" id="name" value="${hospital.name }"></td>
 			</tr>
 			<tr>
 				<th>옵션명</th>
-				<td><input type="text" name="optionName" id="optionName"></td>
+				<td><input type="text" name="optionName" id="optionName"  value="${hospital.optionName }"></td>
 			</tr>
 			<tr>
 				<th>금액</th>
-				<td><input type="number" name="price" id="price"></td>
+				<td><input type="number" name="price" id="price" value="${hospital.price }"></td>
 			</tr>
 			<tr>
 				<th>타이틀 이미지</th>
@@ -68,7 +68,7 @@
 			</tr>
 		</table>
 		<br>
-		<button type="submit">등록</button>
+		<button type="submit">수정</button>
 	</form>
 
 	<script>
