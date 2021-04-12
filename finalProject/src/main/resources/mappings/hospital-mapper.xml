@@ -6,7 +6,7 @@
 
 	<!-- 병원상품 리스트조회 -->
 	<select id="getSearchHospital" parameterType="HospitalVO" resultType="HospitalVO">
-		SELECT HOSPITALNUMBER
+		SELECT SEQ
 			 , CATEGORY1
 			 , CATEGORY2
 			 , NAME
@@ -20,7 +20,7 @@
 	</select>
 	<!-- 병원상품 상세화면조회 -->
 	<select id="getHospital" parameterType="HospitalVO" resultType="HospitalVO">
-		SELECT HOSPITALNUMBER
+		SELECT SEQ
 			 , CATEGORY1
 			 , CATEGORY2
 			 , NAME
@@ -31,12 +31,13 @@
 			 , T_IMAGE
 			 , IMAGE
 	 	 FROM HOSPITAL
-	 	 WHERE HOSPITALNUMBER=#{hospitalNumber}
+	 	 WHERE SEQ=#{seq}
 	</select>
 	<!-- 병원상품 등록 -->
 	<insert id="insertHospital" parameterType="hospitalVO">
 	INSERT INTO HOSPITAL(
-				HOSPITALNUMBER
+				SEQ
+			  , BUSINESSNUMBER
 			  , CATEGORY1
 			  , CATEGORY2
 			  , NAME
@@ -47,6 +48,7 @@
 			  , IMAGE
 			  ) VALUES(
 			  20||HOSPI_SEQ.NEXTVAL
+			  , #{businessNumber}
 			  , #{category1, jdbcType=VARCHAR}
 			  , #{category2}
 			  , #{name}
@@ -67,13 +69,13 @@
 		, LOCATION=#{location}
 		, T_IMAGE=#{t_image}
 	 	, IMAGE=#{image}
-	WHERE HOSPITALNUMBER=#{hospitalNumber}
+	WHERE SEQ=#{seq}
 	</update>
 
 	<!-- 병원상품 삭제 -->
 	<delete id="deleteHospital">
 		DELETE FROM HOSPITAL
-		WHERE HOSPITALNUMBER=#{hospitalNumber}
+		WHERE SEQ=#{seq}
 	</delete>
 
 	<!-- 사업자별 병원조회  -->

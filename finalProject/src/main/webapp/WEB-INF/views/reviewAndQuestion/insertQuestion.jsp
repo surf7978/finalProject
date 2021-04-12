@@ -10,7 +10,7 @@
 <h3>상품문의 등록</h3>
 <form action="insertQuestionBusi" method="post">
 <input type="text" id="memberId" name="memberId" value="${loginID }">
-<input type="text" id="probisNumber" name="probisNumber" value="${hospital.hospitalNumber }">
+<input type="text" id="probisNumber" name="probisNumber" value="${hospital.seq }">
 <input type="text" id="toPerson" name="toPerson" value="${business.businessId }">
 	<table border="1">
 		<tr>

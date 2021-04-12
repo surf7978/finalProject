@@ -77,10 +77,16 @@
 	</tbody>
 </table>
 <br/>
-
+<button type="button" class="getSearchReservation" onclick="location.href='getSearchReservation?memberId=${loginID}'">캘린더조회</button>
 
 		
 <script>
+	$(function(){
+		$("#getSearchReservation").on("click", function(){
+			var pndNum = $(this).closest('tr').find('td').eq(0).text();
+			location.href="getSearchBuy?pndNumber="+pndNum;
+		})
+	});
 	$(function(){
 		$(".getSearchBuy").on("click", function(){
 			var pndNum = $(this).closest('tr').find('td').eq(0).text();

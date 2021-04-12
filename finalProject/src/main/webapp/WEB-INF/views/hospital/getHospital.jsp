@@ -97,7 +97,7 @@
 <div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
 문의내역
 <c:if test="${not empty loginID }">
-<button type="button" style="position:absolute;right:0;" id="insertQuestion" onclick="window.open('insertQuestionBusi?hospitalNumber=${hospital.hospitalNumber}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
+<button type="button" style="position:absolute;right:0;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
 </c:if>
 <hr style="align:center; text-align:left; background-color: black;">
 </div>
