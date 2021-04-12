@@ -13,7 +13,7 @@ public interface IntegratedMapper {
 
 	public IntegratedVO getIntegrated(IntegratedVO vo); // 상세조회
 
-	public List<IntegratedVO> getSearchIntegratedVO(IntegratedVO vo); // 전체조회
+	public List<IntegratedVO> getSearchIntegrated(IntegratedVO vo); // 전체조회
 
 	public int getCount(IntegratedVO vo);// 레코드 조회
 
