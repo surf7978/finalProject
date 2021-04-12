@@ -12,6 +12,7 @@
 	<h3>병원 수정</h3>
 	<form id="frm" action="updateHospital" encType="multipart/form-data" method="post">
 		<input type="text" id="businessNumber" name="businessNumber" value="${business.businessNumber }">
+		<input type="text" id="seq" name="seq" value="${hospital.seq }">
 		<table border="1">
 			<tr>
 				<th>사업자명</th>

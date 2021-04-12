@@ -96,17 +96,17 @@
 		//결제페이지로 이동
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
-			location.href="PayInfoForm?productNumber=${hospital.hospitalNumber }&resultPrice="+resultPrice +"&memberId=${loginID}";
+			location.href="PayInfoForm?productNumber=${hospital.seq }&resultPrice="+resultPrice +"&memberId=${loginID}";
 		});
 		$("#d_btn").on("click",function(){
 			if(confirm("삭제하시겟습니까")==true){
-				location.href="deleteHospital?hospitalNumber=${hospital.hospitalNumber }";				
+				location.href="deleteHospital?seq=${hospital.seq }";				
 			}else{
 				return false;
 			}
 		});
 		$("#u_btn").on("click",function(){
-			location.href="updateHospital?hospitalNumber=${hospital.hospitalNumber }"
+			location.href="updateHospital?seq=${hospital.seq }"
 		})
 	});
 </script>
@@ -132,7 +132,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
-					<input value="${hospital.hospitalNumber }" type="hidden" name="productNumber">
+					<input value="${hospital.seq }" type="hidden" name="productNumber">
 					<input value="2500" type="hidden" name="cartCourier">
 					<c:if test="${not empty loginID }">
 						<input value="${loginID }" type="hidden" name="memberId">
@@ -206,7 +206,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 <div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
 <h4>문의내역
 <c:if test="${not empty loginID }">
-<button type="button" style="position:absolute;right:0;border:none; border-radius:5px; background-color:#87ceeb; color:white; font-size:20px; padding:5px;" id="insertQuestion" onclick="window.open('insertQuestionBusi?hospitalNumber=${hospital.hospitalNumber}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
+<button type="button" style="position:absolute;right:0;border:none; border-radius:5px; background-color:#87ceeb; color:white; font-size:20px; padding:5px;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
 <button type="button" style="position:absolute;right:0;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
 </c:if>
 </h4>

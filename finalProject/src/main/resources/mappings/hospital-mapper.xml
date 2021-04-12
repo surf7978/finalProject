@@ -65,16 +65,18 @@
 		</insert>
 	<!-- 병원상품 수정 -->
 	<update id="updateHospital" parameterType="HospitalVO">
-	UPDATE HOSPITAL SET 
-		   CATEGORY1=#{category1}
-		,  CATEGORY2=#{category2}
-		,  NAME=#{name}
-		, OPTIONNAME=#{optionName}
-		, PRICE=#{price}
-		, LOCATION=#{location}
-		, T_IMAGE=#{t_image}
-	 	, IMAGE=#{image}
-	WHERE SEQ=#{seq}
+		UPDATE HOSPITAL
+			<set>				
+				<if test="category1 != null">,CATEGORY1 = #{category1}</if>
+				<if test="category2 != null">,CATEGORY2 = #{category2}</if>
+				<if test="image != null">,IMAGE = #{image}</if>
+				<if test="t_image != null">,T_IMAGE = #{t_image}</if>
+				<if test="name != null">,NAME = #{name}</if>
+				<if test="optionName != null">,OPTIONNAME = #{optionName}</if>
+				<if test="price != null">,PRICE = #{price}</if>
+				<if test="location != null">,LOCATION = #{location}</if>
+			</set>
+		WHERE SEQ = #{seq}
 	</update>
 
 	<!-- 병원상품 삭제 -->

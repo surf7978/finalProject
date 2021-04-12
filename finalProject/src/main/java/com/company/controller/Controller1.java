@@ -359,7 +359,7 @@ public class Controller1 {
 	@PostMapping("/updateHospital")
 	public String updateHospital(HospitalVO vo) {
 		hospitalService.updateHospital(vo);
-		return "redirect:/getHospital";
+		return "redirect:/getSearchHospital";
 	}
 	
 	// 병원상품 삭제
