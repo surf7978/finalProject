@@ -29,6 +29,8 @@ import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
+import com.company.hospital.service.HospitalService;
+import com.company.hospital.service.HospitalVO;
 import com.company.member.common.KakaoAPI;
 import com.company.member.common.coolsmsAPI;
 import com.company.member.service.MemberService;
@@ -339,6 +341,33 @@ public class Controller1 {
 		return "animal/getSearchAnimal99";
 	}
 	
+	@Autowired HospitalService hospitalService;
+	// 병원상품 사업자별 조회(수정페이지로 가기 위한)
+
+	// 병원상품 수정 페이지
+	@GetMapping("/updateHospital")
+	public String updateHospitalForm(HospitalVO vo, Model model, HttpSession session) {
+		System.out.println(vo);
+		BusinessVO vo1 = new BusinessVO();
+		vo1.setBusinessId((String) session.getAttribute("loginID"));
+		model.addAttribute("business", businessService.getBusiness(vo1));
+		model.addAttribute("hospital", hospitalService.getHospital(vo));
+		return "hospital/updateHospital";
+	}
+
+	// 병원상품 수정 처리
+	@PostMapping("/updateHospital")
+	public String updateHospital(HospitalVO vo) {
+		hospitalService.updateHospital(vo);
+		return "redirect:/getHospital";
+	}
+	
+	// 병원상품 삭제
+	@GetMapping("/deleteHospital")
+	public String deleteHospital(HospitalVO vo) {
+		hospitalService.deleteHospital(vo);
+		return "redirect:/getSearchHospital";
+	}
 	
 	@Autowired ProductService productService;
 	// 홈화면 출력(스프링 기본세팅)
