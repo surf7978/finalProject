@@ -17,7 +17,10 @@
 	<form action="getSearchEventAndNoticeSelect?category=2" method="post">
 		<button type="submit">공지사항</button>
 	</form>
-	
+	<button onclick="location.href='insertEventAndNotice1'">이벤트등록</button>
+	<button onclick="location.href='insertEventAndNotice2'">공지사항등록</button>
+	<br>
+	<a href="getSearchCr4">홈으로 돌아가기</a>
 	
 	
 	

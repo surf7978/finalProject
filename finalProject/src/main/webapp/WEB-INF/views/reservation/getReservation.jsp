@@ -11,26 +11,28 @@
 </head>
 <body>
 <table border="1">
-	<thead>
-		<th>예약번호</th>
-		<th>옵션명</th>
-		<th>예약날짜</th>
-		<th>예약상태</th>
-		<th>구매평</th>	
-		<th>환불하기</th>
-	</thead>
-	<tbody>
-	<c:forEach items="${reservation }" var="res" varStatus="status">
 	<tr>
-		<td><c:out value="${status.count}"/></td>
-		<td><c:out value="${res.optionName}"/></td>
-		<td><c:out value="${res.reservationDate}"/></td>
-		<td><c:out value="${res.reservationState}"/></td>
-		<td><button type="button" class="">구매평쓰기</button></td>
-		<td><button type="button" class="">환불하기</button></td>
+		<th>예약번호</th>
+		<td>${reservation.reservationNumber}</td>
 	</tr>
-	</c:forEach>
-	</tbody>
+	<tr>
+		<th>옵션명</th>
+		<td>${reservation.optionName}</td>
+	</tr>
+	<tr>
+		<th>예약날짜</th>
+		<td>${reservation.reservationDate}</td>
+	</tr>
+	<tr>
+		<th>예약시간</th>
+		<td>${reservation.reservationTime}</td>
+	</tr>
+	<tr>
+		<th>예약상태</th>
+		<td>${reservation.reservationState}</td>
+	</tr>
 </table>
+<br>
+<button type="button" onclick="window.close()">닫기</button>
 </body>
 </html>

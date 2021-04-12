@@ -32,10 +32,7 @@
 	<th>상세이미지</th>
 	<td><input type="file" id="image" name="uploadFile" size="100%" multiple="multiple"></td>
 	</tr> 
-	<tr>  
-	<th>타이틀이미지</th>
-	<td><input type="file" id="t_image" name="t_uploadFile" size="100%" multiple="multiple"></td>
-	</tr> 
+
 	</table> 
 	<p></p> 	<p></p>
 		<button type="submit">등록</button><button type="reset">초기화</button>

@@ -27,9 +27,11 @@ a {
 		//채크박스 생성
 		checkbox();
 		//상세보기
-		getCafe();
-		//전체 리스트
-		getSearchList1(1);
+		getSearchInfo();
+		//전체리스트1
+		getSearchList1(1,1);
+		//전체리스트2
+		getSearchList1(2,1);
 	});//end of function
 	
 	//채크박스 생성
@@ -61,10 +63,10 @@ a {
 	}//enf of checkbox
 	
 	//상세보기
-	function getCafe() {
+	function getSearchInfo() {
 		//li 태그 클릭 로직 짜기
 		$("#contents").on("click","#show li",function() {
-			location.href = "getCafe?cafeNumber="+ $(this).find("[name=cafeNumber]").val();
+			location.href = "getSearchInfo?seq="+ $(this).find("[name=seq]").val();
 		})
 	}//end of getCafe
 
@@ -73,7 +75,8 @@ a {
 	//category1이라는 매개변수는 form 태그의 button 'cafe','hotel','taxi'를 눌렀을 때 들어오는 값을 의미함
 	//들어온 매개변수 값이 null이 아니며 undefined도 아닐 때 input type hidden의 value값에 넣어준다는 의미
 	//그때 mapper에 있는 where 조건절이 실행되며 쿼리문이 정상 작동함
-	function getSearchList1(p,category1) {
+	function getSearchList1(menu,p,category1) {
+		searchAndInsert.page.menu = menu;
 		//page버튼 누를시 p값으로 들어옴
 		searchAndInsert.page.value = p;
 		if(category1 !=null && category1 !='undefined')
@@ -92,13 +95,13 @@ a {
 				//datas = Object 즉, datas란 Object 안의 list값을 가져온다는 의미
 				var response = datas.list;
 				$(response).each(function(i) {
-							var cafeNumber = response[i].cafeNumber;
+							var seq = response[i].seq;
 							var image1 = response[i].image1;
 							var li = $("<li>");
 							var input = $("<input>").attr({
-								"value" : cafeNumber,
+								"value" : seq,
 								"type" : "hidden",
-								"name" : "cafeNumber"
+								"name" : "seq"
 							});
 							//div in img
 							var div = $("<div>").attr("class", "product_img").append($("<img>")//
@@ -139,6 +142,7 @@ a {
 		<h2>전체 리스트</h2>
 		<div id="menu" align="left">
 			<form id="searchAndInsert">
+				<input type="hidden" name="menu">
 				<input type="hidden" name="category1">
 				<ul>
 					<li><a onclick="getSearchList1(1,'cafe')">카페</a></li>

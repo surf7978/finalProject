@@ -5,30 +5,41 @@
 <mapper
 	namespace="com.company.reservation.service.impl.ReservationMapper">
 
-	<!-- 예약 리스트 조회 -->
-	<select id="getSearchReservation" parameterType="ReservationVO"
+	<!-- 예약 단건조회 -->
+	<select id="getReservation" parameterType="ReservationVO"
 		resultType="ReservationVO">
-		SELECT *
-		FROM Reservation
-		WHERE DELIVERYNUMBER=#{deliveryNumber}
+		SELECT RESERVATIONNUMBER
+			, OPTIONNAME
+			, TO_CHAR(RESERVATIONDATE, 'yyyy-mm-dd') AS RESERVATIONDATE
+			, RESERVATIONSTATE
+			, MEMBERID
+			, PNDNUMBER
+			, BISNUMBER
+			, RESERVATIONTIME
+		FROM RESERVATION
+		WHERE
+		PNDNUMBER=#{pndNumber}
 	</select>
 	
-	<!-- 예약내역 view 조회 -->
+
+
+	<!-- 예약내역 view 조회 구매평등록하기 버튼 클릭시 필요한 값 -->
 	<select id="getViewReservation" parameterType="ReservationVO"
 		resultType="ReservationVO">
 		SELECT * FROM REVIEWRESERVATION
 		WHERE MEMBERID=#{memberId}
 		AND BISNUMBER=#{bisNumber}
 	</select>
-	
-	<!-- 예약내역 view 조회 구매평등록시 readonly값 출력-->
-	<select id="getViewReservation2" parameterType="ReservationVO"
-		resultType="ReservationVO">
-		SELECT * FROM REVIEWRESERVATION
-		WHERE DELIVERYNUMBER=#{deliveryNumber}
-		AND BISNUMBER=#{bisNumber}
-	</select>
-	
-	
+
+	<!-- 예약하기 버튼눌러서 날짜선택시 Reservation DB update -->
+	<update id="updateReservation" parameterType="ReservationVO">
+		UPDATE RESERVATION SET 
+			RESERVATIONDATE = #{reservationDate}
+		  ,	RESERVATIONTIME = #{reservationTime}
+		  , RESERVATIONSTATE = '예약완료'
+	WHERE PNDNUMBER=#{pndNumber}
+	</update>
+
+
 
 </mapper>

@@ -69,6 +69,7 @@
 	<select id="getSearchQuestionSelect1" resultType="questionVO"> <!-- 1번 상품문의전체조회 -->
 		SELECT * FROM QUESTION
 		WHERE CATEGORY=1
+		AND TOPERSON='admin'
 		ORDER BY WRITER ASC
 	</select>
 
@@ -148,7 +149,7 @@
 		#{content},
 		'admin' ,
 		#{writer} ,
-		3,
+		1,
 		#{memberId})
 	</insert>
 

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	
@@ -13,48 +14,62 @@
 		$("#btn").on("click" , function(){
 			location.href="insertBoard2";
 		});
-		
+		$("#contents").on("click", "#show li",function(boardNumber){
+			console.log(this);
+			var boardNumber =  $(this).find("input[type=hidden]").val();
+			location.href="getBoard2?boardNumber=" + boardNumber;
+		});
+		/* 리스트 ajax  */
+		$.ajax({
+			url: "getSearchBoardCategiry2",
+			type:"Get",
+			dataType:"JSON",
+			error:function(){
+				alert("Error");
+			},
+			success: function(response){
+				/* ul 태그 선언 */
+				var ul = $("<ul>");
+				/* div#show  */
+				$("#show").append(ul);
+				$(response).each(function(i){
+					var boardNumber = response[i].boardNumber;
+					var t_img = response[i].t_image;
+					
+					var li = $("<li>");
+					var input = $("<input>").attr({
+						"value":boardNumber,
+						"type" : "hidden" ,
+						"name" : "boardNumber"
+					});
+					
+					var div = $("<div>").attr("class" , "board_img").append($("<img>").attr("src","resources/images/board2/"+t_img));
+					var nav = $("<nav>");
+					var strong = $("<strong>").text(response[i].title);
+					var p = $("<p>").text(response[i].writer+ "님 |" +response[i].calendar );
+					$(nav).append(strong,p);
+					$(li).append(input, div, nav);
+					$(ul).append(li);
+				})
+			}
+		});
 	});
 
 </script>
-<style>
-table , tr, td{
-		
-		border: 1px dotted black;
-			}
-</style>
+
 </head>
 <body>
-<p><p>
-<h3 align="center">자랑하기 게시판</h3> 
-<p>
-
-<table>
-<thead>
-<tr>
-<td>제목</td>
-<td>작성날짜</td> 
-<td>작성자</td> 
-<td>조회수</td>
-</tr>
-</thead>
-<c:forEach var="board" items="${board}">
-
-<tr onclick="location.href='getBoard2?boardNumber=${board.boardNumber}'">
- <td>${board.title}</td>
- <td>${board.calendar}</td>
- <td>${board.writer}</td>
- <td>${board.views}</td>
-</tr>
-</c:forEach>
- 
+<div id="contents"> 
+	<h1 >자랑하기 게시판</h1> 
+	<div id="pro_location"> 
+	</div>
+	<div id="show"> 
+	
+	</div>
+	<div id="paging"></div>
+	<button id="btn">글쓰기</button><a href="getSearchCr4">홈으로 돌아가기</a>
+</div>	
 
 
-
-
-</table>
-<p><p>
-<button id="btn">자랑 글쓰기 </button> <p>
-<a href="/finalProject">홈으로 돌아가기</a>
 </body>
 </html>

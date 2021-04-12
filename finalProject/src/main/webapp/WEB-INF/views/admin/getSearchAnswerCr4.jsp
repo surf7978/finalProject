@@ -65,7 +65,7 @@ $(".delete").on("click" , function(){
 </c:forEach>
 </table>
 
-<a href="/finalProject">홈으로</a>
+<a href="getSearchCr4">홈으로</a>
 
 </body>
 </html>

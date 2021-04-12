@@ -56,6 +56,6 @@ table , tr, td{
 
 </table> <p><p>
 <button id="btn">자유게시판 글쓰기</button> <p>
-<a href="/finalProject">홈으로 돌아가기</a>
+<a href="getSearchCr4">홈으로 돌아가기</a>
 </body>
 </html>

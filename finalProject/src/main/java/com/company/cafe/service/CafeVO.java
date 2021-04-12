@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class CafeVO {
-	String cafeNumber;
+	String seq;
 	String name;
 	String optionName;
 	String price;
@@ -17,4 +17,6 @@ public class CafeVO {
 	// upload
 	MultipartFile uploadFile;
 	MultipartFile t_uploadFile;
+	//
+	String menu;
 }

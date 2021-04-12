@@ -53,7 +53,6 @@
 	<update id="updateBoard" parameterType="boardVO">
 		UPDATE BOARD SET
 		TITLE=#{title} ,
-		IMAGE=#{image} ,
 		CONTENT=#{content} ,
 		CATEGORY= #{category}
 		WHERE BOARDNUMBER= #{boardNumber}
@@ -82,8 +81,7 @@
 	</select>
 	<insert id="insertBoard" parameterType="boardVO">
 		  insert into board(BOARDNUMBER
-		  					, IMAGE
-		  					, T_IMAGE
+		  					, IMAGE	  					
 		  					, TITLE
 		  					, CALENDAR
 		  					, CONTENT
@@ -93,7 +91,6 @@
 		  					, MEMBERID)
 		  			 values(board1_seq.nextval
 		  			 		, #{image}
-		  			 		, #{t_image}
 		  			 		, #{title}
 		  			 		, sysdate
 		  			 		, #{content}

@@ -16,33 +16,10 @@ table , tr, td{
 <body>
 <h3 >마이페이지 관리자-게시글관리</h3>
 <div >
-<table>
+<a href="getSearchBoardCategiry1">1.자유게시판으로 가기</a>	<br>
+<a href="getSearchBoardCategiry2Form">2.자랑하기 게시판으로 가기</a> <br> 
+<a href="getSearchCr4">홈으로 돌아가기</a> <br>
 
-<thead>
-<tr>
-<td>조회수</td>
-<td>제목</td>
-<td>작성날짜</td> 
-<td>작성자</td> 
-</tr>
-</thead>
-<c:forEach var="list" items="${list}">
-
-<tr onclick="location.href='getBoard?boardNumber=${list.boardNumber}'">
- <td>${list.views}</td>
- <td>${list.title}</td>
- <td>${list.calendar}</td>
- <td>${list.writer}</td>
-</tr>
-</c:forEach>
- 
-
-
-
-
-</table>
-<a href="/finalProject">홈으로 돌아가기</a>
- <h3>검색기능 만들구요, 페이지 넘기는 기능 만드시오. </h3>
 </div>
 </body>
 </html>
