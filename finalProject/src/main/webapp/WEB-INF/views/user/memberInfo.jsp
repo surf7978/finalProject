@@ -54,10 +54,9 @@
 					"phone":$("#phone").val()
 					},
 				success:function(data){
-					$("#searchPWResult").append("변경할 비밀번호<br>");
-					$("#searchPWResult").append("<input id='password' name='password' style='width:400px; border:1;'><br><br>");
-					$("#searchPWResult").append("<button onclick='changePW1()'>변 경</button>");
-					$("#searchPWResult").append("<button onclick='changePWCancel()'>취 소</button><br>");
+					$("#searchPWResult").append("<input id='password' name='password' style='width:400px; border:1;'  placeholder='변경할 비밀번호 입력'>");
+					$("#searchPWResult").append("<button type='button' onclick='changePW1()'>변 경</button>&nbsp;&nbsp;");
+					$("#searchPWResult").append("<button type='button' onclick='changePWCancel()'>취 소</button>");
 				}
 			});	
 		});
@@ -86,6 +85,11 @@
 			<tr>
 				<td><input value="아 이 디" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
 				<td><input id="memberId" name="memberId" value="${member.memberId}" style="width:400px;" readonly></td>
+				<td class="changePW"><input type="button" id="changePW" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="PW변경"></td>
+			</tr>
+			<tr>
+				<td>
+				<td colspan="2"><div id="searchPWResult"></div></td>
 			</tr>
 			<tr>
 				<td><input value="이 름" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
@@ -125,13 +129,12 @@
 		&nbsp;
 		<button type="button" onclick="location.href='/finalProject'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 	</form>
+	<br><br>
 	<c:if test="${loginID ne 'admin'}">
 		<a href="membershipCancel?ID=${member.memberId}">탈퇴</a>
 	</c:if>
 	<c:if test="${loginID eq 'admin'}">
 		<a href="deleteMember99?ID=${member.memberId}">탈퇴</a>
 	</c:if>
-	<button id="changePW">비밀번호 변경</button>
-	<div id="searchPWResult"></div>
 </body>
 </html>
