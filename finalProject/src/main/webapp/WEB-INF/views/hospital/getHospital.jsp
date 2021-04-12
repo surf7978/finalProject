@@ -60,23 +60,115 @@
 			ESCbtn.parent().empty();
 		})
 	})
-	
-	
+</script>
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
+<script>
+	$(function() {
+		$("#optionName").on(
+				"click",
+				function() {
+					var op = $("#optionName option:selected").val();
+					if (op != "") {
+						console.log(op);
+						var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
+								$("<span>").text("${hospital.name }")
+										.append("<hr>"));
+						var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count","readonly":"readonly"});
+						var inval = $(input).val();
+						var strong = $("<p>").css("text-align", "right").text("${hospital.price }");
+						$(nav).append(input, strong);						
+						$("#pro_show").append(nav);
+						var restrong = $("<dt>").html("총 함계금액");
+						var result = $("<dd>").text("${hospital.price }").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
+						$("#pro_result").append(restrong, result);
+					}
+				})
+		$("#pro_show").on("click","input[type=number]", function(){
+			var plu = $(this).val();
+			var result = $("#pro_result").find("dd");
+			result.empty();
+			result.text("${hospital.price }" * plu)
+		});
+		//결제페이지로 이동
+		$("#contents").on("click", "#b_btn", function(){
+			var resultPrice = $("[name=resultPrice]").text();
+			location.href="PayInfoForm?productNumber=${hospital.hospitalNumber }&resultPrice="+resultPrice +"&memberId=${loginID}";
+		});
+		$("#d_btn").on("click",function(){
+			if(confirm("삭제하시겟습니까")==true){
+				location.href="deleteHospital?hospitalNumber=${hospital.hospitalNumber }";				
+			}else{
+				return false;
+			}
+		});
+		$("#u_btn").on("click",function(){
+			location.href="updateHospital?hospitalNumber=${hospital.hospitalNumber }"
+		})
+	});
 </script>
 </head>
-<body >
-대표사진:<img src="resources/img/hospital/${hospital.t_image }"><br>
-진료구분: ${hospital.category1 }<br>
-상세구분: ${hospital.category2 }<br>
-옵션명:<select id="optionName" name="optionName">
-<option>선택해주세요</option>
-<option value="${hospital.optionName }">${hospital.optionName }</option>
-</select>
-<br>
-금액:${hospital.price }<br>
-위치:${hospital.location }<br>
-사진:<img src="resources/img/hospital/${hospital.image}" ><br>
-<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+<body>
+
+<div id="contents">
+	<div>
+		<button id="u_btn">수정하기</button>
+		<button id="d_btn">삭제하기</button></div>
+		<div id="getproduct">
+			<div class="pro_title">
+				<form id="frm" name="frm">
+					<input value="${hospital.hospitalNumber }" type="hidden" name="productNumber">
+					<input value="2500" type="hidden" name="cartCourier">
+					<c:if test="${not empty loginID }">
+						<input value="${loginID }" type="hidden" name="memberId">
+					</c:if>
+					<ul>
+						<li><img src="resources/img/hospital/${hospital.t_image }"></li>
+						<li>
+							<div>
+								<h3>${hospital.optionName }</h3>
+							</div>
+							<div>
+								<dl>
+									<dt>초대가</dt>
+									<dd>
+										<strong>${hospital.price }원</strong>
+									</dd>
+								</dl>
+							</div>
+							<div>
+								<select name="optionName" id="optionName">
+									<option value="" selected disabled>상품선택</option>
+									<option>${hospital.optionName }(${hospital.price }원)</option>
+								</select>
+							</div>
+							<div id="pro_show"></div>
+							<div id="pro_result"></div>
+							<div>
+								<button>장바구니 담기</button>
+								<button type="button" id="b_btn">바로구매</button>
+							</div>
+						</li>
+					</ul>
+				</form>
+			</div>
+			<div id="pro_contentwrap">
+				<div class="pro_menu">
+					<ul>
+						<li><a href="#pro_content">상품 상세정보</a></li>
+						<li><a href="#">상품 구매평</a></li>
+						<li><a href="#">상품 문의</a></li>
+						<li><a href="#">취소/환불</a></li>
+					</ul>
+				</div>
+				<div id="content">
+					<img src="resources/img/hospital/${hospital.image }">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
 구매평
 <c:if test="${not empty reservation.reservationDate }">
 <button type="button" style="position:absolute;right:0;" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')">구매평 등록하기</button>
@@ -111,6 +203,7 @@
 			</div>
 			<div class="getQuestionResult" style="align:center; width:50%; text-align:left;"></div>
 	</c:forEach>
-	<br>
+<br>
+
 </body>
 </html>
