@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +23,9 @@
 				success:function(data){
 					console.log(data);
 					btn.closest(".reviewNumber").next().text("");
-					btn.closest(".reviewNumber").next().append(data.content);
-					btn.closest(".reviewNumber").next().append("<input type='button' class='ESC' value='닫기'>");//닫기 버튼 생성
+					btn.closest(".reviewNumber").next().append("<br>");
+					btn.closest(".reviewNumber").next().append("ㄴ "+data.content);
+					btn.closest(".reviewNumber").next().append("&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' class='ESC' value='▲' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>");//닫기 버튼 생성
 					btn.remove();
 				}
 			})
@@ -30,7 +33,7 @@
 		//내용 닫기
 		$(".getReviewResult").on("click", ".ESC", function(){//이렇게 그룹이벤트로 해줘야 생성된 버튼 동작함
 			var ESCbtn = $(this);
-			ESCbtn.parent().prev().append("<input type='button' class='getReview' value='상세조회'>")
+			ESCbtn.parent().prev().append("<input type='button' class='getReview' value='▼' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>")
 			ESCbtn.parent().empty();
 		})
 	})
@@ -47,8 +50,9 @@
 				success:function(data){
 					console.log(data);
 					btn1.closest(".questionNumber").next().text("");
-					btn1.closest(".questionNumber").next().append(data.content);
-					btn1.closest(".questionNumber").next().append("<input type='button' class='ESC' value='닫기'>");//닫기 버튼 생성
+					btn1.closest(".questionNumber").next().append("<br>");
+					btn1.closest(".questionNumber").next().append("ㄴ "+data.content);
+					btn1.closest(".questionNumber").next().append("&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' class='ESC' value='▲' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>");//닫기 버튼 생성
 					btn1.remove();
 				}
 			})
@@ -56,7 +60,7 @@
 		//내용 닫기
 		$(".getQuestionResult").on("click", ".ESC", function(){//이렇게 그룹이벤트로 해줘야 생성된 버튼 동작함
 			var ESCbtn = $(this);
-			ESCbtn.parent().prev().append("<input type='button' class='getQuestion' value='상세조회'>")
+			ESCbtn.parent().prev().append("<input type='button' class='getQuestion' value='▼' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>")
 			ESCbtn.parent().empty();
 		})
 	})
@@ -108,11 +112,20 @@
 </script>
 </head>
 <body>
-
+<!-- 글작성자와 조회자가 일치하는지 확인하는코드 -->
+<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
+ url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+ user="final" password="a20210409A"/>
+<sql:query var="rs" dataSource="${ds }">
+    select * from business where businessNumber = '${hospital.businessNumber}'
+</sql:query>
 <div id="contents">
-	<div>
-		<button id="u_btn">수정하기</button>
-		<button id="d_btn">삭제하기</button></div>
+	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
+		<div>
+			<button id="u_btn">수정하기</button>
+			<button id="d_btn">삭제하기</button>
+		</div>
+	</c:if> 
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
@@ -167,43 +180,46 @@
 		</div>
 	</div>
 	
-	
 	<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
-구매평
+<h4>구매평
 <c:if test="${not empty reservation.reservationDate }">
-<button type="button" style="position:absolute;right:0;" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')">구매평 등록하기</button>
+<button type="button" style="position:absolute;right:0; border:none; border-radius:5px; background-color:#87ceeb; color:white; font-size:20px; padding:5px;" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')">구매평 등록하기</button>
 </c:if>
+</h4>
 <hr style="align:center; text-align:left; background-color: black;">
 </div>
 <br>
 	<c:forEach items="${review }" var="list">
 		<div class="reviewNumber" style="align:center; width:55%; text-align:left;">
 			<input type="hidden" value="${list.reviewNumber}">
-			<span>${list.title}</span> &nbsp;
-			<span>작성자: ${list.writer}</span>
-			<input type="button" class="getReview" value="상세조회">
+			<span><c:set var="TextValue" value="${list.writer}"/>${fn:substring(TextValue,0,1)}<c:forEach begin="2" end="${fn:length(TextValue) }" varStatus="loop">*</c:forEach></span> &nbsp;&nbsp;&nbsp;
+			<span>${list.title}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" class="getReview" value="▼" style="font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;">
 		</div>
 		<div class="getReviewResult" style="align:center; width:50%; text-align:left;"></div>
+		<hr style="align:center; width:1090px; text-align:left; padding-left: 20px;position:relative;">
 	</c:forEach>
-	<br>
+	<br><br>
 <div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
-문의내역
+<h4>문의내역
 <c:if test="${not empty loginID }">
-<button type="button" style="position:absolute;right:0;" id="insertQuestion" onclick="window.open('insertQuestionBusi?hospitalNumber=${hospital.hospitalNumber}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
+<button type="button" style="position:absolute;right:0;border:none; border-radius:5px; background-color:#87ceeb; color:white; font-size:20px; padding:5px;" id="insertQuestion" onclick="window.open('insertQuestionBusi?hospitalNumber=${hospital.hospitalNumber}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
 </c:if>
+</h4>
 <hr style="align:center; text-align:left; background-color: black;">
 </div>
 <br>
 	<c:forEach items="${question }" var="list">
 		<div class="questionNumber" style="align:center; width:55%; text-align:left;">
 			<input type="hidden" value="${list.questionNumber}">
-			<span>${list.title}</span> &nbsp;
-			<span>작성자: ${list.writer}</span>
-			<input type="button" class="getQuestion" value="상세조회">
+			<span><c:set var="TextValue" value="${list.writer}"/>${fn:substring(TextValue,0,1)}<c:forEach begin="2" end="${fn:length(TextValue) }" varStatus="loop">*</c:forEach></span> &nbsp;&nbsp;&nbsp;
+			<span>${list.title}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" class="getQuestion" value="▼" style="font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;">
 			</div>
 			<div class="getQuestionResult" style="align:center; width:50%; text-align:left;"></div>
+			<hr style="align:center; width:1090px; text-align:left; padding-left: 20px;position:relative;">
 	</c:forEach>
-<br>
+<br><br><br><br><br>
 
 </body>
 </html>
