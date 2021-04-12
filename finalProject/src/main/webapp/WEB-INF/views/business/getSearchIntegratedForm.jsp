@@ -11,12 +11,46 @@
 <script>
 	//호출시 첫 화면
 	$(function() {
-		//등록 버튼
-		//수정,삭제 버튼
+		//등록
+		insertIntegrated();
+		//수정
+		//updateIntegrated();
+		//삭제
+		//deleteIntegrated();
 		//상세보기
+		getIntegrated();
 		//전체 리스트
 		getSearchIntegrated(1);
-	})//
+	})
+	//등록 폼 요청
+	function insertIntegrated(){
+		$("#btnInsert").on("click",function(){
+			location.href = "insertIntegrated";
+		})//end of btnInsert
+	}
+	//수정
+	//삭제
+	
+	//상세보기
+	function getIntegrated(){
+		//조회버튼 클릭
+		$("#btnSelect").on("click",function(){
+			var seq = $(this).closest("tr").find("seq");
+			//글번호 조회
+			$.ajax({
+				url:"getIntegrated",
+				data:{seq:seq},
+				dataType:"json",
+				success: getIntegratedResult
+				
+			})//end of ajax	
+		})//end of btnSelect
+	}//end of getIntegrated
+	
+	//조회 응답
+	function getIntegratedResult(seq){
+	}//end of getIntegratedResult
+	
 	//전체 리스트
 	function getSearchIntegrated(p) {
 		//pageValue
@@ -32,7 +66,7 @@
 				var tbl = $("<table>");
 				$("#show").empty();
 				$("#show").append(tbl);
-				var titles = ['상품명','옵션이름','가격','지역','대표이미지','추가이미지','조회','삭제'];
+				var titles = ['상품명','옵션이름','가격','지역','대표이미지','추가이미지','조회','수정','삭제'];
 				var thead=$("<thead>");
 				//titles
 				var tr = $("<tr>");
@@ -84,6 +118,7 @@
 			.append($("<td>").html(item.image1))
 			.append($("<td>").html(item.image2))
 			.append($("<td>").html("<button id=\'btnSelect\'>조회</button>"))
+			.append($("<td>").html("<button id=\'btnSelect\'>수정</button>"))
 			.append($("<td>").html("<button id=\'btnDelete\'>삭제</button>"))
 			.append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.seq));
 	}//end of makeTr
@@ -92,6 +127,7 @@
 <body>
 	<div id="content">
 		<h4>게시글 관리 페이지</h4>
+		<button type="button" id="btnInsert">등록</button>
 		<form id="frm" name="frm">
 			<input type="hidden" name="page" value="1">			
 		</form>

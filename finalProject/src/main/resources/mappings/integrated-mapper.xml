@@ -21,20 +21,20 @@
 		image2
 		)VALUES(
 		<!-- if seq 5개 분류 -->
-		<if test="code =='hotel'">
+		<if test="code == 'HOTEL'">
 			10 || hotel_seq.nextval,
 		</if>
-		<if test="code =='cafe'">
+		<if test="code == 'CAFE'">
 			30 || cafe_seq.nextval,
 		</if>
-		<if test="code =='beauty'">
-			40 || beauty.nextval,
+		<if test="code == 'BEAUTY'">
+			40 || beauty_seq.nextval,
 		</if>
-		<if test="code =='edu'">
-			50 || edu.nextval,
+		<if test="code == 'EDU'">
+			50 || edu_seq.nextval,
 		</if>
-		<if test="code =='taxi'">
-			60 || taxi.nextval,
+		<if test="code == 'TAXI'">
+			60 || taxi_seq.nextval,
 		</if>
 		#{name},
 		#{optionName},
