@@ -207,6 +207,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 <h4>문의내역
 <c:if test="${not empty loginID }">
 <button type="button" style="position:absolute;right:0;border:none; border-radius:5px; background-color:#87ceeb; color:white; font-size:20px; padding:5px;" id="insertQuestion" onclick="window.open('insertQuestionBusi?hospitalNumber=${hospital.hospitalNumber}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
+<button type="button" style="position:absolute;right:0;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
 </c:if>
 </h4>
 <hr style="align:center; text-align:left; background-color: black;">

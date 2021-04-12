@@ -17,7 +17,7 @@ public class ReservationServiceimpl implements ReservationService{
 	public ReservationVO getReservation(ReservationVO vo) {
 		return ReservationMapper.getReservation(vo);
 	}
-
+	//회원별 예약리스트 조회
 	@Override
 	public List<ReservationVO> getSearchReservation(ReservationVO vo) {
 		return ReservationMapper.getSearchReservation(vo);

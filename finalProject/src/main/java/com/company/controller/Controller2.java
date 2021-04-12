@@ -3,10 +3,6 @@ package com.company.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -115,6 +111,7 @@ public class Controller2 {
 	public String getSearchPayAndDelivery(PayAndDeliveryVO vo, Model model, HttpSession session) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
 		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery(vo));
+		model.addAttribute("memberId", vo);
 		return "user/getSearchPayAndDelivery";
 	}
 
@@ -145,7 +142,13 @@ public class Controller2 {
 		writer.close();
 		
 	}
-	
+	//회원의 예약리스트조회+캘린더 조회
+	@RequestMapping("/getSearchReservation")
+	public String getSearchReservation(ReservationVO vo, Model model, HttpSession session) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
+		model.addAttribute("reservation", reservationService.getSearchReservation(vo));
+		return "reservation/getSearchReservation";
+	}
 
 	// 예약내역 상세리스트 조회
 	@RequestMapping("/getReservation")
@@ -154,6 +157,7 @@ public class Controller2 {
 		model.addAttribute("reservation", reservationService.getReservation(vo));
 		return "empty/reservation/getReservation";
 	}
+	
 
 	// 구매내역 삭제
 	@DeleteMapping("/deleteBuy")
@@ -224,15 +228,15 @@ public class Controller2 {
 	}
 
 	// 병원 상세조회 + 구매평 전체리스트 출력 + 문의내역 전체리스트 출력
-	@RequestMapping("/getHospital") // getSearchHospital에서 hospitalNumber를 담아놓았음
-	public String getHospital(HospitalVO vo, Model model, String hospitalNumber, HttpSession session) {
-		vo.setHospitalNumber(hospitalNumber); // 담아놓은 hospitalNumber를 HospitalVO의 hospitalNumber에 담음
-		model.addAttribute("hospital", hospitalService.getHospital(vo)); // HospitalVO의 hospitalNumber로 getHospital한 값들을
+	@RequestMapping("/getHospital") // getSearchHospital에서 seq를 담아놓았음
+	public String getHospital(HospitalVO vo, Model model, String seq, HttpSession session) {
+		vo.setSeq(seq); // 담아놓은 seq를 HospitalVO의 hospitalNumber에 담음
+		model.addAttribute("hospital", hospitalService.getHospital(vo)); // HospitalVO의 seq로 getHospital한 값들을
 																			// 모델에 담음 변수명 "hospital"으로
 		if (session.getAttribute("loginID") != null) {
 			ReservationVO vo1 = new ReservationVO();
 			vo1.setMemberId((String) session.getAttribute("loginID")); // 로그인한 세션 아이디를 ReservationVO의 memberId에 담음
-			vo1.setBisNumber(hospitalNumber); // hospitalNumber를 BisNumber에 담음
+			vo1.setBisNumber(seq); // seq를 BisNumber에 담음
 			model.addAttribute("reservation", reservationService.getViewReservation(vo1)); // 위의 두 값으로
 																							// getViewReservation해서
 																							// 조회된 값을 모델에 담음
@@ -240,11 +244,11 @@ public class Controller2 {
 																							// 값들
 		}
 		ReviewVO vo2 = new ReviewVO();
-		vo2.setProbisNumber(hospitalNumber);
+		vo2.setProbisNumber(seq);
 		model.addAttribute("review", reviewService.getSearchReview(vo2));
 
 		QuestionVO vo3 = new QuestionVO();
-		vo3.setProbisNumber(hospitalNumber);
+		vo3.setProbisNumber(seq);
 		model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
 		return "hospital/getHospital";
 	}
@@ -253,14 +257,13 @@ public class Controller2 {
 	@GetMapping("/insertHospital")
 	public String insertHospitalForm(BusinessVO vo, Model model, HttpSession session) {
 		vo.setBusinessId((String) session.getAttribute("loginID"));
-		model.addAttribute("businessCompanyName", businessService.getBusiness(vo).getBusinessCompanyName());
+		model.addAttribute("business", businessService.getBusiness(vo));
 		return "hospital/insertHospital";
 	}
 
 	// 병원상품 등록 처리
 	@PostMapping("/insertHospital")
 	public String insertHospital(HospitalVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
-		System.out.println(vo);
 		// 첨부파일처리
 		MultipartFile image = vo.getUploadFile();
 		MultipartFile t_image = vo.getT_uploadFile();
@@ -314,10 +317,10 @@ public class Controller2 {
 
 	// 상세조회에서 상품문의 등록페이지 이동
 	@GetMapping("/insertQuestionBusi")
-	public String insertQuestionBusi(HospitalVO vo, MemberVO vo1, String hospitalNumber, String businessNumber,
+	public String insertQuestionBusi(HospitalVO vo, MemberVO vo1, String seq, String businessNumber,
 			Model model, HttpSession session) {
 		// 상품번호 담기
-		vo.setHospitalNumber(hospitalNumber);
+		vo.setSeq(seq);
 		model.addAttribute("hospital", hospitalService.getHospital(vo));
 
 		// 작성자 이름 담기

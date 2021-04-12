@@ -15,7 +15,7 @@
 		<table border="1">
 			<tr>
 				<th>사업자명</th>
-				<td><input type="text" id="businessCompanyName" name="businessCompanyName" value="${businessCompanyName }" readonly="readonly"></td>
+				<td><input type="text" id="businessCompanyName" name="businessCompanyName" value="${business.businessCompanyName }" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th>위치</th>
@@ -66,6 +66,10 @@
 				<th>상세 이미지</th>
 				<td><input type="file" name="uploadFile" id="image" size="100%" multiple="multiple"></td>
 			</tr>
+			<tr>
+				<th>미리보기</th>
+				<td id="viewImg" style="height: 400px; overflow: scroll;"><img></td>
+			</tr>
 		</table>
 		<br>
 		<button type="submit">등록</button>
@@ -115,6 +119,16 @@
 				$("#category2").append(option1);	
 			}
 		});
+		//이미지 미리보기
+        $("#image").change(function(){
+               if(this.files && this.files[0]) {
+                var reader = new FileReader;
+                reader.onload = function(data) {
+                 $("#viewImg img").attr("src", data.target.result).width(500);            
+                }
+                reader.readAsDataURL(this.files[0]);
+              }
+           });
 	});
 	</script>
 </body>
