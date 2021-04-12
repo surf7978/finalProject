@@ -351,11 +351,13 @@ public class Controller5 {
 		return "cafe/getCafe";
 	}
 
-	// 사업자-카페/호텔/택시 페이지 호출
+	// 사업자-통합 페이지 호출
 	@RequestMapping("/getSearchListForm")
 	public String getSearchBusinessForm() {
 		return "business/getSearchListForm";
 	}
+	
+	
 
 	// 사업자-통합리스트1
 	@GetMapping("/getSearchList1")
@@ -373,6 +375,7 @@ public class Controller5 {
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
 		List<CafeVO> list = cafeService.getSearchList1(vo);
+		// System.out.println("값:" + vo.getMenu());
 		// map에 넘겨주는 이유:model보다 사용이 편리해서
 		map.put("paging", paging);
 		map.put("list", list);

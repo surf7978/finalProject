@@ -26,6 +26,35 @@
 		#{image2}
 		)
 	</insert>
+	<!-- 수정 -->
+	<update id="updateIntegrated">
+	UPDATE ${code}
+		<set>
+			<if test="name !=null">
+				name = #{name},
+			</if>
+			<if test="optionName != null">
+				AND optionName = #{optionName},
+			</if>
+			<if test="price != null">
+				AND price = #{price},
+			</if>
+			<if test="location != null">
+				AND location = #{location},
+			</if>
+			<if test="image1 != null">
+				AND image1 = #{image1},
+			</if>
+			<if test="image2 != null">			
+				AND image2 = #{image2}
+			</if>
+		</set> 
+	</update>
+	<!-- 삭제 -->
+	<delete id="deleteIntegrated">
+		DELETE FROM ${code}
+		WHERE SEQ = #{seq}
+	</delete>
 	<!-- 상세 조회 -->
 	<select id="getIntegrated" resultType="IntegratedVO">
 		SELECT * FROM GETSEARCHLIST1
