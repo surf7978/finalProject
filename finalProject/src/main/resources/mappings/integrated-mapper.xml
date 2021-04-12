@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.company.integrated.service.impl.IntegratedMapper">
+<mapper namespace="com.company.integrated.service.impl.IntegratedMapper">
+	<!-- 레코드 조회 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*) FROM ${code}
+		WHERE BUSINESSNUMBER = #{businessNumber}
+	</select>
 	<!-- 통합 등록 -->
 	<insert id="insertIntegrated">
 		INSERT INTO ${code}
@@ -16,7 +20,22 @@
 		image1,
 		image2
 		)VALUES(
-		integrate_seq.nextval,
+		<!-- if seq 5개 분류 -->
+		<if test="code == 'HOTEL'">
+			10 || hotel_seq.nextval,
+		</if>
+		<if test="code == 'CAFE'">
+			30 || cafe_seq.nextval,
+		</if>
+		<if test="code == 'BEAUTY'">
+			40 || beauty_seq.nextval,
+		</if>
+		<if test="code == 'EDU'">
+			50 || edu_seq.nextval,
+		</if>
+		<if test="code == 'TAXI'">
+			60 || taxi_seq.nextval,
+		</if>
 		#{name},
 		#{optionName},
 		#{price},
@@ -26,9 +45,43 @@
 		#{image2}
 		)
 	</insert>
+	<!-- 수정 -->
+	<update id="updateIntegrated">
+	UPDATE ${code}
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="optionName != null">
+				AND optionName = #{optionName},
+			</if>
+			<if test="price != null">
+				AND price = #{price},
+			</if>
+			<if test="location != null">
+				AND location = #{location},
+			</if>
+			<if test="image1 != null">
+				AND image1 = #{image1},
+			</if>
+			<if test="image2 != null">			
+				AND image2 = #{image2}
+			</if>
+		</set> 
+	</update>
+	<!-- 삭제 -->
+	<delete id="deleteIntegrated">
+		DELETE FROM ${code}
+		WHERE SEQ = #{seq}
+	</delete>
 	<!-- 상세 조회 -->
 	<select id="getIntegrated" resultType="IntegratedVO">
 		SELECT * FROM GETSEARCHLIST1
 		WHERE SEQ = #{seq}
+	</select>
+	<!-- 사업자 마이페이지-게시글 조회 -->
+	<select id="getSearchIntegrated" resultType="IntegratedVO">
+		SELECT * FROM ${code}
+		WHERE BUSINESSNUMBER = #{businessNumber}
 	</select>
 </mapper>

@@ -1,11 +1,11 @@
- package com.company.cafe.service;
+package com.company.integrated.service;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper=false)
-public class CafeSearchVO extends CafeVO {
+@EqualsAndHashCode(callSuper = false)
+public class IntegratedSearchVO extends IntegratedVO {
 	String category1;
 	String[] searchLocation;
 	String search;

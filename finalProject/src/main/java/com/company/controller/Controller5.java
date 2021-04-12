@@ -30,6 +30,7 @@ import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
+import com.company.integrated.service.IntegratedSearchVO;
 import com.company.integrated.service.IntegratedService;
 import com.company.integrated.service.IntegratedVO;
 import com.company.question.service.QuestionService;
@@ -351,13 +352,13 @@ public class Controller5 {
 		return "cafe/getCafe";
 	}
 
-	// 사업자-카페/호텔/택시 페이지 호출
+	// 사업자-통합 페이지 호출
 	@RequestMapping("/getSearchListForm")
 	public String getSearchBusinessForm() {
 		return "business/getSearchListForm";
 	}
 
-	// 사업자-통합리스트1
+	// 사업자-통합리스트
 	@GetMapping("/getSearchList1")
 	@ResponseBody
 	public Map<String, Object> getSearchList1(CafeSearchVO vo, Paging paging) {
@@ -373,6 +374,7 @@ public class Controller5 {
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
 		List<CafeVO> list = cafeService.getSearchList1(vo);
+		// System.out.println("값:" + vo.getMenu());
 		// map에 넘겨주는 이유:model보다 사용이 편리해서
 		map.put("paging", paging);
 		map.put("list", list);
@@ -389,13 +391,13 @@ public class Controller5 {
 	}
 
 	// 사업자-통합 등록 폼
-	@GetMapping("/insertInfo")
+	@GetMapping("/insertIntegrated")
 	public String insertInfo() {
-		return "business/insertInfo";
+		return "business/insertIntegrated";
 	}// end of insertInfo
 
 	// 사업체-통합 등록 기능
-	@PostMapping("/insertInfo")
+	@PostMapping("/insertIntegrated")
 	// 통합이라 vo값을 어떻게 처리해야할지
 	public void insertInfoProc(IntegratedVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
 			HttpServletResponse response) throws Exception {
@@ -408,7 +410,6 @@ public class Controller5 {
 		// 3. business의 사업자 번호 가져와 넣기
 		vo.setBusinessNumber(bvo.getBusinessNumber());
 		vo.setCode(bvo.getBusinessCode());
-		System.out.println("코드값1:" + vo.getCode());
 		if (vo.getCode().equals("10"))
 			vo.setCode("HOTEL");
 		else if (vo.getCode().equals("30"))
@@ -448,15 +449,64 @@ public class Controller5 {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		if (r == 1) {
-			writer.print("<script>alert('등록되었습니다');location.href='getSearchListForm'</script>");
+			writer.print("<script>alert('등록되었습니다');location.href='getSearchIntegratedForm'</script>");
 		} else {
-			writer.print("<script>alert('오류..다시등록해주세요');location.href='insertInfo'</script>");
+			writer.print("<script>alert('오류..다시등록해주세요');location.href='insertIntegrated'</script>");
 		}
 		writer.close();
 
-	}// end of insertInfoProc
+	}// end of insertIntegrated
 
-	// 사업자-통합리스트2
+	// 사업자-게시글 관리 CRUD
+	// 사업자-게시글 관리 폼 호출
+	@RequestMapping("/getSearchIntegratedForm")
+	public String getSearchIntegratedForm() {
+		return "business/getSearchIntegratedForm";
+	}
+
+	// 사업자-게시글 관리 ajax
+	@GetMapping("/getSearchIntegrated")
+	@ResponseBody
+	public Map<String, Object> getSearchIntegrated(IntegratedSearchVO vo, BusinessVO bvo, Paging paging,
+			HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 1.session
+		// 2. id로 businessTable 조회
+		String id = session.getAttribute("loginID").toString();
+		bvo.setBusinessId(id);
+		bvo = businessService.getBusiness(bvo);
+		// 3. business의 사업자 번호 가져와 넣기
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		vo.setCode(bvo.getBusinessCode());
+		// 코드값 변환
+		if (vo.getCode().equals("10"))
+			vo.setCode("HOTEL");
+		else if (vo.getCode().equals("30"))
+			vo.setCode("CAFE");
+		else if (vo.getCode().equals("40"))
+			vo.setCode("BEAUTY");
+		else if (vo.getCode().equals("50"))
+			vo.setCode("EDU");
+		else if (vo.getCode().equals("60"))
+			vo.setCode("TAXI");
+		// 1.페이지 설정
+		paging.setPageUnit(5);//
+		paging.setPageSize(3);// 페이지 번호 수
+		// 2.초기페이지 설정
+		if (paging.getPage() == null)
+			paging.setPage(1);
+		// 3. 값 추가
+		paging.setTotalRecord(integratedService.getCount(vo));
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		List<IntegratedVO> list = integratedService.getSearchIntegrated(vo);
+		// map에 담음
+		map.put("paging", paging);
+		map.put("list", list);
+		return map;
+	}
+	// 사업자-게시글 관리 수정
+	// 사업자-게시글 관리 삭제
 
 	// start of bCart
 	// 장바구니-페이지 호출

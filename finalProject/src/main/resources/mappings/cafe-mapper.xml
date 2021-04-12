@@ -7,11 +7,8 @@
 		FROM CAFE
 	</select>
 	<select id="getCountList1" resultType="int">
-	SELECT a.a + b.a + c.a
-	FROM
-	(SELECT COUNT(*) a from HOTEL )a
-	,(SELECT COUNT(*) a from CAFE)b
-	,(SELECT COUNT(*) a from TAXI)c
+	SELECT COUNT(*)
+	FROM GETSEARCHLIST1
 	</select>
 	<!-- 제품 등록 -->
 	<insert id="insertCafe">
@@ -26,7 +23,7 @@
 		IMAGE2
 		)VALUES(
 		(SELECT
-		NVL(MAX(cafeNUMBER),0)+1 FROM CAFE),
+		NVL(MAX(SEQ),0)+1 FROM CAFE),
 		#{name},
 		#{optionName},
 		#{price},
@@ -47,12 +44,12 @@
 	<delete id="deleteCafe">
 		DELETE FROM CAFE
 		<!-- 제품번호 -->
-		WHERE CAFENUMBER = #{cafeNumber}
+		WHERE SEQ = #{cafeNumber}
 	</delete>
 	<!-- 상세 리스트 -->
 	<select id="getCafe" resultType="cafeVO">
 		SELECT
-		CAFENUMBER,
+		SEQ,
 		NAME,
 		OPTIONNAME,
 		PRICE,
@@ -60,7 +57,7 @@
 		IMAGE1,
 		IMAGE2
 		FROM CAFE
-		<where>CAFENUMBER = #{cafeNumber}
+		<where>SEQ = #{cafeNumber}
 		</where>
 	</select>
 	<!-- 전체 리스트 -->
@@ -68,7 +65,7 @@
 		SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
 		<!-- start of query -->
 		SELECT
-			CAFENUMBER,
+			SEQ,
 			NAME,
 			OPTIONNAME,
 			PRICE,
@@ -85,6 +82,7 @@
 	SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
 		<!-- start of query -->
 			select * from getsearchlist1
+			
 		<include refid="search"></include>
 	ORDER BY LOCATION
 	<!-- end of query -->
@@ -93,36 +91,37 @@
 	<!-- 검색기능 -->
 	<sql id="search">
 		<where>
-			<choose>
 				<!-- 전체리스트 1,2 -->
-				<when test="menu != null and menu != ''">
-					<if test="menu = 1">
+					<if test="menu == 1">
 						category1 in ('cafe','hotel','taxi')
 					</if>
-					<if test="menu = 2">
+					<if test="menu == 2">
 						category1 in ('beauty','edu')
-					</if>
-				</when>
+					</if>			
+			<choose>
 				<!-- 전체 -->
-				<when test="search == 'all' ">
-					 NAME LIKE '%' || #{searchValue} || '%'
+				<when test="search == 'all'">
+					AND(NAME LIKE '%' || #{searchValue} || '%'
 					OR PRICE LIKE '%' || #{searchValue} || '%'
-					OR LOCATION LIKE '%' || #{searchValue} || '%'
+					OR LOCATION LIKE '%' || #{searchValue} || '%')
 				</when>
 				<!-- 전체가 아닌 경우 -->
 				<when test="search != null and search != ''">
-					 ${search} LIKE '%' || #{searchValue} || '%'
+					AND ${search} LIKE '%' || #{searchValue} || '%'
 				</when>
 				<!-- 지역구분 채크박스 -->
 				<when test="searchLocation != null">
-					 LOCATION IN 
-					 <foreach item="cate" collection="searchLocation" open="(" separator="," close=")" >
-							  #{cate}
+					AND 
+					 <foreach item="cate" index = "idx" collection="searchLocation" open="(" separator="" close=")" >
+					 	<if test="idx > 0">
+							OR 
+						</if>
+						LOCATION LIKE '%' ||  #{cate}  || '%' 
 				  	</foreach>
 				</when>
 				<!-- 카테고리 3개 분류 -->
 				<when test="category1 != null and category1 != '' ">
-					 CATEGORY1 = #{category1}
+				AND  CATEGORY1 = #{category1}
 				</when>
 			</choose>
 		</where>

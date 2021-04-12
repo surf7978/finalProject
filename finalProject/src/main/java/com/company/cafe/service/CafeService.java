@@ -15,7 +15,7 @@ public interface CafeService {
 
 	public int getCount(CafeVO vo);// 레코드 조회
 
-	public List<CafeVO> getSearchList1(CafeVO vo); // Cafe,Hotel,Taxi 리스트 조회
+	public List<CafeVO> getSearchList1(CafeSearchVO vo); // Cafe,Hotel,Taxi 리스트 조회
 
 	public int getCountList1(CafeVO vo);// Cafe,Hotel,Taxi 레코드 조회
 }
