@@ -99,6 +99,12 @@
 		});
 	}); 
 </script>
+<!-- 휴대폰인증페이지 출력 -->
+<script>
+	function coolsms(){
+		window.open("coolsms", "본인인증", "width=1000px, height=200px");
+	}
+</script>
 <body>
 
 <br><br><br><input value="사업자 회원정보" style="font-size:40px; text-align:center; width:400px; border:none;" readonly>가입일 ${business.startDate}<br><br>
@@ -128,6 +134,7 @@
 			<tr>
 				<td><input value="연 락 처" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
 				<td><input id="phone" name="phone" style="width:400px;" value="${business.phone}"></td>
+				<td><input type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="본인인증"></td>
 			</tr>
 			<tr>
 				<td><input value="이 메 일" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
