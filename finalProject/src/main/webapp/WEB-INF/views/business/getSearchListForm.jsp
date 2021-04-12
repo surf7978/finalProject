@@ -45,11 +45,11 @@ a {
 					var input = $("<input>").attr({
 						type : "checkbox",
 						value : location,
-					//	id : location,
+						id : idx.value,
 						name:"searchLocation",
 						class: "location"
 					});
-				var label = $("<label>").attr("for", location).text(location);
+				var label = $("<label>").attr("for", idx.value).text(location);
 				$(".con").append(input, label);	
 				})//end of each
 			}//end of success
