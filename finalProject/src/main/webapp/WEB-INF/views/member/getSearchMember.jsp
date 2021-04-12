@@ -59,7 +59,7 @@ table , tr, td{
 </tr> 
 </c:forEach>
 </table>
- <h4>페이지 넘기는기능 , 검색기능 추가하십시오.</h4>
+
 <a href="/finalProject">홈으로 돌아가기</a> <!-- /로 가면 메인화면으로 가진다.  -->
 </div>
 
