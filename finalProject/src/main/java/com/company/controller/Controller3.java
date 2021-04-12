@@ -19,10 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.abandonment.common.AbandonmentAPI;
+import com.company.buy.service.BuyService;
+import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
+import com.company.payAndDelivery.service.PayAndDeliveryService;
+import com.company.payAndDelivery.service.PayAndDeliveryVO;
 import com.company.product.service.ProductSearchVO;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
@@ -36,6 +40,10 @@ public class Controller3 {
 	ProductService productService;
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	PayAndDeliveryService padService;
+	@Autowired
+	BuyService buyService;
 
 	// 유기동물 API
 	@RequestMapping("/getAban")
@@ -214,19 +222,33 @@ public class Controller3 {
 
 	// 결제API
 	@RequestMapping("/PayInfo")
-	public String PayInfo(ProductVO vo, Model model, String productNumber, String resultPrice) {
+	public String PayInfo(ProductVO vo, Model model, String productNumber, String resultPrice, String count) {
 		model.addAttribute("product", productService.getProduct(vo));
 		vo.setResultPrice(resultPrice);
+		vo.setCount(count);
 		model.addAttribute("resultPrice", vo.getResultPrice());
+		model.addAttribute("count", vo.getCount());
 		return "pay/PayInfo";
 	}
+	//결제폼으로
 	@RequestMapping("/PayInfoForm")
-	public String PayInfoForm(ProductVO vo, Model model, String productNumber, String resultPrice, MemberVO mvo) {
+	public String PayInfoForm(ProductVO vo, Model model, String productNumber, String resultPrice, MemberVO mvo, String count) {
 		model.addAttribute("product", productService.getProduct(vo));
 		vo.setResultPrice(resultPrice);
+		vo.setCount(count);
 		model.addAttribute("resultPrice", vo.getResultPrice());
 		model.addAttribute("member", memberService.getMember(mvo));
+		model.addAttribute("count", vo.getCount());
 		return "pay/PayInfoForm";
+	}
+	//결제시 insert
+	@RequestMapping("/insertPayProduct")
+	public String insertPayProduct(PayAndDeliveryVO padvo, BuyVO bvo,ProductVO vo) {
+		padService.insertPayAndDelivery2(padvo);
+		bvo.setPndNumber(padvo.getPndNumber());
+		bvo.setProductNumber(vo.getProductNumber());
+		buyService.insertBuy2(bvo);		
+		return "pay/successPay";
 	}
 
 }
