@@ -117,7 +117,9 @@
 					</ul>
 				</div>
 				<div id="content">
-					<img src="resources/images/products/${product.image }">
+				<c:forTokens items="${product.image }" delims="," var="file">
+					<img src="resources/images/products/${file }">
+				</c:forTokens>					
 				</div>
 			</div>
 		</div>

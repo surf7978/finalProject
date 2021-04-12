@@ -228,7 +228,7 @@
 						var reader = new FileReader;
 						reader.onload = function(data) {
 							$("#viewImg img").attr("src", data.target.result)
-									.width(500);
+									.width(auto);
 						}
 						reader.readAsDataURL(this.files[0]);
 					}
@@ -298,7 +298,7 @@
 				</tr>
 				<tr>
 					<th>미리보기</th>
-					<td id="viewImg" style="height: 400px; overflow: scroll;"><img src="resources/images/products/${product.image }"></td>
+					<td id="viewImg"><div style="height:500px;overflow-y:scroll;"><img></div></td>
 				</tr>
 			</table>
 			<button type="submit">확인</button>
