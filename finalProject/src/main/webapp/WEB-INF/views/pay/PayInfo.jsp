@@ -11,15 +11,15 @@
 <script src="https://cdn.bootpay.co.kr/js/bootpay-3.3.1.min.js"
 	type="application/javascript"></script>
 <script>
-	$(function(){
+	$(function() {
 		//productNumber설정
 		var productNumber = '${product.productNumber}';
-		var strpro = productNumber.substr(0,2);
+		var strpro = productNumber.substr(0, 2);
 		$("[name=category]").val(strpro)
 	})
-	
-	/* BootPay.request({
-		price : '${sumPrice}', //실제 결제되는 가격
+
+	BootPay.request({
+		price : '1000', //'${resultPrice}', //실제 결제되는 가격
 		application_id : "606aa3b1d8c1bd002bf4d58f",
 		name : '${product.productName}', //결제창에서 보여질 이름(상품명)
 		pg : 'nicepay',
@@ -44,15 +44,26 @@
 		alert('결제완료!');
 		window.close();
 		console.log(data);
-	}); */
+		$("#frm").submit();
+	});
 </script>
 </head>
 <body>
-	<form name="frm" action="insertPayProduct" method="post">
-		<input value="${count }" name="count">
+	<form name="frm" id="frm" action="insertPayProduct" method="post">
+		<input value="${count }" name="count"> 
 		<input name="category">
-		<input name="sumPrice" value="${resultPrice }">
-		<input name="memberId" value="${loginID}">	
+		<input name="sumPrice" value="${resultPrice }"> 
+		<input name="memberId" value="${loginID}"> 
+		<input name="category1" value="${product.category}"> 
+		<input name="fromPerson" value="${product.memberId}"> 
+		<input name="toPerson" value="${name }"> 
+		<input name="post" value="${post }">
+		<input name="address" value="${address }"> 
+		<input name="address2" value="${address2 }"> 
+		<input name="phone" value="${phone }"> 
+		<input name="productNumber" value="${product.productNumber }">
+		<input name="optionName" value="${product.optionName }">
+		<input name="price" value="${resultPrice }">
 	</form>
 </body>
 </html>

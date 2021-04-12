@@ -40,9 +40,9 @@
 		})
 		//배송비 포함 설정
 		if(${resultPrice } >=10000){
-			$("[name=sumPrice]").val(${resultPrice });
+			$("[name=resultPrice]").val(${resultPrice });
 		}else{
-			$("[name=sumPrice]").val(${resultPrice } + 2500);			
+			$("[name=resultPrice]").val(${resultPrice } + 2500);			
 		}
 	});
 	

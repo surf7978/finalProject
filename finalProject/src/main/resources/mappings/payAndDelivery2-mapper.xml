@@ -2,24 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.company.payAndDelivery.service.impl.PayAndDeliveryMapper">
-	
+<mapper
+	namespace="com.company.payAndDelivery.service.impl.PayAndDeliveryMapper">
+
 	<!-- 결제 insert -->
-	<insert id="insertPayAndDelivery2" parameterType="PayAndDeliveryVO">
+	<insert id="insertPayAndDelivery2"
+		parameterType="PayAndDeliveryVO">
+		<selectKey resultType="string" keyProperty="pndNumber"
+			order="BEFORE">
+			SELECT NVL(MAX(PNDNUMBER),0)+1 FROM PAYANDDELIVERY
+		</selectKey>
+		<!-- 먼저 실행되어 vo값에 담김 -->
 		INSERT INTO PAYANDDELIVERY(
-			PNDNUMBER
-			,CATEGORY
-			,PAYDATE
-			,SUMPRICE
-			,MEMBERID
-			,BUYSTATE
+		PNDNUMBER
+		,CATEGORY
+		,PAYDATE
+		,SUMPRICE
+		,MEMBERID
+		,BUYSTATE
 		)VALUES(
-			(SELECT NVL(MAX(PNDNUMBER),0)+1 FROM PAYANDDELIVERY)
-			,#{category}
-			,SYSDATE
-			,#{sumPrice}
-			,#{memberId}
-			,'결제완료'
+		(SELECT NVL(MAX(PNDNUMBER),0)+1 FROM PAYANDDELIVERY)
+		,#{category}
+		,SYSDATE
+		,#{sumPrice}
+		,#{memberId}
+		,'결제완료'
 		)
-	</insert>	
+	</insert>
 </mapper>

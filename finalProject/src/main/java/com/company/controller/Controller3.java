@@ -222,12 +222,23 @@ public class Controller3 {
 
 	// 결제API
 	@RequestMapping("/PayInfo")
-	public String PayInfo(ProductVO vo, Model model, String productNumber, String resultPrice, String count) {
+	public String PayInfo(MemberVO mvo, String name, String phone, String post, String address, String address2,ProductVO vo, Model model, String productNumber, String resultPrice, String count) {
 		model.addAttribute("product", productService.getProduct(vo));
 		vo.setResultPrice(resultPrice);
 		vo.setCount(count);
+		mvo.setName(name);
+		mvo.setPhone(phone);
+		mvo.setPost(post);
+		mvo.setAddress(address);
+		mvo.setAddress(address2);
 		model.addAttribute("resultPrice", vo.getResultPrice());
 		model.addAttribute("count", vo.getCount());
+		model.addAttribute("name", mvo.getName());
+		model.addAttribute("phone", mvo.getPhone());
+		model.addAttribute("post", mvo.getPost());
+		model.addAttribute("address", mvo.getAddress());
+		model.addAttribute("address2", mvo.getAddress2());
+		
 		return "pay/PayInfo";
 	}
 	//결제폼으로
@@ -243,9 +254,11 @@ public class Controller3 {
 	}
 	//결제시 insert
 	@RequestMapping("/insertPayProduct")
-	public String insertPayProduct(PayAndDeliveryVO padvo, BuyVO bvo,ProductVO vo) {
+	public String insertPayProduct(PayAndDeliveryVO padvo, BuyVO bvo,ProductVO vo, String category1) {
 		padService.insertPayAndDelivery2(padvo);
+		System.out.println("=======================결과===================" + padvo.getPndNumber());
 		bvo.setPndNumber(padvo.getPndNumber());
+		bvo.setCategory(category1);
 		bvo.setProductNumber(vo.getProductNumber());
 		buyService.insertBuy2(bvo);		
 		return "pay/successPay";
