@@ -111,9 +111,12 @@
 				</when>
 				<!-- 지역구분 채크박스 -->
 				<when test="searchLocation != null">
-					AND LOCATION IN 
-					 <foreach item="cate" collection="searchLocation" open="(" separator="," close=")" >
-							  #{cate}
+					AND 
+					 <foreach item="cate" index = "idx" collection="searchLocation" open="(" separator="" close=")" >
+					 	<if test="idx > 0">
+							OR 
+						</if>
+						LOCATION LIKE '%' ||  #{cate}  || '%' 
 				  	</foreach>
 				</when>
 				<!-- 카테고리 3개 분류 -->
