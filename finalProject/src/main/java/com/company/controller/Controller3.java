@@ -162,7 +162,7 @@ public class Controller3 {
 		}else {
 			//새로운 파일이 등록되지않았다면
 			//기존이미지를 그대로 사용
-			vo.setImage(request.getParameter("t_image"));			
+			vo.setT_image(request.getParameter("t_image"));			
 		}
 //			String path="resources/images";
 		productService.updateProduct(vo);
