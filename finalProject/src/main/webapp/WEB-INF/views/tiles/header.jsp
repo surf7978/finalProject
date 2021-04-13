@@ -299,8 +299,6 @@
 	</header>
 	<!-- Header End -->
 
-
-
 	<div align="center" style="min-height:100vh;">
 		<tiles:insertAttribute name="content" />
 	</div>

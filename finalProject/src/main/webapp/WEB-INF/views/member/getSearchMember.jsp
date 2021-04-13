@@ -19,7 +19,6 @@ table , tr, td{
 <h3 align="center">마이페이지 관리자-회원관리</h3>
 <br><br>
 <div align="center">
-
 <table>
  <thead> 
 	 <tr id="head"> 
