@@ -1,6 +1,7 @@
 package com.company.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -316,26 +317,8 @@ public class Controller5 {
 	public void insertInfoProc(IntegratedVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
 			HttpServletResponse response) throws Exception {
 		// 사업자 번호를 어디서 가져올 것인지
-		// 1.session
-		// 2. id로 businessTable 조회
-		String id = session.getAttribute("loginID").toString();
-		bvo.setBusinessId(id);
-		bvo = businessService.getBusiness(bvo);
-		// 3. business의 사업자 번호 가져와 넣기
-		vo.setBusinessNumber(bvo.getBusinessNumber());
-		vo.setCode(bvo.getBusinessCode());
-		if (vo.getCode().equals("10"))
-			vo.setCode("HOTEL");
-		else if (vo.getCode().equals("30"))
-			vo.setCode("CAFE");
-		else if (vo.getCode().equals("40"))
-			vo.setCode("BEAUTY");
-		else if (vo.getCode().equals("50"))
-			vo.setCode("EDU");
-		else if (vo.getCode().equals("60"))
-			vo.setCode("TAXI");
-
-		System.out.println("코드값2:" + vo.getCode());
+		// session method
+		vo = sessionSelect(session);
 		// 첨부파일처리
 		// 1.vo값 가져오기
 		MultipartFile image1 = vo.getT_uploadFile();
@@ -422,12 +405,37 @@ public class Controller5 {
 	}
 
 	// 사업자-게시글 관리 수정 폼
-	@RequestMapping("/updateIntegrated")
-	public String updateIntegrated() {
-			
-		return "business/updateIntegrated";
+	@RequestMapping("/updateIntegratedForm")
+	public String updateIntegratedForm() {
+
+		return "business/updateIntegratedForm";
 	}
+
+	// 수정기능
+	@RequestMapping("/updateIntegrated")
+	public void updateIntegrated(IntegratedVO vo) {
+		integratedService.updateIntegrated(vo);
+	}
+
 	// 사업자-게시글 관리 삭제
+	@RequestMapping("/deleteIntegrated")
+	public void deleteIntegrated(IntegratedVO vo, BusinessVO bvo, HttpServletResponse response, HttpSession session)
+			throws Exception {
+		// session method
+		vo = sessionSelect(session);
+		// process
+		int r = integratedService.deleteIntegrated(vo);
+		// alert
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		if (r == 1) {
+			writer.println("<script>alert('삭제되었습니다');location.href='getSearchIntegratedForm';window.close();</script>");
+		} else {
+			writer.println(
+					"<script>alert('오류..다시 삭제해주세요');location.href='getSearchIntegratedForm';window.close();</script>");
+		}
+		writer.close();
+	}
 
 	// 장바구니-폼
 	@GetMapping("/getSearchCartForm")
@@ -487,7 +495,31 @@ public class Controller5 {
 	// end of bCart
 	// 나중에
 	// 마이페이지-사업자-통계현황
-	// 마이페이지-사업자-예약내역조회
 	// 마이페이지-사업자-실시간화장진료 페이지
-	// 동물정보-샘플페이지
+
+	// 공통
+	// 세션 및 busCode 변환
+	public IntegratedVO sessionSelect(HttpSession session) {
+		// 1. id로 businessTable 조회
+		String id = session.getAttribute("loginID").toString();
+		BusinessVO bvo = new BusinessVO();
+		bvo.setBusinessId(id);
+		bvo = businessService.getBusiness(bvo);
+		// 2. business의 사업자 번호 가져와 넣기
+		IntegratedVO vo = new IntegratedVO();
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		vo.setCode(bvo.getBusinessCode());
+		// 3. 코드값 변환
+		if (vo.getCode().equals("10"))
+			vo.setCode("HOTEL");
+		else if (vo.getCode().equals("30"))
+			vo.setCode("CAFE");
+		else if (vo.getCode().equals("40"))
+			vo.setCode("BEAUTY");
+		else if (vo.getCode().equals("50"))
+			vo.setCode("EDU");
+		else if (vo.getCode().equals("60"))
+			vo.setCode("TAXI");
+		return vo;
+	}// end of sessionSelect
 }

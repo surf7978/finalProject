@@ -115,6 +115,7 @@
 				<if test="category1 != null and category1 != '' ">
 				AND  CATEGORY1 = #{category1}
 				</if>
+				<!-- 카테고리 없을 때 메뉴로 가게 -->
 				<if test="category1 == null or category1 == ''">
 				AND
 					<if test="menu == 1">

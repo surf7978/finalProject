@@ -129,8 +129,9 @@ a {
 				if (lastPage > endPage) {
 					$("#paging").append("<a href='#' onclick='getSearchList1("+ (endPage + 1) + ")'>" + "&raquo;"+ "</a>");
 				}
-				//
-				$('#searchAndInsert').find('[name=search]').val('');
+				//search값 초기화
+				//$('#searchAndInsert').find('[name=search]').val('');
+				$("#searchAndInsert").find('[name=search]').reset();
 				
 			} //end of success
 		}) //end of ajax

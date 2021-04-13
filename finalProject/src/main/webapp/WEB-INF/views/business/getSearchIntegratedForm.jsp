@@ -11,12 +11,12 @@
 <script>
 	//호출시 첫 화면
 	$(function() {
-		//등록
+		//등록 폼
 		insertIntegrated();
 		//수정
 		updateIntegrated();
 		//삭제
-		//deleteIntegrated();
+		deleteIntegrated();
 		//조회
 		getIntegrated();
 		//전체 리스트
@@ -38,11 +38,23 @@
 	//수정 기능
 	
 	//삭제
-	
+	function deleteIntegrated(){
+		$("#show").on("click","#btnDelete",function(){
+			var y = confirm("삭제하시겠습니까?");
+			var seq = $("#show").onclick("#btnDelete").closest($("#seq"));
+			console.log(seq);
+			if(y){
+				$.ajax({
+					url:"deleteIntegrated",
+					data:{seq:seq}
+				})
+			}//end of if
+		})//end of btnDelete
+	}//end of deleteIntegrated
 	//조회
 	function getIntegrated(){
 		//조회버튼 클릭
-		$("#btnSelect").on("click",function(){
+		$("#show").on("click","#btnSelect",function(){
 			var seq = $(this).closest("tr").find("seq");
 			//글번호 조회
 			$.ajax({
@@ -127,7 +139,7 @@
 			.append($("<td>").html("<button id=\'btnSelect\'>조회</button>"))
 			.append($("<td>").html("<button id=\'btnSelect\'>수정</button>"))
 			.append($("<td>").html("<button id=\'btnDelete\'>삭제</button>"))
-			.append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.seq));
+			.append($('<input type=\'hidden\' id=\'seq\'>').val(item.seq));
 	}//end of makeTr
 </script>
 </head>

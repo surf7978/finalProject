@@ -5,6 +5,7 @@ import java.util.List;
 import com.company.integrated.service.IntegratedVO;
 
 public interface IntegratedMapper {
+	
 	public int insertIntegrated(IntegratedVO vo); // 상품등록
 
 	public int updateIntegrated(IntegratedVO vo); // 상품수정
