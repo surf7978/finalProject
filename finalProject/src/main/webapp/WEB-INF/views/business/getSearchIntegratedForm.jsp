@@ -14,10 +14,10 @@
 		//등록
 		insertIntegrated();
 		//수정
-		//updateIntegrated();
+		updateIntegrated();
 		//삭제
 		//deleteIntegrated();
-		//상세보기
+		//조회
 		getIntegrated();
 		//전체 리스트
 		getSearchIntegrated(1);
@@ -28,10 +28,18 @@
 			location.href = "insertIntegrated";
 		})//end of btnInsert
 	}
-	//수정
+	//수정 폼
+	function updateIntegrated(){
+		$("#btnUpdate").on("click",function(){
+			
+			
+		})//end of btnUpdate
+	}//end of updateIntegrated
+	//수정 기능
+	
 	//삭제
 	
-	//상세보기
+	//조회
 	function getIntegrated(){
 		//조회버튼 클릭
 		$("#btnSelect").on("click",function(){
@@ -64,7 +72,7 @@
 			success : function(datas) {
 				//logic
 				var tbl = $("<table>");
-				$("#show").empty();
+				$("#tbody").empty();
 				$("#show").append(tbl);
 				var titles = ['상품명','옵션이름','가격','지역','대표이미지','추가이미지','조회','수정','삭제'];
 				var thead=$("<thead>");
@@ -78,8 +86,7 @@
 				thead.append(tr);
 				tbl.append(thead);
 				//contents
-				var tbody = $("<tbody>");
-				//map으로 받아온 datas.list를 의미
+				var tbody = $("<tbody>").attr("id","tbody");
 				$.each(datas.list,function(i,item){
 					var content = makeTr(item);
 					console.log(content)

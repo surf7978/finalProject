@@ -91,26 +91,18 @@
 	<!-- 검색기능 -->
 	<sql id="search">
 		<where>
-				<!-- 전체리스트 1,2 -->
-					<if test="menu == 1">
-						category1 in ('cafe','hotel','taxi')
-					</if>
-					<if test="menu == 2">
-						category1 in ('beauty','edu')
-					</if>			
-			<choose>
 				<!-- 전체 -->
-				<when test="search == 'all'">
-					AND(NAME LIKE '%' || #{searchValue} || '%'
+				<if test="search == 'all'">
+					(NAME LIKE '%' || #{searchValue} || '%'
 					OR PRICE LIKE '%' || #{searchValue} || '%'
 					OR LOCATION LIKE '%' || #{searchValue} || '%')
-				</when>
+				</if>
 				<!-- 전체가 아닌 경우 -->
-				<when test="search != null and search != ''">
+				<if test="search != 'all' and search != null and search != ''">
 					AND ${search} LIKE '%' || #{searchValue} || '%'
-				</when>
+				</if>
 				<!-- 지역구분 채크박스 -->
-				<when test="searchLocation != null">
+				<if test="searchLocation != null">
 					AND 
 					 <foreach item="cate" index = "idx" collection="searchLocation" open="(" separator="" close=")" >
 					 	<if test="idx > 0">
@@ -118,12 +110,20 @@
 						</if>
 						LOCATION LIKE '%' ||  #{cate}  || '%' 
 				  	</foreach>
-				</when>
+				</if>
 				<!-- 카테고리 3개 분류 -->
-				<when test="category1 != null and category1 != '' ">
+				<if test="category1 != null and category1 != '' ">
 				AND  CATEGORY1 = #{category1}
-				</when>
-			</choose>
+				</if>
+				<if test="category1 == null or category1 == ''">
+				AND
+					<if test="menu == 1">
+						category1 in ('cafe','hotel','taxi')
+					</if>
+					<if test="menu == 2">
+						category1 in ('beauty','edu')
+					</if>
+				</if>
 		</where>
 	</sql>
 </mapper>
