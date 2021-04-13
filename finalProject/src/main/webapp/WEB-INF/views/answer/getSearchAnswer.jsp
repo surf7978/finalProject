@@ -15,6 +15,8 @@ tr {
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 	<h2>답변 전체 리스트</h2>
 	<table id="tbl">
 		<tr>
@@ -27,6 +29,7 @@ tr {
 		</tr>
 		<tbody id="tbody"></tbody>
 	</table>
+</div>
 </body>
 <script>
 	//global 변수

@@ -10,6 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 	<h3>반려동물 정보 등록</h3>
 	<form action="insertAnimal" method="post" name="frm">
 	<input type="hidden" name="memberId" value="${animal.memberId }">
@@ -73,6 +75,6 @@
 	<button type="submit">등록</button>
 	<button type="reset">초기화</button>
 </form>
-
+</div>
 </body>
 </html>

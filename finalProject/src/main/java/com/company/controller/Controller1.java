@@ -89,7 +89,7 @@ public class Controller1 {
 		return "redirect:/";
 	}
 	
-	//회원가입 선택 화면
+	//회원가입 선택 화면myPageSideBar
 	@RequestMapping("/signUpSelect")
 	public String signUpSelect() {
 		return "member/signUpSelect";
@@ -399,6 +399,12 @@ public class Controller1 {
 	public String deleteHospital(HospitalVO vo) {
 		hospitalService.deleteHospital(vo);
 		return "redirect:/getSearchHospital";
+	}
+	
+	//마이페이지 사이드바 출력(jsp:include해서 이제 이건 사용안함)
+	@GetMapping("/myPageSideBar")
+	public String myPageSideBar() {
+		return "user/myPageSideBar";
 	}
 	
 	@Autowired ProductService productService;

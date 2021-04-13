@@ -11,6 +11,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 	<h2>문의내역 리스트</h2>
 	<form id="frm" action="getQuestion">
 		<table id='tbl'>
@@ -57,5 +59,6 @@
 			});//end of tbody
 		})//end of function
 	</script>
+</div>
 </body>
 </html>

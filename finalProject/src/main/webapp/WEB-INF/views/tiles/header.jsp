@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,53 +101,69 @@
 						</div>
 					</div>
 					<div class="col-lg-3 text-right col-md-3">
+					<c:if test="${not empty loginID}">
+					<!-- 로그인한 사용자의 장바구니 내용 -->
+					<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
+					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+					 user="final" password="a20210409A"/>
+					<sql:query var="rs" dataSource="${ds }">
+					    select COUNT(*) count, sum(OPTIONPRICE) sum from cart where memberId = '${loginID}'
+					</sql:query>
+					<sql:query var="rs1" dataSource="${ds }">
+					    select * from cart where memberId = '${loginID}'
+					</sql:query>
 						<ul class="nav-right">
+							<li class="cart-price">장바구니 합계 : </li>
+							<!-- 
 							<li class="heart-icon"><a href="#"> <i
 									class="icon_heart_alt"></i> <span>1</span>
 							</a></li>
-							<li class="cart-icon"><a href="#"> <i
-									class="icon_bag_alt"></i> <span>3</span>
+							 -->
+							<li class="cart-icon"><a href="#"> 
+								<i class="icon_bag_alt"></i> 
+							<c:if test="${not empty rs}">
+								<span>${rs.rows[0].count}</span>
+							</c:if>
 							</a>
 								<div class="cart-hover">
 									<div class="select-items">
 										<table>
 											<tbody>
+											<c:if test="${not empty rs1}">
+											<c:forEach items="${rs1.rows }" var="list">
 												<tr>
 													<td class="si-pic"><img
-														src="resources/img/select-product-1.jpg" alt=""></td>
+														src="resources/img/${list.image }" alt=""></td>
 													<td class="si-text">
 														<div class="product-selected">
-															<p>$60.00 x 1</p>
-															<h6>Kabino Bedside Table</h6>
+															<h6>${list.optionName }</h6>
+															<p>${list.optionPrice }원</p>
 														</div>
 													</td>
+													<!-- 이거 걍 X 표시임 
 													<td class="si-close"><i class="ti-close"></i></td>
+													 -->
 												</tr>
-												<tr>
-													<td class="si-pic"><img
-														src="resources/img/select-product-2.jpg" alt=""></td>
-													<td class="si-text">
-														<div class="product-selected">
-															<p>$60.00 x 1</p>
-															<h6>Kabino Bedside Table</h6>
-														</div>
-													</td>
-													<td class="si-close"><i class="ti-close"></i></td>
-												</tr>
+											</c:forEach>
+											</c:if>
 											</tbody>
 										</table>
 									</div>
 									<div class="select-total">
-										<span>total:</span>
-										<h5>$120.00</h5>
+										<span>total :</span>
+										<c:if test="${not empty rs}">
+											<h5>${rs.rows[0].sum}원</h5>
+										</c:if>
 									</div>
 									<div class="select-button">
-										<a href="#" class="primary-btn view-card">VIEW CARD</a> <a
-											href="#" class="primary-btn checkout-btn">CHECK OUT</a>
+										<!-- 
+										<a href="#" class="primary-btn view-card">VIEW CARD</a> 
+										 -->
+										<a href="#" class="primary-btn checkout-btn" style="font-size:17px;">결 제 하 기</a>
 									</div>
 								</div></li>
-							<li class="cart-price">$150.00</li>
 						</ul>
+					</c:if>
 					</div>
 				</div>
 			</div>
@@ -231,26 +248,23 @@
 							 -->
 						</li>
 						<li><a href="getAbanList">보호소</a></li>	
-						<li><a href="#">커뮤니티</a>
+						<li><a>커뮤니티</a>
 							<ul class="dropdown">
 								<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>
 								<li><a href="getSearchEventAndNoticeSelect?category=1">이벤트</a></li>
 								<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
-								<li><a href="getSearchBoardCategiry2">자랑하기</a></li>
+								<li><a href="getSearchBoardCategiry2Form">자랑하기</a></li>
 							</ul></li>
-						<li><a href="#">고객센터</a>
+						<li><a>고객센터</a>
 							<ul class="dropdown">
 								<li><a href="#">자주하는질문</a></li>
 								<li><a href="getSearchQuestionCr4">문의하기</a></li>
 								<li><a href="#">환불규정</a></li>
 								<li><a href="#">회원혜택</a></li>
 							</ul></li>
-						<li><a href="#">마이페이지</a>
-							<ul class="dropdown">
-								<c:if test="${empty loginID}">
-									<li><a href="loginForm">로그인</a></li>
-								</c:if>
 								<c:if test="${not empty loginID}">
+						<li><a>마이페이지</a>
+							<ul class="dropdown">
 										<li><a href="getSearchQuestion">문의내역보기</a></li>
 										<li><a href="getSearchAnswer">답변내역보기</a></li>
 										<c:if test="${loginAuth eq 'm'}">
@@ -274,9 +288,9 @@
 											<li><a href="getSearchAnimal99">반려동물현황</a></li>
 										</c:if>
 										<li><a href="logout">로그아웃</a></li>
-								</c:if>
 							</ul>
 						</li>
+								</c:if>
 					</ul>
 				</nav>
 				<div id="mobile-menu-wrap"></div>
@@ -284,8 +298,6 @@
 		</div>
 	</header>
 	<!-- Header End -->
-
-
 
 	<div align="center" style="min-height:100vh;">
 		<tiles:insertAttribute name="content" />

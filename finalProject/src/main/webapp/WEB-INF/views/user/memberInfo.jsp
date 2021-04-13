@@ -78,8 +78,9 @@
 	}
 </script>
 <body>
-
-<br><br><br><input value="일반사용자 회원정보" style="font-size:40px; text-align:center; width:400px; border:none;" readonly>가입일 ${member.startDate}<br><br>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
+<br><br><br><input value="일반사용자 회원정보" style="font-size:40px; text-align:center; width:450px; border:none;" readonly>가입일 ${member.startDate}<br><br>
 <form id="frm" name="frm" onsubmit="return formCheck()" action="updateMember" method="post">
 		<table style="text-align:center;">
 			<tr>
@@ -128,13 +129,14 @@
 		<button type="reset" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#ff6347; color:white;">취 소</button>
 		&nbsp;
 		<button type="button" onclick="location.href='/finalProject'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
+		<br><br>
+		<c:if test="${loginID ne 'admin'}">
+			<a href="membershipCancel?ID=${member.memberId}">탈퇴</a>
+		</c:if>
+		<c:if test="${loginID eq 'admin'}">
+			<a href="deleteMember99?ID=${member.memberId}">탈퇴</a>
+		</c:if>
 	</form>
-	<br><br>
-	<c:if test="${loginID ne 'admin'}">
-		<a href="membershipCancel?ID=${member.memberId}">탈퇴</a>
-	</c:if>
-	<c:if test="${loginID eq 'admin'}">
-		<a href="deleteMember99?ID=${member.memberId}">탈퇴</a>
-	</c:if>
+</div>
 </body>
 </html>

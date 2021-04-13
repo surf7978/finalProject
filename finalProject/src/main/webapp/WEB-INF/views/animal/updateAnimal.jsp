@@ -10,6 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 	<h3>반려동물 정보 수정</h3>
 	<form action="updateAnimal" method="post" name="frm">
 	<input type="hidden" name="animalNumber" value="${animal.animalNumber }">
@@ -86,5 +88,6 @@ $(function(){
 	
 });
 </script>
+</div>
 </body>
 </html>
