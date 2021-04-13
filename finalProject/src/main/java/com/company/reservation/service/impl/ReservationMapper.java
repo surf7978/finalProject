@@ -13,7 +13,7 @@ public interface ReservationMapper {
 
 	public ReservationVO getViewReservation(ReservationVO vo);
 	public List<ReservationVO> getViewReservation2(ReservationVO vo);	// 사업자번호로 예약리스트 조회
-
+ 
 	// 결제용 insert
 	public int insertPayReservation(ReservationVO vo);
 }
