@@ -1,73 +1,106 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-#1 div{
-	align: center;
-}
-#2 div{
-	align: center;
-	
-}
-
-table, tr, td {
-	border: 1px dotted black;
-	
-}
-</style>
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
-	<div class="ddd">
-		<c:if test="${getEventAndNotice.category eq '1'}">
-		<h3 align="center">이벤트</h3>
-		</c:if>
-		<c:if test="${getEventAndNotice.category ne '1'}">
-		<h3 align="center">공지사항</h3>
-		</c:if>	
-	</div>
-	<div id="2" align="center">
-	
-	<table>
-	<tr>
-	<td>번호</td> 
-	<td>${getEventAndNotice.eanNumber}</td>
-	</tr>
+<style>
+input.back{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#6EDCDC;
+}
+input.update{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#3296D7;
+}
+input.delete{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#FF6464;
+}
+#title {
+	font-family: sans-serif;
+	background-color: #e9e9e9;
+}
 
-	<tr>
-	<td>글쓴이</td> 
-	<td>${getEventAndNotice.writer}</td>
-	</tr>
-	<tr>
-	<td>제목</td> 
-	<td>${getEventAndNotice.title}</td>
-	</tr>
-	<tr>
-	<td>내용</td> 
-	<td>${getEventAndNotice.content}</td>
-	</tr>
-	<tr>
-	<td>시작일</td> 
-	<td>${getEventAndNotice.startDate}</td>
-	</tr>
-	<tr>
-	<td>마감일</td> 
-	<td>${getEventAndNotice.endDate}</td>
-	</tr>
-	<tr>
-	<td>이미지</td> 
-	<td>${getEventAndNotice.image}</td>
-	</tr>
-	<tr>
-	<td>조회수</td> 
-	<td>${getEventAndNotice.views}</td>
-	</tr>
-	</table>
+table td {
+	padding-left: 10px;
+}
+
+
+</style>
+<body>
+	<div id="pro_contentwrap">
+		<div class="pro_menu">
+			<ul id="title">
+				<li><h2>${getEventAndNotice.title }</h2></li>
+			</ul>
+
+			<table>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr> 
+				<tr>
+					<td>작성자: ${getEventAndNotice.writer }</td>
+					<td>날짜: ${getEventAndNotice.startDate}</td>
+					<td>조회수:${getEventAndNotice.views}</td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<div  class="image"  style="text-align:left; width:500px;">
+			<%-- <img id="image" src="resources/images/board1/${board.image }"> --%>
+			<h3>이미지 들어가는 자리</h3>
+		</div>
+		<br>
+		<br>
+		<div style="text-align:left; width:500px;">
+
+			<p>${getEventAndNotice.content }</p>
+		</div>
+
 	</div>
-	
+
+	<div>
+	<form action="deleteBoard?boardNumber=${getEventAndNotice.eanNumber}"
+			method="post">
+		<input type="button" class="update"
+			onclick="location.href='updateBoard?eanNumber=${getEventAndNotice.eanNumber}'"
+			value="수정하기">
+
+			<input class="delete" type="submit" value="삭제하기">
+			<input class="back" type="button" value="뒤로가기" onclick="location.href='getSearchEventAndNotice'" >
+			
+		</form>
+	</div>
+
+
+
 </body>
 </html>
