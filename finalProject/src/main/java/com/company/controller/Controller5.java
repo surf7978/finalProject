@@ -28,6 +28,8 @@ import com.company.business.service.BusinessVO;
 import com.company.cafe.service.CafeSearchVO;
 import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
+import com.company.cart.service.CartService;
+import com.company.cart.service.CartVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
 import com.company.integrated.service.IntegratedSearchVO;
@@ -50,7 +52,7 @@ import com.company.question.service.QuestionVO;
  * 21.04.09 Oracle Cloud DB 설정 / 사업자-통합 리스트(checkbox 여러개 채크시 포함되는 결과 전부 나오도록 변경) / 사업자 통합 등록 페이지 폼,기능 완
  * 21.04.11 통합 페이지 4차 수정(mapper)
  * 21.04.12 통합 페이지 동적테스트 / 사업자-게시글CRUD 1차 수정(동적 테이블 생성 script)
- * 21.04.13 
+ * 21.04.13 장바구니 1차 / 사업자-게시글CRUD 2차
  */
 @Controller
 public class Controller5 {
@@ -73,6 +75,10 @@ public class Controller5 {
 
 	@Autowired
 	IntegratedService integratedService;
+
+	// 장바구니
+	@Autowired
+	CartService cartService;
 
 	// end of beans
 
@@ -507,10 +513,31 @@ public class Controller5 {
 		return map;
 	}
 	// 사업자-게시글 관리 수정
-	
+
 	// 사업자-게시글 관리 삭제
 
-	
+	// 장바구니-폼
+	@GetMapping("/getSearchCartForm")
+	public String getSearchCartForm() {
+		return "cart/getSearchCartForm";
+	}
+
+	// 장바구니-CRUD
+	@GetMapping("/insertCart") // 등록
+	public void insertCart(CartVO vo) {
+		cartService.insertCart(vo);
+	}
+
+	@GetMapping("/updateCart") // 수정
+	public void updateCart(CartVO vo) {
+		cartService.updateCart(vo);
+	}
+
+	@GetMapping("/deleteCart") // 삭제
+	public void deleteCart(CartVO vo) {
+		cartService.deleteCart(vo);
+	}
+
 	// start of bCart
 	// 장바구니-페이지 호출
 	@GetMapping("/getSearchBCart")

@@ -9,35 +9,39 @@ import com.company.cart.service.CartService;
 import com.company.cart.service.CartVO;
 
 @Service
-public class CartServiceimpl implements CartService{
-	
-	@Autowired CartMapper CartMapper;
-	//등록
+public class CartServiceimpl implements CartService {
+
+	@Autowired
+	CartMapper CartMapper;
+
+	// 장바구니 등록
 	@Override
 	public int insertCart(CartVO vo) {
 		return CartMapper.insertCart(vo);
 	}
-	//단건조회
-	@Override
-	public CartVO getCart(CartVO vo) {
-		return CartMapper.getCart(vo);
-	}
-	//전체조회
-	@Override
-	public List<CartVO> getSearchCart(CartVO vo) {
-		return CartMapper.getSearchCart(vo);
-	}
-	//수정
+
+	// 장바구니 수정
 	@Override
 	public int updateCart(CartVO vo) {
 		return CartMapper.updateCart(vo);
 	}
-	
-	//탈퇴
+
+	// 장바구니 삭제
 	@Override
 	public int deleteCart(CartVO vo) {
 		return CartMapper.deleteCart(vo);
 	}
 
+	// 장바구니 단건조회
+	@Override
+	public CartVO getCart(CartVO vo) {
+		return CartMapper.getCart(vo);
+	}
+
+	// 장바구니 전체조회
+	@Override
+	public List<CartVO> getSearchCart(CartVO vo) {
+		return CartMapper.getSearchCart(vo);
+	}
 
 }
