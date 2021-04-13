@@ -123,7 +123,7 @@
 loginID : ${loginID }<br>
 rs.rows[0].businessId : ${rs.rows[0].businessId }<br>
 hospital.businessNumber : ${hospital.businessNumber}
- -->
+ --> 
 <div id="contents">
 	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
 		<div>
