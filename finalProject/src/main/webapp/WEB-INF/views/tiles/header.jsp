@@ -31,11 +31,14 @@
 			<div class="container">
 				<div class="ht-left">
 					<div class="mail-service">
-						<i class=" fa fa-envelope"></i> hello.colorlib@gmail.com
+						비지니스 문의 &nbsp;&nbsp;&nbsp;
+						<i class=" fa fa-envelope"></i> admin@naver.com
 					</div>
+					<!-- 
 					<div class="phone-service">
-						<i class=" fa fa-phone"></i> +65 11.188.888
+						<i class=" fa fa-phone"></i> 010-1111-1111
 					</div>
+					 -->
 				</div>
 				<div class="ht-right">
 					<c:if test="${empty loginID }">
@@ -66,12 +69,12 @@
 							</option>
 						</select>
 					</div>
-					 -->
 					<div class="top-social">
 						<a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
 							class="ti-twitter-alt"></i></a> <a href="#"><i
 							class="ti-linkedin"></i></a> <a href="#"><i class="ti-pinterest"></i></a>
 					</div>
+					 -->
 				</div>
 			</div>
 		</div>
