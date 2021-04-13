@@ -1,7 +1,6 @@
 package com.company.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +52,8 @@ import com.company.question.service.QuestionVO;
  * 21.04.09 Oracle Cloud DB 설정 / 사업자-통합 리스트(checkbox 여러개 채크시 포함되는 결과 전부 나오도록 변경) / 사업자 통합 등록 페이지 폼,기능 완
  * 21.04.11 통합 페이지 4차 수정(mapper)
  * 21.04.12 통합 페이지 동적테스트 / 사업자-게시글CRUD 1차 수정(동적 테이블 생성 script)
- * 21.04.13 장바구니 1차 / 사업자-게시글CRUD 2차
+ * 21.04.13 장바구니 1차 / 사업자-게시글CRUD 2차(전체조회,삭제,등록)
+ * 21.04.14 장바구니 2차 / 사업자-게시글CRUD 3차(단건조회,수정)
  */
 @Controller
 public class Controller5 {
@@ -299,26 +299,29 @@ public class Controller5 {
 
 	// 사업자-통합상세페이지
 	@GetMapping("/getSearchInfo")
-	public String getSearchInfo(IntegratedVO vo, Model model) {
+	public String getSearchInfo(IntegratedVO vo, Model model, HttpSession session) {
+		// 공통기능
+		vo.setCode(sessionSelect(session, vo));
+		// 조회
 		vo = integratedService.getIntegrated(vo);
 		model.addAttribute("vo", vo);
 		return "business/getSearchInfo";
 	}
 
 	// 사업자-통합 등록 폼
-	@GetMapping("/insertIntegrated")
-	public String insertInfo() {
-		return "business/insertIntegrated";
-	}// end of insertInfo
+	@GetMapping("/insertIntegratedForm")
+	public String insertIntegratedForm() {
+		return "business/insertIntegratedForm";
+	}// end of insertIntegratedForm
 
 	// 사업체-통합 등록 기능
 	@PostMapping("/insertIntegrated")
 	// 통합이라 vo값을 어떻게 처리해야할지
-	public void insertInfoProc(IntegratedVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
+	public void insertIntegrated(IntegratedVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
 			HttpServletResponse response) throws Exception {
 		// 사업자 번호를 어디서 가져올 것인지
 		// session method
-		vo = sessionSelect(session);
+		vo.setCode(sessionSelect(session, vo));
 		// 첨부파일처리
 		// 1.vo값 가져오기
 		MultipartFile image1 = vo.getT_uploadFile();
@@ -348,13 +351,52 @@ public class Controller5 {
 		if (r == 1) {
 			writer.print("<script>alert('등록되었습니다');location.href='getSearchIntegratedForm'</script>");
 		} else {
-			writer.print("<script>alert('오류..다시등록해주세요');location.href='insertIntegrated'</script>");
+			writer.print("<script>alert('오류..다시등록해주세요');location.href='insertIntegratedForm'</script>");
 		}
 		writer.close();
 
 	}// end of insertIntegrated
 
 	// 사업자-게시글 관리 CRUD
+
+	// 사업자-게시글 관리 수정 요청
+	@GetMapping("/updateIntegrated")
+	public void updateIntegrated(IntegratedVO vo, Model model, HttpSession session) {
+		// 공통기능
+		vo.setCode(sessionSelect(session, vo));
+		// 조회
+		vo = integratedService.getIntegrated(vo);
+		model.addAttribute("vo", vo);
+	}
+
+	// 수정기능
+	@PostMapping("/updateIntegrated")
+	public void updateIntegratedProc(IntegratedVO vo) {
+		integratedService.updateIntegrated(vo);
+	}
+
+	// 사업자-게시글 관리 삭제
+	@RequestMapping("/deleteIntegrated")
+	@ResponseBody
+	public int deleteIntegrated(IntegratedVO vo, BusinessVO bvo, HttpSession session) throws Exception {
+		// session method
+		vo.setCode(sessionSelect(session, vo));
+		// process
+		int r = integratedService.deleteIntegrated(vo);
+		return r;
+	}
+
+	// 사업자-게시글 단건 조회
+	@RequestMapping("/getIntegrated")
+	public String getIntegratedProc(IntegratedVO vo, Model model, HttpSession session) {
+		// 공통기능
+		vo.setCode(sessionSelect(session, vo));
+		// 조회
+		vo = integratedService.getIntegrated(vo);
+		model.addAttribute("vo", vo);
+		return "business/getIntegrated";
+	}
+
 	// 사업자-게시글 관리 폼 호출
 	@RequestMapping("/getSearchIntegratedForm")
 	public String getSearchIntegratedForm() {
@@ -368,24 +410,7 @@ public class Controller5 {
 			HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		// SESSION
-		// 1. id로 businessTable 조회
-		String id = session.getAttribute("loginID").toString();
-		bvo.setBusinessId(id);
-		bvo = businessService.getBusiness(bvo);
-		// 2. business의 사업자 번호 가져와 넣기
-		vo.setBusinessNumber(bvo.getBusinessNumber());
-		vo.setCode(bvo.getBusinessCode());
-		// 3. 코드값 변환
-		if (vo.getCode().equals("10"))
-			vo.setCode("HOTEL");
-		else if (vo.getCode().equals("30"))
-			vo.setCode("CAFE");
-		else if (vo.getCode().equals("40"))
-			vo.setCode("BEAUTY");
-		else if (vo.getCode().equals("50"))
-			vo.setCode("EDU");
-		else if (vo.getCode().equals("60"))
-			vo.setCode("TAXI");
+		vo.setCode(sessionSelect(session, vo));
 		// PAGING
 		// 1. 페이지 설정
 		paging.setPageUnit(5);//
@@ -402,39 +427,6 @@ public class Controller5 {
 		map.put("paging", paging);
 		map.put("list", list);
 		return map;
-	}
-
-	// 사업자-게시글 관리 수정 폼
-	@RequestMapping("/updateIntegratedForm")
-	public String updateIntegratedForm() {
-
-		return "business/updateIntegratedForm";
-	}
-
-	// 수정기능
-	@RequestMapping("/updateIntegrated")
-	public void updateIntegrated(IntegratedVO vo) {
-		integratedService.updateIntegrated(vo);
-	}
-
-	// 사업자-게시글 관리 삭제
-	@RequestMapping("/deleteIntegrated")
-	public void deleteIntegrated(IntegratedVO vo, BusinessVO bvo, HttpServletResponse response, HttpSession session)
-			throws Exception {
-		// session method
-		vo = sessionSelect(session);
-		// process
-		int r = integratedService.deleteIntegrated(vo);
-		// alert
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter writer = response.getWriter();
-		if (r == 1) {
-			writer.println("<script>alert('삭제되었습니다');location.href='getSearchIntegratedForm';window.close();</script>");
-		} else {
-			writer.println(
-					"<script>alert('오류..다시 삭제해주세요');location.href='getSearchIntegratedForm';window.close();</script>");
-		}
-		writer.close();
 	}
 
 	// 장바구니-폼
@@ -499,14 +491,13 @@ public class Controller5 {
 
 	// 공통
 	// 세션 및 busCode 변환
-	public IntegratedVO sessionSelect(HttpSession session) {
+	public String sessionSelect(HttpSession session, IntegratedVO vo) {
 		// 1. id로 businessTable 조회
 		String id = session.getAttribute("loginID").toString();
 		BusinessVO bvo = new BusinessVO();
 		bvo.setBusinessId(id);
 		bvo = businessService.getBusiness(bvo);
 		// 2. business의 사업자 번호 가져와 넣기
-		IntegratedVO vo = new IntegratedVO();
 		vo.setBusinessNumber(bvo.getBusinessNumber());
 		vo.setCode(bvo.getBusinessCode());
 		// 3. 코드값 변환
@@ -520,6 +511,6 @@ public class Controller5 {
 			vo.setCode("EDU");
 		else if (vo.getCode().equals("60"))
 			vo.setCode("TAXI");
-		return vo;
+		return vo.getCode();
 	}// end of sessionSelect
 }

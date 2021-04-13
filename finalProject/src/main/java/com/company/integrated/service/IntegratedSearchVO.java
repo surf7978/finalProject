@@ -6,10 +6,10 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class IntegratedSearchVO extends IntegratedVO {
-	String category1;
-	String[] searchLocation;
-	String search;
-	String searchValue;
+	String category1;//카테고리
+	String[] searchLocation;//지역
+	String search;//검색
+	String searchValue;//검색값
 	// paging
 	Integer page = 1;
 	Integer start = 1;

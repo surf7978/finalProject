@@ -16,18 +16,18 @@
 			<table id="tbl" border="1">
 				<tr>
 					<td>제품명</td>
-					<td><input type="text" name="name"></td>
+					<td><input type="text" name="name" required="required"></td>
 				</tr>
 				<tr>
 					<td>옵션명</td>
-					<td><input type="text" name="optionName"></td>
+					<td><input type="text" name="optionName" required="required"></td>
 				</tr>
 				<tr>
 					<td>가격</td>
-					<td><input type="text" name="price"></td>
+					<td><input type="text" name="price" required="required"></td>
 				<tr>
 					<td>지역</td>
-					<td><select name="location">
+					<td><select name="location" required="required">
 							<option value="서울 강남구">강남구</option>
 							<option value="서울 강동구">강동구</option>
 							<option value="서울 강북구">강북구</option>
@@ -61,11 +61,11 @@
 					</select></td>
 				<tr>
 					<td>대표이미지</td>
-					<td><input type="file" id="image1" name="t_uploadFile" multiple="multiple"></td>
+					<td><input type="file" id="image1" name="t_uploadFile" multiple="multiple" required="required"></td>
 				</tr>
 				<tr>
 					<td>이미지</td>
-					<td><input type="file" id="image2" name="uploadFile" multiple="multiple"></td>
+					<td><input type="file" id="image2" name="uploadFile" multiple="multiple" required="required"></td>
 				</tr>
 			</table>
 			<button type="submit">등록</button>

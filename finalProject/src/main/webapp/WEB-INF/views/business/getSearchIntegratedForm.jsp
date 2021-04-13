@@ -11,43 +11,54 @@
 <script>
 	//호출시 첫 화면
 	$(function() {
-		//등록 폼
-		insertIntegrated();
-		//수정
-		updateIntegrated();
-		//삭제
+		//등록 폼 요청
+		insertIntegratedForm();
+		//수정 요청
+		//updateIntegrated();
+		//삭제 요청
 		deleteIntegrated();
-		//조회
+		//조회 요청
 		getIntegrated();
 		//전체 리스트
 		getSearchIntegrated(1);
 	})
 	//등록 폼 요청
-	function insertIntegrated(){
+	function insertIntegratedForm(){
 		$("#btnInsert").on("click",function(){
-			location.href = "insertIntegrated";
+			location.href = "insertIntegratedForm";
 		})//end of btnInsert
 	}
-	//수정 폼
+	//수정 폼 요청
 	function updateIntegrated(){
-		$("#btnUpdate").on("click",function(){
-			
-			
+		$("#show").on("click","#btnUpdate",function(){
+			var seq = $(this).closest("tr").find("#seq").val();
 		})//end of btnUpdate
 	}//end of updateIntegrated
-	//수정 기능
-	
 	//삭제
 	function deleteIntegrated(){
 		$("#show").on("click","#btnDelete",function(){
-			var y = confirm("삭제하시겠습니까?");
-			var seq = $("#show").onclick("#btnDelete").closest($("#seq"));
+			//동적 table id값 찾는 법
+			//var seq = $("#show").find("input[id=seq]").val();
+			var seq = $(this).closest("tr").find("#seq").val();
 			console.log(seq);
+			var y = confirm("삭제하시겠습니까?");
 			if(y){
 				$.ajax({
 					url:"deleteIntegrated",
-					data:{seq:seq}
-				})
+					data:{seq:seq},
+					dataType:"json",
+					success:function(r){
+						if(r == 1){
+							alert('삭제되었습니다');
+							//location.href='getSearchIntegratedForm';
+							location.reload();
+						}else{
+							alert('오류..다시삭제해주세요');
+							//location.href='getSearchIntegratedForm';
+							location.reload();
+						}
+					}//end of success
+				})//end of ajax
 			}//end of if
 		})//end of btnDelete
 	}//end of deleteIntegrated
@@ -55,21 +66,10 @@
 	function getIntegrated(){
 		//조회버튼 클릭
 		$("#show").on("click","#btnSelect",function(){
-			var seq = $(this).closest("tr").find("seq");
-			//글번호 조회
-			$.ajax({
-				url:"getIntegrated",
-				data:{seq:seq},
-				dataType:"json",
-				success: getIntegratedResult
-				
-			})//end of ajax	
+			var seq = $(this).closest("tr").find("#seq").val();
+			location.href="getIntegrated?seq="+seq;
 		})//end of btnSelect
 	}//end of getIntegrated
-	
-	//조회 응답
-	function getIntegratedResult(seq){
-	}//end of getIntegratedResult
 	
 	//전체 리스트
 	function getSearchIntegrated(p) {
@@ -137,7 +137,7 @@
 			.append($("<td>").html(item.image1))
 			.append($("<td>").html(item.image2))
 			.append($("<td>").html("<button id=\'btnSelect\'>조회</button>"))
-			.append($("<td>").html("<button id=\'btnSelect\'>수정</button>"))
+			.append($("<td>").html("<button id=\'btnUpdate\'>수정</button>"))
 			.append($("<td>").html("<button id=\'btnDelete\'>삭제</button>"))
 			.append($('<input type=\'hidden\' id=\'seq\'>').val(item.seq));
 	}//end of makeTr
