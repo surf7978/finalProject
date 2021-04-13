@@ -25,7 +25,7 @@
 		<ul>
 		<c:forEach items="${hospital }" var="hospi"> 
 			<li onclick="location.href='getHospital?seq=${hospi.seq}'">
-				<div class="hospital_img"><img src="resources/img/hospital/${hospi.t_image }" > </div>
+				<div class="hospital_img"><img src="resources/images/hospital/${hospi.t_image }" > </div>
 				<nav>
 					<strong>${hospi.name }</strong>
 					<p>${hospi.price }원</p>

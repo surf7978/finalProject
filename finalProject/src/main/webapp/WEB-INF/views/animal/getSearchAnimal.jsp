@@ -10,6 +10,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+	<br>
 	<table border="1">
 		<thead>
 		<tr>
@@ -25,7 +26,7 @@
 		<tbody>
 		<c:forEach items="${animal }" var="ani">
 		<tr>
-			<td>이미지</td>
+			<td><img src="resources/images/animal/${ani.image }" width="100px"></td>
 			<td>${ani.name}</td>
 			<td>${ani.gender}</td>
 			<td>${ani.kind}</td>

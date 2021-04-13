@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h3>반려동물 정보 등록</h3>
-	<form action="insertAnimal" method="post" name="frm">
+	<form action="insertAnimal" encType="multipart/form-data" method="post" name="frm">
 	<input type="hidden" name="memberId" value="${animal.memberId }">
 	이름 : <input name="name"><br> 
 	견종 : <select id="kind" name="kind">
@@ -69,7 +69,7 @@
 		<option value="여">여</option>
 	</select><br> 
 	생일 : <input type="date" name="birth" placeholder="YYYY-MM-DD"><br>
-	사진 선택 : <br>
+	사진 선택 : <input type="file" name="uploadFile" id="image" size="100%" multiple="multiple"><br>
 	<button type="submit">등록</button>
 	<button type="reset">초기화</button>
 </form>

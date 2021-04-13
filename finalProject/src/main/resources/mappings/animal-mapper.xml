@@ -11,6 +11,7 @@
 			, GENDER
 			, KIND
 			, BIRTH
+			, IMAGE
 			, MEMBERID
 			FROM ANIMAL
 			WHERE MEMBERID=#{memberId}
@@ -23,6 +24,7 @@
 			, GENDER
 			, KIND
 			, BIRTH
+			, IMAGE
 			, MEMBERID
 		FROM ANIMAL
 		WHERE ANIMALNUMBER = #{animalNumber}
@@ -37,13 +39,15 @@
 				  , KIND
 				  ,BIRTH
 				  , MEMBERID
+				  , IMAGE
 				  ) VALUES(
 				  ANI_SEQ.NEXTVAL
 				  , #{name}
 				  , #{gender}
 				  , #{kind}
 				  , #{birth}
-				  , #{memberId})
+				  , #{memberId}
+				  , #{image})
 	</insert>
 	
 	<!-- 반려동물 정보 수정 -->

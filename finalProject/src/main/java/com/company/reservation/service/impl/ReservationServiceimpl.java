@@ -36,5 +36,10 @@ public class ReservationServiceimpl implements ReservationService{
 	public ReservationVO getViewReservation(ReservationVO vo) {
 		return ReservationMapper.getViewReservation(vo);
 	}
+	// 사업자번호로 예약리스트 조회
+	@Override
+	public List<ReservationVO> getViewReservation2(ReservationVO vo) {
+		return ReservationMapper.getViewReservation2(vo);
+	}
 
 }

@@ -65,7 +65,7 @@
 </script>
 </head>
 <body >
-대표사진:<img src="resources/img/hospital/${hospital.t_image }"><br>
+대표사진:<img src="resources/images//hospital/${hospital.t_image }"><br>
 진료구분: ${hospital.category1 }<br>
 상세구분: ${hospital.category2 }<br>
 옵션명:<select id="optionName" name="optionName">
@@ -75,7 +75,7 @@
 <br>
 금액:${hospital.price }<br>
 위치:${hospital.location }<br>
-사진:<img src="resources/img/hospital/${hospital.image}" ><br>
+사진:<img src="resources/images//hospital/${hospital.image}" ><br>
 <div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
 구매평
 <c:if test="${not empty reservation.reservationDate }">

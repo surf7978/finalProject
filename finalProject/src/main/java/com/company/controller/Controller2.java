@@ -158,6 +158,18 @@ public class Controller2 {
 		return "empty/reservation/getReservation";
 	}
 	
+	//사업자별 예약리스트조회+캘린더 조회
+	@RequestMapping("/getViewReservation2")
+	public String getViewReservation2(ReservationVO vo, BusinessVO bvo, Model model, HttpSession session) {
+		bvo.setBusinessId((String) session.getAttribute("loginID"));
+		model.addAttribute("business", businessService.getBusiness(bvo));
+		
+		vo.setBusinessNumber(businessService.getBusiness(bvo).getBusinessNumber());
+		model.addAttribute("reservation", reservationService.getViewReservation2(vo));
+		return "reservation/getViewReservation2";
+		
+	}
+	
 
 	// 구매내역 삭제
 	@DeleteMapping("/deleteBuy")
@@ -182,13 +194,6 @@ public class Controller2 {
 		return "animal/getAnimal";
 	}
 
-	// 반려동물 삭제
-	@RequestMapping("/deleteAnimal")
-	public String deleteAnimal(AnimalVO vo) {
-		animalService.deleteAnimal(vo);
-		return "redirect:/";
-	}
-
 	// 반려동물 등록 페이지
 	@GetMapping("/insertAnimal")
 	public String insertAnimal() {
@@ -197,8 +202,19 @@ public class Controller2 {
 
 	// 반려동물 등록
 	@PostMapping("/insertAnimal")
-	public String insertAnimalProc(AnimalVO vo, HttpSession session) {
+	public String insertAnimalProc(AnimalVO vo, HttpSession session, HttpServletRequest request) throws IllegalStateException, IOException {
 		vo.setMemberId((String) session.getAttribute("loginID"));
+		// 첨부파일처리
+		MultipartFile image = vo.getUploadFile();
+		String path = request.getSession().getServletContext().getRealPath("resources/images/animal/");
+		System.out.println("경로: " + path);
+		if (image != null && !image.isEmpty() && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함
+			vo.setImage(rename.getName());
+				}
 		animalService.insertAnimal(vo);
 		return "redirect:/getSearchAnimal";
 	}
@@ -217,6 +233,13 @@ public class Controller2 {
 		animalService.updateAnimal(vo);
 		model.addAttribute("animal", vo);
 		return "redirect:/getSearchAnimal?memberId=" + vo.getMemberId();
+	}
+	
+	//반려동물 삭제
+	@RequestMapping("/deleteAnimal")
+	public String deleteAnimal(AnimalVO vo) {
+		animalService.deleteAnimal(vo);
+		return "animal/getSearchAnimal";
 	}
 
 	//////// 병원상품//////////
@@ -267,7 +290,7 @@ public class Controller2 {
 		// 첨부파일처리
 		MultipartFile image = vo.getUploadFile();
 		MultipartFile t_image = vo.getT_uploadFile();
-		String path = request.getSession().getServletContext().getRealPath("resources/img/hospital/");
+		String path = request.getSession().getServletContext().getRealPath("resources/images/hospital/");
 		System.out.println("경로: " + path);
 		if (image != null && !image.isEmpty() && image.getSize() > 0) {
 			String filename = image.getOriginalFilename();
