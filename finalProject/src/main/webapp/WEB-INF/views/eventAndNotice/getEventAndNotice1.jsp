@@ -47,7 +47,7 @@ table td {
 	<div id="pro_contentwrap">
 		<div class="pro_menu">
 			<ul id="title">
-				<li><h2>${board.title }</h2></li>
+				<li><h2>${getEventAndNotice.title }</h2></li>
 			</ul>
 
 			<table>
@@ -67,34 +67,35 @@ table td {
 					<td></td>
 				</tr> 
 				<tr>
-					<td>작성자: ${board.writer }</td>
-					<td>날짜: ${board.calendar}</td>
-					<td>조회수:${board.views}</td>
+					<td>작성자: ${getEventAndNotice.writer }</td>
+					<td>날짜: ${getEventAndNotice.startDate}</td>
+					<td>조회수:${getEventAndNotice.views}</td>
 				</tr>
 			</table>
 		</div>
 		<hr>
-		<div  class="image" >
-			<img id="image" src="resources/images/board2/${board.image }">
+		<div  class="image"  style="text-align:left; width:500px;">
+			<img id="image" src="resources/images/eventAndNotice1/${getEventAndNotice.image }">
+		</div>
 		</div>
 		<br>
 		<br>
-		<div style=" width:800px;">
+		<div style="text-align:left; width:500px;">
 
-			<p>${board.content }</p>
+			<p>${getEventAndNotice.content }</p>
 		</div>
 
-	</div>
-
+	
+</div>
 	<div>
-	<form action="deleteBoard?boardNumber=${board.boardNumber}"
+	<form action="deleteEventAndNotice?eanNumber=${getEventAndNotice.eanNumber}"
 			method="post">
 		<input type="button" class="update"
-			onclick="location.href='updateBoard?boardNumber=${board.boardNumber}'"
+			onclick="location.href='updateEventAndNotice1?eanNumber=${getEventAndNotice.eanNumber}'"
 			value="수정하기">
 
 			<input class="delete" type="submit" value="삭제하기">
-			<input class="back" type="button" value="뒤로가기" onclick="location.href='getSearchBoardCategiry2Form'" >
+			<input class="back" type="button" value="뒤로가기" onclick="location.href='getSearchEventAndNotice'" >
 			
 		</form>
 	</div>
