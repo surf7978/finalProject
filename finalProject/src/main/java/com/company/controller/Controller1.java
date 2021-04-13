@@ -1,5 +1,6 @@
 package com.company.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
@@ -24,11 +26,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
+import com.company.common.FileRenamePolicy;
 import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
 import com.company.member.common.KakaoAPI;
@@ -357,7 +361,35 @@ public class Controller1 {
 
 	// 병원상품 수정 처리
 	@PostMapping("/updateHospital")
-	public String updateHospital(HospitalVO vo) {
+	public String updateHospital(HospitalVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		// 첨부파일처리
+		MultipartFile image = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String path = request.getSession().getServletContext().getRealPath("resources/img/hospital/");
+		System.out.println("경로: " + path);
+		if (image != null && !image.isEmpty() && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+			vo.setImage(rename.getName());
+		}
+
+		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+			String filename = t_image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+			vo.setT_image(rename.getName());
+		}
 		hospitalService.updateHospital(vo);
 		return "redirect:/getSearchHospital";
 	}

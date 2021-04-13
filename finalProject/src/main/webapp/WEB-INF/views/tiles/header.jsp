@@ -31,11 +31,14 @@
 			<div class="container">
 				<div class="ht-left">
 					<div class="mail-service">
-						<i class=" fa fa-envelope"></i> hello.colorlib@gmail.com
+						비지니스 문의 &nbsp;&nbsp;&nbsp;
+						<i class=" fa fa-envelope"></i> admin@naver.com
 					</div>
+					<!-- 
 					<div class="phone-service">
-						<i class=" fa fa-phone"></i> +65 11.188.888
+						<i class=" fa fa-phone"></i> 010-1111-1111
 					</div>
+					 -->
 				</div>
 				<div class="ht-right">
 					<c:if test="${empty loginID }">
@@ -66,12 +69,12 @@
 							</option>
 						</select>
 					</div>
-					 -->
 					<div class="top-social">
 						<a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
 							class="ti-twitter-alt"></i></a> <a href="#"><i
 							class="ti-linkedin"></i></a> <a href="#"><i class="ti-pinterest"></i></a>
 					</div>
+					 -->
 				</div>
 			</div>
 		</div>
@@ -150,6 +153,8 @@
 		</div>
 		<div class="nav-item">
 			<div class="container" style=" max-width:100%;display:flex;justify-content: center;">
+			<!-- 
+			
 				<div class="nav-depart">
 					<div class="depart-btn">
 						<i class="ti-menu"></i> <span>메뉴</span>
@@ -201,6 +206,7 @@
 						</ul>
 					</div>
 				</div>
+				 -->
 				<nav class="nav-menu mobile-menu">
 					<ul>
 						<!-- 
@@ -208,7 +214,7 @@
 						 -->
 						<li><a href="getSearchProductForm">쇼핑몰</a></li>
 						<li><a href="getSearchHospital">병원</a></li>
-						<li><a href="getSearchListForm">카페/호텔/펫택시</a>
+						<li><a href="getSearchListForm?menu=1">카페/호텔/펫택시</a>
 						<!-- 
 							<ul class="dropdown">
 								<li><a href="#">카페</a></li>
@@ -216,12 +222,15 @@
 								<li><a href="#">펫택시</a></li>
 							</ul></li>
 						 -->
-						<li><a href="#">교육/미용/보호소</a>
+						<li><a href="getSearchListForm?menu=2">교육/미용</a>
+							<!-- 
 							<ul class="dropdown">
 								<li><a href="#">교육</a></li>
 								<li><a href="#">미용</a></li>
-								<li><a href="getAbanList">보호소</a></li>
-							</ul></li>
+							</ul>
+							 -->
+						</li>
+						<li><a href="getAbanList">보호소</a></li>	
 						<li><a href="#">커뮤니티</a>
 							<ul class="dropdown">
 								<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>

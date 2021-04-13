@@ -50,7 +50,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="product-large set-bg" data-setbg="resources/img/products/women-large.jpg">
+                    <div class="product-large set-bg" data-setbg="resources/img/women-large.jpg">
                         <h2>쇼핑몰</h2>
                         <a href="getSearchProductForm">Discover More</a>
                     </div>
@@ -222,7 +222,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1">
-                    <div class="product-large set-bg m-large" data-setbg="resources/img/products/man-large.jpg">
+                    <div class="product-large set-bg m-large" data-setbg="resources/img/women-large.jpg">
                         <h2>Men’s</h2>
                         <a href="#">Discover More</a>
                     </div>

@@ -15,11 +15,11 @@
                         <h2>로 그 인</h2>
                         <form action="login" method="post">
                             <div class="group-input">
-                                <label for="username">아이디 입력 *</label>
+                                <label for="username" style="text-align:left;">아이디 입력</label>
                                 <input type="text" id="memberId" name="memberId">
                             </div>
                             <div class="group-input">
-                                <label for="pass">비밀번호 입력 *</label>
+                                <label for="pass" style="text-align:left;">비밀번호 입력</label>
                                 <input type="password" id="password" name="password">
                             </div>
                             <div class="group-input gi-check">
@@ -27,7 +27,8 @@
                                     <a href="searchID&PW" class="forget-pass">아이디/비밀번호 찾기</a>
                                 </div>
                             </div>
-                            <button type="submit" class="site-btn login-btn" style="width:170px; height:50px;">로그인</button>
+                            <br><br>
+                            <button type="submit" class="site-btn login-btn" style="padding-top:9px; width:170px; height:43px; border-radius:5px;">로그인</button>
                             &nbsp;&nbsp;&nbsp;
 	                        <a href="https://kauth.kakao.com/oauth/authorize
 									?response_type=code
