@@ -2,44 +2,81 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>문의하기-신고하기(관리자 찬영)</title>
-
-<style>
-	table,th, tr ,td{
-		border: 1px dotted black;
-				}
-</style>
+    <meta charset="UTF-8">
+    <title>문의하기-신고하기</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 </head>
-<body>
-	<h3>문의하기-신고하기(관리자 찬영)</h3>
-		<table>
-		 <tr>
-		 <th>제목</th>
-		 <th>내용 </th>
-		 <th>글쓴이</th>
-		 <th>아이디 </th>
-		 <th>날짜</th>
-		
-		 
-		 </tr>
-		 
-	<c:forEach var="getSearchQuestionSelect3" items="${getSearchQuestionSelect3}">
-		 <tr onclick="location.href='getQuestion3?questionNumber=${getSearchQuestionSelect3.questionNumber}'">
-		
-		 <td>${getSearchQuestionSelect3.title}</td>
-		 <td>${getSearchQuestionSelect3.content}</td>
-		 <td>${getSearchQuestionSelect3.writer}</td>
-		 <td>${getSearchQuestionSelect3.memberId}</td>
-		 <td>${getSearchQuestionSelect3.calendar}</td>
-		 </tr>
-	</c:forEach>
-		</table>
+<style>
+		input.back{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			color: white;
+			background-color:#778899;
+		}
+    /* 게시판 리스트 목록 */
+.sub_news,.sub_news th,.sub_news td{border:0}
+.sub_news a{color:#383838;text-decoration:none}
+.sub_news{width:50%;border-bottom:1px solid #999;color:#666;font-size:12px;table-layout:fixed}
+.sub_news caption{display:none}
+.sub_news th{padding:5px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color:#e7ab3c;color:white;font-weight:500;line-height:20px;vertical-align:top}
+.sub_news td{padding:8px 0 9px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
+.sub_news .title{text-align:left; padding-left:15px; font-size:13px;}
+.sub_news .title .pic,.sub_news .title .new{margin:0 0 2px;vertical-align:middle}
+.sub_news .title a.comment{padding:0;background:none;color:#f00;font-size:12px;font-weight:bold}
+.sub_news tr.reply .title a{padding-left:16px;background:url(첨부파일/ic_reply.png) 0 1px no-repeat}
+/* //게시판 리스트 목록 */
+
+ tr.th{
  	
+ 	text-align: center;
+ 	font-size: 17px;
+ }
+</style>
+<body>
+<br>
+	<input value="문의하기-신고하기"
+		style="font-size: 40px; text-align: center; width: 500px; border: none;"
+		readonly>
+<br><br>
+<table class="sub_news" border="1"  summary="게시판의 글제목 리스트">
 
 
 
+<thead>
+<tr class="th">
+<th width="60">번호</th>
+<th scope="col">제목</th>
+<th scope="col">날짜</th>
+<th scope="col" width="60">글쓴이</th>
+<th scope="col" width="60">아이디</th>
+</tr>
+</thead>
+<tbody>
+<c:forEach var="getSearchQuestionSelect3" items="${getSearchQuestionSelect3}">
+<tr onclick="location.href='getQuestion3?questionNumber=${getSearchQuestionSelect3.questionNumber}'">
+
+<td >
+${getSearchQuestionSelect3.questionNumber}
+</td>
+<td >
+${getSearchQuestionSelect3.title}
+</td>
+<td>${getSearchQuestionSelect3.calendar}</td>
+<td >${getSearchQuestionSelect3.writer}</td>
+<td>${getSearchQuestionSelect3.memberId} </td>
+</tr>
+</c:forEach>
+
+</tbody>
+</table>
+<br>
+<input class="back" type = "button" value="관리자메뉴" onclick="location.href='getSearchCr4'">
+    
 </body>
 </html>

@@ -8,21 +8,26 @@
 <title>Insert title here</title>
 <style>
 table , tr, td{
-		border: 1px dotted black;
+		border: 1px;
+		padding : 10px;
+		text-align:center;
 			  }
 </style>
 </head>
 <body>
+<br><br><br>
 <h3 align="center">마이페이지 관리자-회원관리</h3>
+<br><br>
 <div align="center">
 
 <table>
- <thead> <tr id="head"> 
- <td>권한</td>
- <td>아이디</td>
- <td>선택</td>
- <td>관리</td>
- </tr>
+ <thead> 
+	 <tr id="head"> 
+		 <th style="width:150px; font-size:30px; border: 1px dotted black;">권한</th>
+		 <th style="width:150px; font-size:30px; border: 1px dotted black;">아이디</th>
+		 <th style="width:150px; font-size:30px; border: 1px dotted black;">조회</th>
+		 <th style="width:150px; font-size:30px; border: 1px dotted black;">관리</th>
+	 </tr>
  </thead>
 <c:forEach var="list" items="${list}" >
 <tr>
@@ -43,24 +48,25 @@ table , tr, td{
  <td>${list.memberId}</td>
  <td> 
  	<c:if test="${list.auth eq 'b'}">
- 		<a href="getBusiness99?businessId=${list.memberId}">선택</a>
+ 		<button onclick="location.href='getBusiness99?businessId=${list.memberId}'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#8fbc8f; color:white;">선택</button>
  	</c:if>
  	<c:if test="${list.auth eq 'm'}">
-		 <a href="getMember1?memberId=${list.memberId}">선택</a>
+		 <button onclick="location.href='getMember1?memberId=${list.memberId}'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#8fbc8f; color:white;">선택</button>
  	</c:if>
  </td>
 
 
  <td>
  <form action="membershipCancel?ID=${list.memberId}" method="post">
- <button type="submit">삭제</button>
+ <button type="submit" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#ff6347; color:white;">삭 제</button>
  </form>
  </td> 
 </tr> 
 </c:forEach>
 </table>
-
-<a href="/finalProject">홈으로 돌아가기</a> <!-- /로 가면 메인화면으로 가진다.  -->
+<!-- 
+<a href="/finalProject">홈으로 돌아가기</a> 
+ -->
 </div>
 
  <!--페이지 넘기는 기능 , 검색기능 추가해야 합니다. 태현이형 로그인의  for each if 관리자를 받아서

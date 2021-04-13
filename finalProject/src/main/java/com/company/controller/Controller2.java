@@ -318,13 +318,7 @@ public class Controller2 {
 		hospitalService.insertHospital(vo);
 		return "redirect:/getSearchHospital";
 	}
-	// 병원상품 사업자별 조회(수정페이지로 가기 위한)
-
-	// 병원상품 수정 페이지
-
-	// 병원상품 수정 처리
-
-	// 병원상품 삭제
+	
 
 	// 상세조회에서 구매평 등록페이지 이동
 	@GetMapping("/insertReview")

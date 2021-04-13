@@ -16,7 +16,9 @@ public class ProductVO {
 	String productState;
 	String memberId;
 	String t_image;
-	MultipartFile uploadFile;
+	MultipartFile[] uploadFile;
 	MultipartFile t_uploadFile;
+	//결제관련
 	String resultPrice;
+	String count;
 }

@@ -22,27 +22,38 @@
 			}).open();
 		})
 		//c체크박스 주소 불러오기
-		$("#pay_wrap").on("click", "#addcheck", function(){
+		$("#pay_wrap").on("click", "input:checkbox[name=addcheck]", function(){
 			console.log(this);
-			if($("#addcheck:checked")){
+			if($("input:checkbox[name=addcheck]").is(":checked") == true){
 				$("input[name=name]").val('${member.name}');
 				$("input[name=phone]").val('${member.phone}');
 				$("input[name=address]").val('${member.address}');
 				$("input[name=address2]").val('${member.address2}');
 				$("input[name=post]").val('${member.post}');
 			}else{
-				$("input[type=text]").val('');
+				$("input[name=name]").val('');
+				$("input[name=phone]").val('');
+				$("input[name=address]").val('');
+				$("input[name=address2]").val('');
+				$("input[name=post]").val('');
 			}
 		})
+		//배송비 포함 설정
+		if(${resultPrice } >=10000){
+			$("[name=resultPrice]").val(${resultPrice });
+		}else{
+			$("[name=resultPrice]").val(${resultPrice } + 2500);			
+		}
 	});
 	
 </script>
 </head>
 <body>
-${member.name }
 	<div id="contents">
 			<h1>바로구매</h1>
-		<form method="post" id="frm">
+		<form method="post" id="frm" action="PayInfo">
+		<input value="${product.memberId }" name="fromPerson">
+		<input value="${product.productNumber }" name="productNumber">
 			<div id="pay_wrap">
 			<table border="1">
 				<thead>
@@ -62,18 +73,18 @@ ${member.name }
 						<td rowspan="2">${resultPrice }</td>
 					</tr>
 					<tr>
-						<td>${product.optionName } ${product.optionPrice }</td>
+						<td>${product.optionName } <input type="number" value="${count }" name="count" style="width:50px;">${product.optionPrice }</td>
 					</tr>
 					<tr>
 						<td>합계금액</td>
-						<td colspan="2" id="sumresult">
-							${resultPrice }
+						<td colspan="2" id="resultPrice">
+						<input type="text" readonly="readonly" name="resultPrice" style="border:none;" >						
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<div>
-			<h3>배송지 정보</h3><input type="checkbox" id="addcheck"><label for="addcheck">구매자 정보와 동일</label>
+			<div> 
+			<h3>배송지 정보</h3><input type="checkbox" name="addcheck" id="addcheck"><label for="addcheck">구매자 정보와 동일</label>
 				<table border="1">
 					<tr>
 						<th>이름</th>
@@ -92,7 +103,8 @@ ${member.name }
 				</table>
 			</div>				
 		</div>
-		<button>결제하기</button>
+		<button type="submit">결제하기</button>
+		<button type="button" onclick="location.href='getSearchProductForm'">취소</button>
 		</form>
 	</div>
 </body>

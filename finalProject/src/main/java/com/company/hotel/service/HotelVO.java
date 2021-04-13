@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class HotelVO {
-	String hotelNumber;
+	String seq;
 	String name;
 	String optionName;
 	String price;

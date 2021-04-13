@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,9 +30,7 @@ a {
 		//상세보기
 		getSearchInfo();
 		//전체리스트1
-		getSearchList1(1,1);
-		//전체리스트2
-		getSearchList1(2,1);
+		getSearchList1(1);
 	});//end of function
 	
 	//채크박스 생성
@@ -46,11 +45,11 @@ a {
 					var input = $("<input>").attr({
 						type : "checkbox",
 						value : location,
-					//	id : location,
+						id : idx.value,
 						name:"searchLocation",
 						class: "location"
 					});
-				var label = $("<label>").attr("for", location).text(location);
+				var label = $("<label>").attr("for", idx.value).text(location);
 				$(".con").append(input, label);	
 				})//end of each
 			}//end of success
@@ -75,8 +74,7 @@ a {
 	//category1이라는 매개변수는 form 태그의 button 'cafe','hotel','taxi'를 눌렀을 때 들어오는 값을 의미함
 	//들어온 매개변수 값이 null이 아니며 undefined도 아닐 때 input type hidden의 value값에 넣어준다는 의미
 	//그때 mapper에 있는 where 조건절이 실행되며 쿼리문이 정상 작동함
-	function getSearchList1(menu,p,category1) {
-		searchAndInsert.page.menu = menu;
+	function getSearchList1(p,category1) {
 		//page버튼 누를시 p값으로 들어옴
 		searchAndInsert.page.value = p;
 		if(category1 !=null && category1 !='undefined')
@@ -131,6 +129,10 @@ a {
 				if (lastPage > endPage) {
 					$("#paging").append("<a href='#' onclick='getSearchList1("+ (endPage + 1) + ")'>" + "&raquo;"+ "</a>");
 				}
+				//search값 초기화
+				//$('#searchAndInsert').find('[name=search]').val('');
+				$("#searchAndInsert").find('[name=search]').reset();
+				
 			} //end of success
 		}) //end of ajax
 	}//end of getSearchList
@@ -142,12 +144,18 @@ a {
 		<h2>전체 리스트</h2>
 		<div id="menu" align="left">
 			<form id="searchAndInsert">
-				<input type="hidden" name="menu">
+				<input type="hidden" name="menu" value="${param.menu}">
 				<input type="hidden" name="category1">
 				<ul>
-					<li><a onclick="getSearchList1(1,'cafe')">카페</a></li>
-					<li><a onclick="getSearchList1(1,'hotel')">호텔</a></li>
-					<li><a onclick="getSearchList1(1,'taxi')">택시</a></li>
+					<c:if test="${param.menu == 1}">
+						<li><a onclick="getSearchList1(1,'cafe')">카페</a></li>
+						<li><a onclick="getSearchList1(1,'hotel')">호텔</a></li>
+						<li><a onclick="getSearchList1(1,'taxi')">택시</a></li>
+					</c:if>
+					<c:if test="${param.menu == 2}">
+						<li><a onclick="getSearchList1(1,'edu')">교육</a></li>
+						<li><a onclick="getSearchList1(1,'beauty')">미용</a></li>
+					</c:if>
 				</ul>
 				<br>
 				<ul>
@@ -165,7 +173,7 @@ a {
 								<option value="name">이름</option>
 								<option value="price">가격</option>
 								<option value="location">지역</option>
-							</select>
+							</select>	
 							<input type="text" name="searchValue" placeholder="검색어 입력">
 							<button type="button" id="searchAllPage" onclick="getSearchList1(1)">검색</button>
 						</div>

@@ -9,9 +9,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-	<h3>병원 등록</h3>
+	<h3>병원 수정</h3>
 	<form id="frm" action="insertHospital" encType="multipart/form-data" method="post">
-	<input type="hidden" id="businessNumber" name="businessNumber" value="${business.businessNumber }" readonly="readonly">
+		<input type="text" id="businessNumber" name="businessNumber" value="${business.businessNumber }">
 		<table border="1">
 			<tr>
 				<th>사업자명</th>
