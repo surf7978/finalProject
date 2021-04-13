@@ -437,33 +437,33 @@ public class Controller4 {
 	
 	// ####★★문의하기-신고하기 에 관한 컨트롤러 ★★ (question & answer 테이블 함께 사용)
 	
-	@GetMapping("/insertQuestion1")			//문의하기 1상품문의 접수
+	@GetMapping("/insertQuestion1")			//문의하기(유저) 1상품문의 접수 
 	public String insertQuestion1(QuestionVO vo ) {
 		return "admin/insertQuestion1";
 	}
-	@PostMapping("/insertQuestion1")		//문의하기 1상품문의 접수 
+	@PostMapping("/insertQuestion1")		//문의하기(유저) 1상품문의 접수 
 	public String insertQuestion1Proc(QuestionVO vo) {
 		System.out.println(vo);
 		questionService.insertQuestion1(vo);
 		return "redirect:/getSearchQuestionSelect1";
 	}
 	
-	@GetMapping("/insertQuestion2")			//문의하기 2.고객센터문의 접수 	로그인해서 세션넘기기
+	@GetMapping("/insertQuestion2")			//문의하기(유저) 2.고객센터문의 접수 	
 	public String insertQuestion2(QuestionVO vo ) {
 		return "admin/insertQuestion2";
 	}
-	@PostMapping("/insertQuestion2")		//문의하기 2.고객센터문의 접수 
+	@PostMapping("/insertQuestion2")		//문의하기(유저) 2.고객센터문의 접수 
 	public String insertQuestion2Proc(QuestionVO vo) {
 		System.out.println(vo);
 		questionService.insertQuestion2(vo);
 		return "redirect:/getSearchQuestionSelect2";
 	}
 	
-	@GetMapping("/insertQuestion3")			//문의하기 3.신고접수 페이지 넘기기	
+	@GetMapping("/insertQuestion3")			//문의하기(유저) 3.신고접수 	
 	public String insertQuestion3(QuestionVO vo ) {
 		return "admin/insertQuestion3";
 	}
-	@PostMapping("/insertQuestion3")		//문의하기 3.신고접수 값 집어넣기
+	@PostMapping("/insertQuestion3")		//문의하기(유저) 3.신고접수 
 	public String insertQuestion3Proc(QuestionVO vo) {
 		System.out.println(vo);
 		questionService.insertQuestion3(vo);
@@ -491,18 +491,19 @@ public class Controller4 {
 	}
 	
 	
-	@GetMapping("/getQuestion1Ans")	// 문의하기 상세조회 신고하기
+	@GetMapping("/getQuestion1Ans")	// 문의하기 상품문의 답장하기
 	public String insertAnswer1Cr4(QuestionVO vo , Model model) {
 		questionService.getQuestion1Ans(vo);
+		model.addAttribute("getQuestion1" , questionService.getQuestion1(vo));
 		model.addAttribute("getQuestion1Ans" , questionService.getQuestion1Ans(vo));
 		return "admin/insertAnswer1Cr4";
 	}
 	
-	@PostMapping("/insertAnswer1Cr4")	//문의하기 에 답장하기
+	@PostMapping("/insertAnswer1Cr4")	//문의하기 상품문의 답장하기 처리
 	public String insertAnswer1Cr4Proc(AnswerVO vo) {
 		System.out.println(vo);
 		answerService.insertAnswer1Cr4(vo);
-		return "redirect:/";
+		return "redirect:/getSearchQuestionCr4";
 	}
 	
 	
@@ -512,7 +513,7 @@ public class Controller4 {
 		return "admin/getSearchQuestionSelect2";
 	}
 	
-	@GetMapping("/getQuestion2")	// 문의하기 상세조회 신고하기
+	@GetMapping("/getQuestion2")	// 고객센터 문의하기 상세조회 
 	public String getQuestion2(QuestionVO vo , Model model) {
 		System.out.println(vo);
 		questionService.getQuestion2(vo);
@@ -521,18 +522,19 @@ public class Controller4 {
 	}
 	
 	
-	@GetMapping("/getQuestion2Ans")	// 문의하기 상세조회 신고하기
+	@GetMapping("/getQuestion2Ans")	// 고객센터 문의하기 답장하기 
 	public String insertAnswer2Cr4(QuestionVO vo , Model model) {
 		questionService.getQuestion2Ans(vo);
+		model.addAttribute("getQuestion2" , questionService.getQuestion2(vo));
 		model.addAttribute("getQuestion2Ans" , questionService.getQuestion2Ans(vo));
 		return "admin/insertAnswer2Cr4";
 	}
 	
-	@PostMapping("/insertAnswer2Cr4")	//문의하기 에 답장하기
+	@PostMapping("/insertAnswer2Cr4")	//고객센터 문의하기 답장하기 처리
 	public String insertAnswer2Cr4Proc(AnswerVO vo) {
 		System.out.println(vo);
 		answerService.insertAnswer2Cr4(vo);
-		return "redirect:/";
+		return "redirect:/getSearchQuestionCr4";
 	}
 	
 	@RequestMapping("/getSearchQuestionSelect3")	//3번은 신고하기
@@ -549,17 +551,18 @@ public class Controller4 {
 		model.addAttribute("getQuestion3" , questionService.getQuestion3(vo));
 		return "admin/getQuestion3";
 	}
-	@GetMapping("/getQuestion3Ans")	// 문의하기 상세조회 신고하기
+	@GetMapping("/getQuestion3Ans")	// 문의하기  신고하기 답장하기
 	public String getQuestion3Ans(QuestionVO vo , Model model) {
 		questionService.getQuestion3Ans(vo);
+		model.addAttribute("getQuestion3" , questionService.getQuestion3(vo));
 		model.addAttribute("getQuestion3Ans" , questionService.getQuestion3Ans(vo));
 		return "admin/insertAnswer3Cr4";
 	}
-	@PostMapping("/insertAnswer3Cr4")	//신고에 답장하기
+	@PostMapping("/insertAnswer3Cr4")	// 문의하기  신고하기 답장하기 처리
 	public String insertAnswerCr4(AnswerVO vo) {
 		System.out.println(vo);
 		answerService.insertAnswer3Cr4(vo);
-		return "redirect:/";
+		return "redirect:/getSearchQuestionCr4";
 	}
 	@RequestMapping("/getSearchAnswerCr4") //답장 전체보기
 	public String getSearchAnswerCr4(AnswerVO  vo, Model model ) {
