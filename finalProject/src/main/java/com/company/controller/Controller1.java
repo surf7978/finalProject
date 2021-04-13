@@ -1,5 +1,6 @@
 package com.company.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
@@ -24,11 +26,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
+import com.company.common.FileRenamePolicy;
+import com.company.hospital.service.HospitalService;
+import com.company.hospital.service.HospitalVO;
 import com.company.member.common.KakaoAPI;
 import com.company.member.common.coolsmsAPI;
 import com.company.member.service.MemberService;
@@ -38,7 +44,7 @@ import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 import com.company.review.service.ReviewService;
 import com.company.review.service.ReviewVO;
- 
+
 @Controller
 public class Controller1 {
 
@@ -269,9 +275,9 @@ public class Controller1 {
 	 
 	@Autowired AnimalService animalService;
 	
-	//회원탈퇴
-	@PostMapping("/membershipCancel")
-	public String membershipCancel(String ID) {
+	//관리자용 회원탈퇴
+	@GetMapping("/deleteMember99")
+	public String deleteMember99(String ID) {
 		MemberVO vo = new MemberVO();
 		vo.setMemberId(ID);
 		if(memberService.getViewMember(vo).getAuth().equals("m")) {
@@ -285,6 +291,26 @@ public class Controller1 {
 			businessService.deleteBusiness(vo1);
 		}
 		return "redirect:/getSearchViewMember";
+	}
+	
+	//회원용 회원탈퇴
+	@GetMapping("/membershipCancel")
+	public String membershipCancel(String ID, HttpSession session) {
+		MemberVO vo = new MemberVO();
+		vo.setMemberId(ID);
+		if(memberService.getViewMember(vo).getAuth().equals("m")) {
+			AnimalVO voAnimal = new AnimalVO();
+			voAnimal.setMemberId(ID);
+			animalService.deleteAnimal(voAnimal);
+			memberService.deleteMember(vo);
+			session.invalidate();
+		}else {
+			BusinessVO vo1 = new BusinessVO();
+			vo1.setBusinessId(ID);
+			businessService.deleteBusiness(vo1);
+			session.invalidate();
+		}
+		return "redirect:/";
 	}
 	 
 	//관리자-전체회원 조회
@@ -319,6 +345,61 @@ public class Controller1 {
 		return "animal/getSearchAnimal99";
 	}
 	
+	@Autowired HospitalService hospitalService;
+	// 병원상품 사업자별 조회(수정페이지로 가기 위한)
+
+	// 병원상품 수정 페이지
+	@GetMapping("/updateHospital")
+	public String updateHospitalForm(HospitalVO vo, Model model, HttpSession session) {
+		System.out.println(vo);
+		BusinessVO vo1 = new BusinessVO();
+		vo1.setBusinessId((String) session.getAttribute("loginID"));
+		model.addAttribute("business", businessService.getBusiness(vo1));
+		model.addAttribute("hospital", hospitalService.getHospital(vo));
+		return "hospital/updateHospital";
+	}
+
+	// 병원상품 수정 처리
+	@PostMapping("/updateHospital")
+	public String updateHospital(HospitalVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		// 첨부파일처리
+		MultipartFile image = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String path = request.getSession().getServletContext().getRealPath("resources/img/hospital/");
+		System.out.println("경로: " + path);
+		if (image != null && !image.isEmpty() && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+			vo.setImage(rename.getName());
+		}
+
+		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+			String filename = t_image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+			vo.setT_image(rename.getName());
+		}
+		hospitalService.updateHospital(vo);
+		return "redirect:/getSearchHospital";
+	}
+	
+	// 병원상품 삭제
+	@GetMapping("/deleteHospital")
+	public String deleteHospital(HospitalVO vo) {
+		hospitalService.deleteHospital(vo);
+		return "redirect:/getSearchHospital";
+	}
 	
 	@Autowired ProductService productService;
 	// 홈화면 출력(스프링 기본세팅)

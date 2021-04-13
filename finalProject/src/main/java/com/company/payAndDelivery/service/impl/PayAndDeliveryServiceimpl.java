@@ -38,4 +38,14 @@ public class PayAndDeliveryServiceimpl implements PayAndDeliveryService{
 		return payAndDeliveryMapper.deletePayAndDelivery(vo);
 	}
 
+	@Override
+	public int updateReservation2(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.updateReservation2(vo);
+	}
+
+	@Override
+	public int insertPayAndDelivery2(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.insertPayAndDelivery2(vo);
+	}
+
 }

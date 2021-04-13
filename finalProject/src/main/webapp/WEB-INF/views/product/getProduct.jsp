@@ -22,8 +22,10 @@
 						var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
 						var inval = $(input).val();
 						var strong = $("<p>").css("text-align", "right").text("${product.optionPrice }");
-						$(nav).append(input, strong);						
+						$(nav).append(input, strong);	
+						$("#pro_show").empty();					
 						$("#pro_show").append(nav);
+						$("#pro_result").empty();
 						var restrong = $("<dt>").html("총 함계금액");
 						var result = $("<dd>").text("${product.optionPrice }").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
 						$("#pro_result").append(restrong, result);
@@ -35,15 +37,30 @@
 			result.empty();
 			result.text("${product.optionPrice }" * plu)
 		});
+		//결제페이지로 이동
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
-			location.href="PayInfo?productNumber=${product.productNumber }&resultPrice="+resultPrice;
+			var count = $("[name=count]").val();
+			location.href="PayInfoForm?productNumber=${product.productNumber }&resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count;
 		});
+		$("#d_btn").on("click",function(){
+			if(confirm("삭제하시겟습니까")==true){
+				location.href="deleteProduct?productNumber=${product.productNumber }";				
+			}else{
+				return false;
+			}
+		});
+		$("#u_btn").on("click",function(){
+			location.href="updateProduct?productNumber=${product.productNumber }"
+		})
 	});
 </script>
 </head>
 <body>
 	<div id="contents">
+	<div>
+		<button id="u_btn">수정하기</button>
+		<button id="d_btn">삭제하기</button></div>
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
@@ -99,13 +116,13 @@
 						<li><a href="#">취소/환불</a></li>
 					</ul>
 				</div>
-				<div id="pro_content">
-					<img src="resources/images/products/${product.image }">
+				<div id="content">
+				<c:forTokens items="${product.image }" delims="," var="file">
+					<img src="resources/images/products/${file }">
+				</c:forTokens>					
 				</div>
 			</div>
 		</div>
-		<button>수정하기</button>
-		<button>삭제하기</button>
 	</div>
 </body>
 </html>

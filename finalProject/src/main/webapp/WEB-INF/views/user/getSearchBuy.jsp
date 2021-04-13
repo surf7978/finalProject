@@ -12,6 +12,7 @@
 <body>
 <table border="1">
 	<thead>
+	<tr>
 		<th>구매번호</th>
 		<th>상품분류</th>
 		<th>옵션명</th>
@@ -26,6 +27,7 @@
 		<th>구매상태</th>	
 		<th>구매평</th>	
 		<th>환불하기</th>
+		</tr>
 	</thead>
 	<tbody>
 	<c:forEach items="${buys }" var="buy" varStatus="status">

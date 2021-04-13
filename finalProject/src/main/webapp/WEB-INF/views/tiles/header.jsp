@@ -150,6 +150,8 @@
 		</div>
 		<div class="nav-item">
 			<div class="container" style=" max-width:100%;display:flex;justify-content: center;">
+			<!-- 
+			
 				<div class="nav-depart">
 					<div class="depart-btn">
 						<i class="ti-menu"></i> <span>메뉴</span>
@@ -201,6 +203,7 @@
 						</ul>
 					</div>
 				</div>
+				 -->
 				<nav class="nav-menu mobile-menu">
 					<ul>
 						<!-- 
@@ -208,18 +211,23 @@
 						 -->
 						<li><a href="getSearchProductForm">쇼핑몰</a></li>
 						<li><a href="getSearchHospital">병원</a></li>
-						<li><a href="getSearchListForm">카페/호텔/펫택시</a>
+						<li><a href="getSearchListForm?menu=1">카페/호텔/펫택시</a>
+						<!-- 
 							<ul class="dropdown">
 								<li><a href="#">카페</a></li>
 								<li><a href="#">호텔</a></li>
 								<li><a href="#">펫택시</a></li>
 							</ul></li>
-						<li><a href="#">교육/미용/보호소</a>
+						 -->
+						<li><a href="getSearchListForm?menu=2">교육/미용</a>
+							<!-- 
 							<ul class="dropdown">
 								<li><a href="#">교육</a></li>
 								<li><a href="#">미용</a></li>
-								<li><a href="getAbanList">보호소</a></li>
-							</ul></li>
+							</ul>
+							 -->
+						</li>
+						<li><a href="getAbanList">보호소</a></li>	
 						<li><a href="#">커뮤니티</a>
 							<ul class="dropdown">
 								<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>

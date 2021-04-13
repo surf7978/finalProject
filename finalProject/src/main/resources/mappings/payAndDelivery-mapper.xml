@@ -7,7 +7,25 @@
 
 	<!-- 구매내역리스트 조회 -->
 	<select id="getSearchPayAndDelivery" resultType="PayAndDeliveryVO">
-		SELECT * FROM PAYANDDELIVERY
-		WHERE MEMBERID=#{memberId}
+	SELECT PNDNUMBER
+	, CATEGORY
+	, COURIERCOMPANY
+	, PAYDATE
+	, INVOICENUMBER
+	, TO_CHAR(SUMPRICE, '999,999,999') AS SUMPRICE
+	, MEMBERID
+	, BUYSTATE 
+	FROM PAYANDDELIVERY
+	WHERE MEMBERID=#{memberId}
 	</select>
+	
+	
+	<!-- 예약하기 버튼눌러서 날짜선택시 PAYANDDELIVERY DB update -->
+	<update id="updateReservation2" parameterType="PayAndDeliveryVO">
+		UPDATE PAYANDDELIVERY SET 
+		BUYSTATE='예약완료'
+		WHERE PNDNUMBER=#{pndNumber}
+	</update>
+	
+	
 </mapper>

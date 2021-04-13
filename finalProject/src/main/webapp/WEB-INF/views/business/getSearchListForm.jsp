@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +28,8 @@ a {
 		//채크박스 생성
 		checkbox();
 		//상세보기
-		getCafe();
-		//전체 리스트
+		getSearchInfo();
+		//전체리스트1
 		getSearchList1(1);
 	});//end of function
 	
@@ -44,11 +45,11 @@ a {
 					var input = $("<input>").attr({
 						type : "checkbox",
 						value : location,
-					//	id : location,
+						id : idx.value,
 						name:"searchLocation",
 						class: "location"
 					});
-				var label = $("<label>").attr("for", location).text(location);
+				var label = $("<label>").attr("for", idx.value).text(location);
 				$(".con").append(input, label);	
 				})//end of each
 			}//end of success
@@ -61,10 +62,10 @@ a {
 	}//enf of checkbox
 	
 	//상세보기
-	function getCafe() {
+	function getSearchInfo() {
 		//li 태그 클릭 로직 짜기
 		$("#contents").on("click","#show li",function() {
-			location.href = "getCafe?cafeNumber="+ $(this).find("[name=cafeNumber]").val();
+			location.href = "getSearchInfo?seq="+ $(this).find("[name=seq]").val();
 		})
 	}//end of getCafe
 
@@ -92,13 +93,13 @@ a {
 				//datas = Object 즉, datas란 Object 안의 list값을 가져온다는 의미
 				var response = datas.list;
 				$(response).each(function(i) {
-							var cafeNumber = response[i].cafeNumber;
+							var seq = response[i].seq;
 							var image1 = response[i].image1;
 							var li = $("<li>");
 							var input = $("<input>").attr({
-								"value" : cafeNumber,
+								"value" : seq,
 								"type" : "hidden",
-								"name" : "cafeNumber"
+								"name" : "seq"
 							});
 							//div in img
 							var div = $("<div>").attr("class", "product_img").append($("<img>")//
@@ -139,11 +140,18 @@ a {
 		<h2>전체 리스트</h2>
 		<div id="menu" align="left">
 			<form id="searchAndInsert">
+				<input type="hidden" name="menu" value="${param.menu}">
 				<input type="hidden" name="category1">
 				<ul>
-					<li><a onclick="getSearchList1(1,'cafe')">카페</a></li>
-					<li><a onclick="getSearchList1(1,'hotel')">호텔</a></li>
-					<li><a onclick="getSearchList1(1,'taxi')">택시</a></li>
+					<c:if test="${param.menu == 1}">
+						<li><a onclick="getSearchList1(1,'cafe')">카페</a></li>
+						<li><a onclick="getSearchList1(1,'hotel')">호텔</a></li>
+						<li><a onclick="getSearchList1(1,'taxi')">택시</a></li>
+					</c:if>
+					<c:if test="${param.menu == 2}">
+						<li><a onclick="getSearchList1(1,'edu')">교육</a></li>
+						<li><a onclick="getSearchList1(1,'beauty')">미용</a></li>
+					</c:if>
 				</ul>
 				<br>
 				<ul>

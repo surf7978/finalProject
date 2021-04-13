@@ -30,5 +30,11 @@ public class BuyServiceimpl implements BuyService{
 	public BuyVO getViewBuy(BuyVO vo) {
 		return buyMapper.getViewBuy(vo);
 	}
+	
+	//구매상세정보 추가
+	@Override
+	public int insertBuy2(BuyVO vo) {
+		return buyMapper.insertBuy2(vo);
+	}
 
 }

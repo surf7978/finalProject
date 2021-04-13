@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.company.product.service.ProductSearchVO;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 
@@ -24,7 +25,7 @@ public class ProductServiceimpl implements ProductService{
 	}
 	//전체조회
 	@Override
-	public List<ProductVO> getSearchProduct(ProductVO vo) {
+	public List<ProductVO> getSearchProduct(ProductSearchVO vo) {
 		return ProductMapper.getSearchProduct(vo);
 	}
 	//수정

@@ -17,7 +17,7 @@
                             <h1>??????</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                 incididunt ut labore et dolore</p>
-                            <a href="getSearchListForm" class="primary-btn">Go Now</a>
+                            <a href="getSearchListForm?menu=1" class="primary-btn">Go Now</a>
                         </div>
                     </div>
                     <div class="off-card">
@@ -253,6 +253,7 @@
 	</c:if>
 	<a href="getMember">회원정보조회</a>
 	<a href="getSearchPayAndDelivery">구매내역조회</a>
+	<a href="getSearchReservationBusi">예약내역조회</a>
 	<a href="getSearchAnimal">마이펫수첩</a> <p></p>
 	
 	<a href="getSearchCr4">컨트롤러4(김찬영)의 페이지</a>

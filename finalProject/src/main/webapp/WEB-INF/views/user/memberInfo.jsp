@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,10 +54,9 @@
 					"phone":$("#phone").val()
 					},
 				success:function(data){
-					$("#searchPWResult").append("변경할 비밀번호<br>");
-					$("#searchPWResult").append("<input id='password' name='password' style='width:400px; border:1;'><br><br>");
-					$("#searchPWResult").append("<button onclick='changePW1()'>변 경</button>");
-					$("#searchPWResult").append("<button onclick='changePWCancel()'>취 소</button><br>");
+					$("#searchPWResult").append("<input id='password' name='password' style='width:400px; border:1;'  placeholder='변경할 비밀번호 입력'>");
+					$("#searchPWResult").append("<button type='button' onclick='changePW1()'>변 경</button>&nbsp;&nbsp;");
+					$("#searchPWResult").append("<button type='button' onclick='changePWCancel()'>취 소</button>");
 				}
 			});	
 		});
@@ -72,6 +71,12 @@
 		$("#searchPWResult").empty();
 	}
 </script>
+<!-- 휴대폰인증페이지 출력 -->
+<script>
+	function coolsms(){
+		window.open("coolsms", "본인인증", "width=800px, height=250px");
+	}
+</script>
 <body>
 
 <br><br><br><input value="일반사용자 회원정보" style="font-size:40px; text-align:center; width:400px; border:none;" readonly>가입일 ${member.startDate}<br><br>
@@ -80,6 +85,11 @@
 			<tr>
 				<td><input value="아 이 디" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
 				<td><input id="memberId" name="memberId" value="${member.memberId}" style="width:400px;" readonly></td>
+				<td class="changePW"><input type="button" id="changePW" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="PW변경"></td>
+			</tr>
+			<tr>
+				<td>
+				<td colspan="2"><div id="searchPWResult"></div></td>
 			</tr>
 			<tr>
 				<td><input value="이 름" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
@@ -100,7 +110,12 @@
 			</tr>
 			<tr>
 				<td><input value="연 락 처" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
-				<td><input id="phone" name="phone" style="width:400px;" value="${member.phone}"></td>
+				<td><input id="phone" name="phone" style="width:400px;" value="${member.phone}" readonly></td>
+				<td><input type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="본인인증"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2"><div id="phoneCheckResult" style="color:red; height:30px;"></div></td>
 			</tr>
 			<tr>
 				<td><input value="이 메 일" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
@@ -114,8 +129,12 @@
 		&nbsp;
 		<button type="button" onclick="location.href='/finalProject'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 	</form>
-	<a href="membershipCancel?ID=${member.memberId}">탈퇴</a>
-	<button id="changePW">비밀번호 변경</button>
-	<div id="searchPWResult"></div>
+	<br><br>
+	<c:if test="${loginID ne 'admin'}">
+		<a href="membershipCancel?ID=${member.memberId}">탈퇴</a>
+	</c:if>
+	<c:if test="${loginID eq 'admin'}">
+		<a href="deleteMember99?ID=${member.memberId}">탈퇴</a>
+	</c:if>
 </body>
 </html>

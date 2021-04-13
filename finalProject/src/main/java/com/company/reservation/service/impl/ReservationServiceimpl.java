@@ -12,28 +12,22 @@ import com.company.reservation.service.ReservationVO;
 public class ReservationServiceimpl implements ReservationService{
 	
 	@Autowired ReservationMapper ReservationMapper;
-	//등록
-	@Override
-	public int insertReservation(ReservationVO vo) {
-		return ReservationMapper.insertReservation(vo);
-	}
-	//단건조회
+
 	@Override
 	public ReservationVO getReservation(ReservationVO vo) {
 		return ReservationMapper.getReservation(vo);
 	}
-	//전체조회
+	//회원별 예약리스트 조회
 	@Override
 	public List<ReservationVO> getSearchReservation(ReservationVO vo) {
 		return ReservationMapper.getSearchReservation(vo);
 	}
-	//수정
+	//예약수정(날짜선택 & 결제완료(예약 전)->예약완료로 변경)
 	@Override
 	public int updateReservation(ReservationVO vo) {
 		return ReservationMapper.updateReservation(vo);
 	}
 	
-	//탈퇴
 	@Override
 	public int deleteReservation(ReservationVO vo) {
 		return ReservationMapper.deleteReservation(vo);
@@ -42,10 +36,5 @@ public class ReservationServiceimpl implements ReservationService{
 	public ReservationVO getViewReservation(ReservationVO vo) {
 		return ReservationMapper.getViewReservation(vo);
 	}
-	@Override
-	public ReservationVO getViewReservation2(ReservationVO vo) {
-		return ReservationMapper.getViewReservation2(vo);
-	}
-
 
 }
