@@ -67,7 +67,7 @@
 </thead>
 <tbody>
 <c:forEach var="getSearchEventAndNoticeSelect2" items="${getSearchEventAndNoticeSelect2}">
-<tr onclick="location.href='getEventAndNotice?eanNumber=${getSearchEventAndNoticeSelect2.eanNumber}'">
+<tr onclick="location.href='getEventAndNotice2?eanNumber=${getSearchEventAndNoticeSelect2.eanNumber}'">
 
 <td >${getSearchEventAndNoticeSelect2.eanNumber}</td>
 <td >${getSearchEventAndNoticeSelect2.title}</td>

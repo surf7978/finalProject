@@ -13,6 +13,7 @@
 	 ,STARTDATE
 	 ,ENDDATE
 	 ,IMAGE
+	 ,T_IMAGE
 	 ,VIEWS
 	 ,CATEGORY
 	 ,MEMBERID) VALUES(ean_seq.nextval 
@@ -22,6 +23,7 @@
 	 , #{startDate} 
 	 , #{endDate}  
 	 , #{image} 
+	 , #{t_image} 
 	 , 0 
 	 , 1 
 	 , 'admin')
@@ -69,12 +71,43 @@
 	WHERE CATEGORY= 2
 	</select>
 	
-	<select id="getEventAndNotice" resultType="eventAndNoticeVO"
+	<select id="getEventAndNotice1" resultType="eventAndNoticeVO"
 									parameterType="eventAndNoticeVO" > 
 	SELECT * 
 	FROM eventAndNotice
 	WHERE EANNUMBER= #{eanNumber}
 	</select>
+	
+	<select id="getEventAndNotice2" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" > 
+	SELECT * 
+	FROM eventAndNotice
+	WHERE EANNUMBER= #{eanNumber}
+	</select>
+	
+		<!-- 이벤트 수정  -->
+	<update id="updateEventAndNotice1" parameterType="eventAndNoticeVO">
+		UPDATE eventAndNotice SET
+		TITLE=#{title} ,
+		CONTENT=#{content} 
+		WHERE EANNUMBER= #{eanNumber}
+	</update>
+	
+	<!-- 공지사항 수정  -->
+	<update id="updateEventAndNotice2" parameterType="eventAndNoticeVO">
+		UPDATE eventAndNotice SET
+		TITLE=#{title} ,
+		CONTENT=#{content} 
+		WHERE EANNUMBER= #{eanNumber}
+	</update>
+	
+	<!-- 게시판 한건 삭제  -->
+	
+	<delete id="deleteEventAndNotice" parameterType="eventAndNoticeVO">
+		DELETE FROM eventAndNotice
+		WHERE EANNUMBER=#{eanNumber}
+	</delete>
+	
 	
 </mapper>
 

@@ -230,8 +230,8 @@
 						<li><a href="getAbanList">보호소</a></li>	
 						<li><a href="#">커뮤니티</a>
 							<ul class="dropdown">
-								<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>
-								<li><a href="getSearchEventAndNoticeSelect?category=1">이벤트</a></li>
+								<li><a href="getSearchEventAndNoticeSelectForm?category=2">공지사항</a></li>
+								<li><a href="getSearchEventAndNoticeSelectForm?category=1">이벤트</a></li>
 								<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
 								<li><a href="getSearchBoardCategiry2Form">자랑하기</a></li>
 							</ul></li>

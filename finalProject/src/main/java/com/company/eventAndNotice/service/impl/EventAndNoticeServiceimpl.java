@@ -22,10 +22,15 @@ public class EventAndNoticeServiceimpl implements EventAndNoticeService{
 	public int insertEventAndNotice2(EventAndNoticeVO vo) {
 		return EventAndNoticeMapper.insertEventAndNotice2(vo);
 	}
-	//단건조회
+	//이벤트 단건조회
 	@Override
-	public EventAndNoticeVO getEventAndNotice(EventAndNoticeVO vo) {
-		return EventAndNoticeMapper.getEventAndNotice(vo);
+	public EventAndNoticeVO getEventAndNotice1(EventAndNoticeVO vo) {
+		return EventAndNoticeMapper.getEventAndNotice1(vo);
+	}
+	//공지사항 단건조회
+	@Override
+	public EventAndNoticeVO getEventAndNotice2(EventAndNoticeVO vo) {
+		return EventAndNoticeMapper.getEventAndNotice2(vo);
 	}
 	
 	//전체조회
@@ -44,10 +49,15 @@ public class EventAndNoticeServiceimpl implements EventAndNoticeService{
 		// TODO Auto-generated method stub
 		return EventAndNoticeMapper.getSearchEventAndNoticeSelect2(vo);
 	}
-	//수정
+	//공지사항 수정
 	@Override
-	public int updateEventAndNotice(EventAndNoticeVO vo) {
-		return EventAndNoticeMapper.updateEventAndNotice(vo);
+	public int updateEventAndNotice1(EventAndNoticeVO vo) {
+		return EventAndNoticeMapper.updateEventAndNotice1(vo);
+	}
+	//이벤트 수정
+	@Override
+	public int updateEventAndNotice2(EventAndNoticeVO vo) {
+		return EventAndNoticeMapper.updateEventAndNotice2(vo);
 	}
 	
 	//탈퇴

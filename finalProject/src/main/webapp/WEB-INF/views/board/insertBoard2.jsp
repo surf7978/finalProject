@@ -128,12 +128,10 @@
 						<tr>
 							<td><input value="TitleImage" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
 							<td><input type="file" id="t_image" name="t_uploadFile" size="100%" multiple="multiple"></td>
-							
 						</tr>
 						<tr>
 							<td><input value="Image" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
 							<td><input type="file" id="image" name="uploadFile" size="100%" multiple="multiple"></td>
-							
 						</tr>
 						<tr>
 							<td><input value="내 용" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>

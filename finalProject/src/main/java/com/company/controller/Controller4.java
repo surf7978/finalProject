@@ -341,12 +341,25 @@ public class Controller4 {
 		model.addAttribute("list", eventAndNoticeService.getSearchEventAndNotice(vo));
 		return "eventAndNotice/getSearchEventAndNotice";
 	}
-	//이벤트게시판 선택(전체조회)
-	@RequestMapping("/getSearchEventAndNoticeSelect")
-	public String getSearchEventAndNoticeSelect(EventAndNoticeVO vo, Model model) {
-		model.addAttribute("getSearchEventAndNoticeSelect", eventAndNoticeService.getSearchEventAndNoticeSelect(vo));
+	
+	//1번 이벤트 전체조회로 가기
+	
+	@RequestMapping("/getSearchEventAndNoticeSelectForm")	
+	public String getSearchEventAndNoticeSelectForm(Model model, EventAndNoticeVO vo) {
+		
+		model.addAttribute("getSearchEventAndNoticeSelect" , eventAndNoticeService.getSearchEventAndNoticeSelect(vo));
+		System.out.println(vo);
 		return "eventAndNotice/getSearchEventAndNoticeSelect";
+		
+	} 
+	//1번 이벤트게시판리스트
+	@RequestMapping("/getSearchEventAndNoticeSelect")
+	@ResponseBody
+	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect(EventAndNoticeVO vo){
+		
+		return eventAndNoticeService.getSearchEventAndNoticeSelect(vo);
 	}
+
 	//공지사항 게시판 선택(전체조회)
 	@RequestMapping("/getSearchEventAndNoticeSelect2")
 	public String getSearchEventAndNoticeSelect2(EventAndNoticeVO vo, Model model) {
@@ -362,10 +375,53 @@ public class Controller4 {
 		
 	}
 	@PostMapping("/insertEventAndNotice1")
-	public String insertEventAndNotice1Proc(EventAndNoticeVO vo) {
-		eventAndNoticeService.insertEventAndNotice1(vo);
+	public String insertEventAndNotice1Proc(EventAndNoticeVO vo, HttpServletRequest request) throws IllegalStateException, IOException  {
 		System.out.println(vo);
-		return "redirect:/getSearchEventAndNotice";
+		// 첨부파일처리
+		// pom, servlet에 추가
+		MultipartFile[] images = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String filenames ="";
+		boolean start = true;
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/eventAndNotice1");
+		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+		System.out.println("경로: " + path);
+		for(MultipartFile image : images) {
+			if (image != null && !image.isEmpty() && image.getSize() > 0) {
+				String filename = image.getOriginalFilename();
+				// 파일명 중복체크 -> rename
+				File rename = FileRenamePolicy.rename(new File(path, filename));
+				// 업로드된 파일명
+				// rename.getName()
+				if(!start) {
+					filenames += ",";						
+				}else {
+					start = false;
+				}
+				filenames += rename.getName();
+				// 파일명을 읽어내는게 getName()
+				// 임시폴더에서 업로드 폴더로 파일이동
+				image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+				
+			}
+		}
+		vo.setImage(filenames);
+
+		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+			String filename = t_image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+			vo.setT_image(rename.getName());
+		}
+//			String path="resources/images";
+		eventAndNoticeService.insertEventAndNotice1(vo);
+		
+		return "redirect:/getSearchEventAndNoticeSelectForm";
 		
 	}
 	
@@ -378,45 +434,111 @@ public class Controller4 {
 		
 	}
 	@PostMapping("/insertEventAndNotice2")
-	public String insertEventAndNotice2Proc(EventAndNoticeVO vo) {
-		eventAndNoticeService.insertEventAndNotice2(vo);
-		System.out.println(vo);
-		return "redirect:/getSearchEventAndNotice";
-		
+		public String insertEventAndNotice2Proc(EventAndNoticeVO vo, HttpServletRequest request) throws IllegalStateException, IOException  {
+			System.out.println(vo);
+			// 첨부파일처리
+			// pom, servlet에 추가
+			MultipartFile[] images = vo.getUploadFile();
+			MultipartFile t_image = vo.getT_uploadFile();
+			String filenames ="";
+			boolean start = true;
+			String path = request.getSession().getServletContext().getRealPath("/resources/images/eventAndNotice2");
+			// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+			System.out.println("경로: " + path);
+			for(MultipartFile image : images) {
+				if (image != null && !image.isEmpty() && image.getSize() > 0) {
+					String filename = image.getOriginalFilename();
+					// 파일명 중복체크 -> rename
+					File rename = FileRenamePolicy.rename(new File(path, filename));
+					// 업로드된 파일명
+					// rename.getName()
+					if(!start) {
+						filenames += ",";						
+					}else {
+						start = false;
+					}
+					filenames += rename.getName();
+					// 파일명을 읽어내는게 getName()
+					// 임시폴더에서 업로드 폴더로 파일이동
+					image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+					
+				}
+			}
+			vo.setImage(filenames);
+
+			if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+				String filename = t_image.getOriginalFilename();
+				// 파일명 중복체크 -> rename
+				File rename = FileRenamePolicy.rename(new File(path, filename));
+				// 업로드된 파일명
+				// rename.getName()
+				// 파일명을 읽어내는게 getName()
+				// 임시폴더에서 업로드 폴더로 파일이동
+				t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+				vo.setT_image(rename.getName());
+			}
+//				String path="resources/images";
+			eventAndNoticeService.insertEventAndNotice2(vo);
+			
+			return "redirect:/getSearchEventAndNoticeSelect2";
+			
+		}
+	
+	//이벤트 단건조회
+	@GetMapping("/getEventAndNotice1")
+	public String getEventAndNotice1(EventAndNoticeVO vo, Model model) {
+		eventAndNoticeService.getEventAndNotice1(vo);
+		model.addAttribute("getEventAndNotice" , eventAndNoticeService.getEventAndNotice1(vo));
+		return  "eventAndNotice/getEventAndNotice1";
 	}
 	
 	
-	
-	
-	//이벤트 or 공지사항 단건조회
-	@GetMapping("/getEventAndNotice")
-	public String getEventAndNotice(EventAndNoticeVO vo, Model model) {
-		eventAndNoticeService.getEventAndNotice(vo);
-		model.addAttribute("getEventAndNotice" , eventAndNoticeService.getEventAndNotice(vo));
-		return  "eventAndNotice/getEventAndNotice";
+	//공지사항 단건조회
+	@GetMapping("/getEventAndNotice2")
+	public String getEventAndNotice2(EventAndNoticeVO vo, Model model) {
+		eventAndNoticeService.getEventAndNotice2(vo);
+		model.addAttribute("getEventAndNotice" , eventAndNoticeService.getEventAndNotice2(vo));
+		return  "eventAndNotice/getEventAndNotice2";
 	}
 	
-	//이벤트  or 공지사항 수정 선택
-	@GetMapping("/updateEventAndNotice")
-	public String updateEventAndNotice(EventAndNoticeVO vo , Model model ) {
-		System.out.println("updateEventAndNotice의 vo" + vo);
-		eventAndNoticeService.getEventAndNotice(vo);
-		model.addAttribute("getEventAndNotice" , eventAndNoticeService.getEventAndNotice(vo) );
-		return "eventAndNotice/updateEventAndNotice";
+	//이벤트 수정 선택
+	@GetMapping("/updateEventAndNotice1")
+	public String updateEventAndNotice1(EventAndNoticeVO vo , Model model ) {
+		System.out.println("updateEventAndNotice1의 vo" + vo);
+		eventAndNoticeService.getEventAndNotice1(vo);
+		model.addAttribute("getEventAndNotice" , eventAndNoticeService.getEventAndNotice1(vo) );
+		return "eventAndNotice/updateEventAndNotice1";
 
 	}
-	//이벤트 or 공지사항 처리 
-	@PostMapping("/updateEventAndNotice")
-	public String updateEventAndNoticeProc(EventAndNoticeVO vo ) {
-		System.out.println("updateEventAndNoticeProc의 vo" + vo);
-		eventAndNoticeService.updateEventAndNotice(vo);
+	//이벤트 처리 
+	@PostMapping("/updateEventAndNotice1")
+	public String updateEventAndNotice1Proc(EventAndNoticeVO vo ) {
+		System.out.println("updateEventAndNotice1Proc의 vo" + vo);
+		eventAndNoticeService.updateEventAndNotice1(vo);
 		return "redirect:/getSearchEventAndNotice";
 	}
+	//공지사항 수정 선택
+	@GetMapping("/updateEventAndNotice2")
+	public String updateEventAndNotice2(EventAndNoticeVO vo , Model model ) {
+		System.out.println("updateEventAndNotice2의 vo" + vo);
+		eventAndNoticeService.getEventAndNotice2(vo);
+		model.addAttribute("getEventAndNotice" , eventAndNoticeService.getEventAndNotice2(vo) );
+		return "eventAndNotice/updateEventAndNotice2";
+
+	}
+	//공지사항 처리 
+	@PostMapping("/updateEventAndNotice2")
+	public String updateEventAndNotice2Proc(EventAndNoticeVO vo ) {
+		System.out.println("updateEventAndNotice2Proc의 vo" + vo);
+		eventAndNoticeService.updateEventAndNotice2(vo);
+		return "redirect:/getSearchEventAndNotice";
+	}
+	
 	@PostMapping("/deleteEventAndNotice")
 	public String deleteEventAndNoticeProc(EventAndNoticeVO vo ) {
 		System.out.println("삭제 vo "+ vo);
 		eventAndNoticeService.deleteEventAndNotice(vo);
-		return "redirect:/";
+		return "redirect:/getSearchEventAndNotice";
 	}
 	
 	

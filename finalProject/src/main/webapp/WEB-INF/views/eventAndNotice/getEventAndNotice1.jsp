@@ -75,7 +75,7 @@ table td {
 		</div>
 		<hr>
 		<div  class="image"  style="text-align:left; width:500px;">
-		<img id="image" src="resources/images/eventAndNotice2/${getEventAndNotice.image}">
+			<img id="image" src="resources/images/eventAndNotice1/${getEventAndNotice.image }">
 		</div>
 		</div>
 		<br>
@@ -85,13 +85,13 @@ table td {
 			<p>${getEventAndNotice.content }</p>
 		</div>
 
-	</div>
-
+	
+</div>
 	<div>
 	<form action="deleteEventAndNotice?eanNumber=${getEventAndNotice.eanNumber}"
 			method="post">
 		<input type="button" class="update"
-			onclick="location.href='updateEventAndNotice2?eanNumber=${getEventAndNotice.eanNumber}'"
+			onclick="location.href='updateEventAndNotice1?eanNumber=${getEventAndNotice.eanNumber}'"
 			value="수정하기">
 
 			<input class="delete" type="submit" value="삭제하기">

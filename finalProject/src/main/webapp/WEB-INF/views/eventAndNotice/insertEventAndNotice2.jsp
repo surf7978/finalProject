@@ -113,10 +113,8 @@
 						</tr>
 						
 						<tr>
-								<td><input value="이 미 지" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><input type=text id="image" name="image" size="20"></td>
-							<!-- <td><input type="file" id="image" name="uploadFile" size="100%" multiple="multiple"></td> -->
-							
+							<td><input value="Image" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type="file" id="image" name="uploadFile" size="100%" multiple="multiple"></td>
 						</tr>
 	
 

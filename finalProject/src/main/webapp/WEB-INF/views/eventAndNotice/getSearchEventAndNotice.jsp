@@ -26,7 +26,7 @@
 <body>
 	
 
-	<form action="getSearchEventAndNoticeSelect" method="post">
+	<form action="getSearchEventAndNoticeSelectForm" method="post">
 		<button class="event" type="submit">이벤트</button>
 	</form>
 	<form action="getSearchEventAndNoticeSelect2" method="post">
