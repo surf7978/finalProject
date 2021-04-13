@@ -62,7 +62,7 @@ public class Controller2 {
 
 	////// 마이페이지-유저///////////
 	// 일반회원 본인정보 조회
-	//admin이 로그인해서 회원들의 정보를 볼려고 클릭하면 자기정보가 나와서 .equals("admin")추가해서 자기정보가 아닌 회원의 정보조회하게 함
+	//admin이 로그인해서 회원들의 정보를 볼려고 클릭하면 자신의 정보가 나와서 .equals("admin")추가해서 자기정보가 아닌 회원의 정보조회하게 함
 	@GetMapping("/getMember1")
 	public String getMember(MemberVO vo1, Model model, HttpSession session) {
 		if(session.getAttribute("loginID").equals("admin")) {
@@ -170,7 +170,6 @@ public class Controller2 {
 		
 	}
 	
-
 	// 구매내역 삭제
 	@DeleteMapping("/deleteBuy")
 	public String deleteBuy(BuyVO vo) {
@@ -229,7 +228,18 @@ public class Controller2 {
 
 	// 반려동물 수정
 	@PostMapping("/updateAnimal")
-	public String updateAnimalProc(AnimalVO vo, Model model) {
+	public String updateAnimalProc(AnimalVO vo, Model model, HttpServletRequest request) throws IllegalStateException, IOException {
+		// 첨부파일처리
+		MultipartFile image = vo.getUploadFile();
+		String path = request.getSession().getServletContext().getRealPath("resources/images/animal/");
+		System.out.println("경로: " + path);
+		if (image != null && !image.isEmpty() && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함
+			vo.setImage(rename.getName());
+			}
 		animalService.updateAnimal(vo);
 		model.addAttribute("animal", vo);
 		return "redirect:/getSearchAnimal?memberId=" + vo.getMemberId();
@@ -239,8 +249,18 @@ public class Controller2 {
 	@RequestMapping("/deleteAnimal")
 	public String deleteAnimal(AnimalVO vo) {
 		animalService.deleteAnimal(vo);
-		return "animal/getSearchAnimal";
+		return "redirect:/getSearchAnimal";
 	}
+	
+	//의료수첩 페이지
+	@RequestMapping("/animalLifeCare")
+	public String animalLifeCare(AnimalVO vo) {
+		return "animal/animalLifeCare";
+	}
+	
+	
+	
+	
 
 	//////// 병원상품//////////
 	// 병원상품 전체리스트 조회

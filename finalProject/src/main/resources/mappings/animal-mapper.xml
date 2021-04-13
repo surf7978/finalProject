@@ -58,6 +58,7 @@
 			,KIND = #{kind}
 			, BIRTH = #{birth}
 			, MEMBERID = #{memberId}
+			, IMAGE = #{image}
 		WHERE ANIMALNUMBER = #{animalNumber}
 	</update>
 	

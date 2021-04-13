@@ -89,12 +89,13 @@
 	</tr>
 	</table>
 	<button type="submit">수정</button>
-	<button type="button" id="delete">삭제</button>
+	<button type="button" class="deleteAnimal" onclick="location.href='deleteAnimal?animalNumber=${animal.animalNumber }'">삭제</button>
 </form>
-
 <script>
 $("#kind").val("${animal.kind }")
 $("#gender").val("${animal.gender }")
+
+//반려동물 정보 삭제
 
 //이미지 미리보기
 $(function(){
