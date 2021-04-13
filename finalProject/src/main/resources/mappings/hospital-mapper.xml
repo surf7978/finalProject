@@ -48,7 +48,6 @@
 			  , LOCATION
 			  , T_IMAGE
 			  , IMAGE
-			  , BUSINESSNUMBER
 			  ) VALUES(
 			  20||HOSPI_SEQ.NEXTVAL
 			  , #{businessNumber}
@@ -60,7 +59,6 @@
 			  , #{location}
 			  , #{t_image}
 			  , #{image}
-			  , #{businessNumber}
 			  )
 		</insert>
 	<!-- 병원상품 수정 -->
