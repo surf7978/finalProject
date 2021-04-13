@@ -1,6 +1,7 @@
 package com.company.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,8 @@ import com.company.business.service.BusinessVO;
 import com.company.cafe.service.CafeSearchVO;
 import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
+import com.company.cart.service.CartService;
+import com.company.cart.service.CartVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
 import com.company.integrated.service.IntegratedSearchVO;
@@ -47,10 +50,10 @@ import com.company.question.service.QuestionVO;
  * 21.04.06 사업체-카페-전체리스트 3차 수정(Ajax,paging)
  * 21.04.07 사업체-통합 리스트(Ajax,paging,search,checkbox)
  * 21.04.08 사업체-통합 리스트 세분화(카테고리 별 검색 완)
- * 21.04.09 Oracle Cloud DB 설정/ 사업자-통합 리스트(checkbox 여러개 채크시 포함되는 결과 전부 나오도록 변경) / 사업자 통합 등록 페이지 폼,기능 완
- * 21.04.10 
- * 21.04.11 장바구니 세션에 넣는 법
- * 21.04.12 
+ * 21.04.09 Oracle Cloud DB 설정 / 사업자-통합 리스트(checkbox 여러개 채크시 포함되는 결과 전부 나오도록 변경) / 사업자 통합 등록 페이지 폼,기능 완
+ * 21.04.11 통합 페이지 4차 수정(mapper)
+ * 21.04.12 통합 페이지 동적테스트 / 사업자-게시글CRUD 1차 수정(동적 테이블 생성 script)
+ * 21.04.13 장바구니 1차 / 사업자-게시글CRUD 2차
  */
 @Controller
 public class Controller5 {
@@ -73,6 +76,10 @@ public class Controller5 {
 
 	@Autowired
 	IntegratedService integratedService;
+
+	// 장바구니
+	@Autowired
+	CartService cartService;
 
 	// end of beans
 
@@ -260,98 +267,6 @@ public class Controller5 {
 	}// end of getSearchAnswer
 		// end of answer
 
-	// start of Cafe
-	// 사업체-카페-상품등록 페이지
-	@GetMapping("/insertCafe")
-	public String insertCafe() {
-		return "cafe/insertCafe";
-	}
-
-	// 사업체-카페-상품등록 기능
-	@PostMapping("/insertCafe")
-	public void insertCafeProc(CafeVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
-			HttpServletResponse response) throws Exception {
-		// 사업자 번호를 어디서 가져올 것인지
-		// 1.session
-		// 2. id로 businessTable 조회
-		String id = session.getAttribute("loginID").toString();
-		bvo.setBusinessId(id);
-		bvo = businessService.getBusiness(bvo);
-		// 3. business의 사업자 번호 가져와 넣기
-		vo.setBusinessNumber(bvo.getBusinessNumber());
-		// 첨부파일처리
-		// 1.vo값 가져오기
-		MultipartFile image1 = vo.getT_uploadFile();
-		MultipartFile image2 = vo.getUploadFile();
-		// 2.저장될path설정
-		String path = request.getSession().getServletContext().getRealPath("/resources/images/business");
-		// 3.중복채크
-		if (image1 != null && !image1.isEmpty() && image1.getSize() > 0) {
-			String filename = image1.getOriginalFilename();
-			// 파일명
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			image1.transferTo(rename);
-			vo.setImage1(rename.getName());
-		} // end of if
-
-		if (image2 != null && !image2.isEmpty() && image2.getSize() > 0) {
-			String filename = image2.getOriginalFilename();
-			// 파일명
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			image2.transferTo(rename);
-			vo.setImage2(rename.getName());
-		} // end of if
-			// 등록처리
-		int r = cafeService.insertCafe(vo);
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter writer = response.getWriter();
-		if (r == 1) {
-			writer.print("<script>alert('등록되었습니다');location.href='getSearchCafe'</script>");
-		} else {
-			writer.print("<script>alert('오류..다시등록해주세요');location.href='insertCafe'</script>");
-		}
-		writer.close();
-
-	}// end of insertCafe
-
-	// 사업자-카페-전체리스트(form)
-	@GetMapping("/getSearchCafeForm")
-	public String getSearchCafe(CafeSearchVO vo) {
-		return "cafe/getSearchCafeForm";
-	}// end of getSearchCafe
-
-	// 사업자-카페-전체리스트(ajax)
-	@GetMapping("/getSearchCafe")
-	@ResponseBody
-	public Map<String, Object> getSearchCafeProc(CafeSearchVO vo, Paging paging) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		// 1.페이지 설정
-		paging.setPageUnit(5);//
-		paging.setPageSize(3);// 페이지 번호 수
-		// 2.초기페이지 설정
-		if (paging.getPage() == null)
-			paging.setPage(1);
-		// 3. 값 추가
-		paging.setTotalRecord(cafeService.getCount(vo));
-		vo.setStart(paging.getFirst());
-		vo.setEnd(paging.getLast());
-		List<CafeVO> list = cafeService.getSearchCafe(vo);
-		// map에 넘겨주는 이유:model보다 사용이 편리해서
-		map.put("paging", paging);
-		map.put("list", list);
-		// Cafe List
-		return map;
-	}// end of getSearchCafeProc
-
-	// 사업자-카페-상세리스트 페이지 호출
-	@GetMapping("/getCafe")
-	public String getCafeProc(CafeVO vo, Model model) {
-		// 카페 상세 정보조회
-		vo = cafeService.getCafe(vo);
-		model.addAttribute("vo", vo);
-		return "cafe/getCafe";
-	}
-
 	// 사업자-통합 페이지 호출
 	@RequestMapping("/getSearchListForm")
 	public String getSearchBusinessForm() {
@@ -402,26 +317,8 @@ public class Controller5 {
 	public void insertInfoProc(IntegratedVO vo, BusinessVO bvo, HttpServletRequest request, HttpSession session,
 			HttpServletResponse response) throws Exception {
 		// 사업자 번호를 어디서 가져올 것인지
-		// 1.session
-		// 2. id로 businessTable 조회
-		String id = session.getAttribute("loginID").toString();
-		bvo.setBusinessId(id);
-		bvo = businessService.getBusiness(bvo);
-		// 3. business의 사업자 번호 가져와 넣기
-		vo.setBusinessNumber(bvo.getBusinessNumber());
-		vo.setCode(bvo.getBusinessCode());
-		if (vo.getCode().equals("10"))
-			vo.setCode("HOTEL");
-		else if (vo.getCode().equals("30"))
-			vo.setCode("CAFE");
-		else if (vo.getCode().equals("40"))
-			vo.setCode("BEAUTY");
-		else if (vo.getCode().equals("50"))
-			vo.setCode("EDU");
-		else if (vo.getCode().equals("60"))
-			vo.setCode("TAXI");
-
-		System.out.println("코드값2:" + vo.getCode());
+		// session method
+		vo = sessionSelect(session);
 		// 첨부파일처리
 		// 1.vo값 가져오기
 		MultipartFile image1 = vo.getT_uploadFile();
@@ -470,15 +367,15 @@ public class Controller5 {
 	public Map<String, Object> getSearchIntegrated(IntegratedSearchVO vo, BusinessVO bvo, Paging paging,
 			HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		// 1.session
-		// 2. id로 businessTable 조회
+		// SESSION
+		// 1. id로 businessTable 조회
 		String id = session.getAttribute("loginID").toString();
 		bvo.setBusinessId(id);
 		bvo = businessService.getBusiness(bvo);
-		// 3. business의 사업자 번호 가져와 넣기
+		// 2. business의 사업자 번호 가져와 넣기
 		vo.setBusinessNumber(bvo.getBusinessNumber());
 		vo.setCode(bvo.getBusinessCode());
-		// 코드값 변환
+		// 3. 코드값 변환
 		if (vo.getCode().equals("10"))
 			vo.setCode("HOTEL");
 		else if (vo.getCode().equals("30"))
@@ -489,10 +386,11 @@ public class Controller5 {
 			vo.setCode("EDU");
 		else if (vo.getCode().equals("60"))
 			vo.setCode("TAXI");
-		// 1.페이지 설정
+		// PAGING
+		// 1. 페이지 설정
 		paging.setPageUnit(5);//
 		paging.setPageSize(3);// 페이지 번호 수
-		// 2.초기페이지 설정
+		// 2. 초기페이지 설정
 		if (paging.getPage() == null)
 			paging.setPage(1);
 		// 3. 값 추가
@@ -505,8 +403,61 @@ public class Controller5 {
 		map.put("list", list);
 		return map;
 	}
-	// 사업자-게시글 관리 수정
+
+	// 사업자-게시글 관리 수정 폼
+	@RequestMapping("/updateIntegratedForm")
+	public String updateIntegratedForm() {
+
+		return "business/updateIntegratedForm";
+	}
+
+	// 수정기능
+	@RequestMapping("/updateIntegrated")
+	public void updateIntegrated(IntegratedVO vo) {
+		integratedService.updateIntegrated(vo);
+	}
+
 	// 사업자-게시글 관리 삭제
+	@RequestMapping("/deleteIntegrated")
+	public void deleteIntegrated(IntegratedVO vo, BusinessVO bvo, HttpServletResponse response, HttpSession session)
+			throws Exception {
+		// session method
+		vo = sessionSelect(session);
+		// process
+		int r = integratedService.deleteIntegrated(vo);
+		// alert
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		if (r == 1) {
+			writer.println("<script>alert('삭제되었습니다');location.href='getSearchIntegratedForm';window.close();</script>");
+		} else {
+			writer.println(
+					"<script>alert('오류..다시 삭제해주세요');location.href='getSearchIntegratedForm';window.close();</script>");
+		}
+		writer.close();
+	}
+
+	// 장바구니-폼
+	@GetMapping("/getSearchCartForm")
+	public String getSearchCartForm() {
+		return "cart/getSearchCartForm";
+	}
+
+	// 장바구니-CRUD
+	@GetMapping("/insertCart") // 등록
+	public void insertCart(CartVO vo) {
+		cartService.insertCart(vo);
+	}
+
+	@GetMapping("/updateCart") // 수정
+	public void updateCart(CartVO vo) {
+		cartService.updateCart(vo);
+	}
+
+	@GetMapping("/deleteCart") // 삭제
+	public void deleteCart(CartVO vo) {
+		cartService.deleteCart(vo);
+	}
 
 	// start of bCart
 	// 장바구니-페이지 호출
@@ -544,7 +495,31 @@ public class Controller5 {
 	// end of bCart
 	// 나중에
 	// 마이페이지-사업자-통계현황
-	// 마이페이지-사업자-예약내역조회
 	// 마이페이지-사업자-실시간화장진료 페이지
-	// 동물정보-샘플페이지
+
+	// 공통
+	// 세션 및 busCode 변환
+	public IntegratedVO sessionSelect(HttpSession session) {
+		// 1. id로 businessTable 조회
+		String id = session.getAttribute("loginID").toString();
+		BusinessVO bvo = new BusinessVO();
+		bvo.setBusinessId(id);
+		bvo = businessService.getBusiness(bvo);
+		// 2. business의 사업자 번호 가져와 넣기
+		IntegratedVO vo = new IntegratedVO();
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		vo.setCode(bvo.getBusinessCode());
+		// 3. 코드값 변환
+		if (vo.getCode().equals("10"))
+			vo.setCode("HOTEL");
+		else if (vo.getCode().equals("30"))
+			vo.setCode("CAFE");
+		else if (vo.getCode().equals("40"))
+			vo.setCode("BEAUTY");
+		else if (vo.getCode().equals("50"))
+			vo.setCode("EDU");
+		else if (vo.getCode().equals("60"))
+			vo.setCode("TAXI");
+		return vo;
+	}// end of sessionSelect
 }

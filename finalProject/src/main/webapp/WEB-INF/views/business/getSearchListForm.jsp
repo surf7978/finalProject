@@ -129,6 +129,10 @@ a {
 				if (lastPage > endPage) {
 					$("#paging").append("<a href='#' onclick='getSearchList1("+ (endPage + 1) + ")'>" + "&raquo;"+ "</a>");
 				}
+				//search값 초기화
+				//$('#searchAndInsert').find('[name=search]').val('');
+				$("#searchAndInsert").find('[name=search]').reset();
+				
 			} //end of success
 		}) //end of ajax
 	}//end of getSearchList
@@ -169,7 +173,7 @@ a {
 								<option value="name">이름</option>
 								<option value="price">가격</option>
 								<option value="location">지역</option>
-							</select>
+							</select>	
 							<input type="text" name="searchValue" placeholder="검색어 입력">
 							<button type="button" id="searchAllPage" onclick="getSearchList1(1)">검색</button>
 						</div>

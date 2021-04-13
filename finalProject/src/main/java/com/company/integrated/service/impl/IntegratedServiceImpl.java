@@ -26,7 +26,7 @@ public class IntegratedServiceImpl implements IntegratedService {
 
 	@Override // 삭제
 	public int deleteIntegrated(IntegratedVO vo) {
-		return integratedMapper.updateIntegrated(vo);
+		return integratedMapper.deleteIntegrated(vo);
 	}
 
 	@Override // 상세조회
