@@ -9,7 +9,7 @@
 </head>
 <body>
 <br><br>
-<div style="width:60%; text-align:left;">
+<div style="float:left;">
 	<table border="1">
 			<c:if test="${loginAuth eq 'm' }">
 				<!-- ADMIN 마이페이지 -->

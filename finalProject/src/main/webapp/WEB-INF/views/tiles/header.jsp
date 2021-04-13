@@ -248,14 +248,14 @@
 							 -->
 						</li>
 						<li><a href="getAbanList">보호소</a></li>	
-						<li><a href="#">커뮤니티</a>
+						<li><a>커뮤니티</a>
 							<ul class="dropdown">
 								<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>
 								<li><a href="getSearchEventAndNoticeSelect?category=1">이벤트</a></li>
 								<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
 								<li><a href="getSearchBoardCategiry2Form">자랑하기</a></li>
 							</ul></li>
-						<li><a href="#">고객센터</a>
+						<li><a>고객센터</a>
 							<ul class="dropdown">
 								<li><a href="#">자주하는질문</a></li>
 								<li><a href="getSearchQuestionCr4">문의하기</a></li>
@@ -263,7 +263,7 @@
 								<li><a href="#">회원혜택</a></li>
 							</ul></li>
 								<c:if test="${not empty loginID}">
-						<li><a href="myPageSideBar">마이페이지</a>
+						<li><a>마이페이지</a>
 							<ul class="dropdown">
 										<li><a href="getSearchQuestion">문의내역보기</a></li>
 										<li><a href="getSearchAnswer">답변내역보기</a></li>

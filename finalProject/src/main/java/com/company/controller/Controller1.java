@@ -401,7 +401,7 @@ public class Controller1 {
 		return "redirect:/getSearchHospital";
 	}
 	
-	//회원가입 선택 화면
+	//마이페이지 사이드바 출력(jsp:include해서 이제 이건 사용안함)
 	@GetMapping("/myPageSideBar")
 	public String myPageSideBar() {
 		return "user/myPageSideBar";

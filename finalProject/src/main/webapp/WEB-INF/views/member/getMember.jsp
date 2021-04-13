@@ -15,6 +15,8 @@ table, tr,td {
 </style>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 정보:${member}
 <hr>
 <table>
@@ -67,6 +69,6 @@ table, tr,td {
 </tr>
 	
 </table>
-	
+</div>	
 </body>
 </html>

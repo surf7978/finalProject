@@ -35,6 +35,8 @@
 	})
 </script>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 구매평 전체리스트<br>
 	<c:forEach items="${review }" var="list">
 		<div class="reviewNumber">
@@ -45,5 +47,6 @@
 		</div>
 		<div class="getReviewResult"></div>
 	</c:forEach>
+</div>
 </body>
 </html>
