@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.company.reservation.service.impl.ReservationMapper">
+
+<!-- 결제 insert -->
+<insert id="insertPayReservation">
+	INSERT INTO RESERVATION
+			(RESERVATIONNUMBER
+			,OPTIONNAME
+			,RESERVATIONSTATE
+			,MEMBERID
+			,PNDNUMBER
+			,BISNUMBER
+			,BUSINESSNUMBER			
+		)VALUES(
+			(SELECT NVL(MAX(RESERVATIONNUMBER),0)+1 FROM RESERVATION)
+			,#{optionName}
+			,'예약전'
+			,#{memberId}
+			,#{pndNumber}
+			,#{bisNumber}
+			,#{businessNumber}
+		)		
+</insert>
+</mapper>

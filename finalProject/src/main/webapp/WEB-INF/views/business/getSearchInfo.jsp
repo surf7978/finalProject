@@ -33,9 +33,12 @@
 			result.empty();
 			result.text("${vo.price }" * plu)
 		});
+		
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
-			location.href="PayInfo?seq=${vo.seq}&resultPrice="+resultPrice;
+			var count = $("[name=count]").val();
+			var seq = $("[name=seq]").val();
+			location.href="ReserPayInfoForm?resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count +"&seq=" +seq;
 		});
 	});
 </script>
@@ -45,6 +48,7 @@
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
+				<input value="${vo.businessNumber }" name="businessNumber">
 					<input value="${vo.seq}" type="hidden" name="seq">
 					<input value="2500" type="hidden" name="cartCourier">
 					<c:if test="${not empty loginID}">
@@ -98,7 +102,7 @@
 					</ul>
 				</div>
 				<div id="pro_content">
-					<img src="resources/images/business/${vo.image1}">
+					<img src="resources/images/business/${vo.image2}">
 				</div>
 			</div>
 		</div>

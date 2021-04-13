@@ -9,4 +9,7 @@ public interface ReservationService {
 	public int deleteReservation(ReservationVO vo);	//예약취소(환불과 연결)
 	
 	public ReservationVO getViewReservation(ReservationVO vo); //예약내역 view 조회 구매평등록하기 버튼 클릭시 필요한 값
+	
+	//결제용 insert
+	public int insertPayReservation(ReservationVO vo);
 }
