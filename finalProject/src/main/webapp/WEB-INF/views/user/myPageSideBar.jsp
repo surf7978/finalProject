@@ -19,7 +19,7 @@
 		<tr>
 			<td style="height:220px; padding-left:10px;">
 				<h6 style="font-size:20px;">구매내역조회</h6>
-				<button style="border:none; background-color:;">&nbsp;&nbsp;&nbsp;-&nbsp;구매내역조회</button><br>
+				<button style="border:none; background-color:;">&nbsp;&nbsp;&nbsp;-&nbsp;구매내역조회</button><br> 
 				<button>&nbsp;&nbsp;&nbsp;-&nbsp;구매내역조회</button><br>
 			</td>
 		</tr>
