@@ -13,4 +13,5 @@ public class ReservationVO {
 	String bisNumber;
 	String name;
 	String reservationTime;
+	String businessNumber;
 }
