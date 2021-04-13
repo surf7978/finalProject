@@ -11,12 +11,12 @@
 </head>
 <body>
 	<h3>반려동물 정보 수정</h3>
-	<form action="updateAnimal" method="post" name="frm">
+	<form action="updateAnimal" encType="multipart/form-data" method="post" name="frm">
 	<input type="hidden" name="animalNumber" value="${animal.animalNumber }">
 	<input type="hidden" name="memberId" value="${animal.memberId }">
 	<table border="1">
 	<tr>
-	<td id="viewImg" rowspan="5"><img src="resources/images/animal/${animal.image }" width="200px" height="200"><img></td>
+	<td id="viewImg" rowspan="5"><img src="resources/images/animal/${animal.image }" width="200px" height="200"></td>
 	<th>이름</th>
 	<td><input name="name" value="${animal.name }"></td>
 	</tr>
@@ -99,7 +99,9 @@ $("#gender").val("${animal.gender }")
 //이미지 미리보기
 $(function(){
 	$("#image").change(function(){
+
        if(this.files && this.files[0]) {
+    	
         var reader = new FileReader;
         reader.onload = function(data) {
          $("#viewImg img").attr("src", data.target.result).width(200);            

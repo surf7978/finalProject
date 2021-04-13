@@ -106,7 +106,7 @@
 		var t_key1 = td.find('input[name=t_key]').val();
 	    var t_code1 = td.find('input[name=t_code]').val();
 	    var t_invoice1 = td.find('input[name=t_invoice]').val();	
-	  	var gsWin = window.open("http://info.sweettracker.co.kr/tracking/5?t_key="+t_key1+"&t_code="+t_code1+"&t_invoice="+t_invoice1, "dview", "width=800,height=800");
+	  	var tracking = window.open("http://info.sweettracker.co.kr/tracking/5?t_key="+t_key1+"&t_code="+t_code1+"&t_invoice="+t_invoice1, "dview", "width=800,height=800");
 	}
 </script>
 </body>
