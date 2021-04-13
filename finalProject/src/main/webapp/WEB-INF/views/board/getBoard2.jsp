@@ -74,12 +74,12 @@ table td {
 			</table>
 		</div>
 		<hr>
-		<div  class="image"  style="text-align:left; width:500px;">
+		<div  class="image"  style=" float: left; width:500px;">
 			<img id="image" src="resources/images/board2/${board.image }">
 		</div>
 		<br>
 		<br>
-		<div style="text-align:left; width:500px;">
+		<div style="text-align:left;  width:800px;">
 
 			<p>${board.content }</p>
 		</div>

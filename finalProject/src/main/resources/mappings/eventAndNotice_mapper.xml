@@ -32,18 +32,18 @@
 	INSERT INTO eventAndNotice 
      (EANNUMBER
      ,WRITER 
+     ,IMAGE
      ,TITLE
 	 ,CONTENT
 	 ,STARTDATE
-	 ,ENDDATE
 	 ,VIEWS
 	 ,CATEGORY
 	 ,MEMBERID) VALUES(ean_seq.nextval 
 	 , 'admin' 
+	 , #{image}
 	 , #{title} 
 	 , #{content}
-	 , #{startDate} 
-	 , #{endDate}  
+	 ,	sysdate 
 	 , 0 
 	 , 2 
 	 , 'admin')
@@ -54,12 +54,19 @@
 	SELECT * FROM eventAndNotice
 	
 	</select>
-	
+	<!-- 1번. 이벤트 -->
 	<select id="getSearchEventAndNoticeSelect" resultType="eventAndNoticeVO"
 									parameterType="eventAndNoticeVO" > 
 	SELECT * 
 	FROM eventAndNotice
-	WHERE CATEGORY= #{category}
+	WHERE CATEGORY= 1
+	</select>
+	<!-- 2번. 공지사항 -->
+	<select id="getSearchEventAndNoticeSelect2" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" > 
+	SELECT * 
+	FROM eventAndNotice
+	WHERE CATEGORY= 2
 	</select>
 	
 	<select id="getEventAndNotice" resultType="eventAndNoticeVO"

@@ -9,7 +9,8 @@ public interface EventAndNoticeMapper {
 	public int insertEventAndNotice2(EventAndNoticeVO vo);	// 공지사항 등록
 	public EventAndNoticeVO getEventAndNotice(EventAndNoticeVO vo);
 	public List<EventAndNoticeVO> getSearchEventAndNotice(EventAndNoticeVO vo);
-	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect(EventAndNoticeVO vo);//이벤트 혹은 공지사항
+	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect(EventAndNoticeVO vo);//이벤트
+	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect2(EventAndNoticeVO vo);//공지사항
 	public int updateEventAndNotice(EventAndNoticeVO vo);
 	public int deleteEventAndNotice(EventAndNoticeVO vo);
 }

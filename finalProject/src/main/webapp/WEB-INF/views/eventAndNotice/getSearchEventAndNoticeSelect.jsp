@@ -24,12 +24,10 @@ table , tr ,td {
 </head>
 <body>
 	<div class="ddd">
-		<c:if test="${getSearchEventAndNoticeSelect[0].category eq '1'}">
+		
 		<h3 align="center">이벤트</h3>
-		</c:if>
-		<c:if test="${getSearchEventAndNoticeSelect[0].category ne '1'}">
-		<h3 align="center">공지사항</h3>
-		</c:if>	
+	
+		
 	</div>
 	<c:forEach var="getSearchEventAndNoticeSelect" items="${getSearchEventAndNoticeSelect}"> 
 	<div class="fff">

@@ -225,7 +225,7 @@
 								<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>
 								<li><a href="getSearchEventAndNoticeSelect?category=1">이벤트</a></li>
 								<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
-								<li><a href="getSearchBoardCategiry2">자랑하기</a></li>
+								<li><a href="getSearchBoardCategiry2Form">자랑하기</a></li>
 							</ul></li>
 						<li><a href="#">고객센터</a>
 							<ul class="dropdown">

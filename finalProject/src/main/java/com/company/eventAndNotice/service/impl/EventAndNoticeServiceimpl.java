@@ -34,10 +34,15 @@ public class EventAndNoticeServiceimpl implements EventAndNoticeService{
 		// TODO Auto-generated method stub
 		return EventAndNoticeMapper.getSearchEventAndNotice(vo);
 	}
-	@Override //이벤트 혹은 공지사항인지 선택.
+	@Override //이벤트 
 	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect(EventAndNoticeVO vo) {
 		// TODO Auto-generated method stub
 		return EventAndNoticeMapper.getSearchEventAndNoticeSelect(vo);
+	}
+	@Override //공지사항
+	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect2(EventAndNoticeVO vo) {
+		// TODO Auto-generated method stub
+		return EventAndNoticeMapper.getSearchEventAndNoticeSelect2(vo);
 	}
 	//수정
 	@Override

@@ -341,13 +341,18 @@ public class Controller4 {
 		model.addAttribute("list", eventAndNoticeService.getSearchEventAndNotice(vo));
 		return "eventAndNotice/getSearchEventAndNotice";
 	}
-	//이벤트 or 공지사항 게시판 선택
+	//이벤트게시판 선택(전체조회)
 	@RequestMapping("/getSearchEventAndNoticeSelect")
 	public String getSearchEventAndNoticeSelect(EventAndNoticeVO vo, Model model) {
 		model.addAttribute("getSearchEventAndNoticeSelect", eventAndNoticeService.getSearchEventAndNoticeSelect(vo));
 		return "eventAndNotice/getSearchEventAndNoticeSelect";
 	}
-	
+	//공지사항 게시판 선택(전체조회)
+	@RequestMapping("/getSearchEventAndNoticeSelect2")
+	public String getSearchEventAndNoticeSelect2(EventAndNoticeVO vo, Model model) {
+		model.addAttribute("getSearchEventAndNoticeSelect2", eventAndNoticeService.getSearchEventAndNoticeSelect2(vo));
+		return "eventAndNotice/getSearchEventAndNoticeSelect2";
+	}
 	// 이벤트 등록
 	
 	@GetMapping("/insertEventAndNotice1")
