@@ -23,13 +23,18 @@ import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
+import com.company.integrated.service.IntegratedService;
+import com.company.integrated.service.IntegratedVO;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
+import com.company.product.service.PayVO;
 import com.company.product.service.ProductSearchVO;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
+import com.company.reservation.service.ReservationService;
+import com.company.reservation.service.ReservationVO;
 
 @Controller
 public class Controller3 {
@@ -44,6 +49,10 @@ public class Controller3 {
 	PayAndDeliveryService padService;
 	@Autowired
 	BuyService buyService;
+	@Autowired
+	IntegratedService integratedService;
+	@Autowired
+	ReservationService rsvService;
 	
 	// 유기동물 API
 	@RequestMapping("/getAban")
@@ -262,7 +271,7 @@ public class Controller3 {
 		
 		return "pay/PayInfo";
 	}
-	//결제폼으로
+	//쇼핑몰 바로가기 결제폼
 	@RequestMapping("/PayInfoForm")
 	public String PayInfoForm(ProductVO vo, Model model, String productNumber, String resultPrice, MemberVO mvo, String count) {
 		model.addAttribute("product", productService.getProduct(vo));
@@ -273,7 +282,7 @@ public class Controller3 {
 		model.addAttribute("count", vo.getCount());
 		return "pay/PayInfoForm";
 	}
-	//결제시 insert
+	//쇼핑몰 결제시 insert
 	@RequestMapping("/insertPayProduct")
 	public String insertPayProduct(PayAndDeliveryVO padvo, BuyVO bvo,ProductVO vo, String category1) {
 		padService.insertPayAndDelivery2(padvo);
@@ -283,5 +292,36 @@ public class Controller3 {
 		buyService.insertBuy2(bvo);		
 		return "pay/successPay";
 	}
+	
+	//사업체 결제폼 
+	@RequestMapping("/ReserPayInfoForm")
+	public String ReserPayInfoForm(Model model, String resultPrice, MemberVO mvo, String count,IntegratedVO vo, String seq) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("count", count);
+		map.put("resultPrice", resultPrice);
+		vo = integratedService.getIntegrated(vo);
+		//member 불러오기
+		model.addAttribute("member", memberService.getMember(mvo));
+		//제품 불러오기
+		model.addAttribute("vo", vo);
+		model.addAttribute("map", map);
+		return "pay/ReserPayInfoForm";
+	}
+	
+	// 사업체 결제API
+		@RequestMapping("/ReserPayInfo")
+		public String ReserPayInfo(MemberVO mvo,PayVO pvo,IntegratedVO vo, Model model) {
+			 model.addAttribute("pay", pvo);
+			return "pay/ReserPayInfo";
+		}
+		
+		//사업체 결제시 insert
+		@RequestMapping("/ReserinsertPayProduct")
+		public String ReserinsertPayProduct(PayAndDeliveryVO padvo, ReservationVO rvo) {
+			padService.insertPayAndDelivery2(padvo);
+			rvo.setPndNumber(padvo.getPndNumber());
+			rsvService.insertPayReservation(rvo);
+			return "pay/successPay";
+		}
 
 }
