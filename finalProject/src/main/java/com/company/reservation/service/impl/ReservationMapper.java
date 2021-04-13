@@ -11,4 +11,5 @@ public interface ReservationMapper {
 	public int deleteReservation(ReservationVO vo);
 	
 	public ReservationVO getViewReservation(ReservationVO vo);
+	public List<ReservationVO> getViewReservation2(ReservationVO vo);	// 사업자번호로 예약리스트 조회
 }

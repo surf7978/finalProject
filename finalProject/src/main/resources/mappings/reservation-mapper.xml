@@ -40,9 +40,35 @@
 	<!-- 예약내역 view 조회 구매평등록하기 버튼 클릭시 필요한 값 -->
 	<select id="getViewReservation" parameterType="ReservationVO"
 		resultType="ReservationVO">
-		SELECT * FROM REVIEWRESERVATION
+		SELECT NAME
+		, PNDNUMBER
+		, MEMBERID
+		, RESERVATIONDATE
+		, RESERVATIONTIME
+		, RESERVATIONSTATE
+		, BUSINESSNUMBER
+		, OPTIONNAME
+		, BISNUMBER
+		, RESERVATIONNUMBER 
+		FROM REVIEWRESERVATION
 		WHERE MEMBERID=#{memberId}
 		AND BISNUMBER=#{bisNumber}
+	</select>
+	
+	<!-- 예약리스트 view조회 for 사업자번호별 조회 -->
+	<select id="getViewReservation2" parameterType="ReservationVO" resultType="ReservationVO">
+		SELECT NAME
+		, PNDNUMBER
+		, MEMBERID
+		, RESERVATIONDATE
+		, RESERVATIONTIME
+		, RESERVATIONSTATE
+		, BUSINESSNUMBER
+		, OPTIONNAME
+		, BISNUMBER
+		, RESERVATIONNUMBER
+		 FROM REVIEWRESERVATION
+		WHERE BUSINESSNUMBER = #{businessNumber}
 	</select>
 
 	<!-- 예약하기 버튼눌러서 날짜선택시 Reservation DB update -->

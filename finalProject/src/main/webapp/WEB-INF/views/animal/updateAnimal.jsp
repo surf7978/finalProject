@@ -13,11 +13,18 @@
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 	<h3>반려동물 정보 수정</h3>
-	<form action="updateAnimal" method="post" name="frm">
+	<form action="updateAnimal" encType="multipart/form-data" method="post" name="frm">
 	<input type="hidden" name="animalNumber" value="${animal.animalNumber }">
 	<input type="hidden" name="memberId" value="${animal.memberId }">
-	이름 : <input name="name" value="${animal.name }"><br> 
-	견종 : <select id="kind" name="kind">
+	<table border="1">
+	<tr>
+	<td id="viewImg" rowspan="5"><img src="resources/images/animal/${animal.image }" width="200px" height="200"></td>
+	<th>이름</th>
+	<td><input name="name" value="${animal.name }"></td>
+	</tr>
+	<tr>
+	<th>견종</th>
+	<td><select id="kind" name="kind">
 		<option value="골든리트리버">골든리트리버</option>
 		<option value="그레이하운드">그레이하운드</option>
 		<option value="기타(대형견)">기타(대형견)</option>
@@ -66,26 +73,45 @@
 		<option value="풍산개">풍산개</option>
 		<option value="프랜치불독">프랜치불독</option>
 		<option value="핏볼테리어">핏볼테리어</option>
-	</select><br>
-	성별 :<select class="gender" id="gender" name="gender">
+	</select></td>
+	<tr>
+	<th>성별</th>
+	<td><select class="gender" id="gender" name="gender">
 		<option	value="남">남</option>
 		<option value="여">여</option>
-	</select><br> 
-	생일 : <input type="date" name="birth" value="${animal.birth }" placeholder="YYYY-MM-DD"><br>
-	사진 선택 : <br>
+	</select></td>
+	</tr>
+	<tr>
+	<th>생일</th>
+	<td><input type="date" name="birth" value="${animal.birth }" placeholder="YYYY-MM-DD"></td>
+	</tr>
+	<tr>
+	<th>사진 수정</th>
+	<td><input type="file" name="uploadFile" id="image" size="100%" multiple="multiple"></td>
+	</tr>
+	</table>
 	<button type="submit">수정</button>
-	<button type="button" id="delete">삭제</button>
+	<button type="button" class="deleteAnimal" onclick="location.href='deleteAnimal?animalNumber=${animal.animalNumber }'">삭제</button>
 </form>
-
 <script>
 $("#kind").val("${animal.kind }")
 $("#gender").val("${animal.gender }")
 
+//반려동물 정보 삭제
+
+//이미지 미리보기
 $(function(){
-	$("#delete").on("click", function(){
-		
-	})
-	
+	$("#image").change(function(){
+
+       if(this.files && this.files[0]) {
+    	
+        var reader = new FileReader;
+        reader.onload = function(data) {
+         $("#viewImg img").attr("src", data.target.result).width(200);            
+        }
+        reader.readAsDataURL(this.files[0]);
+      }
+   });
 });
 </script>
 </div>
