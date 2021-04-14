@@ -27,7 +27,14 @@
 	<!-- 수정 -->
 	<update id="updateBCart">
 		UPDATE  BCART
-		SET = 
+		<set>
+		<if test="price != null and price != ''">
+			PRICE = #{price}
+		</if>
+		<if test="count != null and count != ''">
+			AND COUNT = #{count}
+		</if>
+		</set>
 		WHERE MEMBERID = #{memberId}
 	</update>
 	<!-- 삭제 -->
