@@ -38,4 +38,11 @@
 		FROM Review
 		WHERE REVIEWNUMBER = #{reviewNumber}
 	</select>
+	<!-- 일반사용자 후기내역 -->
+	<select id="getSearchReview99" parameterType="reviewVO" resultType="reviewVO">
+		SELECT 
+			*
+		FROM Review
+		WHERE memberId = #{memberId}
+	</select>
 </mapper>

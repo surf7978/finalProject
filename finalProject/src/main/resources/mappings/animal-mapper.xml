@@ -78,4 +78,10 @@
 			, MEMBERID
 			FROM ANIMAL
 	</select>
+	
+	<!-- 반려동물 삭제 -->
+	<delete id="deleteAnimal99" parameterType="AnimalVO">
+		DELETE FROM ANIMAL
+		WHERE MEMBERID=#{memberId}
+	</delete>
 </mapper>

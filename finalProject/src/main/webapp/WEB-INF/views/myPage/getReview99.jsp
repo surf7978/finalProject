@@ -47,7 +47,7 @@ table td {
 	<div id="pro_contentwrap">
 		<div class="pro_menu">
 			<ul id="title">
-				<li><h2>${board.title }</h2></li>
+				<li><h2>${review.title }</h2></li>
 			</ul>
 
 			<table>
@@ -67,39 +67,26 @@ table td {
 					<td></td>
 				</tr> 
 				<tr>
-					<td>작성자: ${board.writer }</td>
-					<td>날짜: ${board.calendar}</td>
-					<td>조회수:${board.views}</td>
+					<td>작성자: ${review.writer }</td>
+					<td>날짜: ${review.calendar}</td>
 				</tr>
 			</table>
 		</div>
 		<hr>
-		<div  class="image"  style="text-align:left; width:500px;">
-			<c:if test="${board.category eq 1}">
-				<img id="image" src="resources/images/board1/${board.image }">
-			</c:if>
-			<c:if test="${board.category eq 2}">
-				<img id="image" src="resources/images/board2/${board.image }">
-			</c:if>
-		</div>
-		<br>
-		<br>
-		<div style="text-align:left; width:500px;">
-
-			<p>${board.content }</p>
+		<div style="text-align:center; width:500px;">
+			<input id="content" name="content" value="${review.content }">
 		</div>
 
 	</div>
 
 	<div>
-	<form action="deleteBoard?boardNumber=${board.boardNumber}"
+	<form action="deleteReview?reviewNumber=${review.reviewNumber}"
 			method="post">
 		<input type="button" class="update"
-			onclick="location.href='updateBoard?boardNumber=${board.boardNumber}'"
+			onclick="location.href='updateReview?reviewNumber=${review.reviewNumber}'"
 			value="수정하기">
 
 			<input class="delete" type="submit" value="삭제하기">
-			<input class="back" type="button" value="뒤로가기" onclick="location.href='getSearchBoardCategiry1'" >
 			
 		</form>
 	</div>

@@ -38,6 +38,12 @@ public class ReviewServiceimpl implements ReviewService{
 	public int deleteReview(ReviewVO vo) {
 		return reviewMapper.deleteReview(vo);
 	}
+	
+	//일반사용자 후기내역
+	@Override
+	public List<ReviewVO> getSearchReview99(ReviewVO vo) {
+		return reviewMapper.getSearchReview99(vo);
+	}
 
 
 }

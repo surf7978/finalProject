@@ -8,4 +8,6 @@ public interface ReviewService {
 	public List<ReviewVO> getSearchReview(ReviewVO vo);	//전체조회
 	public int updateReview(ReviewVO vo);	//회원수정
 	public int deleteReview(ReviewVO vo);	//화원탈퇴
+	
+	public List<ReviewVO> getSearchReview99(ReviewVO vo);	//일반사용자 후기내역
 }

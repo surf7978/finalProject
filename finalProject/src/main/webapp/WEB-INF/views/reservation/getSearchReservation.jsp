@@ -22,6 +22,8 @@
 </script>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 	<table border="1">
 		<tr>
 			<th>예약번호</th>
@@ -45,6 +47,7 @@
 		</c:forEach>
 	</table>
 	<br>
-	<div id='calendar' style="width: 1000px"></div>
+	<div id='calendar' style="width: 800px"></div>
+</div>
 </body>
 </html>

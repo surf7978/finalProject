@@ -44,6 +44,11 @@ public class AnimalServiceimpl implements AnimalService{
 	public List<AnimalVO> getSearchAnimal99(AnimalVO vo) {
 		return animalMapper.getSearchAnimal99(vo);
 	}
+	//탈퇴한 일반사용자 반려견 다건삭제
+	@Override
+	public int deleteAnimal99(AnimalVO vo) {
+		return animalMapper.deleteAnimal99(vo);
+	}
 
 
 }
