@@ -34,6 +34,8 @@ import com.company.board.service.BoardService;
 import com.company.board.service.BoardVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
+import com.company.buy.service.BuyService;
+import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
 import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
@@ -42,6 +44,8 @@ import com.company.member.common.coolsmsAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.member.service.impl.MemberServiceimpl;
+import com.company.payAndDelivery.service.PayAndDeliveryService;
+import com.company.payAndDelivery.service.PayAndDeliveryVO;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 import com.company.question.service.QuestionService;
@@ -454,6 +458,29 @@ public class Controller1 {
 	@GetMapping("/buyCancel")
 	public String buyCancel() {
 		return "pay/buyCancel";
+	}
+	
+	@Autowired PayAndDeliveryService payAndDeliveryService;
+	// 관리자용 구매현황 리스트조회
+	@RequestMapping("/getSearchPayAndDelivery99")
+	public String getSearchPayAndDelivery99(PayAndDeliveryVO vo, Model model) {
+		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery99(vo));
+		return "user/getSearchPayAndDelivery99";
+	}
+	
+	@Autowired BuyService buyService;
+	// 구매내역 상세리스트 조회
+	@RequestMapping("/getSearchBuy99")
+	public String getSearchBuy(BuyVO vo, Model model) {
+		model.addAttribute("buys", buyService.getSearchBuy(vo));
+		return "empty/user/getSearchBuy99";
+	}
+	
+	// 관리자용 예약현황 리스트조회
+	@RequestMapping("/getSearchPayAndDelivery98")
+	public String getSearchPayAndDelivery98(PayAndDeliveryVO vo, Model model) {
+		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery99(vo));
+		return "user/getSearchPayAndDelivery98";
 	}
 	
 	@Autowired ProductService productService;

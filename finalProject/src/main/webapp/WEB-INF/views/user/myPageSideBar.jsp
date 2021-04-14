@@ -24,8 +24,8 @@
 						<td style="height:160px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">구매/예약현황</h6>
 							<br>
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매현황</button><br> 
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약현황</button><br>
+							<button onclick="location.href='getSearchPayAndDelivery99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매현황</button><br> 
+							<button onclick="location.href='getSearchPayAndDelivery98'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약현황</button><br>
 						</td>
 					</tr>
 					<tr>

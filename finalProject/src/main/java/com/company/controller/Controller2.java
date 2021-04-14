@@ -119,7 +119,7 @@ public class Controller2 {
 	@RequestMapping("/getSearchBuy")
 	public String getSearchBuy(BuyVO vo, Model model) {
 		model.addAttribute("buys", buyService.getSearchBuy(vo));
-		return "user/getSearchBuy";
+		return "empty/user/getSearchBuy";
 	}
 	
 	//////////예약하기//////////////////

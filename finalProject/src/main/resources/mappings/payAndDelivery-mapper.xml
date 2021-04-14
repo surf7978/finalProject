@@ -27,5 +27,10 @@
 		WHERE PNDNUMBER=#{pndNumber}
 	</update>
 	
+	<!-- 관리자용 구매내역리스트 조회 -->
+	<select id="getSearchPayAndDelivery99" resultType="PayAndDeliveryVO">
+	SELECT *
+	FROM PAYANDDELIVERY
+	</select>	
 	
 </mapper>

@@ -233,4 +233,14 @@ hospital.businessNumber : ${hospital.businessNumber}
 <br><br><br><br><br>
 
 </body>
+<!-- 화면 부드럽게 하기 -->
+<script>
+$(".pro_menu ul li a[href^='#']").on("click", function(e) {
+    e.preventDefault();
+    var position = $($(this).attr("href")).offset().top;
+   $("html, body").animate({
+       scrollTop : position
+   }, 1000);
+});
+</script>
 </html>
