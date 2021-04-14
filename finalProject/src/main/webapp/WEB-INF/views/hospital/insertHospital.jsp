@@ -94,8 +94,18 @@
 				$("#category2").append(option1,option2,option3,option4,option5,option6,option7,option8,option9,option10);	
 			} else if(result == "예방접종"){
 				var select = $("<select>").attr("name", "category2");
-				var option1 = $("<option>").attr("value", "기초/추가").text("기초/추가");
-				var option2 = $("<option>").attr("value", "심장사상충").text("심장사상충");
+				var option1 = $("<option>").attr("value", "심장사상충").text("심장사상충");
+				var option2 = $("<option>").attr("value", "기초/추가").text("기초/추가");
+				var option3 = $("<option>").attr("value", "기초/추가").text("기초/추가");
+				var option4 = $("<option>").attr("value", "기초/추가").text("기초/추가");
+				var option5 = $("<option>").attr("value", "기초/추가").text("기초/추가");
+				var option6 = $("<option>").attr("value", "기초/추가").text("기초/추가");
+				var option7 = $("<option>").attr("value", "기초/추가").text("기초/추가");
+				var option8 = $("<option>").attr("value", "기초/추가").text("기초/추가");
+				var option9 = $("<option>").attr("value", "기초/추가").text("기초/추가");
+				var option10 = $("<option>").attr("value", "기초/추가").text("기초/추가");
+				
+				
 				var option3 = $("<option>").attr("value", "기타").text("기타");
 				$("#category2").append(option1,option2,option3);	
 			} else if(result == "검진/검사"){
