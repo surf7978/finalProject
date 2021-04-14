@@ -60,9 +60,9 @@
 			<table border="1">
 				<thead>
 					<tr>
-						<th width="70%;">상품정보</th>
+						<th width="80%;">상품정보</th>
 						<th width="10%;">배송비</th>
-						<th width="20%;">합계금액</th>
+						<th width="10%;">합계금액</th>
 					</tr>
 				</thead>
 				<tbody>					
@@ -75,26 +75,26 @@
 						<td rowspan="2">${resultPrice }</td>
 					</tr>
 					<tr>
-						<td>${product.optionName } <input type="number" value="${count }" name="count" style="width:50px;">${product.optionPrice }</td>
+						<td>${product.optionName }<div><input type="number" value="${count }" name="count" style="width:50px;">${product.optionPrice }</div></td>
 					</tr>
 					<tr>
 						<td>합계금액</td>
 						<td colspan="2" id="resultPrice">
-						<input type="text" readonly="readonly" name="resultPrice" style="border:none;" >						
+						<input type="text" readonly="readonly" name="resultPrice" style="border:none;text-align:center;width:100%;" >						
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			<div> 
-			<h3>배송지 정보</h3><input type="checkbox" name="addcheck" id="addcheck"><label for="addcheck">구매자 정보와 동일</label>
+			<div id="pay" style="text-align:left;"><h3>배송지 정보</h3><input type="checkbox" name="addcheck" id="addcheck"><label for="addcheck">구매자 정보와 동일</label></div>
 				<table border="1">
 					<tr>
 						<th>이름</th>
-						<td><input type="text" name="name"  required></td>
+						<td><input type="text" name="name" required></td>
 					</tr>				
 					<tr>
 						<th>연락처</th>
-						<td><input type="text" name="phone"  required></td>
+						<td><input type="text" name="phone" required></td>
 					</tr>
 					<tr>
 						<th>주소</th>

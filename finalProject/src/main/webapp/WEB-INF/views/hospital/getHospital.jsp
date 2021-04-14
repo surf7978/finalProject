@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <!-- 단건조회 아작스 -->
 <script>
 	$(function(){
@@ -98,7 +99,12 @@
 		//결제페이지로 이동
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
-			$("#frm").attr("action","HospitalPayInfoForm?resultPrice="+resultPrice).submit();
+			var pro = $("#pro_result").text();
+			if(pro == ""){
+				alert("상품을 선택해주세요");
+			}else{
+				$("#frm").attr("action","HospitalPayInfoForm?resultPrice="+resultPrice).submit();
+			}			
 		});
 		$("#d_btn").on("click",function(){
 			if(confirm("삭제하시겠습니까")==true){
@@ -110,6 +116,14 @@
 		$("#u_btn").on("click",function(){
 			location.href="updateHospital?seq=${hospital.seq }"
 		})
+		//부드럽게 스크롤
+		$(".pro_menu ul li a[href^='#']").on("click", function(e) {
+				e.preventDefault();
+				var position = $($(this).attr("href")).offset().top;
+			   $("html, body").animate({
+				   scrollTop : position
+			   }, 1000);
+		});
 	});
 </script>
 </head>

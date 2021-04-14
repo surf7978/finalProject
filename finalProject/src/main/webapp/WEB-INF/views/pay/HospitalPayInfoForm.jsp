@@ -63,26 +63,7 @@
 						</td>
 					</tr>
 				</tbody>
-			</table>
-			<div> 
-			<h3>배송지 정보</h3><input type="checkbox" name="addcheck" id="addcheck"><label for="addcheck">구매자 정보와 동일</label>
-				<table border="1">
-					<tr>
-						<th>이름</th>
-						<td><input type="text" name="name"  required></td>
-					</tr>				
-					<tr>
-						<th>연락처</th>
-						<td><input type="text" name="phone"  required></td>
-					</tr>
-					<tr>
-						<th>주소</th>
-						<td><input type="text" name="post"><button type="button" id="addbtn" required >주소검색</button><br>
-							<input type="text" name="address" readonly  required><br>
-							<input type="text" name="address2"  required></td>
-					</tr>
-				</table>
-			</div>				
+			</table>		
 		</div>
 		<button type="submit">결제하기</button>
 		<button type="button" onclick="location.href='getSearchProductForm'">취소</button>
