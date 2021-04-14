@@ -38,6 +38,10 @@ public class NoteServiceimpl implements NoteService{
 	public int deleteNote(NoteVO vo) {
 		return noteMapper.deleteNote(vo);
 	}
+	@Override
+	public NoteVO getNoteCount(NoteVO vo) {
+		return noteMapper.getNoteCount(vo);
+	}
 
 
 }

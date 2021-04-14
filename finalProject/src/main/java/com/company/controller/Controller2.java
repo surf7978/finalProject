@@ -31,6 +31,8 @@ import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
+import com.company.note.service.NoteService;
+import com.company.note.service.NoteVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
 import com.company.question.service.QuestionService;
@@ -61,6 +63,8 @@ public class Controller2 {
 	ReviewService reviewService;
 	@Autowired
 	QuestionService questionService;
+	@Autowired
+	NoteService noteService;
 
 	////// 마이페이지-유저///////////
 	// 일반회원 본인정보 조회
@@ -280,11 +284,19 @@ public class Controller2 {
 		return "redirect:/getSearchAnimal";
 	}
 
-	// 의료수첩 페이지
+	/////의료수첩 페이지////////////
 	@RequestMapping("/getSearchNote")
-	public String getSearchNote(AnimalVO vo, Model model) {
-		model.addAttribute("animal", animalService.getAnimal(vo));
+	public String getSearchNote(AnimalVO avo, NoteVO nvo, Model model) {
+		model.addAttribute("animal", animalService.getAnimal(avo));
+		model.addAttribute("note", noteService.getSearchNote(nvo));
+		model.addAttribute("noteCount", noteService.getNoteCount(nvo));
 		return "note/getSearchNote";
+	}
+	
+	//의료내역 등록 페이지
+	@RequestMapping("/insertNote")
+	public String insertNote(NoteVO vo) {
+		return "empty/note/insertNote";
 	}
 
 	//////// 병원상품//////////
@@ -353,10 +365,6 @@ public class Controller2 {
 			String filename = t_image.getOriginalFilename();
 			// 파일명 중복체크 -> rename
 			File rename = FileRenamePolicy.rename(new File(path, filename));
-			// 업로드된 파일명
-			// rename.getName()
-			// 파일명을 읽어내는게 getName()
-			// 임시폴더에서 업로드 폴더로 파일이동
 			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
 			vo.setT_image(rename.getName());
 		}

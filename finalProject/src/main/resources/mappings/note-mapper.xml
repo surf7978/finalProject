@@ -7,12 +7,13 @@
 	<!-- 한 반려견의 등록한 의료내역 조회 -->
 	<select id="getSearchNote" parameterType="NoteVO" resultType="NoteVO">
 		SELECT NOTENUMBER
-			,	CATEGORY
-			,	NAME
-			,	PRICE
-			,	CALENDAR
-			,	CONTENT
-			,	ANIMALNUMBER 
+         	  , CATEGORY1
+          	  , CATEGORY2
+              , TO_CHAR(PRICE, '999,999,999')AS PRICE
+              , TO_CHAR(CALENDAR, 'yyyy-mm-dd') AS CALENDAR
+              , CONTENT
+              , ANIMALNUMBER
+              , TO_CHAR(CALENDAR2, 'yyyy-mm-dd') AS CALENDAR2
 		FROM NOTE 
 		WHERE ANIMALNUMBER=#{animalNumber}
 	</select>
@@ -20,42 +21,50 @@
 	<!-- 단건조회 -->
 	<select id="getNote" parameterType="NoteVO" resultType="NoteVO">
 		SELECT NOTENUMBER
-			,	CATEGORY
-			,	NAME
-			,	PRICE
-			,	CALENDAR
-			,	CONTENT
-			,	ANIMALNUMBER 
+         	  , CATEGORY1
+          	  , CATEGORY2
+              , TO_CHAR(PRICE, '999,999,999') AS PRICE
+              , TO_CHAR(CALENDAR, 'yyyy-mm-dd') AS CALENDAR
+              , CONTENT
+              , ANIMALNUMBER
+              , TO_CHAR(CALENDAR2, 'yyyy-mm-dd') AS CALENDAR2
 		FROM NOTE 
 		WHERE NOTENUMBER=#{noteNumber}
 	</select>
 	
 	<!-- 의료내역 입력 -->
 	<insert id="insertNote" parameterType="NoteVO">
-		insert into NOTE(
-				NOTENUMBER
-			,	CATEGORY
-			,	NAME
-			,	PRICE
-			,	CALENDAR
-			,	CONTENT
-			,	ANIMALNUMBER
+		 insert into NOTE(
+		 		NOTENUMBER
+         	  , CATEGORY1
+          	  , CATEGORY2
+              , PRICE
+              , CALENDAR
+              , CONTENT
+              , ANIMALNUMBER
+              , CALENDAR2
 			) VALUES(
-				#{noteNumber}
-			,	#{category}
-			,	#{name}
-			,	#{price}
-			,	#{calendar}
-			,	#{content}
-			,	#{animalNumber}
+			NOTE_SEQ.NEXTVAL
+			, #{category1}
+			, #{category2}
+			, #{price}
+			, #{calendar}
+			, #{content}
+			, #{animalNumber}
+            , sysdate
 			)
-	
 	</insert>
 	
 	<!-- 의료내역 수정 -->
 	
 	<!-- 의료내역 삭제 -->
 	
+	<!-- 의료내역 건수 & 합계 출력 -->
+	<select id="getNoteCount" parameterType="NoteVO" resultType="NoteVO">
+		SELECT COUNT(NOTENUMBER) AS NOTENUMBER
+			, TO_CHAR(SUM(PRICE), '999,999,999') AS PRICE 
+		FROM NOTE 
+		WHERE ANIMALNUMBER=#{animalNumber}
+	</select>
 	
-
 </mapper>

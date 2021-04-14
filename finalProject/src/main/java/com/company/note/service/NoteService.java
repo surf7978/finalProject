@@ -8,4 +8,5 @@ public interface NoteService {
 	public List<NoteVO> getSearchNote(NoteVO vo);	//의료내역 전체조회
 	public int updateNote(NoteVO vo);	//의료내역 수정
 	public int deleteNote(NoteVO vo);	//의료내역 삭제
+	public NoteVO getNoteCount(NoteVO vo);	//의료내역 건수 & 합계 출력
 }
