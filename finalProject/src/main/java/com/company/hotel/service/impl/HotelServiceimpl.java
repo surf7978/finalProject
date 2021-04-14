@@ -12,40 +12,40 @@ import com.company.hotel.service.HotelVO;
 public class HotelServiceimpl implements HotelService {
 
 	@Autowired
-	HotelMapper HotelMapper;
+	HotelMapper hotelMapper;
 
 	// 등록
 	@Override
 	public int insertHotel(HotelVO vo) {
-		return HotelMapper.insertHotel(vo);
+		return hotelMapper.insertHotel(vo);
 	}
 
 	// 수정
 	@Override
 	public int updateHotel(HotelVO vo) {
-		return HotelMapper.updateHotel(vo);
+		return hotelMapper.updateHotel(vo);
 	}
 
 	// 삭제
 	@Override
 	public int deleteHotel(HotelVO vo) {
-		return HotelMapper.deleteHotel(vo);
+		return hotelMapper.deleteHotel(vo);
 	}
 
 	// 상세조회
 	@Override
 	public HotelVO getHotel(HotelVO vo) {
-		return HotelMapper.getHotel(vo);
+		return hotelMapper.getHotel(vo);
 	}
 
 	// 전체조회
 	@Override
 	public List<HotelVO> getSearchHotel(HotelVO vo) {
-		return HotelMapper.getSearchHotel(vo);
+		return hotelMapper.getSearchHotel(vo);
 	}
 
 	@Override
 	public int getCount(HotelVO vo) {
-		return HotelMapper.getCount(vo);
+		return hotelMapper.getCount(vo);
 	}
 }

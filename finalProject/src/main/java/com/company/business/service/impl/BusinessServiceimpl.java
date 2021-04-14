@@ -11,36 +11,36 @@ import com.company.business.service.BusinessVO;
 @Service
 public class BusinessServiceimpl implements BusinessService{
 	
-	@Autowired BusinessMapper BusinessMapper;
+	@Autowired BusinessMapper businessMapper;
 	//등록
 	@Override
 	public int insertBusiness(BusinessVO vo) {
-		return BusinessMapper.insertBusiness(vo);
+		return businessMapper.insertBusiness(vo);
 	}
 	//단건조회
 	@Override
 	public BusinessVO getBusiness(BusinessVO vo) {
-		return BusinessMapper.getBusiness(vo);
+		return businessMapper.getBusiness(vo);
 	}
 	//전체조회
 	@Override
 	public List<BusinessVO> getSearchBusiness(BusinessVO vo) {
-		return BusinessMapper.getSearchBusiness(vo);
+		return businessMapper.getSearchBusiness(vo);
 	}
 	//수정
 	@Override
 	public int updateBusiness(BusinessVO vo) {
-		return BusinessMapper.updateBusiness(vo);
+		return businessMapper.updateBusiness(vo);
 	}
 	
 	//탈퇴
 	@Override
 	public int deleteBusiness(BusinessVO vo) {
-		return BusinessMapper.deleteBusiness(vo);
+		return businessMapper.deleteBusiness(vo);
 	}
 	@Override
 	public BusinessVO getBusinessId(BusinessVO vo) {
-		return BusinessMapper.getBusinessId(vo);
+		return businessMapper.getBusinessId(vo);
 	}
 
 
