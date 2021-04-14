@@ -61,12 +61,21 @@
 		$("#btnCart").on("click",function(){
 			var vo = $("#frm").serialize();
 			//장바구니 DB에 넣기
-			frm.action = "insertBCart?" + vo;
-			frm.submit();
-			//data필요
+			$.ajax({
+				url:"insertBCart",
+				data:vo,
+				dataType:"json",
+				success: function (result){
+					if(result == 1){
+						var y = confirm('상품이 장바구니에 담겼습니다\n지금 확인 하시겠습니까?');
+						if(y){
+							location.href='getSearchBCart'
+						}//end of if
+					}//end of if
+				}//end of success
+			})//end of ajax
 		})//end of btnCart
 	}//end of insertCart
-	
 </script>
 </head>
 <body>

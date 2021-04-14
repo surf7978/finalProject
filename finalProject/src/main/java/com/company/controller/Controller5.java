@@ -470,9 +470,10 @@ public class Controller5 {
 
 	// 사업자 장바구니 CRUD
 	@RequestMapping("/insertBCart")
-	public String insertBCart(BCartVO vo) {
-		bCartService.insertBCart(vo);
-		return "redirect:/getSearchBCart";
+	@ResponseBody
+	public int insertBCart(BCartVO vo) {
+		int r = bCartService.insertBCart(vo);
+		return r;
 	}
 
 	@RequestMapping("/updateBCart")
@@ -520,8 +521,8 @@ public class Controller5 {
 			vo.setCode("TAXI");
 		return vo.getCode();
 	}// end of sessionSelect
-	
-	//seq를 code값으로 변환
+
+	// seq를 code값으로 변환
 	public void seqConversion(IntegratedVO vo) {
 		if (vo.getCode().equals("10"))
 			vo.setCode("HOTEL");
