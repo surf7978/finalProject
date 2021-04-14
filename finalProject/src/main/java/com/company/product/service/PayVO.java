@@ -15,7 +15,5 @@ public class PayVO {
 	//제품관련
 	String bizNumber;
 	String optionName;
-	String businessNumber;
-	
-	
+	String businessNumber;	
 }

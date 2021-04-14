@@ -39,6 +39,7 @@
 			}
 		})
 		//배송비 포함 설정
+		var count = $("input[name=count]").val();
 		if(${resultPrice } >=10000){
 			$("[name=resultPrice]").val(${resultPrice });
 		}else{

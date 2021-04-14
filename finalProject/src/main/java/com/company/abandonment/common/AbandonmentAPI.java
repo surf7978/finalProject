@@ -18,7 +18,7 @@ public class AbandonmentAPI {
 	        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=8tY1eYWe6lr01%2Fy4I1nRYPMeVaVSYb9Q63Ov8Q0%2BOHG25bo1w6WUYCV3uFxg%2B8%2BlMnvBhuqC79W1QUlkINNqTQ%3D%3D"); /*Service Key*/
 	        urlBuilder.append("&upkind=417000");
 	        if(uprCd != null && uprCd != "") {
-	        	urlBuilder.append("&uprCd=" + uprCd);	        
+	        	urlBuilder.append("&upr_cd=" + uprCd);	        
 	        }
 	        urlBuilder.append("&numOfRows=9");
 	        urlBuilder.append("&pageNo=").append(pageNo);
