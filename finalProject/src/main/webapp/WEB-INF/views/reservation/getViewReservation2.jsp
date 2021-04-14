@@ -6,10 +6,37 @@
 <head>
 <meta charset="UTF-8">
 <title>사업자번호로 예약리스트 조회</title>
+<link href='resources/css/fullcalendar.css' rel='stylesheet' />
+<script src='resources/js/fullcalendar.js'></script>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView : 'dayGridMonth' ,
+			locale: 'ko',
+			eventSources: [
+				{
+					 url: 'getSearchReservationCalendar2'
+				
+				}
+			],  
+			eventClick:function(event) {
+                if(event.url) {
+                    alert(event.title + "\n" + event.url, "wicked", "width=700,height=600");
+                    window.open(event.url);
+                    return false;
+                }
+            }
+		});
+		calendar.render();
+	});
+</script>
 </head>
 <body>
+<br>
 <input type="hidden" id="businessNumber" name="businessNumber" value="${business.businessNumber }">
 <h3>${business.businessCompanyName } 예약 리스트</h3>
+<br>
 <table border="1">
 		<tr>
 			<th>예약번호</th>
@@ -30,5 +57,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+		<div id='calendar' style="width: 1000px"></div>
 </body>
 </html>

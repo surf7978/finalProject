@@ -1,6 +1,7 @@
 package com.company.reservation.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.company.reservation.service.ReservationVO;
 
@@ -12,4 +13,6 @@ public interface ReservationMapper {
 	
 	public ReservationVO getViewReservation(ReservationVO vo);
 	public List<ReservationVO> getViewReservation2(ReservationVO vo);	// 사업자번호로 예약리스트 조회
+	public List<Map<String, String>> getSearchReservationCalendar(ReservationVO vo); //캘린더조회 for 회원
+	public List<Map<String, String>> getSearchReservationCalendar2(ReservationVO vo); //캘린더조회 for 사업자
 }
