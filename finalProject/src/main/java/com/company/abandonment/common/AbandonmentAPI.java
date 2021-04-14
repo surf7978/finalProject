@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AbandonmentAPI {
 		//api 리스트
-	    public String getAban(String pageNo, String uprCd) throws IOException {
+	    public String getAban(String pageNo, String upr_cd) throws IOException {
 	    	StringBuilder urlBuilder = new StringBuilder("http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic"); /*URL*/
 	        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=8tY1eYWe6lr01%2Fy4I1nRYPMeVaVSYb9Q63Ov8Q0%2BOHG25bo1w6WUYCV3uFxg%2B8%2BlMnvBhuqC79W1QUlkINNqTQ%3D%3D"); /*Service Key*/
 	        urlBuilder.append("&upkind=417000");
-	        if(uprCd != null && uprCd != "") {
-	        	urlBuilder.append("&uprCd=" + uprCd);	        
+	        if(upr_cd != null && upr_cd != "") {
+	        	urlBuilder.append("&upr_cd=" + upr_cd);	        
 	        }
 	        urlBuilder.append("&numOfRows=9");
 	        urlBuilder.append("&pageNo=" + pageNo);
