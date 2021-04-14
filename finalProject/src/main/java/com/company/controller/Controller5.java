@@ -1,7 +1,6 @@
 package com.company.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -521,7 +520,8 @@ public class Controller5 {
 			vo.setCode("TAXI");
 		return vo.getCode();
 	}// end of sessionSelect
-
+	
+	//seq를 code값으로 변환
 	public void seqConversion(IntegratedVO vo) {
 		if (vo.getCode().equals("10"))
 			vo.setCode("HOTEL");
