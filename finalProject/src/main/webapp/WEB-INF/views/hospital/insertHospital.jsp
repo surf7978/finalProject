@@ -111,7 +111,7 @@
 				var option9 = $("<option>").attr("value", "심장사상충검사").text("심장사상충검사");
 				var option10 = $("<option>").attr("value", "심장검사").text("심장검사");
 				var option11 = $("<option>").attr("value", "내시경검사").text("내시경검사");
-				var option12 = $("<option>").attr("value", "기타").text("기타");
+				var option12 = $("<option>").attr("value", "슬개골검사").text("슬개골검사");
 				$("#category2").append(option1,option2,option3,option4,option5,option6,option7,option8,option9,option10,option11,option12);	
 			} else if(result == "기타"){
 				var select = $("<select>").attr("name", "category2");

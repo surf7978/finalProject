@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.company.note.service.impl.NoteMapper">
+	
+	<!-- 한 반려견의 등록한 의료내역 조회 -->
+	<select id="getSearchNote" parameterType="NoteVO" resultType="NoteVO">
+		SELECT NOTENUMBER
+			,	CATEGORY
+			,	NAME
+			,	PRICE
+			,	CALENDAR
+			,	CONTENT
+			,	ANIMALNUMBER 
+		FROM NOTE 
+		WHERE ANIMALNUMBER=#{animalNumber}
+	</select>
+	
+	<!-- 단건조회 -->
+	<select id="getNote" parameterType="NoteVO" resultType="NoteVO">
+		SELECT NOTENUMBER
+			,	CATEGORY
+			,	NAME
+			,	PRICE
+			,	CALENDAR
+			,	CONTENT
+			,	ANIMALNUMBER 
+		FROM NOTE 
+		WHERE NOTENUMBER=#{noteNumber}
+	</select>
+	
+	<!-- 의료내역 입력 -->
+	<insert id="insertNote" parameterType="NoteVO">
+		insert into NOTE(
+				NOTENUMBER
+			,	CATEGORY
+			,	NAME
+			,	PRICE
+			,	CALENDAR
+			,	CONTENT
+			,	ANIMALNUMBER
+			) VALUES(
+				#{noteNumber}
+			,	#{category}
+			,	#{name}
+			,	#{price}
+			,	#{calendar}
+			,	#{content}
+			,	#{animalNumber}
+			)
+	
+	</insert>
+	
+	<!-- 의료내역 수정 -->
+	
+	<!-- 의료내역 삭제 -->
+	
+	
+
+</mapper>

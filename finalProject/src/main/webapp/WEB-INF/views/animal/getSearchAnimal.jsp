@@ -32,7 +32,7 @@
 			<td>${ani.kind}</td>
 			<td>${ani.birth}</td>
 			<td><input type="button" value="정보수정" onclick="location.href='updateAnimal?animalNumber='+${ani.animalNumber}"></td>
-			<td><input type="button" value="수첩보기" onclick="/"></td>	
+			<td><input type="button" value="수첩보기" onclick="location.href='getSearchAnimal?animalNumber='+${ani.animalNumber}"></td>	
 				<tr>
 		</c:forEach>	
 	</table>

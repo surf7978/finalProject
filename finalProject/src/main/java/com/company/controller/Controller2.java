@@ -136,7 +136,7 @@ public class Controller2 {
 
 	// 예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
 	@PostMapping("/updateReservation")
-	public String updateReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, HttpServletResponse response, Model model)
+	public void updateReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, HttpServletResponse response, Model model)
 			throws IOException {
 		reservationService.updateReservation(vo);
 		payAndDeliveryService.updateReservation2(vo1);
@@ -144,7 +144,8 @@ public class Controller2 {
 		PrintWriter writer = response.getWriter();
 		writer.println("<script>alert('예약되었습니다');window.close();</script>");
 		writer.close();
-		return "redirect:/getSearchReservation";
+		writer.println("<script>$(opener).reload();</script>");
+	
 
 	}
 
@@ -280,9 +281,10 @@ public class Controller2 {
 	}
 
 	// 의료수첩 페이지
-	@RequestMapping("/animalLifeCare")
-	public String animalLifeCare(AnimalVO vo) {
-		return "animal/animalLifeCare";
+	@RequestMapping("/getSearchNote")
+	public String getSearchNote(AnimalVO vo, Model model) {
+		model.addAttribute("animal", animalService.getAnimal(vo));
+		return "note/getSearchNote";
 	}
 
 	//////// 병원상품//////////
