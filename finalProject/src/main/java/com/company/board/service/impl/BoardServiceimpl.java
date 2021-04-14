@@ -67,6 +67,10 @@ public class BoardServiceimpl implements BoardService{
 	
 		return boardMapper.getSearchBoardCategiry2(vo);
 	}
+	@Override
+	public List<BoardVO> getSearchBoardCategory199(BoardVO vo) {
+		return boardMapper.getSearchBoardCategory199(vo);
+	}
 
 
 }

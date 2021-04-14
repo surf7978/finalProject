@@ -167,7 +167,6 @@ a {
 					<li><div>
 							<input type="hidden" name="page" value="1">
 							<select name="search">
-								<option value=""></option>
 								<option value="all">이름+가격+지역</option>
 								<option value="name">이름</option>
 								<option value="price">가격</option>

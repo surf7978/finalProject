@@ -48,4 +48,9 @@ public class PayAndDeliveryServiceimpl implements PayAndDeliveryService{
 		return payAndDeliveryMapper.insertPayAndDelivery2(vo);
 	}
 
+	@Override
+	public List<PayAndDeliveryVO> getSearchPayAndDelivery99(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.getSearchPayAndDelivery99(vo);
+	}
+
 }

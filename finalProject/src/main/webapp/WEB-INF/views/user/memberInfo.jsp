@@ -80,7 +80,7 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-<br><br><br><input value="일반사용자 회원정보" style="font-size:40px; text-align:center; width:450px; border:none;" readonly>가입일 ${member.startDate}<br><br>
+<input value="일반사용자 회원정보" style="font-size:40px; text-align:center; width:450px; border:none;" readonly>가입일 ${member.startDate}<br><br>
 <form id="frm" name="frm" onsubmit="return formCheck()" action="updateMember" method="post">
 		<table style="text-align:center;">
 			<tr>

@@ -102,6 +102,8 @@
 					</div>
 					<div class="col-lg-3 text-right col-md-3">
 					<c:if test="${not empty loginID}">
+					<c:if test="${loginAuth eq 'm'}">
+					<c:if test="${loginID ne 'admin'}">
 					<!-- 로그인한 사용자의 장바구니 내용 -->
 					<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
 					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
@@ -163,6 +165,8 @@
 									</div>
 								</div></li>
 						</ul>
+					</c:if>
+					</c:if>
 					</c:if>
 					</div>
 				</div>
@@ -258,12 +262,18 @@
 						<li><a>고객센터</a>
 							<ul class="dropdown">
 								<li><a href="#">자주하는질문</a></li>
-								<li><a href="getSearchQuestionCr4">문의하기</a></li>
-								<li><a href="#">환불규정</a></li>
+								<c:if test="${not empty loginID}">
+								<c:if test="${loginID ne 'admin' }">
+									<li><a href="insertQuestion2">문의하기</a></li>
+								</c:if>
+								</c:if>
+								<li><a href="buyCancel">환불규정</a></li>
+								<!-- 
 								<li><a href="#">회원혜택</a></li>
+								 -->
 							</ul></li>
 								<c:if test="${not empty loginID}">
-						<li><a>마이페이지</a>
+						<li><a href="myPageSideBar">마이페이지</a>
 							<ul class="dropdown">
 										<li><a href="getSearchQuestion">문의내역보기</a></li>
 										<li><a href="getSearchAnswer">답변내역보기</a></li>

@@ -87,7 +87,9 @@
 	</div>
 	<div id="paging"></div>
 	<button class="write" id="btn">글쓰기</button>
+	<!-- 
 	<button class="back" onclick="location.href='getSearchBoard'">뒤로가기</button>
+	 -->
 </div>	
 
 

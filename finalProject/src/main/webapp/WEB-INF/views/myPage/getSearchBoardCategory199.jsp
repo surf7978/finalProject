@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>자유게시판</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-</head>
+<meta charset="UTF-8">
+<title>getSearchBoardCategory199</title>
 <style>
 	input.write{
 			padding:10px;
@@ -46,12 +42,11 @@
  	font-size: 17px;
  }
 </style>
+</head>
 <body>
-<br>
-	<input value="자유게시판"
-		style="font-size: 40px; text-align: center; width: 400px; border: none;"
-		readonly>
-<br><br>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
+<input value="내가 쓴 글" style="font-size:40px; text-align:center; width:450px; border:none;" readonly><br><br>
 <table class="sub_news" border="1"  summary="게시판의 글제목 리스트">
 
 
@@ -61,7 +56,6 @@
 <th width="60">조회수</th>
 <th scope="col">제목</th>
 <th scope="col">날짜</th>
-<th scope="col" width="60">글쓴이</th>
 
 </tr>
 </thead>
@@ -72,18 +66,16 @@
 <td >${board.views}</td>
 <td >${board.title}</td>
 <td>${board.calendar}</td>
-<td >${board.writer}</td>
 </tr>
 </c:forEach>
 
 </tbody>
 </table>
 <br>
-
-<input class="write" type = "button" value="글쓰기" onclick="location.href='insertBoard'">
 <!-- 
-<input class="back" type = "button" value="메뉴로" onclick="location.href='getSearchBoard'">
+<input class="write" type = "button" value="글쓰기" onclick="location.href='insertBoard'">
  -->
     
+</div>
 </body>
 </html>

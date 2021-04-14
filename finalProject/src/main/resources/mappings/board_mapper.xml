@@ -122,4 +122,11 @@
 		  			 		,#{memberId})
 	</insert>
 	
+	<!--  일반사용자 내가 쓴 글 조회 -->
+	<select id="getSearchBoardCategory199" resultType="boardVO"
+        parameterType="boardVO">
+        SELECT * FROM BOARD
+        WHERE MEMBERID = #{memberId}
+    </select>
+	
 </mapper>

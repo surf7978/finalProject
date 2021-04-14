@@ -9,6 +9,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 	<h2>특정 문의내역조회</h2>
 	<table>
 		<tr>
@@ -28,6 +30,7 @@
 	</table>
 	<button type="button" id="getSearchQuestion">문의 리스트</button>
 	<button type="button" id="insertAnswer">답장하기</button>
+</div>
 </body>
 <script>
 	$("#insertAnswer").on("click", function() {

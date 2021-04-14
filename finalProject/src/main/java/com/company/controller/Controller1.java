@@ -30,8 +30,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
+import com.company.board.service.BoardService;
+import com.company.board.service.BoardVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
+import com.company.buy.service.BuyService;
+import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
 import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
@@ -40,8 +44,12 @@ import com.company.member.common.coolsmsAPI;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
 import com.company.member.service.impl.MemberServiceimpl;
+import com.company.payAndDelivery.service.PayAndDeliveryService;
+import com.company.payAndDelivery.service.PayAndDeliveryVO;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
+import com.company.question.service.QuestionService;
+import com.company.question.service.QuestionVO;
 import com.company.review.service.ReviewService;
 import com.company.review.service.ReviewVO;
 
@@ -283,7 +291,9 @@ public class Controller1 {
 		if(memberService.getViewMember(vo).getAuth().equals("m")) {
 			AnimalVO voAnimal = new AnimalVO();
 			voAnimal.setMemberId(ID);
-			animalService.deleteAnimal(voAnimal);
+			if(animalService.getSearchAnimal(voAnimal)!=null) {
+				animalService.deleteAnimal99(voAnimal);
+			}
 			memberService.deleteMember(vo);
 		}else {
 			BusinessVO vo1 = new BusinessVO();
@@ -301,7 +311,9 @@ public class Controller1 {
 		if(memberService.getViewMember(vo).getAuth().equals("m")) {
 			AnimalVO voAnimal = new AnimalVO();
 			voAnimal.setMemberId(ID);
-			animalService.deleteAnimal(voAnimal);
+			if(animalService.getSearchAnimal(voAnimal)!=null) {
+				animalService.deleteAnimal99(voAnimal);
+			}
 			memberService.deleteMember(vo);
 			session.invalidate();
 		}else {
@@ -404,7 +416,71 @@ public class Controller1 {
 	//마이페이지 사이드바 출력(jsp:include해서 이제 이건 사용안함)
 	@GetMapping("/myPageSideBar")
 	public String myPageSideBar() {
-		return "user/myPageSideBar";
+		return "user/myPageSideBar1";
+	}
+	
+	//마이페이지-일반사용자-내가쓴글 출력
+	@Autowired BoardService boardService;
+	@GetMapping("/getSearchBoardCategory199")
+	public String getSearchBoardCategory199(MemberVO vo, Model model) {
+		BoardVO vo1 =new BoardVO();
+		vo1.setMemberId(vo.getMemberId());
+		model.addAttribute("board", boardService.getSearchBoardCategory199(vo1));
+		return "myPage/getSearchBoardCategory199";
+	}
+	
+	//마이페이지-일반사용자-후기내역 출력
+	@GetMapping("/getSearchReview98")
+	public String getSearchReview98(MemberVO vo, Model model) {
+		ReviewVO vo1 =new ReviewVO();
+		vo1.setMemberId(vo.getMemberId());
+		model.addAttribute("review", reviewService.getSearchReview99(vo1));
+		return "myPage/getSearchReview98";
+	}
+	//마이페이지-일반사용자-후기내역 상세 출력
+	@GetMapping("/getReview")
+	public String getReview99(ReviewVO vo, Model model) {
+		model.addAttribute("review", reviewService.getReview(vo));
+		return "myPage/getReview99";
+	}
+	
+	@Autowired QuestionService questionService;
+	//마이페이지-일반사용자-문의내역 출력
+	@GetMapping("/getSearchQuestion99")
+	public String getSearchQuestion99(MemberVO vo, Model model) {
+		QuestionVO vo1 =new QuestionVO();
+		vo1.setMemberId(vo.getMemberId());
+		model.addAttribute("question", questionService.getSearchQuestion99(vo1));
+		return "myPage/getSearchQuestion99";
+	}
+	
+	//로그인화면 이동
+	@GetMapping("/buyCancel")
+	public String buyCancel() {
+		return "pay/buyCancel";
+	}
+	
+	@Autowired PayAndDeliveryService payAndDeliveryService;
+	// 관리자용 구매현황 리스트조회
+	@RequestMapping("/getSearchPayAndDelivery99")
+	public String getSearchPayAndDelivery99(PayAndDeliveryVO vo, Model model) {
+		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery99(vo));
+		return "user/getSearchPayAndDelivery99";
+	}
+	
+	@Autowired BuyService buyService;
+	// 구매내역 상세리스트 조회
+	@RequestMapping("/getSearchBuy99")
+	public String getSearchBuy(BuyVO vo, Model model) {
+		model.addAttribute("buys", buyService.getSearchBuy(vo));
+		return "empty/user/getSearchBuy99";
+	}
+	
+	// 관리자용 예약현황 리스트조회
+	@RequestMapping("/getSearchPayAndDelivery98")
+	public String getSearchPayAndDelivery98(PayAndDeliveryVO vo, Model model) {
+		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery99(vo));
+		return "user/getSearchPayAndDelivery98";
 	}
 	
 	@Autowired ProductService productService;
