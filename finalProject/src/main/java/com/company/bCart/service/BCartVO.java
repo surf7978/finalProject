@@ -6,11 +6,11 @@ import lombok.Data;
 @Data
 public class BCartVO {
 	String bcartNumber;
-	String image;
+	String image1;
 	String name;
 	String optionName;
 	String price;
 	String count;
-	String bIsNumber;
+	String bisNumber;
 	String memberId;
 }

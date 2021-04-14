@@ -143,7 +143,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 						<input value="${loginID }" type="hidden" name="memberId">
 					</c:if>
 					<ul>
-						<li><img src="resources/img/hospital/${hospital.t_image }"></li>
+						<li><img src="resources/images/hospital/${hospital.t_image }"></li>
 						<li>
 							<div>
 								<h3><input value="${hospital.optionName }" style="border:none;"></h3>
@@ -178,11 +178,11 @@ hospital.businessNumber : ${hospital.businessNumber}
 						<li><a href="#content">상품 상세정보</a></li>
 						<li><a href="#content22">상품 구매평</a></li>
 						<li><a href="#content33">상품 문의</a></li>
-						<li><a href="#">취소/환불</a></li>
+						<li><a href="#content44">취소/환불</a></li>
 					</ul>
 				</div>
 				<div id="content">
-					<img src="resources/img/hospital/${hospital.image }">
+					<img src="resources/images/hospital/${hospital.image }">
 				</div>
 			</div>
 		</div>

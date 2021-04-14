@@ -71,16 +71,16 @@
 	</update>
 	<!-- 삭제 -->
 	<delete id="deleteIntegrated">
-		DELETE FROM ${code}
-		WHERE SEQ = #{seq}
+		DELETE FROM  ${code}       
+		WHERE SEQ = ${seq} 
 	</delete>
-	<!-- 상세 조회 -->
+	<!-- 단건 조회 -->
 	<select id="getIntegrated" resultType="IntegratedVO">
-		SELECT * FROM GETSEARCHLIST1
+		SELECT * FROM ${code}
 		WHERE SEQ = #{seq}
 	</select>
 	<!-- 사업자 마이페이지-게시글 조회 -->
-	<select id="getSearchIntegrated" resultType="IntegratedVO">
+	<select id="getSearchIntegrated" resultType="IntegratedSearchVO">
 		SELECT * FROM ${code}
 		WHERE BUSINESSNUMBER = #{businessNumber}
 	</select>

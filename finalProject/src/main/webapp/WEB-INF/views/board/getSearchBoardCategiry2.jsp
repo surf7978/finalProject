@@ -6,6 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+	button.write {
+	   		padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#3296D7;
+	}
+		button.back {
+	   		padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#6EDCDC;
+	}
+	
+</style>
+
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -67,7 +86,8 @@
 	
 	</div>
 	<div id="paging"></div>
-	<button class="write" id="btn">글쓰기</button><a href="getSearchCr4">홈으로 돌아가기</a>
+	<button class="write" id="btn">글쓰기</button>
+	<button class="back" onclick="location.href='getSearchBoard'">뒤로가기</button>
 </div>	
 
 
