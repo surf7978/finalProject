@@ -7,7 +7,7 @@
 		INSERT INTO CART
 		(
 			CARTNUMBER,
-			IMAGE,
+			IMAGE1,
 			PRODUCTNAME,
 			OPTIONNAME,
 			OPTIONPRICE,
@@ -16,8 +16,8 @@
 			MEMBERID,
 			PRODUCTNUMBER
 		)VALUES(
-			#{cartNumber},
-			#{image},
+			CART_SEQ.NEXTVAL,
+			#{image1},
 			#{productName},
 			#{optionName},
 			#{optionPrice},
