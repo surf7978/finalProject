@@ -34,7 +34,7 @@
 	<delete id="deleteBCart">
 		DELETE FROM BCART
 		WHERE MEMBERID = #{memberId}
-		AND SEQ = #{seq}
+		AND BCARTNUMBER = #{bcartNumber}
 	</delete>
 	<!-- 장바구니 단건조회 -->
 	<select id="getBCart" resultType="bCartVO">

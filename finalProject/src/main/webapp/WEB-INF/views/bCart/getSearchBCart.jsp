@@ -49,7 +49,7 @@
 			if (y){
 				$.ajax({
 					url:"deleteCart",
-					data:{seq:seqVal , memberId : "${sessionScope.loginID}"},
+					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
 					dataType:"json",
 					success:function(response){
 						if(response == 1){
