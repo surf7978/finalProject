@@ -53,4 +53,9 @@ public class ReservationServiceimpl implements ReservationService{
 		return ReservationMapper.getSearchReservationCalendar2(vo);
 	}
 
+	@Override
+	public int insertPayReservation(ReservationVO vo) {
+		return ReservationMapper.insertPayReservation(vo);
+	}
+
 }

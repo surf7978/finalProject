@@ -15,11 +15,11 @@ table , tr, td{
 </style>
 </head>
 <body>
-<br><br><br>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 <h3 align="center">마이페이지 관리자-회원관리</h3>
 <br><br>
 <div align="center">
-
 <table>
  <thead> 
 	 <tr id="head"> 
@@ -76,6 +76,6 @@ table , tr, td{
 
 	
 
-	
+</div>	
 </body>
 </html>

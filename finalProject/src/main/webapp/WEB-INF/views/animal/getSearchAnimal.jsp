@@ -10,7 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-	<br>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 	<table border="1">
 		<thead>
 		<tr>
@@ -37,5 +38,6 @@
 		</c:forEach>	
 	</table>
 	<input type="button" value="반려견 추가등록" onclick="location.href='insertAnimal'">
+</div>
 </body>
 </html>
