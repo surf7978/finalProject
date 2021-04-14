@@ -43,8 +43,7 @@
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
 			var count = $("[name=count]").val();
-			var seq = $("[name=seq]").val();
-			location.href="ReserPayInfoForm?resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count +"&seq=" +seq;
+			location.href="ReserPayInfoForm?resultPrice="+resultPrice +"&count=" + count +"&seq=${vo.seq}";
 		});//end of contents
 	}//end of contents
 	

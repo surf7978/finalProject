@@ -99,11 +99,12 @@
 		//결제페이지로 이동
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
+			var count = $("[name=count]").val();
 			var pro = $("#pro_result").text();
 			if(pro == ""){
 				alert("상품을 선택해주세요");
 			}else{
-				$("#frm").attr("action","HospitalPayInfoForm?resultPrice="+resultPrice).submit();
+				location.href="HospitalPayInfoForm?resultPrice="+resultPrice +"&count=" + count +"&seq=${hospital.seq }";
 			}			
 		});
 		$("#d_btn").on("click",function(){

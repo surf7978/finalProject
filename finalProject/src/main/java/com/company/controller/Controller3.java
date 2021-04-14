@@ -303,6 +303,7 @@ public class Controller3 {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("count", count);
 		map.put("resultPrice", resultPrice);
+		vo.setSeq(seq);
 		vo = integratedService.getIntegrated(vo);
 		// member 불러오기
 		// 제품 불러오기
@@ -313,8 +314,8 @@ public class Controller3 {
 
 	// 사업체 결제API
 	@RequestMapping("/ReserPayInfo")
-	public String ReserPayInfo(MemberVO mvo, PayVO pvo, IntegratedVO vo, Model model) {
-		model.addAttribute("pay", pvo);
+	public String ReserPayInfo(MemberVO mvo, ReservationVO rvo, IntegratedVO vo, Model model,String resultPrice) {
+		model.addAttribute("pay", rvo);
 		return "pay/ReserPayInfo";
 	}
 
@@ -329,19 +330,18 @@ public class Controller3 {
 
 	// 병원 결제form
 	@RequestMapping("/HospitalPayInfoForm")
-	public String HospitalPayInfoForm(Model model, PayVO pvo, HospitalVO hosvo, String resultPrice) {
+	public String HospitalPayInfoForm(Model model, HospitalVO hosvo, String resultPrice,String count,String seq) {
 		// member 불러오기
 		// 제품 불러오기
-		pvo.setResultPrice(resultPrice);
-		model.addAttribute("pvo", pvo);
-		model.addAttribute("hosvo", hospitalService.getHospital(hosvo));
+		model.addAttribute("resultPrice",resultPrice);
+		model.addAttribute("count",count);
+		model.addAttribute("vo", hospitalService.getHospital(hosvo));
 		return "pay/HospitalPayInfoForm";
 	}
 
 	// 병원 결제API
 	@RequestMapping("/HospitalPayInfo")
-	public String HospitalPayInfo(MemberVO mvo, PayVO pvo, Model model) {
-		model.addAttribute("pay", pvo);
+	public String HospitalPayInfo(Model model) {
 		return "pay/ReserPayInfo";
 	}
 

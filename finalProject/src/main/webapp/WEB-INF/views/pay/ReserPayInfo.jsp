@@ -12,7 +12,7 @@
 	type="application/javascript"></script>
 <script>$(function() {
 		//productNumber설정
-		var productNumber = '${pay.bizNumber}';
+		var productNumber = '${pay.bisNumber}';
 		var strpro = productNumber.substr(0, 2);
 		$("[name=category]").val(strpro)
 	})
@@ -50,7 +50,7 @@
 </head>
 <body>
 	<form name="frm" id="frm" action="ReserinsertPayProduct" method="post">
-		<input value="${pay.bizNumber }" name="bisNumber">
+		<input value="${pay.bisNumber }" name="bisNumber">
 		<input name="category">
 		<input name="optionName" value="${pay.optionName }">
 		<input name="businessNumber" value="${pay.businessNumber }">
