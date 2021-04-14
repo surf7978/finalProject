@@ -10,37 +10,63 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function() {
-		$("#optionName").on("click", function() {
-					var op = $("#optionName option:selected").val();
-					if (op != "") {
-						console.log(op);
-						var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
-								$("<span>").text("${vo.name }")
-										.append("<hr>"));
-						var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
-						var inval = $(input).val();
-						var strong = $("<p>").css("text-align", "right").text("${vo.price }");
-						$(nav).append(input, strong);						
-						$("#pro_show").append(nav);
-						var restrong = $("<dt>").html("총 함계금액");
-						var result = $("<dd>").text("${vo.price }").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
-						$("#pro_result").append(restrong, result);
-					}
-				})
-		$("#pro_show").on("click","input[type=number]", function(){
-			var plu = $(this).val();
-			var result = $("#pro_result").find("dd");
-			result.empty();
-			result.text("${vo.price }" * plu)
-		});
+		//optionName		
+		optionName();
+		//pro_show의 input type number 클릭 시 이벤트
+		pro_show();
+		//contents의 b_btn클릭시
+		contents();
+		//장바구니 클릭 시 데이터값 추가
+		insertCart();
 		
+	});//end of function
+	
+	function optionName(){
+		$("#optionName").on("click", function() {
+			var op = $("#optionName option:selected").val();
+			if (op != "") {
+				var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
+						$("<span>").text("${vo.name}").append("<hr>"));
+				var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
+				var inval = $(input).val();
+				var strong = $("<p>").css("text-align", "right").text("${vo.price}");
+				$(nav).append(input, strong);						
+				$("#pro_show").append(nav);
+				var restrong = $("<dt>").html("총 합계금액");
+				var result = $("<dd>").text("${vo.price}").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
+				$("#pro_result").append(restrong, result);
+			}
+		})//end of optionName
+	}//end of optionName
+	
+	function contents(){
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
 			var count = $("[name=count]").val();
 			var seq = $("[name=seq]").val();
 			location.href="ReserPayInfoForm?resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count +"&seq=" +seq;
-		});
-	});
+		});//end of contents
+	}//end of contents
+	
+	function pro_show(){
+		$("#pro_show").on("click","input[type=number]", function(){
+			var plu = $(this).val();
+			var result = $("#pro_result").find("dd");
+			result.empty();
+			result.text("${vo.price}" * plu)
+		});//end of pro_show
+	}//end of pro_show
+	
+	function insertCart(){
+		$("#btnCart").on("click",function(){
+			var vo = $("#frm").serialize();
+			//장바구니 DB에 넣기
+			frm.action = "insertBCart?" + vo;
+			frm.submit();
+			//data필요
+		})//end of btnCart
+	}//end of insertCart
+	
 </script>
 </head>
 <body>
@@ -48,17 +74,21 @@
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
-				<input value="${vo.businessNumber }" name="businessNumber">
-					<input value="${vo.seq}" type="hidden" name="seq">
-					<input value="2500" type="hidden" name="cartCourier">
+					<input type="hidden" name="bisNumber" value="${vo.seq}">
+					<input type="hidden" name="name" value="${vo.name}">
+					<input type="hidden" name="businessNumber" value="${vo.businessNumber}">
+					<input type="hidden" name="image1" value="${vo.image1}">
+					<input type="hidden" name="optionName" value="${vo.optionName}">
+					<input type="hidden" name="price" value="${vo.price}">
+					<input type="hidden" name="cartCourier" value="2500">
 					<c:if test="${not empty loginID}">
-						<input value="${loginID}" type="hidden" name="memberId">
+						<input type="hidden" name="memberId" value="${loginID}">
 					</c:if>
 					<ul>
 						<li><img src="resources/images/business/${vo.image1}"></li>
 						<li>
 							<div>
-								<h3>${vo.name }</h3>
+								<h3>${vo.name}</h3>
 							</div>
 							<div>
 								<dl>
@@ -68,16 +98,9 @@
 									</dd>
 								</dl>
 							</div>
+							
 							<div>
-								<dl>
-									<dt>배송정보</dt>
-									<dd>
-										배송비 2,500원 | 100,000원 이상 구매시 무료배송<br> (제주 및 도서산간지역 별도)
-									</dd>
-								</dl>
-							</div>
-							<div>
-								<select name="optionName" id="optionName">
+								<select id="optionName" name="optionName">
 									<option value="" selected disabled>상품선택</option>
 									<option>${vo.optionName}(${vo.price}원)</option>
 								</select>
@@ -85,7 +108,7 @@
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
 							<div>
-								<button>장바구니 담기</button>
+								<button type="button" id="btnCart">장바구니 담기</button>
 								<button type="button" id="b_btn">바로구매</button>
 							</div>
 						</li>
