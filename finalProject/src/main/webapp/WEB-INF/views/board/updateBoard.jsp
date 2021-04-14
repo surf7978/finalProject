@@ -1,47 +1,130 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>고객센터 신고하기</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function confirm(){
+	var A = confirm("수정하시겠습니까?");
+	if(A){
+		return true;
+	}else{
+		return false;
+	}
+}
+</script>
 <style>
-
+		div.send{
+			
+			text-align: center;
+		}
+		input.send{
+			color: white;
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#e7ab3c;
+		}
+		input.reset{
+			padding:10px;
+			width:100px;
+		 	border-radius:5px;	
+			border:none;
+			color: white;
+			background-color:#ff6347;
+		}		
+		input.back{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			color: white;
+			background-color:#778899;
+		}
+        table.table2{
+                border-collapse: separate;
+                border-spacing: 1px;
+                text-align: left;
+                line-height: 1.5;
+                border-top: 1px solid #ccc;
+                margin : 20px 10px;
+        }
+        table.table2 tr {
+                 width: 50px;
+                 padding: 10px;
+                font-weight: bold;
+                vertical-align: top;
+                border-bottom: 1px solid #ccc;
+        }
+        table.table2 td {
+                 width: 100px;
+                 padding: 10px;
+                 vertical-align: top;
+                 border-bottom: 1px solid #ccc;
+        }
+ 
 </style>
-</head>
+
+
 <body>
-<h3>리스트</h3>
+	<br>
+	<br>
+	<br>
+	<input value="고객센터 신고하기"
+		style="font-size: 40px; text-align: center; width: 400px; border: none;"
+		readonly>
+	<br>
+	<br>
+	<form id="frm" name="frm" onsubmit="return confirm()"
+		action="updateBoard?boardNumber=${board.boardNumber}" method="post">
 
-<hr>
-<h3>수정폼</h3>
-</head>
-<body>
-<form action="updateBoard?boardNumber=${board.boardNumber}" method="post" >
+	
+		<table
+			style="padding-top: 50px; align: center; width: 700; border: 0; cellpadding: 2;">
+			<tr>
+				<td height="20" align="center" bgcolor="#e7ab3c">
+				<font  color="white"> 수정하기 </font></td>
+			</tr>
+			
+
+			<tr>
+				<td bgcolor=white>
+					<table class="table2">
+						
+						
+						<tr>
+							<td><input value="제 목" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type=text id="title" name="title" size="60" value="${board.title}" ></td>
+						</tr>
+
+						<tr>
+							<td><input value="내 용" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><textarea id="content" name="content" cols="85" rows="15"  >${board.content}</textarea></td>
+						</tr>
 
 
- <table>
- <tr>
- <th>제목</th>
- <td><input style="width: 300px; font-size:10px;" type="text" id="title" name="title" value="${board.title}" ></td>
- </tr>
- <tr>
+					</table>
+				<input type="hidden" id="category" name="category" value="${board.category }">
+					
+						<div class="send">
+                        <input class="send" type = "submit" value="수정하기">
+                        <input class="reset" type = "reset" value="취소">
+                       <input class="back" type = "button" value="뒤로가기" onclick="location.href='getSearchBoard'">
+                        
+                        </div>
 
- <tr>
- <th>내용</th>
- <td><input style="width: 300px; height:50px; font-size:10px;"type="text" id="content" name="content" value="${board.content }" ></td>
- </tr>
- <tr>
- <th>항목</th>
- <td><input type="text" id="category" name="category" value="${board.category }" ></td>
- </table>
- <p>
- <div align="center">
-	<button type="submit">수정</button>
- 	<button type="reset">취소</button>
- 	<button type="button" onclick="location.href='getSearchBoard'">메인으로 가기</button>
- </div>
+					
 
-</form> 
+
+
+				</td>
+			</tr>
+		</table>
+		</form>
 </body>
 </html>

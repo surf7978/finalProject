@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.company.cafe.service.CafeSearchVO;
 import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
 
@@ -52,7 +53,7 @@ public class CafeServiceimpl implements CafeService {
 
 	// Cafe,Hotel,Taxi 조회
 	@Override
-	public List<CafeVO> getSearchList1(CafeVO vo) {
+	public List<CafeVO> getSearchList1(CafeSearchVO vo) {
 		return CafeMapper.getSearchList1(vo);
 	}
 

@@ -26,7 +26,7 @@ public class IntegratedServiceImpl implements IntegratedService {
 
 	@Override // 삭제
 	public int deleteIntegrated(IntegratedVO vo) {
-		return integratedMapper.updateIntegrated(vo);
+		return integratedMapper.deleteIntegrated(vo);
 	}
 
 	@Override // 상세조회
@@ -35,8 +35,8 @@ public class IntegratedServiceImpl implements IntegratedService {
 	}
 
 	@Override // 전체조회
-	public List<IntegratedVO> getSearchIntegratedVO(IntegratedVO vo) {
-		return integratedMapper.getSearchIntegratedVO(vo);
+	public List<IntegratedVO> getSearchIntegrated(IntegratedVO vo) {
+		return integratedMapper.getSearchIntegrated(vo);
 	}
 
 	@Override // 레코드조회

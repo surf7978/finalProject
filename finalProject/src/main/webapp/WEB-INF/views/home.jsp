@@ -17,7 +17,7 @@
                             <h1>??????</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                 incididunt ut labore et dolore</p>
-                            <a href="getSearchListForm" class="primary-btn">Go Now</a>
+                            <a href="getSearchListForm?menu=1" class="primary-btn">Go Now</a>
                         </div>
                     </div>
                     <div class="off-card">
@@ -50,7 +50,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="product-large set-bg" data-setbg="resources/img/products/women-large.jpg">
+                    <div class="product-large set-bg" data-setbg="resources/img/women-large.jpg">
                         <h2>쇼핑몰</h2>
                         <a href="getSearchProductForm">Discover More</a>
                     </div>
@@ -222,7 +222,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1">
-                    <div class="product-large set-bg m-large" data-setbg="resources/img/products/man-large.jpg">
+                    <div class="product-large set-bg m-large" data-setbg="resources/img/women-large.jpg">
                         <h2>Men’s</h2>
                         <a href="#">Discover More</a>
                     </div>
@@ -253,6 +253,7 @@
 	</c:if>
 	<a href="getMember">회원정보조회</a>
 	<a href="getSearchPayAndDelivery">구매내역조회</a>
+	<a href="getSearchReservationBusi">예약내역조회</a>
 	<a href="getSearchAnimal">마이펫수첩</a> <p></p>
 	
 	<a href="getSearchCr4">컨트롤러4(김찬영)의 페이지</a>

@@ -49,6 +49,7 @@
 </script>
 </head>
 <body>
+<div style="width:60%;">
 	<div id="contents">
 			<h1>바로구매</h1>
 		<form method="post" id="frm" action="PayInfo">
@@ -107,5 +108,6 @@
 		<button type="button" onclick="location.href='getSearchProductForm'">취소</button>
 		</form>
 	</div>
+</div>
 </body>
 </html>

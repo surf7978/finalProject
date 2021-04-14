@@ -12,7 +12,7 @@
 <body>
 	<h2>상품등록</h2>
 	<div id="cafe">
-		<form id="frm" action="insertInfo" encType="multipart/form-data" method="post">
+		<form id="frm" action="insertIntegrated" encType="multipart/form-data" method="post">
 			<table id="tbl" border="1">
 				<tr>
 					<td>제품명</td>

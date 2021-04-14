@@ -80,8 +80,10 @@
 						var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count","readonly":"readonly"});
 						var inval = $(input).val();
 						var strong = $("<p>").css("text-align", "right").text("${hospital.price }");
-						$(nav).append(input, strong);						
+						$(nav).append(input, strong);		
+						$("#pro_show").empty();							
 						$("#pro_show").append(nav);
+						$("#pro_result").empty();
 						var restrong = $("<dt>").html("총 함계금액");
 						var result = $("<dd>").text("${hospital.price }").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
 						$("#pro_result").append(restrong, result);
@@ -96,29 +98,34 @@
 		//결제페이지로 이동
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
-			location.href="PayInfoForm?productNumber=${hospital.hospitalNumber }&resultPrice="+resultPrice +"&memberId=${loginID}";
+			$("#frm").attr("action","HospitalPayInfoForm?resultPrice="+resultPrice).submit();
 		});
 		$("#d_btn").on("click",function(){
-			if(confirm("삭제하시겟습니까")==true){
-				location.href="deleteHospital?hospitalNumber=${hospital.hospitalNumber }";				
+			if(confirm("삭제하시겠습니까")==true){
+				location.href="deleteHospital?seq=${hospital.seq }";				
 			}else{
 				return false;
 			}
 		});
 		$("#u_btn").on("click",function(){
-			location.href="updateHospital?hospitalNumber=${hospital.hospitalNumber }"
+			location.href="updateHospital?seq=${hospital.seq }"
 		})
 	});
 </script>
 </head>
 <body>
-<!-- 글작성자와 조회자가 일치하는지 확인하는코드 -->
+<!-- 글작성자와 조회자가 일치하는지 확인하는 코드 -->
 <sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
  url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
  user="final" password="a20210409A"/>
 <sql:query var="rs" dataSource="${ds }">
     select * from business where businessNumber = '${hospital.businessNumber}'
 </sql:query>
+<!-- 
+loginID : ${loginID }<br>
+rs.rows[0].businessId : ${rs.rows[0].businessId }<br>
+hospital.businessNumber : ${hospital.businessNumber}
+ --> 
 <div id="contents">
 	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
 		<div>
@@ -128,8 +135,9 @@
 	</c:if> 
 		<div id="getproduct">
 			<div class="pro_title">
-				<form id="frm" name="frm">
-					<input value="${hospital.hospitalNumber }" type="hidden" name="productNumber">
+				<form id="frm" name="frm" method="post">
+					<input value="${hospital.seq }" type="hidden" name="seq">
+					<input value="${hospital.businessNumber }" type="hidden" name="businessNumber">
 					<input value="2500" type="hidden" name="cartCourier">
 					<c:if test="${not empty loginID }">
 						<input value="${loginID }" type="hidden" name="memberId">
@@ -138,7 +146,7 @@
 						<li><img src="resources/img/hospital/${hospital.t_image }"></li>
 						<li>
 							<div>
-								<h3>${hospital.optionName }</h3>
+								<h3><input value="${hospital.optionName }" style="border:none;"></h3>
 							</div>
 							<div>
 								<dl>
@@ -157,8 +165,8 @@
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
 							<div>
-								<button>장바구니 담기</button>
-								<button type="button" id="b_btn">바로구매</button>
+								<button style="padding:10px; width:220px; border:none; border-radius:5px; background-color:#adff2f;">장바구니 담기</button>
+								<button type="button" id="b_btn" style="padding:10px; width:220px; border:none; border-radius:5px;">바로구매</button>
 							</div>
 						</li>
 					</ul>
@@ -167,9 +175,9 @@
 			<div id="pro_contentwrap">
 				<div class="pro_menu">
 					<ul>
-						<li><a href="#pro_content">상품 상세정보</a></li>
-						<li><a href="#">상품 구매평</a></li>
-						<li><a href="#">상품 문의</a></li>
+						<li><a href="#content">상품 상세정보</a></li>
+						<li><a href="#content22">상품 구매평</a></li>
+						<li><a href="#content33">상품 문의</a></li>
 						<li><a href="#">취소/환불</a></li>
 					</ul>
 				</div>
@@ -181,9 +189,9 @@
 	</div>
 	
 	<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
-<h4>구매평
+<h4 id="content22">구매평
 <c:if test="${not empty reservation.reservationDate }">
-<button type="button" style="position:absolute;right:0; border:none; border-radius:5px; background-color:#87ceeb; color:white; font-size:20px; padding:5px;" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')">구매평 등록하기</button>
+<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')">구매평 등록하기</button>
 </c:if>
 </h4>
 <hr style="align:center; text-align:left; background-color: black;">
@@ -201,9 +209,9 @@
 	</c:forEach>
 	<br><br>
 <div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
-<h4>문의내역
+<h4 id="content33">문의내역
 <c:if test="${not empty loginID }">
-<button type="button" style="position:absolute;right:0;border:none; border-radius:5px; background-color:#87ceeb; color:white; font-size:20px; padding:5px;" id="insertQuestion" onclick="window.open('insertQuestionBusi?hospitalNumber=${hospital.hospitalNumber}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
+<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
 </c:if>
 </h4>
 <hr style="align:center; text-align:left; background-color: black;">
@@ -219,6 +227,12 @@
 			<div class="getQuestionResult" style="align:center; width:50%; text-align:left;"></div>
 			<hr style="align:center; width:1090px; text-align:left; padding-left: 20px;position:relative;">
 	</c:forEach>
+<br>
+<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+	<h4 id="content44">취소/환불</h4>
+	<hr style="align:center; text-align:left; background-color: black;">
+</div>
+<img src="resources/img/cancel.PNG">
 <br><br><br><br><br>
 
 </body>

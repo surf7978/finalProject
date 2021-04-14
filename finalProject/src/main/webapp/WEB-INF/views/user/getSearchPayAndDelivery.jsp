@@ -10,6 +10,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 <table border="1">
 	<thead>
 	<tr>
@@ -77,10 +79,16 @@
 	</tbody>
 </table>
 <br/>
-
+<button type="button" class="getSearchReservation" onclick="location.href='getSearchReservation?memberId=${loginID}'">캘린더조회</button>
 
 		
 <script>
+	$(function(){
+		$("#getSearchReservation").on("click", function(){
+			var pndNum = $(this).closest('tr').find('td').eq(0).text();
+			location.href="getSearchBuy?pndNumber="+pndNum;
+		})
+	});
 	$(function(){
 		$(".getSearchBuy").on("click", function(){
 			var pndNum = $(this).closest('tr').find('td').eq(0).text();
@@ -103,5 +111,6 @@
 	  	var gsWin = window.open("http://info.sweettracker.co.kr/tracking/5?t_key="+t_key1+"&t_code="+t_code1+"&t_invoice="+t_invoice1, "dview", "width=800,height=800");
 	}
 </script>
+</div>
 </body>
 </html>

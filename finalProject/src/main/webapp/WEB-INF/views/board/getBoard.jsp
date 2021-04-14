@@ -11,13 +11,27 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
-#content {
-	display: flex;
-	justify-content: center;
-	width: 40%;
-	margin: 0 auto;
+input.back{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#6EDCDC;
 }
-
+input.update{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#3296D7;
+}
+input.delete{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#FF6464;
+}
 #title {
 	font-family: sans-serif;
 	background-color: #e9e9e9;
@@ -27,9 +41,7 @@ table td {
 	padding-left: 10px;
 }
 
-#image {
-	background-image: 100px 100px;
-}
+
 </style>
 <body>
 	<div id="pro_contentwrap">
@@ -62,12 +74,12 @@ table td {
 			</table>
 		</div>
 		<hr>
-		<div>
+		<div  class="image"  style="text-align:left; width:500px;">
 			<img id="image" src="resources/images/board1/${board.image }">
 		</div>
 		<br>
 		<br>
-		<div id="content">
+		<div style="text-align:left; width:500px;">
 
 			<p>${board.content }</p>
 		</div>
@@ -75,13 +87,15 @@ table td {
 	</div>
 
 	<div>
-		<input type="button"
+	<form action="deleteBoard?boardNumber=${board.boardNumber}"
+			method="post">
+		<input type="button" class="update"
 			onclick="location.href='updateBoard?boardNumber=${board.boardNumber}'"
 			value="수정하기">
 
-		<form action="deleteBoard?boardNumber=${board.boardNumber}"
-			method="post">
-			<input type="submit" value="삭제하기">
+			<input class="delete" type="submit" value="삭제하기">
+			<input class="back" type="button" value="뒤로가기" onclick="location.href='getSearchBoardCategiry1'" >
+			
 		</form>
 	</div>
 

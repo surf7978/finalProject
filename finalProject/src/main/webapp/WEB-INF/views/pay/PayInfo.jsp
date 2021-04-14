@@ -49,6 +49,8 @@
 </script>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 	<form name="frm" id="frm" action="insertPayProduct" method="post">
 		<input value="${count }" name="count"> 
 		<input name="category">
@@ -65,5 +67,6 @@
 		<input name="optionName" value="${product.optionName }">
 		<input name="price" value="${resultPrice }">
 	</form>
+</div>
 </body>
 </html>

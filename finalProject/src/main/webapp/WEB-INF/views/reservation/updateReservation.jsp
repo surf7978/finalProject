@@ -42,12 +42,24 @@ ul li:hover {
 	});
 	//현재날짜, 현재시간 문자로 출력
 	var today = new Date();
-	var curDate = today.getFullYear() + "" + (today.getMonth() + 1) + ""+ today.getDate();
+	if((today.getMonth() + 1)<10){
+		if(today.getDate()<10){
+			var curDate = today.getFullYear() + "0" + (today.getMonth() + 1) + "0"+ today.getDate();
+		}else{
+			var curDate = today.getFullYear() + "0" + (today.getMonth() + 1) + ""+ today.getDate();
+		}
+	}else{
+		if(today.getDate()<10){
+			var curDate = today.getFullYear() + "" + (today.getMonth() + 1) + "0"+ today.getDate();
+		}else{
+			var curDate = today.getFullYear() + "" + (today.getMonth() + 1) + ""+ today.getDate();
+		}
+	}
 	var curTime = today.getHours();
-	
+	console.log(curDate);
 	//datepicker 설정
 	$.datepicker.setDefaults({
-		dateFormat : 'yymd',
+		dateFormat : 'yymmdd',
 		prevText : '이전 달',
 		nextText : '다음 달',
 		monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월',

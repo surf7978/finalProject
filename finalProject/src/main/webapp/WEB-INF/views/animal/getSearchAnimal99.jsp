@@ -8,19 +8,32 @@
 <title>마이펫수첩 반려동물 리스트</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+table , tr, td{
+		border: 1px;
+		padding : 10px;
+		text-align:center;
+			  }
+</style>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
+	<h3 align="center">관리자-반려동물 현황</h3>
+	<br><br>
 	<table border="1">
 		<thead>
 		<tr>
-			<th>번호</th>
-			<th>이름(애칭)</th>
-			<th>주인</th>
-			<th>견종</th>
-			<th>성별</th>
-			<th>생일</th>
-			<th>관리</th>
-			<th>생애주기 의료수첩</th>
+			<th style="width:80px; font-size:20px;">번호</th>
+			<th style="width:150px; font-size:20px;">이름(애칭)</th>
+			<th style="width:100px; font-size:20px;">주인</th>
+			<th style="width:80px; font-size:20px;">성별</th>
+			<th style="width:150px; font-size:20px;">견종</th>
+			<th style="width:100px; font-size:20px;">생일</th>
+			<th style="width:150px; font-size:20px;">관리</th>
+			<!-- 
+			<th style="font-size:18px;">생애주기 의료수첩</th>
+			 -->
 		</tr>
 		</thead>
 		<tbody>
@@ -32,16 +45,20 @@
 			<td>${ani.gender}</td>
 			<td>${ani.kind}</td>
 			<td>${ani.birth}</td>
-			<td><input type="button" value="정보수정" onclick="location.href='updateAnimal?animalNumber='+${ani.animalNumber}">
-				
+			<td><input type="button" value="조회"  onclick="location.href='updateAnimal?animalNumber='+${ani.animalNumber}" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#8fbc8f; color:white;">
+				<input type="button" value="삭제" onclick="location.href='deleteAnimal?animalNumber='+${ani.animalNumber}" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#ff6347; color:white;">
 			</td>
+			<!-- 
 			<td>
-				<input type="button" value="수첩보기" onclick="/">
-				<input type="button" value="삭제" onclick="location.href='deleteAnimal?animalNumber='+${ani.animalNumber}">
+				<input type="button" value="수첩보기" onclick="/" style="padding:5px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">
 			</td>
+			 -->
 		<tr>
 		</c:forEach>	
 	</table>
+	<!-- 
 	<input type="button" value="반려견 추가등록" onclick="location.href='insertAnimal'">
+	 -->
+</div>
 </body>
 </html>

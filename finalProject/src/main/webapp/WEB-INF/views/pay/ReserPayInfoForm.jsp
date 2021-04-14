@@ -39,11 +39,8 @@
 			}
 		})
 		//배송비 포함 설정
-		if(${map.resultPrice } >=10000){
-			$("[name=resultPrice]").val(${map.resultPrice });
-		}else{
-			$("[name=resultPrice]").val(${map.resultPrice } + 2500);			
-		}
+		$("[name=resultPrice]").val(${map.resultPrice });
+		
 	});
 	
 </script>
@@ -68,8 +65,7 @@
 					<tr>
 						<td><nav><img src="resources/images/business/${vo.image1}"></nav><strong></strong></td>
 						<td rowspan="2" class="ship">
-							<c:if test="${map.resultPrice >= 10000 }">무료배송</c:if>
-							<c:if test="${map.resultPrice < 10000 }">2500</c:if>
+							무료배송
 						</td>
 						<td rowspan="2">${map.resultPrice }</td>
 					</tr>

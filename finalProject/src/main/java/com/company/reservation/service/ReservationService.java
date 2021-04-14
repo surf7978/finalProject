@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ReservationService {
 	public ReservationVO getReservation(ReservationVO vo);	//예약 단건 조회
-	public List<ReservationVO> getSearchReservation(ReservationVO vo);	//예약리스트 전체조회
+	public List<ReservationVO> getSearchReservation(ReservationVO vo);	// 회원별 예약리스트 전체조회
 	public int updateReservation(ReservationVO vo);	//예약하기(날짜선택 & 결제완료(예약 전)->예약완료로 변경)
 	public int deleteReservation(ReservationVO vo);	//예약취소(환불과 연결)
 	
