@@ -18,7 +18,7 @@
 			border-radius:5px;
 			border:none;
 			color: white;
-			background-color:#778899;
+			background-color:#5ABEF5;
 		}
     /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}
@@ -76,7 +76,8 @@ ${getSearchQuestionSelect2.title}
 </tbody>
 </table>
 <br>
-<input class="back" type = "button" value="관리자메뉴" onclick="location.href='getSearchCr4'">
+</div>
+<input class="back" type = "button" value="관리자메뉴" onclick="location.href='getSearchQuestionSelect2'">
     
 </body>
 </html>
