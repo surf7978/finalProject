@@ -10,4 +10,5 @@ public interface HospitalService {
 	public int updateHospital(HospitalVO vo);	//병원상품수정
 	public int deleteHospital(HospitalVO vo);	//병원상품삭제
 	public int getCount(HospitalVO vo);// 레코드 조회
+	public List<HospitalVO> getSearchHospital99(HospitalVO vo);	//아작스 전체 리스트
 }

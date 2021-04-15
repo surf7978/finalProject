@@ -407,14 +407,14 @@ public class Controller1 {
 			vo.setT_image(rename.getName());
 		}
 		hospitalService.updateHospital(vo);
-		return "redirect:/getSearchHospital";
+		return "redirect:/getSearchHospital99";
 	}
 	
 	// 병원상품 삭제
 	@GetMapping("/deleteHospital")
 	public String deleteHospital(HospitalVO vo) {
 		hospitalService.deleteHospital(vo);
-		return "redirect:/getSearchHospital";
+		return "redirect:/getSearchHospital99";
 	}
 	
 	//마이페이지 사이드바 출력(jsp:include해서 이제 이건 사용안함)
@@ -508,7 +508,7 @@ public class Controller1 {
 		paging.setTotalRecord(hospitalService.getCount(vo));
 		vo.setStart(paging.getFirst());
 		vo.setEnd(paging.getLast());
-		List<HospitalVO> list = hospitalService.getSearchHospital(vo);
+		List<HospitalVO> list = hospitalService.getSearchHospital99(vo);
 		map.put("paging", paging);
 		map.put("list", list);
 		//

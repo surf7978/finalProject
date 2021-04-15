@@ -405,7 +405,7 @@ public class Controller2 {
 			vo.setT_image(rename.getName());
 		}
 		hospitalService.insertHospital(vo);
-		return "redirect:/getSearchHospital";
+		return "redirect:/getSearchHospital99";
 	}
 
 	// 상세조회에서 구매평 등록페이지 이동
