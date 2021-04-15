@@ -20,8 +20,6 @@
 		pay();
 		//전체 체크박스
 		totalCheckBox();
-		//한개라도 채크되면 해제되게
-		oneCheck();
 	})//end of function
 	
 	
@@ -121,15 +119,13 @@
 	}//end of totalCheckBox
 	
 	//한개라도 채크해제시 전체 채크박스 해제
-	function oneCheck(){
 		$(".chk").on("click",function(){
-			if($("input[name='check']:checked").length == 3){
+			if($(".chk:checked").length < $('.chk').length){
 				$("#totalCheck").prop("checked",true);
 			}else{
 				$("#totalCheck").prop("checked",false);
 			}
 		})	//end of chk
-	}//end of oneCheck
 	
 	//채크박스 된 것들 삭제
 	function totalCheckDelete(){
@@ -147,7 +143,7 @@
 			<table>
 				<thead>
 					<tr>
-						<th><input type="checkbox" id="totalCheck"></th>
+						<th><input type="checkbox" class="chk" id="totalCheck"></th>
 						<th colspan="3">상품정보</th>
 						<th>상품금액</th>
 						<th>배송비</th>
