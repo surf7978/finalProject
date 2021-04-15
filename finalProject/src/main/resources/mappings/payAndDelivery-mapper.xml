@@ -31,6 +31,14 @@
 	<select id="getSearchPayAndDelivery99" resultType="PayAndDeliveryVO">
 	SELECT *
 	FROM PAYANDDELIVERY
-	</select>	
+	</select>
+	
+	<!-- 관리자의 배송정보 입력 -->	
+	<update id="updateDelivery" parameterType="PayAndDeliveryVO">
+		UPDATE PAYANDDELIVERY SET 
+		COURIERCOMPANY = #{courierCompany}
+		, INVOICENUMBER = #{invoiceNumber}
+		WHERE PNDNUMBER=#{pndNumber}
+	</update>
 	
 </mapper>

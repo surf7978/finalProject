@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,14 +168,14 @@ hospital.businessNumber : ${hospital.businessNumber}
 								<dl>
 									<dt>초대가</dt>
 									<dd>
-										<strong>${hospital.price }원</strong>
+										<strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${hospital.price }"/>원</strong>
 									</dd>
 								</dl>
 							</div>
 							<div>
 								<select name="optionName" id="optionName">
 									<option value="" selected disabled>상품선택</option>
-									<option>${hospital.optionName }(${hospital.price }원)</option>
+									<option>${hospital.optionName }(<fmt:formatNumber type="number" maxFractionDigits="3" value="${hospital.price }"/>원)</option>
 								</select>
 							</div>
 							<div id="pro_show"></div>

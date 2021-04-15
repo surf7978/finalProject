@@ -6,9 +6,9 @@ import lombok.Data;
 public class PayAndDeliveryVO {
 	String pndNumber;
 	String category;
-	String courierCompany;
+	String courierCompany;	//택배회사 코드
 	String payDate;
-	String invoiceNumber;
+	String invoiceNumber;	//송장번호
 	String sumPrice;
 	String memberId;
 	
