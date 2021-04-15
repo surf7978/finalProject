@@ -54,6 +54,8 @@ import com.company.question.service.QuestionVO;
  * 21.04.12 통합 페이지 동적테스트 / 사업자-게시글CRUD 1차 수정(동적 테이블 생성 script)
  * 21.04.13 장바구니 1차 / 사업자-게시글CRUD 2차(전체조회,삭제,등록)
  * 21.04.14 장바구니 2차 / 사업자-게시글CRUD 3차(단건조회,수정)
+ * 21.04.15 장바구니 3차(토탈 장바구니로 변경) / 사업자-게시글CRUD 3차 수정(조회,삭제)
+ * 21.04.16 장바구니 4차(채크박스,수량버튼) / 차트 1차
  */
 @Controller
 public class Controller5 {
