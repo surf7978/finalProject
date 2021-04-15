@@ -381,7 +381,7 @@ public class Controller1 {
 		// 첨부파일처리
 		MultipartFile image = vo.getUploadFile();
 		MultipartFile t_image = vo.getT_uploadFile();
-		String path = request.getSession().getServletContext().getRealPath("resources/imgages/hospital/");
+		String path = request.getSession().getServletContext().getRealPath("resources/images/hospital/");
 		System.out.println("경로: " + path);
 		if (image != null && !image.isEmpty() && image.getSize() > 0) {
 			String filename = image.getOriginalFilename();
