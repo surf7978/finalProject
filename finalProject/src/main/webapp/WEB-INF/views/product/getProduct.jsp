@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function() {
 		$("#optionName").on(
@@ -30,6 +31,7 @@
 						var result = $("<dd>").text("${product.optionPrice }").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
 						$("#pro_result").append(restrong, result);
 					}
+					$("#optionName option").prop("selected", false);
 				})
 		/* count + result 총 합계금액 */
 		$("#pro_show").on("click","input[type=number]", function(){
@@ -43,11 +45,21 @@
 			var resultPrice = $("[name=resultPrice]").text();
 			var count = $("[name=count]").val();
 			var pro = $("#pro_result").text();
+			var loginId = $("[name=memberId]").val();
+			//상품선택 로그인 체크
 			if(pro == ""){
 				alert("상품을 선택해주세요");
+			}else if(!loginId){
+				var result = confirm("로그인해주세요");
+				if(result==true){
+					location.href="loginForm";
+				}else{
+					return false;
+				}
 			}else{
 				location.href="PayInfoForm?productNumber=${product.productNumber }&resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count;
 			}			
+					
 		});
 		
 		$("#d_btn").on("click",function(){
@@ -65,14 +77,16 @@
 </head>
 <body>
 	<div id="contents">
-	<div>
-		<button id="u_btn">수정하기</button>
-		<button id="d_btn">삭제하기</button></div>
+		<div>
+			<button id="u_btn">수정하기</button>
+			<button id="d_btn">삭제하기</button>
+		</div>
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
-					<input value="${product.productNumber }" type="hidden" name="productNumber">
-					<input value="2500" type="hidden" name="cartCourier">
+					<input value="${product.productNumber }" type="hidden"
+						name="productNumber"> <input value="2500" type="hidden"
+						name="cartCourier">
 					<c:if test="${not empty loginID }">
 						<input value="${loginID }" type="hidden" name="memberId">
 					</c:if>
@@ -100,7 +114,7 @@
 							</div>
 							<div>
 								<select name="optionName" id="optionName">
-									<option value="" selected disabled>상품선택</option>
+									<option value="">상품선택</option>
 									<option>${product.optionName }(${product.optionPrice }원)</option>
 								</select>
 							</div>
@@ -124,9 +138,9 @@
 					</ul>
 				</div>
 				<div id="content">
-				<c:forTokens items="${product.image }" delims="," var="file">
-					<img src="resources/images/products/${file }">
-				</c:forTokens>					
+					<c:forTokens items="${product.image }" delims="," var="file">
+						<img src="resources/images/products/${file }">
+					</c:forTokens>
 				</div>
 			</div>
 		</div>

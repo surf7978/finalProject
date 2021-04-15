@@ -20,6 +20,26 @@
     <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/style.css" type="text/css">
 </head>
+<style>
+	#top_btn{position:fixed;right:0;bottom:60px;width:40px;height:40px;background:#e7ab3c;text-align:center;color:#fff;line-height:40px;cursor:pointer;display:none;font-size:13px;}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$(window).scroll(function(){
+			if($(this).scrollTop() > 300){
+				$("#top_btn").fadeIn();
+			}else{
+				$("#top_btn").fadeOut();
+			}
+		});
+		$("#top_btn").click(function(){
+			 $("html, body").animate({
+                 scrollTop : 0
+             }, 500);
+		})
+	})
+</script>
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -395,7 +415,10 @@
 		</div>
 	</footer>
 	<!-- Footer Section End -->
-	
+	<!-- topbutton -->
+	<div id="top_btn">
+		TOP
+	</div>
 
     <!-- Js Plugins -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -45,6 +45,16 @@
 		}else{
 			$("[name=resultPrice]").val(${resultPrice } + 2500);			
 		}
+		//count 클릭시 이벤트
+		$("[name=count]").on("click", function(){
+			var count = $(this).val();
+			var result = ${resultPrice} * count;
+			if(result >=10000){
+				$("[name=resultPrice]").val(result);
+			}else{
+				$("[name=resultPrice]").val(result + 2500);			
+			}			
+		})
 	});
 	
 </script>
@@ -54,8 +64,8 @@
 	<div id="contents">
 			<h1>바로구매</h1>
 		<form method="post" id="frm" action="PayInfo">
-		<input value="${product.memberId }" name="fromPerson">
-		<input value="${product.productNumber }" name="productNumber">
+		<input value="${product.memberId }" name="fromPerson" type="hidden">
+		<input value="${product.productNumber }" name="productNumber" type="hidden">
 			<div id="pay_wrap">
 			<table border="1">
 				<thead>
@@ -69,13 +79,13 @@
 					<tr>
 						<td><nav><img src="resources/images/products/${product.t_image }"></nav><strong>${product.optionName }</strong></td>
 						<td rowspan="2" class="ship">
-							<c:if test="${resultPrice >= 10000 }">무료배송</c:if>
+							<c:if test="${resultPrice >= 10000 }"><a style="color:#e7ab3c">:무료배송</a></c:if>
 							<c:if test="${resultPrice < 10000 }">2500</c:if>
 						</td>
 						<td rowspan="2">${resultPrice }</td>
 					</tr>
 					<tr>
-						<td>${product.optionName }<div><input type="number" value="${count }" name="count" style="width:50px;">${product.optionPrice }</div></td>
+						<td>${product.optionName }<div><input type="number" value="${count }" min="1" name="count" style="width:50px;">${product.optionPrice }</div></td>
 					</tr>
 					<tr>
 						<td>합계금액</td>
@@ -86,8 +96,8 @@
 				</tbody>
 			</table>
 			<div> 
-			<div id="pay" style="text-align:left;"><h3>배송지 정보</h3><input type="checkbox" name="addcheck" id="addcheck"><label for="addcheck">구매자 정보와 동일</label></div>
-				<table border="1">
+			<div id="pay" style="text-align:left;"><h4>배송지 정보</h4><input type="checkbox" name="addcheck" id="addcheck"><label for="addcheck">구매자 정보와 동일</label></div>
+				<table border="1" id="add_wrap">
 					<tr>
 						<th>이름</th>
 						<td><input type="text" name="name" required></td>
