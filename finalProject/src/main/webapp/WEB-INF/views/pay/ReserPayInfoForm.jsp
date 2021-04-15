@@ -11,33 +11,6 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
 	$(function(){
-		//주소검색
-		$("#addbtn").on("click", function(){
-			new daum.Postcode({
-				oncomplete: function(data) {
-					$('[name=post]').val(data.zonecode); // 우편번호 (5자리)
-					$('[name=address]').val(data.address);
-					$('[name=address2]').val(data.buildingName);
-				}
-			}).open();
-		})
-		//c체크박스 주소 불러오기
-		$("#pay_wrap").on("click", "input:checkbox[name=addcheck]", function(){
-			console.log(this);
-			if($("input:checkbox[name=addcheck]").is(":checked") == true){
-				$("input[name=name]").val('${member.name}');
-				$("input[name=phone]").val('${member.phone}');
-				$("input[name=address]").val('${member.address}');
-				$("input[name=address2]").val('${member.address2}');
-				$("input[name=post]").val('${member.post}');
-			}else{
-				$("input[name=name]").val('');
-				$("input[name=phone]").val('');
-				$("input[name=address]").val('');
-				$("input[name=address2]").val('');
-				$("input[name=post]").val('');
-			}
-		})
 		//배송비 포함 설정
 		$("[name=resultPrice]").val(${map.resultPrice });
 		
@@ -49,8 +22,8 @@
 	<div id="contents">
 			<h1>바로구매</h1>
 		<form method="post" id="frm" action="ReserPayInfo">
-		<input value="${member.memberId }" name="memberId">
-		<input value="${vo.seq }" name="bizNumber">
+		<input value="${loginID }" name="memberId">
+		<input value="${vo.seq }" name="bisNumber">
 		<input value="${vo.businessNumber }" name="businessNumber">
 			<div id="pay_wrap">
 			<table border="1">
