@@ -70,7 +70,7 @@
 		</c:if>
 		<c:if test="${pad.category != '70' }">
 		<c:if test="${pad.buyState !='환불완료' }">
-		<td><button type="button" class="updateReservation" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','updateReservation','width=500, height=500')">예약하기</button></td>
+		<td><button type="button" class="updateReservation" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','updateReservation','width=550, height=500')">예약하기</button></td>
 		</c:if>
 		</c:if>
 		
