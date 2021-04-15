@@ -10,4 +10,5 @@ public interface HospitalMapper {
 	public List<HospitalVO> getSearchHospital(HospitalVO vo);
 	public int updateHospital(HospitalVO vo);
 	public int deleteHospital(HospitalVO vo);
+	public int getCount(HospitalVO vo);// 레코드 조회
 }

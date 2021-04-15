@@ -38,6 +38,10 @@ public class HospitalServiceimpl implements HospitalService{
 	public int deleteHospital(HospitalVO vo) {
 		return hospitalMapper.deleteHospital(vo);
 	}
+	@Override
+	public int getCount(HospitalVO vo) {
+		return hospitalMapper.getCount(vo);
+	}
 
 
 }

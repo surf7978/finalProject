@@ -49,7 +49,6 @@
 		</ul>
 		</div>
 		<div id="paging"></div>
-		
 	</div>
 </body>
 </html>
