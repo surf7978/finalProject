@@ -254,7 +254,7 @@
 						<li class="active"><a href="./index.html">Home</a></li>
 						 -->
 						<li><a href="getSearchProductForm">쇼핑몰</a></li>
-						<li><a href="getSearchHospital">병원</a></li>
+						<li><a href="getSearchHospitalForm99">병원</a></li>
 						<li><a href="getSearchListForm?menu=1">카페/호텔/펫택시</a>
 						<!-- 
 							<ul class="dropdown">
@@ -274,7 +274,7 @@
 						<li><a href="getAbanList">보호소</a></li>	
 						<li><a>커뮤니티</a>
 							<ul class="dropdown">
-								<li><a href="getSearchEventAndNoticeSelectForm?category=2">공지사항</a></li>
+								<li><a href="getSearchEventAndNoticeSelect2">공지사항</a></li>
 								<li><a href="getSearchEventAndNoticeSelectForm?category=1">이벤트</a></li>
 								<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
 								<li><a href="getSearchBoardCategiry2Form">자랑하기</a></li>
@@ -294,6 +294,7 @@
 							</ul></li>
 								<c:if test="${not empty loginID}">
 						<li><a href="myPageSideBar">마이페이지</a>
+						<!-- 
 							<ul class="dropdown">
 										<li><a href="getSearchQuestion">문의내역보기</a></li>
 										<li><a href="getSearchAnswer">답변내역보기</a></li>
@@ -323,6 +324,7 @@
 										</c:if>
 										<li><a href="logout">로그아웃</a></li>
 							</ul>
+						 -->
 						</li>
 								</c:if>
 					</ul>

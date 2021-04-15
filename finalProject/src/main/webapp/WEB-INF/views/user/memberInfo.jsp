@@ -130,12 +130,14 @@
 		&nbsp;
 		<button type="button" onclick="location.href='/finalProject'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 		<br><br>
+		<!-- 
 		<c:if test="${loginID ne 'admin'}">
 			<a href="membershipCancel?ID=${member.memberId}">탈퇴</a>
 		</c:if>
 		<c:if test="${loginID eq 'admin'}">
 			<a href="deleteMember99?ID=${member.memberId}">탈퇴</a>
 		</c:if>
+		 -->
 	</form>
 </div>
 </body>

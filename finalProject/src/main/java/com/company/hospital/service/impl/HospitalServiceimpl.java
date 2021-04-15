@@ -38,6 +38,16 @@ public class HospitalServiceimpl implements HospitalService{
 	public int deleteHospital(HospitalVO vo) {
 		return hospitalMapper.deleteHospital(vo);
 	}
+	@Override
+	public int getCount(HospitalVO vo) {
+		return hospitalMapper.getCount(vo);
+	}
+	
+	//아작스 전체리스트9
+	@Override
+	public List<HospitalVO> getSearchHospital99(HospitalVO vo) {
+		return hospitalMapper.getSearchHospital99(vo);
+	}
 
 
 }

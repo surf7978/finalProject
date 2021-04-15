@@ -23,7 +23,7 @@
 		<th>구매상태</th>
 		<th>송장번호</th>
 		<th>상세조회</th>
-		<th>배송조회</th>
+		<th>배송입력</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -69,7 +69,7 @@
 		<input type="hidden" id="t_key" name="t_key" value="ooo6aOm5bqvE5wog0VTMGQ">
 		<input type="hidden" name="t_code" id="t_code" value="${pad.courierCompany}">
 		<input type="hidden" name="t_invoice" id="t_invoice" value="${pad.invoiceNumber}">
-		<button type="button" onclick="dview()">배송조회</button>
+		<button type="button" onclick="window.open('updateDelivery?pndNumber=${pad.pndNumber}','updateDelivery','width=400, height=300')">배송입력</button>
 		</td>
 		</c:if>
 		</c:if>

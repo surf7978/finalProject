@@ -2,7 +2,9 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+
 import java.util.List;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,10 +22,12 @@ import com.company.answer.service.AnswerVO;
 import com.company.board.service.BoardService;
 import com.company.board.service.BoardVO;
 import com.company.common.FileRenamePolicy;
+import com.company.common.Paging;
 import com.company.eventAndNotice.service.EventAndNoticeService;
 import com.company.eventAndNotice.service.EventAndNoticeVO;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
+
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -602,7 +606,7 @@ public class Controller4 {
 		model.addAttribute("getSearchQuestionCr4" , questionService.getSearchQuestionCr4(vo));
 		return "admin/getSearchQuestionCr4";
 	}
-	@RequestMapping("/getSearchQuestionSelect1")	//1번은 상품문의 전체조회
+	@RequestMapping("/getSearchQuestionSelect1")	//2번은 고객센터문의
 	public String getSearchQuestionSelect1(QuestionVO vo, Model model) {
 		model.addAttribute("getSearchQuestionSelect1", questionService.getSearchQuestionSelect1(vo));
 		return "admin/getSearchQuestionSelect1";

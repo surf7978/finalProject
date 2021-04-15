@@ -7,7 +7,11 @@
 	<select id="getCount" resultType="int">
 		SELECT COUNT(*)
 		FROM QUESTION
-		<!-- 수정필요 -->
+	</select>
+	<!--  -->
+	<select id="getCountList1" resultType="int">
+	SELECT COUNT(*)
+	FROM GETSEARCHLIST1
 	</select>
 	<!-- 사업자가 관리자에게 문의내역 등록 -->
 	<insert id="insertQuestion">
@@ -66,7 +70,9 @@
 	<select id="getSearchQuestionCr4" resultType="questionVO">	<!-- 문의하기 전체조회 -->
 		SELECT * FROM QUESTION
 	</select>
-	<select id="getSearchQuestionSelect1" resultType="questionVO"> <!-- 1번 상품문의전체조회 -->
+	
+
+	<select id="getSearchQuestionSelect1" resultType="questionVO">
 		SELECT * FROM QUESTION
 		WHERE CATEGORY=1
 		AND TOPERSON='admin'

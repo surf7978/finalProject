@@ -274,6 +274,7 @@ public class Controller5 {
 	}
 
 	// 사업자-통합리스트
+	//
 	@GetMapping("/getSearchList1")
 	@ResponseBody
 	public Map<String, Object> getSearchList1(CafeSearchVO vo, Paging paging) {
@@ -431,12 +432,6 @@ public class Controller5 {
 		return map;
 	}
 
-	// 장바구니-폼
-	@GetMapping("/getSearchCartForm")
-	public String getSearchCartForm() {
-		return "cart/getSearchCartForm";
-	}
-
 	// 장바구니-CRUD
 	@GetMapping("/insertCart") // 등록
 	public void insertCart(CartVO vo) {
@@ -453,18 +448,17 @@ public class Controller5 {
 		cartService.deleteCart(vo);
 	}
 
-	// start of bCart
-	// 사업자 장바구니-페이지 호출
-	@GetMapping("/getSearchBCart")
-	public String getSearchBCart(BCartVO vo) {
-		return "bCart/getSearchBCart";
+	// 통합 장바구니 폼 페이지
+	@GetMapping("/getSearchTotalCartForm")
+	public String getSearchTotalCartForm(BCartVO vo) {
+		return "totalCart/getSearchTotalCartForm";
 	}
 
 	// 장바구니-페이지 기능
-	@PostMapping("/getSearchBCart")
+	@GetMapping("/getSearchTotalCart")
 	@ResponseBody
-	public List<BCartVO> getSearchBCartProc(BCartVO vo) {
-		List<BCartVO> list = bCartService.getSearchBCart(vo);
+	public List<BCartVO> getSearchTotalCart(CartVO vo) {
+		List<BCartVO> list = bCartService.getSearchTotalCart(vo);
 		return list;
 	}
 

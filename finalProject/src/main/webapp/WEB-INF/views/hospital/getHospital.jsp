@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,14 +168,14 @@ hospital.businessNumber : ${hospital.businessNumber}
 								<dl>
 									<dt>초대가</dt>
 									<dd>
-										<strong>${hospital.price }원</strong>
+										<strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${hospital.price }"/>원</strong>
 									</dd>
 								</dl>
 							</div>
 							<div>
 								<select name="optionName" id="optionName">
 									<option value="" selected disabled>상품선택</option>
-									<option>${hospital.optionName }(${hospital.price }원)</option>
+									<option>${hospital.optionName }(<fmt:formatNumber type="number" maxFractionDigits="3" value="${hospital.price }"/>원)</option>
 								</select>
 							</div>
 							<div id="pro_show"></div>
@@ -226,7 +227,9 @@ hospital.businessNumber : ${hospital.businessNumber}
 <div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
 <h4 id="content33">문의내역
 <c:if test="${not empty loginID }">
+<c:if test="${loginAuth eq 'm' }">
 <button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
+</c:if>
 </c:if>
 </h4>
 <hr style="align:center; text-align:left; background-color: black;">
