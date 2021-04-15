@@ -68,7 +68,7 @@
 	//tr태그 
 	function makeTr(item){
 		return $("<tr>")
-		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
+		.append($("<td><input type='checkbox' name='check'></td>"))
 		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
 		.append($("<td>").html(item.name))
 		.append($("<td>").html(item.optionName))
@@ -76,6 +76,7 @@
 		.append($("<td>").html("무료"))
 		.append($("<td>").html(item.optionPrice+"원"))
 		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
+		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
 	}//end of makeTr
 	
 	function shopping(){
@@ -109,8 +110,8 @@
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2">상품명</th>
-					<th>상품옵션</th>
+					<th><input type="checkbox"></th>
+					<th colspan="3">상품정보</th>
 					<th>상품금액</th>
 					<th>배송비</th>
 					<th>합계금액</th>
