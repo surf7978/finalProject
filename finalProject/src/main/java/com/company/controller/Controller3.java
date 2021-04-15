@@ -298,13 +298,14 @@ public class Controller3 {
 
 	// 사업체 결제폼
 	@RequestMapping("/ReserPayInfoForm")
-	public String ReserPayInfoForm(Model model, String resultPrice, String count, IntegratedVO vo,
+	public String ReserPayInfoForm(Model model, String resultPrice, MemberVO mvo, String count, IntegratedVO vo,
 			String seq) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("count", count);
 		map.put("resultPrice", resultPrice);
 		vo = integratedService.getIntegrated(vo);
 		// member 불러오기
+		model.addAttribute("member", memberService.getMember(mvo));
 		// 제품 불러오기
 		model.addAttribute("vo", vo);
 		model.addAttribute("map", map);
@@ -329,8 +330,9 @@ public class Controller3 {
 
 	// 병원 결제form
 	@RequestMapping("/HospitalPayInfoForm")
-	public String HospitalPayInfoForm(Model model, PayVO pvo, HospitalVO hosvo, String resultPrice) {
+	public String HospitalPayInfoForm(Model model, MemberVO mvo, PayVO pvo, HospitalVO hosvo, String resultPrice) {
 		// member 불러오기
+		model.addAttribute("member", memberService.getMember(mvo));
 		// 제품 불러오기
 		pvo.setResultPrice(resultPrice);
 		model.addAttribute("pvo", pvo);
