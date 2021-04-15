@@ -54,7 +54,8 @@
 					"phone":$("#phone").val()
 					},
 				success:function(data){
-					$("#searchPWResult").append("<input id='password' name='password' style='width:400px; border:1;'  placeholder='변경할 비밀번호 입력'>");
+					$("#searchPWResult").append("<input type='password' id='password' name='password' style='width:400px; border:1;'  placeholder='변경할 비밀번호 입력'>");
+					$("#searchPWResult").append("<input type='password' id='passwordCheck' name='passwordCheck' style='width:400px; border:1;'  placeholder='변경할 비밀번호 확인'>");
 					$("#searchPWResult").append("<button type='button' onclick='changePW1()'>변 경</button>&nbsp;&nbsp;");
 					$("#searchPWResult").append("<button type='button' onclick='changePWCancel()'>취 소</button>");
 				}
@@ -65,7 +66,11 @@
 <!-- 비밀번호 변경 -->
 <script>
 	function changePW1(){
-		location.href="changePW?memberId="+businessId.value+"&password="+password.value;
+		if(password.value==passwordCheck.value){
+			location.href="changePW?memberId="+businessId.value+"&password="+password.value;
+		}else{
+			alert("비밀번호가 일치하지 않습니다.")
+		}
 	}
 	function changePWCancel(){
 		$("#searchPWResult").empty();

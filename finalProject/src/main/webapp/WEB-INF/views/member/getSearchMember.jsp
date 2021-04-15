@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <div style="width:60%;">
@@ -50,25 +51,25 @@
 
 
  <td>
- <form action="membershipCancel?ID=${list.memberId}" method="post">
+ <form onsubmit="return checkMembershipCancel()" action="membershipCancel">
+ <input type="hidden" id="ID" name="ID" value="${list.memberId}">
  <button type="submit" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#ff6347; color:white;">삭 제</button>
  </form>
  </td> 
 </tr> 
 </c:forEach>
 </table>
-<!-- 
-<a href="/finalProject">홈으로 돌아가기</a> 
- -->
 </div>
-
- <!--페이지 넘기는 기능 , 검색기능 추가해야 합니다. 태현이형 로그인의  for each if 관리자를 받아서
- 관리자로 로그인후 나타나는 페이지    -->
-
-
-
-	
-
 </div>	
 </body>
+<script>
+	//관리자 탈퇴 질척임
+	function checkMembershipCancel(){
+		var YnN = confirm("탈퇴 시키겠습니까?");
+		if(YnN){
+			return true;
+		}
+		return false;
+	}
+</script>
 </html>
