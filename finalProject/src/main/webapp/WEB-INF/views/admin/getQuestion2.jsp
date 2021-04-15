@@ -100,7 +100,7 @@
 					
 						<div class="send">
                         <input class="send" type = "button" value="답장하기" onclick="location.href='getQuestion2Ans?questionNumber=${getQuestion2.questionNumber}'">
-                        <input class="back" type = "button" value="뒤로가기" onclick="location.href='getSearchQuestionCr4'">
+                       
                         
                         </div>
 

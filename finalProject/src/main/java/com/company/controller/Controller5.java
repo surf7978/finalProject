@@ -274,6 +274,7 @@ public class Controller5 {
 	}
 
 	// 사업자-통합리스트
+	//
 	@GetMapping("/getSearchList1")
 	@ResponseBody
 	public Map<String, Object> getSearchList1(CafeSearchVO vo, Paging paging) {

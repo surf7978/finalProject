@@ -75,7 +75,7 @@ a {
 	//들어온 매개변수 값이 null이 아니며 undefined도 아닐 때 input type hidden의 value값에 넣어준다는 의미
 	//그때 mapper에 있는 where 조건절이 실행되며 쿼리문이 정상 작동함
 	function getSearchList1(p,category1) {
-		//page버튼 누를시 p값으로 들어옴
+		//page버튼 누를시 p값으로 들어옴 시작 1페이지부터 
 		searchAndInsert.page.value = p;
 		if(category1 !=null && category1 !='undefined')
 			searchAndInsert.category1.value = category1;
