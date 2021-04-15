@@ -41,7 +41,7 @@
 		</table>
 		<button type="submit">수정</button>
 		<button type="button" onclick="window.close()">취소</button>
-		<button type="button" class="deleteNote">삭제</button>
+		<button type="button" id="deleteNote">삭제</button>
 	</form>
 	<script>
 	//select창
@@ -64,8 +64,15 @@
 			
 			//삭제버튼
 			$("#deleteNote").on("click", function(){
-				alert("정말 삭제하시겠습니까?");
-				window.close();
+				if(confirm("삭제하시겠습니까 ?") == true){
+					$(this).parent().parent().remove();
+					location.href='deleteNote?noteNumber='+${note.noteNumber };
+			        alert("삭제되었습니다");
+			        window.close();
+			        opener.location.reload();
+			    }else{
+			        return ;
+			    }
 			})			
 		});
 

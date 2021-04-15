@@ -39,7 +39,7 @@
 	<h3>병원 수정</h3>
 	<form id="frm" action="insertHospital" encType="multipart/form-data"
 		method="post">
-		<input type="text" id="businessNumber" name="businessNumber"
+		<input type="hidden" id="businessNumber" name="businessNumber"
 			value="${business.businessNumber }">
 		<table border="1">
 			<tr>
