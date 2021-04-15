@@ -99,7 +99,9 @@ table td {
 			value="수정하기">
 
 			<input class="delete" type="submit" value="삭제하기">
+			<!-- 
 			<input class="back" type="button" value="뒤로가기" onclick="location.href='getSearchBoardCategiry1'" >
+			 -->
 			
 		</form>
 	</div>

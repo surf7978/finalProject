@@ -104,18 +104,18 @@
 
 			<tr>
 				<td bgcolor=white>
+							<input type="hidden" id="writer" name="writer" size="20" value="${loginID }">
+							<input type="hidden" id="memberId" name="memberId" size="20" value="${loginID }">
 					<table class="table2">
-					<!-- 
+							<!-- 
 						<tr>
 							<td><input value="작 성 자" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><input type="hidden" id="writer" name="writer" size="20" value="${loginID }"></td>
 						</tr>
 
 						<tr>
 							<td><input value="아 이 디" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><input type="hidden" id="memberId" name="memberId" size="20" value="${loginID }"></td>
 						</tr>
-					 -->
+						 -->
 						
 						
 						<tr>

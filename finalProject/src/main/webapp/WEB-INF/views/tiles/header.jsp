@@ -274,6 +274,7 @@
 							</ul></li>
 								<c:if test="${not empty loginID}">
 						<li><a href="myPageSideBar">마이페이지</a>
+						<!-- 
 							<ul class="dropdown">
 										<li><a href="getSearchQuestion">문의내역보기</a></li>
 										<li><a href="getSearchAnswer">답변내역보기</a></li>
@@ -303,6 +304,7 @@
 										</c:if>
 										<li><a href="logout">로그아웃</a></li>
 							</ul>
+						 -->
 						</li>
 								</c:if>
 					</ul>

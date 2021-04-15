@@ -13,11 +13,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>카페/호텔/팻택시</span>
-                            <h1>??????</h1>
+                            <span>쇼핑몰</span>
+                            <h1>쇼핑몰 리스트</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                 incididunt ut labore et dolore</p>
-                            <a href="getSearchListForm?menu=1" class="primary-btn">Go Now</a>
+                            <a href="getSearchProductForm" class="primary-btn">Go Now</a>
                         </div>
                     </div>
                     <div class="off-card">
@@ -29,11 +29,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>병원</span>
-                            <h1>?????????</h1>
+                            <span>보호소</span>
+                            <h1>보호소 리스트</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                 incididunt ut labore et dolore</p>
-                            <a href="getSearchHospital" class="primary-btn">Go Now</a>
+                            <a href="getAbanList" class="primary-btn">Go Now</a>
                         </div>
                     </div>
                     <div class="off-card">
