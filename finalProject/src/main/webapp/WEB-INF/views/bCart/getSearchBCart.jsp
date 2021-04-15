@@ -48,13 +48,14 @@
 			var seqVal = $(this).closest("tr").find("#seq").val();
 			if (y){
 				$.ajax({
-					url:"deleteCart",
+					url:"deleteBCart",
 					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
 					dataType:"json",
 					success:function(response){
 						if(response == 1){
 							alert('삭제되었습니다.');
-						}
+							$(this).closest("tr").remove();
+						}//end of if
 					}//end of success
 				})//end of ajax
 			}//end of if
@@ -78,7 +79,7 @@
 			if(y){
 				history.go(-1);
 			}else{
-				alert("취소!");				
+				return false;	
 			}
 		});//end of shopping
 	}//end of shopping
@@ -89,7 +90,7 @@
 			if(y){
 				//location.href="";
 			}else{
-				alert("취소!");
+				return false;
 			}
 		})//end of pay
 	}//end of pay
