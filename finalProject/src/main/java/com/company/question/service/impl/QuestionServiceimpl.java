@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -155,11 +157,6 @@ public class QuestionServiceimpl implements QuestionService {
 		return QuestionMapper.deleteQuestion(vo);
 	}
 
-	// 레코드
-	@Override
-	public int getCount(QuestionVO vo) {
-		return QuestionMapper.getCount(vo);
-	}
 	
 	
 	//나경
@@ -178,5 +175,14 @@ public class QuestionServiceimpl implements QuestionService {
 	public QuestionVO getQuestionProbis(QuestionVO vo) {
 		return QuestionMapper.getQuestionProbis(vo);	
 	}
+	
+	// 레코드
+	@Override
+	public int getCount(QuestionVO vo) {
+		return QuestionMapper.getCount(vo);
+	}
+	
+	
+
 
 }

@@ -2,6 +2,8 @@ package com.company.question.service.impl;
 
 import java.util.List;
 
+
+
 import com.company.question.service.QuestionVO;
 
 public interface QuestionMapper {
@@ -29,10 +31,15 @@ public interface QuestionMapper {
 	public List<QuestionVO> getSearchQuestionSelect3(QuestionVO vo);	// 문의하기항목 전체조회. 3번신고하기
 	
 	
+	
+	public int getCount(QuestionVO vo); // DB레코드 카운트  레코드 조회
+
+	
+	
 	public int updateQuestion(QuestionVO vo);	//회원수정
 	public int deleteQuestion(QuestionVO vo);	//화원탈퇴
+	
 
-	public int getCount(QuestionVO vo); // DB레코드 카운트
 	
 	//나경
 	public int insertQuestionBusi(QuestionVO vo);	//병원, 카페 등 상품 상세보기에서 상품문의글 등록

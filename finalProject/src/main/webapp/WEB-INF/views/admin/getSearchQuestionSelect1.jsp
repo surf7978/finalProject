@@ -11,6 +11,13 @@
     
 </head>
 <style>
+.center {
+  text-align: center;
+}
+.pagination {
+  display: inline-block;
+}
+
 		input.back{
 			padding:10px;
 			width:100px;
@@ -75,7 +82,8 @@ ${getSearchQuestionSelect1.title}
 
 </tbody>
 </table>
-<br>
+
+
 <input class="back" type = "button" value="관리자메뉴" onclick="location.href='getSearchCr4'">
     
 </body>

@@ -6,6 +6,7 @@
 		SELECT COUNT(*)
 		FROM CAFE
 	</select>
+	<!--  -->
 	<select id="getCountList1" resultType="int">
 	SELECT COUNT(*)
 	FROM GETSEARCHLIST1
@@ -78,6 +79,7 @@
 		<!-- end of query -->
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	<!--  -->
 	<select id="getSearchList1" resultType="cafeVO">
 	SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
 		<!-- start of query -->
