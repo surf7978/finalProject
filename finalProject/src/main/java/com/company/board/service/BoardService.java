@@ -21,4 +21,7 @@ public interface BoardService {
 	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo);	
 	public int insertBoard2(BoardVO vo);	
 	public int insertBoard(BoardVO vo);
+	
+	public List<BoardVO> getSearchBoardCategory199(BoardVO vo); //일반사용자 내가쓴글 조회
+	
 }

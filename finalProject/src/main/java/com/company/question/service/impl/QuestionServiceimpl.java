@@ -178,5 +178,10 @@ public class QuestionServiceimpl implements QuestionService {
 	public QuestionVO getQuestionProbis(QuestionVO vo) {
 		return QuestionMapper.getQuestionProbis(vo);	
 	}
+	//마이페이지-유저-문의내역
+	@Override
+	public List<QuestionVO> getSearchQuestion99(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestion99(vo);
+	}
 
 }

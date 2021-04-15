@@ -469,20 +469,27 @@ public class Controller5 {
 	}
 
 	// 사업자 장바구니 CRUD
-	@RequestMapping("/insertBCart")
-	public String insertBCart(BCartVO vo) {
-		bCartService.insertBCart(vo);
-		return "redirect:/getSearchBCart";
+	@RequestMapping("/insertBCart") // 등록
+	@ResponseBody
+	public int insertBCart(BCartVO vo) {
+		int r = bCartService.insertBCart(vo);
+		return r;
 	}
 
-	@RequestMapping("/updateBCart")
-	public void updateBCart(BCartVO vo) {
-		bCartService.updateBCart(vo);
+	@RequestMapping("/updateBCart") // 수정
+	@ResponseBody
+	public int updateBCart(BCartVO vo) {
+		int r = bCartService.updateBCart(vo);
+		return r;
+
 	}
 
-	@RequestMapping("/deleteBCart")
-	public void deleteBCart(BCartVO vo) {
-		bCartService.deleteBCart(vo);
+	@RequestMapping("/deleteBCart") // 삭제
+	@ResponseBody
+	public int deleteBCart(BCartVO vo) {
+		int r = bCartService.deleteBCart(vo);
+		return r;
+
 	}
 
 	// 지도-샘플페이지
@@ -520,8 +527,8 @@ public class Controller5 {
 			vo.setCode("TAXI");
 		return vo.getCode();
 	}// end of sessionSelect
-	
-	//seq를 code값으로 변환
+
+	// seq를 code값으로 변환
 	public void seqConversion(IntegratedVO vo) {
 		if (vo.getCode().equals("10"))
 			vo.setCode("HOTEL");

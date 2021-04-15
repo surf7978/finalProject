@@ -13,4 +13,6 @@ public interface PayAndDeliveryService {
 	
 	//결제설정
 	public int insertPayAndDelivery2(PayAndDeliveryVO vo); //결제 및 배송 추가
+	
+	public List<PayAndDeliveryVO> getSearchPayAndDelivery99(PayAndDeliveryVO vo); 	//관리자용 구매내역 조회
 }

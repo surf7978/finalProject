@@ -105,15 +105,17 @@
 			<tr>
 				<td bgcolor=white>
 					<table class="table2">
+					<!-- 
 						<tr>
 							<td><input value="작 성 자" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><input type=text id="writer" name="writer" size="20"></td>
+							<td><input type="hidden" id="writer" name="writer" size="20" value="${loginID }"></td>
 						</tr>
 
 						<tr>
 							<td><input value="아 이 디" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><input type=text id="memberId" name="memberId" size="20"></td>
+							<td><input type="hidden" id="memberId" name="memberId" size="20" value="${loginID }"></td>
 						</tr>
+					 -->
 						
 						
 						<tr>
@@ -123,7 +125,7 @@
 
 						<tr>
 							<td><input value="내 용" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><textarea id="content" name="content" cols="85" rows="15"></textarea></td>
+							<td><textarea id="content" name="content" cols="85" rows="15" style="resize:none;"></textarea></td>
 						</tr>
 
 
@@ -133,7 +135,9 @@
 						<div class="send">
                         <input class="send" type = "submit" value="작성">
                         <input class="reset" type = "reset" value="취소">
+                        <!-- 
                         <input class="back" type = "button" value="뒤로가기" onclick="location.href='getSearchQuestionCr4'">
+                         -->
                         
                         </div>
 

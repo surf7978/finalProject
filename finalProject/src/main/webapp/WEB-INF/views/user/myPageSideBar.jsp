@@ -24,8 +24,8 @@
 						<td style="height:160px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">구매/예약현황</h6>
 							<br>
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매현황</button><br> 
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약현황</button><br>
+							<button onclick="location.href='getSearchPayAndDelivery99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매현황</button><br> 
+							<button onclick="location.href='getSearchPayAndDelivery98'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약현황</button><br>
 						</td>
 					</tr>
 					<tr>
@@ -67,33 +67,33 @@
 						<td style="height:160px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">구매내역조회</h6>
 							<br>
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매내역</button><br> 
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약내역</button><br>
+							<button onclick="location.href='getSearchPayAndDelivery'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매내역</button><br> 
+							<button onclick="location.href='getSearchReservation?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약내역</button><br>
 						</td>
 					</tr>
 					<tr>
 						<td style="height:160px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">마이펫 수첩</h6>
 							<br>
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;반려동물 정보</button><br> 
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;반려동물 의료수첩</button><br>
+							<button onclick="location.href='getSearchAnimal'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;반려동물 정보</button><br> 
+							<button onclick="location.href='getMember1?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;반려동물 의료수첩</button><br>
 						</td>
 					</tr>
 					<tr>
 						<td style="height:200px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">나의 활동</h6>
 							<br>
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;내가쓴글</button><br> 
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기내역</button><br>
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의내역</button><br>
+							<button onclick="location.href='getSearchBoardCategory199?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;내가쓴글</button><br> 
+							<button onclick="location.href='getSearchReview98?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기내역</button><br>
+							<button onclick="location.href='getSearchQuestion99?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의내역</button><br>
 						</td>
 					</tr>
 					<tr>
 						<td style="height:160px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">나의 정보</h6>
 							<br>
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원정보</button><br> 
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원탈퇴</button><br>
+							<button onclick="location.href='getMember1?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원정보</button><br> 
+							<button onclick="location.href='membershipCancel?ID=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원탈퇴</button><br>
 						</td>
 					</tr>
 				</c:if>

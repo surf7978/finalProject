@@ -113,11 +113,11 @@
 						</tr>
 						<tr>
 							<td><input value="시 작 일" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><input type=text id="startDate" name="startDate" size="20"></td>
+							<td><input type="date" id="startDate" name="startDate" size="20"></td>
 						</tr>
 						<tr>
 							<td><input value="마 감 일" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><input type=text id="endDate" name="endDate" size="20"></td>
+							<td><input type="date" id="endDate" name="endDate" size="20"></td>
 						</tr>
 						<tr>
 							<td><input value="TitleImage" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>

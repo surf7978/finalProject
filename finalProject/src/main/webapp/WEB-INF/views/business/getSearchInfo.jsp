@@ -21,6 +21,7 @@
 		
 	});//end of function
 	
+	//버튼 누를시 하단에 추가되는 내용
 	function optionName(){
 		$("#optionName").on("click", function() {
 			var op = $("#optionName option:selected").val();
@@ -39,6 +40,7 @@
 		})//end of optionName
 	}//end of optionName
 	
+	//가격
 	function contents(){
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
@@ -46,6 +48,7 @@
 			location.href="ReserPayInfoForm?resultPrice="+resultPrice +"&count=" + count +"&seq=" + ${vo.seq};
 		});//end of contents
 	}//end of contents
+	
 	
 	function pro_show(){
 		$("#pro_show").on("click","input[type=number]", function(){
@@ -56,13 +59,25 @@
 		});//end of pro_show
 	}//end of pro_show
 	
+	//장바구니에 등록
 	function insertCart(){
 		$("#btnCart").on("click",function(){
 			var vo = $("#frm").serialize();
 			//장바구니 DB에 넣기
-			frm.action = "insertBCart?" + vo;
-			frm.submit();
-			//data필요
+			$.ajax({
+				url:"insertBCart",
+				data:vo,
+				dataType:"json",
+				//callback으로 변경하는 법 배워서 바꾸기
+				success: function (result){
+					if(result == 1){
+						var y = confirm('상품이 장바구니에 담겼습니다\n지금 확인 하시겠습니까?');
+						if(y){
+							location.href='getSearchBCart'
+						}//end of if
+					}//end of if
+				}//end of success
+			})//end of ajax
 		})//end of btnCart
 	}//end of insertCart
 	
@@ -101,7 +116,7 @@
 							<div>
 								<select id="optionName" name="optionName">
 									<option value="" selected disabled>상품선택</option>
-									<option>${vo.optionName}(${vo.price}원)</option>
+									<option>${vo.optionName} ${vo.price}원</option>
 								</select>
 							</div>
 							<div id="pro_show"></div>
@@ -132,4 +147,14 @@
 		<button>삭제하기</button>
 	</div>
 </body>
+<!-- 화면 부드럽게 하기 -->
+<script>
+$(".pro_menu ul li a[href^='#']").on("click", function(e) {
+    e.preventDefault();
+    var position = $($(this).attr("href")).offset().top;
+   $("html, body").animate({
+       scrollTop : position
+   }, 1000);
+});
+</script>
 </html>
