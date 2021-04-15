@@ -140,12 +140,12 @@
 
 						
 							<input type="hidden" value="작 성 자" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly>
-							<input type=hidden id="writer" name="writer" size="20" value="${loginID }" readonly>
+							<input type=hidden id="writer" name="writer" size="20" value="${loginID}" readonly>
 		
 
 						
 							<input type="hidden" value="아 이 디" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly>
-							<input type="hidden" id="memberId" name="memberId" size="20" value="${loginID }" readonly>
+							<input type="hidden" id="memberId" name="memberId" size="20" value="${loginID}" readonly>
 				
 					
 						

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
+import com.company.board.service.BoardVO;
+import com.company.common.PagingVOCr4;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -125,10 +125,10 @@ public class QuestionServiceimpl implements QuestionService {
 	}
 	
 	// 문의하기 항목 하나 전체조회 1 상품문의
-	@Override
-	public List<QuestionVO> getSearchQuestionSelect1(QuestionVO vo) {
-		return QuestionMapper.getSearchQuestionSelect1(vo);
-	}
+	/*
+	 * @Override public List<QuestionVO> getSearchQuestionSelect1(QuestionVO vo) {
+	 * return QuestionMapper.getSearchQuestionSelect1(vo); }
+	 */
 
 	// 문의하기 항목 하나 전체조회 2 고객센터 문의
 	@Override
@@ -191,5 +191,22 @@ public class QuestionServiceimpl implements QuestionService {
 		return QuestionMapper.getSearchQuestion99(vo);
 	}
 
+	
+	//페이징 처리 하는 것.
+	
+	
+	
+	@Override
+	public int countQuestion() {
+		return QuestionMapper.countQuestion();
+	}
+
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect1(PagingVOCr4 vo) {
+		return QuestionMapper.getSearchQuestionSelect1(vo);
+	}
+	
+	
+	
 
 }

@@ -2,9 +2,7 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.util.List;
-
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,12 +21,11 @@ import com.company.answer.service.AnswerVO;
 import com.company.board.service.BoardService;
 import com.company.board.service.BoardVO;
 import com.company.common.FileRenamePolicy;
-import com.company.common.Paging;
+import com.company.common.PagingVOCr4;
 import com.company.eventAndNotice.service.EventAndNoticeService;
 import com.company.eventAndNotice.service.EventAndNoticeVO;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
-
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -568,6 +566,33 @@ public class Controller4 {
 	
 	// ####★★문의하기-신고하기 에 관한 컨트롤러 ★★ (question & answer 테이블 함께 사용)
 	
+	
+	
+	//페이징 처리에 관한것.
+	@GetMapping("getSearchQuestionSelect1")
+	public String getSearchQuestionSelect1(PagingVOCr4 vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		int total = questionService.countQuestion();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
+		model.addAttribute("viewAll", questionService.getSearchQuestionSelect1(vo));
+		return "admin/getSearchQuestionSelect1";
+	}
+	
+	
+	
+	
+	
 	@GetMapping("/insertQuestion1")			//문의하기(유저) 1상품문의 접수 
 	public String insertQuestion1(QuestionVO vo ) {
 		return "admin/insertQuestion1";
@@ -606,11 +631,13 @@ public class Controller4 {
 		model.addAttribute("getSearchQuestionCr4" , questionService.getSearchQuestionCr4(vo));
 		return "admin/getSearchQuestionCr4";
 	}
-	@RequestMapping("/getSearchQuestionSelect1")	//2번은 고객센터문의
-	public String getSearchQuestionSelect1(QuestionVO vo, Model model) {
-		model.addAttribute("getSearchQuestionSelect1", questionService.getSearchQuestionSelect1(vo));
-		return "admin/getSearchQuestionSelect1";
-	}
+	/*
+	 * @RequestMapping("/getSearchQuestionSelect1") //2번은 고객센터문의 public String
+	 * getSearchQuestionSelect1(QuestionVO vo, Model model) {
+	 * model.addAttribute("getSearchQuestionSelect1",
+	 * questionService.getSearchQuestionSelect1(vo)); return
+	 * "admin/getSearchQuestionSelect1"; }
+	 */
 	
 	
 	@GetMapping("/getQuestion1")	// 상품문의 상세조회 

@@ -2,8 +2,9 @@ package com.company.common;
 
 public class PagingVOCr4 {
 	// 현재페이지, 시작페이지, 끝페이지, 게시글 총 갯수, 페이지당 글 갯수, 마지막페이지, SQL쿼리에 쓸 start, end
-		private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
+		private int nowPage, startPage, endPage,cntPerPage, total, lastPage, start, end;
 		private int cntPage = 5;
+		
 		
 		public PagingVOCr4() {
 		}
@@ -92,7 +93,7 @@ public class PagingVOCr4 {
 		}
 		@Override
 		public String toString() {
-			return "PagingVO [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total
+			return "PagingVOCr4 [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total
 					+ ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end
 					+ ", cntPage=" + cntPage + "]";
 		}
