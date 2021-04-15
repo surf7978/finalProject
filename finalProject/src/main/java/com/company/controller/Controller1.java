@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -37,6 +39,8 @@ import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
+import com.company.common.Paging;
+import com.company.hospital.service.HospitalSearchVO;
 import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
 import com.company.member.common.KakaoAPI;
@@ -403,14 +407,14 @@ public class Controller1 {
 			vo.setT_image(rename.getName());
 		}
 		hospitalService.updateHospital(vo);
-		return "redirect:/getSearchHospital";
+		return "redirect:/getSearchHospital99";
 	}
 	
 	// 병원상품 삭제
 	@GetMapping("/deleteHospital")
 	public String deleteHospital(HospitalVO vo) {
 		hospitalService.deleteHospital(vo);
-		return "redirect:/getSearchHospital";
+		return "redirect:/getSearchHospital99";
 	}
 	
 	//마이페이지 사이드바 출력(jsp:include해서 이제 이건 사용안함)
@@ -481,6 +485,34 @@ public class Controller1 {
 	public String getSearchPayAndDelivery98(PayAndDeliveryVO vo, Model model) {
 		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery99(vo));
 		return "user/getSearchPayAndDelivery98";
+	}
+	
+	// 병원 리스트로 가기
+	@RequestMapping("/getSearchHospitalForm99")
+	public String getSearchProductForm(ProductVO vo) {
+		return "hospital/getSearchHospital99";
+	}
+	
+	// 병원리스트(ajax)
+	@RequestMapping("/getSearchHospital99")
+	@ResponseBody
+	public Map<String, Object> getSearchHospital99(HospitalSearchVO vo, Paging paging) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 1. 페이지 설정
+		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
+		paging.setPageSize(10); // 보이는 페이지 번호
+		// 2.초기페이지 설정
+		if (paging.getPage() == null)
+			paging.setPage(1);
+		// 3. 값 추가
+		paging.setTotalRecord(hospitalService.getCount(vo));
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		List<HospitalVO> list = hospitalService.getSearchHospital99(vo);
+		map.put("paging", paging);
+		map.put("list", list);
+		//
+		return map;
 	}
 	
 	@Autowired ProductService productService;

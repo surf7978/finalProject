@@ -16,7 +16,7 @@
 			MEMBERID,
 			PRODUCTNUMBER
 		)VALUES(
-			CART_SEQ.NEXTVAL,
+			TOTALCART_SEQ.NEXTVAL,
 			#{image1},
 			#{productName},
 			#{optionName},

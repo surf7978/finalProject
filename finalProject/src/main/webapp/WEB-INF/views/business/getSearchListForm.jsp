@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +76,7 @@ a {
 	//들어온 매개변수 값이 null이 아니며 undefined도 아닐 때 input type hidden의 value값에 넣어준다는 의미
 	//그때 mapper에 있는 where 조건절이 실행되며 쿼리문이 정상 작동함
 	function getSearchList1(p,category1) {
-		//page버튼 누를시 p값으로 들어옴
+		//page버튼 누를시 p값으로 들어옴 시작 1페이지부터 
 		searchAndInsert.page.value = p;
 		if(category1 !=null && category1 !='undefined')
 			searchAndInsert.category1.value = category1;
@@ -140,6 +141,18 @@ a {
 <body>
 	<div id="checkbox"></div>
 	<div id="contents">
+		<c:if test="${loginAuth eq 'b' }">
+			<!-- 로그인한 사업자가 병원일 때 등록 활성화 -->
+			<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
+			 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+			 user="final" password="a20210409A"/>
+			<sql:query var="rs" dataSource="${ds }">
+				select * from business where businessId = '${loginID}'
+			</sql:query>
+			<c:if test="${rs.rows[0].businesscode ne 20 }">
+				<button onclick="location.href='insertIntegratedForm'">상품등록</button>
+			</c:if>
+		</c:if>
 		<h2>전체 리스트</h2>
 		<div id="menu" align="left">
 			<form id="searchAndInsert">

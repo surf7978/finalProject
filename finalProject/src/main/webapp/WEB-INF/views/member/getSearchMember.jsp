@@ -6,13 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-table , tr, td{
-		border: 1px;
-		padding : 10px;
-		text-align:center;
-			  }
-</style>
 </head>
 <body>
 <div style="width:60%;">
@@ -20,13 +13,13 @@ table , tr, td{
 <h3 align="center">마이페이지 관리자-회원관리</h3>
 <br><br>
 <div align="center">
-<table>
+<table border="1" style="text-align:center;">
  <thead> 
 	 <tr id="head"> 
-		 <th style="width:150px; font-size:30px; border: 1px dotted black;">권한</th>
-		 <th style="width:150px; font-size:30px; border: 1px dotted black;">아이디</th>
-		 <th style="width:150px; font-size:30px; border: 1px dotted black;">조회</th>
-		 <th style="width:150px; font-size:30px; border: 1px dotted black;">관리</th>
+		 <th style="width:150px; font-size:30px;">권한</th>
+		 <th style="width:150px; font-size:30px;">아이디</th>
+		 <th style="width:150px; font-size:30px;">조회</th>
+		 <th style="width:150px; font-size:30px;">관리</th>
 	 </tr>
  </thead>
 <c:forEach var="list" items="${list}" >
