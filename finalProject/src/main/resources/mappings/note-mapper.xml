@@ -58,11 +58,13 @@
 	<!-- 의료내역 수정 -->
 	<update id="updateNote" parameterType="NoteVO">
 	 UPDATE NOTE SET
-	 			CATEGORY1
-          	  , CATEGORY2
-              , PRICE
-              , CALENDAR
-              , CONTENT
+	 <set> 
+		 <if test="category1 != null">			 CATEGORY1 = #{category1}</if>
+		 <if test="category2 != null">			, CATEGORY2 = #{category2}</if>
+		 <if test="price != null">			, PRICE = #{price}</if>
+		 <if test="calendar != null">			, CALENDAR = #{calendar}</if>
+		 <if test="content != null">		, CONTENT = #{content}</if>
+		</set>
 	 WHERE NOTENUMBER = #{noteNumber}
 	</update>
 	
