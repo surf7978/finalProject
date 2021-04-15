@@ -229,7 +229,7 @@
 		&nbsp;
 		<button type="reset" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#ff6347; color:white;">취 소</button>
 		&nbsp;
-		<button type="button" onclick="location.href='loginForm'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
+		<button type="button" onclick="location.href='signUpSelect'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 	</form>
 	<br><br><br><br>
 </body>
