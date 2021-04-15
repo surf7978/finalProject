@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,6 +146,8 @@
 </script>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 	<div id="content">
 		<h4>게시글 관리 페이지</h4>
 		<button type="button" id="btnInsert">등록</button>
@@ -153,5 +157,6 @@
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>
+</div>
 </body>
 </html>
