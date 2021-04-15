@@ -17,3 +17,12 @@ tr:hover {
 	width: 100px;
 	height: 50px;
 }
+
+.table100 {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.width80 {
+	width: 80%;
+}

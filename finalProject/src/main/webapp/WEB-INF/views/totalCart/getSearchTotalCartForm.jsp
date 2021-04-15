@@ -36,7 +36,7 @@
 				$.each(datas,function(i,item){
 					console.log(item)
 					var content = makeTr(item);
-					content.appendTo($("tbody"));
+					content.appendTo("#totalCartTbody");
 				})//end of each
 			}//end of success
 		})//end of ajax
@@ -68,15 +68,24 @@
 	//tr태그 
 	function makeTr(item){
 		return $("<tr>")
-		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
+		.append($("<td><input type='checkbox' name='check'></td>"))
 		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
-		.append($("<td>").html(item.name))
+		.append($("<td>").html(item.productName))
 		.append($("<td>").html(item.optionName))
 		.append($("<td>").html(item.optionPrice))
 		.append($("<td>").html("무료"))
 		.append($("<td>").html(item.optionPrice+"원"))
 		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
+		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
 	}//end of makeTr
+	
+	function totalPrice(){
+		return $("<tr>")
+		.append($("<td rowspan='3'>").html("전체합계금액"))
+		.append($("<td>").html("총상품 금액"))
+		.append($("<td>").html("배송비"))
+		.append($("<td>").html("전체주문금액"))
+	}
 	
 	function shopping(){
 		$("#shopping").on("click", function() {
@@ -103,24 +112,41 @@
 </script>
 </head>
 <body>
-	<div id="page">
+	<div id="totalCart">
 		<strong>장바구니</strong>
 		<small>장바구니에 담아놓은 상품은 3개월 동안 보관 후 자동 삭제됩니다.</small>
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2">상품명</th>
-					<th>상품옵션</th>
+					<th><input type="checkbox"></th>
+					<th colspan="3">상품정보</th>
 					<th>상품금액</th>
 					<th>배송비</th>
 					<th>합계금액</th>
 					<th>삭제</th>
 				</tr>
 			</thead>
-			<tbody></tbody>
+			<tbody id="totalCartTbody"></tbody>
 		</table>
 		<button type="button" id="shopping">쇼핑계속하기</button>
 		<button type="button" id="pay">주문결제하기</button>
+	</div>
+	<div id="totalPrice">
+		<table>
+			<tr>
+				<td rowspan=3>전체합계금액</td>
+			    <td>총상품금액</td>
+			    <td>24000</td>
+			</tr>
+			<tr>
+				<td>배송비</td>
+				<td>0원</td>
+			</tr>
+			<tr>
+				<td>전체주문금액</td>
+				<td>5원</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>
