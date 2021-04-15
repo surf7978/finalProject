@@ -29,7 +29,6 @@
 					<td><input id="location" name="location"></td>
 				</tr>
 			</table>
-			</p>
 			<button>등록</button>
 			<button type="reset">취소</button>
 		</form>

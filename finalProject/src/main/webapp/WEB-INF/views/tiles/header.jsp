@@ -234,7 +234,7 @@
 						<li class="active"><a href="./index.html">Home</a></li>
 						 -->
 						<li><a href="getSearchProductForm">쇼핑몰</a></li>
-						<li><a href="getSearchHospital">병원</a></li>
+						<li><a href="getSearchHospitalForm99">병원</a></li>
 						<li><a href="getSearchListForm?menu=1">카페/호텔/펫택시</a>
 						<!-- 
 							<ul class="dropdown">

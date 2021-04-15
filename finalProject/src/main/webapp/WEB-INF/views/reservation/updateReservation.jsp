@@ -116,7 +116,6 @@ ul li:hover {
 </script>
 </head>
 <body>
-${reservation.reservationTime}
 	<br><br><br>
 	<form action="updateReservation" method="post">
 		<input type="hidden" id="pndNumber" name="pndNumber" value="${reservation.pndNumber}"> 
@@ -124,8 +123,8 @@ ${reservation.reservationTime}
 		<br> 시간 선택:<input type="text" id="reservationTime" name="reservationTime"> <br> <br>
 		<div id="selectTime">
 			<ul style="width: 290px; margin: 0 auto;">
-				<li value="8:00"><a onclick="statusChange(this)" >8:00</a></li>
-				<li value="9:00"><a onclick="statusChange(this)">9:00</a></li>
+				<li value="08:00"><a onclick="statusChange(this)" >08:00</a></li>
+				<li value="09:00"><a onclick="statusChange(this)">09:00</a></li>
 				<li value="10:00"><a onclick="statusChange(this)">10:00</a></li>
 				<li value="11:00"><a onclick="statusChange(this)">11:00</a></li>
 				<li value="12:00"><a onclick="statusChange(this)">12:00</a></li>

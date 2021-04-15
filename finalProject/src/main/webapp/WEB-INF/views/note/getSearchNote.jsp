@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,6 @@
 </head>
 <body>
 <br>
-${noteCount}
 	<table border="1">
 		<tr>
 			<td rowspan="3"><img src="resources/images/animal/${animal.image }" width="200px" height="200"></td>
@@ -21,7 +21,7 @@ ${noteCount}
 		</tr>
 		<tr>
 			<td>생일: ${animal.birth }</td>
-			<td>총 의료비: ${noteCount.price}원 </td>
+			<td>총 의료비: <fmt:formatNumber type="number" maxFractionDigits="3" value="${noteCount.price}" />원 </td>
 		</tr>
 	</table>
 	<br>
@@ -37,12 +37,12 @@ ${noteCount}
 		<tr>
 		<td>${no.category1 }>${no.category2 } </td>
 		<td>${no.calendar }</td>
-		<td>${no.price }원</td>
+		<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${no.price }" />원</td>
 		<td>${no.calendar2 }</td>
-		<td><button type="button" onclick="window.open();">상세조회</button></td>
+		<td><button type="button" onclick="window.open('updateNote?noteNumber=${no.noteNumber }','updateNote', 'width=800, height=800')">상세조회</button></td>
 		</tr>
 		</c:forEach>
 	</table>
-		<button type="button" onclick="window.open();">의료내역 등록</button>
+		<button type="button" onclick="window.open('insertNote?animalNumber=${animal.animalNumber }','insertNote', 'width=800, height=800')">의료내역 등록</button>
 </body>
 </html>

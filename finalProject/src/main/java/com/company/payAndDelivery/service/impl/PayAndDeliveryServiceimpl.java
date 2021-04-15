@@ -53,4 +53,9 @@ public class PayAndDeliveryServiceimpl implements PayAndDeliveryService{
 		return payAndDeliveryMapper.getSearchPayAndDelivery99(vo);
 	}
 
+	@Override
+	public int updateDelivery(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.updateDelivery(vo);
+	}
+
 }

@@ -9,7 +9,7 @@
 		SELECT NOTENUMBER
          	  , CATEGORY1
           	  , CATEGORY2
-              , TO_CHAR(PRICE, '999,999,999')AS PRICE
+              , PRICE
               , TO_CHAR(CALENDAR, 'yyyy-mm-dd') AS CALENDAR
               , CONTENT
               , ANIMALNUMBER
@@ -23,7 +23,7 @@
 		SELECT NOTENUMBER
          	  , CATEGORY1
           	  , CATEGORY2
-              , TO_CHAR(PRICE, '999,999,999') AS PRICE
+              , PRICE
               , TO_CHAR(CALENDAR, 'yyyy-mm-dd') AS CALENDAR
               , CONTENT
               , ANIMALNUMBER
@@ -56,15 +56,29 @@
 	</insert>
 	
 	<!-- 의료내역 수정 -->
+	<update id="updateNote" parameterType="NoteVO">
+	 UPDATE NOTE SET
+	 <set> 
+		 <if test="category1 != null">			 CATEGORY1 = #{category1}</if>
+		 <if test="category2 != null">			, CATEGORY2 = #{category2}</if>
+		 <if test="price != null">			, PRICE = #{price}</if>
+		 <if test="calendar != null">			, CALENDAR = #{calendar}</if>
+		 <if test="content != null">		, CONTENT = #{content}</if>
+		</set>
+	 WHERE NOTENUMBER = #{noteNumber}
+	</update>
 	
 	<!-- 의료내역 삭제 -->
+	<delete id="deleteNote" parameterType="NoteVO">
+	DELETE FROM NOTE
+	WHERE NOTENUMBER = #{noteNumber}
+	</delete>
 	
 	<!-- 의료내역 건수 & 합계 출력 -->
 	<select id="getNoteCount" parameterType="NoteVO" resultType="NoteVO">
 		SELECT COUNT(NOTENUMBER) AS NOTENUMBER
-			, TO_CHAR(SUM(PRICE), '999,999,999') AS PRICE 
+			, SUM(PRICE) AS PRICE 
 		FROM NOTE 
 		WHERE ANIMALNUMBER=#{animalNumber}
 	</select>
-	
 </mapper>
