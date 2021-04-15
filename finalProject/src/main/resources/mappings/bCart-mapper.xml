@@ -14,7 +14,7 @@
 			BISNUMBER,
 			MEMBERID
 		)VALUES(
-			BCART_SEQ.NEXTVAL,
+			TOTALCART_SEQ.NEXTVAL,
 			#{image1},
 			#{name},
 			#{optionName},
@@ -27,14 +27,21 @@
 	<!-- 수정 -->
 	<update id="updateBCart">
 		UPDATE  BCART
-		SET = 
+		<set>
+		<if test="price != null and price != ''">
+			PRICE = #{price}
+		</if>
+		<if test="count != null and count != ''">
+			AND COUNT = #{count}
+		</if>
+		</set>
 		WHERE MEMBERID = #{memberId}
 	</update>
 	<!-- 삭제 -->
 	<delete id="deleteBCart">
 		DELETE FROM BCART
 		WHERE MEMBERID = #{memberId}
-		AND SEQ = #{seq}
+		AND BCARTNUMBER = #{bcartNumber}
 	</delete>
 	<!-- 장바구니 단건조회 -->
 	<select id="getBCart" resultType="bCartVO">
@@ -43,8 +50,8 @@
 		MEMBERID = #{memberId}
 	</select>
 	<!-- 장바구니 리스트조회 -->
-	<select id="getSearchBCart" resultType="bCartVO">
-		SELECT * FROM BCART
+	<select id="getSearchTotalCart" resultType="CartVO">
+		SELECT * FROM TOTALCARTVIEW
 		WHERE
 		MEMBERID = #{memberId}
 	</select>

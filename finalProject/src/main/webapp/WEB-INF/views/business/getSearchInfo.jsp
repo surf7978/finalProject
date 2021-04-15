@@ -73,7 +73,7 @@
 					if(result == 1){
 						var y = confirm('상품이 장바구니에 담겼습니다\n지금 확인 하시겠습니까?');
 						if(y){
-							location.href='getSearchBCart'
+							location.href='getSearchTotalCartForm'
 						}//end of if
 					}//end of if
 				}//end of success

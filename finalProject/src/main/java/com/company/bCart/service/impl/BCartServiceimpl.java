@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.company.bCart.service.BCartService;
 import com.company.bCart.service.BCartVO;
+import com.company.cart.service.CartVO;
 
 @Service
 public class BCartServiceimpl implements BCartService {
@@ -20,18 +21,6 @@ public class BCartServiceimpl implements BCartService {
 		return bCartMapper.insertBCart(vo);
 	}
 
-	// 단건조회
-	@Override
-	public BCartVO getBCart(BCartVO vo) {
-		return bCartMapper.getBCart(vo);
-	}
-
-	// 전체조회
-	@Override
-	public List<BCartVO> getSearchBCart(BCartVO vo) {
-		return bCartMapper.getSearchBCart(vo);
-	}
-
 	// 수정
 	@Override
 	public int updateBCart(BCartVO vo) {
@@ -42,6 +31,18 @@ public class BCartServiceimpl implements BCartService {
 	@Override
 	public int deleteBCart(BCartVO vo) {
 		return bCartMapper.deleteBCart(vo);
+	}
+
+	// 단건조회
+	@Override
+	public BCartVO getBCart(BCartVO vo) {
+		return bCartMapper.getBCart(vo);
+	}
+
+	// 전체조회
+	@Override
+	public List<BCartVO> getSearchTotalCart(CartVO vo) {
+		return bCartMapper.getSearchTotalCart(vo);
 	}
 
 }

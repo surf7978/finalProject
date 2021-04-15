@@ -11,7 +11,7 @@
 	//시작시 화면
 	$(function() {
 		//전체 리스트 조회
-		getSearchBCart();
+		getSearchTotalCart();
 		//삭제
 		deleteCart();
 		//쇼핑하러가기
@@ -23,53 +23,59 @@
 	
 	
 	//전체리스트 조회
-	function getSearchBCart(){
+	function getSearchTotalCart(){
 		//ajax 연결
 		$.ajax({
-			url : "getSearchBCart",
-			method : "post",
+			url : "getSearchTotalCart",
+			method : "get",
 			data : {
 				memberId : "${sessionScope.loginID}"
 			},
 			dataType : "json",
 			success : function(datas){
 				$.each(datas,function(i,item){
+					console.log(item)
 					var content = makeTr(item);
 					content.appendTo($("tbody"));
 				})//end of each
 			}//end of success
 		})//end of ajax
-	}//end of getSearchBCart
+	}//end of getSearchTotalCart
 	
 	//삭제
 	function deleteCart(){
 		$("tbody").on("click","#deleteCart",function(){
+			tr =$(this).closest("tr");
 			var y = confirm("장바구니에서 삭제 하시겠습니까?");
 			var seqVal = $(this).closest("tr").find("#seq").val();
 			if (y){
 				$.ajax({
-					url:"deleteCart",
-					data:{seq:seqVal , memberId : "${sessionScope.loginID}"},
+					url:"deleteBCart",
+					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
 					dataType:"json",
 					success:function(response){
 						if(response == 1){
 							alert('삭제되었습니다.');
-						}
+							//해당 위치에서 $(this)가 의미하는 건 ajax가 됨
+							tr.remove();
+						}//end of if
 					}//end of success
 				})//end of ajax
 			}//end of if
 		})//end of deleteCart
 	}//end of deleteCart
 	
+	//tr태그 
 	function makeTr(item){
 		return $("<tr>")
-		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.bcartNumber))
-		.append($("<td>").html("<img src=resources/images/business/"+item.image1+">").attr("class","cartImage").trigger("create"))
+		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
+		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
 		.append($("<td>").html(item.name))
 		.append($("<td>").html(item.optionName))
-		.append($("<td>").html(item.price+"<button type='button' id='deleteCart'>삭제</button>"))
+		.append($("<td>").html(item.optionPrice))
 		.append($("<td>").html("무료"))
-		//.append($('<input type=\'hidden\' id=\'seq\'>').val(item.seq));
+		.append($("<td>").html(item.optionPrice+"원"))
+		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
 	}//end of makeTr
 	
 	function shopping(){
@@ -78,7 +84,7 @@
 			if(y){
 				history.go(-1);
 			}else{
-				alert("취소!");				
+				return false;	
 			}
 		});//end of shopping
 	}//end of shopping
@@ -89,7 +95,7 @@
 			if(y){
 				//location.href="";
 			}else{
-				alert("취소!");
+				return false;
 			}
 		})//end of pay
 	}//end of pay
@@ -108,6 +114,7 @@
 					<th>상품금액</th>
 					<th>배송비</th>
 					<th>합계금액</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody></tbody>
