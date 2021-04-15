@@ -1,6 +1,7 @@
 package com.company.reservation.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,16 @@ public class ReservationServiceimpl implements ReservationService{
 	@Override
 	public List<ReservationVO> getViewReservation2(ReservationVO vo) {
 		return ReservationMapper.getViewReservation2(vo);
+	}
+	//캘린더조회 for 회원
+	@Override
+	public List<Map<String, String>> getSearchReservationCalendar(ReservationVO vo) {
+		return ReservationMapper.getSearchReservationCalendar(vo);
+	}
+	//캘린더조회 for 사업자
+	@Override
+	public List<Map<String, String>> getSearchReservationCalendar2(ReservationVO vo) {
+		return ReservationMapper.getSearchReservationCalendar2(vo);
 	}
 
 	@Override

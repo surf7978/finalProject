@@ -13,12 +13,16 @@
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth' ,
-			locale: 'ko'
+			locale: 'ko',
+			eventSources: [
+				{
+					url: 'getSearchReservationCalendar'
+				}
+			]
 		});
 		calendar.render();
 	});
 	
-	$()
 </script>
 </head>
 <body>
