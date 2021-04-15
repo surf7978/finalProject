@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +29,7 @@
 				<div class="hospital_img"><img src="resources/images/hospital/${hospi.t_image }" > </div>
 				<nav>
 					<strong>${hospi.name }</strong>
-					<p>${hospi.price }원</p>
+					<p><fmt:formatNumber type="number" maxFractionDigits="3" value="${hospi.price }"/>원</p>
 					
 				</nav>
 			</li>

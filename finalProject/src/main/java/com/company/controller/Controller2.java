@@ -146,9 +146,8 @@ public class Controller2 {
 		payAndDeliveryService.updateReservation2(vo1);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('예약되었습니다');window.close();</script>");
+		writer.println("<script>alert('예약되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
-		writer.println("<script>$(opener).reload();</script>");
 	
 
 	}
@@ -294,10 +293,47 @@ public class Controller2 {
 	}
 	
 	//의료내역 등록 페이지
-	@RequestMapping("/insertNote")
-	public String insertNote(NoteVO vo) {
+	@GetMapping("/insertNote")
+	public String insertNote(NoteVO vo, String animalNumber, Model model) {
+		vo.setAnimalNumber(animalNumber);
+		model.addAttribute("animalNumber", vo.getAnimalNumber());
 		return "empty/note/insertNote";
 	}
+	
+	//의료내역 등록 처리
+	@PostMapping("/insertNote")
+	public void insertNoteProc(NoteVO vo, HttpServletResponse response) throws IOException {
+		noteService.insertNote(vo);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
+		writer.close();
+		}
+	
+	// 의료내역 수정페이지
+	@GetMapping("/updateNote")
+	public String updateNote(NoteVO vo, Model model) {
+		model.addAttribute("note", noteService.getNote(vo));
+		return "empty/note/updateNote";
+	}
+		
+	//의료내역 수정처리
+	@PostMapping("/updateNote")
+	public void updateNoteProc(NoteVO vo, HttpServletResponse response) throws IOException {
+		noteService.updateNote(vo);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('수정되었습니다');opener.location.reload();window.close();</script>");
+		writer.close();
+		}
+	
+	//의료내역 삭제
+	@RequestMapping("/deleteNote")
+	public String deleteNote(NoteVO vo) {
+		noteService.deleteNote(vo);
+		return "redirect:/getSearchNote";
+	}
+	
 
 	//////// 병원상품//////////
 	// 병원상품 전체리스트 조회
@@ -386,7 +422,7 @@ public class Controller2 {
 		reviewService.insertReview(vo);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('등록되었습니다');window.close();</script>");
+		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
 
@@ -415,7 +451,7 @@ public class Controller2 {
 		questionService.insertQuestionBusi(vo);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('등록되었습니다');window.close();</script>");
+		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
 
@@ -425,5 +461,24 @@ public class Controller2 {
 	public QuestionVO getQuestionProbis(QuestionVO vo) {
 		return questionService.getQuestionProbis(vo);
 	}
+	
+	//관리자의 배송정보 입력페이지 출력
+	@RequestMapping("/updateDelivery")
+	public String updateDelivery(PayAndDeliveryVO vo, String pndNumber, Model model) {
+		vo.setPndNumber(pndNumber);
+		model.addAttribute("pndNumber", vo.getPndNumber());
+		return "user/updateDelivery";
+	}
+	
+	//관리자의 배송정보 입력 처리
+	@PostMapping("/updateDelivery")
+	public void updateDelivery(PayAndDeliveryVO vo, HttpServletResponse response) throws IOException {
+		payAndDeliveryService.updateDelivery(vo);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
+		writer.close();
+		}
+	
 
 }
