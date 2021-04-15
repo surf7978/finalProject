@@ -50,7 +50,7 @@
 		MEMBERID = #{memberId}
 	</select>
 	<!-- 장바구니 리스트조회 -->
-	<select id="getSearchTotalCart" resultType="bCartVO">
+	<select id="getSearchTotalCart" resultType="CartVO">
 		SELECT * FROM TOTALCARTVIEW
 		WHERE
 		MEMBERID = #{memberId}

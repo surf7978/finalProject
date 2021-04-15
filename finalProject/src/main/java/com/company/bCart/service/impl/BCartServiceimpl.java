@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.company.bCart.service.BCartService;
 import com.company.bCart.service.BCartVO;
+import com.company.cart.service.CartVO;
 
 @Service
 public class BCartServiceimpl implements BCartService {
@@ -40,7 +41,7 @@ public class BCartServiceimpl implements BCartService {
 
 	// 전체조회
 	@Override
-	public List<BCartVO> getSearchTotalCart(BCartVO vo) {
+	public List<BCartVO> getSearchTotalCart(CartVO vo) {
 		return bCartMapper.getSearchTotalCart(vo);
 	}
 

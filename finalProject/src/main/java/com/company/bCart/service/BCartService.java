@@ -2,6 +2,8 @@ package com.company.bCart.service;
 
 import java.util.List;
 
+import com.company.cart.service.CartVO;
+
 public interface BCartService {
 	public int insertBCart(BCartVO vo); // 화원탈퇴
 
@@ -11,5 +13,5 @@ public interface BCartService {
 
 	public BCartVO getBCart(BCartVO vo); // 단건조회
 
-	public List<BCartVO> getSearchTotalCart(BCartVO vo); // 전체조회
+	public List<BCartVO> getSearchTotalCart(CartVO vo); // 전체조회
 }

@@ -4,6 +4,7 @@ package com.company.bCart.service.impl;
 import java.util.List;
 
 import com.company.bCart.service.BCartVO;
+import com.company.cart.service.CartVO;
 
 public interface BCartMapper {
 	public int insertBCart(BCartVO vo);// 등록
@@ -14,6 +15,6 @@ public interface BCartMapper {
 
 	public BCartVO getBCart(BCartVO vo);// 단건조회
 
-	public List<BCartVO> getSearchTotalCart(BCartVO vo);// 전체조회
+	public List<BCartVO> getSearchTotalCart(CartVO vo);// 전체조회
 
 }

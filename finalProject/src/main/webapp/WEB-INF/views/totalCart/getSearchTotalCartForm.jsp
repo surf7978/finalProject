@@ -27,13 +27,14 @@
 		//ajax 연결
 		$.ajax({
 			url : "getSearchTotalCart",
-			method : "post",
+			method : "get",
 			data : {
 				memberId : "${sessionScope.loginID}"
 			},
 			dataType : "json",
 			success : function(datas){
 				$.each(datas,function(i,item){
+					console.log(item)
 					var content = makeTr(item);
 					content.appendTo($("tbody"));
 				})//end of each
@@ -44,6 +45,7 @@
 	//삭제
 	function deleteCart(){
 		$("tbody").on("click","#deleteCart",function(){
+			tr =$(this).closest("tr");
 			var y = confirm("장바구니에서 삭제 하시겠습니까?");
 			var seqVal = $(this).closest("tr").find("#seq").val();
 			if (y){
@@ -54,7 +56,8 @@
 					success:function(response){
 						if(response == 1){
 							alert('삭제되었습니다.');
-							$(this).closest("tr").remove();
+							//해당 위치에서 $(this)가 의미하는 건 ajax가 됨
+							tr.remove();
 						}//end of if
 					}//end of success
 				})//end of ajax
@@ -65,13 +68,13 @@
 	//tr태그 
 	function makeTr(item){
 		return $("<tr>")
-		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.bcartNumber))
-		.append($("<td>").html("<img src=resources/images/business/"+item.image1+">").attr("class","cartImage").trigger("create"))
+		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
+		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
 		.append($("<td>").html(item.name))
 		.append($("<td>").html(item.optionName))
-		.append($("<td>").html(item.price))
+		.append($("<td>").html(item.optionPrice))
 		.append($("<td>").html("무료"))
-		.append($("<td>").html(item.price+"원"))
+		.append($("<td>").html(item.optionPrice+"원"))
 		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
 	}//end of makeTr
 	

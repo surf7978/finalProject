@@ -449,15 +449,15 @@ public class Controller5 {
 	}
 
 	// 통합 장바구니 폼 페이지
-	@GetMapping("/getSearchTotalCart")
-	public String getSearchTotalCart(BCartVO vo) {
-		return "totalCart/getSearchTotalCart";
+	@GetMapping("/getSearchTotalCartForm")
+	public String getSearchTotalCartForm(BCartVO vo) {
+		return "totalCart/getSearchTotalCartForm";
 	}
 
 	// 장바구니-페이지 기능
-	@PostMapping("/getSearchTotalCart")
+	@GetMapping("/getSearchTotalCart")
 	@ResponseBody
-	public List<BCartVO> getSearchTotalCartProc(BCartVO vo) {
+	public List<BCartVO> getSearchTotalCart(CartVO vo) {
 		List<BCartVO> list = bCartService.getSearchTotalCart(vo);
 		return list;
 	}
