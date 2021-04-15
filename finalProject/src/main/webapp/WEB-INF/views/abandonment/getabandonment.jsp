@@ -9,9 +9,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>	
-
-
-
 		/* 리스트/페이징 시작 */
 		function pageFunc(pageNo){
 			//if(pageNo==null || pageNo=='')
@@ -66,7 +63,7 @@
 			}
 		});
 		};
-
+/* 체크박스만들기 */
 function sidoCheckbox(){
 	$.ajax({
 		url:"getAbanSido",
@@ -99,11 +96,9 @@ function sidoCheckbox(){
 		sidoCheckbox();
 		
 		/* 시도군리스트 체크박스 */
-		$("#aban_location").on("click","input[type=checkbox].sido", function(){
+		$("#aban_location").on("click","input[type=checkbox].sido", function(){		
 			/* 체크박스 해제함 */
-		    $('input[type=checkbox]').prop('checked', false);
-			/* 내가 클릭한 체크박스는 체크됨*/
-		    $(this).prop("checked", true);
+		    $(this).siblings().prop('checked', false);		
 			pageFunc(1);
 		})
 			

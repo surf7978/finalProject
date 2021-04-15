@@ -9,32 +9,72 @@
 	<select id="getReservation" parameterType="ReservationVO"
 		resultType="ReservationVO">
 		SELECT RESERVATIONNUMBER
-			, OPTIONNAME
-			, TO_CHAR(RESERVATIONDATE, 'yyyy-mm-dd') AS RESERVATIONDATE
-			, RESERVATIONSTATE
-			, MEMBERID
-			, PNDNUMBER
-			, BISNUMBER
-			, RESERVATIONTIME
+		, OPTIONNAME
+		, TO_CHAR(RESERVATIONDATE, 'yyyy-mm-dd') AS RESERVATIONDATE
+		, RESERVATIONSTATE
+		, MEMBERID
+		, PNDNUMBER
+		, BISNUMBER
+		, RESERVATIONTIME
 		FROM RESERVATION
 		WHERE
 		PNDNUMBER=#{pndNumber}
 	</select>
-	
-	<!-- 예약 리스트 조회 -->
+
+	<!-- 예약 리스트 조회 for 회원 -->
 	<select id="getSearchReservation" parameterType="ReservationVO"
 		resultType="ReservationVO">
-	SELECT RESERVATIONNUMBER
-			, OPTIONNAME
-			, TO_CHAR(RESERVATIONDATE, 'yyyy-mm-dd') AS RESERVATIONDATE
-			, RESERVATIONSTATE
-			, MEMBERID
-			, PNDNUMBER
-			, BISNUMBER
-			, RESERVATIONTIME
+		SELECT RESERVATIONNUMBER
+		, OPTIONNAME
+		, TO_CHAR(RESERVATIONDATE, 'yyyy-mm-dd') AS RESERVATIONDATE
+		, RESERVATIONSTATE
+		, MEMBERID
+		, PNDNUMBER
+		, BISNUMBER
+		, RESERVATIONTIME
 		FROM RESERVATION
 		where memberid=#{memberId}
-		</select>
+	</select>
+
+	<!-- 캘린더 조회 for 회원 -->
+	<select id="getSearchReservationCalendar"
+		parameterType="ReservationVO" resultType="map">
+		SELECT OPTIONNAME AS "title"
+		, TO_CHAR(RESERVATIONDATE, 'YYYY-MM-DD')||'T'||RESERVATIONTIME AS
+		"start"
+		FROM RESERVATION
+		WHERE MEMBERID=#{memberId}
+		AND
+		RESERVATIONSTATE='예약완료'
+	</select>
+
+	<!-- 예약리스트 view조회 for 사업자번호별 조회 -->
+	<select id="getViewReservation2" parameterType="ReservationVO"
+		resultType="ReservationVO">
+		SELECT NAME
+		, PNDNUMBER
+		, MEMBERID
+		, TO_CHAR(RESERVATIONDATE, 'YYYY-MM-DD') AS RESERVATIONDATE
+		, RESERVATIONTIME
+		, RESERVATIONSTATE
+		, BUSINESSNUMBER
+		, OPTIONNAME
+		,
+		BISNUMBER
+		, RESERVATIONNUMBER
+		FROM REVIEWRESERVATION
+		WHERE BUSINESSNUMBER = #{businessNumber}
+	</select>
+	
+	<!-- 캘린더 조회 for 사업자 -->
+	<select id="getSearchReservationCalendar2"
+		parameterType="ReservationVO" resultType="map">
+		SELECT NAME AS "title"
+		, TO_CHAR(RESERVATIONDATE, 'YYYY-MM-DD')||'T'||RESERVATIONTIME AS "start"
+		FROM REVIEWRESERVATION
+		WHERE BUSINESSNUMBER=#{businessNumber}
+		AND RESERVATIONSTATE='예약완료'
+	</select>
 
 
 	<!-- 예약내역 view 조회 구매평등록하기 버튼 클릭시 필요한 값 -->
@@ -49,36 +89,20 @@
 		, BUSINESSNUMBER
 		, OPTIONNAME
 		, BISNUMBER
-		, RESERVATIONNUMBER 
+		, RESERVATIONNUMBER
 		FROM REVIEWRESERVATION
 		WHERE MEMBERID=#{memberId}
 		AND BISNUMBER=#{bisNumber}
 	</select>
-	
-	<!-- 예약리스트 view조회 for 사업자번호별 조회 -->
-	<select id="getViewReservation2" parameterType="ReservationVO" resultType="ReservationVO">
-		SELECT NAME
-		, PNDNUMBER
-		, MEMBERID
-		, RESERVATIONDATE
-		, RESERVATIONTIME
-		, RESERVATIONSTATE
-		, BUSINESSNUMBER
-		, OPTIONNAME
-		, BISNUMBER
-		, RESERVATIONNUMBER
-		 FROM REVIEWRESERVATION
-		WHERE BUSINESSNUMBER = #{businessNumber}
-	</select>
 
 	<!-- 예약하기 버튼눌러서 날짜선택시 Reservation DB update -->
 	<update id="updateReservation" parameterType="ReservationVO">
-		UPDATE RESERVATION SET 
-			RESERVATIONDATE = TO_DATE(#{reservationDate}, 'yyyy-mm-dd')
-		  ,	RESERVATIONTIME = #{reservationTime}
-		  , RESERVATIONSTATE = '예약완료'
-	WHERE PNDNUMBER=#{pndNumber}
+		UPDATE RESERVATION
+		SET
+		RESERVATIONDATE = TO_DATE(#{reservationDate}, 'yyyy-mm-dd')
+		, RESERVATIONTIME = #{reservationTime}
+		, RESERVATIONSTATE = '예약완료'
+		WHERE PNDNUMBER=#{pndNumber}
 	</update>
-	
-	
+
 </mapper>

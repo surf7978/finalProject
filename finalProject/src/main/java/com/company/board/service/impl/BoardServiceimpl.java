@@ -11,39 +11,39 @@ import com.company.board.service.BoardVO;
 @Service
 public class BoardServiceimpl implements BoardService{
 	
-	@Autowired BoardMapper BoardMapper;
+	@Autowired BoardMapper boardMapper;
 	//단건조회
 	@Override
 	public BoardVO getBoard(BoardVO vo) {
-		return BoardMapper.getBoard(vo);
+		return boardMapper.getBoard(vo);
 	}
 	@Override
 	public BoardVO getBoard2(BoardVO vo) {
-		return BoardMapper.getBoard2(vo);
+		return boardMapper.getBoard2(vo);
 	}
 
 	
 	//전체조회
 	@Override
 	public List<BoardVO> getSearchBoard(BoardVO vo) {
-		return BoardMapper.getSearchBoard(vo);
+		return boardMapper.getSearchBoard(vo);
 	}
 	//수정
 	@Override
 	public int updateBoard(BoardVO vo) {
-		return BoardMapper.updateBoard(vo);
+		return boardMapper.updateBoard(vo);
 	}
 	
 	//탈퇴
 	@Override
 	public int deleteBoard(BoardVO vo) {
-		return BoardMapper.deleteBoard(vo);
+		return boardMapper.deleteBoard(vo);
 	}
 	
 	//자유게시판 글쓰기
 	@Override
 	public int insertBoard(BoardVO vo) {
-		return BoardMapper.insertBoard(vo);
+		return boardMapper.insertBoard(vo);
 	}
 
 	
@@ -51,21 +51,25 @@ public class BoardServiceimpl implements BoardService{
 	@Override
 	public int insertBoard2(BoardVO vo) {
 		
-		return BoardMapper.insertBoard2(vo);
+		return boardMapper.insertBoard2(vo);
 	}
 	
 	//자유게시판 전체조회
 	@Override
 	public List<BoardVO> getSearchBoardCategiry1(BoardVO vo) {
 	
-		return BoardMapper.getSearchBoardCategiry1(vo);
+		return boardMapper.getSearchBoardCategiry1(vo);
 	}
 	
 	//자랑하기 전체조회
 	@Override
 	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo) {
 	
-		return BoardMapper.getSearchBoardCategiry2(vo);
+		return boardMapper.getSearchBoardCategiry2(vo);
+	}
+	@Override
+	public List<BoardVO> getSearchBoardCategory199(BoardVO vo) {
+		return boardMapper.getSearchBoardCategory199(vo);
 	}
 
 

@@ -12,36 +12,36 @@ import com.company.bCart.service.BCartVO;
 public class BCartServiceimpl implements BCartService {
 
 	@Autowired
-	BCartMapper BCartMapper;
+	BCartMapper bCartMapper;
 
 	// 등록
 	@Override
 	public int insertBCart(BCartVO vo) {
-		return BCartMapper.insertBCart(vo);
+		return bCartMapper.insertBCart(vo);
 	}
 
 	// 단건조회
 	@Override
 	public BCartVO getBCart(BCartVO vo) {
-		return BCartMapper.getBCart(vo);
+		return bCartMapper.getBCart(vo);
 	}
 
 	// 전체조회
 	@Override
 	public List<BCartVO> getSearchBCart(BCartVO vo) {
-		return BCartMapper.getSearchBCart(vo);
+		return bCartMapper.getSearchBCart(vo);
 	}
 
 	// 수정
 	@Override
 	public int updateBCart(BCartVO vo) {
-		return BCartMapper.updateBCart(vo);
+		return bCartMapper.updateBCart(vo);
 	}
 
 	// 삭제
 	@Override
 	public int deleteBCart(BCartVO vo) {
-		return BCartMapper.deleteBCart(vo);
+		return bCartMapper.deleteBCart(vo);
 	}
 
 }

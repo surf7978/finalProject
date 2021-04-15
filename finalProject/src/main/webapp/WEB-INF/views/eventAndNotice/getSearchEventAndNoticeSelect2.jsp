@@ -81,7 +81,7 @@
 <br>
 
 <input class="write" type = "button" value="글쓰기" onclick="location.href='insertEventAndNotice2'">
-<input class="back" type = "button" value="메뉴로" onclick="location.href='getSearchEventAndNotice'">
+
     
 </body>
 </html>

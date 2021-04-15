@@ -36,7 +36,9 @@
 		</ul>
 		</div>
 		<div id="paging"></div>
-		<button id="btn">상품등록</button>
+		<c:if test="${loginAuth eq 'b' }">
+			<button id="btn">상품등록</button>
+		</c:if>
 	</div>
 </body>
 </html>

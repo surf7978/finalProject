@@ -82,6 +82,12 @@
 
 
 <body>
+
+
+
+
+
+
 	<br>
 	<br>
 	<br>
@@ -105,17 +111,17 @@
 			<tr>
 				<td bgcolor=white>
 					<table class="table2">
-						<tr>
-							<td><input value="작 성 자" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><input type=text id="writer" name="writer" size="20"></td>
+		<!-- 여기수정해야함  로그인 세션 -->
+<!-- 						<tr>
+							<td><input type="hidden" value="작 성 자" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type="hidden" id="writer" name="writer" size="20" value="user"></td>
 						</tr>
 
 						<tr>
-							<td><input value="아 이 디" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><input type=text id="memberId" name="memberId" size="20"></td>
-						</tr>
-						
-						
+							<td><input type="hidden" value="아 이 디" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type="hidden" id="memberId" name="memberId" size="20" value="user"></td>
+						</tr> -->
+		
 						<tr>
 							<td><input value="제 목" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
 							<td><input type=text id="title" name="title" size="60"></td>
@@ -123,17 +129,32 @@
 
 						<tr>
 							<td><input value="내 용" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
-							<td><textarea id="content" name="content" cols="85" rows="15"></textarea></td>
+							<td><textarea id="content" name="content" cols="85" rows="15" style="resize:none;"></textarea></td>
 						</tr>
 
 
 					</table>
+		
+							<input type="hidden" value="작 성 자" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly>
+							<input type="hidden" id="writer" name="writer" size="20" value="${loginID }">
+						
 
+					
+							<input type="hidden" value="아 이 디" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly>
+							<input type="hidden" id="memberId" name="memberId" size="20" value="${loginID }">
+						
 					
 						<div class="send">
                         <input class="send" type = "submit" value="작성">
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input class="reset" type = "reset" value="취소">
+                        <!-- 
                         <input class="back" type = "button" value="뒤로가기" onclick="location.href='getSearchQuestionCr4'">
+                         -->
                         
                         </div>
 
@@ -145,5 +166,6 @@
 			</tr>
 		</table>
 		</form>
+	
 </body>
 </html>

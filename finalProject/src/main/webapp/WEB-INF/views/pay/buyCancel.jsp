@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>반려동물 의료수첩</title>
+<title>Insert title here</title>
 </head>
 <body>
-나오니
+<br><br>
+<img src="resources/img/cancel.PNG">
+<br><br><br>
 </body>
 </html>

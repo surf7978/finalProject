@@ -75,7 +75,12 @@ table td {
 		</div>
 		<hr>
 		<div  class="image"  style="text-align:left; width:500px;">
-			<img id="image" src="resources/images/board1/${board.image }">
+			<c:if test="${board.category eq 1}">
+				<img id="image" src="resources/images/board1/${board.image }">
+			</c:if>
+			<c:if test="${board.category eq 2}">
+				<img id="image" src="resources/images/board2/${board.image }">
+			</c:if>
 		</div>
 		<br>
 		<br>
@@ -94,7 +99,7 @@ table td {
 			value="수정하기">
 
 			<input class="delete" type="submit" value="삭제하기">
-			<input class="back" type="button" value="뒤로가기" onclick="location.href='getSearchBoardCategiry1'" >
+			
 			
 		</form>
 	</div>

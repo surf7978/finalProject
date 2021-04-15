@@ -299,10 +299,12 @@ public class Controller5 {
 	}// end of getSearchCafeProc
 
 	// 사업자-통합상세페이지
-	@GetMapping("/getSearchInfo")
+	@GetMapping("/getSearchInfo") // 로그인 하지 않아도 보여야함
 	public String getSearchInfo(IntegratedVO vo, Model model, HttpSession session) {
-		// 공통기능
-		vo.setCode(sessionSelect(session, vo));
+		// seq값 2자리 잘라서 code값에 넣기
+		vo.setCode(vo.getSeq().substring(0, 2));
+		// 코드값 -> 테이블명 변환
+		seqConversion(vo);
 		// 조회
 		vo = integratedService.getIntegrated(vo);
 		model.addAttribute("vo", vo);
@@ -453,7 +455,7 @@ public class Controller5 {
 	}
 
 	// start of bCart
-	// 장바구니-페이지 호출
+	// 사업자 장바구니-페이지 호출
 	@GetMapping("/getSearchBCart")
 	public String getSearchBCart(BCartVO vo) {
 		return "bCart/getSearchBCart";
@@ -467,16 +469,28 @@ public class Controller5 {
 		return list;
 	}
 
-	// 장바구니-등록
-	@RequestMapping("/insertBCart")
-	public void insertBCart(BCartVO vo) {
-		bCartService.insertBCart(vo);
+	// 사업자 장바구니 CRUD
+	@RequestMapping("/insertBCart") // 등록
+	@ResponseBody
+	public int insertBCart(BCartVO vo) {
+		int r = bCartService.insertBCart(vo);
+		return r;
 	}
 
-	// 장바구니-삭제
-	@RequestMapping("/deleteBCart")
-	public void deleteBCart(BCartVO vo) {
-		bCartService.deleteBCart(vo);
+	@RequestMapping("/updateBCart") // 수정
+	@ResponseBody
+	public int updateBCart(BCartVO vo) {
+		int r = bCartService.updateBCart(vo);
+		return r;
+
+	}
+
+	@RequestMapping("/deleteBCart") // 삭제
+	@ResponseBody
+	public int deleteBCart(BCartVO vo) {
+		int r = bCartService.deleteBCart(vo);
+		return r;
+
 	}
 
 	// 지도-샘플페이지
@@ -514,4 +528,18 @@ public class Controller5 {
 			vo.setCode("TAXI");
 		return vo.getCode();
 	}// end of sessionSelect
+
+	// seq를 code값으로 변환
+	public void seqConversion(IntegratedVO vo) {
+		if (vo.getCode().equals("10"))
+			vo.setCode("HOTEL");
+		else if (vo.getCode().equals("30"))
+			vo.setCode("CAFE");
+		else if (vo.getCode().equals("40"))
+			vo.setCode("BEAUTY");
+		else if (vo.getCode().equals("50"))
+			vo.setCode("EDU");
+		else if (vo.getCode().equals("60"))
+			vo.setCode("TAXI");
+	}
 }

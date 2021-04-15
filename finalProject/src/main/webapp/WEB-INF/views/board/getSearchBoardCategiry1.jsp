@@ -81,7 +81,9 @@
 <br>
 
 <input class="write" type = "button" value="글쓰기" onclick="location.href='insertBoard'">
+<!-- 
 <input class="back" type = "button" value="메뉴로" onclick="location.href='getSearchBoard'">
+ -->
     
 </body>
 </html>

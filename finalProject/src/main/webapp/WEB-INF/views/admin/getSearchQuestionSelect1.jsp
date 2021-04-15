@@ -24,7 +24,7 @@
 			border-radius:5px;
 			border:none;
 			color: white;
-			background-color:#778899;
+			background-color:#50B4F5;
 		}
 
     /* 게시판 리스트 목록 */
@@ -83,8 +83,8 @@ ${getSearchQuestionSelect1.title}
 </tbody>
 </table>
 
-
-<input class="back" type = "button" value="관리자메뉴" onclick="location.href='getSearchCr4'">
+</div>
+<input class="back" type = "button" value="관리자메뉴" onclick="location.href='getSearchQuestionCr4'">
     
 </body>
 </html>

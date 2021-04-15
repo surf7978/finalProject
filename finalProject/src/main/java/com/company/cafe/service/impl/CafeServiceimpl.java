@@ -13,54 +13,54 @@ import com.company.cafe.service.CafeVO;
 public class CafeServiceimpl implements CafeService {
 
 	@Autowired
-	CafeMapper CafeMapper;
+	CafeMapper cafeMapper;
 
 	// 등록
 	@Override
 	public int insertCafe(CafeVO vo) {
-		return CafeMapper.insertCafe(vo);
+		return cafeMapper.insertCafe(vo);
 	}
 
 	// 수정
 	@Override
 	public int updateCafe(CafeVO vo) {
-		return CafeMapper.updateCafe(vo);
+		return cafeMapper.updateCafe(vo);
 	}
 
 	// 삭제
 	@Override
 	public int deleteCafe(CafeVO vo) {
-		return CafeMapper.deleteCafe(vo);
+		return cafeMapper.deleteCafe(vo);
 	}
 
 	// 단건조회
 	@Override
 	public CafeVO getCafe(CafeVO vo) {
-		return CafeMapper.getCafe(vo);
+		return cafeMapper.getCafe(vo);
 	}
 
 	// 전체조회
 	@Override
 	public List<CafeVO> getSearchCafe(CafeVO vo) {
-		return CafeMapper.getSearchCafe(vo);
+		return cafeMapper.getSearchCafe(vo);
 	}
 
 	// 레코드조회
 	@Override
 	public int getCount(CafeVO vo) {
-		return CafeMapper.getCount(vo);
+		return cafeMapper.getCount(vo);
 	}
 
 	// Cafe,Hotel,Taxi 조회
 	@Override
 	public List<CafeVO> getSearchList1(CafeSearchVO vo) {
-		return CafeMapper.getSearchList1(vo);
+		return cafeMapper.getSearchList1(vo);
 	}
 
 	// Cafe,Hotel,Taxi 레코드 조회
 	@Override
 	public int getCountList1(CafeVO vo) {
-		return CafeMapper.getCountList1(vo);
+		return cafeMapper.getCountList1(vo);
 	}
 
 }

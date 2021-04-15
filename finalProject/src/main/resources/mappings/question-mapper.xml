@@ -281,4 +281,11 @@
 		FROM QUESTION
 		WHERE QUESTIONNUMBER=#{questionNumber}
 	</select>
+	
+	<!-- 마이페이지 일반사용자 문의내역-->
+	<select id='getSearchQuestion99' resultType="questionVO">
+		SELECT *
+		FROM QUESTION
+		WHERE memberId=#{memberId}
+	</select>
 </mapper>
