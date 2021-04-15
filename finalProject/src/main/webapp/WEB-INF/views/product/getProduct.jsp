@@ -26,11 +26,12 @@
 						$("#pro_show").empty();					
 						$("#pro_show").append(nav);
 						$("#pro_result").empty();
-						var restrong = $("<dt>").html("총 함계금액");
+						var restrong = $("<dt>").html("총 합계금액");
 						var result = $("<dd>").text("${product.optionPrice }").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
 						$("#pro_result").append(restrong, result);
 					}
 				})
+		/* count + result 총 합계금액 */
 		$("#pro_show").on("click","input[type=number]", function(){
 			var plu = $(this).val();
 			var result = $("#pro_result").find("dd");
@@ -41,8 +42,14 @@
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
 			var count = $("[name=count]").val();
-			location.href="PayInfoForm?productNumber=${product.productNumber }&resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count;
+			var pro = $("#pro_result").text();
+			if(pro == ""){
+				alert("상품을 선택해주세요");
+			}else{
+				location.href="PayInfoForm?productNumber=${product.productNumber }&resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count;
+			}			
 		});
+		
 		$("#d_btn").on("click",function(){
 			if(confirm("삭제하시겟습니까")==true){
 				location.href="deleteProduct?productNumber=${product.productNumber }";				

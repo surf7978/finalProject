@@ -11,9 +11,19 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script>
 	$(function(){
-		//배송비 포함 설정
-		$("[name=resultPrice]").val(${map.resultPrice });
+		//주소검색
+		$("#addbtn").on("click", function(){
+			new daum.Postcode({
+				oncomplete: function(data) {
+					$('[name=post]').val(data.zonecode); // 우편번호 (5자리)
+					$('[name=address]').val(data.address);
+					$('[name=address2]').val(data.buildingName);
+				}
+			}).open();
+		})
 		
+		//배송비 포함 설정
+		$("[name=resultPrice]").val(${resultPrice });
 	});
 	
 </script>
@@ -21,8 +31,8 @@
 <body>
 	<div id="contents">
 			<h1>바로구매</h1>
+			<input value="${resultPrice }">
 		<form method="post" id="frm" action="ReserPayInfo">
-		<input value="${loginID }" name="memberId">
 		<input value="${vo.seq }" name="bisNumber">
 		<input value="${vo.businessNumber }" name="businessNumber">
 			<div id="pay_wrap">
@@ -36,23 +46,23 @@
 				</thead>
 				<tbody>					
 					<tr>
-						<td><nav><img src="resources/images/business/${vo.image1}"></nav><strong></strong></td>
+						<td><nav><img src="resources/img/hospital/${vo.t_image}"></nav><strong></strong></td>
 						<td rowspan="2" class="ship">
 							무료배송
 						</td>
-						<td rowspan="2">${map.resultPrice }</td>
+						<td rowspan="2">${resultPrice }</td>
 					</tr>
 					<tr>
-						<td><input value="${vo.optionName }" name="optionName"><input type="number" value="${map.count }" name="count" style="width:50px;">${vo.price }</td>
+						<td><input value="${vo.optionName }" name="optionName"><input type="number" value="${count }" name="count" style="width:50px;">${vo.price }</td>
 					</tr>
 					<tr>
 						<td>합계금액</td>
 						<td colspan="2" id="resultPrice">
-						<input type="text" readonly="readonly" name="resultPrice" style="border:none;" >						
+						<input type="text" readonly="readonly" name="resultPrice" style="border:none;" value="${resultPrice}">						
 						</td>
 					</tr>
 				</tbody>
-			</table>			
+			</table>		
 		</div>
 		<button type="submit">결제하기</button>
 		<button type="button" onclick="location.href='getSearchProductForm'">취소</button>
