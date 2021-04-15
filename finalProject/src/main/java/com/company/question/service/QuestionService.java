@@ -27,9 +27,7 @@ public interface QuestionService {
 	
 	public List<QuestionVO> getSearchQuestion(QuestionVO vo);	//전체조회
 	public List<QuestionVO> getSearchQuestionCr4(QuestionVO vo);	//전체조회 -Cr4(김찬영)
-	//public List<QuestionVO> getSearchQuestionSelect1(QuestionVO vo);	// 문의하기항목 전체조회. 1번상품문의
-	public List<QuestionVO> getSearchQuestionSelect2(QuestionVO vo);	// 문의하기항목 전체조회. 2번고객센터문의
-	public List<QuestionVO> getSearchQuestionSelect3(QuestionVO vo);	// 문의하기항목 전체조회. 3번신고하기
+	
 	
 	
 	public int getCount(QuestionVO vo); // DB레코드 카운트  레코드 조회
@@ -40,10 +38,15 @@ public interface QuestionService {
 
 	
 	// 게시물 총 갯수
-	public int countQuestion();
+	public int countQuestion1();
+	public int countQuestion2();
+	public int countQuestion3();
+	
 		
 	// 페이징 처리 게시글 조회
-	public List<QuestionVO> getSearchQuestionSelect1(PagingVOCr4 vo);
+	public List<QuestionVO> getSearchQuestionSelect1(PagingVOCr4 vo); //문의하기항목1번1번상품문의 문의 단건조회-문의답장하기로 넘기기
+	public List<QuestionVO> getSearchQuestionSelect2(PagingVOCr4 vo); // 문의하기항목 전체조회. 2번고객센터문의
+	public List<QuestionVO> getSearchQuestionSelect3(PagingVOCr4 vo); //문의하기항목 3번신고하기 단건조회-신고답장하기로 넘기기
 	
 	
 	

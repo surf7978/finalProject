@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.company.board.service.BoardVO;
+
 import com.company.common.PagingVOCr4;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
@@ -130,19 +130,7 @@ public class QuestionServiceimpl implements QuestionService {
 	 * return QuestionMapper.getSearchQuestionSelect1(vo); }
 	 */
 
-	// 문의하기 항목 하나 전체조회 2 고객센터 문의
-	@Override
-	public List<QuestionVO> getSearchQuestionSelect2(QuestionVO vo) {
-		return QuestionMapper.getSearchQuestionSelect2(vo);
-	}
 
-	// 문의하기 항목 하나 전체조회 3 신고하기
-	@Override
-	public List<QuestionVO> getSearchQuestionSelect3(QuestionVO vo) {
-		return QuestionMapper.getSearchQuestionSelect3(vo);
-	}
-
-	
 	
 	
 	// 수정
@@ -197,13 +185,30 @@ public class QuestionServiceimpl implements QuestionService {
 	
 	
 	@Override
-	public int countQuestion() {
-		return QuestionMapper.countQuestion();
+	public int countQuestion1() {
+		return QuestionMapper.countQuestion1();
+	}
+	
+	@Override
+	public int countQuestion2() {
+		return QuestionMapper.countQuestion2();
+	}
+	@Override
+	public int countQuestion3() {
+		return QuestionMapper.countQuestion3();
 	}
 
 	@Override
 	public List<QuestionVO> getSearchQuestionSelect1(PagingVOCr4 vo) {
 		return QuestionMapper.getSearchQuestionSelect1(vo);
+	}
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect2(PagingVOCr4 vo) {
+		return QuestionMapper.getSearchQuestionSelect2(vo);
+	}
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect3(PagingVOCr4 vo) {
+		return QuestionMapper.getSearchQuestionSelect3(vo);
 	}
 	
 	

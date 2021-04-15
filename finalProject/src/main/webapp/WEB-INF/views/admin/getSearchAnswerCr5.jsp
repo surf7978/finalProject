@@ -5,13 +5,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>문의하기-고객센터문의</title>
+    <title>관리자-답변목록보기</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
 </head>
 <style>
-
+input.delete{
+		color: white;
+		background-color: red;
+		border-radius:5px;
+}
 		input.back{
 			padding:10px;
 			width:100px;
@@ -20,6 +24,7 @@
 			color: white;
 			background-color:#5ABEF5;
 		}
+
     /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}
 .sub_news a{color:#383838;text-decoration:none}
@@ -34,13 +39,14 @@
 /* //게시판 리스트 목록 */
 
  tr.th{
+ 	border-radius:5px;
  	text-align: center;
  	font-size: 17px;
  }
 </style>
 <body>
 <br>
-	<input value="문의하기-고객센터문의"
+	<input value="관리자's 답변목록조회"
 		style="font-size: 40px; text-align: center; width: 500px; border: none;"
 		readonly>
 <br><br>
@@ -50,34 +56,38 @@
 
 <thead>
 <tr class="th">
-<th width="60">번호</th>
-<th scope="col">제목</th>
+<th width="70">답변번호</th>
+<th scope="col">내용</th>
 <th scope="col">날짜</th>
-<th scope="col" width="60">글쓴이</th>
-<th scope="col" width="60">아이디</th>
+<th scope="col" width="70">질문번호</th>
+<th scope="col" width="60">삭제</th>
 </tr>
 </thead>
 <tbody>
-<c:forEach var="getSearchQuestionSelect2" items="${getSearchQuestionSelect2}">
-<tr onclick="location.href='getQuestion2?questionNumber=${getSearchQuestionSelect2.questionNumber}'">
+<c:forEach var="getSearchAnswerCr4" items="${getSearchAnswerCr4}">
+<tr>
 
 <td >
-${getSearchQuestionSelect2.questionNumber}
+${getSearchAnswerCr4.answerNumber}
 </td>
 <td >
-${getSearchQuestionSelect2.title}
+${getSearchAnswerCr4.content}
 </td>
-<td>${getSearchQuestionSelect2.calendar}</td>
-<td >${getSearchQuestionSelect2.writer}</td>
-<td>${getSearchQuestionSelect2.memberId} </td>
+<td>${getSearchAnswerCr4.calendar}</td>
+<td>${getSearchAnswerCr4.questionNumber}</td>
+<td>
+<form action="deleteAnswerCr4?answerNumber=${getSearchAnswerCr4.answerNumber}" method="post">
+  <input class="delete" type="submit"  value="삭제">	
+</form>
+</td>
 </tr>
 </c:forEach>
 
 </tbody>
 </table>
 <br>
-</div>
-<input class="back" type = "button" value="관리자메뉴" onclick="location.href='getSearchQuestionSelect2'">
-    
+
+	</div>
+     <input class="back" type = "button" value="관리자메뉴" onclick="location.href='getSearchCr4'">
 </body>
 </html>

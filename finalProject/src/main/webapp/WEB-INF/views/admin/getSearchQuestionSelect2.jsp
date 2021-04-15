@@ -55,7 +55,7 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-	<input value="문의하기-고객센터문의"
+	<input value="고객센터문의"
 		style="font-size: 40px; text-align: center; width: 400px; border: none;"
 		readonly>
 <div id="outter">
@@ -71,6 +71,7 @@
 				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option> 
 		</select>
 	</div> <!-- 옵션선택 끝 -->
+	
 <table class="sub_news" border="1"  summary="게시판의 글제목 리스트">
 
 

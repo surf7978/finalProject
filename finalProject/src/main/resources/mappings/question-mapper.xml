@@ -68,12 +68,21 @@
 
 
 	<!-- 총 게시글 갯수 출력 -->
-	<select id="countQuestion" resultType="int">
+	<select id="countQuestion1" resultType="int">
 		SELECT COUNT(*) FROM QUESTION
 		WHERE CATEGORY=1
 		AND TOPERSON='admin'
 	</select>
-
+	<select id="countQuestion2" resultType="int">
+		SELECT COUNT(*) FROM QUESTION
+		WHERE CATEGORY=2
+		AND TOPERSON='admin'
+	</select>
+	<select id="countQuestion3" resultType="int">
+		SELECT COUNT(*) FROM QUESTION
+		WHERE CATEGORY=3
+		AND TOPERSON='admin'
+	</select>
 	<!-- 페이징 처리 후 게시글 조회 -->
 	<!-- 1번 상품문의전체조회 -->
 	<select id="getSearchQuestionSelect1"
@@ -107,6 +116,21 @@
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	
+		<select id="getSearchQuestionSelect3" resultType="questionVO"> <!-- 3번 신고하기전체조회 -->
+		SELECT *
+		FROM (
+		SELECT ROWNUM RN, A.*
+		FROM (
+		SELECT * FROM
+		QUESTION
+		WHERE CATEGORY=3
+		AND TOPERSON='admin'
+		ORDER BY WRITER ASC
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
 
 	<!--############# / end of 페이징에 관한것 ############# -->
 
@@ -116,13 +140,7 @@
 
 
 
-	<select id="getSearchQuestionSelect3" resultType="questionVO"> <!-- 3번 신고하기전체조회 -->
-		SELECT * FROM QUESTION
-		WHERE CATEGORY=3
-		AND TOPERSON='admin'
-		ORDER BY
-		WRITER ASC
-	</select>
+
 
 	<select id="getQuestion1" resultType="questionVO"
 		parameterType="questionVO">	<!-- 문의하기 1번 상품문의 단건조회 -->
