@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -22,7 +21,7 @@ public class AbandonmentAPI {
 	        	urlBuilder.append("&upr_cd=" + upr_cd);	        
 	        }
 	        urlBuilder.append("&numOfRows=9");
-	        urlBuilder.append("&pageNo=" + pageNo);
+	        urlBuilder.append("&pageNo=").append(pageNo);
 	        URL url = new URL(urlBuilder.toString());
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("GET");

@@ -289,8 +289,12 @@
 										<c:if test="${loginAuth eq 'b'}">
 											<li><a href="getBusiness99?businessId=${loginID}">회원정보조회</a></li>
 											<li><a href="#">게시글관리</a></li>
+											<li><a href="getViewReservation2">예약내역조회</a></li>
 										</c:if>
+										<c:if test="${loginAuth eq 'm'}">
 										<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
+										</c:if>
+										
 										<c:if test="${loginID ne 'admin'}">
 											<li><a href="getSearchAnimal">마이펫수첩</a></li>
 										</c:if>

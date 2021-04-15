@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <!-- 단건조회 아작스 -->
 <script>
 	$(function(){
@@ -80,8 +81,10 @@
 						var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count","readonly":"readonly"});
 						var inval = $(input).val();
 						var strong = $("<p>").css("text-align", "right").text("${hospital.price }");
-						$(nav).append(input, strong);						
+						$(nav).append(input, strong);		
+						$("#pro_show").empty();							
 						$("#pro_show").append(nav);
+						$("#pro_result").empty();
 						var restrong = $("<dt>").html("총 함계금액");
 						var result = $("<dd>").text("${hospital.price }").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
 						$("#pro_result").append(restrong, result);
@@ -96,7 +99,13 @@
 		//결제페이지로 이동
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
-			location.href="PayInfoForm?productNumber=${hospital.seq }&resultPrice="+resultPrice +"&memberId=${loginID}";
+			var count = $("[name=count]").val();
+			var pro = $("#pro_result").text();
+			if(pro == ""){
+				alert("상품을 선택해주세요");
+			}else{
+				location.href="HospitalPayInfoForm?resultPrice="+resultPrice +"&count=" + count +"&seq=${hospital.seq }";
+			}			
 		});
 		$("#d_btn").on("click",function(){
 			if(confirm("삭제하시겠습니까")==true){
@@ -108,6 +117,14 @@
 		$("#u_btn").on("click",function(){
 			location.href="updateHospital?seq=${hospital.seq }"
 		})
+		//부드럽게 스크롤
+		$(".pro_menu ul li a[href^='#']").on("click", function(e) {
+				e.preventDefault();
+				var position = $($(this).attr("href")).offset().top;
+			   $("html, body").animate({
+				   scrollTop : position
+			   }, 1000);
+		});
 	});
 </script>
 </head>
@@ -133,8 +150,9 @@ hospital.businessNumber : ${hospital.businessNumber}
 	</c:if> 
 		<div id="getproduct">
 			<div class="pro_title">
-				<form id="frm" name="frm">
-					<input value="${hospital.seq }" type="hidden" name="productNumber">
+				<form id="frm" name="frm" method="post">
+					<input value="${hospital.seq }" type="hidden" name="seq">
+					<input value="${hospital.businessNumber }" type="hidden" name="businessNumber">
 					<input value="2500" type="hidden" name="cartCourier">
 					<c:if test="${not empty loginID }">
 						<input value="${loginID }" type="hidden" name="memberId">
@@ -143,7 +161,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 						<li><img src="resources/images/hospital/${hospital.t_image }"></li>
 						<li>
 							<div>
-								<h3>${hospital.optionName }</h3>
+								<h3><input value="${hospital.optionName }" style="border:none;"></h3>
 							</div>
 							<div>
 								<dl>
