@@ -431,12 +431,6 @@ public class Controller5 {
 		return map;
 	}
 
-	// 장바구니-폼
-	@GetMapping("/getSearchCartForm")
-	public String getSearchCartForm() {
-		return "cart/getSearchCartForm";
-	}
-
 	// 장바구니-CRUD
 	@GetMapping("/insertCart") // 등록
 	public void insertCart(CartVO vo) {
@@ -453,18 +447,17 @@ public class Controller5 {
 		cartService.deleteCart(vo);
 	}
 
-	// start of bCart
-	// 사업자 장바구니-페이지 호출
-	@GetMapping("/getSearchBCart")
-	public String getSearchBCart(BCartVO vo) {
-		return "bCart/getSearchBCart";
+	// 통합 장바구니 폼 페이지
+	@GetMapping("/getSearchTotalCart")
+	public String getSearchTotalCart(BCartVO vo) {
+		return "totalCart/getSearchTotalCart";
 	}
 
 	// 장바구니-페이지 기능
-	@PostMapping("/getSearchBCart")
+	@PostMapping("/getSearchTotalCart")
 	@ResponseBody
-	public List<BCartVO> getSearchBCartProc(BCartVO vo) {
-		List<BCartVO> list = bCartService.getSearchBCart(vo);
+	public List<BCartVO> getSearchTotalCartProc(BCartVO vo) {
+		List<BCartVO> list = bCartService.getSearchTotalCart(vo);
 		return list;
 	}
 

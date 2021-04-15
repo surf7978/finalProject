@@ -11,7 +11,7 @@
 	//시작시 화면
 	$(function() {
 		//전체 리스트 조회
-		getSearchBCart();
+		getSearchTotalCart();
 		//삭제
 		deleteCart();
 		//쇼핑하러가기
@@ -23,10 +23,10 @@
 	
 	
 	//전체리스트 조회
-	function getSearchBCart(){
+	function getSearchTotalCart(){
 		//ajax 연결
 		$.ajax({
-			url : "getSearchBCart",
+			url : "getSearchTotalCart",
 			method : "post",
 			data : {
 				memberId : "${sessionScope.loginID}"
@@ -39,7 +39,7 @@
 				})//end of each
 			}//end of success
 		})//end of ajax
-	}//end of getSearchBCart
+	}//end of getSearchTotalCart
 	
 	//삭제
 	function deleteCart(){
@@ -62,15 +62,17 @@
 		})//end of deleteCart
 	}//end of deleteCart
 	
+	//tr태그 
 	function makeTr(item){
 		return $("<tr>")
 		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.bcartNumber))
 		.append($("<td>").html("<img src=resources/images/business/"+item.image1+">").attr("class","cartImage").trigger("create"))
 		.append($("<td>").html(item.name))
 		.append($("<td>").html(item.optionName))
-		.append($("<td>").html(item.price+"<button type='button' id='deleteCart'>삭제</button>"))
+		.append($("<td>").html(item.price))
 		.append($("<td>").html("무료"))
-		//.append($('<input type=\'hidden\' id=\'seq\'>').val(item.seq));
+		.append($("<td>").html(item.price+"원"))
+		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
 	}//end of makeTr
 	
 	function shopping(){
@@ -109,6 +111,7 @@
 					<th>상품금액</th>
 					<th>배송비</th>
 					<th>합계금액</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody></tbody>

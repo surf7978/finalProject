@@ -14,7 +14,7 @@
 			BISNUMBER,
 			MEMBERID
 		)VALUES(
-			BCART_SEQ.NEXTVAL,
+			TOTALCART_SEQ.NEXTVAL,
 			#{image1},
 			#{name},
 			#{optionName},
@@ -50,8 +50,8 @@
 		MEMBERID = #{memberId}
 	</select>
 	<!-- 장바구니 리스트조회 -->
-	<select id="getSearchBCart" resultType="bCartVO">
-		SELECT * FROM BCART
+	<select id="getSearchTotalCart" resultType="bCartVO">
+		SELECT * FROM TOTALCARTVIEW
 		WHERE
 		MEMBERID = #{memberId}
 	</select>
