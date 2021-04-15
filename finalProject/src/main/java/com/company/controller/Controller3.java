@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.abandonment.common.AbandonmentAPI;
+import com.company.business.service.BusinessService;
+import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
@@ -56,8 +59,9 @@ public class Controller3 {
 	ReservationService rsvService;
 	@Autowired
 	HospitalService hospitalService;
+	@Autowired
+	BusinessService businessService;
 
-	
 	// 유기동물 API
 	@RequestMapping("/getAban")
 	public void getAban(HttpServletResponse response, String pageNo, String upr_cd) throws IOException {
@@ -200,7 +204,6 @@ public class Controller3 {
 		return "redirect:/getSearchProductForm";
 	}
 
- 
 	@PostMapping("/insertProduct")
 	public String insertProduct(ProductVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
 		// 첨부파일처리
@@ -297,15 +300,15 @@ public class Controller3 {
 
 	// 사업체 결제폼
 	@RequestMapping("/ReserPayInfoForm")
-	public String ReserPayInfoForm(Model model, String resultPrice, MemberVO mvo, String count, IntegratedVO vo,
-			String seq) {
+	public String ReserPayInfoForm(Model model, String resultPrice, String count, IntegratedVO vo,
+			HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		vo.setCode(vo.getSeq().substring(0, 2));
+		// 코드값 -> 테이블명 변환
+		seqConversion(vo);
 		map.put("count", count);
 		map.put("resultPrice", resultPrice);
-		vo.setSeq(seq);
 		vo = integratedService.getIntegrated(vo);
-		// member 불러오기
-		model.addAttribute("member", memberService.getMember(mvo));
 		// 제품 불러오기
 		model.addAttribute("vo", vo);
 		model.addAttribute("map", map);
@@ -314,7 +317,7 @@ public class Controller3 {
 
 	// 사업체 결제API
 	@RequestMapping("/ReserPayInfo")
-	public String ReserPayInfo(MemberVO mvo, ReservationVO rvo, IntegratedVO vo, Model model,String resultPrice) {
+	public String ReserPayInfo(MemberVO mvo, ReservationVO rvo, IntegratedVO vo, Model model, String resultPrice) {
 		model.addAttribute("pay", rvo);
 		return "pay/ReserPayInfo";
 	}
@@ -330,11 +333,11 @@ public class Controller3 {
 
 	// 병원 결제form
 	@RequestMapping("/HospitalPayInfoForm")
-	public String HospitalPayInfoForm(Model model, HospitalVO hosvo, String resultPrice,String count,String seq) {
+	public String HospitalPayInfoForm(Model model, HospitalVO hosvo, String resultPrice, String count, String seq) {
 		// member 불러오기
 		// 제품 불러오기
-		model.addAttribute("resultPrice",resultPrice);
-		model.addAttribute("count",count);
+		model.addAttribute("resultPrice", resultPrice);
+		model.addAttribute("count", count);
 		model.addAttribute("vo", hospitalService.getHospital(hosvo));
 		return "pay/HospitalPayInfoForm";
 	}
@@ -344,5 +347,44 @@ public class Controller3 {
 	public String HospitalPayInfo(Model model) {
 		return "pay/ReserPayInfo";
 	}
+	
+	// 공통
+		// 세션 및 busCode 변환
+		public String sessionSelect(HttpSession session, IntegratedVO vo) {
+			// 1. id로 businessTable 조회
+			String id = session.getAttribute("loginID").toString();
+			BusinessVO bvo = new BusinessVO();
+			bvo.setBusinessId(id);
+			bvo = businessService.getBusiness(bvo);
+			// 2. business의 사업자 번호 가져와 넣기
+			vo.setBusinessNumber(bvo.getBusinessNumber());
+			vo.setCode(bvo.getBusinessCode());
+			// 3. 코드값 변환
+			if (vo.getCode().equals("10"))
+				vo.setCode("HOTEL");
+			else if (vo.getCode().equals("30"))
+				vo.setCode("CAFE");
+			else if (vo.getCode().equals("40"))
+				vo.setCode("BEAUTY");
+			else if (vo.getCode().equals("50"))
+				vo.setCode("EDU");
+			else if (vo.getCode().equals("60"))
+				vo.setCode("TAXI");
+			return vo.getCode();
+		}// end of sessionSelect
+		
+		//seq를 code값으로 변환
+		public void seqConversion(IntegratedVO vo) {
+			if (vo.getCode().equals("10"))
+				vo.setCode("HOTEL");
+			else if (vo.getCode().equals("30"))
+				vo.setCode("CAFE");
+			else if (vo.getCode().equals("40"))
+				vo.setCode("BEAUTY");
+			else if (vo.getCode().equals("50"))
+				vo.setCode("EDU");
+			else if (vo.getCode().equals("60"))
+				vo.setCode("TAXI");
+		}
 
 }
