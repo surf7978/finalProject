@@ -93,7 +93,7 @@ table.table2 td {
 		<div id="aban_location"></div>
 		<div id="show">
 			<form id="frm" name="frm" onsubmit="return check()"
-				action="updateBoard?boardNumber=${board.boardNumber}" method="post">
+				action="updateBoard2?boardNumber=${board.boardNumber}" method="post">
 
 
 				<table

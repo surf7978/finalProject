@@ -79,7 +79,7 @@
 </head>
 <body>
 <div id="contents"> 
-	<h1 >자랑하기 게시판</h1> 
+	<h1 >자랑하기</h1> 
 	<div id="pro_location"> 
 	</div>
 	<div id="show"> 
