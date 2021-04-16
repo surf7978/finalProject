@@ -55,11 +55,10 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-	<input value="신고하기조회"
-		style="font-size: 40px; text-align: center; width: 400px; border: none;"
-		readonly>
+<h3 align="center">신고글 현황</h3>
+	<br><br>
 <div id="outter">
-	<div  style="float: bottom; ">
+	<div  style=" display: none;  float: bottom; ">
 		<select  id="cntPerPage" name="sel" onchange="selChange()">
 	 <option value="5"
 				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>

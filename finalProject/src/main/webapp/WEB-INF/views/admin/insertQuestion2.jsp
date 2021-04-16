@@ -25,6 +25,8 @@
 			alert("내용을 입력 하세요");
 			return false;
 		}
+		alert("성공적으로 접수 되었습니다.");
+		
 		return true;
 	}
 </script>
