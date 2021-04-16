@@ -131,8 +131,10 @@ rs.rows[0].businessId : ${rs.rows[0].businessId }<br>
 hospital.businessNumber : ${hospital.businessNumber}
  --> 
 	<div id="contents">
-	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
+	<c:if test="${loginID eq rs.rows[0].businessId}">
 		<button>수정하기</button>
+	</c:if>
+	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
 		<button>삭제하기</button>
 	</c:if>
 		<div id="getproduct">

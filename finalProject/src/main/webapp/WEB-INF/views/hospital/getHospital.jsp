@@ -169,12 +169,14 @@ rs.rows[0].businessId : ${rs.rows[0].businessId }<br>
 hospital.businessNumber : ${hospital.businessNumber}
  --> 
 <div id="contents">
-	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
 		<div>
+	<c:if test="${loginID eq rs.rows[0].businessId}">
 			<button id="u_btn">수정하기</button>
+	</c:if>
+	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
 			<button id="d_btn">삭제하기</button>
-		</div>
 	</c:if> 
+		</div>
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm" method="post">
