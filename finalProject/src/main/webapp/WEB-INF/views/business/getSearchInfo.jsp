@@ -15,8 +15,8 @@
 		optionName();
 		//pro_show의 input type number 클릭 시 이벤트
 		pro_show();
-		//contents의 b_btn클릭시
-		contents();
+		//결제페이지로 이동
+		pay();
 		//장바구니 클릭 시 데이터값 추가
 		insertCart();
 		
@@ -32,25 +32,42 @@
 				var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
 				var inval = $(input).val();
 				var strong = $("<p>").css("text-align", "right").text("${vo.price}");
-				$(nav).append(input, strong);						
+				$(nav).append(input, strong);	
+				$("#pro_show").empty();	
 				$("#pro_show").append(nav);
+				$("#pro_result").empty();
 				var restrong = $("<dt>").html("총 합계금액");
 				var result = $("<dd>").text("${vo.price}").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
 				$("#pro_result").append(restrong, result);
 			}
+			$("#optionName option").prop("selected", false);
 		})//end of optionName
 	}//end of optionName
 	
-	//가격
-	function contents(){
-		$("#contents").on("click", "#b_btn", function(){
+	//결제페이지로 이동
+	function pay(){
+		$("#btnEvent").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
 			var count = $("[name=count]").val();
-			location.href="ReserPayInfoForm?resultPrice="+resultPrice +"&count=" + count +"&seq=" + ${vo.seq};
-		});//end of contents
-	}//end of contents
+			var pro = $("#pro_result").text();
+			var loginId = $("[name=memberId]").val();
+			//상품선택 로그인 체크
+			if(pro == ""){
+				alert("상품을 선택해주세요");
+			}else if(!loginId){
+				var result = confirm("로그인해주세요");
+				if(result==true){
+					location.href="loginForm";
+				}else{
+					return false;
+				}
+			}else{
+				location.href="PayInfoForm?productNumber=${product.productNumber }&resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count;
+			}			
+		});//end of btnEvent
+	}//end of pay
 	
-	
+	/* count + result 총 합계금액 */
 	function pro_show(){
 		$("#pro_show").on("click","input[type=number]", function(){
 			var plu = $(this).val();
@@ -138,7 +155,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 							</div>
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
-							<div>
+							<div id="btnEvent">
 								<button type="button" id="btnCart">장바구니 담기</button>
 								<button type="button" id="b_btn">바로구매</button>
 							</div>
