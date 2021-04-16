@@ -220,7 +220,7 @@
 						<input type="checkbox" id="cate07_04" value="노즈워크"><label
 							for="cate07_04">노즈워크</label>
 					</div></li>
-				<li><a>식기/급식수</a>
+				<li><a>식기/급수기</a>
 					<div>
 						<input type="checkbox" id="cate08_01" value="급식기/사료통"><label
 							for="cate08_01">급식기/사료통</label> <input type="checkbox"
