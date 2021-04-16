@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +29,9 @@
 			<td>${vo.content}</td>
 		</tr>
 	</table>
-	<button type="button" id="getSearchQuestion">문의 리스트</button>
-	<button type="button" id="insertAnswer">답장하기</button>
+	<c:if test="${loginID eq 'admin' }">
+		<button type="button" id="insertAnswer">답장하기</button>
+	</c:if>
 </div>
 </body>
 <script>

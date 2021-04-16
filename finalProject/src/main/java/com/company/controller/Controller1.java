@@ -2,7 +2,6 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,10 +11,8 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -41,11 +38,15 @@ import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
+import com.company.cafe.service.CafeService;
+import com.company.cafe.service.CafeVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
 import com.company.hospital.service.HospitalSearchVO;
 import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
+import com.company.integrated.service.IntegratedService;
+import com.company.integrated.service.IntegratedVO;
 import com.company.member.common.KakaoAPI;
 import com.company.member.common.coolsmsAPI;
 import com.company.member.service.MemberService;
@@ -57,6 +58,8 @@ import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
+import com.company.reservation.service.ReservationService;
+import com.company.reservation.service.ReservationVO;
 import com.company.review.service.ReviewService;
 import com.company.review.service.ReviewVO;
 
@@ -246,7 +249,7 @@ public class Controller1 {
 			vo1.setBusinessId(vo.getMemberId());
 			businessService.updateBusiness(vo1);
 		}
-		return "redirect:/loginForm";
+		return "redirect:/loginout";
 	}
 	
 	//휴대폰인증 페이지 이동-회원가입
@@ -540,6 +543,68 @@ public class Controller1 {
 		map.put("list", list);
 		//
 		return map;
+	}
+	
+	//마이페이지-후기내역-구매평수정
+	@PostMapping("/updateReview")
+	public String updateReview(ReviewVO vo, Model model) {
+		reviewService.updateReview(vo);
+		model.addAttribute("review", reviewService.getReview(vo));
+		return "myPage/getReview99";
+	}
+	
+	//마이페이지-후기내역-구매평삭제
+	@RequestMapping("/deleteReview")
+	public String deleteReview(ReviewVO vo, Model model) {
+		reviewService.deleteReview(vo);
+		ReviewVO vo1 =new ReviewVO();
+		vo1.setMemberId(vo.getMemberId());
+		model.addAttribute("review", reviewService.getSearchReview99(vo1));
+		return "myPage/getSearchReview98";
+	}
+	
+	@Autowired CafeService cafeService;
+	//마이페이지 - 관리자 - 판매글현황
+	@GetMapping("/adminView")
+	public String adminView(CafeVO vo, Model model) {
+		model.addAttribute("adminView", cafeService.adminView(vo));
+		return "admin/adminView";
+	}
+	
+	@Autowired IntegratedService integratedService;
+	//마이페이지 - 관리자 - 판매글현황 - 단건삭제
+	@RequestMapping("/deleteAdminView")
+	public String deleteAdminView(CafeVO vo, Model model) {
+		IntegratedVO vo1 = new IntegratedVO();
+		vo1.setCode(vo.getCode());
+		vo1.setSeq(vo.getSeq());
+		integratedService.deleteIntegrated(vo1);
+		model.addAttribute("adminView", cafeService.adminView(vo));
+		return "admin/adminView";
+	}
+	
+	@Autowired ReservationService reservationService;
+	//마이페이지 - 관리자 - 판매글현황 - 단건조회
+	@GetMapping("/getAdminView")
+	public String getAdminView(CafeVO vo, Model model, HttpSession session) {
+		String seq = vo.getSeq();
+		HospitalVO vo1 = new HospitalVO();
+		vo1.setSeq(seq);
+		model.addAttribute("hospital", hospitalService.getHospital(vo1));
+		if (session.getAttribute("loginID") != null) {
+			ReservationVO vo2 = new ReservationVO();
+			vo2.setMemberId((String) session.getAttribute("loginID")); 
+			vo2.setBisNumber(seq); 
+			model.addAttribute("reservation", reservationService.getViewReservation(vo2)); 
+		}
+		ReviewVO vo2 = new ReviewVO();
+		vo2.setProbisNumber(seq);
+		model.addAttribute("review", reviewService.getSearchReview(vo2));
+		QuestionVO vo3 = new QuestionVO();
+		vo3.setProbisNumber(seq);
+		model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
+		
+		return "hospital/getHospital";
 	}
 	
 	@Autowired ProductService productService;
