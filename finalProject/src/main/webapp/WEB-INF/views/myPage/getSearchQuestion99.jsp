@@ -46,7 +46,7 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-<input value="후기내역" style="font-size:40px; text-align:center; width:450px; border:none;" readonly><br><br>
+<input value="문의내역" style="font-size:40px; text-align:center; width:450px; border:none;" readonly><br><br>
 <table class="sub_news" border="1"  summary="게시판의 글제목 리스트">
 
 

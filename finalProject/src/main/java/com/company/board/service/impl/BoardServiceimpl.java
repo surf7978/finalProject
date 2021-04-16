@@ -33,6 +33,11 @@ public class BoardServiceimpl implements BoardService{
 	public int updateBoard(BoardVO vo) {
 		return boardMapper.updateBoard(vo);
 	}
+	//수정2
+	@Override
+	public int updateBoard2(BoardVO vo) {
+		return boardMapper.updateBoard2(vo);
+	}
 	
 	//탈퇴
 	@Override

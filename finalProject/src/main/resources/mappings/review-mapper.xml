@@ -45,4 +45,19 @@
 		FROM Review
 		WHERE memberId = #{memberId}
 	</select>
+	<!-- 후기(구매평) 수정 -->
+	<update id="updateReview" parameterType="reviewVO">
+		UPDATE Review 
+			<set>
+			 <if test="memberId != null">	memberId = #{memberId}</if>
+			 <if test="title != null">		, title = #{title}</if>
+			 <if test="content != null">	, content = #{content}</if>
+			</set>
+		WHERE REVIEWNUMBER = #{reviewNumber}
+	</update>
+	<delete id="deleteReview" parameterType="reviewVO">
+		DELETE 
+		FROM Review
+		WHERE REVIEWNUMBER = #{reviewNumber}
+	</delete>
 </mapper>

@@ -15,42 +15,73 @@
 		optionName();
 		//pro_show의 input type number 클릭 시 이벤트
 		pro_show();
-		//contents의 b_btn클릭시
-		contents();
+		//결제페이지로 이동
+		pay();
 		//장바구니 클릭 시 데이터값 추가
 		insertCart();
-		
+		//수량버튼 기능
+		countBtn();
 	});//end of function
+	
+	//수량버튼 기능
+	function countBtn(){
+		//플러스 누를시
+		//logic
+		
+		//마이너스 누를시
+		//logic
+		
+	}//end of countBtn
 	
 	//버튼 누를시 하단에 추가되는 내용
 	function optionName(){
 		$("#optionName").on("click", function() {
 			var op = $("#optionName option:selected").val();
 			if (op != "") {
+				//nav 영역이 옵션 선택시 추가되는 영역
 				var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
 						$("<span>").text("${vo.name}").append("<hr>"));
+				//수량으로 바꿀 부분
 				var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
-				var inval = $(input).val();
+				
 				var strong = $("<p>").css("text-align", "right").text("${vo.price}");
-				$(nav).append(input, strong);						
+				$(nav).append(input, strong);	
+				$("#pro_show").empty();	
 				$("#pro_show").append(nav);
+				$("#pro_result").empty();
 				var restrong = $("<dt>").html("총 합계금액");
 				var result = $("<dd>").text("${vo.price}").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
 				$("#pro_result").append(restrong, result);
 			}
+			$("#optionName option").prop("selected", false);
 		})//end of optionName
 	}//end of optionName
 	
-	//가격
-	function contents(){
-		$("#contents").on("click", "#b_btn", function(){
+	
+	//결제페이지로 이동
+	function pay(){
+		$("#btnEvent").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
 			var count = $("[name=count]").val();
-			location.href="ReserPayInfoForm?resultPrice="+resultPrice +"&count=" + count +"&seq=" + ${vo.seq};
-		});//end of contents
-	}//end of contents
+			var pro = $("#pro_result").text();
+			var loginId = $("[name=memberId]").val();
+			//상품선택 로그인 체크
+			if(pro == ""){
+				alert("상품을 선택해주세요");
+			}else if(!loginId){
+				var result = confirm("로그인해주세요");
+				if(result==true){
+					location.href="loginForm";
+				}else{
+					return false;
+				}
+			}else{
+				location.href="PayInfoForm?productNumber=${product.productNumber }&resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count;
+			}			
+		});//end of btnEvent
+	}//end of pay
 	
-	
+	/* count + result 총 합계금액 */
 	function pro_show(){
 		$("#pro_show").on("click","input[type=number]", function(){
 			var plu = $(this).val();
@@ -63,6 +94,8 @@
 	//장바구니에 등록
 	function insertCart(){
 		$("#btnCart").on("click",function(){
+			frm.price.value =  $("[name=resultPrice]").text();
+			 $("[name=resultPrice]").text();
 			var vo = $("#frm").serialize();
 			//장바구니 DB에 넣기
 			$.ajax({
@@ -90,7 +123,7 @@
  url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
  user="final" password="a20210409A"/>
 <sql:query var="rs" dataSource="${ds }">
-    select * from business where businessNumber = '${hospital.businessNumber}'
+    select * from business where businessNumber = '${vo.businessNumber}'
 </sql:query>
 <!-- 
 loginID : ${loginID }<br>
@@ -98,8 +131,10 @@ rs.rows[0].businessId : ${rs.rows[0].businessId }<br>
 hospital.businessNumber : ${hospital.businessNumber}
  --> 
 	<div id="contents">
-	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
+	<c:if test="${loginID eq rs.rows[0].businessId}">
 		<button>수정하기</button>
+	</c:if>
+	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
 		<button>삭제하기</button>
 	</c:if>
 		<div id="getproduct">
@@ -138,7 +173,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 							</div>
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
-							<div>
+							<div id="btnEvent">
 								<button type="button" id="btnCart">장바구니 담기</button>
 								<button type="button" id="b_btn">바로구매</button>
 							</div>

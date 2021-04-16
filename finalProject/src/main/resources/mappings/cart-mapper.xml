@@ -36,7 +36,14 @@
 	<!-- 장바구니 삭제 -->
 	<delete id="deleteCart">
 		DELETE FROM CART
-		WHERE CARTNUMBER = #{cartNumber}
+		<where> 
+			<foreach item="seq" index="idx" collection="cartNumber" open="(" close=")" separator="," >
+				<if test="idx>0">
+					AND
+				</if>
+				CARTNUMBER = #{seq}
+			</foreach>
+		</where>
 	</delete>
 	<!-- 안쓸 예정 -->
 	<!-- 장바구니 상세조회 -->

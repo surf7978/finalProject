@@ -57,7 +57,7 @@
 	
 	<!-- 의료내역 수정 -->
 	<update id="updateNote" parameterType="NoteVO">
-	 UPDATE NOTE SET
+	 UPDATE NOTE
 	 <set> 
 		 <if test="category1 != null">			 CATEGORY1 = #{category1}</if>
 		 <if test="category2 != null">			, CATEGORY2 = #{category2}</if>

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class BCartVO {
-	String bcartNumber;
+	String bcartNumber[];
 	String image1;
 	String name;
 	String optionName;

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="resources/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 </head>
 <style>
 	#top_btn{position:fixed;right:0;bottom:60px;width:40px;height:40px;background:#e7ab3c;text-align:center;color:#fff;line-height:40px;cursor:pointer;display:none;font-size:13px;}
@@ -181,7 +182,7 @@
 										<!-- 
 										<a href="#" class="primary-btn view-card">VIEW CARD</a> 
 										 -->
-										<a href="#" class="primary-btn checkout-btn" style="font-size:17px;">결 제 하 기</a>
+										<a href="#" class="primary-btn checkout-btn" style="font-size:17px;">상 세 보 기</a>
 									</div>
 								</div></li>
 						</ul>
