@@ -12,6 +12,7 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
+<h3>구매내역 리스트</h3><br>
 <table border="1">
 	<thead>
 	<tr>
