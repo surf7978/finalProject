@@ -34,6 +34,7 @@ $(document).ready(function() { //function시작
 										+ "&memberId=${loginID}&count=" + count;
 							}
 						});
+		//삭제버튼 클릭
 		$("#d_btn").on("click",function() {
 							if (confirm("삭제하시겟습니까") == true) {
 								location.href = "deleteProduct?productNumber=${product.productNumber }";
@@ -51,68 +52,15 @@ $(document).ready(function() { //function시작
 						var optionName = $("#optionName option:selected").text();
 						var navlen = $("#pro_show").find("nav").length;
 						if (optionPrice != "" && navlen == 0) {
-							//
-							var nav = $("<nav>").css({
-								"width" : "100%",
-								"position":"relative"
-							}).attr("id", "proname")
-									.append(
-											$("<span>").text(optionName)
-													.append("<hr>"));
-							var input = $("<input>").attr({
-								"type" : "number",
-								"min" : "1",
-								"value" : "1",
-								"name" : "count"
-							});
-							var inval = $(input).val();
-							var strong = $("<p>").css("text-align", "right")
-									.text(optionPrice);
-							$(nav).append(input, strong);
-							$("#pro_show").append(nav);
-							$("#pro_result").empty();
-							var restrong = $("<dt>").html("총 합계금액");
-							var result = $("<dd>").text(optionPrice).attr(
-									"name", "resultPrice").css({
-								"text-align" : "right",
-								"font-size" : "37px",
-								"color" : "#e7ab3c"
-							})
-							$("#pro_result").append(restrong, result);
-							//
+							optionSelect();						
 						}else if(optionPrice != "" && navlen != 0){
-							for(var i=0;i<navlen;i++){
+							$("#pro_show nav").each(function(i){
 								var option = $("#pro_show nav").find("span").eq(i).text();
-								if(option != optionName){
-									var nav = $("<nav>").css({
-										"width" : "100%",
-										"position":"relative"
-									}).attr("id", "proname")
-											.append(
-													$("<span>").text(optionName)
-															.append("<hr>"));
-									var input = $("<input>").attr({
-										"type" : "number",
-										"min" : "1",
-										"value" : "1",
-										"name" : "count"
-									});
-									var inval = $(input).val();
-									var strong = $("<p>").css("text-align", "right")
-											.text(optionPrice);
-									$(nav).append(input, strong);
-									$("#pro_show").append(nav);
-									$("#pro_result").empty();
-									var restrong = $("<dt>").html("총 합계금액");
-									var result = $("<dd>").text(optionPrice).attr(
-											"name", "resultPrice").css({
-										"text-align" : "right",
-										"font-size" : "37px",
-										"color" : "#e7ab3c"
-									})
-									$("#pro_result").append(restrong, result);
+								if(option == optionName){
+									return false;
 								}
-							}
+							})
+							optionSelect();
 						}
 						$("#optionName option").prop("selected", false);
 						resultSum()
@@ -158,6 +106,40 @@ $(document).ready(function() { //function시작
 		}
 		result.text(sum);
 	}//수량 * 가격 of end
+	//옵션선택
+	function optionSelect(){
+		var optionPrice = $("#optionName option:selected").val();
+		var optionName = $("#optionName option:selected").text();
+		var navlen = $("#pro_show").find("nav").length;
+
+		var nav = $("<nav>").css({
+			"width" : "100%",
+			"position":"relative"
+		}).attr("id", "proname")
+				.append(
+						$("<span>").text(optionName)
+								.append("<hr>"));
+		var input = $("<input>").attr({
+			"type" : "number",
+			"min" : "1",
+			"value" : "1",
+			"name" : "count"
+		});
+		var inval = $(input).val();
+		var strong = $("<p>").css("text-align", "right")
+				.text(optionPrice);
+		$(nav).append(input, strong);
+		$("#pro_show").append(nav);
+		$("#pro_result").empty();
+		var restrong = $("<dt>").html("총 합계금액");
+		var result = $("<dd>").text(optionPrice).attr("name", "resultPrice")
+		.css({
+			"text-align" : "right",
+			"font-size" : "37px",
+			"color" : "#e7ab3c"
+		})
+		$("#pro_result").append(restrong, result);
+	}
 </script>
 </head>
 <body>
@@ -205,8 +187,7 @@ $(document).ready(function() { //function시작
 							<div>
 								<select name="optionName" id="optionName">
 									<option value="">상품선택</option>
-									<c:forTokens items="${product.optionName}" delims=","
-										var="optionName" varStatus="num">
+									<c:forTokens items="${product.optionName}" delims="," var="optionName" varStatus="num">
 										<option value="${optionPrice[num.index]}">${optionName }(${optionPrice[num.index]}원)</option>
 									</c:forTokens>
 								</select>
