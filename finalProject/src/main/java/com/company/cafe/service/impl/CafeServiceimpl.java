@@ -62,5 +62,11 @@ public class CafeServiceimpl implements CafeService {
 	public int getCountList1(CafeVO vo) {
 		return cafeMapper.getCountList1(vo);
 	}
+	
+	//adminView 전체조회
+	@Override
+	public List<CafeVO> adminView(CafeVO vo) {
+		return cafeMapper.adminView(vo);
+	}
 
 }

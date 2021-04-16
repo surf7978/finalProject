@@ -19,4 +19,5 @@ public class CafeVO {
 	MultipartFile t_uploadFile;
 	//
 	String menu;
+	String code;
 }
