@@ -165,8 +165,10 @@
 		</table>
 		<br>
 		<button type="submit" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#e7ab3c;">수 정</button>
+		<!-- 
 		&nbsp;
 		<button type="reset" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#ff6347; color:white;">취 소</button>
+		 -->
 		&nbsp;
 		<button type="button" onclick="location.href='/finalProject'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 	<br><br>

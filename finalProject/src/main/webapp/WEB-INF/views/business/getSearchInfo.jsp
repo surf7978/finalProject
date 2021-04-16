@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,9 +85,23 @@
 </script>
 </head>
 <body>
+<!-- 글작성자와 조회자가 일치하는지 확인하는 코드 -->
+<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
+ url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+ user="final" password="a20210409A"/>
+<sql:query var="rs" dataSource="${ds }">
+    select * from business where businessNumber = '${hospital.businessNumber}'
+</sql:query>
+<!-- 
+loginID : ${loginID }<br>
+rs.rows[0].businessId : ${rs.rows[0].businessId }<br>
+hospital.businessNumber : ${hospital.businessNumber}
+ --> 
 	<div id="contents">
+	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
 		<button>수정하기</button>
 		<button>삭제하기</button>
+	</c:if>
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">

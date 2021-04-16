@@ -129,4 +129,11 @@
 				</if>
 		</where>
 	</sql>
+	<!-- adminView 전체조회 -->
+	<select id="adminView" parameterType="cafeVO" resultType="cafeVO">
+		SELECT 
+			*
+		FROM adminView
+		ORDER BY seq DESC
+	</select>
 </mapper>
