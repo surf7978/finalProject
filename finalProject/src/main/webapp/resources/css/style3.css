@@ -104,3 +104,5 @@ li{list-style:none;}
 #contents #pro_tb th{width:20%;}
 #contents #pro_tb td{width:80%;position:relative;}
 #contents #pro_tb td #opbtn{position:absolute;right:0;top:0;}
+/* 제품옵션 */
+#contents #pro_show #proname{background:#fcfcfd;padding:10px;border:#d9dde2 1px solid;}

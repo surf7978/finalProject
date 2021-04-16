@@ -132,14 +132,13 @@
 			var optionName = $("#optionName option:selected").text();
 			if (optionPrice != ""){
 				//
-				var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
+				var nav = $("<nav>").css({"width":"100%", "position":"position:relative"}).attr("id", "proname").append(
 						$("<span>").text(optionName)
 								.append("<hr>"));
 				var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
 				var inval = $(input).val();
 				var strong = $("<p>").css("text-align", "right").text(optionPrice);
 				$(nav).append(input, strong);	
-				$("#pro_show").empty();					
 				$("#pro_show").append(nav);
 				var restrong = $("<dt>").html("총 합계금액");
 				var result = $("<dd>").text(optionPrice).attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
@@ -148,12 +147,17 @@
 			} 
 			$("#optionName option").prop("selected", false);
 		})
-
+		//수량 선택
 		$("#pro_show").on("click","input[type=number]", function(){
-			var plu = $(this).val();
-			var result = $("#pro_result").find("dd").text();
-			result.empty();
-			result.text(result * plu)
+			var nav = $("#pro_show").find("nav");
+			var result = $("#pro_result").find("dd");
+			var sum = 0;
+			for(var i=0;i<nav.length;i++){
+				var count = $(nav).find("[name=count]").val();
+				var price = $(nav).find("p").text();
+				sum += count * price;
+			}
+			result.text(sum);
 		});
 	})
 	</script>
