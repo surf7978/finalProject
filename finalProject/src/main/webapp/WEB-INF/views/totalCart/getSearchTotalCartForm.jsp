@@ -92,7 +92,7 @@
 			var k = $("input[type=checkbox]:checked");
 			for(var i=0;i<k.length;i++){
 				//DB기능은 ok 
-				//tr 태그를 지워야함 단건은 ok 여러건은 x
+				//checked상태인 것들의 tr을 지우겠다는 의미
 				k.closest("tr").remove();
 			}
 		}//end of if
@@ -155,9 +155,7 @@
 					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
 					dataType:"json",
 					//callback
-					success:function(response){
-						removeTr(response)
-					}
+					success:removeTr
 				})//end of ajax
 			}else{
 				false
