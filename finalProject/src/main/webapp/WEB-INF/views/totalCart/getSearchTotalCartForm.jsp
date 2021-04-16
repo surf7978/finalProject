@@ -22,7 +22,7 @@
 		totalCheckBox();
 		//6.한개라도 채크해제시 전체 채크박스 해제
 		oneCheck();
-		//7.채크된 것들 삭제
+		//7.채크된 것들 일괄삭제
 		totalCheckDelete();
 		//전체 합계금액(총상품금액,배송비,전체주문금액)
 	})//end of function
@@ -43,7 +43,8 @@
 					console.log(item)
 					var content = makeTr(item);
 					content.appendTo("#totalCartTbody");
-					totalForm(item)
+					//전체합계금액
+					totalForm(datas)
 				})//end of each
 			}//end of success
 		})//end of ajax
@@ -165,19 +166,25 @@
 	
 	//전체합계금액 
 	function totalForm(item){
-		var totalPrice=0;
-		var totalCourier=0;
-			for(var i=0;i<item.length;i++){
+		var totalPrice = 0;
+		var totalCourier = 0;
+			for(var i = 0; i < item.length; i++){
 				//금액이 String타입으로 더해짐(int로 변경)
-				totalPrice += item.optionPrice
-				if(item.cartCourier!='무료')
-				totalCourier += item.cartCourier;
-			}
-			console.log(totalPrice)
+				totalPrice += parseInt(item[i].optionPrice)
+				if(item[i].cartCourier == '무료'){
+					 item[i].cartCourier = 0;
+				}
+				totalCourier += item[i].cartCourier
+			}//end of for
 			var totalResult = totalPrice + totalCourier;
-			//$("#totalPrice").text("1");
-			//$("#totalCourier").text(totalCourier);
-			//$("#totalResult").text(totalResult);
+			//전체리스트 불러올 때 값을 넣어준다
+			//수량은 해보고 결정할 예정
+			//총상품금액
+			$("#totalPrice").html(totalPrice);
+			//배송비
+			$("#totalCourier").html(totalCourier);
+			//전체주문금액
+			$("#totalResult").html(totalResult);
 	}//end of totalForm
 </script>
 </head>
@@ -202,12 +209,12 @@
 			</table>
 			<button type="button" id="totalDelete">일괄삭제</button>
 		</div>
-		<div id="totalPrice">
+		<div id="totalValue">
 			<table id="totalTbl">
 				<tr>
 					<td rowspan=3><h2>전체합계금액</h2></td>
 				    <td>총상품금액</td>
-				    <td><span id="totalPrice"></span></td>
+				    <td><span id = "totalPrice"></span></td>
 				</tr>
 				<tr>
 					<td>배송비</td>
