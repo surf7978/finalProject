@@ -24,7 +24,7 @@
 		oneCheck();
 		//7.채크된 것들 삭제
 		totalCheckDelete();
-		//전체 합계금액(총상품금액,배송비,전체주문금액)
+		//8.전체 합계금액(총상품금액,배송비,전체주문금액)
 		totalForm();
 	})//end of function
 	
@@ -73,7 +73,7 @@
 		if(item.cartCourier == null || item.cartCourier == "0")
 			item.cartCourier = "무료"
 		return $("<tr>")
-		.append($("<td><input type='checkbox' class='chk' name='check'></td>").val(item.cartNumber))
+		.append($("<td><input type='checkbox' class='chk' name='check'></td>"))
 		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
 		.append($("<td>").html(item.productName))
 		.append($("<td>").html(item.optionName))
@@ -86,10 +86,15 @@
 	
 	//tr태그 지우기
 	function removeTr(response){
-		if(response == 1){
+		if(response != 0){
 			alert('삭제되었습니다.');
 			//해당 위치에서 $(this)가 의미하는 건 ajax가 됨
-			tr.remove();
+			var k = $("input[type=checkbox]:checked");
+			for(var i=0;i<k.length;i++){
+				//DB기능은 ok 
+				//tr 태그를 지워야함 단건은 ok 여러건은 x
+				k.closest("tr").remove();
+			}
 		}//end of if
 	}//end of removeTr
 	
@@ -143,14 +148,16 @@
 		$("#totalCart").on("click","#totalDelete",function(){
 			var y = confirm("선택하신 상품을 장바구니에서 삭제 하시겠습니까??");
 			//seq번호 찾아서 ,로 이어서 넣기
-			var seqVal = closest("checked").find("#seq").val();
+			var seqVal = $("input[type=checkbox]:checked").closest("tr").find("#seq").val();
 			if(y){
 				$.ajax({
 					url:"deleteBCart",
 					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
 					dataType:"json",
 					//callback
-					success:removeTr
+					success:function(response){
+						removeTr(response)
+					}
 				})//end of ajax
 			}else{
 				false
@@ -158,7 +165,7 @@
 		})//end of totalCart
 	}//end of totalCheckDelete
 	
-	//전체합계금액 
+	//8.전체합계금액 
 	function totalForm(item){
 		var totalPrice;
 		var totalCourier;
