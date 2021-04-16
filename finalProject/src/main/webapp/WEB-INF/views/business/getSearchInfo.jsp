@@ -107,7 +107,7 @@
  url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
  user="final" password="a20210409A"/>
 <sql:query var="rs" dataSource="${ds }">
-    select * from business where businessNumber = '${hospital.businessNumber}'
+    select * from business where businessNumber = '${vo.businessNumber}'
 </sql:query>
 <!-- 
 loginID : ${loginID }<br>
