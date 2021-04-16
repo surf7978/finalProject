@@ -11,8 +11,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$(document).ready(function() { //function시작		
-	
+$(document).ready(function() { //function시작			
 		//결제페이지로 이동
 		$("#contents").on("click","#b_btn",function() {
 							var resultPrice = $("[name=resultPrice]").text();
@@ -34,9 +33,7 @@ $(document).ready(function() { //function시작
 										+ resultPrice
 										+ "&memberId=${loginID}&count=" + count;
 							}
-
 						});
-
 		$("#d_btn").on("click",function() {
 							if (confirm("삭제하시겟습니까") == true) {
 								location.href = "deleteProduct?productNumber=${product.productNumber }";
@@ -50,16 +47,14 @@ $(document).ready(function() { //function시작
 	
 			//select option 선택 클릭 이벤트
 			$("#optionName").on("click", function() {
-						var optionPrice = $("#optionName option:selected")
-								.val();
-						console.log(optionPrice);
-						var optionName = $("#optionName option:selected")
-								.text();
-						if (optionPrice != "") {
+						var optionPrice = $("#optionName option:selected").val();
+						var optionName = $("#optionName option:selected").text();
+						var navlen = $("#pro_show").find("nav").length;
+						if (optionPrice != "" && navlen == 0) {
 							//
 							var nav = $("<nav>").css({
 								"width" : "100%",
-								"position" : "position:relative"
+								"position":"relative"
 							}).attr("id", "proname")
 									.append(
 											$("<span>").text(optionName)
@@ -85,6 +80,39 @@ $(document).ready(function() { //function시작
 							})
 							$("#pro_result").append(restrong, result);
 							//
+						}else if(optionPrice != "" && navlen != 0){
+							for(var i=0;i<navlen;i++){
+								var option = $("#pro_show nav").find("span").eq(i).text();
+								if(option != optionName){
+									var nav = $("<nav>").css({
+										"width" : "100%",
+										"position":"relative"
+									}).attr("id", "proname")
+											.append(
+													$("<span>").text(optionName)
+															.append("<hr>"));
+									var input = $("<input>").attr({
+										"type" : "number",
+										"min" : "1",
+										"value" : "1",
+										"name" : "count"
+									});
+									var inval = $(input).val();
+									var strong = $("<p>").css("text-align", "right")
+											.text(optionPrice);
+									$(nav).append(input, strong);
+									$("#pro_show").append(nav);
+									$("#pro_result").empty();
+									var restrong = $("<dt>").html("총 합계금액");
+									var result = $("<dd>").text(optionPrice).attr(
+											"name", "resultPrice").css({
+										"text-align" : "right",
+										"font-size" : "37px",
+										"color" : "#e7ab3c"
+									})
+									$("#pro_result").append(restrong, result);
+								}
+							}
 						}
 						$("#optionName option").prop("selected", false);
 						resultSum()
