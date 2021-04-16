@@ -169,16 +169,15 @@
 		var totalCourier=0;
 			for(var i=0;i<item.length;i++){
 				//금액이 String타입으로 더해짐(int로 변경)
-				totalPrice += 1 
-					//item.optionPrice;
+				totalPrice += item.optionPrice
 				if(item.cartCourier!='무료')
 				totalCourier += item.cartCourier;
 			}
 			console.log(totalPrice)
 			var totalResult = totalPrice + totalCourier;
-			$("#totalPrice").val(totalPrice);
-			$("#totalCourier").val(totalCourier);
-			$("#totalResult").val(totalResult);
+			//$("#totalPrice").text("1");
+			//$("#totalCourier").text(totalCourier);
+			//$("#totalResult").text(totalResult);
 	}//end of totalForm
 </script>
 </head>
