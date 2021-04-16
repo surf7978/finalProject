@@ -31,13 +31,8 @@
 		console.log("error");
 	}).cancel(function(data) {
 		//결제가 취소되면 수행됩니다.
-		alert('결제 취소.');
-		window.close();
-		window.history.go(-1);
-		console.log("cancel");
-	}).close(function(data) {
-		// 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
-		console.log(data);
+		alert('결제가 취소되었습니다.');
+		window.history.go(-3);
 	}).done(function(data) {
 		//결제가 정상적으로 완료되면 수행됩니다
 		//payFrm.submit();			
@@ -50,14 +45,13 @@
 </head>
 <body>
 <div style="width:60%;">
-<jsp:include page="../user/myPageSideBar.jsp" />
 	<form name="frm" id="frm" action="insertPayProduct" method="post">
 		<input value="${count }" name="count"> 
 		<input name="category">
 		<input name="sumPrice" value="${resultPrice }"> 
 		<input name="memberId" value="${loginID}"> 
 		<input name="category1" value="${product.category}"> 
-		<input name="fromPerson" value="${product.memberId}"> 
+		<input name="fromPerson" value="${loginID}"> 
 		<input name="toPerson" value="${name }"> 
 		<input name="post" value="${post }">
 		<input name="address" value="${address }"> 

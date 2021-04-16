@@ -17,7 +17,7 @@
 					$("#category2").empty();
 					if (result == "간식") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "껌")
 								.text("껌");
@@ -43,7 +43,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "사료") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "건식사료").text(
 								"건식사료");
@@ -61,7 +62,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "영양제") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "관절/뼈/칼슘")
 								.text("관절/뼈/칼슘");
@@ -83,7 +85,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "건강/관리용품") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "치약/칫솔")
 								.text("치약/칫솔");
@@ -101,7 +104,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "배변용품") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "배변판").text(
 								"배변판");
@@ -121,7 +125,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "미용/목욕") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "위생/목욕/미용")
 								.text("위생/목욕/미용");
@@ -143,7 +148,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "장난감/훈련용품") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "장난감/토이")
 								.text("장난감/토이");
@@ -158,7 +164,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "식기/급수기") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "급식기/사료통")
 								.text("급식기/사료통");
@@ -169,7 +176,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "쿠션/하우스") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "침대/방석")
 								.text("침대/방석");
@@ -184,7 +192,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "패션용품") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "티셔츠/후드")
 								.text("티셔츠/후드");
@@ -197,7 +206,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "야외용품") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "캐리어/유모차")
 								.text("캐리어/유모차");
@@ -212,7 +222,8 @@
 						$("#category2").append(th, td);
 					} else if (result == "기타용품") {
 						var th = $("<th>").text("소분류");
-						var td = $("<td>");
+						var td = $("<td>").attr("colspan", "2");
+						;
 						var select = $("<select>").attr("name", "category2");
 						var option1 = $("<option>").attr("value", "일반용품").text(
 								"일반용품");
@@ -222,35 +233,53 @@
 					}
 				});
 		//이미지 미리보기
-        $("#image").change(function(){
-               if(this.files && this.files[0]) {
-                var reader = new FileReader;
-                reader.onload = function(data) {
-                 $("#viewImg img").attr("src", data.target.result).width(auto);            
-                }
-                reader.readAsDataURL(this.files[0]);
-              }
-           });
+		$("#image").change(
+				function() {
+					if (this.files && this.files[0]) {
+						var reader = new FileReader;
+						reader.onload = function(data) {
+							$("#viewImg img").attr("src", data.target.result)
+									.width(auto);
+						}
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
+		$("#opbtn").on("click", function() {
+			var option = $(this).parent().prev().children("div").first();
+			var newoption = option.clone(true);
+			$(option).after(newoption);
+			console.log(option);
+		})
+		$("#close").on("click", function() {
+			var div = $(this).parent().siblings("div");
+			console.log(div.length);
+			if (div.length == 0) {
+				alert("필수항목입니다.");
+			} else {
+				$(this).parent().remove();
+			}
+		})
+		
 	});
 </script>
 </head>
 <body>
 	<div id="contents" class="pro_form">
 		<h1>상품등록</h1>
-		<form id="frm" name="frm" method="post" encType="multipart/form-data"
-			action="insertProduct">
-			<table border="1">
+		<form id="frm" name="frm" method="post" encType="multipart/form-data" action="insertProduct">
+			<table border="1" id="pro_tb">
 				<tr>
 					<th>작성자</th>
-					<td><input name="memberId" value="admin" readonly="readonly"></td>
+					<td colspan="2"><input name="memberId" value="admin"
+						readonly="readonly"></td>
 				</tr>
 				<tr>
 					<th>상품이름</th>
-					<td><input type="text" name="productName"></td>
+					<td colspan="2"><input type="text" name="productName"></td>
 				</tr>
 				<tr>
 					<th>대분류</th>
-					<td><select name="category" id="category">
+					<td colspan="2"><select name="category" id="category">
 							<option>선택해주세요</option>
 							<option value="간식">간식</option>
 							<option value="사료">사료</option>
@@ -270,33 +299,40 @@
 				</tr>
 				<tr>
 					<th>옵션</th>
-					<td><input type="text" name="optionName">&nbsp; <label>옵션가격</label>&nbsp;<input
-						type="number" name="optionPrice"></td>
+					<td style="border: none;"><div>
+							<input type="text" name=optionNameList>&nbsp; <label>옵션가격</label>&nbsp;<input
+								type="number" name="optionPriceList"><span id="close"
+								style="cursor: pointer; padding: 10px; color: #212529;">x</span>
+						</div></td>
+					<td style="border: none;"><button type="button" id="opbtn">추가</button></td>
 				</tr>
 				<tr>
 					<th>등록상태</th>
-					<td><select name="productState">
+					<td colspan="2"><select name="productState">
 							<option value="판매중">판매중</option>
 							<option value="매진">매진</option>
 					</select></td>
 				</tr>
 				<tr>
 					<th>타이틀이미지</th>
-					<td><input type="file" id="t_image" name="t_uploadFile"
-						size="100%" multiple="multiple"></td>
+					<td colspan="2"><input type="file" id="t_image"
+						name="t_uploadFile" size="100%" multiple="multiple"></td>
 				</tr>
 				<tr>
 					<th>상세이미지</th>
-					<td><input type="file" id="image" name="uploadFile"
-						size="100%" multiple="multiple"></td>
+					<td colspan="2"><input type="file" id="image"
+						name="uploadFile" size="100%" multiple="multiple"></td>
 				</tr>
 				<tr>
 					<th>미리보기</th>
-					<td id="viewImg"><div style="height:500px;overflow-y:scroll;"><img></div></td>
+					<td id="viewImg" colspan="2"><div
+							style="height: 500px; overflow-y: scroll;">
+							<img>
+						</div></td>
 				</tr>
 
 			</table>
-			<button type="submit">확인</button>
+			<button>확인</button>
 			<button type="reset">초기화</button>
 		</form>
 	</div>
