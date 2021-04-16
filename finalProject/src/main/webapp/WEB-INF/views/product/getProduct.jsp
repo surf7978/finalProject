@@ -77,10 +77,12 @@
 </head>
 <body>
 	<div id="contents">
+		<c:if test="${loginID eq 'admin' }">
 		<div>
 			<button id="u_btn">수정하기</button>
 			<button id="d_btn">삭제하기</button>
 		</div>
+		</c:if>
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
