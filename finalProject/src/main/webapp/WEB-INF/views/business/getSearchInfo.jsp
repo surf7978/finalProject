@@ -85,6 +85,8 @@
 </head>
 <body>
 	<div id="contents">
+		<button>수정하기</button>
+		<button>삭제하기</button>
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
@@ -143,8 +145,7 @@
 				</div>
 			</div>
 		</div>
-		<button>수정하기</button>
-		<button>삭제하기</button>
+		
 	</div>
 </body>
 <!-- 화면 부드럽게 하기 -->

@@ -293,7 +293,18 @@
 								 -->
 							</ul></li>
 								<c:if test="${not empty loginID}">
-						<li><a href="myPageSideBar">마이페이지</a>
+						<li>
+							<c:if test="${loginAuth eq 'm'}">
+								<c:if test="${loginID eq 'admin'}">	
+									<a href="getSearchViewMember">마이페이지</a>
+								</c:if>
+								<c:if test="${loginID ne 'admin'}">	
+									<a href="getMember1?memberId=${loginID}">마이페이지</a>
+								</c:if>
+							</c:if>
+							<c:if test="${loginAuth eq 'b'}">
+								<a href="getBusiness99?businessId=${loginID}">마이페이지</a>
+							</c:if>
 						<!-- 
 							<ul class="dropdown">
 										<li><a href="getSearchQuestion">문의내역보기</a></li>

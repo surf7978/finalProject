@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>\
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,6 +125,18 @@
 </head>
 <body>
 	<div id="contents">
+		<c:if test="${loginAuth eq 'b' }">
+			<!-- 로그인한 사업자가 병원일 때 등록 활성화 -->
+			<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
+			 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+			 user="final" password="a20210409A"/>
+			<sql:query var="rs" dataSource="${ds }">
+				select * from business where businessId = '${loginID}'
+			</sql:query>
+			<c:if test="${rs.rows[0].businesscode eq 70 }">
+				<button id="btn">상품등록</button>
+			</c:if>
+		</c:if>
 		<h1>우리몰</h1>
 		<div id="pro_location">
 			<ul>
@@ -247,7 +260,6 @@
 		</div>
 		<div id="show"></div>
 		<div id="paging"></div>
-		<button id="btn">상품등록</button>
 	</div>
 </body>
 </html>

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
+import com.company.common.PagingVOCr4;
+import com.company.question.service.QuestionVO;
 
 @Service
 public class AnswerServiceimpl implements AnswerService{
@@ -100,9 +102,18 @@ public class AnswerServiceimpl implements AnswerService{
 		return answerMapper.deleteAnswerCr4(vo);
 	}
 
-
-
-
+	//페이징 처리하는것 관련 답변목록조회
+	
+	@Override
+	public int countQuestion() {
+		return answerMapper.countQuestion();
+	}
+	
+	@Override
+	public List<AnswerVO> getSearchAnswerCr4(PagingVOCr4 vo) {
+		return answerMapper.getSearchAnswerCr4(vo);
+	}
+	
 
 
 }

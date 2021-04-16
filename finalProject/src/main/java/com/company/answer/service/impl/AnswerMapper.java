@@ -3,6 +3,7 @@ package com.company.answer.service.impl;
 import java.util.List;
 
 import com.company.answer.service.AnswerVO;
+import com.company.common.PagingVOCr4;
 
 public interface AnswerMapper {
 	public int insertAnswer(AnswerVO vo);	//화원탈퇴
@@ -27,4 +28,13 @@ public interface AnswerMapper {
 	
 	
 	public int deleteAnswerCr4(AnswerVO vo);	//관리자 답변삭제
+	
+	
+	
+	///페이징 관련 관리자의 답변목록조회
+	// 게시물 총 갯수
+	public int countQuestion();
+	
+	// 페이징 처리 
+	public List<AnswerVO> getSearchAnswerCr4(PagingVOCr4 vo); 
 }

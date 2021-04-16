@@ -3,16 +3,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.company.question.service.impl.QuestionMapper">
-	<!-- 페이징용 카운트 변수 -->
-	<select id="getCount" resultType="int">
-		SELECT COUNT(*)
-		FROM QUESTION
-	</select>
-	<!--  -->
-	<select id="getCountList1" resultType="int">
-	SELECT COUNT(*)
-	FROM GETSEARCHLIST1
-	</select>
+
+
 	<!-- 사업자가 관리자에게 문의내역 등록 -->
 	<insert id="insertQuestion">
 		INSERT INTO QUESTION(
@@ -70,32 +62,85 @@
 	<select id="getSearchQuestionCr4" resultType="questionVO">	<!-- 문의하기 전체조회 -->
 		SELECT * FROM QUESTION
 	</select>
-	
 
-	<select id="getSearchQuestionSelect1" resultType="questionVO">
-		SELECT * FROM QUESTION
+	<!--############ 페이징에 관한것 ########### -->
+
+
+
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countQuestion1" resultType="int">
+		SELECT COUNT(*) FROM QUESTION
+		WHERE CATEGORY=1
+		AND TOPERSON='admin'
+	</select>
+	<select id="countQuestion2" resultType="int">
+		SELECT COUNT(*) FROM QUESTION
+		WHERE CATEGORY=2
+		AND TOPERSON='admin'
+	</select>
+	<select id="countQuestion3" resultType="int">
+		SELECT COUNT(*) FROM QUESTION
+		WHERE CATEGORY=3
+		AND TOPERSON='admin'
+	</select>
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<!-- 1번 상품문의전체조회 -->
+	<select id="getSearchQuestionSelect1"
+		resultType="questionVO">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RN, A.*
+		FROM (
+		SELECT * FROM
+		QUESTION
 		WHERE CATEGORY=1
 		AND TOPERSON='admin'
 		ORDER BY WRITER ASC
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
-
-	<select id="getSearchQuestionSelect2" resultType="questionVO"> <!-- 2번 고객센터문의전체조회 -->
-		SELECT * FROM QUESTION
+<!-- 2번 고객센터문의전체조회 -->
+<select id="getSearchQuestionSelect2"
+		resultType="questionVO">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RN, A.*
+		FROM (
+		SELECT * FROM
+		QUESTION
 		WHERE CATEGORY=2
 		AND TOPERSON='admin'
 		ORDER BY WRITER ASC
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
-
-
-
-
-
-	<select id="getSearchQuestionSelect3" resultType="questionVO"> <!-- 3번 신고하기전체조회 -->
-		SELECT * FROM QUESTION
+	
+		<select id="getSearchQuestionSelect3" resultType="questionVO"> <!-- 3번 신고하기전체조회 -->
+		SELECT *
+		FROM (
+		SELECT ROWNUM RN, A.*
+		FROM (
+		SELECT * FROM
+		QUESTION
 		WHERE CATEGORY=3
 		AND TOPERSON='admin'
 		ORDER BY WRITER ASC
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+
+	<!--############# / end of 페이징에 관한것 ############# -->
+
+
+
+
+
+
+
+
 
 	<select id="getQuestion1" resultType="questionVO"
 		parameterType="questionVO">	<!-- 문의하기 1번 상품문의 단건조회 -->
@@ -212,19 +257,22 @@
 		, CONTENT
 		, WRITER
 		, TOPERSON
-		, CATEGORY
+		,
+		CATEGORY
 		, MEMBERID
 		, PROBISNUMBER
 		) VALUES(
 		QUE_SEQ.NEXTVAL
 		, #{title}
-		, SYSDATE
+		,
+		SYSDATE
 		, #{content}
 		, #{writer}
 		, #{toPerson}
 		, 1
 		, #{memberId}
-		, #{probisNumber})
+		,
+		#{probisNumber})
 	</insert>
 
 	<!-- 상품문의등록(쇼핑몰 상세보기에서 문의글 등록) -->
@@ -237,36 +285,41 @@
 		, CONTENT
 		, WRITER
 		, TOPERSON
-		, CATEGORY
+		,
+		CATEGORY
 		, MEMBERID
 		, PROBISNUMBER
 		) VALUES(
 		QUE_SEQ.NEXTVAL
 		, #{title}
-		, SYSDATE
+		,
+		SYSDATE
 		, #{content}
 		, #{writer}
 		, #{memberId}
 		, 1
 		, #{memberId}
-		, #{probisNumber})
+		,
+		#{probisNumber})
 	</insert>
 
 	<!--상세보기별 문의리스트 출력 -->
 	<select id='getSearchQuestionProbis' resultType="questionVO">
-		SELECT QUESTIONNUMBER
+		SELECT
+		QUESTIONNUMBER
 		, TITLE
 		, CALENDAR
 		, CONTENT
 		, WRITER
 		, TOPERSON
 		, CATEGORY
-		, MEMBERID
+		,
+		MEMBERID
 		, PROBISNUMBER
 		FROM QUESTION
 		WHERE PROBISNUMBER=#{probisNumber}
 	</select>
-	
+
 	<!--상세보기별 문의 단건 조회 -->
 	<select id='getQuestionProbis' resultType="questionVO">
 		SELECT QUESTIONNUMBER
@@ -277,15 +330,17 @@
 		, TOPERSON
 		, CATEGORY
 		, MEMBERID
-		, PROBISNUMBER
+		,
+		PROBISNUMBER
 		FROM QUESTION
 		WHERE QUESTIONNUMBER=#{questionNumber}
 	</select>
-	
-	<!-- 마이페이지 일반사용자 문의내역-->
+
+	<!-- 마이페이지 일반사용자 문의내역 -->
 	<select id='getSearchQuestion99' resultType="questionVO">
 		SELECT *
-		FROM QUESTION
+		FROM
+		QUESTION
 		WHERE memberId=#{memberId}
 	</select>
 </mapper>

@@ -143,9 +143,7 @@
 						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input class="reset" type = "reset" value="취소">
-                        <!-- 
-                        <input class="back" type = "button" value="뒤로가기" onclick="location.href='getSearchQuestionCr4'">
-                         -->
+                       
                         
                         </div>
 

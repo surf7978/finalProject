@@ -2,6 +2,7 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,8 +12,10 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -199,17 +202,31 @@ public class Controller1 {
 	
 	//아이디 찾기
 	@ResponseBody
-	@RequestMapping(value="/searchID", method=RequestMethod.POST)
+	@RequestMapping(value="/searchID", method=RequestMethod.POST, produces = "application/html; charset=utf-8")
 	public String searchID(MemberVO vo) {
-		String result = memberService.searchID(vo);
+		String result = null;
+		if(memberService.searchID(vo)!=null) {
+			result = vo.getName()+"님의 아이디는 "+memberService.searchID(vo)+" 입니다.";
+		}else {
+			result = "이름과 연락처가 일치하지 않습니다.";
+		}
 		return result;
 	}
 		
 	//비밀번호 찾기
 	@ResponseBody
-	@RequestMapping(value="/searchPW", method=RequestMethod.POST)
+	@RequestMapping(value="/searchPW", method=RequestMethod.POST, produces = "application/html; charset=utf-8")
 	public String searchPW(MemberVO vo) {
-		String result = memberService.searchPW(vo);
+		String result = null;
+		if(memberService.getMember(vo)!=null) {
+			if(vo.getPhone().equals(memberService.getMember(vo).getPhone())) {
+				result = "본인인증완료";
+			}else {
+				result = "아이디와 연락처가 일치하지 않습니다.";
+			}
+		}else {
+			result = "아이디와 연락처가 일치하지 않습니다.";
+		}
 		return result;
 	}
 	
@@ -232,12 +249,21 @@ public class Controller1 {
 		return "redirect:/loginForm";
 	}
 	
-	//휴대폰인증 페이지 이동
+	//휴대폰인증 페이지 이동-회원가입
 	@GetMapping("/coolsms")
-	public String phone() {
+	public String coolsms() {
 		return "empty/member/coolsms";
 	}
-	
+	//휴대폰인증 페이지 이동-ID찾기
+	@GetMapping("/coolsms1")
+	public String coolsms1() {
+		return "empty/member/coolsms1";
+	}
+	//휴대폰인증 페이지 이동-비밀번호변경
+	@GetMapping("/coolsms2")
+	public String coolsms2() {
+		return "empty/member/coolsms2";
+	}
 	@Autowired coolsmsAPI certificationService;
 	//휴대폰인증-문자전송
 	@GetMapping("/sendSMS")
@@ -381,7 +407,7 @@ public class Controller1 {
 		// 첨부파일처리
 		MultipartFile image = vo.getUploadFile();
 		MultipartFile t_image = vo.getT_uploadFile();
-		String path = request.getSession().getServletContext().getRealPath("resources/imgages/hospital/");
+		String path = request.getSession().getServletContext().getRealPath("resources/images/hospital/");
 		System.out.println("경로: " + path);
 		if (image != null && !image.isEmpty() && image.getSize() > 0) {
 			String filename = image.getOriginalFilename();

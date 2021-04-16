@@ -111,17 +111,33 @@
 		)
 	</insert>
 
-		<!-- 답변전체조회 관리자-->
+		<!-- 답변전체조회 관리자 페이징-->
 	<select id="getSearchAnswerCr4" resultType="answerVO"
 								>
+				SELECT *
+		FROM (
+		SELECT ROWNUM RN, A.*
+		FROM (
 		SELECT * FROM ANSWER 
+		WHERE WRITER='admin'
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+
+	
+	</select>
+	
+	
+		<!-- 총 게시글 갯수 출력 -->
+	<select id="countQuestion" resultType="int">
+		SELECT COUNT(*) FROM ANSWER
 		WHERE WRITER='admin'
 	</select>
 	
-	<select id="getSearchAnswer2Cr4" resultType="answerVO"
+<!-- 안쓸듯...	<select id="getSearchAnswer2Cr4" resultType="answerVO"
 								>
 		SELECT * FROM ANSWER
-	</select>
+	</select> -->
 	
 	<!-- 관리자 답변 한건 삭제 -->
 	<delete id="deleteAnswerCr4" parameterType="answerVO">	

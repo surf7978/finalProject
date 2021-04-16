@@ -126,7 +126,7 @@ public class Controller2 {
 	@RequestMapping("/getSearchBuy")
 	public String getSearchBuy(BuyVO vo, Model model) {
 		model.addAttribute("buys", buyService.getSearchBuy(vo));
-		return "empty/user/getSearchBuy";
+		return "user/getSearchBuy";
 	}
 
 	////////// 예약하기//////////////////
@@ -356,8 +356,7 @@ public class Controller2 {
 			model.addAttribute("reservation", reservationService.getViewReservation(vo1)); // 위의 두 값으로
 																							// getViewReservation해서
 																							// 조회된 값을 모델에 담음
-																							// 위의 두 값은 쿼리문 WHERE절에 필요한
-																							// 값들
+																							// 위의 두 값은 쿼리문 WHERE절에 필요한값들
 		}
 		ReviewVO vo2 = new ReviewVO();
 		vo2.setProbisNumber(seq);

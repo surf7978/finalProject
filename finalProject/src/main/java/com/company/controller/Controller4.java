@@ -2,9 +2,7 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.util.List;
-
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,12 +21,11 @@ import com.company.answer.service.AnswerVO;
 import com.company.board.service.BoardService;
 import com.company.board.service.BoardVO;
 import com.company.common.FileRenamePolicy;
-import com.company.common.Paging;
+import com.company.common.PagingVOCr4;
 import com.company.eventAndNotice.service.EventAndNoticeService;
 import com.company.eventAndNotice.service.EventAndNoticeVO;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
-
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -172,7 +170,7 @@ public class Controller4 {
 		System.out.println("관리자 게시판관리 수정 updateBoard의 vo "+ vo);
 		boardService.getBoard(vo);
 		model.addAttribute("board" , boardService.getBoard(vo));		
-		return "board/updateBoard";
+		return "redirect:/";
 	}
 	
 	
@@ -568,6 +566,77 @@ public class Controller4 {
 	
 	// ####★★문의하기-신고하기 에 관한 컨트롤러 ★★ (question & answer 테이블 함께 사용)
 	
+	
+	
+	//페이징 처리에 관한것.
+	
+	//상품문의
+	@GetMapping("getSearchQuestionSelect1")
+	public String getSearchQuestionSelect1(PagingVOCr4 vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		int total = questionService.countQuestion1();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
+		model.addAttribute("viewAll", questionService.getSearchQuestionSelect1(vo));
+		return "admin/getSearchQuestionSelect1";
+	}
+	
+	//고객센터 조회
+	
+	@GetMapping("getSearchQuestionSelect2")
+	public String getSearchQuestionSelect2(PagingVOCr4 vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		int total = questionService.countQuestion2();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
+		model.addAttribute("viewAll", questionService.getSearchQuestionSelect2(vo));
+		return "admin/getSearchQuestionSelect2";
+	}
+	
+	//신고하기 조회
+	@GetMapping("getSearchQuestionSelect3")
+	public String getSearchQuestionSelect3(PagingVOCr4 vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		int total = questionService.countQuestion3();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
+		model.addAttribute("viewAll", questionService.getSearchQuestionSelect3(vo));
+		return "admin/getSearchQuestionSelect3";
+	}
+	
+	
+	
+	
 	@GetMapping("/insertQuestion1")			//문의하기(유저) 1상품문의 접수 
 	public String insertQuestion1(QuestionVO vo ) {
 		return "admin/insertQuestion1";
@@ -606,11 +675,7 @@ public class Controller4 {
 		model.addAttribute("getSearchQuestionCr4" , questionService.getSearchQuestionCr4(vo));
 		return "admin/getSearchQuestionCr4";
 	}
-	@RequestMapping("/getSearchQuestionSelect1")	//2번은 고객센터문의
-	public String getSearchQuestionSelect1(QuestionVO vo, Model model) {
-		model.addAttribute("getSearchQuestionSelect1", questionService.getSearchQuestionSelect1(vo));
-		return "admin/getSearchQuestionSelect1";
-	}
+
 	
 	
 	@GetMapping("/getQuestion1")	// 상품문의 상세조회 
@@ -634,15 +699,11 @@ public class Controller4 {
 	public String insertAnswer1Cr4Proc(AnswerVO vo) {
 		System.out.println(vo);
 		answerService.insertAnswer1Cr4(vo);
-		return "redirect:/getSearchQuestionCr4";
+		return "redirect:/myPageSideBar";
 	}
 	
 	
-	@RequestMapping("/getSearchQuestionSelect2")	//2번은 고객센터문의
-	public String getSearchQuestionSelect2(QuestionVO vo, Model model) {
-		model.addAttribute("getSearchQuestionSelect2", questionService.getSearchQuestionSelect2(vo));
-		return "admin/getSearchQuestionSelect2";
-	}
+
 	
 	@GetMapping("/getQuestion2")	// 고객센터 문의하기 상세조회 
 	public String getQuestion2(QuestionVO vo , Model model) {
@@ -665,14 +726,9 @@ public class Controller4 {
 	public String insertAnswer2Cr4Proc(AnswerVO vo) {
 		System.out.println(vo);
 		answerService.insertAnswer2Cr4(vo);
-		return "redirect:/getSearchQuestionCr4";
+		return "redirect:/myPageSideBar";
 	}
 	
-	@RequestMapping("/getSearchQuestionSelect3")	//3번은 신고하기
-	public String getSearchQuestionSelect3(QuestionVO vo, Model model) {
-		model.addAttribute("getSearchQuestionSelect3", questionService.getSearchQuestionSelect3(vo));
-		return "admin/getSearchQuestionSelect3";
-	}
 	
 	
 	@GetMapping("/getQuestion3")	// 문의하기 상세조회 신고하기
@@ -693,14 +749,27 @@ public class Controller4 {
 	public String insertAnswerCr4(AnswerVO vo) {
 		System.out.println(vo);
 		answerService.insertAnswer3Cr4(vo);
-		return "redirect:/getSearchQuestionCr4";
+		return "redirect:/myPageSideBar";
 	}
-	@RequestMapping("/getSearchAnswerCr4") //답장 전체보기
-	public String getSearchAnswerCr4(AnswerVO  vo, Model model ) {
-		answerService.getSearchAnswerCr4(vo);
-		model.addAttribute("getSearchAnswerCr4" , answerService.getSearchAnswerCr4(vo));
-		return "admin/getSearchAnswerCr4";	// 이기능이 작동이 안된다 월요일 해결.
-		 
+	//답장 전체보기 페이징처리
+	@GetMapping("getSearchAnswerCr4")
+	public String getSearchAnswerCr4(PagingVOCr4 vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		int total = answerService.countQuestion();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
+		model.addAttribute("viewAll", answerService.getSearchAnswerCr4(vo));
+		return "admin/getSearchAnswerCr4";
 	}
 	
 	
