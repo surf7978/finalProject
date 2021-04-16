@@ -588,6 +588,7 @@ public class Controller1 {
 	@GetMapping("/getAdminView")
 	public String getAdminView(CafeVO vo, Model model, HttpSession session) {
 		String seq = vo.getSeq();
+		
 		return "admin/adminView";
 	}
 	
