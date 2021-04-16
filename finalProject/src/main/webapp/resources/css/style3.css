@@ -87,12 +87,15 @@ li{list-style:none;}
 /* 결제폼 스타일 */
 #pay_wrap{width:100%;}
 #pay_wrap table{font-size:14px;border:none;width:100%;margin-top:30px;border-top:2px solid #989ba0;border-bottom:2px solid #989ba0;}
-#pay_wrap table thead{background:#f5f5f5;border:none;}
+#pay_wrap table thead{background:#f5f5f5;border:none;text-align:center;}
 #pay_wrap table td{border:1px solid #eaeaea;}
 #pay_wrap table thead tr th{padding:10px;font-weight:400;}
 #pay_wrap table tbody tr td{padding:10px;position:relative;}
-#pay_wrap table tbody tr td nav{width:100px;height:100px;border:1px solid #eaeaea;float:left;overflow:hidden;}
+#pay_wrap table tbody tr td nav{width:100px;height:100px;float:left;overflow:hidden;}
 #pay_wrap table tbody tr td nav img{width:100%;}
 #pay_wrap table tbody tr td strong{margin-left:20px;line-height:100px;}
 #pay_wrap h3{text-align:left;margin-top:30px;}
-#pay_wrap table tbody tr td div{display:absolute;left:10px;}
+#pay_wrap table tbody tr td div{position:absolute;right:10px;top:50%;transform:translateY(-50%);}
+#pay_wrap table tbody tr td div input{margin-right:10px;}
+#pay_wrap #pay {margin-top:20px;}
+#pay_wrap #pay #add_wrap{margin-top:0;padding:0;}

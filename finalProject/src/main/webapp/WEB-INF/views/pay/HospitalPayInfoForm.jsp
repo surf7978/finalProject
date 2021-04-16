@@ -46,7 +46,7 @@
 				</thead>
 				<tbody>					
 					<tr>
-						<td><nav><img src="resources/img/hospital/${vo.t_image}"></nav><strong></strong></td>
+						<td><nav><img src="resources/images/hospital/${vo.t_image}"></nav><strong>${vo.optionName }</strong></td>
 						<td rowspan="2" class="ship">
 							무료배송
 						</td>
