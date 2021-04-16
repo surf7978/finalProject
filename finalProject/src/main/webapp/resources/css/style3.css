@@ -99,3 +99,8 @@ li{list-style:none;}
 #pay_wrap table tbody tr td div input{margin-right:10px;}
 #pay_wrap #pay {margin-top:20px;}
 #pay_wrap #pay #add_wrap{margin-top:0;padding:0;}
+/* 제품insert테이블 */
+#contents #pro_tb{width:100%;}
+#contents #pro_tb th{width:20%;}
+#contents #pro_tb td{width:80%;position:relative;}
+#contents #pro_tb td #opbtn{position:absolute;right:0;top:0;}

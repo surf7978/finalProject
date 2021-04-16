@@ -73,8 +73,14 @@
 		,#{image}
 		,#{t_image}
 		,#{productName}
-		,#{optionName}
-		,#{optionPrice}
+		,<foreach item="opname" collection="optionNameList"
+			      open="'" separator="," close="'" >
+			        ${opname}
+		</foreach>
+		,<foreach item="opprice" collection="optionPriceList"
+			      open="'" separator="," close="'" >
+			        ${opprice}
+		</foreach>
 		,#{productState}
 		,#{memberId}
 		)
