@@ -110,6 +110,7 @@
 		,OPTIONNAME
 		,PRICE
 		,BUSINESSNUMBER
+		,LOCATION
 		FROM HOSPITAL
 		WHERE CATEGORY1 = #{category1}
 		<if test="categoryList != null">
@@ -119,6 +120,37 @@
 				#{cate}
 			</foreach>
 		</if>
+		ORDER BY SEQ
+		<!-- end of query -->
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 병원리스트 아작스출력 + 페이징처리용 + 지역별검색 -->
+	<select id="getSearchHospitalLocation" resultType="HospitalVO"
+		parameterType="HospitalVO">
+		SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+		<!-- start of query -->
+		SELECT
+		SEQ
+		,CATEGORY1
+		,CATEGORY2
+		,IMAGE
+		,T_IMAGE
+		,NAME
+		,OPTIONNAME
+		,PRICE
+		,BUSINESSNUMBER
+		,LOCATION
+		FROM HOSPITAL
+		WHERE CATEGORY1 = #{category1}
+		<if test="categoryList != null">
+			AND CATEGORY2 IN
+			<foreach item="cate" collection="categoryList" open="("
+				separator="," close=")">
+				#{cate}
+			</foreach>
+		</if>
+		AND LOCATION = #{location}
 		ORDER BY SEQ
 		<!-- end of query -->
 		) A) B WHERE RN BETWEEN #{start} AND #{end}

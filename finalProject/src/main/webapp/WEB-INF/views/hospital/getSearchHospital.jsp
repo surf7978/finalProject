@@ -11,6 +11,34 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+	//채크박스 생성
+	function checkbox(){
+		$.ajax({
+			url:"resources/js/location.json",
+			dataType:"json",
+			success:function(response){
+				$(response).each(function(i,idx){
+					//idx의 의미:각각의 Object
+					var location = idx.location;
+					var input = $("<input>").attr({
+						type : "checkbox",
+						value : location,
+						id : idx.value,
+						name:"searchLocation",
+						class: "location"
+					});
+				var label = $("<label>").attr("for", idx.value).text(location);
+				$(".con").append(input, label);	
+				})//end of each
+			}//end of success
+		});//enf of ajax
+		$(".con").on("click","input[type=checkbox]",function(){
+			var val = $(this).val();
+			//console.log(val);
+			getSearchList1(1);
+		})//end of input
+	}//enf of checkbox
+	
 	function getSearchHospital99(p) {
 		/* 리스트 ajax */
 		var category1= $("#pro_location ul li a.after").text();
@@ -95,6 +123,8 @@
 	
 	//function start
 	$(function() {
+		//지역구분 체크박스 생성
+		checkbox();
 		//전체리스트
 		getSearchHospital99(1);
 		//상품등록

@@ -48,6 +48,10 @@ public class HospitalServiceimpl implements HospitalService{
 	public List<HospitalVO> getSearchHospital99(HospitalVO vo) {
 		return hospitalMapper.getSearchHospital99(vo);
 	}
+	@Override
+	public List<HospitalVO> getSearchHospitalLocation(HospitalVO vo) {
+		return hospitalMapper.getSearchHospitalLocation(vo);
+	}
 
 
 }
