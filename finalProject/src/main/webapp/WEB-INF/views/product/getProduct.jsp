@@ -52,15 +52,15 @@ $(document).ready(function() { //function시작
 						var optionName = $("#optionName option:selected").text();
 						var navlen = $("#pro_show").find("nav").length;
 						if (optionPrice != "" && navlen == 0) {
-							optionSelect();						
+							optionSelect();	//옵션 생성 function 호출					
 						}else if(optionPrice != "" && navlen != 0){
 							$("#pro_show nav").each(function(i){
 								var option = $("#pro_show nav").find("span").eq(i).text();
 								if(option == optionName){
 									return false;
 								}
+								optionSelect();
 							})
-							optionSelect();
 						}
 						$("#optionName option").prop("selected", false);
 						resultSum()
@@ -106,7 +106,8 @@ $(document).ready(function() { //function시작
 		}
 		result.text(sum);
 	}//수량 * 가격 of end
-	//옵션선택
+	
+	//옵션선택function
 	function optionSelect(){
 		var optionPrice = $("#optionName option:selected").val();
 		var optionName = $("#optionName option:selected").text();
@@ -139,7 +140,7 @@ $(document).ready(function() { //function시작
 			"color" : "#e7ab3c"
 		})
 		$("#pro_result").append(restrong, result);
-	}
+	}//옵션선택function end
 </script>
 </head>
 <body>
