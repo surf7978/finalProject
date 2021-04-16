@@ -10,24 +10,26 @@
 <script>
 	//시작시 화면
 	$(function() {
-		//전체 리스트 조회
+		//1.전체 리스트 조회
 		getSearchTotalCart();
-		//삭제
+		//2.삭제
 		deleteCart();
-		//쇼핑하러가기
+		//3.쇼핑하러가기
 		shopping();
-		//결제하러가기
+		//4.결제하러가기
 		pay();
-		//전체 체크박스
+		//5.전체 체크박스
 		totalCheckBox();
-		//한개 체크시 전체선택 해제
+		//6.한개라도 채크해제시 전체 채크박스 해제
 		oneCheck();
+		//7.채크된 것들 삭제
+		totalCheckDelete();
 		//전체 합계금액(총상품금액,배송비,전체주문금액)
 		totalForm();
 	})//end of function
 	
 	
-	//전체리스트 조회
+	//1.전체리스트 조회
 	function getSearchTotalCart(){
 		//ajax 연결
 		$.ajax({
@@ -48,7 +50,7 @@
 		})//end of ajax
 	}//end of getSearchTotalCart
 	
-	//삭제
+	//2.삭제
 	function deleteCart(){
 		$("tbody").on("click","#deleteCart",function(){
 			tr =$(this).closest("tr");
@@ -71,7 +73,7 @@
 		if(item.cartCourier == null || item.cartCourier == "0")
 			item.cartCourier = "무료"
 		return $("<tr>")
-		.append($("<td><input type='checkbox' class='chk' name='check'></td>"))
+		.append($("<td><input type='checkbox' class='chk' name='check'></td>").val(item.cartNumber))
 		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
 		.append($("<td>").html(item.productName))
 		.append($("<td>").html(item.optionName))
@@ -91,7 +93,7 @@
 		}//end of if
 	}//end of removeTr
 	
-	//쇼핑
+	//3.쇼핑
 	function shopping(){
 		$("#shopping").on("click", function() {
 			var y = confirm("쇼핑을 계속하시겠습니까?");
@@ -103,7 +105,7 @@
 		});//end of shopping
 	}//end of shopping
 	
-	//결제
+	//4.결제
 	function pay(){
 		$("#pay").on("click", function() {
 			var y = confirm("결제하시겠습니까?");
@@ -114,7 +116,7 @@
 			}
 		})//end of pay
 	}//end of pay
-	//전체 채크박스
+	//5.전체 채크박스
 	function totalCheckBox(){
 		$("#totalCheck").on("click",function(){
 			if($("#totalCheck").is(":checked")){
@@ -125,7 +127,7 @@
 		})//end of totalCheck
 	}//end of totalCheckBox
 	
-	//한개라도 채크해제시 전체 채크박스 해제
+	//6.한개라도 채크해제시 전체 채크박스 해제
 	function oneCheck(){
 		$("#totalCart").on("click",".chk",function(){
 				var is_checked = true; 
@@ -136,11 +138,24 @@
 		})//end of totalCart
 	}//end of oneCheck
 		
-	//채크박스 된 것들 삭제
+	//7.채크된 것들 삭제
 	function totalCheckDelete(){
-		$("#wrap").on("click","#totalDelete",function(){
-			//deleteCart();
-		})//end of wrap
+		$("#totalCart").on("click","#totalDelete",function(){
+			var y = confirm("선택하신 상품을 장바구니에서 삭제 하시겠습니까??");
+			//seq번호 찾아서 ,로 이어서 넣기
+			var seqVal = closest("checked").find("#seq").val();
+			if(y){
+				$.ajax({
+					url:"deleteBCart",
+					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
+					dataType:"json",
+					//callback
+					success:removeTr
+				})//end of ajax
+			}else{
+				false
+			}
+		})//end of totalCart
 	}//end of totalCheckDelete
 	
 	//전체합계금액 

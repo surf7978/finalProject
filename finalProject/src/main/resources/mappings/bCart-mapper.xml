@@ -41,7 +41,9 @@
 	<delete id="deleteBCart">
 		DELETE FROM BCART
 		WHERE MEMBERID = #{memberId}
-		AND BCARTNUMBER = #{bcartNumber}
+		<foreach item="seq" collection="bcartNumber" open="(" close=")" separator="," >
+			AND BCARTNUMBER = #{seq}
+		</foreach>
 	</delete>
 	<!-- 장바구니 단건조회 -->
 	<select id="getBCart" resultType="bCartVO">
