@@ -36,10 +36,14 @@
 	}).done(function(data) {
 		//결제가 정상적으로 완료되면 수행됩니다
 		//payFrm.submit();			
-		alert('결제완료!');
+		if(confirm("예약하시겠습니까")==true){
+			location.href="getSearchReservation?memberId=${loginID}";				
+		}else{
+			$("#frm").submit();
+		}
 		window.close();
 		console.log(data);
-		$("#frm").submit();
+		
 	});
 </script>
 </head>

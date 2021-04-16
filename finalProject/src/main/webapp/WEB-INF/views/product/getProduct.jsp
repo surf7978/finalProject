@@ -1,45 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	$(function() {
-		$("#optionName").on(
-				"click",
-				function() {
-					var op = $("#optionName option:selected").val();
-					if (op != "") {
-						console.log(op);
-						var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
-								$("<span>").text("${product.productName }")
-										.append("<hr>"));
-						var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
-						var inval = $(input).val();
-						var strong = $("<p>").css("text-align", "right").text("${product.optionPrice }");
-						$(nav).append(input, strong);	
-						$("#pro_show").empty();					
-						$("#pro_show").append(nav);
-						$("#pro_result").empty();
-						var restrong = $("<dt>").html("총 합계금액");
-						var result = $("<dd>").text("${product.optionPrice }").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
-						$("#pro_result").append(restrong, result);
-					}
-					$("#optionName option").prop("selected", false);
-				})
-		/* count + result 총 합계금액 */
-		$("#pro_show").on("click","input[type=number]", function(){
-			var plu = $(this).val();
-			var result = $("#pro_result").find("dd");
-			result.empty();
-			result.text("${product.optionPrice }" * plu)
-		});
+	$(function() { //function시작
+		
 		//결제페이지로 이동
 		$("#contents").on("click", "#b_btn", function(){
 			var resultPrice = $("[name=resultPrice]").text();
@@ -72,11 +44,13 @@
 		$("#u_btn").on("click",function(){
 			location.href="updateProduct?productNumber=${product.productNumber }"
 		})
-	});
+		
+	}); //function 끝
 </script>
 </head>
 <body>
 	<div id="contents">
+		<c:set var="optionPrice" value="${fn:split(product.optionPrice,',') }"/>
 		<c:if test="${loginID eq 'admin' }">
 		<div>
 			<button id="u_btn">수정하기</button>
@@ -102,7 +76,7 @@
 								<dl>
 									<dt>초대가</dt>
 									<dd>
-										<strong>${product.optionPrice }원</strong>
+										<strong>${optionPrice[0] }원</strong>
 									</dd>
 								</dl>
 							</div>
@@ -116,8 +90,10 @@
 							</div>
 							<div>
 								<select name="optionName" id="optionName">
-									<option value="">상품선택</option>
-									<option>${product.optionName }(${product.optionPrice }원)</option>
+								<option value="">상품선택</option>
+								<c:forTokens items="${product.optionName}" delims="," var="optionName" varStatus="num">
+								<option value="${optionPrice[num.index]}">${optionName }(${optionPrice[num.index]}원)</option>
+								</c:forTokens>
 								</select>
 							</div>
 							<div id="pro_show"></div>
@@ -147,5 +123,39 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	//옵션선택 
+	$(function(){
+		$("#optionName").on("click", function() {
+			var optionPrice = $("#optionName option:selected").val();
+			console.log(optionPrice);
+			var optionName = $("#optionName option:selected").text();
+			if (optionPrice != ""){
+				//
+				var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
+						$("<span>").text(optionName)
+								.append("<hr>"));
+				var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
+				var inval = $(input).val();
+				var strong = $("<p>").css("text-align", "right").text(optionPrice);
+				$(nav).append(input, strong);	
+				$("#pro_show").empty();					
+				$("#pro_show").append(nav);
+				var restrong = $("<dt>").html("총 합계금액");
+				var result = $("<dd>").text(optionPrice).attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
+				$("#pro_result").append(restrong, result);
+				//
+			} 
+			$("#optionName option").prop("selected", false);
+		})
+
+		$("#pro_show").on("click","input[type=number]", function(){
+			var plu = $(this).val();
+			var result = $("#pro_result").find("dd").text();
+			result.empty();
+			result.text(result * plu)
+		});
+	})
+	</script>
 </body>
 </html>
