@@ -91,6 +91,7 @@
 			alert('삭제되었습니다.');
 			//해당 위치에서 $(this)가 의미하는 건 ajax가 됨
 			var k = $("input[type=checkbox]:checked");
+			//is(":checked") == true)
 			for(var i=0;i<k.length;i++){
 				//DB기능은 ok 
 				//checked상태인 것들의 tr을 지우겠다는 의미
