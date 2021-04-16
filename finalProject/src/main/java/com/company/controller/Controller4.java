@@ -170,7 +170,7 @@ public class Controller4 {
 		System.out.println("관리자 게시판관리 수정 updateBoard의 vo "+ vo);
 		boardService.getBoard(vo);
 		model.addAttribute("board" , boardService.getBoard(vo));		
-		return "board/updateBoard";
+		return "redirect:/";
 	}
 	
 	

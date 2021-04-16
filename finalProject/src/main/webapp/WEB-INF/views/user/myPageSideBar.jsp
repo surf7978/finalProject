@@ -97,7 +97,7 @@
 							<h6 style="font-size:20px; font-weight:900;">나의 정보</h6>
 							<br>
 							<button onclick="location.href='getMember1?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원정보</button><br> 
-							<button onclick="location.href='membershipCancel?ID=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원탈퇴</button><br>
+							<button onclick="checkMembershipCancel()" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원탈퇴</button><br>
 						</td>
 					</tr>
 				</c:if>
@@ -132,7 +132,7 @@
 							<h6 style="font-size:20px; font-weight:900;">나의 정보</h6>
 							<br>
 							<button onclick="location.href='getBusiness99?businessId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원정보</button><br> 
-							<button onclick="location.href='membershipCancel?ID=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원탈퇴</button><br>
+							<button onclick="checkMembershipCancel()" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원탈퇴</button><br>
 						</td>
 					</tr>
 					<tr>
@@ -145,6 +145,16 @@
 					</tr>
 			</c:if>
 	</table>
+	<input type="hidden" id="ID" value="${loginID}">
 </div>
 </body>
+<script>
+	//유저, 사업자 탈퇴 질척임
+	function checkMembershipCancel(){
+		var YnN = confirm("회원탈퇴를 하시겠습니까?");
+		if(YnN){
+			location.href='membershipCancel?ID='+ID.value;
+		}
+	}
+</script>
 </html>
