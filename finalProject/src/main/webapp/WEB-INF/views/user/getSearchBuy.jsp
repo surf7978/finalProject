@@ -10,7 +10,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<table border="1">
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
+	<br><h3>구매내역 상세리스트</h3><br>
+<table border="1" style="width: 900px">
 	<thead>
 	<tr>
 		<th>구매번호</th>
@@ -26,7 +29,6 @@
 		<th>전화번호</th>
 		<th>구매상태</th>	
 		<th>구매평</th>	
-		<th>환불하기</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -45,10 +47,10 @@
 		<td><c:out value="${buy.phone}"/></td>
 		<td><c:out value="${buy.buyState}"/></td>
 		<td><button type="button" class="">구매평쓰기</button></td>
-		<td><button type="button" class="">환불하기</button></td>
 	</tr>
 	</c:forEach>
 	</tbody>
 </table>
+</div>
 </body>
 </html>
