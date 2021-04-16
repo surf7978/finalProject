@@ -345,7 +345,7 @@ $(function(){
 			</td>
 			<td>
 			<c:forEach begin="0" end="${note.size() }" var="i">
-			<c:if test="${note[i].category2 eq '치과'}">
+			<c:if test="${note[i].category2 eq '치과검진'}">
 				의료일 : ${note[i].calendar }
 			</c:if>
 			</c:forEach>
