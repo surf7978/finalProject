@@ -92,7 +92,7 @@
 						<!-- 모델을 두개 넘겨준 경우 둘다 되네 -->
 						<div class="send">
                         <input class="send" type = "submit" value="답장하기" >
-                        <input class="back" type = "button" value="홈으로" onclick="location.href='getSearchQuestionCr4'">
+                        
                     
                         </div>
 

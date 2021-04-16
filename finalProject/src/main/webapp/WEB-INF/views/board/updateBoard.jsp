@@ -8,13 +8,20 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function confirm(){
+function check(){
 	var A = confirm("수정하시겠습니까?");
+
+	
 	if(A){
-		return true;
+	
+	return true;
+	
 	}else{
-		return false;
+
+	return false;
 	}
+	
+
 }
 </script>
 <style>
@@ -80,7 +87,7 @@ function confirm(){
 		readonly>
 	<br>
 	<br>
-	<form id="frm" name="frm" onsubmit="return confirm()"
+	<form id="frm" name="frm" onsubmit="return check()"
 		action="updateBoard?boardNumber=${board.boardNumber}" method="post">
 
 	
@@ -114,7 +121,7 @@ function confirm(){
 						<div class="send">
                         <input class="send" type = "submit" value="수정하기">
                         <input class="reset" type = "reset" value="취소">
-                       <input class="back" type = "button" value="뒤로가기" onclick="location.href='getSearchBoard'">
+                       
                         
                         </div>
 

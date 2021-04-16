@@ -40,10 +40,12 @@
 						<td style="height:200px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">활동내역</h6>
 							<br>
-							<button onclick="location.href='getSearchBoard'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;판매글 현황</button><br> 
+							<button onclick="location.href='#'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;판매글 현황</button><br> 
 							<button onclick="location.href='getSearchAnimal99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기글 현황</button><br>
-							<button onclick="location.href='getSearchAnimal99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의글 현황</button><br>
-							<button onclick="location.href='getSearchAnimal99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;신고글 현황</button><br>
+							<button onclick="location.href='getSearchQuestionSelect1'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;상품문의 현황</button><br>
+							<button onclick="location.href='getSearchQuestionSelect2'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;고객센터문의 현황</button><br>
+							<button onclick="location.href='getSearchQuestionSelect3'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;신고글 현황</button><br>
+							<button onclick="location.href='getSearchAnswerCr4'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;관리자의 답변 현황</button><br>
 						</td>
 					</tr>
 					<tr>
