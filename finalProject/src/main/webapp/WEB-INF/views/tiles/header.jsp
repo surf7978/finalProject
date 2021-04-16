@@ -182,7 +182,7 @@
 										<!-- 
 										<a href="#" class="primary-btn view-card">VIEW CARD</a> 
 										 -->
-										<a href="#" class="primary-btn checkout-btn" style="font-size:17px;">결 제 하 기</a>
+										<a href="#" class="primary-btn checkout-btn" style="font-size:17px;">상 세 보 기</a>
 									</div>
 								</div></li>
 						</ul>
