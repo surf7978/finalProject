@@ -19,18 +19,31 @@
 		pay();
 		//장바구니 클릭 시 데이터값 추가
 		insertCart();
-		
+		//수량버튼 기능
+		countBtn();
 	});//end of function
+	
+	//수량버튼 기능
+	function countBtn(){
+		//플러스 누를시
+		//logic
+		
+		//마이너스 누를시
+		//logic
+		
+	}//end of countBtn
 	
 	//버튼 누를시 하단에 추가되는 내용
 	function optionName(){
 		$("#optionName").on("click", function() {
 			var op = $("#optionName option:selected").val();
 			if (op != "") {
+				//nav 영역이 옵션 선택시 추가되는 영역
 				var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
 						$("<span>").text("${vo.name}").append("<hr>"));
+				//수량으로 바꿀 부분
 				var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
-				var inval = $(input).val();
+				
 				var strong = $("<p>").css("text-align", "right").text("${vo.price}");
 				$(nav).append(input, strong);	
 				$("#pro_show").empty();	
@@ -43,6 +56,7 @@
 			$("#optionName option").prop("selected", false);
 		})//end of optionName
 	}//end of optionName
+	
 	
 	//결제페이지로 이동
 	function pay(){
@@ -80,6 +94,8 @@
 	//장바구니에 등록
 	function insertCart(){
 		$("#btnCart").on("click",function(){
+			frm.price.value =  $("[name=resultPrice]").text();
+			 $("[name=resultPrice]").text();
 			var vo = $("#frm").serialize();
 			//장바구니 DB에 넣기
 			$.ajax({

@@ -24,8 +24,7 @@
 		oneCheck();
 		//7.채크된 것들 삭제
 		totalCheckDelete();
-		//8.전체 합계금액(총상품금액,배송비,전체주문금액)
-		totalForm();
+		//전체 합계금액(총상품금액,배송비,전체주문금액)
 	})//end of function
 	
 	
@@ -77,9 +76,10 @@
 		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
 		.append($("<td>").html(item.productName))
 		.append($("<td>").html(item.optionName))
+		.append($("<td>").html(item.count))
 		.append($("<td>").html(item.optionPrice))
 		.append($("<td>").html(item.cartCourier))
-		.append($("<td>").html(item.optionPrice+"원"))
+		.append($("<td>").html(item.optionPrice))
 		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
 		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
 	}//end of makeTr
@@ -163,19 +163,22 @@
 		})//end of totalCart
 	}//end of totalCheckDelete
 	
-	//8.전체합계금액 
+	//전체합계금액 
 	function totalForm(item){
-		var totalPrice;
-		var totalCourier;
-			for(i in item){
-				totalPrice += item.optionPrice;
+		var totalPrice=0;
+		var totalCourier=0;
+			for(var i=0;i<item.length;i++){
+				//금액이 String타입으로 더해짐(int로 변경)
+				totalPrice += 1 
+					//item.optionPrice;
+				if(item.cartCourier!='무료')
 				totalCourier += item.cartCourier;
 			}
 			console.log(totalPrice)
 			var totalResult = totalPrice + totalCourier;
-			$("#totalPrice").html(totalPrice);
-			$("#totalCourier").html(totalCourier);
-			$("#totalResult").html(totalResult);
+			$("#totalPrice").val(totalPrice);
+			$("#totalCourier").val(totalCourier);
+			$("#totalResult").val(totalResult);
 	}//end of totalForm
 </script>
 </head>
@@ -189,6 +192,7 @@
 					<tr>
 						<th><input type="checkbox" id="totalCheck"></th>
 						<th colspan="3">상품정보</th>
+						<th>갯수</th>
 						<th>상품금액</th>
 						<th>배송비</th>
 						<th>합계금액</th>
