@@ -10,20 +10,25 @@
 <script>
 	//시작시 화면
 	$(function() {
-		//전체 리스트 조회
+		//1.전체 리스트 조회
 		getSearchTotalCart();
-		//삭제
+		//2.삭제
 		deleteCart();
-		//쇼핑하러가기
+		//3.쇼핑하러가기
 		shopping();
-		//결제하러가기
+		//4.결제하러가기
 		pay();
-		//전체 체크박스
+		//5.전체 체크박스
 		totalCheckBox();
+		//6.한개라도 채크해제시 전체 채크박스 해제
+		oneCheck();
+		//7.채크된 것들 삭제
+		totalCheckDelete();
+		//전체 합계금액(총상품금액,배송비,전체주문금액)
 	})//end of function
 	
 	
-	//전체리스트 조회
+	//1.전체리스트 조회
 	function getSearchTotalCart(){
 		//ajax 연결
 		$.ajax({
@@ -38,12 +43,13 @@
 					console.log(item)
 					var content = makeTr(item);
 					content.appendTo("#totalCartTbody");
+					totalForm(item)
 				})//end of each
 			}//end of success
 		})//end of ajax
 	}//end of getSearchTotalCart
 	
-	//삭제
+	//2.삭제
 	function deleteCart(){
 		$("tbody").on("click","#deleteCart",function(){
 			tr =$(this).closest("tr");
@@ -63,28 +69,36 @@
 	
 	//tr태그 
 	function makeTr(item){
+		if(item.cartCourier == null || item.cartCourier == "0")
+			item.cartCourier = "무료"
 		return $("<tr>")
 		.append($("<td><input type='checkbox' class='chk' name='check'></td>"))
 		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
 		.append($("<td>").html(item.productName))
 		.append($("<td>").html(item.optionName))
+		.append($("<td>").html(item.count))
 		.append($("<td>").html(item.optionPrice))
-		.append($("<td>").html("무료"))
-		.append($("<td>").html(item.optionPrice+"원"))
+		.append($("<td>").html(item.cartCourier))
+		.append($("<td>").html(item.optionPrice))
 		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
 		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
 	}//end of makeTr
 	
 	//tr태그 지우기
 	function removeTr(response){
-		if(response == 1){
+		if(response != 0){
 			alert('삭제되었습니다.');
 			//해당 위치에서 $(this)가 의미하는 건 ajax가 됨
-			tr.remove();
+			var k = $("input[type=checkbox]:checked");
+			for(var i=0;i<k.length;i++){
+				//DB기능은 ok 
+				//checked상태인 것들의 tr을 지우겠다는 의미
+				k.closest("tr").remove();
+			}
 		}//end of if
 	}//end of removeTr
 	
-	//쇼핑
+	//3.쇼핑
 	function shopping(){
 		$("#shopping").on("click", function() {
 			var y = confirm("쇼핑을 계속하시겠습니까?");
@@ -96,7 +110,7 @@
 		});//end of shopping
 	}//end of shopping
 	
-	//결제
+	//4.결제
 	function pay(){
 		$("#pay").on("click", function() {
 			var y = confirm("결제하시겠습니까?");
@@ -107,7 +121,7 @@
 			}
 		})//end of pay
 	}//end of pay
-	//전체 채크박스
+	//5.전체 채크박스
 	function totalCheckBox(){
 		$("#totalCheck").on("click",function(){
 			if($("#totalCheck").is(":checked")){
@@ -118,21 +132,53 @@
 		})//end of totalCheck
 	}//end of totalCheckBox
 	
-	//한개라도 채크해제시 전체 채크박스 해제
-		$(".chk").on("click",function(){
-			if($(".chk:checked").length < $('.chk').length){
-				$("#totalCheck").prop("checked",true);
-			}else{
-				$("#totalCheck").prop("checked",false);
-			}
-		})	//end of chk
-	
-	//채크박스 된 것들 삭제
+	//6.한개라도 채크해제시 전체 채크박스 해제
+	function oneCheck(){
+		$("#totalCart").on("click",".chk",function(){
+				var is_checked = true; 
+				$("#totalCart .chk").each(function(){
+					is_checked = is_checked && $(this).is(":checked");
+				})
+				$("#totalCheck").prop("checked",is_checked);
+		})//end of totalCart
+	}//end of oneCheck
+		
+	//7.채크된 것들 삭제
 	function totalCheckDelete(){
-		$("#wrap").on("click","#totalDelete",function(){
-			//deleteCart();
-		})//end of wrap
+		$("#totalCart").on("click","#totalDelete",function(){
+			var y = confirm("선택하신 상품을 장바구니에서 삭제 하시겠습니까??");
+			//seq번호 찾아서 ,로 이어서 넣기
+			var seqVal = $("input[type=checkbox]:checked").closest("tr").find("#seq").val();
+			if(y){
+				$.ajax({
+					url:"deleteBCart",
+					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
+					dataType:"json",
+					//callback
+					success:removeTr
+				})//end of ajax
+			}else{
+				false
+			}
+		})//end of totalCart
 	}//end of totalCheckDelete
+	
+	//전체합계금액 
+	function totalForm(item){
+		var totalPrice=0;
+		var totalCourier=0;
+			for(var i=0;i<item.length;i++){
+				//금액이 String타입으로 더해짐(int로 변경)
+				totalPrice += item.optionPrice
+				if(item.cartCourier!='무료')
+				totalCourier += item.cartCourier;
+			}
+			console.log(totalPrice)
+			var totalResult = totalPrice + totalCourier;
+			//$("#totalPrice").text("1");
+			//$("#totalCourier").text(totalCourier);
+			//$("#totalResult").text(totalResult);
+	}//end of totalForm
 </script>
 </head>
 <body>
@@ -143,8 +189,9 @@
 			<table>
 				<thead>
 					<tr>
-						<th><input type="checkbox" class="chk" id="totalCheck"></th>
+						<th><input type="checkbox" id="totalCheck"></th>
 						<th colspan="3">상품정보</th>
+						<th>갯수</th>
 						<th>상품금액</th>
 						<th>배송비</th>
 						<th>합계금액</th>
@@ -164,7 +211,7 @@
 				</tr>
 				<tr>
 					<td>배송비</td>
-					<td><span id="cartCourier"></span></td>
+					<td><span id="totalCourier"></span></td>
 				</tr>
 				<tr>
 					<td>전체주문금액</td>

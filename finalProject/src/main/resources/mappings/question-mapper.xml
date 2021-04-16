@@ -234,7 +234,8 @@
 		TOPERSON,
 		WRITER ,
 		CATEGORY,
-		MEMBERID)
+		MEMBERID,
+		IMAGE)
 		VALUES
 		(QUE_SEQ.NEXTVAL,
 		#{title},
@@ -242,7 +243,8 @@
 		'admin' ,
 		#{writer} ,
 		3,
-		#{memberId})
+		#{memberId},
+		#{image})
 	</insert>
 
 

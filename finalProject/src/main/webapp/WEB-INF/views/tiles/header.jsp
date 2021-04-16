@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="resources/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 </head>
 <style>
 	#top_btn{position:fixed;right:0;bottom:60px;width:40px;height:40px;background:#e7ab3c;text-align:center;color:#fff;line-height:40px;cursor:pointer;display:none;font-size:13px;}

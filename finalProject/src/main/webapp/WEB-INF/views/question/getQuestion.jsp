@@ -32,7 +32,7 @@
 	<c:if test="${loginID eq 'admin' }">
 		<button type="button" id="insertAnswer">답장하기</button>
 	</c:if>
-</div>
+</div> 
 </body>
 <script>
 	$("#insertAnswer").on("click", function() {
