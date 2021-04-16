@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> 이벤트&공지 수정하기</title>
+<title> 이벤트 수정하기</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -72,20 +72,16 @@ function check(){
 
 
 <body>
-	<br>
-	<br>
-	<br>
-	<input value="게시글 수정하기"
-		style="font-size: 40px; text-align: center; width: 400px; border: none;"
-		readonly>
-	<br>
-	<br>
+		<div id="contents"> 
+		<div id="aban_location"></div>
+		<div id="show">
+		<h1>이벤트</h1>
 	<form id="frm" name="frm" onsubmit="return check()"
 		action="updateEventAndNotice1?eanNumber=${getEventAndNotice.eanNumber}" method="post">
 
 	
 		<table
-			style="padding-top: 50px; align: center; width: 700; border: 0; cellpadding: 2;">
+			style="padding-top: 50px; align: center; width: 100%; border: 0; cellpadding: 2;">
 			<tr>
 				<td height="20" align="center" bgcolor="#e7ab3c">
 				<font  color="white"> 수정하기 </font></td>
@@ -126,5 +122,7 @@ function check(){
 			</tr>
 		</table>
 		</form>
+		</div>
+		</div>
 </body>
 </html>

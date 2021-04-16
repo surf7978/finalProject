@@ -13,7 +13,8 @@ public interface BoardMapper {
 	
 	
 	public List<BoardVO> getSearchBoard(BoardVO vo);	//구매내역 상세리스트
-	public int updateBoard(BoardVO vo);	//환불하기
+	public int updateBoard(BoardVO vo);	
+	public int updateBoard2(BoardVO vo);
 	public int deleteBoard(BoardVO vo);
 	//--------------------------------
 	public int insertBoard(BoardVO vo);	// 자유게시판 글쓰기

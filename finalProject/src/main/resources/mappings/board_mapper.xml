@@ -49,8 +49,16 @@
 	
 	
 	
-	<!-- 게시판 수정  -->
+	<!-- 자유게시판 수정  -->
 	<update id="updateBoard" parameterType="boardVO">
+		UPDATE BOARD SET
+		TITLE=#{title} ,
+		CONTENT=#{content} ,
+		CATEGORY= #{category}
+		WHERE BOARDNUMBER= #{boardNumber}
+	</update>
+	<!-- 자랑하기 수정  -->
+	<update id="updateBoard2" parameterType="boardVO">
 		UPDATE BOARD SET
 		TITLE=#{title} ,
 		CONTENT=#{content} ,

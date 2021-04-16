@@ -25,6 +25,7 @@
 			alert("내용을 입력 하세요");
 			return false;
 		}
+		alert("정상적으로 접수되었습니다.");
 		return true;
 	}
 </script>
@@ -91,7 +92,7 @@
 		readonly>
 	<br>
 	<br>
-	<form id="frm" name="frm" onsubmit="return formCheck()"
+	<form id="frm" name="frm" onsubmit="return formCheck()" encType="multipart/form-data"
 		action="insertQuestion3" method="post">
 
 	
@@ -121,7 +122,11 @@
 							<td><input value="제 목" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
 							<td><input type=text id="title" name="title" size="60"></td>
 						</tr>
-
+						<tr>
+							<td><input value="이 미 지" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type="file" id="image" name="uploadFile" size="100%" multiple="multiple"></td>
+							
+						</tr>
 						<tr>
 							<td><input value="내 용" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
 							<td><textarea id="content" name="content" cols="85" rows="15"></textarea></td>
