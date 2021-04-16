@@ -21,8 +21,7 @@
 		<th>구매날짜</th>
 		<th>구매가격</th>
 		<th>구매상태</th>
-		<th>상세조회</th>
-		<th>배송조회</th>	
+			
 	</tr>
 	</thead>
 	<tbody>
@@ -54,7 +53,7 @@
 		<td><c:out value="${pad.sumPrice}"/></td>
 		<td><c:out value="${pad.buyState}"/></td>
 		<c:if test="${pad.category eq '70' }">
-		<td><button type="button" class="getSearchBuy">상세조회</button></td>
+		<td><button type="button" style="padding:10px; width:80px; border:none; border-radius:5px; background-color:#e7ab3c;" class="getSearchBuy">상세조회</button></td>
 		</c:if>
 		<c:if test="${pad.category != '70' }">
 		<td><button type="button" onclick="window.open('getReservation?pndNumber=${pad.pndNumber}','getReservation','width=400, height=300')">예약확인</button></td>
@@ -65,7 +64,7 @@
 		<input type="hidden" id="t_key" name="t_key" value="ooo6aOm5bqvE5wog0VTMGQ">
 		<input type="hidden" name="t_code" id="t_code" value="${pad.courierCompany}">
 		<input type="hidden" name="t_invoice" id="t_invoice" value="${pad.invoiceNumber}">
-		<button type="button" onclick="dview()">배송조회</button>
+		<button type="button" onclick="dview()" style="padding:10px; width:80px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">배송조회</button>
 		</td>
 		</c:if>
 		</c:if>

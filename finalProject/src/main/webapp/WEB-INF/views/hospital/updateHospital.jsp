@@ -9,7 +9,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-	<h3>병원 수정</h3>
+	<h3>병원 상품 수정</h3>
 	<form id="frm" action="updateHospital" encType="multipart/form-data" method="post">
 		<input type="hidden" id="businessNumber" name="businessNumber" value="${business.businessNumber }">
 		<input type="hidden" id="seq" name="seq" value="${hospital.seq }">

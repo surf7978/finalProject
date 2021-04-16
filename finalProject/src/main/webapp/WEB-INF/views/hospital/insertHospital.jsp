@@ -36,7 +36,7 @@
 </script>
 </head>
 <body>
-	<h3>병원 수정</h3>
+	<h3>병원 상품 등록</h3>
 	<form id="frm" action="insertHospital" encType="multipart/form-data"
 		method="post">
 		<input type="hidden" id="businessNumber" name="businessNumber"
