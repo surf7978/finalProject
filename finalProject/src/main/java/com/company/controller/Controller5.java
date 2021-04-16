@@ -434,34 +434,40 @@ public class Controller5 {
 		return map;
 	}
 
-	// 장바구니-CRUD
-	@GetMapping("/insertCart") // 등록
-	public void insertCart(CartVO vo) {
-		cartService.insertCart(vo);
-	}
-
-	@GetMapping("/updateCart") // 수정
-	public void updateCart(CartVO vo) {
-		cartService.updateCart(vo);
-	}
-
-	@GetMapping("/deleteCart") // 삭제
-	public void deleteCart(CartVO vo) {
-		cartService.deleteCart(vo);
-	}
-
-	// 통합 장바구니 폼 페이지
+	// 통합 장바구니 페이지
 	@GetMapping("/getSearchTotalCartForm")
 	public String getSearchTotalCartForm(BCartVO vo) {
 		return "totalCart/getSearchTotalCartForm";
 	}
 
-	// 장바구니-페이지 기능
+	// 통합 장바구니 페이지 호출
 	@GetMapping("/getSearchTotalCart")
 	@ResponseBody
 	public List<BCartVO> getSearchTotalCart(CartVO vo) {
 		List<BCartVO> list = bCartService.getSearchTotalCart(vo);
 		return list;
+	}
+
+	// 장바구니-CRUD
+	@GetMapping("/insertCart") // 등록
+	@ResponseBody
+	public int insertCart(CartVO vo) {
+		int r = cartService.insertCart(vo);
+		return r;
+	}
+
+	@GetMapping("/updateCart") // 수정
+	@ResponseBody
+	public int updateCart(CartVO vo) {
+		int r = cartService.updateCart(vo);
+		return r;
+	}
+
+	@GetMapping("/deleteCart") // 삭제
+	@ResponseBody
+	public int deleteCart(CartVO vo) {
+		int r = cartService.deleteCart(vo);
+		return r;
 	}
 
 	// 사업자 장바구니 CRUD
@@ -494,7 +500,6 @@ public class Controller5 {
 		return "map/map";
 	}
 
-	// end of bCart
 	// 나중에
 	// 마이페이지-사업자-통계현황
 	// 마이페이지-사업자-실시간화장진료 페이지

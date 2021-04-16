@@ -66,6 +66,32 @@
 			ESCbtn.parent().empty();
 		})
 	})
+	//장바구니
+	$(function(){
+		insertCart();
+	});//end of function
+	//장바구니에 등록
+	function insertCart(){
+		$("#btnCart").on("click",function(){
+			var vo = $("#frm").serialize();
+			//장바구니 DB에 넣기
+			$.ajax({
+				url:"insertBCart",
+				data:vo,
+				dataType:"json",
+				//callback으로 변경하는 법 배워서 바꾸기
+				success: function (result){
+					if(result == 1){
+						var y = confirm('상품이 장바구니에 담겼습니다\n지금 확인 하시겠습니까?');
+						if(y){
+							location.href='getSearchTotalCartForm'
+						}//end of if
+					}//end of if
+				}//end of success
+			})//end of ajax
+		})//end of btnCart
+	}//end of insertCart
+	
 </script>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script>
@@ -181,7 +207,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
 							<div>
-								<button style="padding:10px; width:220px; border:none; border-radius:5px; background-color:#adff2f;">장바구니 담기</button>
+								<button type="button" id="btnCart"style="padding:10px; width:220px; border:none; border-radius:5px; background-color:#adff2f;">장바구니 담기</button>
 								<button type="button" id="b_btn" style="padding:10px; width:220px; border:none; border-radius:5px;">바로구매</button>
 							</div>
 						</li>

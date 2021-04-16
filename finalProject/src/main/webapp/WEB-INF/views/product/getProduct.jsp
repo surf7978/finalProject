@@ -72,7 +72,30 @@
 		$("#u_btn").on("click",function(){
 			location.href="updateProduct?productNumber=${product.productNumber }"
 		})
+		//장바구니 
+		insertCart();
 	});
+	//장바구니에 등록
+	function insertCart(){
+		$("#btnCart").on("click",function(){
+			var vo = $("#frm").serialize();
+			//장바구니 DB에 넣기
+			$.ajax({
+				url:"insertCart",
+				data:vo,
+				dataType:"json",
+				//callback으로 변경하는 법 배워서 바꾸기
+				success: function (result){
+					if(result == 1){
+						var y = confirm('상품이 장바구니에 담겼습니다\n지금 확인 하시겠습니까?');
+						if(y){
+							location.href='getSearchTotalCartForm'
+						}//end of if
+					}//end of if
+				}//end of success
+			})//end of ajax
+		})//end of btnCart
+	}//end of insertCart
 </script>
 </head>
 <body>
@@ -86,9 +109,8 @@
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
-					<input value="${product.productNumber }" type="hidden"
-						name="productNumber"> <input value="2500" type="hidden"
-						name="cartCourier">
+					<input value="${product.productNumber }" type="hidden" name="productNumber">
+					<input value="2500" type="hidden" name="cartCourier">
 					<c:if test="${not empty loginID }">
 						<input value="${loginID }" type="hidden" name="memberId">
 					</c:if>
@@ -117,13 +139,13 @@
 							<div>
 								<select name="optionName" id="optionName">
 									<option value="">상품선택</option>
-									<option>${product.optionName }(${product.optionPrice }원)</option>
+									<option>${product.optionName}(${product.optionPrice }원)</option>
 								</select>
 							</div>
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
 							<div>
-								<button>장바구니 담기</button>
+								<button type="button" id="btnCart">장바구니 담기</button>
 								<button type="button" id="b_btn">바로구매</button>
 							</div>
 						</li>
