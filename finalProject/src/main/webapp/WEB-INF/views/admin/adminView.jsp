@@ -10,6 +10,7 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
+	<h3>판매글 현황</h3><br>
 	<table border="1" style="text-align:center;">
 		 <thead> 
 			 <tr> 
@@ -23,14 +24,26 @@
 		 </thead>
 	<c:forEach items="${adminView }" var="list">
 		<tbody>
-			<tr onclick="location.href='getAdminView?seq=${list.seq }'">
-				<td>${list.seq }</td>
-				<td>${list.code }</td>
-				<td>${list.name }</td>
-				<td>${list.price }</td>
-				<td>${list.location }</td>
-				<td><button onclick="location.href='deleteAdminView?seq=${list.seq }&code=${list.code }'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#ff6347; color:white;">삭 제</button></td>
-			</tr>
+			<c:if test="${list.code eq 'hospital' }">
+				<tr onclick="location.href='getAdminView?seq=${list.seq }'">
+					<td>${list.seq }</td>
+					<td>${list.code }</td>
+					<td>${list.name }</td>
+					<td>${list.price }</td>
+					<td>${list.location }</td>
+					<td><button onclick="location.href='deleteAdminView?seq=${list.seq }&code=${list.code }'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#ff6347; color:white;">삭 제</button></td>
+				</tr>
+			</c:if>
+			<c:if test="${list.code ne 'hospital' }">
+				<tr onclick="location.href='getSearchInfo?seq=${list.seq }'">
+					<td>${list.seq }</td>
+					<td>${list.code }</td>
+					<td>${list.name }</td>
+					<td>${list.price }</td>
+					<td>${list.location }</td>
+					<td><button onclick="location.href='deleteAdminView?seq=${list.seq }&code=${list.code }'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#ff6347; color:white;">삭 제</button></td>
+				</tr>
+			</c:if>
 		</tbody>
 	</c:forEach>
 	</table>

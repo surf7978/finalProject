@@ -588,8 +588,23 @@ public class Controller1 {
 	@GetMapping("/getAdminView")
 	public String getAdminView(CafeVO vo, Model model, HttpSession session) {
 		String seq = vo.getSeq();
+		HospitalVO vo1 = new HospitalVO();
+		vo1.setSeq(seq);
+		model.addAttribute("hospital", hospitalService.getHospital(vo1));
+		if (session.getAttribute("loginID") != null) {
+			ReservationVO vo2 = new ReservationVO();
+			vo2.setMemberId((String) session.getAttribute("loginID")); 
+			vo2.setBisNumber(seq); 
+			model.addAttribute("reservation", reservationService.getViewReservation(vo2)); 
+		}
+		ReviewVO vo2 = new ReviewVO();
+		vo2.setProbisNumber(seq);
+		model.addAttribute("review", reviewService.getSearchReview(vo2));
+		QuestionVO vo3 = new QuestionVO();
+		vo3.setProbisNumber(seq);
+		model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
 		
-		return "admin/adminView";
+		return "hospital/getHospital";
 	}
 	
 	@Autowired ProductService productService;
