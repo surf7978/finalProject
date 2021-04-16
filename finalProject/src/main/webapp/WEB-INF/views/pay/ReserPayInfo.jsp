@@ -31,20 +31,19 @@
 		console.log("error");
 	}).cancel(function(data) {
 		//결제가 취소되면 수행됩니다.
-		alert('결제 취소.');
-		window.close();
-		window.history.go(-1);
-		console.log("cancel");
-	}).close(function(data) {
-		// 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
-		console.log(data);
+		alert('결제가 취소되었습니다.');
+		window.history.go(-3);
 	}).done(function(data) {
 		//결제가 정상적으로 완료되면 수행됩니다
 		//payFrm.submit();			
-		alert('결제완료!');
+		if(confirm("예약하시겠습니까")==true){
+			location.href="getSearchReservation?memberId=${loginID}";				
+		}else{
+			$("#frm").submit();
+		}
 		window.close();
 		console.log(data);
-		$("#frm").submit();
+		
 	});
 </script>
 </head>

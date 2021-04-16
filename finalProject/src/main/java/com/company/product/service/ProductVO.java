@@ -21,4 +21,7 @@ public class ProductVO {
 	//결제관련
 	String resultPrice;
 	String count;
+	String[] optionNameList;
+	String[] optionPriceList;
+	
 }

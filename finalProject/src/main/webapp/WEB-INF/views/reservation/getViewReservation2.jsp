@@ -33,7 +33,8 @@
 </script>
 </head>
 <body>
-<br>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 <input type="hidden" id="businessNumber" name="businessNumber" value="${business.businessNumber }">
 <h3>${business.businessCompanyName } 예약 리스트</h3>
 <br>
@@ -57,6 +58,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-		<div id='calendar' style="width: 1000px"></div>
+		<div id='calendar' style="width: 800px"></div>
+</div>
 </body>
 </html>
