@@ -49,19 +49,25 @@ $(document).ready(function() { //function시작
 			//select option 선택 클릭 이벤트
 			$("#optionName").on("click", function() {
 						var optionPrice = $("#optionName option:selected").val();
-						var optionName = $("#optionName option:selected").text();
+						var optionName = $("#optionName option:selected").text();						
 						var navlen = $("#pro_show").find("nav").length;
 						if (optionPrice != "" && navlen == 0) {
 							optionSelect();	//옵션 생성 function 호출					
 						}else if(optionPrice != "" && navlen != 0){
+							var fat = true;
 							$("#pro_show nav").each(function(i){
-								var option = $("#pro_show nav").find("span").eq(i).text();
+								var option = $("#pro_show nav").find("div").eq(i).text();
 								if(option == optionName){
+									alert("이미 선택한 상품입니다.");
+									fat = false;
 									return false;
-								}
-								optionSelect();
+								}else{
+									fat = true;
+								}										
 							})
-						}
+							if(fat == true) optionSelect();
+							$("#optionName option").prop("selected", false);
+							}
 						$("#optionName option").prop("selected", false);
 						resultSum()
 					})
@@ -69,8 +75,19 @@ $(document).ready(function() { //function시작
 				resultSum();
 			});
 		//장바구니 
-		insertCart();
-	});	
+		insertCart()
+		//close 버튼
+		$("#pro_show").on("click", "nav a#close", function(){
+			$(this).parent().remove();
+			resultSum()
+			var div = $("#pro_show nav").find("div").length;
+			if(div ==0){
+				var result = $("#pro_result");
+				result.empty();
+			}
+		})
+});//function of end
+
 	//장바구니에 등록
 	function insertCart() {
 		$("#btnCart").on("click", function() {
@@ -115,10 +132,11 @@ $(document).ready(function() { //function시작
 
 		var nav = $("<nav>").css({
 			"width" : "100%",
-			"position":"relative"
+			"position":"relative",
+			"margin-bottom":"10px"
 		}).attr("id", "proname")
 				.append(
-						$("<span>").text(optionName)
+						$("<div>").text(optionName).css({"margin":"0","padding":"0","width":"95%"})
 								.append("<hr>"));
 		var input = $("<input>").attr({
 			"type" : "number",
@@ -126,10 +144,11 @@ $(document).ready(function() { //function시작
 			"value" : "1",
 			"name" : "count"
 		});
+		var a = $("<a>").attr("id","close").css({"position":"absolute","top":"10px", "right":"10px","cursor":"pointer"}).text("x")
 		var inval = $(input).val();
 		var strong = $("<p>").css("text-align", "right")
 				.text(optionPrice);
-		$(nav).append(input, strong);
+		$(nav).append(input, strong, a);
 		$("#pro_show").append(nav);
 		$("#pro_result").empty();
 		var restrong = $("<dt>").html("총 합계금액");
