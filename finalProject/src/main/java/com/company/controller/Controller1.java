@@ -544,6 +544,27 @@ public class Controller1 {
 		//
 		return map;
 	}
+	//병원리스트(ajax)+지역별 검색
+	@RequestMapping("/getSearchHospitalLocation")
+	@ResponseBody
+	public Map<String, Object> getSearchHospitalLocation(HospitalSearchVO vo, Paging paging) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 1. 페이지 설정
+		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
+		paging.setPageSize(10); // 보이는 페이지 번호
+		// 2.초기페이지 설정
+		if (paging.getPage() == null)
+			paging.setPage(1);
+		// 3. 값 추가
+		paging.setTotalRecord(hospitalService.getCount(vo));
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		List<HospitalVO> list = hospitalService.getSearchHospitalLocation(vo);
+		map.put("paging", paging);
+		map.put("list", list);
+		//
+		return map;
+	}
 	
 	//마이페이지-후기내역-구매평수정
 	@PostMapping("/updateReview")

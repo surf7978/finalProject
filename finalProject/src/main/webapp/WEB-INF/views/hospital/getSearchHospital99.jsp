@@ -12,6 +12,35 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+	//체크박스 생성
+	function checkbox(){
+		$.ajax({
+			url:"resources/js/location2.json",
+			dataType:"json",
+			success:function(response){
+				$(response).each(function(i,idx){
+					//idx의 의미:각각의 Object
+					var location = idx.location;
+					var input = $("<input>").attr({
+						type : "checkbox",
+						value : location,
+						id : idx.value,
+						name:"searchLocation",
+						class: "location"
+					});
+				var label = $("<label>").attr("for", idx.value).text(location);
+				$(".con").append(input, label);	
+				})//end of each
+			}//end of success
+		});//enf of ajax
+		$(".con").on("click","input[type=checkbox]",function(){
+			var val = $(this).val();
+			//console.log(val);
+			getSearchHospital99(1);                         //여기에 지역별 검색하는 방법 구현해야함
+															//다른 컨트롤러명으로 했지만(getSearchHospitalLocation) 충돌나서 안됨 
+		})//end of input
+	}//enf of checkbox
+	
 	function getSearchHospital99(p) {
 		/* 리스트 ajax */
 		var category1= $("#pro_location ul li a.after").text();
@@ -94,8 +123,11 @@
 		}); //end of ajax
 	}
 	
+	
 	//function start
 	$(function() {
+		//지역구분 체크박스 생성
+		checkbox();
 		//전체리스트
 		getSearchHospital99(1);
 		//상품등록
@@ -194,6 +226,9 @@
 					</div></li>
 			</ul>
 		</div>
+				<ul>
+					<li style="text-align:left;">지역구분<br><div class="con"></div></li>
+				</ul>
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>

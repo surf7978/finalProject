@@ -69,7 +69,7 @@
 							<h6 style="font-size:20px; font-weight:900;">구매내역조회</h6>
 							<br>
 							<button onclick="location.href='getSearchPayAndDelivery'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매내역</button><br> 
-							<button onclick="location.href='getSearchReservation?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약내역</button><br>
+							<button onclick="location.href='getSearchReservation'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약내역</button><br>
 						</td>
 					</tr>
 					<tr>
@@ -113,7 +113,7 @@
 						<td style="height:160px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">예약내역조회</h6>
 							<br>
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약현황</button><br> 
+							<button onclick="location.href='getViewReservation2'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약현황</button><br> 
 							<br>
 						</td>
 					</tr>
@@ -121,9 +121,11 @@
 						<td style="height:200px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">나의 활동</h6>
 							<br>
-							<button onclick="location.href='getSearchIntegratedForm'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;내가쓴글</button><br> 
+							<button onclick="location.href='getSearchIntegratedForm'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;내가쓴글</button><br>
+							<!-- 
 							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기내역</button><br>
-							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의내역</button><br>
+							 --> 
+							<button onclick="location.href='getSearchQuestion99?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의내역</button><br>
 						</td>
 					</tr>
 					<tr>
