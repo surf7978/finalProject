@@ -77,15 +77,15 @@
 				</thead>
 				<tbody>					
 					<tr>
-						<td><nav><img src="resources/images/products/${product.t_image }"></nav><strong>${product.optionName }</strong></td>
+						<td><nav><img src="resources/images/products/${product.t_image }"></nav><strong>${product.productName }</strong></td>
 						<td rowspan="2" class="ship">
-							<c:if test="${resultPrice >= 10000 }"><a style="color:#e7ab3c">:무료배송</a></c:if>
+							<c:if test="${resultPrice >= 10000 }"><a style="color:#e7ab3c">무료배송</a></c:if>
 							<c:if test="${resultPrice < 10000 }">2500</c:if>
 						</td>
 						<td rowspan="2">${resultPrice }</td>
 					</tr>
 					<tr>
-						<td>${product.optionName }<div><input type="number" value="${count }" min="1" name="count" style="width:50px;">${product.optionPrice }</div></td>
+						<td>${product.optionName }<div><input type="number" value="${count }" min="1" name="count" style="width:50px;">${resultPrice }</div></td>
 					</tr>
 					<tr>
 						<td>합계금액</td>
