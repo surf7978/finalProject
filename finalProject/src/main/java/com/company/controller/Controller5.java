@@ -39,6 +39,10 @@ import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
+import com.company.reservation.service.ReservationService;
+import com.company.reservation.service.ReservationVO;
+import com.company.review.service.ReviewService;
+import com.company.review.service.ReviewVO;
 
 /*
  * @author 박세민
@@ -89,7 +93,12 @@ public class Controller5 {
 	// 장바구니
 	@Autowired
 	CartService cartService;
+	
+	@Autowired
+	ReservationService reservationService;
 
+	@Autowired
+	ReviewService reviewService;
 	// 결제
 	@Autowired
 	PayAndDeliveryService payAndDeliveryService;
@@ -321,6 +330,27 @@ public class Controller5 {
 		// 조회
 		vo = integratedService.getIntegrated(vo);
 		model.addAttribute("vo", vo);
+		
+
+		//상세조회 시 + 구매평 전체리스트 출력 + 문의내역 전체리스트 출력
+		String seq = vo.getSeq();
+		if (session.getAttribute("loginID") != null) {
+			ReservationVO vo1 = new ReservationVO();
+			vo1.setMemberId((String) session.getAttribute("loginID")); // 로그인한 세션 아이디를 ReservationVO의 memberId에 담음
+			vo1.setBisNumber(seq); // seq를 BisNumber에 담음
+			model.addAttribute("reservation", reservationService.getViewReservation(vo1)); // 위의 두 값으로
+																							// getViewReservation해서
+																							// 조회된 값을 모델에 담음
+																							// 위의 두 값은 쿼리문 WHERE절에 필요한값들
+		}
+		ReviewVO vo2 = new ReviewVO();
+		vo2.setProbisNumber(seq);
+		model.addAttribute("review", reviewService.getSearchReview(vo2));
+
+		QuestionVO vo3 = new QuestionVO();
+		vo3.setProbisNumber(seq);
+		model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
+		
 		return "business/getSearchInfo";
 	}
 
@@ -410,6 +440,7 @@ public class Controller5 {
 		// 조회
 		vo = integratedService.getIntegrated(vo);
 		model.addAttribute("vo", vo);
+		
 		return "business/getIntegrated";
 	}
 

@@ -628,6 +628,26 @@ public class Controller1 {
 		return "hospital/getHospital";
 	}
 	
+	// 상세조회에서 상품문의 등록페이지 이동
+	@GetMapping("/insertQuestionBusi99")
+	public String insertQuestionBusi(CafeVO vo, MemberVO vo1, String seq, String businessNumber, Model model,
+			HttpSession session) {
+		// 상품번호 담기
+		model.addAttribute("seq", seq);
+		vo.setSeq(seq);
+		model.addAttribute("vo", cafeService.adminView(vo));
+
+		// 작성자 이름 담기
+		vo1.setMemberId((String) session.getAttribute("loginID"));
+		model.addAttribute("member", memberService.getMember(vo1));
+
+		// 사업자 아이디 담기
+		BusinessVO vo2 = new BusinessVO();
+		vo2.setBusinessNumber(businessNumber);
+		model.addAttribute("business", businessService.getBusinessId(vo2));
+		return "empty/reviewAndQuestion/insertQuestion2";
+	}
+	
 	@Autowired ProductService productService;
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
