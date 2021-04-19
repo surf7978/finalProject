@@ -60,7 +60,8 @@ import com.company.question.service.QuestionVO;
  * 21.04.16 장바구니 4차(채크박스) 
  * 21.04.17 장바구니 5차(하단 총액부분)
  * 21.04.19 장바구니 6차 수정(단건 삭제 ok, 여러건 삭제, 전체합계금액)
- * 21.04.20 차트 1차 수정
+ * 21.04.20 결제내역차트 1차 구상
+ * 21.04.21 결제내역차트 2차 수정()
  * 
  */
 @Controller
@@ -533,7 +534,6 @@ public class Controller5 {
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
 		vo.setCategory(bvo.getBusinessCode());
-		
 		// 쿼리 결과 호출
 		// 일별 합계
 		List<Map<String, Object>> map = payAndDeliveryService.dailyTotal(vo);
@@ -572,6 +572,8 @@ public class Controller5 {
 		if (vo.getCode().equals("10"))
 			vo.setCode("HOTEL");
 		else if (vo.getCode().equals("30"))
+			vo.setCode("HOSPITAL");
+		else if (vo.getCode().equals("30"))
 			vo.setCode("CAFE");
 		else if (vo.getCode().equals("40"))
 			vo.setCode("BEAUTY");
@@ -579,5 +581,7 @@ public class Controller5 {
 			vo.setCode("EDU");
 		else if (vo.getCode().equals("60"))
 			vo.setCode("TAXI");
+		else if (vo.getCode().equals("70"))
+			vo.setCode("SHOP");
 	}
 }
