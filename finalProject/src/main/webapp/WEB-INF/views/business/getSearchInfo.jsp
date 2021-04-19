@@ -102,19 +102,21 @@
 				url:"insertBCart",
 				data:vo,
 				dataType:"json",
-				//callback으로 변경하는 법 배워서 바꾸기
-				success: function (result){
-					if(result == 1){
-						var y = confirm('상품이 장바구니에 담겼습니다\n지금 확인 하시겠습니까?');
-						if(y){
-							location.href='getSearchTotalCartForm'
-						}//end of if
-					}//end of if
-				}//end of success
+				//callback
+				success: moveTotalCart
 			})//end of ajax
 		})//end of btnCart
 	}//end of insertCart
 	
+	//장바구니로 이동
+	function moveTotalCart(result){
+		if(result == 1){
+			var y = confirm('상품이 장바구니에 담겼습니다\n지금 확인 하시겠습니까?');
+			if(y){
+				location.href='getSearchTotalCartForm'
+			}//end of if
+		}//end of if
+	}
 </script>
 </head>
 <body>
@@ -122,7 +124,7 @@
 <sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
  url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
  user="final" password="a20210409A"/>
-<sql:query var="rs" dataSource="${ds }">
+<sql:query var="rs" dataSource="${ds}">
     select * from business where businessNumber = '${vo.businessNumber}'
 </sql:query>
 <!-- 
@@ -134,6 +136,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 	<c:if test="${loginID eq rs.rows[0].businessId}">
 		<button>수정하기</button>
 	</c:if>
+	<!-- loginID부분 바꾸기 -->
 	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
 		<button>삭제하기</button>
 	</c:if>

@@ -39,8 +39,9 @@
 			},
 			dataType : "json",
 			success : function(datas){
+				console.log(datas)
 				$.each(datas,function(i,item){
-					console.log(item)
+					//tr태그 script
 					var content = makeTr(item);
 					content.appendTo("#totalCartTbody");
 					//전체합계금액
@@ -59,7 +60,7 @@
 			if (y){
 				$.ajax({
 					url:"deleteBCart",
-					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
+					data:{cartNumber:seqVal , memberId : "${sessionScope.loginID}"},
 					dataType:"json",
 					//callback
 					success:removeTr
@@ -75,13 +76,20 @@
 		return $("<tr>")
 		.append($("<td><input type='checkbox' class='chk' name='check'></td>"))
 		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
+		//제품명
 		.append($("<td>").html(item.productName))
+		//옵션명
 		.append($("<td>").html(item.optionName))
+		//수량
 		.append($("<td>").html(item.count))
+		//금액
 		.append($("<td>").html(item.optionPrice))
+		//배송비
 		.append($("<td>").html(item.cartCourier))
+		//합계?
 		.append($("<td>").html(item.optionPrice))
 		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
+		//제품일련번호
 		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
 	}//end of makeTr
 	
@@ -149,18 +157,22 @@
 	function totalCheckDelete(){
 		$("#totalCart").on("click","#totalDelete",function(){
 			var y = confirm("선택하신 상품을 장바구니에서 삭제 하시겠습니까??");
-			//seq번호 찾아서 ,로 이어서 넣기
-			var seqVal = $("input[type=checkbox]:checked").closest("tr").find("#seq").val();
+			//seq번호 찾아서 배열에 담기
+			//채크된 것들 카운트
+			var count = $("input[type=checkbox]:checked").length;
+			for(i = 1; i < count; i++){
+				//var seqVal = $("input[type=checkbox]:checked").closest("tr").find("#seq").val();
+				//var seqVal = $("input[type=checkbox]:checked")[i].closest("tr").find("#seq").val();
+				
+			}
 			if(y){
 				$.ajax({
 					url:"deleteBCart",
-					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
+					data:{cartNumbers:seqVal , memberId : "${sessionScope.loginID}"},
 					dataType:"json",
 					//callback
 					success:removeTr
 				})//end of ajax
-			}else{
-				false
 			}
 		})//end of totalCart
 	}//end of totalCheckDelete

@@ -41,7 +41,7 @@ public class BCartServiceimpl implements BCartService {
 
 	// 전체조회
 	@Override
-	public List<BCartVO> getSearchTotalCart(CartVO vo) {
+	public List<CartVO> getSearchTotalCart(CartVO vo) {
 		return bCartMapper.getSearchTotalCart(vo);
 	}
 

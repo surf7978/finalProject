@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CartVO {
-	String cartNumber[];	//장바구니 번호
+	String cartNumber;	//장바구니 번호
 	String image;		//이미지
 	String productName;	//상품명
 	String optionName;	//옵션명
