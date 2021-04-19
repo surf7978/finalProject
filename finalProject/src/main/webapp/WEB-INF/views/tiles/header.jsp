@@ -340,7 +340,7 @@
 							 -->
 						</li>
 						<li><a href="getAbanList">보호소</a></li>	
-						<li><a>커뮤니티</a>
+						<li><a href="getSearchEventAndNoticeSelect2">커뮤니티</a>
 							<ul class="dropdown">
 								<li><a href="getSearchEventAndNoticeSelect2">공지사항</a></li>
 								<li><a href="getSearchEventAndNoticeSelectForm?category=1">이벤트</a></li>
@@ -349,13 +349,15 @@
 							</ul></li>
 						<li><a>고객센터</a>
 							<ul class="dropdown">
+								<li><a href="#">자주하는질문</a></li>
 								<c:if test="${not empty loginID}">
 								<c:if test="${loginID ne 'admin' }">
 									<li><a href="insertQuestion2">문의하기</a></li>
+									<!-- 
 									<li><a href="insertQuestion3">신고하기</a></li>
+									 -->
 								</c:if>
 								</c:if>
-								<li><a href="#">자주하는질문</a></li>
 								<li><a href="buyCancel">환불규정</a></li>
 							</ul></li>
 								<c:if test="${not empty loginID}">
