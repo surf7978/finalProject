@@ -121,7 +121,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 text-right col-md-3">
+					<%-- <div class="col-lg-3 text-right col-md-3">
 					<c:if test="${not empty loginID}">
 					<c:if test="${loginAuth eq 'm'}">
 					<c:if test="${loginID ne 'admin'}">
@@ -256,7 +256,7 @@
 					</c:if>
 					</c:if>
 					</c:if>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 		</div>

@@ -13,4 +13,9 @@ public class CartVO {
 	String cartCourier;	//택배비
 	String memberId;	//아이디(주문자)
 	String productNumber;//제품번호
+	
+	//쇼핑몰장바구니
+	String[] countList;
+	String[] optionNameList;
+	String[] optionPriceList;	
 }
