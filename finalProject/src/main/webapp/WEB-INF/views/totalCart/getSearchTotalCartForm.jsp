@@ -5,26 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>장바구니 리스트</title>
-<link rel="stylesheet" href="resources/css/style2.css" type="text/css">
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	//시작시 화면
 	$(function() {
 		//1.전체 리스트 조회
 		getSearchTotalCart();
-		//2.삭제
-		deleteCart();
-		//3.쇼핑하러가기
+		//2.쇼핑하러가기
 		shopping();
-		//4.결제하러가기
+		//3.결제하러가기
 		pay();
-		//5.전체 체크박스
+		//4.전체 체크박스
 		totalCheckBox();
-		//6.한개라도 채크해제시 전체 채크박스 해제
+		//5.한개라도 채크해제시 전체 채크박스 해제
 		oneCheck();
-		//7.채크된 것들 일괄삭제
+		//6.채크된 것들 일괄삭제
 		totalCheckDelete();
-		//전체 합계금액(총상품금액,배송비,전체주문금액)
+		//7.전체 합계금액(총상품금액,배송비,전체주문금액)
 	})//end of function
 	
 	
@@ -51,46 +49,39 @@
 		})//end of ajax
 	}//end of getSearchTotalCart
 	
-	//2.삭제
-	function deleteCart(){
-		$("tbody").on("click","#deleteCart",function(){
-			tr =$(this).closest("tr");
-			var y = confirm("장바구니에서 삭제 하시겠습니까?");
-			var seqVal = $(this).closest("tr").find("#seq").val();
-			if (y){
-				$.ajax({
-					url:"deleteBCart",
-					data:{cartNumber:seqVal , memberId : "${sessionScope.loginID}"},
-					dataType:"json",
-					//callback
-					success:removeTr
-				})//end of ajax
-			}//end of if
-		})//end of deleteCart
-	}//end of deleteCart
-	
 	//tr태그 
 	function makeTr(item){
+		//분류코드
+		var code = item.productNumber.substr(0,2);
 		if(item.cartCourier == null || item.cartCourier == "0")
 			item.cartCourier = "무료"
-		return $("<tr>")
-		.append($("<td><input type='checkbox' class='chk' name='check'></td>"))
-		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
+		var tr =  $("<tr>");
+		tr.append($("<td><input type='checkbox' class='chk' name='check'></td>"));
+
+		
+		if(code == '70'){
+			tr.append($("<td>").html("<img src=resources/images/products/"+item.image+">").attr("class","cartImage").trigger("create"))
+		}else if(code == '20'){
+			tr.append($("<td>").html("<img src=resources/images/hospital/"+item.image+">").attr("class","cartImage").trigger("create"))
+		}else{
+			tr.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
+		}
 		//제품명
-		.append($("<td>").html(item.productName))
+		tr.append($("<td>").html(item.productName))
 		//옵션명
 		.append($("<td>").html(item.optionName))
 		//수량
 		.append($("<td>").html(item.count))
-		//금액
+		//단일금액
 		.append($("<td>").html(item.optionPrice))
 		//배송비
 		.append($("<td>").html(item.cartCourier))
-		//합계?
-		.append($("<td>").html(item.optionPrice))
-		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
+		//합계
+		.append($("<td>").html(item.optionPrice * item.count).attr("name","resultPrice"))
 		//제품일련번호
 		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
+		
+		 return tr
 	}//end of makeTr
 	
 	//tr태그 지우기
@@ -190,7 +181,7 @@
 		})//end of totalCart
 	}//end of totalCheckDelete
 	
-	//전체합계금액 
+	//7.전체합계금액 
 	function totalForm(item){
 		var totalPrice = 0;
 		var totalCourier = 0;
@@ -229,7 +220,6 @@
 							<th>상품금액</th>
 							<th>배송비</th>
 							<th>합계금액</th>
-							<th>삭제</th>
 						</tr>
 					</thead>
 					<tbody id="totalCartTbody"></tbody>

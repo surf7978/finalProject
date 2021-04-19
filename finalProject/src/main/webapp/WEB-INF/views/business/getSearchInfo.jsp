@@ -15,27 +15,17 @@
 	$(function() {
 		//optionName		
 		optionName();
-		//pro_show의 input type number 클릭 시 이벤트
-		pro_show();
+		//pro_show의 input [type=number] 클릭 시 이벤트
+		resultSum();
 		//결제페이지로 이동
 		pay();
 		//장바구니 클릭 시 데이터값 추가
 		insertCart();
-		//수량버튼 기능
-		countBtn();
+		//스크롤바
+		scrolling();
 	});//end of function
 	
-	//수량버튼 기능
-	function countBtn(){
-		//플러스 누를시
-		//logic
-		
-		//마이너스 누를시
-		//logic
-		
-	}//end of countBtn
-	
-	//버튼 누를시 하단에 추가되는 내용
+	//옵션 선택시 추가되는 내용
 	function optionName(){
 		$("#optionName").on("click", function() {
 			var op = $("#optionName option:selected").val();
@@ -45,7 +35,6 @@
 						$("<span>").text("${vo.name}").append("<hr>"));
 				//수량으로 바꿀 부분
 				var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
-				
 				var strong = $("<p>").css("text-align", "right").text("${vo.price}");
 				$(nav).append(input, strong);	
 				$("#pro_show").empty();	
@@ -54,50 +43,25 @@
 				var restrong = $("<dt>").html("총 합계금액");
 				var result = $("<dd>").text("${vo.price}").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
 				$("#pro_result").append(restrong, result);
-			}
+			}//end of if
 			$("#optionName option").prop("selected", false);
 		})//end of optionName
 	}//end of optionName
 	
-	
-	//결제페이지로 이동
-	function pay(){
-		$("#btnEvent").on("click", "#b_btn", function(){
-			var resultPrice = $("[name=resultPrice]").text();
-			var count = $("[name=count]").val();
-			var pro = $("#pro_result").text();
-			var loginId = $("[name=memberId]").val();
-			//상품선택 로그인 체크
-			if(pro == ""){
-				alert("상품을 선택해주세요");
-			}else if(!loginId){
-				var result = confirm("로그인해주세요");
-				if(result==true){
-					location.href="loginForm";
-				}else{
-					return false;
-				}
-			}else{
-				location.href="PayInfoForm?productNumber=${product.productNumber }&resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count;
-			}			
-		});//end of btnEvent
-	}//end of pay
-	
 	/* count + result 총 합계금액 */
-	function pro_show(){
+	function resultSum(){
 		$("#pro_show").on("click","input[type=number]", function(){
 			var plu = $(this).val();
 			var result = $("#pro_result").find("dd");
 			result.empty();
 			result.text("${vo.price}" * plu)
 		});//end of pro_show
-	}//end of pro_show
+	}//end of resultSum
 	
 	//장바구니에 등록
 	function insertCart(){
 		$("#btnCart").on("click",function(){
-			frm.price.value =  $("[name=resultPrice]").text();
-			 $("[name=resultPrice]").text();
+			//총괄금액
 			var vo = $("#frm").serialize();
 			//장바구니 DB에 넣기
 			$.ajax({
@@ -119,6 +83,40 @@
 			}//end of if
 		}//end of if
 	}
+
+	//결제페이지로 이동 or 로그인으로 이동
+	function pay(){
+		$("#btnEvent").on("click", "#btnPay", function(){
+			var resultPrice = $("[name=resultPrice]").text();
+			var count = $("[name=count]").val();
+			var pro = $("#pro_result").text();
+			var loginId = $("[name=memberId]").val();
+			//상품선택 로그인 체크
+			if(pro == ""){
+				alert("상품을 선택해주세요");
+			}else if(!loginId){
+				var result = confirm("로그인해주세요");
+				if(result==true){
+					location.href="loginForm";
+				}else{
+					return false;
+				}
+			}else{
+				location.href="PayInfoForm?productNumber=${product.productNumber}&resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count;
+			}			
+		});//end of btnEvent
+	}//end of pay
+	
+	//스크롤바
+	function scrolling(){
+		$(".pro_menu ul li a[href^='#']").on("click", function(e) {
+		    e.preventDefault();
+		    var position = $($(this).attr("href")).offset().top;
+		   $("html, body").animate({
+		       scrollTop : position
+		   }, 1000);
+		});
+	}//end of scrolling
 </script>
 <script>
 	//시작시 호출
@@ -280,7 +278,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 							<div id="pro_result"></div>
 							<div id="btnEvent">
 								<button type="button" id="btnCart">장바구니 담기</button>
-								<button type="button" id="b_btn">바로구매</button>
+								<button type="button" id="btnPay">바로구매</button>
 							</div>
 						</li>
 					</ul>
@@ -295,12 +293,11 @@ hospital.businessNumber : ${hospital.businessNumber}
 						<li><a href="#">취소/환불</a></li>
 					</ul>
 				</div>
-				<div id="pro_content">
+				<div id="content">
 					<img src="resources/images/business/${vo.image2}">
 				</div>
 			</div>
 		</div>
-		
 	</div>
 	
 		
@@ -356,14 +353,4 @@ hospital.businessNumber : ${hospital.businessNumber}
 	
 	
 </body>
-<!-- 화면 부드럽게 하기 -->
-<script>
-$(".pro_menu ul li a[href^='#']").on("click", function(e) {
-    e.preventDefault();
-    var position = $($(this).attr("href")).offset().top;
-   $("html, body").animate({
-       scrollTop : position
-   }, 1000);
-});
-</script>
 </html>
