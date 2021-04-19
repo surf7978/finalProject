@@ -64,7 +64,7 @@ import com.company.review.service.ReviewVO;
  * 21.04.16 장바구니 4차(채크박스) 
  * 21.04.17 장바구니 5차(하단 총액부분)
  * 21.04.19 장바구니 6차 수정(단건 삭제 ok, 여러건 삭제, 전체합계금액)
- * 21.04.20 결제내역차트 1차 구상
+ * 21.04.20 결제내역차트 1차 수정(데이터 값 정상 출력)
  * 21.04.21 결제내역차트 2차 수정()
  * 
  */
@@ -565,6 +565,7 @@ public class Controller5 {
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
 		vo.setCategory(bvo.getBusinessCode());
+		vo.setBusinessId(id);
 		// 쿼리 결과 호출
 		// 일별 합계
 		List<Map<String, Object>> map = payAndDeliveryService.dailyTotal(vo);

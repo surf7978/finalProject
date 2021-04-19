@@ -39,15 +39,25 @@
 	</update>
 
 	<!-- 결제내역 차트용 -->
-
 	<!-- 일별합계 -->
 	<select id="dailyTotal" resultType="map">
 		SELECT
-		TO_CHAR(PAYDATE,'yyyy-mm-dd') paydate, sum(SUMPRICE) sumprice
+		TO_CHAR(PAYDATE,
+			<if test="search == 'daily'">
+				'yyyy-mm-dd'		
+			</if>
+			<if test="search == 'monthly'">
+				'yyyy-mm'		
+			</if>
+			<if test="search == 'years'">
+				'yyyy'		
+			</if>
+		) paydate, sum(SUMPRICE) sumprice
 		FROM PAYANDDELIVERY
-		WHERE CATEGORY = #{category}
+		WHERE businessId = #{businessId}
+		AND CATEGORY = #{category}
 		AND (BUYSTATE = '결제완료'
 		OR BUYSTATE = '예약완료')
-		GROUP paydate
+		GROUP BY paydate
 	</select>
 </mapper>

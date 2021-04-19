@@ -98,7 +98,7 @@
 		}//end of if
 	}//end of removeTr
 	
-	//3.쇼핑
+	//2.쇼핑
 	function shopping(){
 		$("#shopping").on("click", function() {
 			var y = confirm("쇼핑을 계속하시겠습니까?");
@@ -110,31 +110,30 @@
 		});//end of shopping
 	}//end of shopping
 	
-	//4.결제
+	//3.결제
 	function pay(){
 		$("#pay").on("click", function() {
 			var totalResult = $("#totalResult").text();
 			var count = $("[name=count]").val();
-			var pro = $("#pro_result").text();
-			var loginId = $("[name=memberId]").val();
-			//상품선택 로그인 체크
-			if (pro == "") {
+			//체크박스 값 확인
+			var check = $(".chk:checked");
+			//상품선택,로그인 체크
+			if (check.length == 0) {
 				alert("상품을 선택해주세요");
-			} else if (!loginId) {
-				var result = confirm("로그인해주세요");
+			} else if ("${sessionScope.loginID}" == '') {
+				var result = confirm("로그인페이지로 이동하시겠습니까?");
 				if (result == true) {
 					location.href = "loginForm";
 				} else {
 					return false;
 				}
 			} else {
-				location.href = "PayInfoForm?productNumber=${product.productNumber }&resultPrice="
-						+ resultPrice
-						+ "&memberId=${loginID}&count=" + count;
+				location.href = "PayInfoForm?productNumber=${product.productNumber}&resultPrice="
+						+ totalResult + "&memberId=${loginID}&count=" + count;
 			}
 		})//end of pay
 	}//end of pay
-	//5.전체 채크박스
+	//4.전체 채크박스
 	function totalCheckBox(){
 		$("#totalCheck").on("click",function(){
 			if($("#totalCheck").is(":checked")){
@@ -145,7 +144,7 @@
 		})//end of totalCheck
 	}//end of totalCheckBox
 	
-	//6.한개라도 채크해제시 전체 채크박스 해제
+	//5.한개라도 채크해제시 전체 채크박스 해제
 	function oneCheck(){
 		$("#totalCart").on("click",".chk",function(){
 				var is_checked = true; 
@@ -156,7 +155,7 @@
 		})//end of totalCart
 	}//end of oneCheck
 		
-	//7.채크된 것들 삭제
+	//6.채크된 것들 일괄삭제
 	function totalCheckDelete(){
 		$("#totalCart").on("click","#totalDelete",function(){
 			var y = confirm("선택하신 상품을 장바구니에서 삭제 하시겠습니까??");
