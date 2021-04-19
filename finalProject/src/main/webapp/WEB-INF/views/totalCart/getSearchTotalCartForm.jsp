@@ -166,6 +166,10 @@
 			for(i = 0; i <= count; i++){
 				//form 안쓰고 넘기기
 				array.push($($("[name=check]:checked").closest("tr")[i]).find("#seq").val());
+				//form 쓰고 넘기기
+				//array.push($($("[name=check]:checked").closest("tr")[i]).find("#seq").val());
+				//input.cartNumbers 만들면 됨
+				//frm.cartNumbers = array;
 			}//end of for
 			if(y){
 				$.ajax({
@@ -176,8 +180,11 @@
 					//callback
 					success:function(response){
 						removeTr(response);
-						totalForm(response);
-					}
+						//tbody영역 초기화
+						$("#totalCartTbody").empty();
+						//조회
+						getSearchTotalCart();
+					}//end of success
 				})//end of ajax
 			}//end of if
 		})//end of totalCart
