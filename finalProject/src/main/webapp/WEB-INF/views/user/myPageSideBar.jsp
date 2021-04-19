@@ -42,9 +42,9 @@
 							<br>
 							<button onclick="location.href='adminView'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;판매글 현황</button><br> 
 							<button onclick="location.href='getSearchAnimal99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기글 현황</button><br>
-							<button onclick="location.href='getSearchQuestionSelect2'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;고객센터문의 현황</button><br>
 							<button onclick="location.href='getSearchQuestionSelect3'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;신고글 현황</button><br>
-							<button onclick="location.href='getSearchAnswerCr4'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;관리자의 답변 현황</button><br>
+							<button onclick="location.href='getSearchQuestionSelect2'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의 받은 내역 </button><br>
+							<button onclick="location.href='getSearchAnswerCr4'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;답변한 내역</button><br>
 						</td>
 					</tr>
 					<tr>
@@ -88,7 +88,8 @@
 							<br>
 							<button onclick="location.href='getSearchBoardCategory199?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;내가쓴글</button><br> 
 							<button onclick="location.href='getSearchReview98?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기내역</button><br>
-							<button onclick="location.href='getSearchQuestion99?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의내역</button><br>
+							<button onclick="location.href='getSearchQuestion99?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의한 내역</button><br>
+							<button onclick="location.href='getSearchAnswer'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;답변 받은 내역</button><br>
 						</td>
 					</tr>
 					<tr>
@@ -124,8 +125,11 @@
 							<button onclick="location.href='getSearchIntegratedForm'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;내가쓴글</button><br>
 							<!-- 
 							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기내역</button><br>
+							<button onclick="location.href='getSearchQuestion99?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의한 내역</button><br>
+							<button onclick="location.href='getSearchQuestion99?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;답변 받은 내역</button><br>
 							 --> 
-							<button onclick="location.href='getSearchQuestion99?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의내역</button><br>
+							<button onclick="location.href='getSearchQuestion'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의 받은 내역</button><br>
+							<button onclick="location.href='getSearchAnswer'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;답변한 내역</button><br>
 						</td>
 					</tr>
 					<tr>

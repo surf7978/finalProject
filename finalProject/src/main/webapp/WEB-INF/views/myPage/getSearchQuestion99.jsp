@@ -53,9 +53,9 @@
 
 <thead>
 <tr class="th">
-<th width="170">구매한글번호</th>
+<th width="170">문의한글번호</th>
 <th scope="col">제목</th>
-<th scope="col">날짜</th>
+<th scope="col">문의날짜</th>
 
 </tr>
 </thead>

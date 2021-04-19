@@ -86,7 +86,7 @@
 		 'admin' ,
 		#{content},
 		SYSDATE,
-		'admin' ,
+		#{memberId} ,
 		#{questionNumber}
 		)
 	</insert>

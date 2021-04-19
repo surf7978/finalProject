@@ -77,11 +77,11 @@
 
 <thead>
 <tr class="th">
-<th width="60">답변번호</th>
+<th width="100">답변번호</th>
 <th width="200">내용</th>
-<th scope="col">날짜</th>
-<th scope="col" width="60">질문번호</th>
-<th scope="col" width="60">삭제</th>
+<th scope="col" width="300">날짜</th>
+<th scope="col" width="100">질문번호</th>
+<th scope="col" width="60">관리</th>
 </tr>
 </thead>
 <tbody>
