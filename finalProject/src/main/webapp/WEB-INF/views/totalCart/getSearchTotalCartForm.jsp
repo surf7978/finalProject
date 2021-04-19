@@ -203,7 +203,7 @@
 				if(item[i].cartCourier == '무료'){
 					 item[i].cartCourier = 0;
 				}
-				totalCourier += item[i].cartCourier
+				totalCourier += parseInt(item[i].cartCourier)
 			}//end of for
 			var totalResult = totalPrice + totalCourier;
 			//전체리스트 불러올 때 값을 넣어준다
@@ -241,13 +241,13 @@
 			<div id="totalValue">
 				<table id="totalTbl">
 					<tr>
-						<td rowspan=3><h2>전체합계금액</h2></td>
+						<td rowspan = 3><h2>전체합계금액</h2></td>
 					    <td>총상품금액</td>
 					    <td><span id = "totalPrice"></span></td>
 					</tr>
 					<tr>
 						<td>배송비</td>
-						<td><span id="totalCourier"></span></td>
+						<td><span id = "totalCourier"></span></td>
 					</tr>
 					<tr>
 						<td>전체주문금액</td>
@@ -255,8 +255,8 @@
 					</tr>
 				</table>
 			</div>
-			<button type="button" id="pay">주문결제하기</button>
 			<button type="button" id="shopping">쇼핑계속하기</button>
+			<button type="button" id="pay">주문결제하기</button>
 		</form>
 	</div>
 </body>
