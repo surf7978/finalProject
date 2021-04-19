@@ -115,22 +115,21 @@
 		$("#pay").on("click", function() {
 			var totalResult = $("#totalResult").text();
 			var count = $("[name=count]").val();
-			var pro = $("#pro_result").text();
+			var check = $(".check:checked");
 			var loginId = $("[name=memberId]").val();
 			//상품선택 로그인 체크
-			if (pro == "") {
+			if (check==false) {
 				alert("상품을 선택해주세요");
-			} else if (!loginId) {
-				var result = confirm("로그인해주세요");
+			} else if ("${sessionScope.loginID}" == '') {
+				var result = confirm("로그인페이지로 이동하시겠습니까?");
 				if (result == true) {
 					location.href = "loginForm";
 				} else {
 					return false;
 				}
 			} else {
-				location.href = "PayInfoForm?productNumber=${product.productNumber }&resultPrice="
-						+ resultPrice
-						+ "&memberId=${loginID}&count=" + count;
+				location.href = "PayInfoForm?productNumber=${product.productNumber}&resultPrice="
+						+ totalResult + "&memberId=${loginID}&count=" + count;
 			}
 		})//end of pay
 	}//end of pay
