@@ -35,6 +35,8 @@ import com.company.common.Paging;
 import com.company.integrated.service.IntegratedSearchVO;
 import com.company.integrated.service.IntegratedService;
 import com.company.integrated.service.IntegratedVO;
+import com.company.payAndDelivery.service.PayAndDeliveryService;
+import com.company.payAndDelivery.service.PayAndDeliveryVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -57,8 +59,8 @@ import com.company.question.service.QuestionVO;
  * 21.04.15 장바구니 3차(토탈 장바구니로 변경) / 사업자-게시글CRUD 3차 수정(조회,삭제)
  * 21.04.16 장바구니 4차(채크박스) 
  * 21.04.17 장바구니 5차(하단 총액부분)
- * 21.04.19 장바구니 6차 수정(단건 삭제 ok,여러건 삭제 수정중)
- * 
+ * 21.04.19 장바구니 6차 수정(단건 삭제 ok, 여러건 삭제, 전체합계금액)
+ * 21.04.20 차트 1차 수정
  * 
  */
 @Controller
@@ -86,6 +88,10 @@ public class Controller5 {
 	// 장바구니
 	@Autowired
 	CartService cartService;
+
+	// 결제
+	@Autowired
+	PayAndDeliveryService payAndDeliveryService;
 
 	// end of beans
 
@@ -509,8 +515,31 @@ public class Controller5 {
 		return "map/map";
 	}
 
-	// 나중에
-	// 마이페이지-사업자-통계현황
+	// 마이페이지-사업자-통계 페이지
+	@RequestMapping("/getSearchChart")
+	public String getSearchChart() {
+		return "chart/getSearchChart";
+	}
+
+	// 마이페이지-사업자-통계 데이터
+	@RequestMapping("/getSearchChartData")
+	@ResponseBody
+	public List<Map<String, Object>> getChartData(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+		// session ID 조회
+		String id = session.getAttribute("loginID").toString();
+		// ID값 분배
+		bvo.setBusinessId(id);
+		// DB 데이터 조회
+		bvo = businessService.getBusiness(bvo);
+		// 조회 후 코드값 분배
+		vo.setCategory(bvo.getBusinessCode());
+		
+		// 쿼리 결과 호출
+		// 일별 합계
+		List<Map<String, Object>> map = payAndDeliveryService.dailyTotal(vo);
+		return map;
+	}
+
 	// 마이페이지-사업자-실시간화장진료 페이지
 
 	// 공통
