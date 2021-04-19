@@ -2,9 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.company.payAndDelivery.service.impl.PayAndDeliveryMapper">
-
+<mapper namespace="com.company.payAndDelivery.service.impl.PayAndDeliveryMapper">
 	<!-- 구매내역리스트 조회 -->
 	<select id="getSearchPayAndDelivery" resultType="PayAndDeliveryVO">
 	SELECT PNDNUMBER
@@ -18,7 +16,6 @@
 	FROM PAYANDDELIVERY
 	WHERE MEMBERID=#{memberId}
 	</select>
-	
 	
 	<!-- 예약하기 버튼눌러서 날짜선택시 PAYANDDELIVERY DB update -->
 	<update id="updateReservation2" parameterType="PayAndDeliveryVO">
@@ -40,5 +37,19 @@
 		, INVOICENUMBER = #{invoiceNumber}
 		WHERE PNDNUMBER=#{pndNumber}
 	</update>
-	
+
+	<!-- 결제내역 차트용 -->
+	<!-- 일별합계 -->
+	<select id="dailyTotal" resultType="map">
+		SELECT
+		TO_CHAR(PAYDATE,'yyyy-mm-dd') paydate, sum(SUMPRICE) sumprice
+		FROM PAYANDDELIVERY
+		WHERE businessId = #{businessId}
+		AND CATEGORY = #{category}
+		AND (BUYSTATE = '결제완료'
+		OR BUYSTATE = '예약완료')
+		GROUP BY paydate
+	</select>
+	<!-- 월별합계 -->
+	<!-- 년별합계 -->
 </mapper>

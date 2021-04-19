@@ -1,6 +1,7 @@
 package com.company.payAndDelivery.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,21 @@ public class PayAndDeliveryServiceimpl implements PayAndDeliveryService{
 	@Override
 	public int updateDelivery(PayAndDeliveryVO vo) {
 		return payAndDeliveryMapper.updateDelivery(vo);
+	}
+	//결제 내역 차트
+	@Override
+	public List<Map<String, Object>> dailyTotal(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.dailyTotal(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> monthlyTotal(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.monthlyTotal(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> yearsTotal(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.yearsTotal(vo);
 	}
 
 }

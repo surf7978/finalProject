@@ -111,3 +111,19 @@ li{list-style:none;}
 #contents #pro_tb td #opbtn{position:absolute;right:0;top:0;}
 /* 제품옵션 */
 #contents #pro_show #proname{background:#fcfcfd;padding:10px;border:#d9dde2 1px solid;}
+/* 장바구니 */
+#wrap{width:100%;}
+#wrap table{font-size:14px;border:none;width:70%;margin-top:30px;border-top:2px solid #989ba0;border-bottom:2px solid #989ba0;}
+#wrap table thead{background:#f5f5f5;border:none;text-align:center;}
+#wrap table td{border:1px solid #eaeaea;}
+#wrap table thead tr th{padding:10px;font-weight:400;}
+#wrap table tbody tr td{padding:10px;position:relative;}
+#wrap table tbody tr td nav{width:100px;height:100px;float:left;overflow:hidden;}
+#wrap table tbody tr td img{width:100px; height: 100px;}
+#wrap table tbody tr td strong{margin-left:20px;line-height:100px;}
+#wrap h3{text-align:left;margin-top:30px;}
+#wrap table tbody tr td div{position:absolute;right:10px;top:50%;transform:translateY(-50%);}
+#wrap table tbody tr td div input{margin-right:10px;}
+#wrap #pay {margin-top:20px;}
+#wrap #pay #add_wrap{margin-top:0;padding:0;}
+#totalDelete{margin-top : 20px; margin-left: -60%}

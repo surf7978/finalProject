@@ -78,7 +78,8 @@
 			item.cartCourier = "무료";
 		var tr = $("<tr>")
 
-		tr.append($("<td><input type='checkbox' class='chk' name='check'></td>"));
+		tr
+				.append($("<td><input type='checkbox' class='chk' name='check'></td>"));
 		tr.append($("<td>").html(
 				"<img src=resources/images/business/"+item.image+">").attr(
 				"class", "cartImage").trigger("create"));

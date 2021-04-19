@@ -36,7 +36,7 @@
 		$(".con").on("click","input[type=checkbox]",function(){
 			var val = $(this).val();
 			//console.log(val);
-			getSearchHospital99(1);                         //여기에 지역별 검색하는 방법 구현해야함
+			getSearchHospitalLocation(1);                         //여기에 지역별 검색하는 방법 구현해야함
 															//다른 컨트롤러명으로 했지만(getSearchHospitalLocation) 충돌나서 안됨 
 		})//end of input
 	}//enf of checkbox
