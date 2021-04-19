@@ -39,8 +39,9 @@
 			},
 			dataType : "json",
 			success : function(datas){
+				console.log(datas)
 				$.each(datas,function(i,item){
-					console.log(item)
+					//tr태그 script
 					var content = makeTr(item);
 					content.appendTo("#totalCartTbody");
 					//전체합계금액
@@ -59,7 +60,7 @@
 			if (y){
 				$.ajax({
 					url:"deleteBCart",
-					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
+					data:{cartNumber:seqVal , memberId : "${sessionScope.loginID}"},
 					dataType:"json",
 					//callback
 					success:removeTr
@@ -75,13 +76,20 @@
 		return $("<tr>")
 		.append($("<td><input type='checkbox' class='chk' name='check'></td>"))
 		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
+		//제품명
 		.append($("<td>").html(item.productName))
+		//옵션명
 		.append($("<td>").html(item.optionName))
+		//수량
 		.append($("<td>").html(item.count))
+		//금액
 		.append($("<td>").html(item.optionPrice))
+		//배송비
 		.append($("<td>").html(item.cartCourier))
+		//합계?
 		.append($("<td>").html(item.optionPrice))
 		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
+		//제품일련번호
 		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
 	}//end of makeTr
 	
@@ -149,19 +157,36 @@
 	function totalCheckDelete(){
 		$("#totalCart").on("click","#totalDelete",function(){
 			var y = confirm("선택하신 상품을 장바구니에서 삭제 하시겠습니까??");
-			//seq번호 찾아서 ,로 이어서 넣기
-			var seqVal = $("input[type=checkbox]:checked").closest("tr").find("#seq").val();
+			//seq번호 찾아서 배열에 담기
+			//채크된 것들 카운트
+			var count = $("[name=check]:checked").length;
+			//배열
+			var array = [];
+			
+			for(i = 0; i <= count; i++){
+				//form 안쓰고 넘기기
+				array.push($($("[name=check]:checked").closest("tr")[i]).find("#seq").val());
+				//form 쓰고 넘기기
+				//array.push($($("[name=check]:checked").closest("tr")[i]).find("#seq").val());
+				//input.cartNumbers 만들면 됨
+				//frm.cartNumbers = array;
+			}//end of for
 			if(y){
 				$.ajax({
 					url:"deleteBCart",
-					data:{bcartNumber:seqVal , memberId : "${sessionScope.loginID}"},
+					data:{cartNumbers:array , memberId : "${sessionScope.loginID}"},
+					//data:$("#frm").serialize(),
 					dataType:"json",
 					//callback
-					success:removeTr
+					success:function(response){
+						removeTr(response);
+						//tbody영역 초기화
+						$("#totalCartTbody").empty();
+						//조회
+						getSearchTotalCart();
+					}//end of success
 				})//end of ajax
-			}else{
-				false
-			}
+			}//end of if
 		})//end of totalCart
 	}//end of totalCheckDelete
 	
@@ -191,44 +216,46 @@
 </head>
 <body>
 	<div id="wrap">
-		<div id="totalCart">
-			<strong>장바구니</strong>
-			<small>장바구니에 담아놓은 상품은 3개월 동안 보관 후 자동 삭제됩니다.</small>
-			<table>
-				<thead>
+		<form id="frm" name="frm">
+			<div id="totalCart">
+				<strong>장바구니</strong>
+				<small>장바구니에 담아놓은 상품은 3개월 동안 보관 후 자동 삭제됩니다.</small>
+				<table>
+					<thead>
+						<tr>
+							<th><input type="checkbox" id="totalCheck"></th>
+							<th colspan="3">상품정보</th>
+							<th>갯수</th>
+							<th>상품금액</th>
+							<th>배송비</th>
+							<th>합계금액</th>
+							<th>삭제</th>
+						</tr>
+					</thead>
+					<tbody id="totalCartTbody"></tbody>
+				</table>
+				<button type="button" id="totalDelete">일괄삭제</button>
+			</div>
+			<div id="totalValue">
+				<table id="totalTbl">
 					<tr>
-						<th><input type="checkbox" id="totalCheck"></th>
-						<th colspan="3">상품정보</th>
-						<th>갯수</th>
-						<th>상품금액</th>
-						<th>배송비</th>
-						<th>합계금액</th>
-						<th>삭제</th>
+						<td rowspan=3><h2>전체합계금액</h2></td>
+					    <td>총상품금액</td>
+					    <td><span id = "totalPrice"></span></td>
 					</tr>
-				</thead>
-				<tbody id="totalCartTbody"></tbody>
-			</table>
-			<button type="button" id="totalDelete">일괄삭제</button>
-		</div>
-		<div id="totalValue">
-			<table id="totalTbl">
-				<tr>
-					<td rowspan=3><h2>전체합계금액</h2></td>
-				    <td>총상품금액</td>
-				    <td><span id = "totalPrice"></span></td>
-				</tr>
-				<tr>
-					<td>배송비</td>
-					<td><span id="totalCourier"></span></td>
-				</tr>
-				<tr>
-					<td>전체주문금액</td>
-					<td><span id = "totalResult"></span></td>
-				</tr>
-			</table>
-		</div>
-		<button type="button" id="shopping">쇼핑계속하기</button>
-		<button type="button" id="pay">주문결제하기</button>
+					<tr>
+						<td>배송비</td>
+						<td><span id="totalCourier"></span></td>
+					</tr>
+					<tr>
+						<td>전체주문금액</td>
+						<td><span id = "totalResult"></span></td>
+					</tr>
+				</table>
+			</div>
+			<button type="button" id="pay">주문결제하기</button>
+			<button type="button" id="shopping">쇼핑계속하기</button>
+		</form>
 	</div>
 </body>
 </html>

@@ -25,6 +25,8 @@
 </script>
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 	<form id="frm" action="insertNote" method="post">
 		<input type="hidden" id="animalNumber" name="animalNumber"
 			value="${animalNumber}">
@@ -58,5 +60,6 @@
 		<button type="submit">등록</button>
 		<button type="button" onclick="window.close()">취소</button>
 	</form>
+</div>
 </body>
 </html>

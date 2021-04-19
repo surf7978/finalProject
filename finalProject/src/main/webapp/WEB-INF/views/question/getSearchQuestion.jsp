@@ -13,13 +13,13 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-	<h2>문의내역 리스트</h2>
+	<h2>문의 받은 내역</h2>
 	<form id="frm" action="getQuestion">
 		<table id='tbl'>
 			<tr>
-				<td>작성자</td>
-				<td>제목</td>
-				<td>내용</td>
+				<td width="100">작성자</td>
+				<td width="300">제목</td>
+				<td width="300">작성날짜</td>
 			</tr>
 			<tbody id="tbody">
 			</tbody>
@@ -47,7 +47,7 @@
 						//제목
 						.append("<td>" + response[i].title + "</td>")
 						//내용
-						.append("<td>" + response[i].content + "</td><br>");
+						.append("<td>" + response[i].calendar + "</td><br>");
 						tbody.append(tr);
 					}//end of for
 				}//end of success

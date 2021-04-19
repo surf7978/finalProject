@@ -69,7 +69,7 @@
 	<br>
 <form action="insertAnswer2Cr4" method="post">
 
-	
+		<input type="hidden" id="memberId" name="memberId" value="${getQuestion2.writer}">
 		<table style="padding-top: 50px; align: center; width: 700; border: 0; cellpadding: 2;">
 			<tr>
 				<td height="20" align="center" bgcolor="#e7ab3c">

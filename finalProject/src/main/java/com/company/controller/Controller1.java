@@ -249,7 +249,7 @@ public class Controller1 {
 			vo1.setBusinessId(vo.getMemberId());
 			businessService.updateBusiness(vo1);
 		}
-		return "redirect:/loginout";
+		return "redirect:/logout";
 	}
 	
 	//휴대폰인증 페이지 이동-회원가입

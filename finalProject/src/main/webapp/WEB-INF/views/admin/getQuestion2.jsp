@@ -63,7 +63,7 @@
 	<br>
 	<br>
 	<input value="고객센터문의(관리자) 단건조회"
-		style="font-size: 40px; text-align: center; width: 400px; border: none;"
+		style="font-size: 40px; text-align: center; width: 1400px; border: none;"
 		readonly>
 	<br>
 	<br>
