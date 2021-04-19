@@ -186,6 +186,7 @@ $(document).ready(function() { //function시작
 				<input type="hidden" name="image" value="${product.t_image }">
 					<input value="${product.productNumber }" type="hidden" name="productNumber"> 
 					<input value="${product.productName }" type="hidden" name="productName"> 
+					<input value="${product.productName }" type="hidden" name="optionName"> 
 					<input value="${product.optionPrice }" type="hidden" name="optionPrice"> 
 					<input value="2500" type="hidden" name="cartCourier">
 					<c:if test="${not empty loginID }">
