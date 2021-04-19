@@ -39,10 +39,11 @@
 	</update>
 	<!-- 삭제 -->
 	<delete id="deleteBCart">
-		<foreach item="seq" collection="cartNumbers" separator="," >
-			DELETE FROM BCART
-			WHERE MEMBERID = #{memberId}
-			AND CARTNUMBER = #{seq} 
+	DELETE FROM BCART
+	WHERE MEMBERID = #{memberId}
+	AND CARTNUMBER IN
+		<foreach item="seq" collection="cartNumbers" open="(" separator="," close=")" >
+			 #{seq} 
 		</foreach>
 	</delete>
 	<!-- 장바구니 단건조회 -->
