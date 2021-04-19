@@ -115,10 +115,10 @@
 		$("#pay").on("click", function() {
 			var totalResult = $("#totalResult").text();
 			var count = $("[name=count]").val();
-			var check = $(".check:checked");
-			var loginId = $("[name=memberId]").val();
-			//상품선택 로그인 체크
-			if (check==false) {
+			//체크박스 값 확인
+			var check = $(".chk:checked");
+			//상품선택,로그인 체크
+			if (check.length == 0) {
 				alert("상품을 선택해주세요");
 			} else if ("${sessionScope.loginID}" == '') {
 				var result = confirm("로그인페이지로 이동하시겠습니까?");
