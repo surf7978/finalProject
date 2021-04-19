@@ -92,7 +92,7 @@ $(function(){
 </script>
 </head>
 <body>
-<div style="width:60%;">
+<div style="width:1140px;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <h3>반려동물 의료수첩</h3><br>
 	<table class="table2">
@@ -109,41 +109,21 @@ $(function(){
 			<td>총 의료비 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${noteCount.price}" />원 </td>
 		</tr>
 	</table>
+
 	<br>
+	<div class="note3">
 	<div class="animalNote">
-	<h4>의료내역</h4>
-	<table class="table2">
-		<tr>
-		<th>의료내역</th>
-		<th>의료일</th>
-		<th>의료비</th>
-		<th>등록일</th>
-		<th>상세조회</th>
-		</tr>
-		<c:forEach items="${note}" var="no"> 
-		<tr>
-		<td>${no.category1 }>${no.category2 } </td>
-		<td>${no.calendar }</td>
-		<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${no.price }" />원</td>
-		<td>${no.calendar2 }</td>
-		<td><button type="button" onclick="window.open('updateNote?noteNumber=${no.noteNumber }','updateNote', 'width=800, height=800')">상세조회</button></td>
-		</tr>
-		</c:forEach>
-	</table><br>
-		<button type="button" onclick="window.open('insertNote?animalNumber=${animal.animalNumber }','insertNote', 'width=800, height=800')">의료내역 등록</button>
-</div>
-<br>
 	<h4>생애주기 권장 의료표</h4><br>
-	<table class="table3">
+	<table class="table4">
 		<tr>
 		<th colspan="2">반려견 예방접종(필수)</th>
 		</tr>
 		<tr>
-			<td>
+			<td style="width: 350px;">
 			생후 2개월 1주<br>
 			-1차 예방접종 *권장일:<a class="birth"></a>
 			</td>
-			<td>
+			<td style="width: 100px;">
 			<c:forEach begin="0" end="${note.size() }" var="i">
 			<c:if test="${note[i].category2 eq '1차 예방접종'}">
 				의료일 : ${note[i].calendar }
@@ -411,6 +391,30 @@ $(function(){
 			</td>
 		</tr>
 	</table>
+	</div>
+	<div class="animalNote2">
+	<div style="height: 9px"></div><h4>의료내역</h4><br>
+	<table class="table5">
+		<tr>
+		<th style="width: 180px;">의료내역</th>
+		<th style="width: 90px;">의료일</th>
+		<th style="width: 90px;">의료비</th>
+		<th style="width: 90px;">등록일</th>
+		<th style="width: 90px;">상세조회</th>
+		</tr>
+		<c:forEach items="${note}" var="no"> 
+		<tr>
+		<td>${no.category1 }>${no.category2 } </td>
+		<td>${no.calendar }</td>
+		<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${no.price }" />원</td>
+		<td>${no.calendar2 }</td>
+		<td><button type="button" class="updateNoteBtn" onclick="window.open('updateNote?noteNumber=${no.noteNumber }','updateNote', 'width=800, height=800')">상세조회</button></td>
+		</tr>
+		</c:forEach>
+	</table><br>
+		<button type="button" class="insertNoteBtn" onclick="window.open('insertNote?animalNumber=${animal.animalNumber }','insertNote', 'width=800, height=800')">의료내역 등록</button>
+	</div>
+	</div>
 </div>
 </body>
 </html>

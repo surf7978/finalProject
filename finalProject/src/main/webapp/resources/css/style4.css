@@ -34,6 +34,15 @@
 	border-right: 1px solid #444444;
 } 
 
+.table4 th, .table4 td, .table5 th, .table5 td {
+	font-size: 15px; 
+	border: 1px solid #444444;
+}
+
+.table5 th, .table5 td {
+	text-align: center;
+}
+
 .getSearchBuy, .updateAnimalBtn, .getSearchNoteBtn {
 	padding: 10px;
 	width: 80px;
@@ -60,7 +69,7 @@
 	color: white;
 }
 
-.getReservationBtn {
+.getReservationBtn		 {
 	padding: 10px;
 	width: 80px;
 	border: none;
@@ -69,4 +78,42 @@
 	
 }
 
+.updateNoteBtn	{
+	padding: 5px;
+	width: 80px;
+	border: none;
+	border-radius: 5px;
+	background-color: #e7ab3c;
+}
+
+.insertNoteBtn {
+	padding: 5px;
+	width: 120px;
+	border: none;
+	border-radius: 5px;
+	background-color: #e7ab3c;
+}
+
+.close {
+	padding: 10px;
+	width: 80px;
+	border: none;
+	border-radius: 5px;
+	background-color: #e7ab3c;
+	color: white;
+}
+
+.animalNote{
+	float: left;
+	width: 40%;
+	padding: 10px;
+}
+.animalNote2{
+	width: 60%;
+	float: left;
+}
+.note3{
+	width: 80%;
+	display: flex;
+}
 
