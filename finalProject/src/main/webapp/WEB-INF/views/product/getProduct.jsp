@@ -15,9 +15,20 @@ $(document).ready(function() { //function시작
 		//결제페이지로 이동
 		$("#contents").on("click","#b_btn",function() {
 							var resultPrice = $("[name=resultPrice]").text();
-							var count = $("[name=count]").val();
+							var count = [];
 							var pro = $("#pro_result").text();
 							var loginId = $("[name=memberId]").val();
+							var optionNameList =[];
+							$("[name=count]").each(function(){
+								count.push($(this).val());
+							});
+							$("[name=optionNameList]").each(function(){
+								optionNameList.push($(this).text());
+							});
+							var optionPriceList =[];
+							$("[name=optionPriceList]").each(function(){
+								optionPriceList.push($(this).val());
+							});
 							//상품선택 로그인 체크
 							if (pro == "") {
 								alert("상품을 선택해주세요");
@@ -31,7 +42,7 @@ $(document).ready(function() { //function시작
 							} else {
 								location.href = "PayInfoForm?productNumber=${product.productNumber }&resultPrice="
 										+ resultPrice
-										+ "&memberId=${loginID}&count=" + count;
+										+ "&memberId=${loginID}&countList=" + count + "&optionNameList=" + optionNameList + "&optionPriceList=" + optionPriceList;										
 							}
 						});
 		//삭제버튼 클릭
@@ -118,7 +129,7 @@ $(document).ready(function() { //function시작
 		var sum = 0;
 		for (var i = 0; i < nav.length; i++) {
 			var count = $(nav).eq(i).find("[name=count]").val();
-			var price = $(nav).eq(i).find("p").text();
+			var price = $(nav).eq(i).find("[name=optionPriceList]").val();
 			sum += (count * price);
 		}
 		result.text(sum);
@@ -136,18 +147,16 @@ $(document).ready(function() { //function시작
 			"margin-bottom":"10px"
 		}).attr("id", "proname")
 				.append(
-						$("<div>").text(optionName).css({"margin":"0","padding":"0","width":"95%"})
-								.append("<hr>"));
+						$("<div>").attr("name","optionNameList").text(optionName).css({"margin":"0","padding":"10px","margin-bottom":"10px","width":"95%"}));
 		var input = $("<input>").attr({
 			"type" : "number",
 			"min" : "1",
 			"value" : "1",
 			"name" : "count"
-		});
+		}).css("width","50px");
 		var a = $("<a>").attr("id","close").css({"position":"absolute","top":"10px", "right":"10px","cursor":"pointer"}).text("x")
 		var inval = $(input).val();
-		var strong = $("<p>").css("text-align", "right")
-				.text(optionPrice);
+		var strong = $("<p>").css({"float":"right","display":"inline-block"}).append($("<input>").attr({"name":"optionPriceList","readonly":"readonly"}).css({"border":"none","text-align":"right"}).val(optionPrice));
 		$(nav).append(input, strong, a);
 		$("#pro_show").append(nav);
 		$("#pro_result").empty();

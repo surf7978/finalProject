@@ -254,17 +254,19 @@ public class Controller3 {
 	// 결제API
 	@RequestMapping("/PayInfo")
 	public String PayInfo(MemberVO mvo, String name, String phone, String post, String address, String address2,
-			ProductVO vo, Model model, String productNumber, String resultPrice, String count) {
+			ProductVO vo, Model model, String productNumber, String resultPrice, String[] countList, String[] optionNameList) {
 		model.addAttribute("product", productService.getProduct(vo));
 		vo.setResultPrice(resultPrice);
-		vo.setCount(count);
+		vo.setCountList(countList);
+		vo.setOptionNameList(optionNameList);
 		mvo.setName(name);
 		mvo.setPhone(phone);
 		mvo.setPost(post);
 		mvo.setAddress(address);
 		mvo.setAddress(address2);
+		model.addAttribute("optionNameList",vo.getOptionNameList());
 		model.addAttribute("resultPrice", vo.getResultPrice());
-		model.addAttribute("count", vo.getCount());
+		model.addAttribute("count", vo.getCountList());
 		model.addAttribute("name", mvo.getName());
 		model.addAttribute("phone", mvo.getPhone());
 		model.addAttribute("post", mvo.getPost());
@@ -277,13 +279,17 @@ public class Controller3 {
 	// 쇼핑몰 바로가기 결제폼
 	@RequestMapping("/PayInfoForm")
 	public String PayInfoForm(ProductVO vo, Model model, String productNumber, String resultPrice, MemberVO mvo,
-			String count) {
+			String[] countList,String[] optionNameList, String[] optionPriceList) {
 		model.addAttribute("product", productService.getProduct(vo));
 		vo.setResultPrice(resultPrice);
-		vo.setCount(count);
+		vo.setCountList(countList);
+		vo.setOptionNameList(optionNameList);
+		vo.setOptionPriceList(optionPriceList);
+		model.addAttribute("optionNameList",vo.getOptionNameList());
+		model.addAttribute("optionPriceList",vo.getOptionPriceList());
 		model.addAttribute("resultPrice", vo.getResultPrice());
 		model.addAttribute("member", memberService.getMember(mvo));
-		model.addAttribute("count", vo.getCount());
+		model.addAttribute("count", vo.getCountList());
 		return "pay/PayInfoForm";
 	}
 
