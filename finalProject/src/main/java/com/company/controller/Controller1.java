@@ -648,6 +648,11 @@ public class Controller1 {
 		return "empty/reviewAndQuestion/insertQuestion2";
 	}
 	
+	@GetMapping("/FAQ")
+	public String FAQ() {
+		return "eventAndNotice/FAQ";
+	}
+	
 	@Autowired ProductService productService;
 	// 홈화면 출력(스프링 기본세팅)
 	private static final Logger logger = LoggerFactory.getLogger(Controller1.class);
