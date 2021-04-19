@@ -5,7 +5,7 @@
 <head>
 <title>Home</title>
 </head>
-<body>
+<body> 
 <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="hero-items owl-carousel">
