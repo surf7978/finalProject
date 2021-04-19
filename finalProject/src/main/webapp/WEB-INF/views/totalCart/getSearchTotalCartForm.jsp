@@ -55,10 +55,10 @@
 		var code = item.productNumber.substr(0,2);
 		if(item.cartCourier == null || item.cartCourier == "0")
 			item.cartCourier = "무료"
+		//if 조건 사용을 위해 태그 분리 및 return을 문장 끝으로
 		var tr =  $("<tr>");
 		tr.append($("<td><input type='checkbox' class='chk' name='check'></td>"));
-
-		
+		//if 조건에 따라 image루트 변경
 		if(code == '70'){
 			tr.append($("<td>").html("<img src=resources/images/products/"+item.image+">").attr("class","cartImage").trigger("create"))
 		}else if(code == '20'){
@@ -80,7 +80,6 @@
 		.append($("<td>").html(item.optionPrice * item.count).attr("name","resultPrice"))
 		//제품일련번호
 		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
-		
 		 return tr
 	}//end of makeTr
 	
@@ -114,11 +113,24 @@
 	//4.결제
 	function pay(){
 		$("#pay").on("click", function() {
-			var y = confirm("결제하시겠습니까?");
-			if(y){
-				//location.href="";
-			}else{
-				return false;
+			var totalResult = $("#totalResult").text();
+			var count = $("[name=count]").val();
+			var pro = $("#pro_result").text();
+			var loginId = $("[name=memberId]").val();
+			//상품선택 로그인 체크
+			if (pro == "") {
+				alert("상품을 선택해주세요");
+			} else if (!loginId) {
+				var result = confirm("로그인해주세요");
+				if (result == true) {
+					location.href = "loginForm";
+				} else {
+					return false;
+				}
+			} else {
+				location.href = "PayInfoForm?productNumber=${product.productNumber }&resultPrice="
+						+ resultPrice
+						+ "&memberId=${loginID}&count=" + count;
 			}
 		})//end of pay
 	}//end of pay
@@ -191,7 +203,7 @@
 				if(item[i].cartCourier == '무료'){
 					 item[i].cartCourier = 0;
 				}
-				totalCourier += item[i].cartCourier
+				totalCourier += parseInt(item[i].cartCourier)
 			}//end of for
 			var totalResult = totalPrice + totalCourier;
 			//전체리스트 불러올 때 값을 넣어준다
@@ -229,13 +241,13 @@
 			<div id="totalValue">
 				<table id="totalTbl">
 					<tr>
-						<td rowspan=3><h2>전체합계금액</h2></td>
+						<td rowspan = 3><h2>전체합계금액</h2></td>
 					    <td>총상품금액</td>
 					    <td><span id = "totalPrice"></span></td>
 					</tr>
 					<tr>
 						<td>배송비</td>
-						<td><span id="totalCourier"></span></td>
+						<td><span id = "totalCourier"></span></td>
 					</tr>
 					<tr>
 						<td>전체주문금액</td>
@@ -243,8 +255,8 @@
 					</tr>
 				</table>
 			</div>
-			<button type="button" id="pay">주문결제하기</button>
 			<button type="button" id="shopping">쇼핑계속하기</button>
+			<button type="button" id="pay">주문결제하기</button>
 		</form>
 	</div>
 </body>
