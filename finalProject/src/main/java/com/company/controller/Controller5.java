@@ -57,7 +57,9 @@ import com.company.question.service.QuestionVO;
  * 21.04.15 장바구니 3차(토탈 장바구니로 변경) / 사업자-게시글CRUD 3차 수정(조회,삭제)
  * 21.04.16 장바구니 4차(채크박스) 
  * 21.04.17 장바구니 5차(하단 총액부분)
- * 21.04.19 장바구니 합계 수정
+ * 21.04.19 장바구니 6차 수정(단건 삭제 ok,여러건 삭제 수정중)
+ * 
+ * 
  */
 @Controller
 public class Controller5 {
@@ -445,7 +447,12 @@ public class Controller5 {
 	// 통합 장바구니 페이지 호출
 	@GetMapping("/getSearchTotalCart")
 	@ResponseBody
-	public List<CartVO> getSearchTotalCart(CartVO vo) {
+	public List<CartVO> getSearchTotalCart(CartVO vo, HttpSession session) {
+		// 세션 ID값 조회
+		String id = session.getAttribute("loginID").toString();
+		// ID값 담음
+		vo.setMemberId(id);
+		// 조회 후 값 넘김
 		List<CartVO> list = bCartService.getSearchTotalCart(vo);
 		return list;
 	}
