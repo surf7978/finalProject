@@ -15,6 +15,6 @@ public interface BCartMapper {
 
 	public BCartVO getBCart(BCartVO vo);// 단건조회
 
-	public List<BCartVO> getSearchTotalCart(CartVO vo);// 전체조회
+	public List<CartVO> getSearchTotalCart(CartVO vo);// 전체조회
 
 }

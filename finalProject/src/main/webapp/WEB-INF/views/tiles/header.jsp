@@ -135,6 +135,12 @@
 					<sql:query var="rs1" dataSource="${ds }">
 					    select * from cart where memberId = '${loginID}'
 					</sql:query>
+					<sql:query var="rs2" dataSource="${ds }">
+					    select COUNT(*) count, sum(PRICE) sum from bcart where memberId = '${loginID}'
+					</sql:query>
+					<sql:query var="rs3" dataSource="${ds }">
+					    select * from bcart where memberId = '${loginID}'
+					</sql:query>
 						<ul class="nav-right">
 							<li class="cart-price">장바구니 합계 : </li>
 							<!-- 
@@ -144,23 +150,78 @@
 							 -->
 							<li class="cart-icon"><a href="#"> 
 								<i class="icon_bag_alt"></i> 
-							<c:if test="${not empty rs}">
+							<c:if test="${not empty rs && empty rs2}">
 								<span>${rs.rows[0].count}</span>
+							</c:if>
+							<c:if test="${empty rs &&not  empty rs2}">
+								<span>${rs2.rows[0].count}</span>
+							</c:if>
+							<c:if test="${not empty rs && not empty rs2}">
+								<span>${rs.rows[0].count+rs2.rows[0].count}</span>
 							</c:if>
 							</a>
 								<div class="cart-hover">
 									<div class="select-items">
 										<table>
 											<tbody>
-											<c:if test="${not empty rs1}">
+											<c:if test="${not empty rs1 && empty rs3}">
 											<c:forEach items="${rs1.rows }" var="list">
 												<tr>
 													<td class="si-pic"><img
 														src="resources/img/${list.image }" alt=""></td>
 													<td class="si-text">
 														<div class="product-selected">
-															<h6>${list.optionName }</h6>
+															<h6>${list.optionName } X ${list.count}</h6>
 															<p>${list.optionPrice }원</p>
+														</div>
+													</td>
+													<!-- 이거 걍 X 표시임 
+													<td class="si-close"><i class="ti-close"></i></td>
+													 -->
+												</tr>
+											</c:forEach>
+											</c:if>
+											<c:if test="${empty rs1 && not empty rs3}">
+											<c:forEach items="${rs3.rows }" var="list">
+												<tr>
+													<td class="si-pic"><img
+														src="resources/img/${list.image }" alt=""></td>
+													<td class="si-text">
+														<div class="product-selected">
+															<h6>${list.optionName } X ${list.count}</h6>
+															<p>${list.price }원</p>
+														</div>
+													</td>
+													<!-- 이거 걍 X 표시임 
+													<td class="si-close"><i class="ti-close"></i></td>
+													 -->
+												</tr>
+											</c:forEach>
+											</c:if>
+											<c:if test="${not empty rs1 && not empty rs3}">
+											<c:forEach items="${rs1.rows }" var="list">
+												<tr>
+													<td class="si-pic"><img
+														src="resources/img/${list.image }" alt=""></td>
+													<td class="si-text">
+														<div class="product-selected">
+															<h6>${list.optionName } X ${list.count}</h6>
+															<p>${list.optionPrice }원</p>
+														</div>
+													</td>
+													<!-- 이거 걍 X 표시임 
+													<td class="si-close"><i class="ti-close"></i></td>
+													 -->
+												</tr>
+											</c:forEach>
+											<c:forEach items="${rs3.rows }" var="list">
+												<tr>
+													<td class="si-pic"><img
+														src="resources/img/${list.image }" alt=""></td>
+													<td class="si-text">
+														<div class="product-selected">
+															<h6>${list.optionName } X ${list.count}</h6>
+															<p>${list.price }원</p>
 														</div>
 													</td>
 													<!-- 이거 걍 X 표시임 
@@ -174,15 +235,21 @@
 									</div>
 									<div class="select-total">
 										<span>total :</span>
-										<c:if test="${not empty rs}">
+										<c:if test="${not empty rs && empty rs2}">
 											<h5>${rs.rows[0].sum}원</h5>
+										</c:if>
+										<c:if test="${empty rs && not empty rs2}">
+											<h5>${rs2.rows[0].sum}원</h5>
+										</c:if>
+										<c:if test="${not empty rs && not empty rs2}">
+											<h5>${rs.rows[0].sum+rs2.rows[0].sum}원</h5>
 										</c:if>
 									</div>
 									<div class="select-button">
 										<!-- 
 										<a href="#" class="primary-btn view-card">VIEW CARD</a> 
 										 -->
-										<a href="#" class="primary-btn checkout-btn" style="font-size:17px;">상 세 보 기</a>
+										<a href="getSearchTotalCartForm" class="primary-btn checkout-btn" style="font-size:17px;">상 세 보 기</a>
 									</div>
 								</div></li>
 						</ul>
