@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>일반회원의 구매내역 리스트</title>
+<link rel="stylesheet" href="resources/css/style2.css" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -13,6 +14,8 @@
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <h3>구매내역 리스트</h3><br>
+<div id="wrap">
+		<div id="totalCart">
 <table border="1">
 	<thead>
 	<tr>
@@ -55,24 +58,26 @@
 		<c:if test="${pad.category eq '70' }">
 		<td><button type="button" style="padding:10px; width:80px; border:none; border-radius:5px; background-color:#e7ab3c;" class="getSearchBuy">상세조회</button></td>
 		</c:if>
+	
 		<c:if test="${pad.category != '70' }">
-		<td><button type="button" onclick="window.open('getReservation?pndNumber=${pad.pndNumber}','getReservation','width=400, height=300')">예약확인</button></td>
+		<c:if test="${pad.buyState !='환불완료' }">
+			<td><button type="button" class="updateReservation" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','updateReservation','width=550, height=500')">예약하기</button></td>
 		</c:if>
+		</c:if>
+		
+		<td>
 		<c:if test="${pad.category eq '70' }">
 		<c:if test="${pad.buyState !='반품완료' }">
-		<td>
+	
 		<input type="hidden" id="t_key" name="t_key" value="ooo6aOm5bqvE5wog0VTMGQ">
 		<input type="hidden" name="t_code" id="t_code" value="${pad.courierCompany}">
 		<input type="hidden" name="t_invoice" id="t_invoice" value="${pad.invoiceNumber}">
 		<button type="button" onclick="dview()" style="padding:10px; width:80px; border:none; border-radius:5px; background-color:#87ceeb; color:white;">배송조회</button>
+		
+		</c:if>
+		</c:if>
 		</td>
-		</c:if>
-		</c:if>
-		<c:if test="${pad.category != '70' }">
-		<c:if test="${pad.buyState !='환불완료' }">
-		<td><button type="button" class="updateReservation" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','updateReservation','width=550, height=500')">예약하기</button></td>
-		</c:if>
-		</c:if>
+		
 		
 	</tr>
 	</c:forEach>
@@ -111,6 +116,8 @@
 	  	var tracking = window.open("http://info.sweettracker.co.kr/tracking/5?t_key="+t_key1+"&t_code="+t_code1+"&t_invoice="+t_invoice1, "dview", "width=800,height=800");
 	}
 </script>
+</div>
+</div>
 </div>
 </body>
 </html>
