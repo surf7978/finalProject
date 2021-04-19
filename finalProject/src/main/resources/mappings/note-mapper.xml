@@ -16,6 +16,7 @@
               , TO_CHAR(CALENDAR2, 'yyyy-mm-dd') AS CALENDAR2
 		FROM NOTE 
 		WHERE ANIMALNUMBER=#{animalNumber}
+		ORDER BY NOTENUMBER
 	</select>
 	
 	<!-- 단건조회 -->

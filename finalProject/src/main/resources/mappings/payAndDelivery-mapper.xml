@@ -17,6 +17,7 @@
 	, BUYSTATE 
 	FROM PAYANDDELIVERY
 	WHERE MEMBERID=#{memberId}
+	ORDER BY PNDNUMBER
 	</select>
 	
 	
@@ -31,6 +32,7 @@
 	<select id="getSearchPayAndDelivery99" resultType="PayAndDeliveryVO">
 	SELECT *
 	FROM PAYANDDELIVERY
+	ORDER BY PNDNUMBER
 	</select>
 	
 	<!-- 관리자의 배송정보 입력 -->	

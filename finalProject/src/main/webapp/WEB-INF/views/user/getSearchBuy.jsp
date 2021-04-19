@@ -8,6 +8,13 @@
 <title>일반회원의 구매내역 상세리스트 조회</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <style>
+ 	#border{
+ 	border-top: hidden;
+ 	border-bottom: hidden; 
+	border-right: hidden;
+ 	}
+ </style>
 </head>
 <body>
 	<br><h3>구매내역 상세리스트</h3><br>
@@ -43,7 +50,9 @@
 		<td><c:out value="${buy.address2}"/></td>
 		<td><c:out value="${buy.phone}"/></td>
 		<td><c:out value="${buy.buyState}"/></td>
-		<td><button type="button" onclick="location.href='insertReview'">구매평쓰기</button></td>
+		<c:if test="${buy.buyState !='반품완료' }">
+		<td class="border"><button type="button" onclick="location.href='insertReview'">구매평쓰기</button></td>
+		</c:if>
 	</tr>
 	</c:forEach>
 	</tbody>

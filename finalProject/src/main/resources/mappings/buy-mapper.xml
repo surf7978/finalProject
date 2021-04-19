@@ -22,6 +22,7 @@
 		, PHONE 
 		FROM BUY
 		WHERE PNDNUMBER=#{pndNumber}
+		ORDER BY BUYNUMBER
 	</select>
 
 	<!-- reviewProduct VIEW 한건 조회하기 -->
