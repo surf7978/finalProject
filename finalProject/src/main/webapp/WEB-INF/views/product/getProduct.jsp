@@ -66,7 +66,7 @@ $(document).ready(function() { //function시작
 						}else if(optionPrice != "" && navlen != 0){
 							var fat = true;
 							$("#pro_show nav").each(function(i){
-								var option = $("#pro_show nav").find("div").eq(i).text();
+								var option = $("#pro_show nav").find("[name=optionNameList]").eq(i).val();
 								if(option == optionName){
 									alert("이미 선택한 상품입니다.");
 									fat = false;
@@ -136,11 +136,10 @@ $(document).ready(function() { //function시작
 	//옵션선택function
 	function optionSelect(){
 		var optionPrice = $("#optionName option:selected").val();
-		var optPrice = optionPrice.replace(/\s/gi, "");
+		var price = optionPrice.replace(/\s/gi, "");
 		var optionName = $("#optionName option:selected").text();
-		var opName = optionName.replace(/\s/gi, "");
 		var navlen = $("#pro_show").find("nav").length;
-		var area = $("<textarea>").attr({"name":"optionNameList", "readonly":"readonly"}).css({"border":"none","height":"auto","width":"100%","overflow":"hidden"}).text(opName);
+		var area = $("<textarea>").attr({"name":"optionNameList", "readonly":"readonly"}).css({"border":"none","height":"auto","width":"100%","overflow":"hidden"}).text(optionName);
 		var nav = $("<nav>").css({
 			"width" : "100%",
 			"position":"relative",
@@ -156,7 +155,7 @@ $(document).ready(function() { //function시작
 		}).css("width","50px");
 		var a = $("<a>").attr("id","close").css({"position":"absolute","top":"10px", "right":"10px","cursor":"pointer"}).text("x")
 		var inval = $(input).val();
-		var strong = $("<p>").css({"float":"right","display":"inline-block"}).append($("<input>").attr({"name":"optionPriceList","readonly":"readonly"}).css({"border":"none","text-align":"right"}).val(optPrice));
+		var strong = $("<p>").css({"float":"right","display":"inline-block"}).append($("<input>").attr({"name":"optionPriceList","readonly":"readonly"}).css({"border":"none","text-align":"right","width":""}).val(price));
 		$(nav).append(input, strong, a);
 		$("#pro_show").append(nav);
 		$("#pro_result").empty();
@@ -215,7 +214,7 @@ $(document).ready(function() { //function시작
 								<select id="optionName">
 									<option value="">상품선택</option>
 									<c:forTokens items="${product.optionName}" delims="," var="optionName" varStatus="num">
-										<option value="${optionPrice[num.index]}">${optionName }(${optionPrice[num.index]}원)</option>
+										<option value="${optionPrice[num.index]}">${optionName }</option>
 									</c:forTokens>
 								</select>
 							</div>
