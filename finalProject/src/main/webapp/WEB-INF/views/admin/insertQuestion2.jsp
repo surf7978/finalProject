@@ -112,8 +112,6 @@
 
 			<tr>
 				<td bgcolor=white>
-							<input type="hidden" id="writer" name="writer" size="20" value="${loginID }">
-							<input type="hidden" id="memberId" name="memberId" size="20" value="${loginID }">
 					<table class="table2">
 						<tr>
 							<td><input value="제 목" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
