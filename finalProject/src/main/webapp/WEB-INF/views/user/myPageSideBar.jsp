@@ -40,7 +40,7 @@
 						<td style="height:200px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">활동내역</h6>
 							<br>
-							<button onclick="location.href='adminView'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;판매글 현황</button><br> 
+							<button onclick="location.href='adminView'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;업체판매글 현황</button><br> 
 							<button onclick="location.href='getSearchAnimal99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기글 현황</button><br>
 							<button onclick="location.href='getSearchQuestionSelect3'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;신고글 현황</button><br>
 							<button onclick="location.href='getSearchQuestionSelect2'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의 받은 내역 </button><br>
@@ -122,7 +122,7 @@
 						<td style="height:200px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">나의 활동</h6>
 							<br>
-							<button onclick="location.href='getSearchIntegratedForm'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;내가쓴글</button><br>
+							<button onclick="location.href='adminView'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;내가쓴글</button><br>
 							<!-- 
 							<button style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기내역</button><br>
 							<button onclick="location.href='getSearchQuestion99?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의한 내역</button><br>

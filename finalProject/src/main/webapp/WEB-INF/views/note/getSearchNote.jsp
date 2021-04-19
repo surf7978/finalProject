@@ -91,7 +91,8 @@ $(function(){
 </script>
 </head>
 <body>
-<br>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 <h3>반려동물 의료수첩</h3>
 	<table border="1">
 		<tr>
@@ -407,5 +408,6 @@ $(function(){
 			</td>
 		</tr>
 	</table>
+</div>
 </body>
 </html>

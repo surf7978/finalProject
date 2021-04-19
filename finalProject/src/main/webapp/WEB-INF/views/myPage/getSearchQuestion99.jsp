@@ -46,14 +46,13 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-<input value="문의내역" style="font-size:40px; text-align:center; width:450px; border:none;" readonly><br><br>
-<table class="sub_news" border="1"  summary="게시판의 글제목 리스트">
+<input value="문의한 내역" style="font-size:40px; text-align:center; width:450px; border:none;" readonly><br><br>
+<table class="sub_news" border="1">
 
 
 
 <thead>
 <tr class="th">
-<th width="170">문의한글번호</th>
 <th scope="col">제목</th>
 <th scope="col">문의날짜</th>
 
@@ -63,7 +62,6 @@
 <c:forEach var="question" items="${question}">
 <tr onclick="location.href='getQuestion?questionNumber=${question.questionNumber}'">
 
-<td >${question.probisNumber}</td>
 <td >${question.title}</td>
 <td>${question.calendar}</td>
 </tr>

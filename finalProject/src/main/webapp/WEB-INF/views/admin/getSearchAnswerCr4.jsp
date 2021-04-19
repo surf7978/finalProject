@@ -77,24 +77,29 @@
 
 <thead>
 <tr class="th">
+<!-- 
 <th width="100">답변번호</th>
-<th width="200">내용</th>
+ -->
+<th width="500">내용</th>
 <th scope="col" width="300">날짜</th>
-<th scope="col" width="100">질문번호</th>
+<!-- 
 <th scope="col" width="60">관리</th>
+ -->
 </tr>
 </thead>
 <tbody>
 <c:forEach var="list" items="${viewAll}">
 <tr onclick="location.href='#'">
-
+<!-- 
 <td >${list.answerNumber}</td>
+ -->
 <td >${list.content}</td>
 <td>${list.calendar}</td>
-<td >${list.questionNumber}</td>
+<!-- 
 <td><form action="deleteAnswerCr4?answerNumber=${list.answerNumber}" method="post">
   <input class="delete" type="submit"  value="삭제"></form>
 </td>
+ -->
 </tr>
 </c:forEach>
 
