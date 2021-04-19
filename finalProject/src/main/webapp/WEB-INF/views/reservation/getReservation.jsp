@@ -10,7 +10,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<table border="1">
+<c:if test="${reservation.reservationDate eq null}">
+	<p style="color: red">※조회된 예약 내역이 없습니다※</p>
+	<button type="button" class="updateReservationBtn" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','updateReservation','width=550, height=500')">예약하기</button> 
+</c:if>
+<c:if test="${reservation.reservationDate != null}">
+<table>
 	<tr>
 		<th>예약번호</th>
 		<td>${reservation.reservationNumber}</td>
@@ -32,6 +37,7 @@
 		<td>${reservation.reservationState}</td>
 	</tr>
 </table>
+</c:if>
 <br>
 <button type="button" onclick="window.close()">닫기</button>
 </body>

@@ -278,8 +278,9 @@ public class Controller2 {
 
 	// 반려동물 삭제
 	@RequestMapping("/deleteAnimal")
-	public String deleteAnimal(AnimalVO vo) {
-		animalService.deleteAnimal(vo);
+	public String deleteAnimal(AnimalVO avo, NoteVO nvo) {
+		animalService.deleteAnimal(avo);
+		noteService.deleteAnimalNote(nvo);
 		return "redirect:/getSearchAnimal";
 	}
 

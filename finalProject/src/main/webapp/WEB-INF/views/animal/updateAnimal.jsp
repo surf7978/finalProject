@@ -6,17 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>반려동물 정보 수정</title>
+<link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-	<h3>반려동물 정보 수정</h3>
+	<h3>반려동물 정보 수정</h3><br>
 	<form action="updateAnimal" encType="multipart/form-data" method="post" name="frm">
 	<input type="hidden" name="animalNumber" value="${animal.animalNumber }">
 	<input type="hidden" name="memberId" value="${animal.memberId }">
-	<table border="1">
+	<table class="table2">
 	<tr>
 	<td id="viewImg" rowspan="5"><img src="resources/images/animal/${animal.image }" width="200px" height="200"></td>
 	<th>이름</th>
@@ -89,7 +90,7 @@
 	<th>사진 수정</th>
 	<td><input type="file" name="uploadFile" id="image" size="100%" multiple="multiple"></td>
 	</tr>
-	</table>
+	</table><br>
 	<button type="submit">수정</button>
 	<button type="button" class="deleteAnimal" onclick="location.href='deleteAnimal?animalNumber=${animal.animalNumber }'">삭제</button>
 </form>

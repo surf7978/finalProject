@@ -75,6 +75,13 @@
 	WHERE NOTENUMBER = #{noteNumber}
 	</delete>
 	
+	<!-- 반려동물 삭제시 의료수첩 리스트 삭제 -->
+	<delete id="deleteAnimalNote" parameterType="NoteVO">
+	DELETE FROM NOTE
+	WHERE ANIMALNUMBER = #{animalNumber}
+	</delete>
+	
+	
 	<!-- 의료내역 건수 & 합계 출력 -->
 	<select id="getNoteCount" parameterType="NoteVO" resultType="NoteVO">
 		SELECT COUNT(NOTENUMBER) AS NOTENUMBER

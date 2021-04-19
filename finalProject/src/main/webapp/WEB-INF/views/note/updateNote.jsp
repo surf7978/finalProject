@@ -9,8 +9,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<div style="width:60%;">
-<jsp:include page="../user/myPageSideBar.jsp" />
 	<form id="frm" action="updateNote" method="post">
 	<input type="text" id="noteNumber" name="noteNumber" value="${note.noteNumber }">
 		<table border="1">
@@ -79,10 +77,8 @@
 			})			
 		});
 
-	
-	
+
 	
 	</script>
-</div>
 </body>
 </html>

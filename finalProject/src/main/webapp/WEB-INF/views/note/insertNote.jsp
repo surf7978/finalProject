@@ -9,7 +9,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	var category = {'수술/치료': ['중성화','다리수술', '한방치료', '치과', '안과', '종양수술', '결석제거수술', '탈장수술', '자궁축농증수술', '기타'],
-	                '예방접종' : ['1차 예방접종', '2차 예방접종', '3차 예방접종', '4차 예방접종', '5차 예방접종', '6차 예방접종', '추가 예방접종 1차', '추가 예방접종 2차', '심장사상충', '기생충'],
+	                '예방접종' : ['1차 예방접종', '2차 예방접종', '3차 예방접종', '4차 예방접종', '5차 예방접종', '6차 예방접종', '추가 예방접종 1차', '추가 예방접종 2차', '심장사상충 예방주사'],
 	                '검진/검사': ['건강검진', '혈액검사', '안과검진', '치과검진', '항체가검사', '피부검진', '종양검진', '쿠싱검사', '심장사상충검사', '심장검사', '내시경검사', '슬개골검사'],
 	                '기타': ['구충제', '심장사상충 예방약', '기생충 예방약']};
 		$(function() {
@@ -25,8 +25,6 @@
 </script>
 </head>
 <body>
-<div style="width:60%;">
-<jsp:include page="../user/myPageSideBar.jsp" />
 	<form id="frm" action="insertNote" method="post">
 		<input type="hidden" id="animalNumber" name="animalNumber"
 			value="${animalNumber}">
@@ -60,6 +58,5 @@
 		<button type="submit">등록</button>
 		<button type="button" onclick="window.close()">취소</button>
 	</form>
-</div>
 </body>
 </html>

@@ -42,6 +42,10 @@ public class NoteServiceimpl implements NoteService{
 	public NoteVO getNoteCount(NoteVO vo) {
 		return noteMapper.getNoteCount(vo);
 	}
+	@Override
+	public int deleteAnimalNote(NoteVO vo) {
+		return noteMapper.deleteAnimalNote(vo);
+	}
 
 
 }

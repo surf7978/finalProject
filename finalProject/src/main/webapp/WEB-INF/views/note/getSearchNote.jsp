@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>반려동물 의료수첩</title>
+<link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <script>
 //나이 계산
 $(function(){
@@ -93,8 +94,8 @@ $(function(){
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-<h3>반려동물 의료수첩</h3>
-	<table border="1">
+<h3>반려동물 의료수첩</h3><br>
+	<table class="table2">
 		<tr>
 			<td rowspan="3"><img src="resources/images/animal/${animal.image }" width="200px" height="200"></td>
 			<td colspan="2">${animal.name }(${animal.kind })</td>
@@ -109,8 +110,9 @@ $(function(){
 		</tr>
 	</table>
 	<br>
+	<div class="animalNote">
 	<h4>의료내역</h4>
-	<table border="1">
+	<table class="table2">
 		<tr>
 		<th>의료내역</th>
 		<th>의료일</th>
@@ -127,11 +129,12 @@ $(function(){
 		<td><button type="button" onclick="window.open('updateNote?noteNumber=${no.noteNumber }','updateNote', 'width=800, height=800')">상세조회</button></td>
 		</tr>
 		</c:forEach>
-	</table>
+	</table><br>
 		<button type="button" onclick="window.open('insertNote?animalNumber=${animal.animalNumber }','insertNote', 'width=800, height=800')">의료내역 등록</button>
-<br><br>
-	<h4>생애주기 권장 의료표</h4>
-	<table border="1">
+</div>
+<br>
+	<h4>생애주기 권장 의료표</h4><br>
+	<table class="table3">
 		<tr>
 		<th colspan="2">반려견 예방접종(필수)</th>
 		</tr>
@@ -288,7 +291,7 @@ $(function(){
 			</td>
 			<td>
 			<c:forEach begin="0" end="${note.size() }" var="i">
-			<c:if test="${note[i].category2 eq '심장사상충'}">
+			<c:if test="${note[i].category2 eq '심장사상충 예방주사'}">
 				의료일 : ${note[i].calendar }
 			</c:if>
 			</c:forEach>

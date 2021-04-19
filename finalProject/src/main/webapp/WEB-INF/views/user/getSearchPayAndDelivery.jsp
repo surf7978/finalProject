@@ -14,8 +14,7 @@
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <h3>구매내역 리스트</h3><br>
-<table>
-	<thead>
+<table class="table1">
 	<tr>
 		<th>구매번호</th>
 		<th>분류</th>
@@ -23,11 +22,8 @@
 		<th>구매가격</th>
 		<th>구매상태</th>
 		<th></th>
-		<th></th>
-			
+		<th></th>		
 	</tr>
-	</thead>
-	<tbody>
 	<c:forEach items="${pads }" var="pad">
 	<tr>
 		<td><c:out value="${pad.pndNumber}"/></td>
@@ -61,9 +57,12 @@
 		<button type="button" class="getSearchBuy">상세조회</button>
 		</c:if>
 		<c:if test="${pad.category != '70' }">
+		<c:if test="${pad.buyState != '환불완료' }">
 		<button type="button" class="getReservationBtn" onclick="window.open('getReservation?pndNumber=${pad.pndNumber}','getReservation','width=400, height=300')">예약조회</button>
 		</c:if>
-		
+		</c:if>
+		<c:if test="${pad.buyState eq '환불완료' }">
+		</c:if>
 		</td>
 		<td>
 		<c:if test="${pad.category != '70' }">
@@ -84,7 +83,6 @@
 		
 	</tr>
 	</c:forEach>
-	</tbody>
 </table>
 <br/>
 <button type="button" class="getSearchReservation" onclick="location.href='getSearchReservation?memberId=${loginID}'">캘린더조회</button>
