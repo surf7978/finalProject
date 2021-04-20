@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,7 @@ import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 import com.company.reservation.service.ReservationService;
 import com.company.reservation.service.ReservationVO;
+import com.google.gson.JsonArray;
 
 @Controller
 public class Controller3 {
@@ -303,7 +305,15 @@ public class Controller3 {
 		buyService.insertBuy2(bvo);
 		return "pay/successPay";
 	}
-
+	
+	
+	//장바구니 결제시 다중insert
+	@RequestMapping("/insertCartBuy")
+	public String insertCartBuy(List<BuyVO> list){
+		buyService.insertCartBuy(list);
+		return "pay/successPay";		
+	}
+	
 	// 사업체 결제폼
 	@RequestMapping("/ReserPayInfoForm")
 	public String ReserPayInfoForm(Model model, String resultPrice, String count, IntegratedVO vo,
