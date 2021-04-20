@@ -571,20 +571,25 @@ public class Controller5 {
 		return map;
 	}
 
-	@RequestMapping("/getSearchCalendar")
+	// 마이페이지-사업자-통계 데이터2(donut)
+	@RequestMapping("/getDonutChart")
 	@ResponseBody
-	public List<Map<String,Object>> getSearchCalendar(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
-		// ID 조회
-		bvo.setBusinessId(session.getAttribute("loginID").toString());
-		// DB 조회
+	public List<Map<String, Object>> getDonutChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+		// session ID 조회
+		String id = session.getAttribute("loginID").toString();
+		// ID값 분배
+		bvo.setBusinessId(id);
+		// DB 데이터 조회
 		bvo = businessService.getBusiness(bvo);
-		// 조회값 할당
-		
+		// 조회 후 코드값 분배
+		vo.setCategory(bvo.getBusinessCode());
 		vo.setBusinessNumber(bvo.getBusinessNumber());
-		// DB 리스트 조회 후 값 할당
-		List<Map<String,Object>> map = payAndDeliveryService.getSearchCalendar(vo);
+		// 쿼리 결과 호출
+		// 일별 합계
+		List<Map<String, Object>> map = payAndDeliveryService.getDonutChart(vo);
 		return map;
 	}
+
 	// 마이페이지-사업자-실시간화장진료 페이지
 
 	// 공통

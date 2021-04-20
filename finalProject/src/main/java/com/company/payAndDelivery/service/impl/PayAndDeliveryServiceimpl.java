@@ -76,10 +76,16 @@ public class PayAndDeliveryServiceimpl implements PayAndDeliveryService {
 		return payAndDeliveryMapper.yearsTotal(vo);
 	}
 
-	// 캘린더
+	// 도넛차트
 	@Override
-	public List<Map<String, Object>> getSearchCalendar(PayAndDeliveryVO vo) {
-		return payAndDeliveryMapper.getSearchCalendar(vo);
+	public List<Map<String, Object>> getDonutChart(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.getDonutChart(vo);
+	}
+
+	// 비교차트
+	@Override
+	public List<Map<String, Object>> getAreaChart(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.getAreaChart(vo);
 	}
 
 }

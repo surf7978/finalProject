@@ -16,4 +16,8 @@ public class PayAndDeliveryVO {
 	String buyState;
 	String businessNumber;// 사업자 번호
 	String search;
+
+	// 캘린더용
+	String startDate;
+	String endDate;
 }
