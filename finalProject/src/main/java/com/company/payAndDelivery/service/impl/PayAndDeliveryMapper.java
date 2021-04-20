@@ -25,7 +25,10 @@ public interface PayAndDeliveryMapper {
 
 	public List<PayAndDeliveryVO> getSearchPayAndDelivery99(PayAndDeliveryVO vo); // 관리자용 구매내역 조회
 
+	// 캘린더
+	public List<Map<String, Object>> getSearchCalendar(PayAndDeliveryVO vo);// 캘린더
 	// 결제 내역 차트
+
 	public List<Map<String, Object>> dailyTotal(PayAndDeliveryVO vo);// 일별합계
 
 	public List<Map<String, Object>> monthlyTotal(PayAndDeliveryVO vo);// 월별합계
