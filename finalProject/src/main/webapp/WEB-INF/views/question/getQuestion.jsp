@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +33,16 @@
 	<c:if test="${loginID eq 'admin' }">
 		<button type="button" id="insertAnswer">답장하기</button>
 	</c:if>
+	<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
+	 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+	 user="final" password="a20210409A"/>
+	<sql:query var="rs" dataSource="${ds }">
+	 select * from answer where questionNumber = '${vo.questionNumber}'
+	</sql:query>
+    <c:if test="${not empty rs.rows[0].content }">
+     <br><input class="send" type ="button" style="background-color:#ff6347; color:white;"  value="답변완료"><br><br>
+     <textarea style="width:800px; height: 100px; resize: none;" readonly>${rs.rows[0].content }</textarea>
+    </c:if>
 </div> 
 </body>
 <script>
