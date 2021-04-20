@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- 단건조회 아작스 -->
@@ -234,8 +235,8 @@ hospital.businessNumber : ${hospital.businessNumber}
 	
 	<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
 <h4 id="content22">구매평
-<c:if test="${not empty reservation.reservationDate }">
-<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')">구매평 등록하기</button>
+<c:if test="${not empty reservation.reservationDate && reservation.reviewNumber eq null }">
+<button type="button" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
 </c:if>
 </h4>
 <hr style="align:center; text-align:left; background-color: black;">

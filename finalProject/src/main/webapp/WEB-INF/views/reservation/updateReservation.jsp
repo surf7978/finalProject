@@ -147,7 +147,5 @@ ul li:hover {
 		<button type="button" onclick="window.close()">창 닫기</button>
 	</form>
 	<p style="color: red">※현재날짜 선택시 현재시간보다 이전시간은 예약되지 않습니다※</p>
-
-
 </body>
 </html>
