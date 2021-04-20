@@ -16,6 +16,7 @@
 		, PNDNUMBER
 		, BISNUMBER
 		, RESERVATIONTIME
+		, REVIEWNUMBER
 		FROM RESERVATION
 		WHERE
 		PNDNUMBER=#{pndNumber}
@@ -32,6 +33,7 @@
 		, PNDNUMBER
 		, BISNUMBER
 		, RESERVATIONTIME
+		, REVIEWNUMBER
 		FROM RESERVATION
 		where memberid=#{memberId}
 	</select>
@@ -40,8 +42,7 @@
 	<select id="getSearchReservationCalendar"
 		parameterType="ReservationVO" resultType="map">
 		SELECT OPTIONNAME AS "title"
-		, TO_CHAR(RESERVATIONDATE, 'YYYY-MM-DD')||'T'||RESERVATIONTIME AS
-		"start"
+		, TO_CHAR(RESERVATIONDATE, 'YYYY-MM-DD')||'T'||RESERVATIONTIME AS "start"
 		FROM RESERVATION
 		WHERE MEMBERID=#{memberId}
 		AND
@@ -59,8 +60,7 @@
 		, RESERVATIONSTATE
 		, BUSINESSNUMBER
 		, OPTIONNAME
-		,
-		BISNUMBER
+		, BISNUMBER
 		, RESERVATIONNUMBER
 		FROM REVIEWRESERVATION
 		WHERE BUSINESSNUMBER = #{businessNumber}
@@ -83,13 +83,14 @@
 		SELECT NAME
 		, PNDNUMBER
 		, MEMBERID
-		, RESERVATIONDATE
+		, TO_CHAR(RESERVATIONDATE, 'yyyy-mm-dd') AS RESERVATIONDATE
 		, RESERVATIONTIME
 		, RESERVATIONSTATE
 		, BUSINESSNUMBER
 		, OPTIONNAME
 		, BISNUMBER
 		, RESERVATIONNUMBER
+		, REVIEWNUMBER
 		FROM REVIEWRESERVATION
 		WHERE MEMBERID=#{memberId}
 		AND BISNUMBER=#{bisNumber}
@@ -103,6 +104,14 @@
 		, RESERVATIONTIME = #{reservationTime}
 		, RESERVATIONSTATE = '예약완료'
 		WHERE PNDNUMBER=#{pndNumber}
+	</update>
+	
+	<!-- 구매평등록시 Reservation테이블에 리뷰번호 등록 -->
+	<update id="insertReview2" parameterType="ReservationVO">
+		 UPDATE RESERVATION
+		 SET
+		 REVIEWNUMBER='리뷰등록'
+		 WHERE RESERVATIONNUMBER = #{reservationNumber}
 	</update>
 
 </mapper>
