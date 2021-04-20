@@ -134,7 +134,7 @@ table td {
 				<td>댓글내용</td>
 				<td>작성날짜</td>
 				<td>관리</td>
-			</tr>
+			</tr> 
 	     	<c:forEach items="${rs.rows }" var="list">
 			<tr>
 	     			<td style="width:100px;"><c:set var="TextValue" value="${list.writer}"/>${fn:substring(TextValue,0,1)}<c:forEach begin="2" end="${fn:length(TextValue) }" varStatus="loop">*</c:forEach> &nbsp;&nbsp;&nbsp;</td>
