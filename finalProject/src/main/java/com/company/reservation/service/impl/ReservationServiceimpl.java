@@ -57,5 +57,10 @@ public class ReservationServiceimpl implements ReservationService{
 	public int insertPayReservation(ReservationVO vo) {
 		return ReservationMapper.insertPayReservation(vo);
 	}
+	//리뷰등록시 데이터 업데이트
+	@Override
+	public int insertReview2(ReservationVO vo) {
+		return ReservationMapper.insertReview2(vo);
+	}
 
 }
