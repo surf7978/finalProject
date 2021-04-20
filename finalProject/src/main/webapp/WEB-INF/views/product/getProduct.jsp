@@ -245,10 +245,11 @@ $(document).ready(function() { //function시작
 			</div>
 		</div>
 	</div>
-		<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+
 <h4 id="content22">구매평
+<button type="button" id="insertReviewProduct" onclick="window.open('insertReviewProduct?productNumber=${product.productNumber}','insertReview','width=800, height=800')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
 <c:if test="${not empty reservation.reservationDate && reservation.reviewNumber eq null }">
-<button type="button" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
 </c:if>
 </h4>
 <hr style="align:center; text-align:left; background-color: black;">

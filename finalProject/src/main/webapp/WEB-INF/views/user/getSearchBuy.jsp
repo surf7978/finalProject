@@ -51,9 +51,9 @@
 		<td><c:out value="${buy.phone}"/></td>
 		<td><c:out value="${buy.buyState}"/></td>
 		<c:if test="${buy.buyState !='반품완료' }">
-		<td class="border"><button type="button" onclick="location.href='insertReview'">구매평쓰기</button></td>
+		<td class="border"><button type="button" onclick="window.open('insertReview?'">구매평쓰기</button></td>
 		</c:if>
-	</tr>
+	</tr>onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')"
 	</c:forEach>
 	</tbody>
 </table>
