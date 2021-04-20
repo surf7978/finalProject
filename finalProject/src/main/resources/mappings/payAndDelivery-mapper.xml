@@ -60,15 +60,15 @@
 	<select id="dailyTotal" resultType="map">
 		SELECT
 		TO_CHAR(PAYDATE,
-			<if test="search == '' or search==null ">
-				'yyyy-mm-dd'
-			</if>
+			<!-- 기본값:일별조회 -->
 			<if test="search == 'daily'">
 				'yyyy-mm-dd'		
 			</if>
+			<!-- 월별조회 -->
 			<if test="search == 'monthly'">
 				'yyyy-mm'		
 			</if>
+			<!-- 년별조회 -->
 			<if test="search == 'years'">
 				'yyyy'		
 			</if>

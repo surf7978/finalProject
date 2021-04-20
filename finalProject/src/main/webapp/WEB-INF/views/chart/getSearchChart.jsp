@@ -124,14 +124,14 @@ function openCalendar(){
 
 </head>
 <body>
+	<div id="wrap" style="width:60%;">
+	<jsp:include page="../user/myPageSideBar.jsp" />
 	<!-- start of wrap -->
-	<div id="wrap">
 		<!-- start of searchForm -->
 		<div id="searchForm">
 			<form id="frm" name="frm">
 				<button type="button" id="calBtn">캘린더</button>
 				<select name="search">
-					<option value=""></option>
 					<option value="daily">일별조회</option>
 					<option value="monthly">월별조회</option>
 					<option value="years">년별조회</option>

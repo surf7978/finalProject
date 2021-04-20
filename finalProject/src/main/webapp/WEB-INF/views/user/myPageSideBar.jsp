@@ -10,7 +10,7 @@
 <body>
 <br><br>
 <div style="float:left;">
-	<table border="1">
+	<table border="1" style="margin: 0;">
 			<c:if test="${loginAuth eq 'm' }">
 				<!-- ADMIN 마이페이지 -->
 				<c:if test="${loginID eq 'admin' }">
