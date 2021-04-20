@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>getSearchanswerCategory199</title>
+<title>getUserAnswer</title>
 </head>
 <style>
 	input.write{
@@ -62,7 +62,7 @@
 <c:forEach var="answer" items="${answer}">
 <tr>
 	<td>${answer.writer}</td>
-	<td>${answer.title}</td>
+	<td>${answer.content}</td>
 	<td>${answer.calendar}</td>
 </tr>
 </c:forEach>
