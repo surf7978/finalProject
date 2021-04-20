@@ -56,7 +56,7 @@
 			item.cartCourier = "무료"
 		//if 조건 사용을 위해 태그 분리 및 return을 문장 끝으로
 		var tr =  $("<tr>");
-		tr.append($("<td><input type='checkbox' class='chk' name='check'></td>"));
+		tr.append($("<td><input type='checkbox' class='chk' name='check' checked></td>"));
 		//if 조건에 따라 image루트 변경
 		if(code == '70'){
 			tr.append($("<td>").html("<img src=resources/images/products/"+item.image+">").attr("class","cartImage").trigger("create"))
@@ -238,13 +238,14 @@
 			//총상품금액
 			var sum = 0;
 			$("[name=resultPrice]").each(function(){
-				sum += parseInt($(this).text());
+					sum += parseInt($(this).text());
 			})
 			$("#totalPrice").html(sum-totalCourier);
 			//배송비
 			$("#totalCourier").html(totalCourier);
 			//전체주문금액
-			$("#totalResult").html(parseInt($("#totalCourier").text())+parseInt($("#totalPrice").text()));
+			$("#totalResult").html(sum);
+						
 	}//end of totalForm
 </script>
 <style>
@@ -263,7 +264,7 @@
 				<table>
 					<thead>
 						<tr>
-							<th><input type="checkbox" id="totalCheck"></th>
+							<th><input type="checkbox" id="totalCheck" checked></th>
 							<th colspan="3">상품정보</th>
 							<th>갯수</th>
 							<th>상품금액</th>
