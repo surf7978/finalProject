@@ -8,10 +8,15 @@
 <title>일반회원의 구매내역 상세리스트 조회</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <style>
+ 	#border{
+ 	border-top: hidden;
+ 	border-bottom: hidden; 
+	border-right: hidden;
+ 	}
+ </style>
 </head>
 <body>
-<div style="width:60%;">
-<jsp:include page="../user/myPageSideBar.jsp" />
 	<br><h3>구매내역 상세리스트</h3><br>
 <table border="1" style="width: 900px">
 	<thead>
@@ -28,7 +33,6 @@
 		<th>상세주소</th>
 		<th>전화번호</th>
 		<th>구매상태</th>	
-		<th>구매평</th>	
 		</tr>
 	</thead>
 	<tbody>
@@ -46,11 +50,13 @@
 		<td><c:out value="${buy.address2}"/></td>
 		<td><c:out value="${buy.phone}"/></td>
 		<td><c:out value="${buy.buyState}"/></td>
-		<td><button type="button" class="">구매평쓰기</button></td>
+		<c:if test="${buy.buyState !='반품완료' }">
+		<td class="border"><button type="button" onclick="location.href='insertReview'">구매평쓰기</button></td>
+		</c:if>
 	</tr>
 	</c:forEach>
 	</tbody>
 </table>
-</div>
+	<button type="button" onclick="location.href='getSearchPayAndDelivery'">뒤로가기</button>
 </body>
 </html>

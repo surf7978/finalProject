@@ -15,6 +15,7 @@
 	, BUYSTATE 
 	FROM PAYANDDELIVERY
 	WHERE MEMBERID=#{memberId}
+	ORDER BY PNDNUMBER
 	</select>
 	
 	<!-- 예약하기 버튼눌러서 날짜선택시 PAYANDDELIVERY DB update -->
@@ -28,6 +29,7 @@
 	<select id="getSearchPayAndDelivery99" resultType="PayAndDeliveryVO">
 	SELECT *
 	FROM PAYANDDELIVERY
+	ORDER BY PNDNUMBER
 	</select>
 	
 	<!-- 관리자의 배송정보 입력 -->	
