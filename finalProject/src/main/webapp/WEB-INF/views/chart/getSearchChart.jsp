@@ -143,7 +143,7 @@ function openCalendar(){
 		</div>
 		<!-- end of searchForm -->
 		
-		<div id="chart_div" style="width: 30%;display: inline-block;"></div>
+		<div id="chart_div" style="width: 30%; display: inline-block;"></div>
 		<div id="donutChart"style="width: 30%; display: inline-block;"></div>
 	</div>
 	<!-- end of wrap -->
