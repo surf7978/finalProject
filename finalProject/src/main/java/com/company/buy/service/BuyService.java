@@ -12,4 +12,6 @@ public interface BuyService {
 	
 	//결제 설정 
 	public int insertBuy2(BuyVO vo); //구매상세정보 추가
+	//장바구니 다중insert
+	public int insertCartBuy(List<BuyVO> list);
 }

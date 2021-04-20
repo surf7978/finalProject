@@ -49,5 +49,10 @@ public class BuyServiceimpl implements BuyService{
 	}
 	
 
+	@Override
+	public int insertCartBuy(List<BuyVO> list) {
+		return buyMapper.insertCartBuy(list);
+	}	
+
 	
 }
