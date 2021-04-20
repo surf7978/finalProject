@@ -80,22 +80,22 @@
 		for (i = 0; i < optionNames.length; i++) {
 			td.append(optionNames[i] + "<br>");
 			td2.append(counts[i] + "<br>");
-			td3.append(optionPrices[i] + "<br>");
+			td3.append(optionPrices[i] + "<br>").attr("name","realPrice");
 			sumPrice += optionPrices[i] * counts[i]
 		}
 		//수량
 		tr.append(td, td2, td3);
 		//배송비
 		if (sumPrice < 10000) {
-			tr.append($("<td>").html(item.cartCourier));
+			tr.append($("<td>").html(item.cartCourier).attr("name","cartCourier"));
 		} else {
-			tr.append($("<td>").html("무료"));
+			tr.append($("<td>").html("무료").attr("name","cartCourier"));
 		}
-		//합계
+		//합계금액
 		if (sumPrice < 10000) {
 			sumPrice += 2500;
 		}
-		tr.append($("<td>").html(sumPrice))
+		tr.append($("<td>").html(sumPrice).attr("name","resultPrice"))
 		
 		//.append($("<td>").html(item.count))
 		//단일금액
@@ -201,7 +201,7 @@
 			}//end of for
 			if(y){
 				$.ajax({
-					url:"deleteBCart",
+					url:"deleteCart",
 					data:{cartNumbers:array , memberId : "${sessionScope.loginID}"},
 					//data:$("#frm").serialize(),
 					dataType:"json",
@@ -220,19 +220,25 @@
 	
 	//7.전체합계금액 
 	function totalForm(item){
+		console.log(item)
 		var totalPrice = 0;
 		var totalCourier = 0;
 			for(var i = 0; i < item.length; i++){
-				//금액이 String타입으로 더해짐(int로 변경)
-				totalPrice += parseInt(item[i].optionPrice)
-				if(item[i].cartCourier == '무료'){
+				//옵션금액
+				var realPrice = item[i].optionPrice;
+				//갯수
+				var count = item[i].count;
+				//총상품금액
+				totalPrice += parseInt(realPrice * count);
+				if($($("[name=cartCourier]")[i]).html() == '무료'){
 					 item[i].cartCourier = 0;
-				}
+				}//end of if
+				//배송비
 				totalCourier += parseInt(item[i].cartCourier)
 			}//end of for
+			//전체주문금액
 			var totalResult = totalPrice + totalCourier;
 			//전체리스트 불러올 때 값을 넣어준다
-			//수량은 해보고 결정할 예정
 			//총상품금액
 			$("#totalPrice").html(totalPrice);
 			//배송비
@@ -240,6 +246,7 @@
 			//전체주문금액
 			$("#totalResult").html(totalResult);
 	}//end of totalForm
+	
 </script>
 </head>
 <body>
