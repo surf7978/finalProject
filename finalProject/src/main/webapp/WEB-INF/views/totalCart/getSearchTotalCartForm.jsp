@@ -37,7 +37,6 @@
 			},
 			dataType : "json",
 			success : function(datas){
-				console.log(datas)
 				$.each(datas,function(i,item){
 					//tr태그 script
 					var content = makeTr(item);
@@ -69,7 +68,6 @@
 		//제품명
 		tr.append($("<td>").html(item.productName))
 		//옵션명
-		//.append($("<td>").html(item.optionName))
 		var td = $("<td>");
 		var td2 = $("<td>");
 		var td3 = $("<td>");
@@ -95,17 +93,20 @@
 		if (sumPrice < 10000) {
 			sumPrice += 2500;
 		}
-		tr.append($("<td>").html(sumPrice).attr("name","resultPrice"))
+		tr.append($("<td>").html(sumPrice).attr("name","resultPrice"));
+
+		/* //옵션명
+		.append($("<td>").html(item.optionName))
 		
-		//.append($("<td>").html(item.count))
+		.append($("<td>").html(item.count))
 		//단일금액
-		//.append($("<td>").html(item.optionPrice))
+		.append($("<td>").html(item.optionPrice))
 		//배송비
-		//.append($("<td>").html(item.cartCourier))
+		.append($("<td>").html(item.cartCourier))
 		//합계
-		//.append($("<td>").html(item.optionPrice * item.count).attr("name","resultPrice"))
+		.append($("<td>").html(item.optionPrice * item.count).attr("name","resultPrice")) */
 		//제품일련번호
-		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
+		tr.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
 		 return tr
 	}//end of makeTr
 	
@@ -220,22 +221,17 @@
 	
 	//7.전체합계금액 
 	function totalForm(item){
-		console.log(item)
 		var totalPrice = 0;
 		var totalCourier = 0;
 			for(var i = 0; i < item.length; i++){
-				//옵션금액
-				var realPrice = item[i].optionPrice;
-				//갯수
-				var count = item[i].count;
-				//총상품금액
-				totalPrice += parseInt(realPrice * count);
+				//배송비
 				if($($("[name=cartCourier]")[i]).html() == '무료'){
 					 item[i].cartCourier = 0;
 				}//end of if
 				//배송비
 				totalCourier += parseInt(item[i].cartCourier)
 			}//end of for
+			
 			//전체주문금액
 			var totalResult = totalPrice + totalCourier;
 			//전체리스트 불러올 때 값을 넣어준다
@@ -250,7 +246,6 @@
 			//전체주문금액
 			$("#totalResult").html(parseInt($("#totalCourier").text())+parseInt($("#totalPrice").text()));
 	}//end of totalForm
-	
 </script>
 <style>
 	#wrap td{
