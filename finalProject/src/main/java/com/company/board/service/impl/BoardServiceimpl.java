@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.company.board.service.BoardService;
 import com.company.board.service.BoardVO;
+import com.company.common.PagingVOCr4;
 
 
 @Service
@@ -62,7 +63,7 @@ public class BoardServiceimpl implements BoardService{
 	
 	//자유게시판 전체조회
 	@Override
-	public List<BoardVO> getSearchBoardCategiry1(BoardVO vo) {
+	public List<BoardVO> getSearchBoardCategiry1(PagingVOCr4 vo) {
 	
 		return boardMapper.getSearchBoardCategiry1(vo);
 	}

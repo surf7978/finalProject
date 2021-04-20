@@ -74,16 +74,6 @@
 	</delete>
 
 
-	
-	<!--  1번 자유게시판 조회 -->
-	<select id="getSearchBoardCategiry1" resultType="boardVO"
-        parameterType="boardVO">
-
-        SELECT * FROM BOARD
-        WHERE category=1
-   
-    </select>
-
 
 	<insert id="insertBoard" parameterType="boardVO">
 		  insert into board(BOARDNUMBER
@@ -139,13 +129,13 @@
 	<!-- 리스트 갯수 -->
 	<select id="getCount" resultType="int">
 		SELECT COUNT(*)
-		FROM PRODUCT
+		FROM BOARD
 	</select>
 		<!-- 총 게시글 갯수 출력 -->
 	<select id="countBoard" resultType="int">
 		SELECT COUNT(*) FROM BOARD
 	</select>
-	
+	<!--  2번 자랑하기 조회 -->
 	<select id="getSearchBoardCategiry2" resultType="boardVO"
 		parameterType="boardVO">
 		SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
@@ -155,7 +145,17 @@
 		<!-- end of query -->
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
-
+	
+	<!--  1번 자유게시판 조회 -->
+	<select id="getSearchBoardCategiry1" resultType="boardVO"
+        parameterType="boardVO">
+		SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+		<!-- start of query -->
+        SELECT * FROM BOARD
+        WHERE category=1
+   		<!-- end of query -->
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
+    </select>
 	<!--#################################################################  -->
 	<!--#################################################################  -->
 	

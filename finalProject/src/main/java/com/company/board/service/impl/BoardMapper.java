@@ -4,6 +4,7 @@ package com.company.board.service.impl;
 import java.util.List;
 
 import com.company.board.service.BoardVO;
+import com.company.common.PagingVOCr4;
 
 
 public interface BoardMapper {
@@ -20,7 +21,7 @@ public interface BoardMapper {
 	//--------------------------------
 	public int insertBoard(BoardVO vo);	// 자유게시판 글쓰기
 	public int insertBoard2(BoardVO vo); // 자랑하기 글쓰기
-	public List<BoardVO> getSearchBoardCategiry1(BoardVO vo); // 자유게시판 전체조회
+	public List<BoardVO> getSearchBoardCategiry1(PagingVOCr4 vo); // 자유게시판 전체조회
 	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo); // 자랑하기 전체조회
 	public int getCount(BoardVO vo);// 레코드 조회
 	// 게시물 총 갯수

@@ -120,14 +120,27 @@ public class Controller4 {
 
 
 	// 1번 자유게시판 조회
-	@RequestMapping("/getSearchBoardCategiry1")
-	public String getSearchBoardCategiry1(Model model, BoardVO vo) {
-
+	@GetMapping("/getSearchBoardCategiry1")
+	public String getSearchBoardCategiry1(PagingVOCr4 vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		int total = boardService.countBoard();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
 		model.addAttribute("board", boardService.getSearchBoardCategiry1(vo));
-		System.out.println(vo);
-		return "board/getSearchBoardCategiry1";
-
+		return  "board/getSearchBoardCategiry1";
 	}
+		
+
 	
 	// 1번 자유게시판 단건 조회
 	@GetMapping("/getBoard")
