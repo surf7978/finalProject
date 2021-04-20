@@ -100,6 +100,7 @@
 			td3.append(optionPrices[i] + "<br>");
 			sumPrice += optionPrices[i] * counts[i]
 		}
+
 		//수량
 		tr.append(td, td2, td3);
 		//배송비
