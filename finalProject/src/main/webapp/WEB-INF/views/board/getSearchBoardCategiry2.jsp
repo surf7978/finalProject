@@ -80,8 +80,7 @@
 <body>
 <div id="contents"> 
 	<h1 >자랑하기</h1> 
-	<div id="pro_location"> 
-	</div>
+
 	<div id="show"> 
 	
 	</div>
