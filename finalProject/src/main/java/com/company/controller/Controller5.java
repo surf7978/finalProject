@@ -64,13 +64,12 @@ import com.company.review.service.ReviewVO;
  * 21.04.16 장바구니 4차(채크박스) 
  * 21.04.17 장바구니 5차(하단 총액부분)
  * 21.04.19 장바구니 6차 수정(단건 삭제 ok, 여러건 삭제, 전체합계금액, 데이터 값 정상 출력),결제내역차트 1차 수정
- * 21.04.20 
+ * 21.04.20 결제내역차트 1차 수정 
  * 
  */
 @Controller
 public class Controller5 {
 
-	// start of beans
 	@Autowired
 	BusinessService businessService;
 
@@ -81,17 +80,18 @@ public class Controller5 {
 	AnswerService answerService;
 
 	@Autowired
-	BCartService bCartService;
-	// 사업자
-	@Autowired
 	CafeService cafeService;
 
+	// 사업체 통합
 	@Autowired
 	IntegratedService integratedService;
 
 	// 장바구니
 	@Autowired
 	CartService cartService;
+
+	@Autowired
+	BCartService bCartService;
 
 	@Autowired
 	ReservationService reservationService;
