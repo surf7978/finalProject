@@ -2,7 +2,9 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,10 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
+import com.company.board.service.BoardSearchVO;
 import com.company.board.service.BoardService;
 import com.company.board.service.BoardVO;
 import com.company.common.FileRenamePolicy;
+import com.company.common.Paging;
 import com.company.common.PagingVOCr4;
+import com.company.eventAndNotice.service.EventAndNoticeSearchVO;
 import com.company.eventAndNotice.service.EventAndNoticeService;
 import com.company.eventAndNotice.service.EventAndNoticeVO;
 import com.company.member.service.MemberService;
@@ -56,6 +61,7 @@ public class Controller4 {
 		return "admin/getSearchCr4";
 
 	}
+
 
 	// ####★★맴버에 관한 컨트롤러★★
 	// 맴버전체조회
@@ -114,14 +120,27 @@ public class Controller4 {
 
 
 	// 1번 자유게시판 조회
-	@RequestMapping("/getSearchBoardCategiry1")
-	public String getSearchBoardCategiry1(Model model, BoardVO vo) {
-
+	@GetMapping("/getSearchBoardCategiry1")
+	public String getSearchBoardCategiry1(PagingVOCr4 vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		int total = boardService.countBoard();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
 		model.addAttribute("board", boardService.getSearchBoardCategiry1(vo));
-		System.out.println(vo);
-		return "board/getSearchBoardCategiry1";
-
+		return  "board/getSearchBoardCategiry1";
 	}
+		
+
 	
 	// 1번 자유게시판 단건 조회
 	@GetMapping("/getBoard")
@@ -222,25 +241,36 @@ public class Controller4 {
 	//////////////////////////////////////////////////////////////
 	// 2번 자랑하기게시판으로 가기
     //////////////////////////////////////////////////////////////
+	//자랑하기게시판으로 가기
 
-	// 2번 자랑하기게시판리스트   확인
+	@RequestMapping("/getSearchBoardCategiry2Form")
+	public String getSearchBoardCategiry2Form(BoardVO vo) {
+		return "board/getSearchBoardCategiry2";
+		
+	}
+
+	// 2번 자랑하기게시판리스트(ajax)
 	@RequestMapping("/getSearchBoardCategiry2")
 	@ResponseBody
-	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo) {
-
-		return boardService.getSearchBoardCategiry2(vo);
-	}
-
+	public Map<String, Object> getSearchBoardCategiry2(BoardSearchVO vo, Paging paging) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 1. 페이지 설정
+		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
+		paging.setPageSize(10); // 보이는 페이지 번호
+		// 2.초기페이지 설정
+		if (paging.getPage() == null)
+			paging.setPage(1);
+		// 3. 값 추가
+		paging.setTotalRecord(boardService.getCount(vo));
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		List<BoardVO> list = boardService.getSearchBoardCategiry2(vo);
+		map.put("paging", paging);
+		map.put("list", list);
+		//
+		return map;
+	}// end of getSearchBoardCategiry2
 	
-	//자랑하기게시판으로 가기
-	@RequestMapping("/getSearchBoardCategiry2Form")
-	public String getSearchBoardCategiry2Form(Model model, BoardVO vo) {
-
-		model.addAttribute("board", boardService.getSearchBoardCategiry2(vo));
-		System.out.println(vo);
-		return "board/getSearchBoardCategiry2";
-
-	}
 
 	// 2번 자랑하기 단건 조회
 	@GetMapping("/getBoard2")
@@ -334,21 +364,32 @@ public class Controller4 {
 	// 1번 이벤트 전체조회로 가기
 
 	@RequestMapping("/getSearchEventAndNoticeSelectForm")
-	public String getSearchEventAndNoticeSelectForm(Model model, EventAndNoticeVO vo) {
-
-		model.addAttribute("getSearchEventAndNoticeSelect", eventAndNoticeService.getSearchEventAndNoticeSelect(vo));
-		System.out.println(vo);
+	public String getSearchEventAndNoticeSelectForm( EventAndNoticeVO vo) {
 		return "eventAndNotice/getSearchEventAndNoticeSelect";
 
 	}
 
-	// 1번 이벤트게시판리스트
+	// 1번 이벤트게시판리스트(ajax)
 	@RequestMapping("/getSearchEventAndNoticeSelect")
 	@ResponseBody
-	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect(EventAndNoticeVO vo) {
-
-		return eventAndNoticeService.getSearchEventAndNoticeSelect(vo);
-	}
+	public Map<String , Object> getSearchEventAndNoticeSelect(EventAndNoticeSearchVO vo , Paging paging){
+	Map<String , Object> map = new HashMap<String , Object>();
+	// 1.페이지 설정
+	paging.setPageUnit(6);	// 한페이지에 출력되는 레코드 건수
+	paging.setPageSize(10);	// 보이는 페이지 번호
+	// 2.초기페이지 설정
+	if(paging.getPage() == null)
+		paging.setPage(1);
+	// 3.값 추가
+	paging.setTotalRecord(eventAndNoticeService.getCount(vo));
+	vo.setStart(paging.getFirst());
+	vo.setEnd(paging.getLast());
+	List<EventAndNoticeVO> list = eventAndNoticeService.getSearchEventAndNoticeSelect(vo);
+	map.put("paging", paging);
+	map.put("list",list);
+	
+	return map;
+	}// end of getSearchEventAndNoticeSelect
 
 	// 이벤트 등록
 
@@ -436,10 +477,24 @@ public class Controller4 {
 		eventAndNoticeService.updateEventAndNotice1(vo);
 		return "redirect:/getSearchEventAndNoticeSelectForm?category=1";
 	}
-
+	
 	// 공지사항 게시판 선택(전체조회)
-	@RequestMapping("/getSearchEventAndNoticeSelect2")
-	public String getSearchEventAndNoticeSelect2(EventAndNoticeVO vo, Model model) {
+	@GetMapping("getSearchEventAndNoticeSelect2")
+	public String boardList(PagingVOCr4 vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		int total = eventAndNoticeService.countBoard();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
 		model.addAttribute("getSearchEventAndNoticeSelect2", eventAndNoticeService.getSearchEventAndNoticeSelect2(vo));
 		return "eventAndNotice/getSearchEventAndNoticeSelect2";
 	}
