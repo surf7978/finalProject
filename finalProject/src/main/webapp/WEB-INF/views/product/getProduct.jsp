@@ -8,16 +8,26 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() { //function시작			
 		//결제페이지로 이동
 		$("#contents").on("click","#b_btn",function() {
 							var resultPrice = $("[name=resultPrice]").text();
-							var count = $("[name=count]").val();
+							var count = [];
 							var pro = $("#pro_result").text();
 							var loginId = $("[name=memberId]").val();
+							var optionNameList =[];
+							$("[name=countList]").each(function(){
+								count.push($(this).val());
+							});
+							$("[name=optionNameList]").each(function(){
+								optionNameList.push($(this).text());
+							});
+							var optionPriceList =[];
+							$("[name=optionPriceList]").each(function(){
+								optionPriceList.push($(this).val());
+							});
 							//상품선택 로그인 체크
 							if (pro == "") {
 								alert("상품을 선택해주세요");
@@ -31,7 +41,7 @@ $(document).ready(function() { //function시작
 							} else {
 								location.href = "PayInfoForm?productNumber=${product.productNumber }&resultPrice="
 										+ resultPrice
-										+ "&memberId=${loginID}&count=" + count;
+										+ "&memberId=${loginID}&countList=" + count + "&optionNameList=" + optionNameList + "&optionPriceList=" + optionPriceList;										
 							}
 						});
 		//삭제버튼 클릭
@@ -56,7 +66,7 @@ $(document).ready(function() { //function시작
 						}else if(optionPrice != "" && navlen != 0){
 							var fat = true;
 							$("#pro_show nav").each(function(i){
-								var option = $("#pro_show nav").find("div").eq(i).text();
+								var option = $("#pro_show nav").find("[name=optionNameList]").eq(i).val();
 								if(option == optionName){
 									alert("이미 선택한 상품입니다.");
 									fat = false;
@@ -87,7 +97,6 @@ $(document).ready(function() { //function시작
 			}
 		})
 });//function of end
-
 	//장바구니에 등록
 	function insertCart() {
 		$("#btnCart").on("click", function() {
@@ -117,8 +126,8 @@ $(document).ready(function() { //function시작
 		result.empty();
 		var sum = 0;
 		for (var i = 0; i < nav.length; i++) {
-			var count = $(nav).eq(i).find("[name=count]").val();
-			var price = $(nav).eq(i).find("p").text();
+			var count = $(nav).eq(i).find("[name=countList]").val();
+			var price = $(nav).eq(i).find("[name=optionPriceList]").val();
 			sum += (count * price);
 		}
 		result.text(sum);
@@ -127,27 +136,26 @@ $(document).ready(function() { //function시작
 	//옵션선택function
 	function optionSelect(){
 		var optionPrice = $("#optionName option:selected").val();
+		var price = optionPrice.replace(/\s/gi, "");
 		var optionName = $("#optionName option:selected").text();
 		var navlen = $("#pro_show").find("nav").length;
-
+		var area = $("<textarea>").attr({"name":"optionNameList", "readonly":"readonly"}).css({"border":"none","height":"auto","width":"100%","overflow":"hidden"}).text(optionName);
 		var nav = $("<nav>").css({
 			"width" : "100%",
 			"position":"relative",
 			"margin-bottom":"10px"
 		}).attr("id", "proname")
 				.append(
-						$("<div>").text(optionName).css({"margin":"0","padding":"0","width":"95%"})
-								.append("<hr>"));
+						$("<div>").append(area).css({"margin":"0","padding":"0","margin-bottom":"10px","width":"95%"}));
 		var input = $("<input>").attr({
 			"type" : "number",
 			"min" : "1",
 			"value" : "1",
-			"name" : "count"
-		});
+			"name" : "countList"
+		}).css("width","50px");
 		var a = $("<a>").attr("id","close").css({"position":"absolute","top":"10px", "right":"10px","cursor":"pointer"}).text("x")
 		var inval = $(input).val();
-		var strong = $("<p>").css("text-align", "right")
-				.text(optionPrice);
+		var strong = $("<p>").css({"float":"right","display":"inline-block"}).append($("<input>").attr({"name":"optionPriceList","readonly":"readonly"}).css({"border":"none","text-align":"right","width":""}).val(price));
 		$(nav).append(input, strong, a);
 		$("#pro_show").append(nav);
 		$("#pro_result").empty();
@@ -176,8 +184,6 @@ $(document).ready(function() { //function시작
 				<form id="frm" name="frm">
 				<input type="hidden" name="image" value="${product.t_image }">
 					<input value="${product.productNumber }" type="hidden" name="productNumber"> 
-					<input value="${product.productName }" type="hidden" name="productName"> 
-					<input value="${product.optionPrice }" type="hidden" name="optionPrice"> 
 					<input value="2500" type="hidden" name="cartCourier">
 					<c:if test="${not empty loginID }">
 						<input value="${loginID }" type="hidden" name="memberId">
@@ -186,7 +192,7 @@ $(document).ready(function() { //function시작
 						<li><img src="resources/images/products/${product.t_image }"></li>
 						<li>
 							<div>
-								<h3><textarea name="optionName" readonly="readonly" style="border:none;width:100%;overflow:hidden;">${product.productName }</textarea></h3>
+								<h3><textarea name="productName" readonly="readonly" style="border:none;width:100%;overflow:hidden;">${product.productName }</textarea></h3>
 							</div>
 							<div>
 								<dl>
@@ -205,10 +211,10 @@ $(document).ready(function() { //function시작
 								</dl>
 							</div>
 							<div>
-								<select name="optionName" id="optionName">
+								<select id="optionName">
 									<option value="">상품선택</option>
 									<c:forTokens items="${product.optionName}" delims="," var="optionName" varStatus="num">
-										<option value="${optionPrice[num.index]}">${optionName }(${optionPrice[num.index]}원)</option>
+										<option value="${optionPrice[num.index]}">${optionName }</option>
 									</c:forTokens>
 								</select>
 							</div>

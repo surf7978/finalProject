@@ -16,15 +16,18 @@
 			MEMBERID,
 			PRODUCTNUMBER
 		)VALUES(
-			TOTALCART_SEQ.NEXTVAL,
-			#{image},
-			#{productName},
-			#{optionName},
-			#{optionPrice},
-			#{count},
-			#{cartCourier},
-			#{memberId},
-			#{productNumber}
+			TOTALCART_SEQ.NEXTVAL
+			,#{image}
+			,#{productName}
+			<if test="optionName != null">,#{optionName}</if>
+			<if test="optionPrice != null">,#{optionPrice}</if>
+			<if test="count != null">,#{count}</if>
+			<if test="optionNameList != null"><foreach item="opname" collection="optionNameList" open=",'" separator="," close="'" >${opname}</foreach></if>
+			<if test="optionPriceList != null"><foreach item="opprice" collection="optionPriceList"  open=",'" separator="," close="'" >${opprice}</foreach></if>
+			<if test="countList != null"><foreach item="count" collection="countList" open=",'" separator="," close="'" >${count}</foreach></if>
+			,#{cartCourier}
+			,#{memberId}
+			,#{productNumber}
 		)
 	</insert>
 	<!-- 장바구니 수정 -->
