@@ -47,6 +47,12 @@
 		ORDER BY ANSWERNUMBER
 	</select>
 	
+	<!-- 마이페이지-유저-답변 받은 내역 -->
+	<select id="getUserAnswer" resultType="answerVO">
+		SELECT * FROM ANSWER
+		WHERE MEMBERID = #{memberId}
+	</select>
+	
 <!-- 김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영김찬영 -->
 	
 	

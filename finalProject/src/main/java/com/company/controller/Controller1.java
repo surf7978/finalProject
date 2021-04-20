@@ -32,6 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
+import com.company.answer.service.AnswerService;
+import com.company.answer.service.AnswerVO;
 import com.company.board.service.BoardService;
 import com.company.board.service.BoardVO;
 import com.company.business.service.BusinessService;
@@ -166,24 +168,24 @@ public class Controller1 {
 			if(memberService.getViewMember(vo).getMemberId().equals((String)userInfo.get("nickname"))) {
 				return "redirect:/";
 			}else {
-				vo.setPassword(" ");
-				vo.setEmail(" ");
+				vo.setPassword("");
+				vo.setEmail("");
 				vo.setName((String)userInfo.get("nickname"));
-				vo.setPost(" ");
-				vo.setAddress(" ");
-				vo.setAddress2(" ");
-				vo.setPhone(" ");
+				vo.setPost("");
+				vo.setAddress("");
+				vo.setAddress2("");
+				vo.setPhone("010-0000-0000");
 				memberService.insertMember(vo);
 				return "redirect:/";
 			}
 		}else {
-			vo.setPassword(" ");
-			vo.setEmail(" ");
+			vo.setPassword("");
+			vo.setEmail("");
 			vo.setName((String)userInfo.get("nickname"));
-			vo.setPost(" ");
-			vo.setAddress(" ");
-			vo.setAddress2(" ");
-			vo.setPhone(" ");
+			vo.setPost("");
+			vo.setAddress("");
+			vo.setAddress2("");
+			vo.setPhone("010-0000-0000");
 			memberService.insertMember(vo);
 			return "redirect:/";
 		}
@@ -647,10 +649,19 @@ public class Controller1 {
 		model.addAttribute("business", businessService.getBusinessId(vo2));
 		return "empty/reviewAndQuestion/insertQuestion2";
 	}
-	
+	//자주하는 질문 페이지 이동
 	@GetMapping("/FAQ")
 	public String FAQ() {
 		return "eventAndNotice/FAQ";
+	}
+	
+	@Autowired AnswerService answerService;
+	//마이페이지-유저-답변 받은 내역
+	@GetMapping("/userAnswer")
+	public String userAnswer(AnswerVO vo, HttpSession session, Model model) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
+		model.addAttribute("answer", answerService.getUserAnswer(vo));
+		return "myPage/userAnswer";
 	}
 	
 	@Autowired ProductService productService;

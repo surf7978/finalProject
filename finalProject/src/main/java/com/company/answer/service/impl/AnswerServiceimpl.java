@@ -113,6 +113,12 @@ public class AnswerServiceimpl implements AnswerService{
 	public List<AnswerVO> getSearchAnswerCr4(PagingVOCr4 vo) {
 		return answerMapper.getSearchAnswerCr4(vo);
 	}
+
+	//마이페이지-유저-답변 받은 내역
+	@Override
+	public AnswerVO getUserAnswer(AnswerVO vo) {
+		return answerMapper.getUserAnswer(vo);
+	}
 	
 
 
