@@ -116,7 +116,7 @@ public class AnswerServiceimpl implements AnswerService{
 
 	//마이페이지-유저-답변 받은 내역
 	@Override
-	public AnswerVO getUserAnswer(AnswerVO vo) {
+	public List<AnswerVO> getUserAnswer(AnswerVO vo) {
 		return answerMapper.getUserAnswer(vo);
 	}
 	
