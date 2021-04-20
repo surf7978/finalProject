@@ -233,25 +233,33 @@
 			}//end of for
 			
 			//전체주문금액
-            var sum = 0;
-            $("[name=resultPrice]").each(function(){
-                sum += parseInt($(this).text());
-            })//end of each
-      	    //총상품금액
-            $("#totalPrice").html(sum-totalCourier);
-            //배송비
-            $("#totalCourier").html(totalCourier);
-            //전체주문금액
-            $("#totalResult").html(parseInt($("#totalCourier").text())+parseInt($("#totalPrice").text()));
+			var totalResult = totalPrice + totalCourier;
+			//전체리스트 불러올 때 값을 넣어준다
+			//총상품금액
+			var sum = 0;
+			$("[name=resultPrice]").each(function(){
+				sum += parseInt($(this).text());
+			})
+			$("#totalPrice").html(sum-totalCourier);
+			//배송비
+			$("#totalCourier").html(totalCourier);
+			//전체주문금액
+			$("#totalResult").html(parseInt($("#totalCourier").text())+parseInt($("#totalPrice").text()));
 	}//end of totalForm
 </script>
+<style>
+	#wrap td{
+		text-align:center;
+	}
+</style>
 </head>
 <body>
+	<br>
 	<div id="wrap">
 		<form id="frm" name="frm">
 			<div id="totalCart">
-				<strong>장바구니</strong>
-				<small>장바구니에 담아놓은 상품은 3개월 동안 보관 후 자동 삭제됩니다.</small>
+				<strong>장바구니</strong><br>
+				<small>담아놓은 상품은 3개월 동안 보관 후 자동 삭제됩니다.</small>
 				<table>
 					<thead>
 						<tr>

@@ -20,6 +20,7 @@ public class BuyVO {
 	String address;
 	String address2;
 	String phone;
+	String reviewNumber;
 	
 	//db추가 
 	String[] countList;
