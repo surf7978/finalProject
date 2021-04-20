@@ -5,26 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>장바구니 리스트</title>
-<link rel="stylesheet" href="resources/css/style2.css" type="text/css">
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	//시작시 화면
 	$(function() {
 		//1.전체 리스트 조회
 		getSearchTotalCart();
-		//2.삭제
-		deleteCart();
-		//3.쇼핑하러가기
+		//2.쇼핑하러가기
 		shopping();
-		//4.결제하러가기
+		//3.결제하러가기
 		pay();
-		//5.전체 체크박스
+		//4.전체 체크박스
 		totalCheckBox();
-		//6.한개라도 채크해제시 전체 채크박스 해제
+		//5.한개라도 채크해제시 전체 채크박스 해제
 		oneCheck();
-		//7.채크된 것들 일괄삭제
+		//6.채크된 것들 일괄삭제
 		totalCheckDelete();
-		//전체 합계금액(총상품금액,배송비,전체주문금액)
+		//7.전체 합계금액(총상품금액,배송비,전체주문금액)
 	})//end of function
 	
 	
@@ -51,46 +49,38 @@
 		})//end of ajax
 	}//end of getSearchTotalCart
 	
-	//2.삭제
-	function deleteCart(){
-		$("tbody").on("click","#deleteCart",function(){
-			tr =$(this).closest("tr");
-			var y = confirm("장바구니에서 삭제 하시겠습니까?");
-			var seqVal = $(this).closest("tr").find("#seq").val();
-			if (y){
-				$.ajax({
-					url:"deleteBCart",
-					data:{cartNumber:seqVal , memberId : "${sessionScope.loginID}"},
-					dataType:"json",
-					//callback
-					success:removeTr
-				})//end of ajax
-			}//end of if
-		})//end of deleteCart
-	}//end of deleteCart
-	
 	//tr태그 
 	function makeTr(item){
+		//분류코드
+		var code = item.productNumber.substr(0,2);
 		if(item.cartCourier == null || item.cartCourier == "0")
 			item.cartCourier = "무료"
-		return $("<tr>")
-		.append($("<td><input type='checkbox' class='chk' name='check'></td>"))
-		.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
+		//if 조건 사용을 위해 태그 분리 및 return을 문장 끝으로
+		var tr =  $("<tr>");
+		tr.append($("<td><input type='checkbox' class='chk' name='check'></td>"));
+		//if 조건에 따라 image루트 변경
+		if(code == '70'){
+			tr.append($("<td>").html("<img src=resources/images/products/"+item.image+">").attr("class","cartImage").trigger("create"))
+		}else if(code == '20'){
+			tr.append($("<td>").html("<img src=resources/images/hospital/"+item.image+">").attr("class","cartImage").trigger("create"))
+		}else{
+			tr.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
+		}
 		//제품명
-		.append($("<td>").html(item.productName))
+		tr.append($("<td>").html(item.productName))
 		//옵션명
 		.append($("<td>").html(item.optionName))
 		//수량
 		.append($("<td>").html(item.count))
-		//금액
+		//단일금액
 		.append($("<td>").html(item.optionPrice))
 		//배송비
 		.append($("<td>").html(item.cartCourier))
-		//합계?
-		.append($("<td>").html(item.optionPrice))
-		.append($("<td>").html("<button type='button' id='deleteCart'>삭제</button>"))
+		//합계
+		.append($("<td>").html(item.optionPrice * item.count).attr("name","resultPrice"))
 		//제품일련번호
 		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
+		 return tr
 	}//end of makeTr
 	
 	//tr태그 지우기
@@ -108,7 +98,7 @@
 		}//end of if
 	}//end of removeTr
 	
-	//3.쇼핑
+	//2.쇼핑
 	function shopping(){
 		$("#shopping").on("click", function() {
 			var y = confirm("쇼핑을 계속하시겠습니까?");
@@ -120,18 +110,30 @@
 		});//end of shopping
 	}//end of shopping
 	
-	//4.결제
+	//3.결제
 	function pay(){
 		$("#pay").on("click", function() {
-			var y = confirm("결제하시겠습니까?");
-			if(y){
-				//location.href="";
-			}else{
-				return false;
+			var totalResult = $("#totalResult").text();
+			var count = $("[name=count]").val();
+			//체크박스 값 확인
+			var check = $(".chk:checked");
+			//상품선택,로그인 체크
+			if (check.length == 0) {
+				alert("상품을 선택해주세요");
+			} else if ("${sessionScope.loginID}" == '') {
+				var result = confirm("로그인페이지로 이동하시겠습니까?");
+				if (result == true) {
+					location.href = "loginForm";
+				} else {
+					return false;
+				}
+			} else {
+				location.href = "PayInfoForm?productNumber=${product.productNumber}&resultPrice="
+						+ totalResult + "&memberId=${loginID}&count=" + count;
 			}
 		})//end of pay
 	}//end of pay
-	//5.전체 채크박스
+	//4.전체 채크박스
 	function totalCheckBox(){
 		$("#totalCheck").on("click",function(){
 			if($("#totalCheck").is(":checked")){
@@ -142,7 +144,7 @@
 		})//end of totalCheck
 	}//end of totalCheckBox
 	
-	//6.한개라도 채크해제시 전체 채크박스 해제
+	//5.한개라도 채크해제시 전체 채크박스 해제
 	function oneCheck(){
 		$("#totalCart").on("click",".chk",function(){
 				var is_checked = true; 
@@ -153,7 +155,7 @@
 		})//end of totalCart
 	}//end of oneCheck
 		
-	//7.채크된 것들 삭제
+	//6.채크된 것들 일괄삭제
 	function totalCheckDelete(){
 		$("#totalCart").on("click","#totalDelete",function(){
 			var y = confirm("선택하신 상품을 장바구니에서 삭제 하시겠습니까??");
@@ -190,7 +192,7 @@
 		})//end of totalCart
 	}//end of totalCheckDelete
 	
-	//전체합계금액 
+	//7.전체합계금액 
 	function totalForm(item){
 		var totalPrice = 0;
 		var totalCourier = 0;
@@ -200,7 +202,7 @@
 				if(item[i].cartCourier == '무료'){
 					 item[i].cartCourier = 0;
 				}
-				totalCourier += item[i].cartCourier
+				totalCourier += parseInt(item[i].cartCourier)
 			}//end of for
 			var totalResult = totalPrice + totalCourier;
 			//전체리스트 불러올 때 값을 넣어준다
@@ -229,7 +231,6 @@
 							<th>상품금액</th>
 							<th>배송비</th>
 							<th>합계금액</th>
-							<th>삭제</th>
 						</tr>
 					</thead>
 					<tbody id="totalCartTbody"></tbody>
@@ -239,13 +240,13 @@
 			<div id="totalValue">
 				<table id="totalTbl">
 					<tr>
-						<td rowspan=3><h2>전체합계금액</h2></td>
+						<td rowspan = 3><h2>전체합계금액</h2></td>
 					    <td>총상품금액</td>
 					    <td><span id = "totalPrice"></span></td>
 					</tr>
 					<tr>
 						<td>배송비</td>
-						<td><span id="totalCourier"></span></td>
+						<td><span id = "totalCourier"></span></td>
 					</tr>
 					<tr>
 						<td>전체주문금액</td>
@@ -253,8 +254,8 @@
 					</tr>
 				</table>
 			</div>
-			<button type="button" id="pay">주문결제하기</button>
 			<button type="button" id="shopping">쇼핑계속하기</button>
+			<button type="button" id="pay">주문결제하기</button>
 		</form>
 	</div>
 </body>

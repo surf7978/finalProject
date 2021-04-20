@@ -22,7 +22,7 @@
 					//idx의 의미:각각의 Object
 					var location = idx.location;
 					var input = $("<input>").attr({
-						type : "checkbox",
+						type : "radio", //체크박스 속성 곂쳐서 라디오로 함
 						value : location,
 						id : idx.value,
 						name:"searchLocation",
@@ -33,13 +33,96 @@
 				})//end of each
 			}//end of success
 		});//enf of ajax
-		$(".con").on("click","input[type=checkbox]",function(){
+		$(".con").on("click","input[type=radio]",function(){
 			var val = $(this).val();
 			//console.log(val);
-			getSearchHospital99(1);                         //여기에 지역별 검색하는 방법 구현해야함
-															//다른 컨트롤러명으로 했지만(getSearchHospitalLocation) 충돌나서 안됨 
+			getSearchHospitalLocation(1, val);  //여기에 지역별 검색하는 방법 구현
 		})//end of input
 	}//enf of checkbox
+	
+	function getSearchHospitalLocation(p, val) {
+		/* 리스트 ajax */
+		var category1= $("#pro_location ul li a.after").text();
+		console.log(category1);
+		var category2 = [];
+		$("input[type=checkbox]:checked").each(function(){
+			category2.push($(this).val());
+		});
+		console.log(category2);
+		$.ajax({
+			url : "getSearchHospitalLocation",
+			type : "Post",
+			data : {
+				page : p,
+				category1 : category1,
+				categoryList : category2,
+				location : val
+			},
+			dataType : "JSON",
+			success : function(datas) {
+				/* ul태그 선언 */
+				var ul = $("<ul>");
+				/* div#show */
+				$("#show").empty();
+				$("#show").append(ul);
+				var response = datas.list;
+				console.log(response);
+				$(response).each(
+						function(i) {
+							var hospitalNumber = response[i].seq;
+							var t_img = response[i].t_image;
+
+							var li = $("<li>");
+							
+							var input = $("<input>").attr({
+								"value" : hospitalNumber,
+								"type" : "hidden",
+								"name" : "hospitalNumber"
+							});
+
+							var div = $("<div>").attr("class", "hospital_img")
+									.append(
+											$("<img>").attr(
+													"src",
+													"resources/images/hospital/"
+															+ t_img));
+							var nav = $("<nav>");
+							var strong = $("<strong>").text(
+									response[i].name);
+							var p = $("<p>")
+									.text(response[i].price + "원");
+							$(nav).append(strong, p);
+							$(li).append(input, div, nav);
+							$(ul).append(li);
+						})
+				//paging버튼
+				$("#paging").empty();
+				var totalRecord = datas.paging.totalRecord;
+				var lastPage = datas.paging.lastPage;
+				var page = datas.paging.page;
+				var pageSize = datas.paging.pageSize;
+				var endPage = datas.paging.endPage;
+				var startPage = datas.paging.startPage;
+				if (startPage > 1) {
+					$("#paging").append(
+							"<a href='#' onclick='getSearchHospital99("
+									+ (startPage - 1) + ")'>" + "&laquo;"
+									+ "</a>");
+				}
+				for (i = startPage; i <= endPage; i++) {
+					$("#paging").append(
+							"<a href='#' onclick='getSearchHospital99(" + (i)
+									+ ")'>" + i + "</a>");
+				}
+				if (lastPage > endPage) {
+					$("#paging").append(
+							"<a href='#' onclick='getSearchHospital99("
+									+ (endPage + 1) + ")'>" + "&raquo;"
+									+ "</a>");
+				}
+			}//end success
+		}); //end of ajax
+	}
 	
 	function getSearchHospital99(p) {
 		/* 리스트 ajax */
