@@ -42,6 +42,11 @@ public class BuyServiceimpl implements BuyService{
 	public List<BuyVO> getBuy(BuyVO vo) {
 		return buyMapper.getBuy(vo);
 	}
+
+	@Override
+	public int insertReview3(BuyVO vo) {
+		return buyMapper.insertReview3(vo);
+	}
 	
 
 	

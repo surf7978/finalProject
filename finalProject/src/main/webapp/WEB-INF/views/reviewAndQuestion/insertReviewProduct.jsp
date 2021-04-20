@@ -10,15 +10,18 @@
 <body>
 <h3>쇼핑몰 구매평 등록</h3>
 <form action="insertReviewProduct" method="post">
-<select class="probisNumber" name="probisNumber">
+<input type="hidden" id="memberId" name="memberId" value="${loginID }">
+<input type="text" id="probisNumber" name="probisNumber" value="${buy[0].productNumber }">
+<select id="buyNumber" name="buyNumber">
 <c:forEach items="${buy }" var="buy">
-	<option value="${buy.buyNumber }">${buy.buyNumber }, ${buy.optionName }</option>
+	<option value="${buy.buyNumber }">${buy.buyNumber }, ${buy.optionName } </option>
 </c:forEach>
 </select>
-<table>
+
+<table border="1">
 <tr>
 <th>작성자</th>
-<td><input type="text" id="writer" name="writer" value="" readonly="readonly"></td>
+<td><input type="text" id="writer" name="writer" value="${name }" readonly="readonly"></td>
 </tr>
 <tr>
 <th>제목</th>

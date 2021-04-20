@@ -16,4 +16,9 @@ public class PayAndDeliveryVO {
 	String buyState;
 	String businessNumber;// 사업자 번호
 	String search;
+	
+	// paging
+	Integer page = 1;  
+	Integer start = 1;
+	Integer end = 10;
 }

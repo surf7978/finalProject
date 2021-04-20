@@ -245,57 +245,5 @@ $(document).ready(function() { //function시작
 			</div>
 		</div>
 	</div>
-<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
-
-<h4 id="content22">구매평
-<button type="button" id="insertReviewProduct" onclick="window.open('insertReviewProduct?productNumber=${product.productNumber}','insertReview','width=800, height=800')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
-<c:if test="${not empty reservation.reservationDate && reservation.reviewNumber eq null }">
-</c:if>
-</h4>
-<hr style="align:center; text-align:left; background-color: black;">
-</div>
-<br>
-	<c:forEach items="${review }" var="list">
-		<div class="reviewNumber" style="align:center; width:55%; text-align:left;">
-			<input type="hidden" value="${list.reviewNumber}">
-			<span><c:set var="TextValue" value="${list.writer}"/>${fn:substring(TextValue,0,1)}<c:forEach begin="2" end="${fn:length(TextValue) }" varStatus="loop">*</c:forEach></span> &nbsp;&nbsp;&nbsp;
-			<span>${list.title}</span> &nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" class="getReview" value="▼" style="font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;">
-		</div>
-		<div class="getReviewResult" style="align:center; width:50%; text-align:left;"></div>
-		<hr style="align:center; width:1090px; text-align:left; padding-left: 20px;position:relative;">
-	</c:forEach>
-	<br><br>
-<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
-<h4 id="content33">문의내역
-<c:if test="${not empty loginID }">
-<c:if test="${loginAuth eq 'm' }">
-<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
-</c:if>
-</c:if>
-</h4>
-<hr style="align:center; text-align:left; background-color: black;">
-</div>
-<br>
-	<c:forEach items="${question }" var="list">
-		<div class="questionNumber" style="align:center; width:55%; text-align:left;">
-			<input type="hidden" value="${list.questionNumber}">
-			<span><c:set var="TextValue" value="${list.writer}"/>${fn:substring(TextValue,0,1)}<c:forEach begin="2" end="${fn:length(TextValue) }" varStatus="loop">*</c:forEach></span> &nbsp;&nbsp;&nbsp;
-			<span>${list.title}</span> &nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" class="getQuestion" value="▼" style="font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;">
-			</div>
-			<div class="getQuestionResult" style="align:center; width:50%; text-align:left;"></div>
-			<hr style="align:center; width:1090px; text-align:left; padding-left: 20px;position:relative;">
-	</c:forEach>
-<br>
-<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
-	<h4 id="content44">취소/환불</h4>
-	<hr style="align:center; text-align:left; background-color: black;">
-</div>
-<img src="resources/img/cancel.PNG">
-<br><br><br><br><br>
-	<script>
-		
-	</script>
 </body>
 </html>

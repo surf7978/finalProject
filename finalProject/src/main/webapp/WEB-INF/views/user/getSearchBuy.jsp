@@ -21,7 +21,6 @@
 <jsp:include page="../user/myPageSideBar.jsp" />
 	<h3>구매내역 상세리스트</h3><br>
 <table border="1" style="width: 900px">
-	<thead>
 	<tr>
 		<th>구매번호</th>
 		<th>상품분류</th>
@@ -36,8 +35,6 @@
 		<th>전화번호</th>
 		<th>구매상태</th>	
 		</tr>
-	</thead>
-	<tbody>
 	<c:forEach items="${buys }" var="buy" varStatus="status">
 	<tr>
 		<td><c:out value="${status.count}"/></td>
@@ -52,12 +49,7 @@
 		<td><c:out value="${buy.address2}"/></td>
 		<td><c:out value="${buy.phone}"/></td>
 		<td><c:out value="${buy.buyState}"/></td>
-		<c:if test="${buy.buyState !='반품완료' }">
-		<td class="border"><button type="button" onclick="window.open('insertReview?'">구매평쓰기</button></td>
-		</c:if>
-	</tr>onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')"
 	</c:forEach>
-	</tbody>
 </table>
 	<button type="button" onclick="location.href='getSearchPayAndDelivery'">뒤로가기</button>
 </div>
