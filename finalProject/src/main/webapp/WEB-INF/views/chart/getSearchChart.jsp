@@ -7,6 +7,31 @@
 <title>Chart</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
+<link href='resources/css/fullcalendar.css' rel='stylesheet' />
+<script src='resources/js/fullcalendar.js'></script>
+<!-- start of calendar -->
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView : 'dayGridMonth' ,
+			locale: 'ko',
+			eventSources: [
+				{ url: 'getSearchCalendar'}
+						],  
+			eventClick:function(event) {
+                if(event.url) {
+                    alert(event.title + "\n" + event.url, "wicked", "width=700,height=600");
+                    window.open(event.url);
+                    return false;
+                }
+            }
+		});
+		calendar.render();
+	});
+</script>
+<!-- end of calendar -->
+<!-- start of hart -->
 <script>
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
@@ -44,15 +69,13 @@
       var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
       chart.draw(data, options);
     }//end of drawChart
-    
-    $(function(){
-    	
-    })//
-    
 </script>
+<!-- end of chart -->
 </head>
 <body>
+	<!-- start of wrap -->
 	<div id="wrap">
+		<!-- start of searchForm -->
 		<div id="searchForm">
 			<form id="frm" name="frm">
 				<select name="search">
@@ -64,7 +87,10 @@
 				<button type="button" id="searchBtn" onclick="drawChart()">검색</button>
 			</form>
 		</div>
+		<!-- end of searchForm -->
+		<div id="calendar" style="width: 500px"></div>
 		<div id="chart_div"></div>
 	</div>
+	<!-- end of wrap -->
 </body>
 </html>

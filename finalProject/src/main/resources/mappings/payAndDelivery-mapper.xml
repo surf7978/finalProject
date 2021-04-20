@@ -40,6 +40,21 @@
 		WHERE PNDNUMBER=#{pndNumber}
 	</update>
 
+	<!-- 캘린더 -->
+	<select id="getSearchCalendar" resultType="map">
+	SELECT PNDNUMBER
+	, CATEGORY
+	, COURIERCOMPANY
+	, PAYDATE
+	, INVOICENUMBER
+	, TO_CHAR(SUMPRICE, '999,999,999') AS SUMPRICE
+	, MEMBERID
+	, BUYSTATE 
+	FROM PAYANDDELIVERY
+	WHERE BUSINESSNUMBER = #{businessNumber}
+	ORDER BY PNDNUMBER
+	</select>
+
 	<!-- 결제내역 차트용 -->
 	<!-- 일별합계 -->
 	<select id="dailyTotal" resultType="map">
@@ -56,7 +71,7 @@
 			</if>
 		) paydate, sum(SUMPRICE) sumprice
 		FROM PAYANDDELIVERY
-		WHERE businessId = #{businessId}
+		WHERE businessNumber = #{businessNumber}
 		AND CATEGORY = #{category}
 		AND (BUYSTATE = '결제완료'
 		OR BUYSTATE = '예약완료')
