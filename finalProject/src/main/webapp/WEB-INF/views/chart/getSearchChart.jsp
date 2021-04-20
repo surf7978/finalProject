@@ -48,7 +48,7 @@
       			result.sort(function(a,b){
       				return b[obj.PAYDATE] - a[obj.PAYDATE]
       			})
-      			arr.push( [obj.PAYDATE, obj.SUMPRICE] );
+      			arr.push( [obj.PAYDATE, obj.SUM] );
       		}//end of for
       	}//end of success
       })//end of ajax

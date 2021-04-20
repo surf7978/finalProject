@@ -96,9 +96,14 @@
 	</select>
 	<!-- 비교차트 -->
 	<select id="getAreaChart" resultType="map">
-	SELECT BUYSTATE , SUM(SUMPRICE) SUM
-	FROM PAYANDDELIVERY
-	WHERE BUSINESSNUMBER = #{businessNumber}   
-	GROUP BY BUYSTATE
+	SELECT BUYSTATE,SUM(SUMPRICE) SUM
+	FROM(
+   		SELECT CASE WHEN BUYSTATE = '예약완료' OR BUYSTATE ='결제완료' THEN 'SALL' 
+        WHEN BUYSTATE = '환불완료' OR BUYSTATE ='반품완료' THEN 'EXPENSES' 
+        END BUYSTATE, SUMPRICE
+    	FROM PAYANDDELIVERY
+    	WHERE BUSINESSNUMBER = '206-81-87531'
+    	)
+	GROUP BY BUYSTATE;
 	</select>
 </mapper>
