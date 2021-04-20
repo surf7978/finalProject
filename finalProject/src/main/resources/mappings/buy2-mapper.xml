@@ -23,8 +23,12 @@
 			)VALUES(
 				(SELECT NVL(MAX(BUYNUMBER),0)+1 FROM BUY)
 				,#{category}
-				,#{optionName}
-				,#{count}
+				,<foreach item="opname" collection="optionNameList" open="'" separator="," close="'" >
+				${opname}
+				</foreach>
+				,<foreach item="count" collection="countList" open="'" separator="," close="'" >			
+				${count}
+				</foreach>
 				,#{price}
 				,#{fromPerson}
 				,#{toPerson}
