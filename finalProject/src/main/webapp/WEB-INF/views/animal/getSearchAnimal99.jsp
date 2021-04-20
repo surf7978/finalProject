@@ -8,13 +8,7 @@
 <title>마이펫수첩 반려동물 리스트</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-table , tr, td{
-		border: 1px;
-		padding : 10px;
-		text-align:center;
-			  }
-</style>
+
 </head>
 <body>
 <div style="width:60%;">
@@ -24,12 +18,14 @@ table , tr, td{
 	<table border="1">
 		<thead>
 		<tr>
+			<!-- 
 			<th style="width:80px; font-size:20px;">번호</th>
+			 -->
 			<th style="width:150px; font-size:20px;">이름(애칭)</th>
 			<th style="width:100px; font-size:20px;">주인</th>
 			<th style="width:80px; font-size:20px;">성별</th>
 			<th style="width:150px; font-size:20px;">견종</th>
-			<th style="width:100px; font-size:20px;">생일</th>
+			<th style="width:150px; font-size:20px;">생일</th>
 			<th style="width:150px; font-size:20px;">관리</th>
 			<!-- 
 			<th style="font-size:18px;">생애주기 의료수첩</th>
@@ -39,7 +35,9 @@ table , tr, td{
 		<tbody>
 		<c:forEach items="${animal }" var="ani">
 		<tr>
+		<!-- 
 			<td>${ani.animalNumber}</td>
+		 -->
 			<td>${ani.name}</td>
 			<td>${ani.memberId}</td>
 			<td>${ani.gender}</td>
