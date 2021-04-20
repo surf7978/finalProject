@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <style>
 	button.write {
+			
 	   		padding:10px;
 			width:100px;
 			border-radius:5px;
@@ -112,15 +113,20 @@
 </script>
 </head>
 <body>
-	<div id="contents">
+	<br>
 			<c:if test="${loginID eq 'admin' }">
-				<button id="btn">자랑하기 등록</button>
+				<button id="btn" class="write">글쓰기</button>
 			</c:if>
+	<div id="contents">
 		<h1>자랑하기</h1>
 		<div id="pro_location">
 		</div>
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>
+
+
+
+
 </body>
 </html>

@@ -57,13 +57,7 @@
 	
 	</select>
 
-	<!-- 2번. 공지사항 -->
-	<select id="getSearchEventAndNoticeSelect2" resultType="eventAndNoticeVO"
-									parameterType="eventAndNoticeVO" > 
-	SELECT * 
-	FROM eventAndNotice
-	WHERE CATEGORY= 2
-	</select>
+
 	
 	<select id="getEventAndNotice1" resultType="eventAndNoticeVO"
 									parameterType="eventAndNoticeVO" > 
@@ -124,6 +118,25 @@
 	<!-- end of query -->
 	 ) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	
+		<!-- 2번. 공지사항 -->
+	<select id="getSearchEventAndNoticeSelect2" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" >
+	SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+	<!-- start of query --> 
+	SELECT * 
+	FROM eventAndNotice
+	WHERE CATEGORY= 2
+	<!-- end of query -->
+	 ) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+		<!-- 총 게시글 갯수 출력 -->
+	<select id="countBoard" resultType="int">
+		SELECT COUNT(*) FROM BOARD
+	</select>
+	
+	
 	<!--#################################################################  -->
 	<!--#################################################################  -->
 	

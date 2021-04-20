@@ -111,10 +111,10 @@
 	}); //end of getSearchProduct
 </script>
 </head>
-<body>
+<body> <br>
 	<div id="contents">
 			<c:if test="${loginID eq 'admin' }">
-				<button id="btn">이벤트 등록</button>
+				<button class="write" id="btn">이벤트 등록</button>
 			</c:if>
 		<h1>이벤트</h1>
 		<div id="pro_location">

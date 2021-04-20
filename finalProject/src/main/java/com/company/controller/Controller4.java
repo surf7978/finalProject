@@ -31,7 +31,6 @@ import com.company.eventAndNotice.service.EventAndNoticeService;
 import com.company.eventAndNotice.service.EventAndNoticeVO;
 import com.company.member.service.MemberService;
 import com.company.member.service.MemberVO;
-import com.company.product.service.ProductVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -62,6 +61,7 @@ public class Controller4 {
 		return "admin/getSearchCr4";
 
 	}
+
 
 	// ####★★맴버에 관한 컨트롤러★★
 	// 맴버전체조회
@@ -464,10 +464,24 @@ public class Controller4 {
 		eventAndNoticeService.updateEventAndNotice1(vo);
 		return "redirect:/getSearchEventAndNoticeSelectForm?category=1";
 	}
-
+	
 	// 공지사항 게시판 선택(전체조회)
-	@RequestMapping("/getSearchEventAndNoticeSelect2")
-	public String getSearchEventAndNoticeSelect2(EventAndNoticeVO vo, Model model) {
+	@GetMapping("getSearchEventAndNoticeSelect2")
+	public String boardList(PagingVOCr4 vo, Model model
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		int total = eventAndNoticeService.countBoard();
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
 		model.addAttribute("getSearchEventAndNoticeSelect2", eventAndNoticeService.getSearchEventAndNoticeSelect2(vo));
 		return "eventAndNotice/getSearchEventAndNoticeSelect2";
 	}

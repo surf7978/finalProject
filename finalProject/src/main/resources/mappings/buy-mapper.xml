@@ -20,6 +20,7 @@
 		, ADDRESS
 		, ADDRESS2
 		, PHONE 
+		, REVIEWNUMBER
 		FROM BUY
 		WHERE PNDNUMBER=#{pndNumber}
 		ORDER BY BUYNUMBER
@@ -38,6 +39,28 @@
 		, PRODUCTNUMBER
 		FROM REVIEWPRODUCT
 		WHERE BUYNUMBER=#{buyNumber}
+	</select>
+	
+	<!-- 구매내역 한 건 조회 for구매평등록 -->
+	<select id="getBuy" parameterType="BuyVO" resultType="BuyVO">
+	SELECT BUYNUMBER
+		, CATEGORY
+		, OPTIONNAME
+		, COUNT
+		, PRICE
+		, BUYSTATE
+		, PRODUCTNUMBER
+		, PNDNUMBER
+		, FROMPERSON
+		, TOPERSON
+		 ,POST
+		, ADDRESS
+		, ADDRESS2
+		, PHONE
+		, REVIEWNUMBER
+		FROM BUY
+		WHERE FROMPERSON=#{fromPerson}
+		AND PRODUCTNUMBER=#{productNumber}
 	</select>
 	
 </mapper>

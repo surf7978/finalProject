@@ -18,6 +18,8 @@ public interface ReservationMapper {
 	public List<ReservationVO> getViewReservation2(ReservationVO vo);	// 사업자번호로 예약리스트 조회
 	public List<Map<String, String>> getSearchReservationCalendar(ReservationVO vo); //캘린더조회 for 회원
 	public List<Map<String, String>> getSearchReservationCalendar2(ReservationVO vo); //캘린더조회 for 사업자
+	
+	public int insertReview2(ReservationVO vo);	//리뷰등록시 데이터 업데이트
  
 	// 결제용 insert
 	public int insertPayReservation(ReservationVO vo);

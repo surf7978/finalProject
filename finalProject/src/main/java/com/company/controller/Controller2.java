@@ -141,15 +141,13 @@ public class Controller2 {
 	// 예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
 	@PostMapping("/updateReservation")
 	public void updateReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, HttpServletResponse response, Model model)
-			throws IOException {
+		throws IOException {
 		reservationService.updateReservation(vo);
 		payAndDeliveryService.updateReservation2(vo1);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		writer.println("<script>alert('예약되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
-	
-
 	}
 
 	// 회원의 예약리스트조회
@@ -414,8 +412,9 @@ public class Controller2 {
 
 	// 상세조회에서 구매평 등록처리
 	@PostMapping("/insertReview")
-	public void insertReview(ReviewVO vo, HttpServletResponse response) throws IOException {
+	public void insertReview(ReviewVO vo, ReservationVO rvo, HttpServletResponse response) throws IOException {
 		reviewService.insertReview(vo);
+		reservationService.insertReview2(rvo);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");

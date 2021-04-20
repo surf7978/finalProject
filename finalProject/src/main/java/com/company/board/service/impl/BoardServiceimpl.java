@@ -83,6 +83,10 @@ public class BoardServiceimpl implements BoardService{
 	public List<BoardVO> getSearchBoardCategory199(BoardVO vo) {
 		return boardMapper.getSearchBoardCategory199(vo);
 	}
+	@Override
+	public int countBoard() {
+		return boardMapper.countBoard();
+	}
 
 
 }

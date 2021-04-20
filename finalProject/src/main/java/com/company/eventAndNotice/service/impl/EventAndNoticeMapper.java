@@ -2,6 +2,7 @@ package com.company.eventAndNotice.service.impl;
 
 import java.util.List;
 
+import com.company.common.PagingVOCr4;
 import com.company.eventAndNotice.service.EventAndNoticeVO;
 
 
@@ -12,9 +13,11 @@ public interface EventAndNoticeMapper {
 	public EventAndNoticeVO getEventAndNotice2(EventAndNoticeVO vo);	//공지사항 단건조회
 	public List<EventAndNoticeVO> getSearchEventAndNotice(EventAndNoticeVO vo);
 	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect(EventAndNoticeVO vo);//이벤트전체조회
-	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect2(EventAndNoticeVO vo);//공지사항전체조회
+	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect2(PagingVOCr4  vo);//공지사항전체조회
 	public int updateEventAndNotice1(EventAndNoticeVO vo);	//이벤트	
 	public int updateEventAndNotice2(EventAndNoticeVO vo);	//공지사항
 	public int deleteEventAndNotice(EventAndNoticeVO vo);
 	public int getCount(EventAndNoticeVO vo);// 레코드 조회
+	// 게시물 총 갯수
+	public int countBoard();
 }

@@ -8,6 +8,8 @@
 <title>공지사항</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
+
 
 </head>
 <style>
@@ -98,8 +100,30 @@ tr.th {
 	font-size: 17px;
 }
 </style>
+<script>
+	function selChange() {
+		var sel = document.getElementById('cntPerPage').value;
+		location.href="getSearchEventAndNoticeSelect2?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
+</script>
 <body>
 	<div id="contents">
+	
+	
+		<div style=" display:none; float: right;">
+		<select id="cntPerPage" name="sel" onchange="selChange()">
+			<option value="5"
+				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
+			<option value="10"
+				<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
+			<option value="15"
+				<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
+			<option value="20"
+				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
+		</select>
+		</div> <!-- 옵션선택 끝 -->
+	
+	
 	<h1>공지사항</h1>
 		<div id="aban_location"></div>
 		<div id="show">
@@ -135,12 +159,33 @@ tr.th {
 	</table>
 	<br>
 
-	<input class="write" type="button" value="글쓰기"
-		onclick="location.href='insertEventAndNotice2'">
+
 			</div>
-		<div id="paging"></div>
+			<!--  -->
+		<div id="paging">
+					
+		<c:if test="${paging.startPage != 1 }">
+			<a href="getSearchEventAndNoticeSelect2?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<a href="#">${p }</a>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="getSearchEventAndNoticeSelect2?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a href="getSearchEventAndNoticeSelect2?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
 	</div>
 	
+	</div>
+	</div>
+		<input  class="write" type="button" value="글쓰기"
+		onclick="location.href='insertEventAndNotice2'">
 
 </body>
 </html>

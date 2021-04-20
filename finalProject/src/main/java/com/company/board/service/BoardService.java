@@ -23,6 +23,8 @@ public interface BoardService {
 	public List<BoardVO> getSearchBoardCategiry1(BoardVO vo);	
 	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo);	
 	public int getCount(BoardVO vo);// 레코드 조회
+	// 게시물 총 갯수
+	public int countBoard();
 	
 	public int insertBoard2(BoardVO vo);	
 	public int insertBoard(BoardVO vo);

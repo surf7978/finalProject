@@ -17,7 +17,9 @@
  </style>
 </head>
 <body>
-	<br><h3>구매내역 상세리스트</h3><br>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
+	<h3>구매내역 상세리스트</h3><br>
 <table border="1" style="width: 900px">
 	<thead>
 	<tr>
@@ -58,5 +60,6 @@
 	</tbody>
 </table>
 	<button type="button" onclick="location.href='getSearchPayAndDelivery'">뒤로가기</button>
+</div>
 </body>
 </html>

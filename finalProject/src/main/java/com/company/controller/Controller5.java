@@ -63,15 +63,13 @@ import com.company.review.service.ReviewVO;
  * 21.04.15 장바구니 3차(토탈 장바구니로 변경) / 사업자-게시글CRUD 3차 수정(조회,삭제)
  * 21.04.16 장바구니 4차(채크박스) 
  * 21.04.17 장바구니 5차(하단 총액부분)
- * 21.04.19 장바구니 6차 수정(단건 삭제 ok, 여러건 삭제, 전체합계금액)
- * 21.04.20 결제내역차트 1차 수정(데이터 값 정상 출력)
- * 21.04.21 결제내역차트 2차 수정()
+ * 21.04.19 장바구니 6차 수정(단건 삭제 ok, 여러건 삭제, 전체합계금액, 데이터 값 정상 출력),결제내역차트 1차 수정
+ * 21.04.20 결제내역차트 1차 수정 
  * 
  */
 @Controller
 public class Controller5 {
 
-	// start of beans
 	@Autowired
 	BusinessService businessService;
 
@@ -82,17 +80,18 @@ public class Controller5 {
 	AnswerService answerService;
 
 	@Autowired
-	BCartService bCartService;
-	// 사업자
-	@Autowired
 	CafeService cafeService;
 
+	// 사업체 통합
 	@Autowired
 	IntegratedService integratedService;
 
 	// 장바구니
 	@Autowired
 	CartService cartService;
+
+	@Autowired
+	BCartService bCartService;
 
 	@Autowired
 	ReservationService reservationService;
@@ -565,13 +564,27 @@ public class Controller5 {
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
 		vo.setCategory(bvo.getBusinessCode());
-		vo.setBusinessId(id);
+		vo.setBusinessNumber(bvo.getBusinessNumber());
 		// 쿼리 결과 호출
 		// 일별 합계
 		List<Map<String, Object>> map = payAndDeliveryService.dailyTotal(vo);
 		return map;
 	}
 
+	@RequestMapping("/getSearchCalendar")
+	@ResponseBody
+	public List<Map<String,Object>> getSearchCalendar(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+		// ID 조회
+		bvo.setBusinessId(session.getAttribute("loginID").toString());
+		// DB 조회
+		bvo = businessService.getBusiness(bvo);
+		// 조회값 할당
+		
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		// DB 리스트 조회 후 값 할당
+		List<Map<String,Object>> map = payAndDeliveryService.getSearchCalendar(vo);
+		return map;
+	}
 	// 마이페이지-사업자-실시간화장진료 페이지
 
 	// 공통
