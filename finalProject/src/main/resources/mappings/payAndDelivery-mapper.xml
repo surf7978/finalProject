@@ -96,5 +96,9 @@
 	</select>
 	<!-- 비교차트 -->
 	<select id="getAreaChart" resultType="map">
+	SELECT BUYSTATE , SUM(SUMPRICE) SUM
+	FROM PAYANDDELIVERY
+	WHERE BUSINESSNUMBER = #{businessNumber}   
+	GROUP BY BUYSTATE
 	</select>
 </mapper>

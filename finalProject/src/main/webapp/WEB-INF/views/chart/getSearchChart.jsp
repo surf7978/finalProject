@@ -21,6 +21,8 @@
 </script>
 <!-- end of calendar -->
 
+<!-- end of calendar -->
+
 <!-- start of columnChart -->
 <script>
 	//loading
@@ -98,8 +100,8 @@
 	  var options = {'title':'구매상태 내역',
 	                 'width':400,
 	                 'height':300,
-	                 //순서: 예약=파란색, 반품=주황색, 결제=초록색
-	                 colors: ['#1E90FF', '#e6693e', '#00a000', '#f3b49f', '#f6c7b6'],
+	                 //순서: 예약 = 파란색, 반품 = 주황색, 결제 = 초록색 , 환불 = 빨간색
+	                 colors: ['#1E90FF', '#e6693e', '#00a000', '#FF0000', '#f6c7b6'],
 	  				 vAxis: {format:"$#,###", gridlines: { count: 10 } }
 	                 };
 	  var chart = new google.visualization.PieChart(document.getElementById('donutChart'));
@@ -108,7 +110,51 @@
 </script>
 <!-- end of donutChart -->
 
-<!-- start of function -->
+<!-- start of AreaChart -->
+<script>
+	//loading
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawAreaChart);
+	
+	function drawAreaChart() {
+	// draws it.
+	  var data = new google.visualization.DataTable();
+	  data.addColumn('string', '날짜');
+	  data.addColumn('number', '수익');
+	  data.addColumn('number', '지출');
+	  var arr = [];
+	  //ajax
+	  $.ajax({
+	  	url : "getAreaChart",
+	  	async :false,//동기식
+	  	dataType : 'json',
+	  	success : function(result){
+	  		console.log(result)
+	  		for (obj of result){//of = array, in = value
+	  			//[ {},{} ] -> [ [],[] ]
+	  			arr.push( [obj.BUYSTATE, obj.SUM,obj.SUM] );
+	  		}//end of for
+	  	}//end of success
+	  })//end of ajax
+	  
+	  //DB데이터로 추가
+	  data.addRows(arr);
+	  // Set chart options
+	  var options = {'title':'매출비교 내역',
+	                 'width':400,
+	                 'height':300,
+	                 //순서: 수익 = 파란색, 지출 = 빨간색
+	                 colors: ['#1E90FF',  '#FF0000'],
+	  				 vAxis: {format:"$#,###", gridlines: { count: 10 } }
+	                 };//end of options
+	  var chart = new google.visualization.AreaChart(document.getElementById('areaChart'));
+	  //array(data),object(options)
+	  chart.draw(data, options);
+	}//end of drawDonutChart
+</script>
+<!-- end of AreaChart -->
+
+<!-- start of settingFunction -->
 <script>
 $(function(){
 	//캘린더 버튼 클릭 시
@@ -120,7 +166,7 @@ function openCalendar(){
 	})//end of calBtn
 }//end of openCalendar
 </script>
-<!-- end of function -->
+<!-- end of settingFunction -->
 
 </head>
 <body>
@@ -136,7 +182,7 @@ function openCalendar(){
 					<option value="monthly">월별조회</option>
 					<option value="years">년별조회</option>
 				</select>
-				<input type="text" name="searchValue" placeholder="검색어 입력">
+				<input type="text" name="searchValue" placeholder="년/월/일">
 				<button type="button" id="searchBtn" onclick="drawChart()">검색</button>
 			</form>
 				<div id="calendar" style="width: 300px; display: none;"></div>
@@ -145,6 +191,7 @@ function openCalendar(){
 		
 		<div id="chart_div" style="width: 30%; display: inline-block;"></div>
 		<div id="donutChart"style="width: 30%; display: inline-block;"></div>
+		<div id="areaChart" style="width: 60%;"></div>
 	</div>
 	<!-- end of wrap -->
 </body>
