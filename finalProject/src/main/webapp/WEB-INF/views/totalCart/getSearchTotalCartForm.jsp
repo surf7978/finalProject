@@ -69,15 +69,41 @@
 		//제품명
 		tr.append($("<td>").html(item.productName))
 		//옵션명
-		.append($("<td>").html(item.optionName))
+		//.append($("<td>").html(item.optionName))
+		var td = $("<td>");
+		var td2 = $("<td>");
+		var td3 = $("<td>");
+		var optionNames = item.optionName.split(",")
+		var counts = item.count.split(",");
+		var optionPrices = item.optionPrice.split(",");
+		var sumPrice = 0;
+		for (i = 0; i < optionNames.length; i++) {
+			td.append(optionNames[i] + "<br>");
+			td2.append(counts[i] + "<br>");
+			td3.append(optionPrices[i] + "<br>");
+			sumPrice += optionPrices[i] * counts[i]
+		}
 		//수량
-		.append($("<td>").html(item.count))
-		//단일금액
-		.append($("<td>").html(item.optionPrice))
+		tr.append(td, td2, td3);
 		//배송비
-		.append($("<td>").html(item.cartCourier))
+		if (sumPrice < 10000) {
+			tr.append($("<td>").html(item.cartCourier));
+		} else {
+			tr.append($("<td>").html("무료"));
+		}
 		//합계
-		.append($("<td>").html(item.optionPrice * item.count).attr("name","resultPrice"))
+		if (sumPrice < 10000) {
+			sumPrice += 2500;
+		}
+		tr.append($("<td>").html(sumPrice))
+		
+		//.append($("<td>").html(item.count))
+		//단일금액
+		//.append($("<td>").html(item.optionPrice))
+		//배송비
+		//.append($("<td>").html(item.cartCourier))
+		//합계
+		//.append($("<td>").html(item.optionPrice * item.count).attr("name","resultPrice"))
 		//제품일련번호
 		.append($('<input type=\'hidden\' id=\'seq\'>').val(item.cartNumber))
 		 return tr
