@@ -20,4 +20,9 @@ public class PayAndDeliveryVO {
 	// 캘린더용
 	String startDate;
 	String endDate;
+	
+	// paging
+	Integer page = 1;  
+	Integer start = 1;
+	Integer end = 10;
 }

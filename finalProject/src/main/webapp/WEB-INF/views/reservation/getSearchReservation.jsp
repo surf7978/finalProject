@@ -18,8 +18,16 @@
 			eventSources: [
 				{
 					url: 'getSearchReservationCalendar'
-				}
-			]
+				},
+			],
+			eventClick: function(info){
+				alert('Event: ' + info.event.title);
+			    alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+			    alert('View: ' + info.view.type);
+
+			    // change the border color just for fun
+			    info.el.style.borderColor = 'red';
+			}
 		});
 		calendar.render();
 	});

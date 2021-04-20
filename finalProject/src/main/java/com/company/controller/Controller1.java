@@ -42,6 +42,9 @@ import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
+import com.company.comment.service.CommentService;
+import com.company.comment.service.CommentVO;
+import com.company.comment.service.CommentVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
 import com.company.hospital.service.HospitalSearchVO;
@@ -662,6 +665,22 @@ public class Controller1 {
 		vo.setMemberId((String) session.getAttribute("loginID"));
 		model.addAttribute("answer", answerService.getUserAnswer(vo));
 		return "myPage/userAnswer";
+	}
+	
+	//댓글달기 ajax처리
+	@Autowired CommentService commentService; 
+	@RequestMapping("/insertComment")
+	@ResponseBody
+	public CommentVO insertComment(CommentVO vo) {
+		commentService.insertComment(vo);
+		return vo;
+	}
+	
+	@RequestMapping("/deleteComment")
+	@ResponseBody
+	public CommentVO deleteComment(CommentVO vo) {
+		commentService.deleteComment(vo);
+		return vo;
 	}
 	
 	@Autowired ProductService productService;

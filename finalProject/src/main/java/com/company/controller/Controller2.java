@@ -3,6 +3,7 @@ package com.company.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,8 @@ import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
+import com.company.common.Paging;
+import com.company.hospital.service.HospitalSearchVO;
 import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
 import com.company.member.service.MemberService;
@@ -35,6 +38,7 @@ import com.company.note.service.NoteService;
 import com.company.note.service.NoteVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
+import com.company.product.service.ProductVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 import com.company.reservation.service.ReservationService;
@@ -114,13 +118,37 @@ public class Controller2 {
 
 	//////////// 구매내역///////////////
 	// 구매내역리스트조회
-	@RequestMapping("/getSearchPayAndDelivery")
-	public String getSearchPayAndDelivery(PayAndDeliveryVO vo, Model model, HttpSession session) {
+	@RequestMapping("/getSearchPayAndDeliveryForm")
+	public String getSearchPayAndDeliveryForm(PayAndDeliveryVO vo, Model model, HttpSession session) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
 		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery(vo));
 		model.addAttribute("memberId", vo);
-		return "user/getSearchPayAndDelivery";
+		return "user/getSearchPayAndDeliveryForm";
 	}
+	
+//	//구매내역리스트(ajax)+페이징처리
+//	@RequestMapping("/getSearchPayAndDelivery")
+//	@ResponseBody
+//	public Map<String, Object> getSearchPayAndDelivery(PayAndDeliveryVO vo, Paging paging) {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		// 1. 페이지 설정
+//		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
+//		paging.setPageSize(10); // 보이는 페이지 번호
+//		// 2.초기페이지 설정
+//		if (paging.getPage() == null)
+//			paging.setPage(1);
+//		// 3. 값 추가
+//		paging.setTotalRecord(payAndDeliveryService.getCount(vo));
+//		vo.setStart(paging.getFirst());
+//		vo.setEnd(paging.getLast());
+//		List<PayAndDeliveryVO> list = payAndDeliveryService.getSearchPayAndDelivery(vo);
+//		map.put("paging", paging);
+//		map.put("list", list);
+//		//
+//		return map;
+//		}
+	
+	
 
 	// 구매내역 상세리스트 조회
 	@RequestMapping("/getSearchBuy")
@@ -141,7 +169,7 @@ public class Controller2 {
 	// 예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
 	@PostMapping("/updateReservation")
 	public void updateReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, HttpServletResponse response, Model model)
-		throws IOException {
+			throws IOException {
 		reservationService.updateReservation(vo);
 		payAndDeliveryService.updateReservation2(vo1);
 		response.setContentType("text/html; charset=utf-8");
@@ -185,17 +213,17 @@ public class Controller2 {
 		model.addAttribute("reservation", reservationService.getViewReservation2(vo));
 		return "reservation/getViewReservation2";
 	}
-	
+
 	// 캘린더조회 for 사업자
 	@RequestMapping("/getSearchReservationCalendar2")
 	@ResponseBody
-	public List<Map<String, String>> getSearchReservationCalendar2(ReservationVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, String>> getSearchReservationCalendar2(ReservationVO vo, BusinessVO bvo,
+			HttpSession session) {
 		bvo.setBusinessId((String) session.getAttribute("loginID"));
 		vo.setBusinessNumber(businessService.getBusiness(bvo).getBusinessNumber());
 		List<Map<String, String>> list = reservationService.getSearchReservationCalendar2(vo);
 		return list;
 	}
-	
 
 	// 구매내역 삭제
 	@DeleteMapping("/deleteBuy")
@@ -282,7 +310,7 @@ public class Controller2 {
 		return "redirect:/getSearchAnimal";
 	}
 
-	/////의료수첩 페이지////////////
+	///// 의료수첩 페이지////////////
 	@RequestMapping("/getSearchNote")
 	public String getSearchNote(AnimalVO avo, NoteVO nvo, Model model) {
 		model.addAttribute("animal", animalService.getAnimal(avo));
@@ -290,16 +318,16 @@ public class Controller2 {
 		model.addAttribute("noteCount", noteService.getNoteCount(nvo));
 		return "note/getSearchNote";
 	}
-	
-	//의료내역 등록 페이지
+
+	// 의료내역 등록 페이지
 	@GetMapping("/insertNote")
 	public String insertNote(NoteVO vo, String animalNumber, Model model) {
 		vo.setAnimalNumber(animalNumber);
 		model.addAttribute("animalNumber", vo.getAnimalNumber());
 		return "empty/note/insertNote";
 	}
-	
-	//의료내역 등록 처리
+
+	// 의료내역 등록 처리
 	@PostMapping("/insertNote")
 	public void insertNoteProc(NoteVO vo, HttpServletResponse response) throws IOException {
 		noteService.insertNote(vo);
@@ -307,16 +335,16 @@ public class Controller2 {
 		PrintWriter writer = response.getWriter();
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
-		}
-	
+	}
+
 	// 의료내역 수정페이지
 	@GetMapping("/updateNote")
 	public String updateNote(NoteVO vo, Model model) {
 		model.addAttribute("note", noteService.getNote(vo));
 		return "empty/note/updateNote";
 	}
-		
-	//의료내역 수정처리
+
+	// 의료내역 수정처리
 	@PostMapping("/updateNote")
 	public void updateNoteProc(NoteVO vo, HttpServletResponse response) throws IOException {
 		noteService.updateNote(vo);
@@ -324,15 +352,14 @@ public class Controller2 {
 		PrintWriter writer = response.getWriter();
 		writer.println("<script>alert('수정되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
-		}
-	
-	//의료내역 삭제
+	}
+
+	// 의료내역 삭제
 	@RequestMapping("/deleteNote")
 	public String deleteNote(NoteVO vo) {
 		noteService.deleteNote(vo);
 		return "redirect:/getSearchNote";
 	}
-	
 
 	//////// 병원상품//////////
 	// 병원상품 전체리스트 조회
@@ -343,15 +370,15 @@ public class Controller2 {
 	}
 
 	// 병원 상세조회 + 구매평 전체리스트 출력 + 문의내역 전체리스트 출력
-	@RequestMapping("/getHospital") 
+	@RequestMapping("/getHospital")
 	public String getHospital(HospitalVO vo, Model model, String seq, HttpSession session) {
-		vo.setSeq(seq); 
-		model.addAttribute("hospital", hospitalService.getHospital(vo)); 												
+		vo.setSeq(seq);
+		model.addAttribute("hospital", hospitalService.getHospital(vo));
 		if (session.getAttribute("loginID") != null) {
 			ReservationVO vo1 = new ReservationVO();
-			vo1.setMemberId((String) session.getAttribute("loginID")); 
-			vo1.setBisNumber(seq); 
-			model.addAttribute("reservation", reservationService.getViewReservation(vo1)); 
+			vo1.setMemberId((String) session.getAttribute("loginID"));
+			vo1.setBisNumber(seq);
+			model.addAttribute("reservation", reservationService.getViewReservation(vo1));
 		}
 		ReviewVO vo2 = new ReviewVO();
 		vo2.setProbisNumber(seq);
@@ -402,7 +429,7 @@ public class Controller2 {
 		return "redirect:/getSearchHospital99";
 	}
 
-	// 상세조회에서 구매평 등록페이지 이동
+	// 상세조회에서 사업자 구매평 등록페이지 이동
 	@GetMapping("/insertReview")
 	public String insertReview(ReservationVO vo, Model model, HttpSession session) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
@@ -420,6 +447,29 @@ public class Controller2 {
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
+
+	 //상세조회에서 쇼핑몰 구매평 등록페이지 이동
+	 @GetMapping("/insertReviewProduct") 
+	 public String insertReviewProduct(BuyVO vo, Model model, MemberVO mvo, HttpSession session) { 
+		String loginID = (String) session.getAttribute("loginID");
+		vo.setFromPerson(loginID);
+		mvo.setMemberId(loginID);
+		model.addAttribute("buy", buyService.getBuy(vo));
+		model.addAttribute("name", memberService.getMember(mvo).getName());
+		return "empty/reviewAndQuestion/insertReviewProduct";
+	 }
+	 
+	 //상세조회에서 쇼핑몰 구매평 등록처리
+	 @PostMapping("/insertReviewProduct")
+	 public void insertReviewProduct(ReviewVO rvo, BuyVO bvo, HttpServletResponse response) throws IOException {
+		reviewService.insertReview(rvo);
+		buyService.insertReview3(bvo);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
+		writer.close();
+	 }
+
 
 	// 상세조회에서 상품문의 등록페이지 이동
 	@GetMapping("/insertQuestionBusi")
@@ -456,16 +506,16 @@ public class Controller2 {
 	public QuestionVO getQuestionProbis(QuestionVO vo) {
 		return questionService.getQuestionProbis(vo);
 	}
-	
-	//관리자의 배송정보 입력페이지 출력
+
+	// 관리자의 배송정보 입력페이지 출력
 	@RequestMapping("/updateDelivery")
 	public String updateDelivery(PayAndDeliveryVO vo, String pndNumber, Model model) {
 		vo.setPndNumber(pndNumber);
 		model.addAttribute("pndNumber", vo.getPndNumber());
 		return "user/updateDelivery";
 	}
-	
-	//관리자의 배송정보 입력 처리
+
+	// 관리자의 배송정보 입력 처리
 	@PostMapping("/updateDelivery")
 	public void updateDelivery(PayAndDeliveryVO vo, HttpServletResponse response) throws IOException {
 		payAndDeliveryService.updateDelivery(vo);
@@ -473,7 +523,6 @@ public class Controller2 {
 		PrintWriter writer = response.getWriter();
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
-		}
-	
+	}
 
 }

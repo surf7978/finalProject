@@ -70,7 +70,7 @@
 						<td style="height:160px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">구매내역조회</h6>
 							<br>
-							<button onclick="location.href='getSearchPayAndDelivery'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매내역</button><br> 
+							<button onclick="location.href='getSearchPayAndDeliveryForm'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매내역</button><br> 
 							<button onclick="location.href='getSearchReservation'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;예약내역</button><br>
 						</td>
 					</tr>

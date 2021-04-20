@@ -79,15 +79,10 @@
 		</c:if>
 		</c:if>
 		</td>
-		
-		
 	</tr>
 	</c:forEach>
 </table>
-<br/>
-<button type="button" class="getSearchReservation" onclick="location.href='getSearchReservation?memberId=${loginID}'">캘린더조회</button>
-
-		
+<div id="paging"></div>
 <script>
 	$(function(){
 		$("#getSearchReservation").on("click", function(){
