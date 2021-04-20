@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.company.board.service.BoardService;
 import com.company.board.service.BoardVO;
 
+
 @Service
 public class BoardServiceimpl implements BoardService{
 	
@@ -72,6 +73,12 @@ public class BoardServiceimpl implements BoardService{
 	
 		return boardMapper.getSearchBoardCategiry2(vo);
 	}
+	
+	@Override
+	public int getCount(BoardVO vo) {
+		return boardMapper.getCount(vo);
+	}
+	
 	@Override
 	public List<BoardVO> getSearchBoardCategory199(BoardVO vo) {
 		return boardMapper.getSearchBoardCategory199(vo);

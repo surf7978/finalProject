@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.company.eventAndNotice.service.EventAndNoticeService;
 import com.company.eventAndNotice.service.EventAndNoticeVO;
+import com.company.product.service.ProductVO;
 
 @Service
 public class EventAndNoticeServiceimpl implements EventAndNoticeService{
@@ -64,6 +65,11 @@ public class EventAndNoticeServiceimpl implements EventAndNoticeService{
 	@Override
 	public int deleteEventAndNotice(EventAndNoticeVO vo) {
 		return EventAndNoticeMapper.deleteEventAndNotice(vo);
+	}
+	//레코드 건수
+	@Override
+	public int getCount(EventAndNoticeVO vo) {
+		return EventAndNoticeMapper.getCount(vo);
 	}
 
 

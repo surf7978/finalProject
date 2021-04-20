@@ -82,11 +82,7 @@
         WHERE category=1
     </select>
 
-	<select id="getSearchBoardCategiry2" resultType="boardVO"
-		parameterType="boardVO">
-		SELECT * FROM BOARD
-		WHERE category=2
-	</select>
+
 	<insert id="insertBoard" parameterType="boardVO">
 		  insert into board(BOARDNUMBER
 		  					, IMAGE	  					
@@ -136,5 +132,26 @@
         SELECT * FROM BOARD
         WHERE MEMBERID = #{memberId}
     </select>
+    <!--#################################################################  -->
+	<!--#################################################################  -->
+	<!-- 리스트 갯수 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+	</select>
+	
+	
+	<select id="getSearchBoardCategiry2" resultType="boardVO"
+		parameterType="boardVO">
+		SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+		<!-- start of query -->
+		SELECT * FROM BOARD
+		WHERE category=2
+		<!-- end of query -->
+		) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
+	<!--#################################################################  -->
+	<!--#################################################################  -->
 	
 </mapper>

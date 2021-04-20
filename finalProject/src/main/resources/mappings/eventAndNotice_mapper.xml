@@ -56,13 +56,7 @@
 	SELECT * FROM eventAndNotice
 	
 	</select>
-	<!-- 1번. 이벤트 -->
-	<select id="getSearchEventAndNoticeSelect" resultType="eventAndNoticeVO"
-									parameterType="eventAndNoticeVO" > 
-	SELECT * 
-	FROM eventAndNotice
-	WHERE CATEGORY= 1
-	</select>
+
 	<!-- 2번. 공지사항 -->
 	<select id="getSearchEventAndNoticeSelect2" resultType="eventAndNoticeVO"
 									parameterType="eventAndNoticeVO" > 
@@ -107,6 +101,31 @@
 		DELETE FROM eventAndNotice
 		WHERE EANNUMBER=#{eanNumber}
 	</delete>
+	
+	
+	<!--#################################################################  -->
+	<!--#################################################################  -->
+	<!-- 리스트 갯수 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+	</select>
+	
+	
+	<!--  이벤트전체조회 -->
+	<select id="getSearchEventAndNoticeSelect" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" > 
+	
+	SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+	<!-- start of query -->
+	SELECT * 
+	FROM eventAndNotice
+	WHERE CATEGORY= 1
+	<!-- end of query -->
+	 ) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	<!--#################################################################  -->
+	<!--#################################################################  -->
 	
 	
 </mapper>
