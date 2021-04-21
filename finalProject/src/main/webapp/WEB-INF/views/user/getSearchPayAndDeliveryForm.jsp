@@ -1,19 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>일반회원의 구매내역 리스트</title>
 <link rel="stylesheet" href="resources/css/style4.css" type="text/css">
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 </head>
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <h3>구매내역 리스트</h3><br>
+<input type="hidden" name="page" value="1">
 <table class="table1">
 	<tr>
 		<th>구매번호</th>
@@ -78,11 +81,17 @@
 				<button type="button" onclick="dview()" class="dviewBtn">배송조회</button>
 		</c:if>
 		</c:if>
-		</td>
+		</td>		
 	</tr>
 	</c:forEach>
 </table>
-<div id="paging"></div>
+<my:paging paging="${paging}" jsFunc="goPage" />
+<script>
+	function goPage(p){
+		searchFrm.page.value=p;
+		searchFrm.submit();
+	}
+</script>	
 <script>
 	$(function(){
 		$("#getSearchReservation").on("click", function(){

@@ -20,13 +20,9 @@
 					url: 'getSearchReservationCalendar'
 				},
 			],
-			eventClick: function(info){
-				alert('Event: ' + info.event.title);
-			    alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-			    alert('View: ' + info.view.type);
-
-			    // change the border color just for fun
-			    info.el.style.borderColor = 'red';
+			eventMouseover: function(info){
+			
+			    alert("a");
 			}
 		});
 		calendar.render();
@@ -35,6 +31,7 @@
 </script>
 </head>
 <body>
+<br><h3>예약내역</h3>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 	<table class="table1">
@@ -44,7 +41,7 @@
 			<th>예약날짜</th>
 			<th>예약시간</th>
 			<th>예약상태</th>
-			<th>예약변경</th>
+			<th>예약하기</th>
 			<th>환불하기</th>
 		</tr>
 		<c:forEach items="${reservation }" var="res">
@@ -54,8 +51,15 @@
 				<td><c:out value="${res.reservationDate}" /></td>
 				<td><c:out value="${res.reservationTime}" /></td>
 				<td><c:out value="${res.reservationState}" /></td>
-				<td><button type="button" class="updateReservation" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=500, height=500')">예약변경</button></td>
-				<td><button type="button" class="">환불하기</button></td>
+				<td>
+				<c:if test="${res.reservationDate eq null}">
+				<button type="button" class="insertReservationBtn" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=500, height=500')">예약하기</button>
+				</c:if>
+				<c:if test="${res.reservationDate ne null}">
+				<button type="button" class="updateReservationBtn" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=500, height=500')">예약변경</button>
+				</c:if>
+				</td>
+				<td><button type="button" class="updateReservationBtn">환불하기</button></td>
 			</tr>
 		</c:forEach>
 	</table>

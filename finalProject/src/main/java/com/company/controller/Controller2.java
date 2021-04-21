@@ -3,7 +3,6 @@ package com.company.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +28,6 @@ import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
-import com.company.hospital.service.HospitalSearchVO;
 import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
 import com.company.member.service.MemberService;
@@ -38,6 +36,7 @@ import com.company.note.service.NoteService;
 import com.company.note.service.NoteVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
+import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
@@ -69,18 +68,19 @@ public class Controller2 {
 	QuestionService questionService;
 	@Autowired
 	NoteService noteService;
+	@Autowired
+	ProductService productService;
+	
 
 	////// 마이페이지-유저///////////
 	// 일반회원 본인정보 조회
-	// admin이 로그인해서 회원들의 정보를 볼려고 클릭하면 자신의 정보가 나와서 .equals("admin")추가해서 자기정보가 아닌 회원의
-	////// 정보조회하게 함
+	// admin이 로그인해서 회원들의 정보를 볼려고 클릭하면 자신의 정보가 나와서 .equals("admin")추가해서 자기정보가 아닌 회원의 정보조회하게 함
 	@GetMapping("/getMember1")
 	public String getMember(MemberVO vo1, Model model, HttpSession session) {
 		if (session.getAttribute("loginID").equals("admin")) {
 			model.addAttribute("member", memberService.getMember(vo1));
 		} else {
-			MemberVO vo = new MemberVO();
-			vo.setMemberId((String) session.getAttribute("loginID"));
+			vo1.setMemberId((String) session.getAttribute("loginID"));
 			model.addAttribute("member", memberService.getMember(vo1));
 		}
 		return "user/memberInfo";
@@ -115,39 +115,50 @@ public class Controller2 {
 		memberService.deleteMember(vo);
 		return "user/deleteMember";
 	}
-
-	//////////// 구매내역///////////////
+	
+	////////////구매내역///////////////
 	// 구매내역리스트조회
 	@RequestMapping("/getSearchPayAndDeliveryForm")
-	public String getSearchPayAndDeliveryForm(PayAndDeliveryVO vo, Model model, HttpSession session) {
+	public String getSearchPayAndDeliveryForm(PayAndDeliveryVO vo, Model model, HttpSession session, Paging paging) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
+		paging.setPageUnit(5); //한페이지에 출력되는 레코드 건수
+		paging.setPageSize(3); //페이지번호가 3개씩 보임
+		//페이징
+		if(vo.getPage() == null) {
+			vo.setPage(1);
+		}
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		//전체페이지가 넘어가야 last를 구함
+		paging.setTotalRecord(payAndDeliveryService.getCount(vo));
+		model.addAttribute("paging", paging);
 		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery(vo));
 		model.addAttribute("memberId", vo);
-		return "user/getSearchPayAndDeliveryForm";
+	return "user/getSearchPayAndDeliveryForm";
 	}
 	
-//	//구매내역리스트(ajax)+페이징처리
+//	//구매내역리스트 페이징처리
 //	@RequestMapping("/getSearchPayAndDelivery")
-//	@ResponseBody
-//	public Map<String, Object> getSearchPayAndDelivery(PayAndDeliveryVO vo, Paging paging) {
+//	public Map<String, Object> getSearchProduct(PayAndDeliveryVO vo, Paging paging, HttpSession session) {
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		// 1. 페이지 설정
 //		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
-//		paging.setPageSize(10); // 보이는 페이지 번호
+//		paging.setPageSize(3); // 보이는 페이지 번호
 //		// 2.초기페이지 설정
-//		if (paging.getPage() == null)
-//			paging.setPage(1);
+//		if (vo.getPage() == null)
+//			vo.setPage(1);
 //		// 3. 값 추가
 //		paging.setTotalRecord(payAndDeliveryService.getCount(vo));
 //		vo.setStart(paging.getFirst());
 //		vo.setEnd(paging.getLast());
-//		List<PayAndDeliveryVO> list = payAndDeliveryService.getSearchPayAndDelivery(vo);
+//		
+//		
 //		map.put("paging", paging);
 //		map.put("list", list);
-//		//
 //		return map;
-//		}
-	
+//	}
+		
+		
 	
 
 	// 구매내역 상세리스트 조회
@@ -524,5 +535,14 @@ public class Controller2 {
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
+	
+	// 쇼핑몰 상세보기
+	@RequestMapping("/getProduct")
+	public String getProduct(ProductVO vo, Model model, String productNumber) {
+		model.addAttribute("product", productService.getProduct(vo));
+		return "product/getProduct";
+	}
+	
+	
 
 }

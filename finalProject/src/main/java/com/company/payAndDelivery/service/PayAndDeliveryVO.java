@@ -21,8 +21,10 @@ public class PayAndDeliveryVO {
 	String startDate;
 	String endDate;
 	
-	// paging
-	Integer page = 1;  
-	Integer start = 1;
-	Integer end = 10;
+	//paging과 관련된 값만 더 추가
+	Integer page = 1;
+	//null 체크하려면integer이 편함
+	int start = 1;
+	int end = 10;
+	
 }
