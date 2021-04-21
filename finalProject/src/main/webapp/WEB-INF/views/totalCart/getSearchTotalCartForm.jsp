@@ -23,7 +23,7 @@
 		//6.채크된 것들 일괄삭제
 		totalCheckDelete();
 		//7.전체 합계금액(총상품금액,배송비,전체주문금액)
-	})//end of function
+	})//end of function 
 	
 	
 	//1.전체리스트 조회
