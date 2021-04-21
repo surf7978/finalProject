@@ -29,20 +29,20 @@
 	<c:forEach items="${adminView }" var="list">
 		<tbody>
 			<c:if test="${list.code eq 'hospital' }">
-				<tr onclick="location.href='getAdminView?seq=${list.seq }'">
+				<tr>
 					<td>${list.seq }</td>
 					<td>${list.code }</td>
-					<td>${list.name }</td>
+					<td onclick="location.href='getAdminView?seq=${list.seq }'">${list.name }</td>
 					<td>${list.price }</td>
 					<td>${list.location }</td>
 					<td><button onclick="location.href='deleteAdminView?seq=${list.seq }&code=${list.code }'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#ff6347; color:white;">삭 제</button></td>
 				</tr>
 			</c:if>
 			<c:if test="${list.code ne 'hospital' }">
-				<tr onclick="location.href='getSearchInfo?seq=${list.seq }'">
+				<tr>
 					<td>${list.seq }</td>
 					<td>${list.code }</td>
-					<td>${list.name }</td>
+					<td onclick="location.href='getSearchInfo?seq=${list.seq }'">${list.name }</td>
 					<td>${list.price }</td>
 					<td>${list.location }</td>
 					<td><button onclick="location.href='deleteAdminView?seq=${list.seq }&code=${list.code }'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#ff6347; color:white;">삭 제</button></td>
@@ -64,12 +64,12 @@
 		<tbody>
 			<c:if test="${list.code eq 'hospital' }">
 							<c:if test="${rs.rows[0].businessNumber eq list.businessNumber }">
-				<tr onclick="location.href='getAdminView?seq=${list.seq }'">
+				<tr>
 				<c:if test="${loginID eq 'admin' }">
 					<td>${list.seq }</td>
 					<td>${list.code }</td>
 				</c:if>
-					<td>${list.name }</td>
+					<td onclick="location.href='getAdminView?seq=${list.seq }'">${list.name }</td>
 					<td>${list.price }</td>
 					<td>${list.location }</td>
 					<td><button onclick="location.href='deleteAdminView?seq=${list.seq }&code=${list.code }'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#ff6347; color:white;">삭 제</button></td>
