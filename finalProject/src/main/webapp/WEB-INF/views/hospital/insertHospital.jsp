@@ -22,21 +22,40 @@
 		}
 	});
 	//이미지 미리보기
-	$("#image").change(function(){
-	       if(this.files && this.files[0]) {
-	        var reader = new FileReader;
-	        reader.onload = function(data) {
-	         $("#viewImg img").attr("src", data.target.result).width(500);            
-	        }
-	        reader.readAsDataURL(this.files[0]);
-	      }
-	   });
+	$("#image").change(
+			function() {
+				if (this.files && this.files[0]) {
+					var reader = new FileReader;
+					reader.onload = function(data) {
+						$("#viewImg img").attr("src", data.target.result)
+								.width(auto);
+					}
+					reader.readAsDataURL(this.files[0]);
+				}
+			});
+	$("#opbtn").on("click", function() {
+		var option = $(this).parent().prev().children("div").first();
+		var newoption = option.clone(true);
+		$(option).after(newoption);
+		console.log(option);
+	})
+	$("#close").on("click", function() {
+		var div = $(this).parent().siblings("div");
+		console.log(div.length);
+		if (div.length == 0) {
+			alert("필수항목입니다.");
+		} else {
+			$(this).parent().remove();
+		}
+	})
+	
+	
 	
 	});
 </script>
 </head>
 <body>
-	<h3>병원 상품 등록</h3>
+	<br><h3>병원 상품 등록</h3><br>
 	<form id="frm" action="insertHospital" encType="multipart/form-data"
 		method="post">
 		<input type="hidden" id="businessNumber" name="businessNumber"
@@ -44,26 +63,17 @@
 		<table border="1">
 			<tr>
 				<th>사업자명</th>
-				<td><input type="text" id="businessCompanyName"
+				<td colspan="2"><input type="text" id="businessCompanyName"
 					name="businessCompanyName" value="${business.businessCompanyName }"
 					readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th>위치</th>
-				<td><select id="location" name="location">
-						<option>선택해주세요</option>
-						<option value="서울특별시">서울특별시</option>
-						<option value="인천광역시">인천광역시</option>
-						<option value="부산광역시">부산광역시</option>
-						<option value="대구광역시">대구광역시</option>
-						<option value="광주광역시">광주광역시</option>
-						<option value="대전광역시">대전광역시</option>
-						<option value="울산광역시">울산광역시</option>
-				</select></td>
+				<td colspan="2"><input type="text" id="location" name="location" value="${business.address }" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th>진료구분</th>
-				<td><select id="category1" name="category1">
+				<td colspan="2"><select id="category1" name="category1">
 						<option>선택해주세요</option>
 						<option value="수술/치료">수술/치료</option>
 						<option value="예방접종">예방접종</option>
@@ -73,35 +83,39 @@
 			</tr>
 			<tr>
 				<th>상세구분</th>
-				<td><select id="category2" name="category2">
+				<td colspan="2"><select id="category2" name="category2">
 						<option>선택해주세요</option>
 				</select></td>
 			</tr>
 			<tr>
 				<th>진료명</th>
-				<td><input type="text" name="name" id="name"></td>
+				<td colspan="2"><input type="text" name="name" id="name"></td>
 			</tr>
 			<tr>
-				<th>옵션명</th>
-				<td><input type="text" name="optionName" id="optionName"></td>
-			</tr>
-			<tr>
-				<th>금액</th>
-				<td><input type="number" name="price" id="price"></td>
-			</tr>
+					<th>옵션</th>
+					<td style="border: none;">
+					<div>
+							<input type="text" name=optionNameList>&nbsp; 
+							<label>옵션가격</label>&nbsp;
+							<input type="number" name="optionPriceList">
+							<span id="close" style="cursor: pointer; padding: 10px; color: #212529;">x</span>
+						</div>
+					</td>
+					<td style="border: none;"><button type="button" id="opbtn">추가</button></td>
+				</tr>
 			<tr>
 				<th>타이틀 이미지</th>
-				<td><input type="file" name="t_uploadFile" id="t_image"
+				<td colspan="2"><input type="file" name="t_uploadFile" id="t_image"
 					size="100%" multiple="multiple"></td>
 			</tr>
 			<tr>
 				<th>상세 이미지</th>
-				<td><input type="file" name="uploadFile" id="image" size="100%"
+				<td colspan="2"><input type="file" name="uploadFile" id="image" size="100%"
 					multiple="multiple"></td>
 			</tr>
 			<tr>
 				<th>미리보기</th>
-				<td id="viewImg" style="height: 400px; overflow: scroll;"><img></td>
+				<td colspan="2" id="viewImg" style="height: 400px; overflow: scroll;"><img></td>
 			</tr>
 		</table>
 		<br>
