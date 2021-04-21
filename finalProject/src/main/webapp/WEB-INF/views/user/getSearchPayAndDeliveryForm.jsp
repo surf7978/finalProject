@@ -85,8 +85,6 @@
 	</c:forEach>
 </table>
 <br/>
-<button type="button" class="getSearchReservation" onclick="location.href='getSearchReservation?memberId=${loginID}'">캘린더조회</button>
-
 		
 <script>
 	$(function(){

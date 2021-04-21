@@ -302,7 +302,7 @@
 									<a href="getSearchViewMember">마이페이지</a>
 								</c:if>
 								<c:if test="${loginID ne 'admin'}">	
-									<a href="getMember1?memberId=${loginID}">마이페이지</a>
+									<a href="getMember1">마이페이지</a>
 								</c:if>
 							</c:if>
 							<c:if test="${loginAuth eq 'b'}">

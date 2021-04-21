@@ -15,11 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
@@ -74,15 +76,13 @@ public class Controller2 {
 
 	////// 마이페이지-유저///////////
 	// 일반회원 본인정보 조회
-	// admin이 로그인해서 회원들의 정보를 볼려고 클릭하면 자신의 정보가 나와서 .equals("admin")추가해서 자기정보가 아닌 회원의
-	////// 정보조회하게 함
+	// admin이 로그인해서 회원들의 정보를 볼려고 클릭하면 자신의 정보가 나와서 .equals("admin")추가해서 자기정보가 아닌 회원의 정보조회하게 함
 	@GetMapping("/getMember1")
 	public String getMember(MemberVO vo1, Model model, HttpSession session) {
 		if (session.getAttribute("loginID").equals("admin")) {
 			model.addAttribute("member", memberService.getMember(vo1));
 		} else {
-			MemberVO vo = new MemberVO();
-			vo.setMemberId((String) session.getAttribute("loginID"));
+			vo1.setMemberId((String) session.getAttribute("loginID"));
 			model.addAttribute("member", memberService.getMember(vo1));
 		}
 		return "user/memberInfo";

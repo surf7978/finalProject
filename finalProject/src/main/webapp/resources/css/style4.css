@@ -59,6 +59,15 @@
 	color: white;
 }
 
+.insertReservationBtn {
+	padding: 10px;
+	width: 80px;
+	border: none;
+	border-radius: 5px;
+	background-color: #e7ab3c;
+	color: white;
+}
+
 .updateReservationBtn {
 	padding: 10px;
 	width: 80px;
