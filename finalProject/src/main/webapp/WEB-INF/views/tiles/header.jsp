@@ -127,7 +127,7 @@
 					<c:if test="${loginID ne 'admin'}">
 					<!-- 로그인한 사용자의 장바구니 내용 -->
 					<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
-					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
+					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
 					 user="final" password="a20210409A"/>
 					<sql:query var="rs" dataSource="${ds }">
 					    select COUNT(*) count from cart where memberId = '${loginID}'

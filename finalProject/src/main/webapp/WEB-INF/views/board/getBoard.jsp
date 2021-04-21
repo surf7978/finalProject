@@ -53,7 +53,7 @@ table td {
 	<div id="contents">
 	<!-- 매퍼, 컨트롤러 작성하기 귀찮아서 JSP에서 바로 쿼리때림 -->
 	<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
-	 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
+	 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
 	 user="final" password="a20210409A"/>
 		<h1>자유게시판</h1>
 		<div id="aban_location"></div>
