@@ -42,7 +42,7 @@
 			)			
 	</insert>
 	<!-- 장바구니 결제 insert -->
-	<insert id="insertCartBuy" parameterType="List">
+	<insert id="insertCartBuy" parameterType="java.util.List">
 		INSERT INTO BUY
 			(BUYNUMBER
 			,CATEGORY
@@ -63,12 +63,8 @@
 			(
 				(SELECT NVL(MAX(BUYNUMBER),0)+1 FROM BUY)
 				,#{vo.category}
-				,<foreach item="opname" collection="vo.optionNameList" open="'" separator="," close="'" >
-				${opname}
-				</foreach>
-				,<foreach item="count" collection="vo.countList" open="'" separator="," close="'" >			
-				${count}
-				</foreach>
+				,#{vo.optionName}
+				,#{vo.count}
 				,#{vo.price}
 				,#{vo.fromPerson}
 				,#{vo.toPerson}

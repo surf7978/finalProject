@@ -50,6 +50,18 @@
 		FROM PRODUCT
 		WHERE PRODUCTNUMBER = #{productNumber}
 	</select>
+	<!-- 장바구니 -->
+	<select id="cartGetProduct" resultType="ProductVO"
+		parameterType="ProductVO">
+		SELECT
+		CATEGORY,
+		PRODUCTNUMBER
+		FROM PRODUCT
+		WHERE PRODUCTNUMBER IN
+		<foreach item='seq' collection='productNumberList' open='(' separator=',' close=')' >
+			 #{seq} 
+		</foreach>
+	</select>
 	<insert id="insertProduct" parameterType="ProductVO">
 		INSERT INTO
 		PRODUCT(
