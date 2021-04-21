@@ -117,8 +117,10 @@
 				<button class="write" id="btn">이벤트 등록</button>
 			</c:if>
 		<h1>이벤트</h1>
+		<!-- 
 		<div id="pro_location">
 		</div>
+		 -->
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>

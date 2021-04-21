@@ -113,14 +113,15 @@
 </script>
 </head>
 <body>
-	<br>
 			<c:if test="${loginID eq 'admin' }">
 				<button id="btn" class="write">글쓰기</button>
 			</c:if>
 	<div id="contents">
 		<h1>자랑하기</h1>
+		<!-- 
 		<div id="pro_location">
 		</div>
+		 -->
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>
