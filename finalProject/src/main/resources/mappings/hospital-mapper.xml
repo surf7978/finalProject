@@ -20,6 +20,7 @@
 		, T_IMAGE
 		, IMAGE
 		FROM HOSPITAL
+		ORDER BY SEQ DESC
 	</select>
 	<!-- 병원상품 상세화면조회 -->
 	<select id="getHospital" parameterType="HospitalVO"

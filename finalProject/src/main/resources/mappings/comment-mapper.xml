@@ -31,11 +31,11 @@
 	
 	<!-- 단건조회 -->
 	<select id="getComment" resultType="CommentVO">
-		SELECT * FROM Comments WHERE COMMENTNUMBER = #{commentNumber}
+		SELECT * FROM Comments WHERE COMMENTNUMBER = #{commentNumber} ORDER BY CALENDAR DESC
 	</select>
 	
 	<!-- 전체조회 -->
 	<select id="getSearchComment" resultType="CommentVO">
-		SELECT * FROM Comments
+		SELECT * FROM Comments ORDER BY CALENDAR DESC
 	</select>
 </mapper>

@@ -15,8 +15,10 @@
 	<table border="1" style="text-align:center;">
 		 <thead> 
 			 <tr> 
+			 	<c:if test="${loginID eq 'admin' }">
 				 <th style="width:100px; font-size:30px;">글번호</th>
 				 <th style="width:100px; font-size:30px;">분류</th>
+				</c:if>
 				 <th style="width:250px; font-size:30px;">글제목</th>
 				 <th style="width:150px; font-size:30px;">가격</th>
 				 <th style="width:100px; font-size:30px;">지역</th>
@@ -63,8 +65,10 @@
 			<c:if test="${list.code eq 'hospital' }">
 							<c:if test="${rs.rows[0].businessNumber eq list.businessNumber }">
 				<tr onclick="location.href='getAdminView?seq=${list.seq }'">
+				<c:if test="${loginID eq 'admin' }">
 					<td>${list.seq }</td>
 					<td>${list.code }</td>
+				</c:if>
 					<td>${list.name }</td>
 					<td>${list.price }</td>
 					<td>${list.location }</td>
@@ -81,8 +85,10 @@
 			<c:if test="${list.code ne 'hospital' }">
 							<c:if test="${rs.rows[0].businessNumber eq list.businessNumber }">
 				<tr onclick="location.href='getSearchInfo?seq=${list.seq }'">
+				<c:if test="${loginID eq 'admin' }">
 					<td>${list.seq }</td>
 					<td>${list.code }</td>
+				</c:if>
 					<td>${list.name }</td>
 					<td>${list.price }</td>
 					<td>${list.location }</td>
