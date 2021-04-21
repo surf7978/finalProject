@@ -28,10 +28,7 @@
 		WHERE CATEGORY = #{category}
 		<if test="categoryList != null">
 		AND CATEGORY2 IN
-			 <foreach item="cate" collection="categoryList"
-			      open="(" separator="," close=")" >
-			        #{cate}
-			  </foreach>
+			 <foreach item="cate" collection="categoryList" open="(" separator="," close=")" >#{cate}</foreach>
 		</if>
 		ORDER BY PRODUCTNUMBER
 		<!-- end of query -->
@@ -73,14 +70,8 @@
 		,#{image}
 		,#{t_image}
 		,#{productName}
-		,<foreach item="opname" collection="optionNameList"
-			      open="'" separator="," close="'" >
-			        ${opname}
-		</foreach>
-		,<foreach item="opprice" collection="optionPriceList"
-			      open="'" separator="," close="'" >
-			        ${opprice}
-		</foreach>
+		<foreach item="opname" collection="optionNameList" open=",'" separator="," close="'" >${opname}</foreach>
+		<foreach item="opprice" collection="optionPriceList" open=",'" separator="," close="'" >${opprice}</foreach>
 		,#{productState}
 		,#{memberId}
 		)

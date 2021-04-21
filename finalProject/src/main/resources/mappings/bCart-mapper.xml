@@ -5,7 +5,7 @@
 	<!-- 등록 -->
 	<insert id="insertBCart">
 		INSERT INTO BCART(
-			BCARTNUMBER,
+			CARTNUMBER,
 			IMAGE1,
 			NAME,
 			OPTIONNAME,
@@ -39,14 +39,15 @@
 	</update>
 	<!-- 삭제 -->
 	<delete id="deleteBCart">
-		DELETE FROM BCART
-		WHERE MEMBERID = #{memberId}
-		<foreach item="seq" collection="bcartNumber" open="(" close=")" separator="," >
-			AND BCARTNUMBER = #{seq}
+	DELETE FROM BCART
+	WHERE MEMBERID = #{memberId}
+	AND CARTNUMBER IN
+		<foreach item="seq" collection="cartNumbers" open="(" separator="," close=")" >
+			 #{seq} 
 		</foreach>
 	</delete>
 	<!-- 장바구니 단건조회 -->
-	<select id="getBCart" resultType="bCartVO">
+	<select id="getBCart" resultType="CartVO">
 		SELECT * FROM BCART
 		WHERE
 		MEMBERID = #{memberId}

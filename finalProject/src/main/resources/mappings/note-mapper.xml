@@ -16,6 +16,7 @@
               , TO_CHAR(CALENDAR2, 'yyyy-mm-dd') AS CALENDAR2
 		FROM NOTE 
 		WHERE ANIMALNUMBER=#{animalNumber}
+		ORDER BY NOTENUMBER
 	</select>
 	
 	<!-- 단건조회 -->
@@ -73,6 +74,13 @@
 	DELETE FROM NOTE
 	WHERE NOTENUMBER = #{noteNumber}
 	</delete>
+	
+	<!-- 반려동물 삭제시 의료수첩 리스트 삭제 -->
+	<delete id="deleteAnimalNote" parameterType="NoteVO">
+	DELETE FROM NOTE
+	WHERE ANIMALNUMBER = #{animalNumber}
+	</delete>
+	
 	
 	<!-- 의료내역 건수 & 합계 출력 -->
 	<select id="getNoteCount" parameterType="NoteVO" resultType="NoteVO">

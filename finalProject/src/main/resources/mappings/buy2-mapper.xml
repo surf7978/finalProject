@@ -23,8 +23,12 @@
 			)VALUES(
 				(SELECT NVL(MAX(BUYNUMBER),0)+1 FROM BUY)
 				,#{category}
-				,#{optionName}
-				,#{count}
+				,<foreach item="opname" collection="optionNameList" open="'" separator="," close="'" >
+				${opname}
+				</foreach>
+				,<foreach item="count" collection="countList" open="'" separator="," close="'" >			
+				${count}
+				</foreach>
 				,#{price}
 				,#{fromPerson}
 				,#{toPerson}
@@ -36,5 +40,46 @@
 				,#{pndNumber}
 				,'결제완료'
 			)			
+	</insert>
+	<!-- 장바구니 결제 insert -->
+	<insert id="insertCartBuy" parameterType="List">
+		INSERT INTO BUY
+			(BUYNUMBER
+			,CATEGORY
+			,OPTIONNAME
+			,COUNT
+			,PRICE
+			,FROMPERSON
+			,TOPERSON
+			,POST
+			,ADDRESS
+			,ADDRESS2
+			,PHONE
+			,PRODUCTNUMBER
+			,PNDNUMBER
+			,BUYSTATE			
+			)VALUES
+			<foreach collection="list" item="vo" separator=",">
+			(
+				(SELECT NVL(MAX(BUYNUMBER),0)+1 FROM BUY)
+				,#{vo.category}
+				,<foreach item="opname" collection="vo.optionNameList" open="'" separator="," close="'" >
+				${opname}
+				</foreach>
+				,<foreach item="count" collection="vo.countList" open="'" separator="," close="'" >			
+				${count}
+				</foreach>
+				,#{vo.price}
+				,#{vo.fromPerson}
+				,#{vo.toPerson}
+				,#{vo.post}
+				,#{vo.address}
+				,#{vo.address2}
+				,#{vo.phone}
+				,#{vo.productNumber}
+				,#{vo.pndNumber}
+				,'결제완료'
+			)	
+			</foreach>		
 	</insert>
 </mapper>

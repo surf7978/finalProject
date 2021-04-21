@@ -5,7 +5,7 @@
 <head>
 <title>Home</title>
 </head>
-<body>
+<body> 
 <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="hero-items owl-carousel">
@@ -252,7 +252,7 @@
 		<a href="logout">로그아웃</a>
 	</c:if>
 	<a href="getMember">회원정보조회</a>
-	<a href="getSearchPayAndDelivery">구매내역조회</a>
+	<a href="getSearchPayAndDeliveryForm">구매내역조회</a>
 	<a href="getSearchReservationBusi">예약내역조회</a>
 	<a href="getViewReservation2">사업자용리스트 조회(예비)</a>
 	<a href="getSearchAnimal">마이펫수첩</a> <p></p>

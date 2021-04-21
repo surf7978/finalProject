@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- 단건조회 아작스 -->
@@ -66,31 +67,6 @@
 			ESCbtn.parent().empty();
 		})
 	})
-	//장바구니
-	$(function(){
-		insertCart();
-	});//end of function
-	//장바구니에 등록
-	function insertCart(){
-		$("#btnCart").on("click",function(){
-			var vo = $("#frm").serialize();
-			//장바구니 DB에 넣기
-			$.ajax({
-				url:"insertBCart",
-				data:vo,
-				dataType:"json",
-				//callback으로 변경하는 법 배워서 바꾸기
-				success: function (result){
-					if(result == 1){
-						var y = confirm('상품이 장바구니에 담겼습니다\n지금 확인 하시겠습니까?');
-						if(y){
-							location.href='getSearchTotalCartForm'
-						}//end of if
-					}//end of if
-				}//end of success
-			})//end of ajax
-		})//end of btnCart
-	}//end of insertCart
 	
 </script>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
@@ -209,8 +185,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
 							<div>
-								<button type="button" id="btnCart"style="padding:10px; width:220px; border:none; border-radius:5px; background-color:#adff2f;">장바구니 담기</button>
-								<button type="button" id="b_btn" style="padding:10px; width:220px; border:none; border-radius:5px;">바로구매</button>
+								<button type="button" id="b_btn" style="padding:10px; width:440px; border:none; border-radius:5px;">바로구매</button>
 							</div>
 						</li>
 					</ul>
@@ -234,8 +209,8 @@ hospital.businessNumber : ${hospital.businessNumber}
 	
 	<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
 <h4 id="content22">구매평
-<c:if test="${not empty reservation.reservationDate }">
-<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')">구매평 등록하기</button>
+<c:if test="${not empty reservation.reservationDate && reservation.reviewNumber eq null }">
+<button type="button" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
 </c:if>
 </h4>
 <hr style="align:center; text-align:left; background-color: black;">

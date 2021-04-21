@@ -105,7 +105,7 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2">
 						<div class="logo">
-							<a href="/finalProject"> <img src="resources/img/logo.png" alt="">
+							<a href="${pageContext.request.contextPath}"> <img src="resources/img/logo.png" alt="">
 							</a>
 						</div>
 					</div>
@@ -130,37 +130,37 @@
 					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
 					 user="final" password="a20210409A"/>
 					<sql:query var="rs" dataSource="${ds }">
-					    select COUNT(*) count, sum(OPTIONPRICE) sum from cart where memberId = '${loginID}'
+					    select COUNT(*) count from cart where memberId = '${loginID}'
 					</sql:query>
 					<sql:query var="rs1" dataSource="${ds }">
 					    select * from cart where memberId = '${loginID}'
 					</sql:query>
 						<ul class="nav-right">
-							<li class="cart-price">장바구니 합계 : </li>
+							<li class="cart-price">장바구니 </li>
 							<!-- 
 							<li class="heart-icon"><a href="#"> <i
 									class="icon_heart_alt"></i> <span>1</span>
 							</a></li>
 							 -->
-							<li class="cart-icon"><a href="#"> 
+							<li class="cart-icon"><a href="getSearchTotalCartForm"> 
 								<i class="icon_bag_alt"></i> 
 							<c:if test="${not empty rs}">
 								<span>${rs.rows[0].count}</span>
 							</c:if>
 							</a>
-								<div class="cart-hover">
+								<div class="cart-hover"  style="width:500px;">
 									<div class="select-items">
 										<table>
 											<tbody>
 											<c:if test="${not empty rs1}">
 											<c:forEach items="${rs1.rows }" var="list">
 												<tr>
-													<td class="si-pic"><img
-														src="resources/img/${list.image }" alt=""></td>
+													<td class="si-pic"><img style="width:150px; height:100px;"
+														src="resources/images/products/${list.image }" alt=""></td>
 													<td class="si-text">
 														<div class="product-selected">
 															<h6>${list.optionName }</h6>
-															<p>${list.optionPrice }원</p>
+															<p>${list.optionPrice } 원</p>
 														</div>
 													</td>
 													<!-- 이거 걍 X 표시임 
@@ -172,17 +172,19 @@
 											</tbody>
 										</table>
 									</div>
+									<!-- 
 									<div class="select-total">
 										<span>total :</span>
 										<c:if test="${not empty rs}">
-											<h5>${rs.rows[0].sum}원</h5>
+											<h5>총합계 : 원</h5>
 										</c:if>
 									</div>
+									 -->
 									<div class="select-button">
 										<!-- 
 										<a href="#" class="primary-btn view-card">VIEW CARD</a> 
 										 -->
-										<a href="#" class="primary-btn checkout-btn" style="font-size:17px;">상 세 보 기</a>
+										<a href="getSearchTotalCartForm" class="primary-btn checkout-btn" style="font-size:17px;">상 세 보 기</a>
 									</div>
 								</div></li>
 						</ul>
@@ -236,7 +238,7 @@
 										<li><a href="getBusiness99?businessId=${loginID}">회원정보조회</a></li>
 										<li><a href="#">게시글관리</a></li>
 									</c:if>
-									<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
+									<li><a href="getSearchPayAndDeliveryForm">구매내역조회</a></li>
 									<c:if test="${loginID ne 'admin'}">
 											<li><a href="getSearchAnimal">마이펫수첩</a></li>
 										</c:if>
@@ -273,22 +275,24 @@
 							 -->
 						</li>
 						<li><a href="getAbanList">보호소</a></li>	
-						<li><a>커뮤니티</a>
+						<li><a href="getSearchEventAndNoticeSelect2">커뮤니티</a>
 							<ul class="dropdown">
 								<li><a href="getSearchEventAndNoticeSelect2">공지사항</a></li>
 								<li><a href="getSearchEventAndNoticeSelectForm?category=1">이벤트</a></li>
 								<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
 								<li><a href="getSearchBoardCategiry2Form">자랑하기</a></li>
 							</ul></li>
-						<li><a>고객센터</a>
+						<li><a href="FAQ">고객센터</a>
 							<ul class="dropdown">
+								<li><a href="FAQ">자주하는질문</a></li>
 								<c:if test="${not empty loginID}">
 								<c:if test="${loginID ne 'admin' }">
 									<li><a href="insertQuestion2">문의하기</a></li>
+									<!-- 
 									<li><a href="insertQuestion3">신고하기</a></li>
+									 -->
 								</c:if>
 								</c:if>
-								<li><a href="#">자주하는질문</a></li>
 								<li><a href="buyCancel">환불규정</a></li>
 							</ul></li>
 								<c:if test="${not empty loginID}">
@@ -298,7 +302,7 @@
 									<a href="getSearchViewMember">마이페이지</a>
 								</c:if>
 								<c:if test="${loginID ne 'admin'}">	
-									<a href="getMember1?memberId=${loginID}">마이페이지</a>
+									<a href="getMember1">마이페이지</a>
 								</c:if>
 							</c:if>
 							<c:if test="${loginAuth eq 'b'}">
@@ -323,7 +327,7 @@
 											<li><a href="getViewReservation2">예약내역조회</a></li>
 										</c:if>
 										<c:if test="${loginAuth eq 'm'}">
-										<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
+										<li><a href="getSearchPayAndDeliveryForm">구매내역조회</a></li>
 										</c:if>
 										
 										<c:if test="${loginID ne 'admin'}">

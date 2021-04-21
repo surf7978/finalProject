@@ -20,8 +20,10 @@
 		, ADDRESS
 		, ADDRESS2
 		, PHONE 
+		, REVIEWNUMBER
 		FROM BUY
 		WHERE PNDNUMBER=#{pndNumber}
+		ORDER BY BUYNUMBER
 	</select>
 
 	<!-- reviewProduct VIEW 한건 조회하기 -->
@@ -38,5 +40,35 @@
 		FROM REVIEWPRODUCT
 		WHERE BUYNUMBER=#{buyNumber}
 	</select>
+	
+	<!-- 구매내역 한 건 조회 for구매평등록 -->
+	<select id="getBuy" parameterType="BuyVO" resultType="BuyVO">
+	SELECT BUYNUMBER
+		, CATEGORY
+		, OPTIONNAME
+		, COUNT
+		, PRICE
+		, BUYSTATE
+		, PRODUCTNUMBER
+		, PNDNUMBER
+		, FROMPERSON
+		, TOPERSON
+		 ,POST
+		, ADDRESS
+		, ADDRESS2
+		, PHONE
+		, REVIEWNUMBER
+		FROM BUY
+		WHERE FROMPERSON=#{fromPerson}
+		AND PRODUCTNUMBER=#{productNumber}
+	</select>
+	
+	<!-- 구매평등록시 Buy테이블에 리뷰번호 등록 -->
+	<update id="insertReview3" parameterType="BuyVO">
+		 UPDATE BUY
+		 SET
+		 REVIEWNUMBER='리뷰등록'
+		 WHERE BUYNUMBER = #{buyNumber}
+	</update>
 	
 </mapper>

@@ -56,7 +56,7 @@
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 
-			<h3 align="center">고객센터문의 현황</h3>
+			<h3 align="center">관리자 문의 받은 내역</h3>
 	<br><br>
 <div id="outter">
 	<div  style=" display: none;  float: bottom; ">
@@ -78,22 +78,18 @@
 
 <thead>
 <tr class="th">
-<th width="60">번호</th>
-<th width="200">제목</th>
-<th scope="col">날짜</th>
-<th scope="col" width="60">글쓴이</th>
-<th scope="col" width="60">아이디</th>
+<th width="300">제목</th>
+<th scope="col" width="300">날짜</th>
+<th scope="col" width="100">보낸사람</th>
 </tr>
 </thead>
 <tbody>
 <c:forEach var="list" items="${viewAll}">
 <tr onclick="location.href='getQuestion2?questionNumber=${list.questionNumber}'">
 
-<td >${list.questionNumber}</td>
 <td >${list.title}</td>
 <td>${list.calendar}</td>
 <td >${list.writer}</td>
-<td>${list.memberId} </td>
 </tr>
 </c:forEach>
 

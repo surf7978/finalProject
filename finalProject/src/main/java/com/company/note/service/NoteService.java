@@ -9,4 +9,5 @@ public interface NoteService {
 	public int updateNote(NoteVO vo);	//의료내역 수정
 	public int deleteNote(NoteVO vo);	//의료내역 삭제
 	public NoteVO getNoteCount(NoteVO vo);	//의료내역 건수 & 합계 출력
+	public int deleteAnimalNote(NoteVO vo); //반려동물 삭제시 의료수첩리스트 삭제
 }

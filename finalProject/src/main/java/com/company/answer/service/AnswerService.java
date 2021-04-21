@@ -39,4 +39,6 @@ public interface AnswerService {
 	// 페이징 처리 
 	public List<AnswerVO> getSearchAnswerCr4(PagingVOCr4 vo); 
 	
+	public List<AnswerVO> getUserAnswer(AnswerVO vo);	//마이페이지-유저-답변 받은 내역
+	
 }

@@ -8,16 +8,83 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 단건조회 아작스 -->
+<script>
+	$(function(){
+		$(".reviewNumber").on("click", ".getReview", function(){
+			var btn = $(this);
+			console.log(btn.prev().prev().prev().val());//span개수만큼 해줘야함
+			$.ajax({
+				url:"getReview99",
+				type:"post",
+				dataType:"json",
+				data:{"reviewNumber":btn.prev().prev().prev().val()},
+				success:function(data){
+					console.log(data);
+					btn.closest(".reviewNumber").next().text("");
+					btn.closest(".reviewNumber").next().append("<br>");
+					btn.closest(".reviewNumber").next().append("ㄴ "+data.content);
+					btn.closest(".reviewNumber").next().append("&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' class='ESC' value='▲' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>");//닫기 버튼 생성
+					btn.remove();
+				}
+			})
+		})
+		//내용 닫기
+		$(".getReviewResult").on("click", ".ESC", function(){//이렇게 그룹이벤트로 해줘야 생성된 버튼 동작함
+			var ESCbtn = $(this);
+			ESCbtn.parent().prev().append("<input type='button' class='getReview' value='▼' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>")
+			ESCbtn.parent().empty();
+		})
+	})
+	
+	$(function(){
+		$(".questionNumber").on("click", ".getQuestion", function(){
+			var btn1 = $(this);
+			console.log(btn1.prev().prev().prev().val());//span개수만큼 해줘야함
+			$.ajax({
+				url:"getQuestionProbis",
+				type:"post",
+				dataType:"json",
+				data:{"questionNumber":btn1.prev().prev().prev().val()},
+				success:function(data){
+					console.log(data);
+					btn1.closest(".questionNumber").next().text("");
+					btn1.closest(".questionNumber").next().append("<br>");
+					btn1.closest(".questionNumber").next().append("ㄴ "+data.content);
+					btn1.closest(".questionNumber").next().append("&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' class='ESC' value='▲' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>");//닫기 버튼 생성
+					btn1.remove();
+				}
+			})
+		})
+		//내용 닫기
+		$(".getQuestionResult").on("click", ".ESC", function(){//이렇게 그룹이벤트로 해줘야 생성된 버튼 동작함
+			var ESCbtn = $(this);
+			ESCbtn.parent().prev().append("<input type='button' class='getQuestion' value='▼' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>")
+			ESCbtn.parent().empty();
+		})
+	})
+	
+</script>
 <script>
 $(document).ready(function() { //function시작			
 		//결제페이지로 이동
 		$("#contents").on("click","#b_btn",function() {
 							var resultPrice = $("[name=resultPrice]").text();
-							var count = $("[name=count]").val();
+							var count = [];
 							var pro = $("#pro_result").text();
 							var loginId = $("[name=memberId]").val();
+							var optionNameList =[];
+							$("[name=countList]").each(function(){
+								count.push($(this).val());
+							});
+							$("[name=optionNameList]").each(function(){
+								optionNameList.push($(this).text());
+							});
+							var optionPriceList =[];
+							$("[name=optionPriceList]").each(function(){
+								optionPriceList.push($(this).val());
+							});
 							//상품선택 로그인 체크
 							if (pro == "") {
 								alert("상품을 선택해주세요");
@@ -31,7 +98,7 @@ $(document).ready(function() { //function시작
 							} else {
 								location.href = "PayInfoForm?productNumber=${product.productNumber }&resultPrice="
 										+ resultPrice
-										+ "&memberId=${loginID}&count=" + count;
+										+ "&memberId=${loginID}&countList=" + count + "&optionNameList=" + optionNameList + "&optionPriceList=" + optionPriceList;										
 							}
 						});
 		//삭제버튼 클릭
@@ -49,19 +116,25 @@ $(document).ready(function() { //function시작
 			//select option 선택 클릭 이벤트
 			$("#optionName").on("click", function() {
 						var optionPrice = $("#optionName option:selected").val();
-						var optionName = $("#optionName option:selected").text();
+						var optionName = $("#optionName option:selected").text();						
 						var navlen = $("#pro_show").find("nav").length;
 						if (optionPrice != "" && navlen == 0) {
 							optionSelect();	//옵션 생성 function 호출					
 						}else if(optionPrice != "" && navlen != 0){
+							var fat = true;
 							$("#pro_show nav").each(function(i){
-								var option = $("#pro_show nav").find("span").eq(i).text();
+								var option = $("#pro_show nav").find("[name=optionNameList]").eq(i).val();
 								if(option == optionName){
+									alert("이미 선택한 상품입니다.");
+									fat = false;
 									return false;
-								}
-								optionSelect();
+								}else{
+									fat = true;
+								}										
 							})
-						}
+							if(fat == true) optionSelect();
+							$("#optionName option").prop("selected", false);
+							}
 						$("#optionName option").prop("selected", false);
 						resultSum()
 					})
@@ -69,8 +142,18 @@ $(document).ready(function() { //function시작
 				resultSum();
 			});
 		//장바구니 
-		insertCart();
-	});	
+		insertCart()
+		//close 버튼
+		$("#pro_show").on("click", "nav a#close", function(){
+			$(this).parent().remove();
+			resultSum()
+			var div = $("#pro_show nav").find("div").length;
+			if(div ==0){
+				var result = $("#pro_result");
+				result.empty();
+			}
+		})
+});//function of end
 	//장바구니에 등록
 	function insertCart() {
 		$("#btnCart").on("click", function() {
@@ -100,8 +183,8 @@ $(document).ready(function() { //function시작
 		result.empty();
 		var sum = 0;
 		for (var i = 0; i < nav.length; i++) {
-			var count = $(nav).eq(i).find("[name=count]").val();
-			var price = $(nav).eq(i).find("p").text();
+			var count = $(nav).eq(i).find("[name=countList]").val();
+			var price = $(nav).eq(i).find("[name=optionPriceList]").val();
 			sum += (count * price);
 		}
 		result.text(sum);
@@ -110,26 +193,27 @@ $(document).ready(function() { //function시작
 	//옵션선택function
 	function optionSelect(){
 		var optionPrice = $("#optionName option:selected").val();
+		var price = optionPrice.replace(/\s/gi, "");
 		var optionName = $("#optionName option:selected").text();
 		var navlen = $("#pro_show").find("nav").length;
-
+		var area = $("<textarea>").attr({"name":"optionNameList", "readonly":"readonly"}).css({"border":"none","height":"auto","width":"100%","overflow":"hidden"}).text(optionName);
 		var nav = $("<nav>").css({
 			"width" : "100%",
-			"position":"relative"
+			"position":"relative",
+			"margin-bottom":"10px"
 		}).attr("id", "proname")
 				.append(
-						$("<span>").text(optionName)
-								.append("<hr>"));
+						$("<div>").append(area).css({"margin":"0","padding":"0","margin-bottom":"10px","width":"95%"}));
 		var input = $("<input>").attr({
 			"type" : "number",
 			"min" : "1",
 			"value" : "1",
-			"name" : "count"
-		});
+			"name" : "countList"
+		}).css("width","50px");
+		var a = $("<a>").attr("id","close").css({"position":"absolute","top":"10px", "right":"10px","cursor":"pointer"}).text("x")
 		var inval = $(input).val();
-		var strong = $("<p>").css("text-align", "right")
-				.text(optionPrice);
-		$(nav).append(input, strong);
+		var strong = $("<p>").css({"float":"right","display":"inline-block"}).append($("<input>").attr({"name":"optionPriceList","readonly":"readonly"}).css({"border":"none","text-align":"right","width":""}).val(price));
+		$(nav).append(input, strong, a);
 		$("#pro_show").append(nav);
 		$("#pro_result").empty();
 		var restrong = $("<dt>").html("총 합계금액");
@@ -157,8 +241,6 @@ $(document).ready(function() { //function시작
 				<form id="frm" name="frm">
 				<input type="hidden" name="image" value="${product.t_image }">
 					<input value="${product.productNumber }" type="hidden" name="productNumber"> 
-					<input value="${product.productName }" type="hidden" name="productName"> 
-					<input value="${product.optionPrice }" type="hidden" name="optionPrice"> 
 					<input value="2500" type="hidden" name="cartCourier">
 					<c:if test="${not empty loginID }">
 						<input value="${loginID }" type="hidden" name="memberId">
@@ -167,7 +249,7 @@ $(document).ready(function() { //function시작
 						<li><img src="resources/images/products/${product.t_image }"></li>
 						<li>
 							<div>
-								<h3><textarea name="optionName" readonly="readonly" style="border:none;width:100%;overflow:hidden;">${product.productName }</textarea></h3>
+								<h3><textarea name="productName" readonly="readonly" style="border:none;width:100%;overflow:hidden;">${product.productName }</textarea></h3>
 							</div>
 							<div>
 								<dl>
@@ -186,18 +268,18 @@ $(document).ready(function() { //function시작
 								</dl>
 							</div>
 							<div>
-								<select name="optionName" id="optionName">
+								<select id="optionName">
 									<option value="">상품선택</option>
 									<c:forTokens items="${product.optionName}" delims="," var="optionName" varStatus="num">
-										<option value="${optionPrice[num.index]}">${optionName }(${optionPrice[num.index]}원)</option>
+										<option value="${optionPrice[num.index]}">${optionName }</option>
 									</c:forTokens>
 								</select>
 							</div>
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
 							<div>
-								<button type="button" id="btnCart">장바구니 담기</button>
-								<button type="button" id="b_btn">바로구매</button>
+								<button type="button" id="btnCart"style="padding:10px; width:220px; border:none; border-radius:5px; ">장바구니 담기</button>
+								<button type="button" id="b_btn" style="padding:10px; width:220px; border:none; border-radius:5px; background-color:#adff2f;">결제하기</button>
 							</div>
 						</li>
 					</ul>
@@ -207,9 +289,9 @@ $(document).ready(function() { //function시작
 				<div class="pro_menu">
 					<ul>
 						<li><a href="#pro_content">상품 상세정보</a></li>
-						<li><a href="#">상품 구매평</a></li>
-						<li><a href="#">상품 문의</a></li>
-						<li><a href="#">취소/환불</a></li>
+						<li><a href="#content22">상품 구매평</a></li>
+						<li><a href="#content33">상품 문의</a></li>
+						<li><a href="#content44">취소/환불</a></li>
 					</ul>
 				</div>
 				<div id="content">
@@ -220,8 +302,54 @@ $(document).ready(function() { //function시작
 			</div>
 		</div>
 	</div>
-	<script>
-		
-	</script>
+	
+<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+<h4 id="content22">구매평
+<c:if test="${not empty reservation.reservationDate && reservation.reviewNumber eq null }">
+<button type="button" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
+</c:if>
+</h4>
+<hr style="align:center; text-align:left; background-color: black;">
+</div>
+<br>
+	<c:forEach items="${review }" var="list">
+		<div class="reviewNumber" style="align:center; width:55%; text-align:left;">
+			<input type="hidden" value="${list.reviewNumber}">
+			<span><c:set var="TextValue" value="${list.writer}"/>${fn:substring(TextValue,0,1)}<c:forEach begin="2" end="${fn:length(TextValue) }" varStatus="loop">*</c:forEach></span> &nbsp;&nbsp;&nbsp;
+			<span>${list.title}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" class="getReview" value="▼" style="font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;">
+		</div>
+		<div class="getReviewResult" style="align:center; width:50%; text-align:left;"></div>
+		<hr style="align:center; width:1090px; text-align:left; padding-left: 20px;position:relative;">
+	</c:forEach>
+	<br><br>
+<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+<h4 id="content33">문의내역
+<c:if test="${not empty loginID }">
+<c:if test="${loginAuth eq 'm' }">
+<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
+</c:if>
+</c:if>
+</h4>
+<hr style="align:center; text-align:left; background-color: black;">
+</div>
+<br>
+	<c:forEach items="${question }" var="list">
+		<div class="questionNumber" style="align:center; width:55%; text-align:left;">
+			<input type="hidden" value="${list.questionNumber}">
+			<span><c:set var="TextValue" value="${list.writer}"/>${fn:substring(TextValue,0,1)}<c:forEach begin="2" end="${fn:length(TextValue) }" varStatus="loop">*</c:forEach></span> &nbsp;&nbsp;&nbsp;
+			<span>${list.title}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" class="getQuestion" value="▼" style="font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;">
+			</div>
+			<div class="getQuestionResult" style="align:center; width:50%; text-align:left;"></div>
+			<hr style="align:center; width:1090px; text-align:left; padding-left: 20px;position:relative;">
+	</c:forEach>
+<br>
+<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+	<h4 id="content44">취소/환불</h4>
+	<hr style="align:center; text-align:left; background-color: black;">
+</div>
+<img src="resources/img/cancel.PNG">
+<br><br><br><br><br>
 </body>
 </html>

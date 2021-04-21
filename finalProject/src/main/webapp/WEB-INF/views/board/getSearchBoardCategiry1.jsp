@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판</title>
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -18,15 +22,6 @@ input.write {
 	border: none;
 	color: white;
 	background-color: #3CB4FF;
-}
-
-input.back {
-	padding: 10px;
-	width: 100px;
-	border-radius: 5px;
-	border: none;
-	color: white;
-	background-color: #FFD732;
 }
 
 /* 게시판 리스트 목록 */
@@ -98,6 +93,13 @@ tr.th {
 	font-size: 17px;
 }
 </style>
+<script>
+	function selChange() {
+		var sel = document.getElementById('cntPerPage').value;
+		location.href = "getSearchBoardCategiry1?nowPage=${paging.nowPage}&cntPerPage="
+				+ sel;
+	}
+</script>
 <body>
 	<div id="contents">
 		<h1>자유게시판</h1>
@@ -128,12 +130,37 @@ tr.th {
 
 				</tbody>
 			</table>
-			<br> <input class="write" type="button" value="글쓰기"
-				onclick="location.href='insertBoard'">
-			<!--<input class="back" type = "button" value="메뉴로" onclick="location.href='getSearchBoard'"> -->
+
+
 		</div>
-		<div id="paging"></div>
+		<br>
+		<div id="paging"
+			style="align: center; display: inline-block; text-align: center;">
+			<c:if test="${paging.startPage != 1 }">
+				<a
+					href="getSearchBoardCategiry1?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+			</c:if>
+			<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+				var="p">
+				<c:choose>
+					<c:when test="${p == paging.nowPage }">
+						<a href="#">${p }</a>
+					</c:when>
+					<c:when test="${p != paging.nowPage }">
+						<a
+							href="getSearchBoardCategiry1?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${paging.endPage != paging.lastPage}">
+				<a
+					href="getSearchBoardCategiry1?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+			</c:if>
+		</div>
 	</div>
 
+	<br>
+	<input class="write" type="button" value="글쓰기"
+		onclick="location.href='insertBoard'">
 </body>
 </html>

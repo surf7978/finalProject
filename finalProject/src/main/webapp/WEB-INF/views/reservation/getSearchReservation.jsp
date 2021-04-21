@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <link href='resources/css/fullcalendar.css' rel='stylesheet' />
 <script src='resources/js/fullcalendar.js'></script>
 <script>
@@ -17,8 +18,12 @@
 			eventSources: [
 				{
 					url: 'getSearchReservationCalendar'
-				}
-			]
+				},
+			],
+			eventMouseover: function(info){
+			
+			    alert("a");
+			}
 		});
 		calendar.render();
 	});
@@ -28,14 +33,14 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-	<table border="1">
+	<table class="table1">
 		<tr>
 			<th>예약번호</th>
 			<th>옵션명</th>
 			<th>예약날짜</th>
 			<th>예약시간</th>
 			<th>예약상태</th>
-			<th>예약변경</th>
+			<th>예약하기</th>
 			<th>환불하기</th>
 		</tr>
 		<c:forEach items="${reservation }" var="res">
@@ -45,8 +50,15 @@
 				<td><c:out value="${res.reservationDate}" /></td>
 				<td><c:out value="${res.reservationTime}" /></td>
 				<td><c:out value="${res.reservationState}" /></td>
-				<td><button type="button" class="updateReservation" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=500, height=500')">예약변경</button></td>
-				<td><button type="button" class="">환불하기</button></td>
+				<td>
+				<c:if test="${res.reservationDate eq null}">
+				<button type="button" class="insertReservationBtn" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=500, height=500')">예약하기</button>
+				</c:if>
+				<c:if test="${res.reservationDate ne null}">
+				<button type="button" class="updateReservationBtn" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=500, height=500')">예약변경</button>
+				</c:if>
+				</td>
+				<td><button type="button" class="updateReservationBtn">환불하기</button></td>
 			</tr>
 		</c:forEach>
 	</table>

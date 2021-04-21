@@ -20,6 +20,7 @@
 		, T_IMAGE
 		, IMAGE
 		FROM HOSPITAL
+		ORDER BY SEQ DESC
 	</select>
 	<!-- 병원상품 상세화면조회 -->
 	<select id="getHospital" parameterType="HospitalVO"
@@ -150,7 +151,7 @@
 				#{cate}
 			</foreach>
 		</if>
-		AND LOCATION = #{location}
+		AND LOCATION like  '%'||#{location}||'%'
 		ORDER BY SEQ
 		<!-- end of query -->
 		) A) B WHERE RN BETWEEN #{start} AND #{end}

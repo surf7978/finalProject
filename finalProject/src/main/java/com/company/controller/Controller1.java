@@ -32,6 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.company.animal.service.AnimalService;
 import com.company.animal.service.AnimalVO;
+import com.company.answer.service.AnswerService;
+import com.company.answer.service.AnswerVO;
 import com.company.board.service.BoardService;
 import com.company.board.service.BoardVO;
 import com.company.business.service.BusinessService;
@@ -40,6 +42,9 @@ import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.cafe.service.CafeService;
 import com.company.cafe.service.CafeVO;
+import com.company.comment.service.CommentService;
+import com.company.comment.service.CommentVO;
+import com.company.comment.service.CommentVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
 import com.company.hospital.service.HospitalSearchVO;
@@ -166,24 +171,24 @@ public class Controller1 {
 			if(memberService.getViewMember(vo).getMemberId().equals((String)userInfo.get("nickname"))) {
 				return "redirect:/";
 			}else {
-				vo.setPassword(" ");
-				vo.setEmail(" ");
+				vo.setPassword("");
+				vo.setEmail("");
 				vo.setName((String)userInfo.get("nickname"));
-				vo.setPost(" ");
-				vo.setAddress(" ");
-				vo.setAddress2(" ");
-				vo.setPhone(" ");
+				vo.setPost("");
+				vo.setAddress("");
+				vo.setAddress2("");
+				vo.setPhone("010-0000-0000");
 				memberService.insertMember(vo);
 				return "redirect:/";
 			}
 		}else {
-			vo.setPassword(" ");
-			vo.setEmail(" ");
+			vo.setPassword("");
+			vo.setEmail("");
 			vo.setName((String)userInfo.get("nickname"));
-			vo.setPost(" ");
-			vo.setAddress(" ");
-			vo.setAddress2(" ");
-			vo.setPhone(" ");
+			vo.setPost("");
+			vo.setAddress("");
+			vo.setAddress2("");
+			vo.setPhone("010-0000-0000");
 			memberService.insertMember(vo);
 			return "redirect:/";
 		}
@@ -249,7 +254,7 @@ public class Controller1 {
 			vo1.setBusinessId(vo.getMemberId());
 			businessService.updateBusiness(vo1);
 		}
-		return "redirect:/loginout";
+		return "redirect:/logout";
 	}
 	
 	//휴대폰인증 페이지 이동-회원가입
@@ -444,7 +449,7 @@ public class Controller1 {
 	@GetMapping("/deleteHospital")
 	public String deleteHospital(HospitalVO vo) {
 		hospitalService.deleteHospital(vo);
-		return "redirect:/getSearchHospital99";
+		return "redirect:/getSearchHospitalForm99";
 	}
 	
 	//마이페이지 사이드바 출력(jsp:include해서 이제 이건 사용안함)
@@ -626,6 +631,56 @@ public class Controller1 {
 		model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
 		
 		return "hospital/getHospital";
+	}
+	
+	// 상세조회에서 상품문의 등록페이지 이동
+	@GetMapping("/insertQuestionBusi99")
+	public String insertQuestionBusi(CafeVO vo, MemberVO vo1, String seq, String businessNumber, Model model,
+			HttpSession session) {
+		// 상품번호 담기
+		model.addAttribute("seq", seq);
+		vo.setSeq(seq);
+		model.addAttribute("vo", cafeService.adminView(vo));
+
+		// 작성자 이름 담기
+		vo1.setMemberId((String) session.getAttribute("loginID"));
+		model.addAttribute("member", memberService.getMember(vo1));
+
+		// 사업자 아이디 담기
+		BusinessVO vo2 = new BusinessVO();
+		vo2.setBusinessNumber(businessNumber);
+		model.addAttribute("business", businessService.getBusinessId(vo2));
+		return "empty/reviewAndQuestion/insertQuestion2";
+	}
+	//자주하는 질문 페이지 이동
+	@GetMapping("/FAQ")
+	public String FAQ() {
+		return "eventAndNotice/FAQ";
+	}
+	
+	@Autowired AnswerService answerService;
+	//마이페이지-유저-답변 받은 내역
+	@GetMapping("/userAnswer")
+	public String userAnswer(AnswerVO vo, HttpSession session, Model model) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
+		model.addAttribute("answer", answerService.getUserAnswer(vo));
+		return "myPage/userAnswer";
+	}
+	
+	//댓글달기 ajax처리
+	@Autowired CommentService commentService; 
+	@RequestMapping("/insertComment")
+	@ResponseBody
+	public CommentVO insertComment(CommentVO vo) {
+		commentService.insertComment(vo);
+		return vo;
+	}
+	
+	@RequestMapping("/deleteComment")
+	@ResponseBody
+	public CommentVO deleteComment(CommentVO vo) {
+		commentService.deleteComment(vo);
+		return vo;
 	}
 	
 	@Autowired ProductService productService;

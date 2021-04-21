@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,9 @@
 <body>
 <div style="width:60%;">
 	<form name="frm" id="frm" action="insertPayProduct" method="post">
-		<input value="${count }" name="count"> 
+	<c:forEach items="${count}" var="count">
+		<input value="${count }" name="countList"> 
+		</c:forEach>
 		<input name="category">
 		<input name="sumPrice" value="${resultPrice }"> 
 		<input name="memberId" value="${loginID}"> 
@@ -58,7 +61,9 @@
 		<input name="address2" value="${address2 }"> 
 		<input name="phone" value="${phone }"> 
 		<input name="productNumber" value="${product.productNumber }">
-		<input name="optionName" value="${product.optionName }">
+	<c:forEach items="${optionNameList}" var="optionNameList">
+		<input name="optionNameList" value="${optionNameList }">
+		</c:forEach>
 		<input name="price" value="${resultPrice }">
 	</form>
 </div>

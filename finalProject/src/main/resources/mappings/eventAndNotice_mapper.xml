@@ -53,36 +53,24 @@
 	
 	
 	<select id="getSearchEventAndNotice" resultType="eventAndNoticeVO">
-	SELECT * FROM eventAndNotice
+	SELECT * FROM eventAndNotice ORDER BY EANNUMBER DESC
 	
 	</select>
-	<!-- 1번. 이벤트 -->
-	<select id="getSearchEventAndNoticeSelect" resultType="eventAndNoticeVO"
-									parameterType="eventAndNoticeVO" > 
-	SELECT * 
-	FROM eventAndNotice
-	WHERE CATEGORY= 1
-	</select>
-	<!-- 2번. 공지사항 -->
-	<select id="getSearchEventAndNoticeSelect2" resultType="eventAndNoticeVO"
-									parameterType="eventAndNoticeVO" > 
-	SELECT * 
-	FROM eventAndNotice
-	WHERE CATEGORY= 2
-	</select>
+
+
 	
 	<select id="getEventAndNotice1" resultType="eventAndNoticeVO"
 									parameterType="eventAndNoticeVO" > 
 	SELECT * 
 	FROM eventAndNotice
-	WHERE EANNUMBER= #{eanNumber}
+	WHERE EANNUMBER= #{eanNumber} ORDER BY EANNUMBER DESC
 	</select>
 	
 	<select id="getEventAndNotice2" resultType="eventAndNoticeVO"
 									parameterType="eventAndNoticeVO" > 
 	SELECT * 
 	FROM eventAndNotice
-	WHERE EANNUMBER= #{eanNumber}
+	WHERE EANNUMBER= #{eanNumber} ORDER BY EANNUMBER DESC
 	</select>
 	
 		<!-- 이벤트 수정  -->
@@ -90,7 +78,7 @@
 		UPDATE eventAndNotice SET
 		TITLE=#{title} ,
 		CONTENT=#{content} 
-		WHERE EANNUMBER= #{eanNumber}
+		WHERE EANNUMBER= #{eanNumber} 
 	</update>
 	
 	<!-- 공지사항 수정  -->
@@ -107,6 +95,52 @@
 		DELETE FROM eventAndNotice
 		WHERE EANNUMBER=#{eanNumber}
 	</delete>
+	
+	
+	<!--#################################################################  -->
+	<!--#################################################################  -->
+	<!-- 리스트 갯수 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+	</select>
+	
+	
+	<!--  이벤트전체조회 -->
+	<select id="getSearchEventAndNoticeSelect" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" > 
+	
+	SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+	<!-- start of query -->
+	SELECT * 
+	FROM eventAndNotice
+	WHERE CATEGORY= 1
+	ORDER BY EANNUMBER DESC
+	<!-- end of query -->
+	 ) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+		<!-- 2번. 공지사항 -->
+	<select id="getSearchEventAndNoticeSelect2" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" >
+	SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+	<!-- start of query --> 
+	SELECT * 
+	FROM eventAndNotice
+	WHERE CATEGORY= 2
+	ORDER BY EANNUMBER DESC
+	<!-- end of query -->
+	 ) A) B WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+		<!-- 총 게시글 갯수 출력 -->
+	<select id="countBoard" resultType="int">
+		SELECT COUNT(*) FROM BOARD
+	</select>
+	
+	
+	<!--#################################################################  -->
+	<!--#################################################################  -->
 	
 	
 </mapper>
