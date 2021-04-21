@@ -44,6 +44,7 @@
 		SELECT * FROM QUESTION
 		WHERE
 		QUESTIONNUMBER = #{questionNumber}
+		ORDER BY CALENDAR DESC
 	</select>
 	<!--문의내역 전체조회 -->
 	<select id="getSearchQuestion" resultType="questionVO">
@@ -54,13 +55,13 @@
 		<!-- 사업자가 문의내역 조회하면 자기 사업체에 대한 문의만 보여야함 -->
 		<!-- 막줄 -->
 		<!-- )A )B WHERE RN BETWEEN #{start} AND #{end} -->
-
+		ORDER BY CALENDAR DESC
 	</select>
 
 	<!-- 찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영찬영 -->
 
 	<select id="getSearchQuestionCr4" resultType="questionVO">	<!-- 문의하기 전체조회 -->
-		SELECT * FROM QUESTION
+		SELECT * FROM QUESTION ORDER BY CALENDAR DESC
 	</select>
 
 	<!--############ 페이징에 관한것 ########### -->
@@ -72,16 +73,19 @@
 		SELECT COUNT(*) FROM QUESTION
 		WHERE CATEGORY=1
 		AND TOPERSON='admin'
+		ORDER BY CALENDAR DESC
 	</select>
 	<select id="countQuestion2" resultType="int">
 		SELECT COUNT(*) FROM QUESTION
 		WHERE CATEGORY=2
 		AND TOPERSON='admin'
+		ORDER BY CALENDAR DESC
 	</select>
 	<select id="countQuestion3" resultType="int">
 		SELECT COUNT(*) FROM QUESTION
 		WHERE CATEGORY=3
 		AND TOPERSON='admin'
+		ORDER BY CALENDAR DESC
 	</select>
 	<!-- 페이징 처리 후 게시글 조회 -->
 	<!-- 1번 상품문의전체조회 -->
@@ -95,7 +99,7 @@
 		QUESTION
 		WHERE CATEGORY=1
 		AND TOPERSON='admin'
-		ORDER BY WRITER ASC
+		ORDER BY CALENDAR DESC
 		) A
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
@@ -111,7 +115,7 @@
 		QUESTION
 		WHERE CATEGORY=2
 		AND TOPERSON='admin'
-		ORDER BY WRITER ASC
+		ORDER BY CALENDAR DESC
 		) A
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
@@ -126,7 +130,7 @@
 		QUESTION
 		WHERE CATEGORY=3
 		AND TOPERSON='admin'
-		ORDER BY WRITER ASC
+		ORDER BY CALENDAR DESC
 		) A
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
@@ -146,24 +150,28 @@
 		parameterType="questionVO">	<!-- 문의하기 1번 상품문의 단건조회 -->
 		SELECT * FROM QUESTION
 		WHERE QUESTIONNUMBER=#{questionNumber}
+		ORDER BY CALENDAR DESC
 	</select>
 
 	<select id="getQuestion2" resultType="questionVO"
 		parameterType="questionVO">	<!-- 문의하기 2번 문희하기 단건조회 -->
 		SELECT * FROM QUESTION
 		WHERE QUESTIONNUMBER=#{questionNumber}
+		ORDER BY CALENDAR DESC
 	</select>
 
 	<select id="getQuestion3" resultType="questionVO"
 		parameterType="questionVO">	<!-- 문의하기 3번 신고하기 단건조회 -->
 		SELECT * FROM QUESTION
 		WHERE QUESTIONNUMBER=#{questionNumber}
+		ORDER BY CALENDAR DESC
 	</select>
 
 	<select id="getQuestion1Ans" resultType="questionVO"
 		parameterType="questionVO">	<!-- 문의하기 1번 상품 문의 하기 단건조회 -->
 		SELECT * FROM QUESTION
 		WHERE QUESTIONNUMBER=#{questionNumber}
+		ORDER BY CALENDAR DESC
 	</select>
 
 
@@ -173,6 +181,7 @@
 		parameterType="questionVO">	<!-- 문의하기 2번 신고하기 단건조회 -->
 		SELECT * FROM QUESTION
 		WHERE QUESTIONNUMBER=#{questionNumber}
+		ORDER BY CALENDAR DESC
 	</select>
 
 
@@ -183,6 +192,7 @@
 		parameterType="questionVO">	<!-- 문의하기 3번 신고하기 단건조회 -->
 		SELECT * FROM QUESTION
 		WHERE QUESTIONNUMBER=#{questionNumber}
+		ORDER BY CALENDAR DESC
 	</select>
 
 	<insert id="insertQuestion1" parameterType="questionVO">  <!--상품문의 문의내역 문의 등록 -->
@@ -336,6 +346,7 @@
 		PROBISNUMBER
 		FROM QUESTION
 		WHERE QUESTIONNUMBER=#{questionNumber}
+		ORDER BY CALENDAR DESC
 	</select>
 
 	<!-- 마이페이지 일반사용자 문의내역 -->
@@ -344,5 +355,6 @@
 		FROM
 		QUESTION
 		WHERE memberId=#{memberId}
+		ORDER BY CALENDAR DESC
 	</select>
 </mapper>

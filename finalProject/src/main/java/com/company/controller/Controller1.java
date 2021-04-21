@@ -449,7 +449,7 @@ public class Controller1 {
 	@GetMapping("/deleteHospital")
 	public String deleteHospital(HospitalVO vo) {
 		hospitalService.deleteHospital(vo);
-		return "redirect:/getSearchHospital99";
+		return "redirect:/getSearchHospitalForm99";
 	}
 	
 	//마이페이지 사이드바 출력(jsp:include해서 이제 이건 사용안함)
