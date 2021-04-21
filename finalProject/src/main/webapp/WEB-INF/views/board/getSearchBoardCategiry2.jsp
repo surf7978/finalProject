@@ -123,9 +123,12 @@
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>
-				<button id="btn" class="write">글쓰기</button>
 
-
+					<c:if test="${not empty loginID}">
+					
+						<button id="btn" class="write">글쓰기</button>
+				
+					 </c:if> 
 
 
 </body>

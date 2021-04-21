@@ -33,4 +33,7 @@ public interface BoardService {
 	
 	public List<BoardVO> getSearchBoardCategory199(BoardVO vo); //일반사용자 내가쓴글 조회
 	
+	// 조회수 +1
+	public int updateViews(BoardVO vo);
+	
 }

@@ -88,6 +88,11 @@ public class BoardServiceimpl implements BoardService{
 	public int countBoard() {
 		return boardMapper.countBoard();
 	}
+	@Override
+	public int updateViews(BoardVO vo) {
+		
+		return boardMapper.updateViews(vo);
+	}
 
 
 }

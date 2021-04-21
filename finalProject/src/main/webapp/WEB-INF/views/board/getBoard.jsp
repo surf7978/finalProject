@@ -122,13 +122,13 @@ table td {
 			</div>
 		</div>
 		
-		
+		<hr>
 		<br>
 		<sql:query var="rs" dataSource="${ds }">
 		 select * from comments where boardNumber = '${board.boardNumber}'
 		</sql:query>
 	    <c:if test="${not empty rs.rows }">
-		<table style="text-align:center;" border="1">
+		<table style="text-align:left; border: none;">
 			<tr>
 				<td>작성자</td>
 				<td>댓글내용</td>
@@ -151,14 +151,16 @@ table td {
 		</table>
 	    </c:if>
 	    <br>
+	    <div>
 	    <c:if test="${not empty loginID }">
 				<input type="hidden" id="writer" name="writer" value="${loginID }">
 				<input type="hidden" id="boardNumber" name="boardNumber" value="${board.boardNumber}">
 				<input type="hidden" id="memberId" name="memberId" value="${board.writer}">
-				<input type="text" value="댓글" readonly>
-				<input id="content" name="content">
+				<input style="width:50px; border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" type="text" value="댓글  :" readonly>
+				<input style="width:60%;" id="content" name="content">
 				<button id="insertComment">댓글달기</button>
 		</c:if>
+		</div>
 	</div>
 </body>
 <script>

@@ -135,8 +135,17 @@
 	
 		<!-- 총 게시글 갯수 출력 -->
 	<select id="countBoard" resultType="int">
-		SELECT COUNT(*) FROM BOARD
+		SELECT COUNT(*) FROM eventAndNotice
 	</select>
+	
+	
+	<!--#################################################################  -->
+	<!--#################################################################  -->
+
+	<!--조회수 +1  -->
+	<update id="updateViews" >
+	  UPDATE EVENTANDNOTICE SET VIEWS = VIEWS + 1 WHERE EANNUMBER = #{eanNumber}
+	</update>
 	
 	
 	<!--#################################################################  -->
