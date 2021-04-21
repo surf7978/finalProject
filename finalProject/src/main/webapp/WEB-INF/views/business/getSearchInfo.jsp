@@ -277,8 +277,10 @@ hospital.businessNumber : ${hospital.businessNumber}
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
 							<div id="btnEvent">
-								<button type="button" id="btnCart">장바구니 담기</button>
-								<button type="button" id="btnPay">바로구매</button>
+							<!-- 
+								<button type="button" id="btnCart"style="padding:10px; width:220px; border:none; border-radius:5px; ">장바구니 담기</button>
+							 -->
+								<button type="button" id="btnPay" style="padding:10px; width:440px; border:none; border-radius:5px; background-color:#adff2f;">결제하기</button>
 							</div>
 						</li>
 					</ul>
@@ -288,9 +290,9 @@ hospital.businessNumber : ${hospital.businessNumber}
 				<div class="pro_menu">
 					<ul>
 						<li><a href="#pro_content">상품 상세정보</a></li>
-						<li><a href="#">상품 구매평</a></li>
-						<li><a href="#">상품 문의</a></li>
-						<li><a href="#">취소/환불</a></li>
+						<li><a href="#content22">상품 구매평</a></li>
+						<li><a href="#content33">상품 문의</a></li>
+						<li><a href="#content44">취소/환불</a></li>
 					</ul>
 				</div>
 				<div id="content">

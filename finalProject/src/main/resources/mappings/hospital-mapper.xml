@@ -151,7 +151,7 @@
 				#{cate}
 			</foreach>
 		</if>
-		AND LOCATION = #{location}
+		AND LOCATION like  #{location}
 		ORDER BY SEQ
 		<!-- end of query -->
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
