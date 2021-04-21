@@ -779,11 +779,16 @@ public class Controller4 {
 
 	@PostMapping("/insertAnswer2Cr4") // 고객센터 문의하기 답장하기 처리
 	public String insertAnswer2Cr4Proc(AnswerVO vo) {
-		System.out.println(vo);
 		answerService.insertAnswer2Cr4(vo);
 		return "redirect:/getSearchQuestionSelect2";
 	}
-
+	
+	@PostMapping("/insertAnswer299Cr4") // 사업자가 문의하기 답장 처리 하는 것
+	public String insertAnswer299Cr4Proc(AnswerVO vo) {
+		answerService.insertAnswer2Cr4(vo);
+		return "redirect:/getSearchQuestion";
+	}
+	
 	@GetMapping("/getQuestion3") // 문의하기 상세조회 신고하기
 	public String getQuestion3(QuestionVO vo, Model model) {
 		System.out.println(vo);
