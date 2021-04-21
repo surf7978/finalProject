@@ -249,7 +249,7 @@
 		<c:if test="${loginAuth eq 'b' }">
 			<!-- 로그인한 사업자가 병원일 때 등록 활성화 -->
 			<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
-			 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+			 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
 			 user="final" password="a20210409A"/>
 			<sql:query var="rs" dataSource="${ds }">
 				select * from business where businessId = '${loginID}'
@@ -339,7 +339,7 @@
 				</ul>
 		 -->
 				 <sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
-					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
 					 user="final" password="a20210409A"/>
 				<div id="selectLocation" style="text-align:left;">
 						<sql:query var="rs1" dataSource="${ds }">
