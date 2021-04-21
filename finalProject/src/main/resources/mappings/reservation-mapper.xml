@@ -36,6 +36,7 @@
 		, REVIEWNUMBER
 		FROM RESERVATION
 		where memberid=#{memberId}
+		ORDER BY RESERVATIONNUMBER
 	</select>
 
 	<!-- 캘린더 조회 for 회원 -->
@@ -64,6 +65,7 @@
 		, RESERVATIONNUMBER
 		FROM REVIEWRESERVATION
 		WHERE BUSINESSNUMBER = #{businessNumber}
+		ORDER BY RESERVATIONNUMBER
 	</select>
 	
 	<!-- 캘린더 조회 for 사업자 -->
