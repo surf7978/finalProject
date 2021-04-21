@@ -58,7 +58,9 @@
 	<div>
 	<!-- 주소 -->
 	<c:forEach items="${productoption}" var="pro" varStatus="num">
-	<c:if test="${pro.productNumber == list.productNumber}"><input name="category" value="${pro.category }"></c:if>
+	<c:if test="${pro.productNumber == list.productNumber}">
+		<input name="category" value="${pro.category }">
+	</c:if>
 	</c:forEach>	
 		<input name="fromPerson" value="${loginID}"> 
 		<input name="toPerson" value="${name }"> 
@@ -72,10 +74,10 @@
 		<input name="optionName" value="${fn:replace(list.optionName,',','/') }">
 		<input name="price" value="${vo.resultPrice }">
 		<%-- <input name="price" value="${fn:replace(list.optionPrice,',','/') }"> --%>
-		<input name="count" value="${fn:replace(list.count,',','/') }">
+		<input name="count" value="${fn:replace(list.count.trim(),',','/') }">
 	</div>
 	</c:forEach>
-	<button>확인</button>
+	<button type="submit">확인</button>
 	</form>
 </div>
 </body>

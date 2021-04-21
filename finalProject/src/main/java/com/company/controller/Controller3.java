@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.company.abandonment.common.AbandonmentAPI;
 import com.company.bCart.service.BCartService;
-import com.company.bCart.service.BCartVO;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
@@ -44,7 +43,6 @@ import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 import com.company.reservation.service.ReservationService;
 import com.company.reservation.service.ReservationVO;
-import com.google.gson.JsonArray;
 
 @Controller
 public class Controller3 {
@@ -115,10 +113,10 @@ public class Controller3 {
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 1. 페이지 설정
 		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
-		paging.setPageSize(10); // 보이는 페이지 번호
+		paging.setPageSize(3); // 보이는 페이지 번호
 		// 2.초기페이지 설정
-		if (paging.getPage() == null)
-			paging.setPage(1);
+		if (vo.getPage() == null)
+			vo.setPage(1);
 		// 3. 값 추가
 		paging.setTotalRecord(productService.getCount(vo));
 		vo.setStart(paging.getFirst());
@@ -318,10 +316,10 @@ public class Controller3 {
 	// 쇼핑몰 결제시 다중insert
 	@RequestMapping("/insertCartPayProduct")
 	public String insertCartPayProduct(HttpSession session,PayAndDeliveryVO padvo, BuyVO bvo, ProductVO vo, String category1,CartVO cvo) {
-		padvo.setCategory(category1);
-		padService.insertPayAndDelivery2(padvo);
 		String id = session.getAttribute("loginID").toString();
 		cvo.setMemberId(id);// 조회 후 값 넘김
+		padvo.setCategory(category1);
+		padService.insertPayAndDelivery2(padvo);
 		bvo.setPndNumber(padvo.getPndNumber());
 		List<BuyVO> list = new ArrayList<BuyVO>();
 		list.add(bvo);
@@ -331,6 +329,7 @@ public class Controller3 {
 	}
 	//장바구니 결제form
 	@RequestMapping("/cartPayInfoForm")
+	@ResponseBody
 	public String cartPayInfoForm(MemberVO mvo, Model model, CartVO vo, HttpSession session,String[] cartNumbers, String resultPrice) {
 		// 세션 ID값 조회
 		String id = session.getAttribute("loginID").toString();
@@ -345,7 +344,7 @@ public class Controller3 {
 	}
 	//장바구니 결제시 다중insert form
 	@RequestMapping("/insertCartBuy")
-	public String insertCartBuy(HttpSession session,CartVO cvo,ProductVO vo,BuyVO bvo, Model model,String name){
+	public String insertCartBuy(HttpSession session, CartVO cvo,ProductVO vo,BuyVO bvo, Model model,String name){
 		String id = session.getAttribute("loginID").toString();
 		cvo.setMemberId(id);// 조회 후 값 넘김
 		model.addAttribute("bvo", bvo);
