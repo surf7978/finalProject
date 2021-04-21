@@ -65,6 +65,7 @@
 		, RESERVATIONNUMBER
 		FROM REVIEWRESERVATION
 		WHERE BUSINESSNUMBER = #{businessNumber}
+		ORDER BY RESERVATIONNUMBER
 	</select>
 	
 	<!-- 캘린더 조회 for 사업자 -->

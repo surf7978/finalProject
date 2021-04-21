@@ -48,6 +48,7 @@
 	border: none;
 	border-radius: 5px;
 	background-color: #e7ab3c;
+	color: white;
 }
 
 .dviewBtn {
@@ -83,6 +84,7 @@
 	border: none;
 	border-radius: 5px;
 	background-color: #3CB371;
+	color: white;
 }
 
 .updateNoteBtn {
@@ -91,6 +93,7 @@
 	border: none;
 	border-radius: 5px;
 	background-color: #e7ab3c;
+	color: white;
 }
 
 .insertNoteBtn {
@@ -99,6 +102,7 @@
 	border: none;
 	border-radius: 5px;
 	background-color: #e7ab3c;
+	color: white;
 }
 
 .close {
