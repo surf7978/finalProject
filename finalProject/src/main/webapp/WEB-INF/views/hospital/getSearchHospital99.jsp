@@ -338,11 +338,11 @@
 					<li style="text-align:left;">지역구분<br><div class="con"></div></li>
 				</ul>
 		 -->
-				 <sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
+				 <sql:setDataSource var="as" driver="oracle.jdbc.OracleDriver"
 					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
 					 user="final" password="a20210409A"/>
 				<div id="selectLocation" style="text-align:left;">
-						<sql:query var="rs1" dataSource="${ds }">
+						<sql:query var="rs1" dataSource="${as }">
 							select location from hospital group by location
 						</sql:query>
 						<c:if test="${not empty rs1.rows }">
