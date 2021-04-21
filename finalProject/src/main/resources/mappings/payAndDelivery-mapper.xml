@@ -82,7 +82,14 @@
 			</if>
 		) paydate, sum(SUMPRICE) sumprice
 		FROM PAYANDDELIVERY
-		WHERE businessNumber = #{businessNumber}
+		<!-- 사업자 -->
+		<if test="businessNumber !=null">
+			WHERE businessNumber = #{businessNumber}
+		</if>
+		<!-- 관리자 -->
+		<if test="category == 70">
+			WHERE CATEGORY = 70
+		</if>
 		
 		<if test="startDate !=null and startDate !=''">
 			AND PAYDATE BETWEEN TO_DATE(#{startDate},'yyyy-mm-dd')
