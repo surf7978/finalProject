@@ -46,7 +46,7 @@ table td {
 </style>
 <body>
 	<div id="contents">
-		<h1>공지사항</h1>
+		<h1>이벤트 상세보기</h1>
 
 		<div id="show"></div>
 		<div id="pro_contentwrap">
@@ -93,6 +93,7 @@ table td {
 
 
 		<div>
+			<c:if test="${loginID eq 'admin' }">
 			<form
 				action="deleteEventAndNotice?eanNumber=${getEventAndNotice.eanNumber}"
 				method="post">
@@ -103,6 +104,7 @@ table td {
 
 
 			</form>
+			</c:if>
 		</div>
 
 	</div>
