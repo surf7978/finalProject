@@ -39,7 +39,7 @@
 		if(confirm("예약하시겠습니까")==true){
 			location.href="getSearchReservation?memberId=${loginID}";				
 		}else{
-			location.href="/finalProject";
+			location.href="${pageContext.request.contextPath}";
 		}	
 		$("#frm").submit();
 		window.close();

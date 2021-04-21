@@ -36,6 +36,8 @@ import com.company.note.service.NoteService;
 import com.company.note.service.NoteVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
+import com.company.product.service.ProductService;
+import com.company.product.service.ProductVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 import com.company.reservation.service.ReservationService;
@@ -66,6 +68,9 @@ public class Controller2 {
 	QuestionService questionService;
 	@Autowired
 	NoteService noteService;
+	@Autowired
+	ProductService productService;
+	
 
 	////// 마이페이지-유저///////////
 	// 일반회원 본인정보 조회
@@ -497,5 +502,14 @@ public class Controller2 {
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
+	
+	// 쇼핑몰 상세보기
+	@RequestMapping("/getProduct")
+	public String getProduct(ProductVO vo, Model model, String productNumber) {
+		model.addAttribute("product", productService.getProduct(vo));
+		return "product/getProduct";
+	}
+	
+	
 
 }
