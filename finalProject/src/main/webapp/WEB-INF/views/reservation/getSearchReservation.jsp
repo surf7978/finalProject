@@ -31,6 +31,7 @@
 </script>
 </head>
 <body>
+<br><h3>예약내역</h3>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 	<table class="table1">

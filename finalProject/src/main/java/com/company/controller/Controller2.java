@@ -27,6 +27,7 @@ import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
+import com.company.common.Paging;
 import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
 import com.company.member.service.MemberService;
@@ -115,15 +116,50 @@ public class Controller2 {
 		return "user/deleteMember";
 	}
 	
-	//////////// 구매내역///////////////
+	////////////구매내역///////////////
 	// 구매내역리스트조회
 	@RequestMapping("/getSearchPayAndDeliveryForm")
-	public String getSearchPayAndDeliveryForm(PayAndDeliveryVO pvo, Model model, HttpSession session) {
-		pvo.setMemberId((String) session.getAttribute("loginID"));
-		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery(pvo));
-		model.addAttribute("memberId", pvo);
-		return "user/getSearchPayAndDeliveryForm";
+	public String getSearchPayAndDeliveryForm(PayAndDeliveryVO vo, Model model, HttpSession session, Paging paging) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
+		paging.setPageUnit(5); //한페이지에 출력되는 레코드 건수
+		paging.setPageSize(3); //페이지번호가 3개씩 보임
+		//페이징
+		if(vo.getPage() == null) {
+			vo.setPage(1);
+		}
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		//전체페이지가 넘어가야 last를 구함
+		paging.setTotalRecord(payAndDeliveryService.getCount(vo));
+		model.addAttribute("paging", paging);
+		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery(vo));
+		model.addAttribute("memberId", vo);
+	return "user/getSearchPayAndDeliveryForm";
 	}
+	
+//	//구매내역리스트 페이징처리
+//	@RequestMapping("/getSearchPayAndDelivery")
+//	public Map<String, Object> getSearchProduct(PayAndDeliveryVO vo, Paging paging, HttpSession session) {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		// 1. 페이지 설정
+//		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
+//		paging.setPageSize(3); // 보이는 페이지 번호
+//		// 2.초기페이지 설정
+//		if (vo.getPage() == null)
+//			vo.setPage(1);
+//		// 3. 값 추가
+//		paging.setTotalRecord(payAndDeliveryService.getCount(vo));
+//		vo.setStart(paging.getFirst());
+//		vo.setEnd(paging.getLast());
+//		
+//		
+//		map.put("paging", paging);
+//		map.put("list", list);
+//		return map;
+//	}
+		
+		
+	
 
 	// 구매내역 상세리스트 조회
 	@RequestMapping("/getSearchBuy")
