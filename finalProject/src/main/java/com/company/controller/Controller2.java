@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +28,6 @@ import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
-import com.company.common.PagingVOCr4;
 import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
 import com.company.member.service.MemberService;
@@ -112,7 +112,7 @@ public class Controller2 {
 		memberService.deleteMember(vo);
 		return "user/deleteMember";
 	}
-
+	
 	//////////// 구매내역///////////////
 	// 구매내역리스트조회
 	@RequestMapping("/getSearchPayAndDeliveryForm")

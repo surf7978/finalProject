@@ -58,8 +58,8 @@
 		, #{category1, jdbcType=VARCHAR}
 		, #{category2}
 		, #{name}
-		<foreach item="opname" collection="optionNameList" open=",'" separator="," close="'" >${opname}</foreach>
-		<foreach item="opprice" collection="optionPriceList" open=",'" separator="," close="'" >${opprice}</foreach>
+		, #{optionName}
+		, #{price}
 		, #{location}
 		, #{t_image}
 		, #{image}

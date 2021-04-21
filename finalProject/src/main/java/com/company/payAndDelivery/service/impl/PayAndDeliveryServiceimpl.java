@@ -89,8 +89,8 @@ public class PayAndDeliveryServiceimpl implements PayAndDeliveryService {
 	}
 
 	@Override
-	public int getCount(PayAndDeliveryVO vo) {
-		return payAndDeliveryMapper.getCount(vo);
+	public int getCount() {
+		return payAndDeliveryMapper.getCount();
 	}
 
 }

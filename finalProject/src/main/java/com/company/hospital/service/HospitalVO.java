@@ -18,6 +18,4 @@ public class HospitalVO {
 	String category2;
 	MultipartFile uploadFile;
 	MultipartFile t_uploadFile;
-	String[] optionNameList;
-	String[] optionPriceList;
 }

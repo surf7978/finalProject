@@ -11,7 +11,6 @@
 	
 	<!-- 구매내역리스트 조회 -->
 	<select id="getSearchPayAndDelivery" resultType="PayAndDeliveryVO">
-	SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
 	SELECT PNDNUMBER
 	, CATEGORY
 	, COURIERCOMPANY
@@ -23,7 +22,6 @@
 	FROM PAYANDDELIVERY
 	WHERE MEMBERID=#{memberId}
 	ORDER BY PNDNUMBER
-	) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 예약하기 버튼눌러서 날짜선택시 PAYANDDELIVERY DB update -->

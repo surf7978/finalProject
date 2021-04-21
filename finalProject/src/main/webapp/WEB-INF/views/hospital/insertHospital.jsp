@@ -33,23 +33,6 @@
 					reader.readAsDataURL(this.files[0]);
 				}
 			});
-	$("#opbtn").on("click", function() {
-		var option = $(this).parent().prev().children("div").first();
-		var newoption = option.clone(true);
-		$(option).after(newoption);
-		console.log(option);
-	})
-	$("#close").on("click", function() {
-		var div = $(this).parent().siblings("div");
-		console.log(div.length);
-		if (div.length == 0) {
-			alert("필수항목입니다.");
-		} else {
-			$(this).parent().remove();
-		}
-	})
-	
-	
 	
 	});
 </script>
@@ -92,17 +75,13 @@
 				<td colspan="2"><input type="text" name="name" id="name"></td>
 			</tr>
 			<tr>
-					<th>옵션</th>
-					<td style="border: none;">
-					<div>
-							<input type="text" name=optionNameList>&nbsp; 
-							<label>옵션가격</label>&nbsp;
-							<input type="number" name="optionPriceList">
-							<span id="close" style="cursor: pointer; padding: 10px; color: #212529;">x</span>
-						</div>
-					</td>
-					<td style="border: none;"><button type="button" id="opbtn">추가</button></td>
-				</tr>
+				<th>옵션명</th>
+				<td><input type="text" name="optionName" id="optionName"></td>
+			</tr>
+			<tr>
+				<th>금액</th>
+				<td><input type="number" name="price" id="price"></td>
+			</tr>
 			<tr>
 				<th>타이틀 이미지</th>
 				<td colspan="2"><input type="file" name="t_uploadFile" id="t_image"
