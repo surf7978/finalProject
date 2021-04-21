@@ -7,6 +7,9 @@
 <title>FAQ</title>
 </head>
 <body>
-이곳은 자주하는 질문 페이지 입니다.
+<br><br>
+<img src="resources/img/qu.png">
+<br><br><br>
+
 </body>
 </html>

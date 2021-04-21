@@ -63,4 +63,12 @@
 		AND PRODUCTNUMBER=#{productNumber}
 	</select>
 	
+	<!-- 구매평등록시 Buy테이블에 리뷰번호 등록 -->
+	<update id="insertReview3" parameterType="BuyVO">
+		 UPDATE BUY
+		 SET
+		 REVIEWNUMBER='리뷰등록'
+		 WHERE BUYNUMBER = #{buyNumber}
+	</update>
+	
 </mapper>

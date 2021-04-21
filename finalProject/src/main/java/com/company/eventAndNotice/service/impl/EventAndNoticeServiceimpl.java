@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.company.common.PagingVOCr4;
 import com.company.eventAndNotice.service.EventAndNoticeService;
 import com.company.eventAndNotice.service.EventAndNoticeVO;
 
@@ -45,7 +46,7 @@ public class EventAndNoticeServiceimpl implements EventAndNoticeService{
 		return EventAndNoticeMapper.getSearchEventAndNoticeSelect(vo);
 	}
 	@Override //공지사항
-	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect2(EventAndNoticeVO vo) {
+	public List<EventAndNoticeVO> getSearchEventAndNoticeSelect2(PagingVOCr4 vo) {
 		// TODO Auto-generated method stub
 		return EventAndNoticeMapper.getSearchEventAndNoticeSelect2(vo);
 	}
@@ -64,6 +65,15 @@ public class EventAndNoticeServiceimpl implements EventAndNoticeService{
 	@Override
 	public int deleteEventAndNotice(EventAndNoticeVO vo) {
 		return EventAndNoticeMapper.deleteEventAndNotice(vo);
+	}
+	//레코드 건수
+	@Override
+	public int getCount(EventAndNoticeVO vo) {
+		return EventAndNoticeMapper.getCount(vo);
+	}
+	@Override
+	public int countBoard() {
+		return EventAndNoticeMapper.countBoard();
 	}
 
 

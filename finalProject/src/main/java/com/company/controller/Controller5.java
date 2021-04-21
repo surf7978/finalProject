@@ -564,13 +564,50 @@ public class Controller5 {
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
 		vo.setCategory(bvo.getBusinessCode());
-		vo.setBusinessId(id);
+		vo.setBusinessNumber(bvo.getBusinessNumber());
 		// 쿼리 결과 호출
 		// 일별 합계
 		List<Map<String, Object>> map = payAndDeliveryService.dailyTotal(vo);
 		return map;
 	}
 
+	// 마이페이지-사업자-통계 데이터2(donut)
+	@RequestMapping("/getDonutChart")
+	@ResponseBody
+	public List<Map<String, Object>> getDonutChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+		// session ID 조회
+		String id = session.getAttribute("loginID").toString();
+		// ID값 분배
+		bvo.setBusinessId(id);
+		// DB 데이터 조회
+		bvo = businessService.getBusiness(bvo);
+		// 조회 후 코드값 분배
+		vo.setCategory(bvo.getBusinessCode());
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		// 쿼리 결과 호출
+		// 일별 합계
+		List<Map<String, Object>> map = payAndDeliveryService.getDonutChart(vo);
+		return map;
+	}
+
+	// 마이페이지-사업자-통계 데이터3(areaChart)
+	@RequestMapping("/getAreaChart")
+	@ResponseBody
+	public List<Map<String, Object>> getAreaChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+		// session ID 조회
+		String id = session.getAttribute("loginID").toString();
+		// ID값 분배
+		bvo.setBusinessId(id);
+		// DB 데이터 조회
+		bvo = businessService.getBusiness(bvo);
+		// 조회 후 코드값 분배
+		vo.setCategory(bvo.getBusinessCode());
+		vo.setBusinessNumber(bvo.getBusinessNumber());
+		// 쿼리 결과 호출
+		// 일별 합계
+		List<Map<String, Object>> map = payAndDeliveryService.getAreaChart(vo);
+		return map;
+	}
 	// 마이페이지-사업자-실시간화장진료 페이지
 
 	// 공통

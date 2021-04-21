@@ -10,10 +10,11 @@ import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
 
 @Service
-public class PayAndDeliveryServiceimpl implements PayAndDeliveryService{
+public class PayAndDeliveryServiceimpl implements PayAndDeliveryService {
 
-	@Autowired PayAndDeliveryMapper payAndDeliveryMapper;
-	
+	@Autowired
+	PayAndDeliveryMapper payAndDeliveryMapper;
+
 	@Override
 	public int insertPayAndDelivery(PayAndDeliveryVO vo) {
 		return payAndDeliveryMapper.insertPayAndDelivery(vo);
@@ -58,7 +59,8 @@ public class PayAndDeliveryServiceimpl implements PayAndDeliveryService{
 	public int updateDelivery(PayAndDeliveryVO vo) {
 		return payAndDeliveryMapper.updateDelivery(vo);
 	}
-	//결제 내역 차트
+
+	// 결제 내역 차트
 	@Override
 	public List<Map<String, Object>> dailyTotal(PayAndDeliveryVO vo) {
 		return payAndDeliveryMapper.dailyTotal(vo);
@@ -72,6 +74,23 @@ public class PayAndDeliveryServiceimpl implements PayAndDeliveryService{
 	@Override
 	public List<Map<String, Object>> yearsTotal(PayAndDeliveryVO vo) {
 		return payAndDeliveryMapper.yearsTotal(vo);
+	}
+
+	// 도넛차트
+	@Override
+	public List<Map<String, Object>> getDonutChart(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.getDonutChart(vo);
+	}
+
+	// 비교차트
+	@Override
+	public List<Map<String, Object>> getAreaChart(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.getAreaChart(vo);
+	}
+
+	@Override
+	public int getCount(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.getCount(vo);
 	}
 
 }

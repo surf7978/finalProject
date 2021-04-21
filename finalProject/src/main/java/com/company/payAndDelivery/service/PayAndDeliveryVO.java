@@ -14,6 +14,15 @@ public class PayAndDeliveryVO {
 
 	// DB컬럼 수정
 	String buyState;
-	String businessId;// 사업자 아이디(사업자 번호로 수정 할 예정)
+	String businessNumber;// 사업자 번호
 	String search;
+
+	// 캘린더용
+	String startDate;
+	String endDate;
+	
+	// paging
+	Integer page = 1;  
+	Integer start = 1;
+	Integer end = 10;
 }

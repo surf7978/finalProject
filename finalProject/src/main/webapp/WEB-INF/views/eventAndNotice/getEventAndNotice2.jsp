@@ -93,6 +93,7 @@ table td {
 
 
 			<div>
+				<c:if test="${loginID eq 'admin' }">
 				<form
 					action="deleteEventAndNotice?eanNumber=${getEventAndNotice.eanNumber}"
 					method="post">
@@ -103,6 +104,7 @@ table td {
 
 
 				</form>
+				</c:if>
 			</div>
 
 		</div>

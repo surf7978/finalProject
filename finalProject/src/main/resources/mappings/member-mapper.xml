@@ -38,6 +38,7 @@
 			, endDate
 		FROM MEMBER
 		WHERE memberId = #{memberId}
+		ORDER BY startDate DESC
 	</select>
 
 	<select id="getSearchMember" parameterType="memberVO" resultType="memberVO">
@@ -54,6 +55,7 @@
 			, startDate
 			, endDate
 		FROM MEMBER
+		ORDER BY startDate DESC
 	</select>
 
 	<update id="updateMember" parameterType="memberVO">
@@ -87,6 +89,7 @@
 			, auth
 		FROM UNIONID
 		WHERE memberId = #{memberId}
+		ORDER BY memberId DESC
 	</select>
 	<!-- 아이디 중복체크 -->
 	<select id="idCheck" resultType="int">
@@ -94,6 +97,7 @@
 			COUNT(*)
 		FROM UNIONID
 		WHERE memberId = #{memberId}
+		ORDER BY memberId DESC
 	</select>
 	
 	<!-- 아이디 찾기 -->
@@ -118,5 +122,6 @@
 		SELECT 
 			*
 		FROM UNIONID
+		ORDER BY memberId DESC
 	</select>
 </mapper>

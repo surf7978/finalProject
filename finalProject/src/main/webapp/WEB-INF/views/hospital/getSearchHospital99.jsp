@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	//체크박스 생성
+	//라디오 생성
 	function checkbox(){
 		$.ajax({
 			url:"resources/js/location2.json",
@@ -42,6 +43,7 @@
 	
 	function getSearchHospitalLocation(p, val) {
 		/* 리스트 ajax */
+		console.log(val)
 		var category1= $("#pro_location ul li a.after").text();
 		console.log(category1);
 		var category2 = [];
@@ -71,7 +73,6 @@
 						function(i) {
 							var hospitalNumber = response[i].seq;
 							var t_img = response[i].t_image;
-
 							var li = $("<li>");
 							
 							var input = $("<input>").attr({
@@ -79,7 +80,6 @@
 								"type" : "hidden",
 								"name" : "hospitalNumber"
 							});
-
 							var div = $("<div>").attr("class", "hospital_img")
 									.append(
 											$("<img>").attr(
@@ -153,7 +153,6 @@
 						function(i) {
 							var hospitalNumber = response[i].seq;
 							var t_img = response[i].t_image;
-
 							var li = $("<li>");
 							
 							var input = $("<input>").attr({
@@ -161,7 +160,6 @@
 								"type" : "hidden",
 								"name" : "hospitalNumber"
 							});
-
 							var div = $("<div>").attr("class", "hospital_img")
 									.append(
 											$("<img>").attr(
@@ -235,6 +233,14 @@
 		$("#pro_location ul li").on("click", "input[type=checkbox]", function(){	
 			getSearchHospital99(1)			
 		});
+		
+		//셀렉트 요소로 지역검색
+		$("#selectLocation").on("click","select",function(){
+			var val = $(this).val();
+			//console.log(val);
+			getSearchHospitalLocation(1, val);  //여기에 지역별 검색하는 방법 구현
+		})//end of input
+		
 	}); //end of getSearchHospital99
 </script>
 </head>
@@ -274,10 +280,24 @@
 					</div></li>
 				<li><a>예방접종</a>
 					<div>
-						<input type="checkbox" id="cate02_01" value="기초/추가"><label
-							for="cate02_01">기초/추가</label> <input type="checkbox"
-							id="cate02_02" value="심장사상충"><label for="cate02_02">심장사상충</label> <input
-							type="checkbox" id="cate02_03" value="기타"><label for="cate02_03">기타</label>
+						<input type="checkbox" id="cate02_01" value="1차 예방접종">
+						<label for="cate02_01">1차 예방접종</label>
+						<input type="checkbox" id="cate02_01" value="2차 예방접종">
+						<label for="cate02_02">2차 예방접종</label>
+						<input type="checkbox" id="cate02_01" value="3차 예방접종">
+						<label for="cate02_03">3차 예방접종</label>
+						<input type="checkbox" id="cate02_01" value="4차 예방접종">
+						<label for="cate02_04">4차 예방접종</label>
+						<input type="checkbox" id="cate02_01" value="4차 예방접종">
+						<label for="cate02_04">4차 예방접종</label>
+						<input type="checkbox" id="cate02_01" value="5차 예방접종">
+						<label for="cate02_05">5차 예방접종</label>
+						<input type="checkbox" id="cate02_01" value="6차 예방접종">
+						<label for="cate02_06">6차 예방접종</label>
+						<input type="checkbox" id="cate02_01" value="추가 예방접종 1차">
+						<label for="cate02_07">추가 예방접종 1차</label>
+						 <input type="checkbox" type="checkbox" id="cate02_03" value="심장사상충 예방주사">
+						 <label for="cate02_09">심장사상충 예방주사</label>
 					</div></li>
 				<li><a>검진/검사</a>
 					<div>
@@ -299,19 +319,45 @@
 							for="cate03_10">심장검사</label>
 							<input type="checkbox" id="cate03_11" value="내시경검사"><label
 							for="cate03_11">내시경검사</label>
-							<input type="checkbox" id="cate03_12" value="기타"><label
-							for="cate03_12">기타</label>
+							<input type="checkbox" id="cate03_12" value="슬개골검사"><label
+							for="cate03_12">슬개골검사</label>
 					</div></li>
 				<li><a>기타</a>
 					<div>
-						<input type="checkbox" id="cate04_01" value="기타상품"><label
-							for="cate04_01">기타상품</label>
+						<input type="checkbox" id="cate04_01" value="구충제"><label
+							for="cate04_01">구충제</label>
+							<input type="checkbox" id="cate04_01" value="심장사상충 예방약"><label
+							for="cate04_02">심장사상충 예방약</label>
+							<input type="checkbox" id="cate04_01" value="기생충 예방약"><label
+							for="cate04_03">기생충 예방약</label>
 					</div></li>
 			</ul>
 		</div>
+		<!-- 
 				<ul>
 					<li style="text-align:left;">지역구분<br><div class="con"></div></li>
 				</ul>
+		 -->
+				 <sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
+					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+					 user="final" password="a20210409A"/>
+				<div id="selectLocation" style="text-align:left;">
+						<sql:query var="rs1" dataSource="${ds }">
+							select location from hospital group by location
+						</sql:query>
+						<c:if test="${not empty rs1.rows }">
+						지역구분<br>
+							<select>
+								<option value="">전체</option>
+								<c:forEach items="${rs1.rows }" var="list">
+										<!-- 이거 조절해서 지역별 구분가능 -->
+										<option value="${fn:substring(list.location, 0, 6)}">
+											${fn:substring(list.location, 0, 6)}
+										</option>
+								</c:forEach>
+							</select>
+						</c:if>
+				</div>
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>

@@ -94,7 +94,7 @@
 </tbody>
 </table>
 	
-	<div style="display: block; text-align: center;">		
+	<div style="border:1px solid; width:30px; height:30px; display: block; text-align: center;">		
 		<c:if test="${paging.startPage != 1 }">
 			<a href="getSearchQuestionSelect1?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
