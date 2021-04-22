@@ -44,9 +44,9 @@ li{list-style:none;}
 #aban_location #con input {margin-left:10px;}
 #aban_location #con label{margin-left:5px;}
 #searchshow{width:100%;border:1px solid #f8f8f8;display:flex;margin:50px 0;}
-#searchshow table {border-collapse: collapse;width:50%;margin-left:2%;}
-#searchshow table tr th{background:#e7ab3c;padding:10px;}
-#searchshow table tr td{padding:10px;color:#6d6d6d;}
+#searchshow table {border-collapse: collapse;width:50%;margin-left:2%;border-left:none;border-right:none;}
+#searchshow table tr th{background:#eeeeee;padding:10px;width:30%;text-align:center;}
+#searchshow table tr td{padding:10px;color:#6d6d6d;width:70%;}
 #searchshow nav{width:48%;float:left;border-radius: 5px;overflow:hidden;}
 #searchshow nav img{width:100%;}
 
