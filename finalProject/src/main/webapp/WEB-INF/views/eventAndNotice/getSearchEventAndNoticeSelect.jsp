@@ -115,8 +115,10 @@
 <body> <br>
 	<div id="contents">
 		<h1>이벤트</h1>
+		<!-- 
 		<div id="pro_location">
 		</div>
+		 -->
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>

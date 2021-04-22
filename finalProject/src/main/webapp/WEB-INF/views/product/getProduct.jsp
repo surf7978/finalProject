@@ -9,6 +9,63 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 단건조회 아작스 -->
+<script>
+	$(function(){
+		$(".reviewNumber").on("click", ".getReview", function(){
+			var btn = $(this);
+			console.log(btn.prev().prev().prev().val());//span개수만큼 해줘야함
+			$.ajax({
+				url:"getReview99",
+				type:"post",
+				dataType:"json",
+				data:{"reviewNumber":btn.prev().prev().prev().val()},
+				success:function(data){
+					console.log(data);
+					btn.closest(".reviewNumber").next().text("");
+					btn.closest(".reviewNumber").next().append("<br>");
+					btn.closest(".reviewNumber").next().append("ㄴ "+data.content);
+					btn.closest(".reviewNumber").next().append("&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' class='ESC' value='▲' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>");//닫기 버튼 생성
+					btn.remove();
+				}
+			})
+		})
+		//내용 닫기
+		$(".getReviewResult").on("click", ".ESC", function(){//이렇게 그룹이벤트로 해줘야 생성된 버튼 동작함
+			var ESCbtn = $(this);
+			ESCbtn.parent().prev().append("<input type='button' class='getReview' value='▼' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>")
+			ESCbtn.parent().empty();
+		})
+	})
+	
+	$(function(){
+		$(".questionNumber").on("click", ".getQuestion", function(){
+			var btn1 = $(this);
+			console.log(btn1.prev().prev().prev().val());//span개수만큼 해줘야함
+			$.ajax({
+				url:"getQuestionProbis",
+				type:"post",
+				dataType:"json",
+				data:{"questionNumber":btn1.prev().prev().prev().val()},
+				success:function(data){
+					console.log(data);
+					btn1.closest(".questionNumber").next().text("");
+					btn1.closest(".questionNumber").next().append("<br>");
+					btn1.closest(".questionNumber").next().append("ㄴ "+data.content);
+					btn1.closest(".questionNumber").next().append("&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' class='ESC' value='▲' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>");//닫기 버튼 생성
+					btn1.remove();
+				}
+			})
+		})
+		//내용 닫기
+		$(".getQuestionResult").on("click", ".ESC", function(){//이렇게 그룹이벤트로 해줘야 생성된 버튼 동작함
+			var ESCbtn = $(this);
+			ESCbtn.parent().prev().append("<input type='button' class='getQuestion' value='▼' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>")
+			ESCbtn.parent().empty();
+		})
+	})
+	
+</script>
 <script>
 $(document).ready(function() { //function시작			
 		//결제페이지로 이동
@@ -221,8 +278,8 @@ $(document).ready(function() { //function시작
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
 							<div>
-								<button type="button" id="btnCart">장바구니 담기</button>
-								<button type="button" id="b_btn">바로구매</button>
+								<button type="button" id="btnCart"style="padding:10px; width:220px; border:none; border-radius:5px; ">장바구니 담기</button>
+								<button type="button" id="b_btn" style="padding:10px; width:220px; border:none; border-radius:5px; background-color:#adff2f;">결제하기</button>
 							</div>
 						</li>
 					</ul>
@@ -245,5 +302,54 @@ $(document).ready(function() { //function시작
 			</div>
 		</div>
 	</div>
+	
+<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+<h4 id="content22">구매평
+<c:if test="${not empty reservation.reservationDate && reservation.reviewNumber eq null }">
+<button type="button" id="insertReview" onclick="window.open('insertReview?pndNumber=${reservation.pndNumber}&bisNumber=${reservation.bisNumber}','insertReview','width=800, height=800')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
+</c:if>
+</h4>
+<hr style="align:center; text-align:left; background-color: black;">
+</div>
+<br>
+	<c:forEach items="${review }" var="list">
+		<div class="reviewNumber" style="align:center; width:55%; text-align:left;">
+			<input type="hidden" value="${list.reviewNumber}">
+			<span><c:set var="TextValue" value="${list.writer}"/>${fn:substring(TextValue,0,1)}<c:forEach begin="2" end="${fn:length(TextValue) }" varStatus="loop">*</c:forEach></span> &nbsp;&nbsp;&nbsp;
+			<span>${list.title}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" class="getReview" value="▼" style="font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;">
+		</div>
+		<div class="getReviewResult" style="align:center; width:50%; text-align:left;"></div>
+		<hr style="align:center; width:1090px; text-align:left; padding-left: 20px;position:relative;">
+	</c:forEach>
+	<br><br>
+<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+<h4 id="content33">문의내역
+<c:if test="${not empty loginID }">
+<c:if test="${loginAuth eq 'm' }">
+<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
+</c:if>
+</c:if>
+</h4>
+<hr style="align:center; text-align:left; background-color: black;">
+</div>
+<br>
+	<c:forEach items="${question }" var="list">
+		<div class="questionNumber" style="align:center; width:55%; text-align:left;">
+			<input type="hidden" value="${list.questionNumber}">
+			<span><c:set var="TextValue" value="${list.writer}"/>${fn:substring(TextValue,0,1)}<c:forEach begin="2" end="${fn:length(TextValue) }" varStatus="loop">*</c:forEach></span> &nbsp;&nbsp;&nbsp;
+			<span>${list.title}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" class="getQuestion" value="▼" style="font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;">
+			</div>
+			<div class="getQuestionResult" style="align:center; width:50%; text-align:left;"></div>
+			<hr style="align:center; width:1090px; text-align:left; padding-left: 20px;position:relative;">
+	</c:forEach>
+<br>
+<div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
+	<h4 id="content44">취소/환불</h4>
+	<hr style="align:center; text-align:left; background-color: black;">
+</div>
+<img src="resources/img/cancel.PNG">
+<br><br><br><br><br>
 </body>
 </html>

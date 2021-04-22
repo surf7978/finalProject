@@ -93,6 +93,7 @@ table td {
 
 
 			<div>
+				<c:if test="${loginID eq 'admin' }">
 				<form
 					action="deleteEventAndNotice?eanNumber=${getEventAndNotice.eanNumber}"
 					method="post">
@@ -104,6 +105,7 @@ table td {
 					</c:if>
 
 				</form>
+				</c:if>
 			</div>
 	<br>
 				<input class="back" type="button" value="목록으로" onclick="location.href='getSearchEventAndNoticeSelect2'" > 

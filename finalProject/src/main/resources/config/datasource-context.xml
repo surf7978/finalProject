@@ -6,8 +6,8 @@
 	<bean id="dataSource" class="oracle.ucp.jdbc.PoolDataSourceImpl">
 		<property name="connectionFactoryClassName"
 			value="oracle.jdbc.pool.OracleDataSource" />
-		<property name="URL"
-			value="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" />
+		<property name="URL" value="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" />
+		<!-- <property name="URL" value="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" /> -->
 		<property name="user" value="final" />
 		<property name="password" value="a20210409A" />
 	</bean>

@@ -2,6 +2,7 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
@@ -86,7 +88,9 @@ public class Controller1 {
 	
 	//일반사용자 로그인 처리
 	@PostMapping("/login")
-	public String loginProc(MemberVO vo, HttpSession session) {
+	public String loginProc(MemberVO vo, HttpSession session, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
 		if(memberService.getViewMember(vo) != null) {
 			MemberServiceimpl memberServiceimpl = new MemberServiceimpl();
 			String insertPW = vo.getPassword(); //로그인화면에 입력한 비밀번호
@@ -94,11 +98,19 @@ public class Controller1 {
 			if(memberServiceimpl.matches(insertPW, DBinPW)){ //입력한 비밀번호와 DB의 비밀번호 일치체크
 				session.setAttribute("loginID", memberService.getViewMember(vo).getMemberId()); //세션에 로그인한 아이디 담아줌
 				session.setAttribute("loginAuth", memberService.getViewMember(vo).getAuth()); //권한 확인
-				return "/home";
+				return "redirect:/";
 			} else {
+				writer.println("<script>alert('로그인 실패 : 비밀번호 불일치');");
+				writer.println("location.href='loginForm'");
+				writer.println("</script>");
+				writer.close();
 				return "redirect:/loginForm";
 			}
 		}else {
+			writer.println("<script>alert('로그인 실패 : 아이디가 없습니다.');");
+			writer.println("location.href='loginForm'");
+			writer.println("</script>");
+			writer.close();
 			return "redirect:/loginForm";
 		}
 	}
@@ -372,7 +384,22 @@ public class Controller1 {
 	
 	//사업자-개인정보 조회
 	@GetMapping("/getBusiness99")
-	public String getBusiness99(HttpSession session, Model model, BusinessVO vo1) {
+	public String getBusiness99(HttpSession session, Model model) {
+		BusinessVO vo1 = new BusinessVO();
+		vo1.setBusinessId((String) session.getAttribute("loginID"));
+		if(session.getAttribute("loginID").equals("admin")) {
+			model.addAttribute("business", businessService.getBusiness(vo1));
+		}else {
+			BusinessVO vo = new BusinessVO();
+			vo.setBusinessId((String) session.getAttribute("loginID"));
+			model.addAttribute("business", businessService.getBusiness(vo));
+		}
+		return "business/getBusiness99";
+	}
+	
+	//사업자-개인정보 조회
+	@GetMapping("/getBusiness98")
+	public String getBusiness98(HttpSession session, Model model, BusinessVO vo1) {
 		if(session.getAttribute("loginID").equals("admin")) {
 			model.addAttribute("business", businessService.getBusiness(vo1));
 		}else {

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	//체크박스 생성
+	//라디오 생성
 	function checkbox(){
 		$.ajax({
 			url:"resources/js/location2.json",
@@ -39,9 +40,10 @@
 			getSearchHospitalLocation(1, val);  //여기에 지역별 검색하는 방법 구현
 		})//end of input
 	}//enf of checkbox
-	
+	 
 	function getSearchHospitalLocation(p, val) {
 		/* 리스트 ajax */
+		console.log(val)
 		var category1= $("#pro_location ul li a.after").text();
 		console.log(category1);
 		var category2 = [];
@@ -235,6 +237,14 @@
 		$("#pro_location ul li").on("click", "input[type=checkbox]", function(){	
 			getSearchHospital99(1)			
 		});
+		
+		//셀렉트 요소로 지역검색
+		$("#selectLocation").on("click","select",function(){
+			var val = $(this).val();
+			//console.log(val);
+			getSearchHospitalLocation(1, val);  //여기에 지역별 검색하는 방법 구현
+		})//end of input
+		
 	}); //end of getSearchHospital99
 </script>
 </head>
@@ -309,9 +319,31 @@
 					</div></li>
 			</ul>
 		</div>
+		<!-- 
 				<ul>
 					<li style="text-align:left;">지역구분<br><div class="con"></div></li>
 				</ul>
+		 -->
+				<div id="selectLocation" style="text-align:left;">
+						<sql:setDataSource var="as" driver="oracle.jdbc.OracleDriver"
+						 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+						 user="final" password="a20210409A"/>
+						<sql:query var="rs1" dataSource="${as }">
+							select location from hospital group by location
+						</sql:query>
+						<c:if test="${not empty rs1.rows }">
+						지역구분<br>
+							<select>
+								<option value="">전체</option>
+								<c:forEach items="${rs1.rows }" var="list">
+										<!-- 이거 조절해서 지역별 구분가능 -->
+										<option value="${fn:substring(list.location, 0, 6)}">
+											${fn:substring(list.location, 0, 6)}
+										</option>
+								</c:forEach>
+							</select>
+						</c:if>
+				</div>
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>

@@ -324,6 +324,7 @@ public class Controller5 {
 	public String getSearchInfo(IntegratedVO vo, Model model, HttpSession session) {
 		// seq값 2자리 잘라서 code값에 넣기
 		vo.setCode(vo.getSeq().substring(0, 2));
+		System.out.println("코드값" + vo.getSeq().substring(0, 2));
 		// 코드값 -> 테이블명 변환
 		seqConversion(vo);
 		// 조회
@@ -624,6 +625,8 @@ public class Controller5 {
 		// 3. 코드값 변환
 		if (vo.getCode().equals("10"))
 			vo.setCode("HOTEL");
+		else if (vo.getCode().equals("20"))
+			vo.setCode("HOSPITAL");
 		else if (vo.getCode().equals("30"))
 			vo.setCode("CAFE");
 		else if (vo.getCode().equals("40"))
@@ -632,6 +635,8 @@ public class Controller5 {
 			vo.setCode("EDU");
 		else if (vo.getCode().equals("60"))
 			vo.setCode("TAXI");
+		else if (vo.getCode().equals("70"))
+			vo.setCode("SHOP");
 		return vo.getCode();
 	}// end of sessionSelect
 
@@ -639,7 +644,7 @@ public class Controller5 {
 	public void seqConversion(IntegratedVO vo) {
 		if (vo.getCode().equals("10"))
 			vo.setCode("HOTEL");
-		else if (vo.getCode().equals("30"))
+		else if (vo.getCode().equals("20"))
 			vo.setCode("HOSPITAL");
 		else if (vo.getCode().equals("30"))
 			vo.setCode("CAFE");

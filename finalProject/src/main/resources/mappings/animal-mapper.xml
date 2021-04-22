@@ -39,7 +39,7 @@
 				  , KIND
 				  ,BIRTH
 				  , MEMBERID
-				  , IMAGE
+				 , IMAGE
 				  ) VALUES(
 				  ANI_SEQ.NEXTVAL
 				  , #{name}
@@ -47,7 +47,7 @@
 				  , #{kind}
 				  , #{birth}
 				  , #{memberId}
-				  , #{image})
+				  , #{image, jdbcType = VARCHAR } )
 	</insert>
 	
 	<!-- 반려동물 정보 수정 -->
