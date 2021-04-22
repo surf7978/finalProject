@@ -325,7 +325,10 @@
 				</ul>
 		 -->
 				<div id="selectLocation" style="text-align:left;">
-						<sql:query var="rs1" dataSource="${ds }">
+						<sql:setDataSource var="as" driver="oracle.jdbc.OracleDriver"
+						 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+						 user="final" password="a20210409A"/>
+						<sql:query var="rs1" dataSource="${as }">
 							select location from hospital group by location
 						</sql:query>
 						<c:if test="${not empty rs1.rows }">
