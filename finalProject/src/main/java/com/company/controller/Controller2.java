@@ -162,7 +162,7 @@ public class Controller2 {
 		payAndDeliveryService.updateReservation2(vo1);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('예약되었습니다');opener.location.reload();window.close();</script>");
+		writer.println("<script>alert('예약되었습니다');opener.opener.location.reload();opener.location.reload();window.close();</script>");
 		writer.close();
 	}
 
