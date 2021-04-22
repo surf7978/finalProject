@@ -155,8 +155,8 @@ table td {
 				<input type="hidden" id="writer" name="writer" value="${loginID }">
 				<input type="hidden" id="boardNumber" name="boardNumber" value="${board.boardNumber}">
 				<input type="hidden" id="memberId" name="memberId" value="${board.writer}">
-				<input type="text" value="댓글" readonly>
-				<input id="content" name="content">
+				<textarea id="content" name="content" style="resize:none; width:770px; height:300px;" placeholder="댓글입력"></textarea>
+				<br>
 				<button id="insertComment">댓글달기</button>
 		</c:if>
 	</div>
@@ -186,18 +186,21 @@ table td {
 		
 		$(".deleteComment").on("click", function(){
 			console.log($(this).prev().val())
-			$.ajax({
-				url:"deleteComment",
-				type:"post",
-				dataType:"json",
-				data:{
-					"commentNumber":$(this).prev().val()
-					},
-				success:function(data){
-					console.log(data);
-					location.reload();
-				}
-			})
+			let deleteCheck = confirm("댓글을 삭제할까요?");
+			if(deleteCheck){
+				$.ajax({
+					url:"deleteComment",
+					type:"post",
+					dataType:"json",
+					data:{
+						"commentNumber":$(this).prev().val()
+						},
+					success:function(data){
+						console.log(data);
+						location.reload();
+					}
+				})
+			}
 		})
 	})
 </script>
