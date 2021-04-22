@@ -189,18 +189,21 @@ table td {
 		
 		$(".deleteComment").on("click", function(){
 			console.log($(this).prev().val())
-			$.ajax({
-				url:"deleteComment",
-				type:"post",
-				dataType:"json",
-				data:{
-					"commentNumber":$(this).prev().val()
-					},
-				success:function(data){
-					console.log(data);
-					location.reload();
-				}
-			})
+			let deleteCheck = confirm("댓글을 삭제할까요?");
+			if(deleteCheck){
+				$.ajax({
+					url:"deleteComment",
+					type:"post",
+					dataType:"json",
+					data:{
+						"commentNumber":$(this).prev().val()
+						},
+					success:function(data){
+						console.log(data);
+						location.reload();
+					}
+				})
+			}
 		})
 	})
 </script>
