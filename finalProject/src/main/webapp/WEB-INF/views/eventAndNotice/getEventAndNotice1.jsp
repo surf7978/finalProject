@@ -10,6 +10,22 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+<script>
+function check() {
+	var A = confirm("삭제하시겠습니까?");
+	
+	if (A) {
+		alert("삭제 되었습니다.");
+		return true;
+	
+	} else {
+	
+		return false;
+	}
+
+}
+
+</script>
 <style>
 input.back {
 	padding: 10px;
@@ -96,7 +112,7 @@ table td {
 			<c:if test="${loginID eq 'admin' }">
 			<form
 				action="deleteEventAndNotice?eanNumber=${getEventAndNotice.eanNumber}"
-				method="post">
+				method="post" onsubmit="return check()">
 
 				<c:if test="${loginID eq 'admin'}">
 					<input type="button" class="update"
