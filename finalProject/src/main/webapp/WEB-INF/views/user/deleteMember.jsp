@@ -9,7 +9,7 @@
 <body>
 <div align="center">
 ${member.memberId} 님 회원탈퇴 되었습니다.
-<a href="/finalProject">홈으로</a>
+<a href="${pageContext.request.contextPath}">홈으로</a>
 
 
 </div>

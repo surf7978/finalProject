@@ -37,9 +37,9 @@
 		//결제가 정상적으로 완료되면 수행됩니다
 		//payFrm.submit();		
 		if(confirm("예약하시겠습니까")==true){
-			location.href="getSearchReservation?memberId=${loginID}";				
+			location.href="getSearchReservation";				
 		}else{
-			location.href="/finalProject";
+			location.href="${pageContext.request.contextPath}";
 		}	
 		$("#frm").submit();
 		window.close();

@@ -129,7 +129,7 @@ public class Controller3 {
 	}// end of getSearchProduct
 
 	// 쇼핑몰 상세보기
-	@RequestMapping("/getProduct")
+	@RequestMapping("/getProduct22")
 	public String getProduct(ProductVO vo, Model model, String productNumber) {
 		model.addAttribute("product", productService.getProduct(vo));
 		return "product/getProduct";

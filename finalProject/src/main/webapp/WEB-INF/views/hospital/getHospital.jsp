@@ -67,31 +67,6 @@
 			ESCbtn.parent().empty();
 		})
 	})
-	//장바구니
-	$(function(){
-		insertCart();
-	});//end of function
-	//장바구니에 등록
-	function insertCart(){
-		$("#btnCart").on("click",function(){
-			var vo = $("#frm").serialize();
-			//장바구니 DB에 넣기
-			$.ajax({
-				url:"insertBCart",
-				data:vo,
-				dataType:"json",
-				//callback으로 변경하는 법 배워서 바꾸기
-				success: function (result){
-					if(result == 1){
-						var y = confirm('상품이 장바구니에 담겼습니다\n지금 확인 하시겠습니까?');
-						if(y){
-							location.href='getSearchTotalCartForm'
-						}//end of if
-					}//end of if
-				}//end of success
-			})//end of ajax
-		})//end of btnCart
-	}//end of insertCart
 	
 </script>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
@@ -106,7 +81,7 @@
 						var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
 								$("<span>").text("${hospital.name }")
 										.append("<hr>"));
-						var input = $("<input>").attr({"type":"hidden","min":"1","value":"1","name":"count","readonly":"readonly"});
+						var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count","readonly":"readonly"});
 						var inval = $(input).val();
 						var strong = $("<p>").css("text-align", "right").text("${hospital.price }");
 						$(nav).append(input, strong);		
@@ -159,7 +134,7 @@
 <body>
 <!-- 글작성자와 조회자가 일치하는지 확인하는 코드 -->
 <sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
- url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
+ url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
  user="final" password="a20210409A"/>
 <sql:query var="rs" dataSource="${ds }">
     select * from business where businessNumber = '${hospital.businessNumber}'
@@ -210,10 +185,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
 							<div>
-							<!-- 
-								<button type="button" id="btnCart"style="padding:10px; width:220px; border:none; border-radius:5px; ">장바구니 담기</button>
-							 -->
-								<button type="button" id="b_btn" style="padding:10px; width:440px; border:none; border-radius:5px; background-color:#adff2f;">결제하기</button>
+								<button type="button" id="b_btn" style="padding:10px; width:440px; border:none; border-radius:5px;">바로구매</button>
 							</div>
 						</li>
 					</ul>

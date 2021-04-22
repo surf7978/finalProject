@@ -105,7 +105,7 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2">
 						<div class="logo">
-							<a href="/finalProject"> <img src="resources/img/logo.png" alt="">
+							<a href="${pageContext.request.contextPath}"> <img src="resources/img/logo.png" alt="">
 							</a>
 						</div>
 					</div>
@@ -127,7 +127,7 @@
 					<c:if test="${loginID ne 'admin'}">
 					<!-- 로그인한 사용자의 장바구니 내용 -->
 					<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
-					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
+					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
 					 user="final" password="a20210409A"/>
 					<%-- <sql:query var="rs" dataSource="${ds }">
 					    select COUNT(*) count from cart where memberId = '${loginID}'
@@ -302,7 +302,7 @@
 									<a href="getSearchViewMember">마이페이지</a>
 								</c:if>
 								<c:if test="${loginID ne 'admin'}">	
-									<a href="getMember1?memberId=${loginID}">마이페이지</a>
+									<a href="getMember1">마이페이지</a>
 								</c:if>
 							</c:if>
 							<c:if test="${loginAuth eq 'b'}">
