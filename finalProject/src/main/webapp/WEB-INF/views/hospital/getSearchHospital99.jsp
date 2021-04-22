@@ -73,6 +73,7 @@
 						function(i) {
 							var hospitalNumber = response[i].seq;
 							var t_img = response[i].t_image;
+
 							var li = $("<li>");
 							
 							var input = $("<input>").attr({
@@ -80,6 +81,7 @@
 								"type" : "hidden",
 								"name" : "hospitalNumber"
 							});
+
 							var div = $("<div>").attr("class", "hospital_img")
 									.append(
 											$("<img>").attr(
@@ -153,6 +155,7 @@
 						function(i) {
 							var hospitalNumber = response[i].seq;
 							var t_img = response[i].t_image;
+
 							var li = $("<li>");
 							
 							var input = $("<input>").attr({
@@ -160,6 +163,7 @@
 								"type" : "hidden",
 								"name" : "hospitalNumber"
 							});
+
 							var div = $("<div>").attr("class", "hospital_img")
 									.append(
 											$("<img>").attr(
@@ -280,24 +284,10 @@
 					</div></li>
 				<li><a>예방접종</a>
 					<div>
-						<input type="checkbox" id="cate02_01" value="1차 예방접종">
-						<label for="cate02_01">1차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="2차 예방접종">
-						<label for="cate02_02">2차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="3차 예방접종">
-						<label for="cate02_03">3차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="4차 예방접종">
-						<label for="cate02_04">4차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="4차 예방접종">
-						<label for="cate02_04">4차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="5차 예방접종">
-						<label for="cate02_05">5차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="6차 예방접종">
-						<label for="cate02_06">6차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="추가 예방접종 1차">
-						<label for="cate02_07">추가 예방접종 1차</label>
-						 <input type="checkbox" type="checkbox" id="cate02_03" value="심장사상충 예방주사">
-						 <label for="cate02_09">심장사상충 예방주사</label>
+						<input type="checkbox" id="cate02_01" value="기초/추가"><label
+							for="cate02_01">기초/추가</label> <input type="checkbox"
+							id="cate02_02" value="심장사상충"><label for="cate02_02">심장사상충</label> <input
+							type="checkbox" id="cate02_03" value="기타"><label for="cate02_03">기타</label>
 					</div></li>
 				<li><a>검진/검사</a>
 					<div>
@@ -319,17 +309,13 @@
 							for="cate03_10">심장검사</label>
 							<input type="checkbox" id="cate03_11" value="내시경검사"><label
 							for="cate03_11">내시경검사</label>
-							<input type="checkbox" id="cate03_12" value="슬개골검사"><label
-							for="cate03_12">슬개골검사</label>
+							<input type="checkbox" id="cate03_12" value="기타"><label
+							for="cate03_12">기타</label>
 					</div></li>
 				<li><a>기타</a>
 					<div>
-						<input type="checkbox" id="cate04_01" value="구충제"><label
-							for="cate04_01">구충제</label>
-							<input type="checkbox" id="cate04_01" value="심장사상충 예방약"><label
-							for="cate04_02">심장사상충 예방약</label>
-							<input type="checkbox" id="cate04_01" value="기생충 예방약"><label
-							for="cate04_03">기생충 예방약</label>
+						<input type="checkbox" id="cate04_01" value="기타상품"><label
+							for="cate04_01">기타상품</label>
 					</div></li>
 			</ul>
 		</div>
@@ -338,11 +324,8 @@
 					<li style="text-align:left;">지역구분<br><div class="con"></div></li>
 				</ul>
 		 -->
-				 <sql:setDataSource var="as" driver="oracle.jdbc.OracleDriver"
-					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
-					 user="final" password="a20210409A"/>
 				<div id="selectLocation" style="text-align:left;">
-						<sql:query var="rs1" dataSource="${as }">
+						<sql:query var="rs1" dataSource="${ds }">
 							select location from hospital group by location
 						</sql:query>
 						<c:if test="${not empty rs1.rows }">
