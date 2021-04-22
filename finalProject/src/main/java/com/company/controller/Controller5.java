@@ -324,7 +324,6 @@ public class Controller5 {
 	public String getSearchInfo(IntegratedVO vo, Model model, HttpSession session) {
 		// seq값 2자리 잘라서 code값에 넣기
 		vo.setCode(vo.getSeq().substring(0, 2));
-		System.out.println("코드값" + vo.getSeq().substring(0, 2));
 		// 코드값 -> 테이블명 변환
 		seqConversion(vo);
 		// 조회
@@ -554,9 +553,9 @@ public class Controller5 {
 	}
 
 	// 마이페이지-사업자-통계 데이터
-	@RequestMapping("/getSearchChartData")
+	@RequestMapping("/getColumnChart")
 	@ResponseBody
-	public List<Map<String, Object>> getChartData(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, Object>> getSearchColumnChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
 		// session ID 조회
 		String id = session.getAttribute("loginID").toString();
 		// ID값 분배
@@ -565,10 +564,11 @@ public class Controller5 {
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
 		vo.setCategory(bvo.getBusinessCode());
+		// 조회 후 사업자 번호 분배
 		vo.setBusinessNumber(bvo.getBusinessNumber());
 		// 쿼리 결과 호출
 		// 일별 합계
-		List<Map<String, Object>> map = payAndDeliveryService.dailyTotal(vo);
+		List<Map<String, Object>> map = payAndDeliveryService.getColumnChart(vo);
 		return map;
 	}
 
