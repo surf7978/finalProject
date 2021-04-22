@@ -397,6 +397,19 @@ public class Controller1 {
 		return "business/getBusiness99";
 	}
 	
+	//사업자-개인정보 조회
+	@GetMapping("/getBusiness98")
+	public String getBusiness98(HttpSession session, Model model, BusinessVO vo1) {
+		if(session.getAttribute("loginID").equals("admin")) {
+			model.addAttribute("business", businessService.getBusiness(vo1));
+		}else {
+			BusinessVO vo = new BusinessVO();
+			vo.setBusinessId((String) session.getAttribute("loginID"));
+			model.addAttribute("business", businessService.getBusiness(vo));
+		}
+		return "business/getBusiness99";
+	}
+	
 	@PostMapping("/updateBusiness99")
 	public String updateBusiness99(BusinessVO vo) {
 		businessService.updateBusiness(vo);
