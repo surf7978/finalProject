@@ -308,7 +308,7 @@
 		SYSDATE
 		, #{content}
 		, #{writer}
-		, #{memberId}
+		, 'admin'
 		, 1
 		, #{memberId}
 		,
