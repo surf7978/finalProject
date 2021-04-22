@@ -35,13 +35,13 @@
 		window.history.go(-3);
 	}).done(function(data) {
 		//결제가 정상적으로 완료되면 수행됩니다
-		//payFrm.submit();		
+		//payFrm.submit();	
 		$("#frm").submit();
 		if(confirm("예약하시겠습니까")==true){
 			location.href="getSearchReservation";				
 		}else{
 			location.href="${pageContext.request.contextPath}";
-		}	
+		}		
 		window.close();
 		console.log(data);
 		

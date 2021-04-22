@@ -305,10 +305,11 @@ public class Controller3 {
 	// 쇼핑몰 결제시 insert
 	@RequestMapping("/insertPayProduct")
 	public String insertPayProduct(PayAndDeliveryVO padvo, BuyVO bvo, ProductVO vo, String category1) {
+		padService.insertPayAndDelivery2(padvo);
 		bvo.setPndNumber(padvo.getPndNumber());
 		bvo.setCategory(category1);
 		bvo.setProductNumber(vo.getProductNumber());
-		padService.insertPayAndDelivery2(padvo);
+		buyService.insertBuy2(bvo);
 		return "pay/successPay";
 	}	
 	
@@ -319,7 +320,7 @@ public class Controller3 {
 		cvo.setMemberId(id);// 조회 후 값 넘김
 		padvo.setCategory(category1);
 		padService.insertPayAndDelivery2(padvo);
-		for(BuyVO bvo: padvo.getBuyList()) {
+		for(BuyVO bvo: padvo.getBuyList()) {	
 			bvo.setPndNumber(padvo.getPndNumber());
 		}
 		buyService.insertCartBuy(padvo.getBuyList());
