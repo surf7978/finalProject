@@ -18,13 +18,10 @@
 			locale: 'ko',
 			eventSources: [
 				{
-					url: 'getSearchReservationCalendar'
-				},
-			],
-			eventMouseover: function(info){
-			
-			    alert("a");
-			}
+					 url: 'getSearchReservationCalendar2'
+				
+				}
+			]
 		});
 		calendar.render();
 	});
