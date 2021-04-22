@@ -16,7 +16,9 @@
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <h3>구매내역 리스트</h3><br>
-<input type="hidden" name="page" value="1">
+<form id="searchFrm" name="searchFrm">
+<input type="hidden" id="page" name="page" value="1">
+</form>
 <table class="table1">
 	<tr>
 		<th>구매번호</th>
@@ -88,7 +90,8 @@
 <my:paging paging="${paging}" jsFunc="goPage" />
 <script>
 	function goPage(p){
-		searchFrm.page.value=p;
+		page.value=p;
+		console.log(page.value)
 		searchFrm.submit();
 	}
 </script>	
