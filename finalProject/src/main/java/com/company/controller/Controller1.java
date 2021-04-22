@@ -384,7 +384,9 @@ public class Controller1 {
 	
 	//사업자-개인정보 조회
 	@GetMapping("/getBusiness99")
-	public String getBusiness99(HttpSession session, Model model, BusinessVO vo1) {
+	public String getBusiness99(HttpSession session, Model model) {
+		BusinessVO vo1 = new BusinessVO();
+		vo1.setBusinessId((String) session.getAttribute("loginID"));
 		if(session.getAttribute("loginID").equals("admin")) {
 			model.addAttribute("business", businessService.getBusiness(vo1));
 		}else {
