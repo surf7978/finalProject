@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>일반회원의 구매내역 상세리스트 조회</title>
+<title>일반회원의 구매내역 상세리스트 조회ㅇㅇㅇㅇ</title>
 <link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

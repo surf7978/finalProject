@@ -62,5 +62,9 @@ public class ReservationServiceimpl implements ReservationService{
 	public int insertReview2(ReservationVO vo) {
 		return ReservationMapper.insertReview2(vo);
 	}
+	@Override
+	public int getCount(ReservationVO vo) {
+		return ReservationMapper.getCount(vo);
+	}
 
 }
