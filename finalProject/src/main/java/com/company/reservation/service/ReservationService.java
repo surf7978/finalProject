@@ -15,8 +15,6 @@ public interface ReservationService {
 	public List<Map<String, String>> getSearchReservationCalendar2(ReservationVO vo); //캘린더조회 for 사업자
 	
 	public int insertReview2(ReservationVO vo);	//리뷰등록시 데이터 업데이트
-		
-
 	
 	//결제용 insert
 	public int insertPayReservation(ReservationVO vo);

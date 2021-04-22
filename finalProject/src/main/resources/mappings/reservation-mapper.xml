@@ -115,5 +115,11 @@
 		 REVIEWNUMBER='리뷰등록'
 		 WHERE RESERVATIONNUMBER = #{reservationNumber}
 	</update>
-
+	
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM RESERVATION
+		WHERE MEMBERID=#{memberId}
+	</select>
+	
 </mapper>
