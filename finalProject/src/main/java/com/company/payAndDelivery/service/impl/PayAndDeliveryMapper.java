@@ -26,6 +26,8 @@ public interface PayAndDeliveryMapper {
 	public int insertPayAndDelivery2(PayAndDeliveryVO vo); // 결제 및 배송 추가
 
 	public List<PayAndDeliveryVO> getSearchPayAndDelivery99(PayAndDeliveryVO vo); // 관리자용 구매내역 조회
+	
+	public int getCount99(PayAndDeliveryVO vo);// 관리자용 레코드 조회
 
 	// 결제 내역 차트
 	public List<Map<String, Object>> getColumnChart(PayAndDeliveryVO vo);// 일별합계

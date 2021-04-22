@@ -529,7 +529,18 @@ public class Controller1 {
 	@Autowired PayAndDeliveryService payAndDeliveryService;
 	// 관리자용 구매현황 리스트조회
 	@RequestMapping("/getSearchPayAndDelivery99")
-	public String getSearchPayAndDelivery99(PayAndDeliveryVO vo, Model model) {
+	public String getSearchPayAndDelivery99(PayAndDeliveryVO vo, Model model, Paging paging) {
+		paging.setPageUnit(20); //한페이지에 출력되는 레코드 건수
+		paging.setPageSize(5); //페이지번호가 3개씩 보임
+		//페이징
+		if(vo.getPage() == null) {
+			vo.setPage(1);
+		}
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		//전체페이지가 넘어가야 last를 구함
+		paging.setTotalRecord(payAndDeliveryService.getCount99(vo));
+		model.addAttribute("paging", paging);
 		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery99(vo));
 		return "user/getSearchPayAndDelivery99";
 	}
@@ -544,7 +555,18 @@ public class Controller1 {
 	
 	// 관리자용 예약현황 리스트조회
 	@RequestMapping("/getSearchPayAndDelivery98")
-	public String getSearchPayAndDelivery98(PayAndDeliveryVO vo, Model model) {
+	public String getSearchPayAndDelivery98(PayAndDeliveryVO vo, Model model, Paging paging) {
+		paging.setPageUnit(100); //한페이지에 출력되는 레코드 건수
+		paging.setPageSize(5); //페이지번호가 3개씩 보임
+		//페이징
+		if(vo.getPage() == null) {
+			vo.setPage(1);
+		}
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		//전체페이지가 넘어가야 last를 구함
+		paging.setTotalRecord(payAndDeliveryService.getCount99(vo));
+		model.addAttribute("paging", paging);
 		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery99(vo));
 		return "user/getSearchPayAndDelivery98";
 	}

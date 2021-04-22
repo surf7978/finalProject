@@ -569,7 +569,7 @@ public class Controller2 {
 	public String updateDelivery(PayAndDeliveryVO vo, String pndNumber, Model model) {
 		vo.setPndNumber(pndNumber);
 		model.addAttribute("pndNumber", vo.getPndNumber());
-		return "user/updateDelivery";
+		return "empty/user/updateDelivery";
 	}
 
 	// 관리자의 배송정보 입력 처리

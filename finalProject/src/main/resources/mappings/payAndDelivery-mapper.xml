@@ -10,6 +10,11 @@
 		WHERE MEMBERID=#{memberId}
 	</select>
 	
+	<select id="getCount99" resultType="int">
+		SELECT COUNT(*)
+		FROM PAYANDDELIVERY
+	</select>
+	
 	<!-- 구매내역리스트 조회 -->
 	<select id="getSearchPayAndDelivery" resultType="PayAndDeliveryVO">
 	SELECT B.* FROM ( SELECT ROWNUM RN, A.* FROM (
@@ -23,7 +28,7 @@
 	, BUYSTATE 
 	FROM PAYANDDELIVERY
 	WHERE MEMBERID=#{memberId}
-	ORDER BY PNDNUMBER
+	ORDER BY PNDNUMBER 
 	) A ) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -36,9 +41,18 @@
 	
 	<!-- 관리자용 구매내역리스트 조회 -->
 	<select id="getSearchPayAndDelivery99" resultType="PayAndDeliveryVO">
-	SELECT *
+	SELECT B.* FROM ( SELECT ROWNUM RN, A.* FROM (
+	SELECT PNDNUMBER
+	, CATEGORY
+	, COURIERCOMPANY
+	, PAYDATE
+	, INVOICENUMBER
+	, TO_CHAR(SUMPRICE, '999,999,999') AS SUMPRICE
+	, MEMBERID
+	, BUYSTATE 
 	FROM PAYANDDELIVERY
-	ORDER BY PNDNUMBER
+	ORDER BY PNDNUMBER DESC
+	) A ) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 관리자의 배송정보 입력 -->	
