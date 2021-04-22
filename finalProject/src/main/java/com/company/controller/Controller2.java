@@ -137,29 +137,6 @@ public class Controller2 {
 	return "user/getSearchPayAndDeliveryForm";
 	}
 	
-//	//구매내역리스트 페이징처리
-//	@RequestMapping("/getSearchPayAndDelivery")
-//	public Map<String, Object> getSearchProduct(PayAndDeliveryVO vo, Paging paging, HttpSession session) {
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		// 1. 페이지 설정
-//		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
-//		paging.setPageSize(3); // 보이는 페이지 번호
-//		// 2.초기페이지 설정
-//		if (vo.getPage() == null)
-//			vo.setPage(1);
-//		// 3. 값 추가
-//		paging.setTotalRecord(payAndDeliveryService.getCount(vo));
-//		vo.setStart(paging.getFirst());
-//		vo.setEnd(paging.getLast());
-//		
-//		
-//		map.put("paging", paging);
-//		map.put("list", list);
-//		return map;
-//	}
-		
-		
-	
 
 	// 구매내역 상세리스트 조회
 	@RequestMapping("/getSearchBuy")
@@ -185,14 +162,25 @@ public class Controller2 {
 		payAndDeliveryService.updateReservation2(vo1);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('예약되었습니다');opener.location.reload();window.close();</script>");
+		writer.println("<script>alert('예약되었습니다');opener.location.reload();opener.opener.location.reload();window.close();</script>");
 		writer.close();
 	}
 
 	// 회원의 예약리스트조회
 	@RequestMapping("/getSearchReservation")
-	public String getSearchReservation(ReservationVO vo, Model model, HttpSession session) {
+	public String getSearchReservation(ReservationVO vo, Model model, HttpSession session, Paging paging) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
+		paging.setPageUnit(5); //한페이지에 출력되는 레코드 건수
+		paging.setPageSize(3); //페이지번호가 3개씩 보임
+		//페이징
+		if(vo.getPage() == null) {
+			vo.setPage(1);
+		}
+		vo.setStart1(paging.getFirst());
+		vo.setEnd1(paging.getLast());
+		//전체페이지가 넘어가야 last를 구함
+		paging.setTotalRecord(reservationService.getCount(vo));
+		model.addAttribute("paging", paging);
 		model.addAttribute("reservation", reservationService.getSearchReservation(vo));
 		return "reservation/getSearchReservation";
 	}

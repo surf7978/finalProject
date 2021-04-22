@@ -13,6 +13,7 @@ public interface ReservationMapper {
 	public int updateReservation(ReservationVO vo);
 
 	public int deleteReservation(ReservationVO vo);
+	public int getCount(ReservationVO vo);// 레코드 조회
 
 	public ReservationVO getViewReservation(ReservationVO vo);
 	public List<ReservationVO> getViewReservation2(ReservationVO vo);	// 사업자번호로 예약리스트 조회

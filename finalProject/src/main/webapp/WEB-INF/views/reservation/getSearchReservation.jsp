@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +35,9 @@
 <br><h3>예약내역</h3>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
+<form id="searchFrm" name="searchFrm">
+<input type="hidden" id="page" name="page" value="1">
+</form>
 	<table class="table1">
 		<tr>
 			<th>예약번호</th>
@@ -63,6 +67,13 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<my:paging paging="${paging}" jsFunc="goPage" />
+	<script>
+	function goPage(p){
+		page.value=p;
+		searchFrm.submit();
+	}
+</script>
 	<br>
 	<div id='calendar' style="width: 800px"></div>
 </div>

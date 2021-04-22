@@ -18,4 +18,10 @@ public class ReservationVO {
 	
 	//결제
 	String resultPrice;
+	
+	//paging과 관련된 값만 더 추가
+	Integer page = 1;
+	//null 체크하려면integer이 편함
+	int start1 = 1;
+	int end1 = 10;
 }

@@ -13,7 +13,7 @@
 <body>
 <c:if test="${reservation.reservationDate eq null}">
 	<p style="color: red">※조회된 예약 내역이 없습니다※</p>
-	<button type="button" class="updateReservationBtn" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','updateReservation','width=550, height=500'); window.close();">예약하기</button> 
+	<button type="button" class="updateReservationBtn" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','updateReservation','width=550, height=500');">예약하기</button> 
 <button type="button" class="close" onclick="window.close()">닫기</button>
 </c:if>
 <c:if test="${reservation.reservationDate != null}">
