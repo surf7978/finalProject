@@ -7,6 +7,7 @@ import com.company.reservation.service.ReservationVO;
 
 public interface ReservationMapper {
 	public ReservationVO getReservation(ReservationVO vo);
+	public int getCount(ReservationVO vo);// 레코드 조회
 
 
 	public List<ReservationVO> getSearchReservation(ReservationVO vo); //회원별 예약리스트 조회
