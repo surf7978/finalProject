@@ -284,10 +284,15 @@
 					</div></li>
 				<li><a>예방접종</a>
 					<div>
-						<input type="checkbox" id="cate02_01" value="기초/추가"><label
-							for="cate02_01">기초/추가</label> <input type="checkbox"
-							id="cate02_02" value="심장사상충"><label for="cate02_02">심장사상충</label> <input
-							type="checkbox" id="cate02_03" value="기타"><label for="cate02_03">기타</label>
+						<input type="checkbox" id="cate02_01" value="1차 예방접종"><label
+							for="cate02_01">1차 예방접종</label> <input type="checkbox"
+							id="cate02_02" value="2차 예방접종"><label for="cate02_02">2차 예방접종</label> 
+							<input type="checkbox" id="cate02_03" value="3차 예방접종"><label for="cate02_03">3차 예방접종</label>
+							<input type="checkbox" id="cate02_04" value="4차 예방접종"><label for="cate02_04">4차 예방접종</label>
+							<input type="checkbox" id="cate02_05" value="5차 예방접종"><label for="cate02_05">5차 예방접종</label>
+							<input type="checkbox" id="cate02_06" value="6차 예방접종"><label for="cate02_06">6차 예방접종</label>
+							<input type="checkbox" id="cate02_07" value="추가 예방접종 1차"><label for="cate02_07">추가 예방접종 1차</label>
+							<input type="checkbox" id="cate02_08" value="심장사상충 예방주사"><label for="cate02_08">심장사상충 예방주사</label>
 					</div></li>
 				<li><a>검진/검사</a>
 					<div>
@@ -309,13 +314,14 @@
 							for="cate03_10">심장검사</label>
 							<input type="checkbox" id="cate03_11" value="내시경검사"><label
 							for="cate03_11">내시경검사</label>
-							<input type="checkbox" id="cate03_12" value="기타"><label
-							for="cate03_12">기타</label>
+							<input type="checkbox" id="cate03_12" value="슬개골검사"><label
+							for="cate03_12">슬개골검사</label>
 					</div></li>
 				<li><a>기타</a>
 					<div>
-						<input type="checkbox" id="cate04_01" value="기타상품"><label
-							for="cate04_01">기타상품</label>
+						<input type="checkbox" id="cate04_01" value="구충제"><label for="cate04_01">구충제</label>
+						<input type="checkbox" id="cate04_02" value="심장사상충 예방약"><label for="cate04_02">심장사상충 예방약</label>
+						<input type="checkbox" id="cate04_03" value="기생충 예방약"><label for="cate04_03">기생충 예방약</label>
 					</div></li>
 			</ul>
 		</div>

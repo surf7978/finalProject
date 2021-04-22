@@ -148,8 +148,8 @@
 					</tr>
 					<tr>
 						<td style="height:160px; padding-left:10px;">
-							<br>
-							<br>
+							<h6 style="font-size:20px; font-weight:900;">통계 현황</h6>
+							<button onclick="location.href='getSearchChart'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;사업자통계</button><br>
 							<br> 
 							<br>
 						</td>
