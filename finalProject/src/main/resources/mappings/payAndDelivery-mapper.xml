@@ -65,25 +65,12 @@
 	</select>
 
 	<!-- 결제내역 차트용 -->
-	
-	<!-- 일,월,년별합계 -->
 	<!-- 컬럼차트 -->
-	<select id="dailyTotal" resultType="map">
+	<select id="getColumnChart" resultType="map">
+	SELECT PAYDATE,SUM(SUMPRICE) SUM
+	FROM(
 		SELECT
-		TO_CHAR(PAYDATE,
-			<!-- 기본값:일별조회 -->
-			<if test="search == 'daily'">
-				'yyyy-mm-dd'		
-			</if>
-			<!-- 월별조회 -->
-			<if test="search == 'monthly'">
-				'yyyy-mm'		
-			</if>
-			<!-- 년별조회 -->
-			<if test="search == 'years'">
-				'yyyy'		
-			</if>
-		) paydate, sum(SUMPRICE) sumprice
+		TO_CHAR(PAYDATE,'yyyy-mm') paydate, sum(SUMPRICE) sumprice
 		FROM PAYANDDELIVERY
 		<!-- 사업자 -->
 		<if test="businessNumber !=null">
@@ -104,8 +91,11 @@
 		AND (BUYSTATE = '결제완료'
 		OR BUYSTATE = '예약완료')
 		GROUP BY PAYDATE
+		)
+		GROUP BY PAYDATE
 		ORDER BY PAYDATE
 	</select>
+	
 	<!-- 도넛차트 -->
 	<select id="getDonutChart" resultType="map">
 	SELECT BUYSTATE ,COUNT(BUYSTATE) COUNT
@@ -120,23 +110,23 @@
    	</if>
 	GROUP BY BUYSTATE
 	</select>
+	
 	<!-- 비교차트 -->
 	<select id="getAreaChart" resultType="map">
-	SELECT BUYSTATE,SUM(SUMPRICE) SUM
-	FROM(
-   		SELECT CASE WHEN BUYSTATE = '예약완료' OR BUYSTATE ='결제완료' THEN 'SALES' 
-        WHEN BUYSTATE = '환불완료' OR BUYSTATE ='반품완료' THEN 'EXPENSES' 
-        END BUYSTATE, SUMPRICE
-    	FROM PAYANDDELIVERY
+   	SELECT TO_CHAR(PAYDATE,'YYYY-MM') PAYDATE, 
+   	SUM (CASE WHEN BUYSTATE = '예약완료' OR BUYSTATE ='결제완료' THEN SUMPRICE ELSE 0 END) SALES,
+	SUM (CASE WHEN BUYSTATE = '환불완료' OR BUYSTATE ='반품완료' THEN SUMPRICE ELSE 0 END) EXPENSES 
+    FROM PAYANDDELIVERY
     	<!-- 사업자 -->
     	<if test="businessNumber != null">
 	    	WHERE BUSINESSNUMBER = #{businessNumber}
     	</if>
     	<!-- 관리자 -->
-    	<if test="category ==70">
+    	<if test="category == 70">
     		WHERE CATEGORY = 70
     	</if>
-    	)
-	GROUP BY BUYSTATE;
+	GROUP BY TO_CHAR(PAYDATE,'YYYY-MM')
+	ORDER BY PAYDATE
 	</select>
+	
 </mapper>
