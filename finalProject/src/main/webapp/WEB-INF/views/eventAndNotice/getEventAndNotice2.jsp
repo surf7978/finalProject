@@ -97,16 +97,18 @@ table td {
 				<form
 					action="deleteEventAndNotice?eanNumber=${getEventAndNotice.eanNumber}"
 					method="post">
+					<c:if test="${loginID eq 'admin'}">
 					<input type="button" class="update"
 						onclick="location.href='updateEventAndNotice2?eanNumber=${getEventAndNotice.eanNumber}'"
 						value="수정하기"> <input class="delete" type="submit"
 						value="삭제하기">
-
+					</c:if>
 
 				</form>
 				</c:if>
 			</div>
-
+	<br>
+				<input class="back" type="button" value="목록으로" onclick="location.href='getSearchEventAndNoticeSelect2'" > 
 		</div>
 	
 </body>

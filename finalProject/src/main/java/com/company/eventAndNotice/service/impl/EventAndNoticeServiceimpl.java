@@ -75,6 +75,13 @@ public class EventAndNoticeServiceimpl implements EventAndNoticeService{
 	public int countBoard() {
 		return EventAndNoticeMapper.countBoard();
 	}
+	@Override
+	public int updateViews(EventAndNoticeVO vo) {
+		
+		return EventAndNoticeMapper.updateViews(vo);
+	}
+	
+
 
 
 }

@@ -110,7 +110,7 @@ function check(){
 						<div class="send">
 						 <input class="send" type ="submit" value="수정">
                         <input class="reset" type = "reset" value="취소">
-                   
+                   		<input class="back" type="button" value="뒤로가기" onclick="location.href='getEventAndNotice1?eanNumber=${getEventAndNotice.eanNumber}'">
                         
                         </div>
 

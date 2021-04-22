@@ -306,7 +306,7 @@
 								</c:if>
 							</c:if>
 							<c:if test="${loginAuth eq 'b'}">
-								<a href="getBusiness99?businessId=${loginID}">마이페이지</a>
+								<a href="getBusiness99">마이페이지</a>
 							</c:if>
 						<!-- 
 							<ul class="dropdown">

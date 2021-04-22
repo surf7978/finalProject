@@ -146,6 +146,10 @@ public class Controller4 {
 	@GetMapping("/getBoard")
 	public String getBoard(Model model, BoardVO vo) {
 		model.addAttribute("board", boardService.getBoard(vo));
+		
+		// 조회수 +1
+		boardService.updateViews(vo);
+		
 		return "board/getBoard";
 	}
 
@@ -276,6 +280,10 @@ public class Controller4 {
 	@GetMapping("/getBoard2")
 	public String getBoard2(Model model, BoardVO vo) {
 		model.addAttribute("board", boardService.getBoard(vo));
+		
+		// 조회수 +1
+		boardService.updateViews(vo);
+		
 		return "board/getBoard2";
 	}
 	
@@ -454,9 +462,13 @@ public class Controller4 {
 
 	// 이벤트 단건조회
 	@GetMapping("/getEventAndNotice1")
-	public String getEventAndNotice1(EventAndNoticeVO vo, Model model) {
+	public String getEventAndNotice1( EventAndNoticeVO vo, Model model) {
 		eventAndNoticeService.getEventAndNotice1(vo);
 		model.addAttribute("getEventAndNotice", eventAndNoticeService.getEventAndNotice1(vo));
+		
+		// 기존의 게시글 자세히 보기에서 추가된 부분.조회수
+		eventAndNoticeService.updateViews(vo);
+		
 		return "eventAndNotice/getEventAndNotice1";
 	}
 
@@ -563,8 +575,11 @@ public class Controller4 {
 	// 공지사항 단건조회
 	@GetMapping("/getEventAndNotice2")
 	public String getEventAndNotice2(EventAndNoticeVO vo, Model model) {
-		eventAndNoticeService.getEventAndNotice2(vo);
+		eventAndNoticeService.getEventAndNotice2(vo);		
 		model.addAttribute("getEventAndNotice", eventAndNoticeService.getEventAndNotice2(vo));
+		
+		//조회수+1
+		eventAndNoticeService.updateViews(vo);
 		return "eventAndNotice/getEventAndNotice2";
 	}
 

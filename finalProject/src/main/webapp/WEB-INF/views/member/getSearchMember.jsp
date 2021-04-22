@@ -42,7 +42,7 @@
  <td>${list.memberId}</td>
  <td> 
  	<c:if test="${list.auth eq 'b'}">
- 		<button onclick="location.href='getBusiness99?businessId=${list.memberId}'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#8fbc8f; color:white;">선택</button>
+ 		<button onclick="location.href='getBusiness98?businessId=${list.memberId}'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#8fbc8f; color:white;">선택</button>
  	</c:if>
  	<c:if test="${list.auth eq 'm'}">
 		 <button onclick="location.href='getMember1?memberId=${list.memberId}'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#8fbc8f; color:white;">선택</button>
