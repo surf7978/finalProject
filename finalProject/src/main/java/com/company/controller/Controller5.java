@@ -640,7 +640,12 @@ public class Controller5 {
 		List<Map<String, Object>> map = payAndDeliveryService.getAreaChart(vo);
 		return map;
 	}
+
 	// 마이페이지-사업자-실시간화장진료 페이지
+	@RequestMapping("/videoCall")
+	public String videoCall() {
+		return "video/videoCall";
+	}
 
 	// 공통
 	// 세션 및 busCode 변환
