@@ -91,10 +91,10 @@ table td {
 				</div>
 				<hr>
 				<div class="image" style="text-align: left; width: 500px;">
-					<c:if test="${board.category eq 1}">
+					<c:if test="${board.category eq 1 and board.image ne ' '}">
 						<img id="image" src="resources/images/board1/${board.image }">
 					</c:if>
-					<c:if test="${board.category eq 2}">
+					<c:if test="${board.category eq 2 and board.image ne ' '}">
 						<img id="image" src="resources/images/board2/${board.image }">
 					</c:if>
 				</div>
@@ -119,7 +119,10 @@ table td {
 						value="삭제하기">
 				</form>
 				</c:if>
+				<br>
+				 <input class="back" type="button" value="목록으로" onclick="location.href='getSearchBoardCategiry1'">
 			</div>
+			
 		</div>
 		
 		<hr>
@@ -143,6 +146,9 @@ table td {
 			     	<td style="width:70px;">
 			     	<input type="hidden" id="commentNumber" name="commentNumber" value="${list.commentNumber }">
 				     	<c:if test="${list.writer eq loginID }">
+				     		<button class="deleteComment">삭제</button>
+				     	</c:if>
+				     	<c:if test="${loginID eq 'admin' }">
 				     		<button class="deleteComment">삭제</button>
 				     	</c:if>
 			     	</td>

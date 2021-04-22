@@ -132,7 +132,7 @@ table.table2 td {
 							<div class="send">
 								<input class="send" type="submit" value="수정하기"> <input
 									class="reset" type="reset" value="취소">
-
+							<input class="back" type="button" value="뒤로가기" onclick="location.href='getBoard?boardNumber=${board.boardNumber}'">		
 
 							</div>
 

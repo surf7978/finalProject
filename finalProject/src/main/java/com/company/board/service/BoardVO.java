@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class BoardVO {
 	String boardNumber;
-	String image;
+	String image = " ";
 	String title;
 	String calendar;
 	String content;

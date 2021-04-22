@@ -107,7 +107,8 @@ table td {
 
 			</form>
 		</div>
-
+	<br>
+				<input class="back" type="button" value="목록으로" onclick="location.href='getSearchEventAndNoticeSelectForm?category=${getEventAndNotice.category}'" > 
 	</div>
 
 
