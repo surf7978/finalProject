@@ -35,6 +35,8 @@ import com.company.common.Paging;
 import com.company.integrated.service.IntegratedSearchVO;
 import com.company.integrated.service.IntegratedService;
 import com.company.integrated.service.IntegratedVO;
+import com.company.member.service.MemberService;
+import com.company.member.service.MemberVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
 import com.company.question.service.QuestionService;
@@ -101,6 +103,8 @@ public class Controller5 {
 	// 결제
 	@Autowired
 	PayAndDeliveryService payAndDeliveryService;
+	@Autowired
+	MemberService memberService;
 
 	// end of beans
 
@@ -555,11 +559,20 @@ public class Controller5 {
 	// 마이페이지-사업자-통계 데이터
 	@RequestMapping("/getColumnChart")
 	@ResponseBody
-	public List<Map<String, Object>> getSearchColumnChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, Object>> getSearchColumnChart(PayAndDeliveryVO vo, BusinessVO bvo, MemberVO mvo,
+			HttpSession session) {
 		// session ID 조회
 		String id = session.getAttribute("loginID").toString();
 		// ID값 분배
 		bvo.setBusinessId(id);
+		// 관리자인 경우
+		if (id.equals("admin")) {
+			mvo.setMemberId(id);
+			mvo = memberService.getMember(mvo);
+			vo.setCategory("70");
+			List<Map<String, Object>> map = payAndDeliveryService.getColumnChart(vo);
+			return map;
+		}
 		// DB 데이터 조회
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
@@ -575,11 +588,20 @@ public class Controller5 {
 	// 마이페이지-사업자-통계 데이터2(donut)
 	@RequestMapping("/getDonutChart")
 	@ResponseBody
-	public List<Map<String, Object>> getDonutChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, Object>> getDonutChart(PayAndDeliveryVO vo, BusinessVO bvo, MemberVO mvo,
+			HttpSession session) {
 		// session ID 조회
 		String id = session.getAttribute("loginID").toString();
 		// ID값 분배
 		bvo.setBusinessId(id);
+		// 관리자인 경우
+		if (id.equals("admin")) {
+			mvo.setMemberId(id);
+			mvo = memberService.getMember(mvo);
+			vo.setCategory("70");
+			List<Map<String, Object>> map = payAndDeliveryService.getDonutChart(vo);
+			return map;
+		}
 		// DB 데이터 조회
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
@@ -594,11 +616,20 @@ public class Controller5 {
 	// 마이페이지-사업자-통계 데이터3(areaChart)
 	@RequestMapping("/getAreaChart")
 	@ResponseBody
-	public List<Map<String, Object>> getAreaChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, Object>> getAreaChart(PayAndDeliveryVO vo, BusinessVO bvo, MemberVO mvo,
+			HttpSession session) {
 		// session ID 조회
 		String id = session.getAttribute("loginID").toString();
 		// ID값 분배
 		bvo.setBusinessId(id);
+		// 관리자인 경우
+		if (id.equals("admin")) {
+			mvo.setMemberId(id);
+			mvo = memberService.getMember(mvo);
+			vo.setCategory("70");
+			List<Map<String, Object>> map = payAndDeliveryService.getAreaChart(vo);
+			return map;
+		}
 		// DB 데이터 조회
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
