@@ -29,6 +29,12 @@
 		calendar.render();
 	});
 	
+	//페이징처리
+	function goPage(p){
+		page.value=p;
+		console.log(page.value)
+		searchFrm.submit();
+	}
 </script>
 </head>
 <body>
@@ -46,7 +52,6 @@
 			<th>예약시간</th>
 			<th>예약상태</th>
 			<th>예약하기</th>
-			<th>환불하기</th>
 		</tr>
 		<c:forEach items="${reservation }" var="res">
 			<tr>
@@ -63,18 +68,10 @@
 				<button type="button" class="updateReservationBtn" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=500, height=500')">예약변경</button>
 				</c:if>
 				</td>
-				<td><button type="button" class="updateReservationBtn">환불하기</button></td>
 			</tr>
 		</c:forEach>
 	</table>
 	<my:paging paging="${paging}" jsFunc="goPage" />
-<script>
-	function goPage(p){
-		page.value=p;
-		console.log(page.value);
-		searchFrm.submit();
-	}
-</script>
 	<br>
 	<div id='calendar' style="width: 800px"></div>
 </div>

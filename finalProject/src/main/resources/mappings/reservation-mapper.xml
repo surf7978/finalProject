@@ -4,6 +4,12 @@
 
 <mapper
 	namespace="com.company.reservation.service.impl.ReservationMapper">
+	
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM RESERVATION
+		WHERE MEMBERID=#{memberId}
+	</select>
 
 	<!-- 예약 단건조회 -->
 	<select id="getReservation" parameterType="ReservationVO"
@@ -25,6 +31,7 @@
 	<!-- 예약 리스트 조회 for 회원 -->
 	<select id="getSearchReservation" parameterType="ReservationVO"
 		resultType="ReservationVO">
+		SELECT B.* FROM ( SELECT ROWNUM RN, A.* FROM (
 		SELECT RESERVATIONNUMBER
 		, OPTIONNAME
 		, TO_CHAR(RESERVATIONDATE, 'yyyy-mm-dd') AS RESERVATIONDATE
@@ -36,7 +43,8 @@
 		, REVIEWNUMBER
 		FROM RESERVATION
 		where memberid=#{memberId}
-		ORDER BY RESERVATIONNUMBER
+		ORDER BY RESERVATIONNUMBER DESC
+		) A ) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 
 	<!-- 캘린더 조회 for 회원 -->
@@ -115,11 +123,5 @@
 		 REVIEWNUMBER='리뷰등록'
 		 WHERE RESERVATIONNUMBER = #{reservationNumber}
 	</update>
-	
-	<select id="getCount" resultType="int">
-		SELECT COUNT(*)
-		FROM RESERVATION
-		WHERE MEMBERID=#{memberId}
-	</select>
 	
 </mapper>
