@@ -120,8 +120,8 @@
 	// draws it.
 	  var data = new google.visualization.DataTable();
 	  data.addColumn('string', '날짜');
-	  data.addColumn('number', '수익');
-	  data.addColumn('number', '지출');
+	  data.addColumn('number', 'Sales');
+	  data.addColumn('number', 'Expenses');
 	  var arr = [];
 	  //ajax
 	  $.ajax({
@@ -130,7 +130,7 @@
 	  	dataType : 'json',
 	  	success : function(result){
 	  		console.log(result)
-	  		for (obj of result){//of = array, in = value
+	  		for (obj of result){
 	  			//[ {},{} ] -> [ [],[] ]
 	  			arr.push( [obj.BUYSTATE, obj.SUM,obj.SUM] );
 	  		}//end of for

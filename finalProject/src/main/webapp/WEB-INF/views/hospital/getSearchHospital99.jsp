@@ -40,7 +40,7 @@
 			getSearchHospitalLocation(1, val);  //여기에 지역별 검색하는 방법 구현
 		})//end of input
 	}//enf of checkbox
-	
+	 
 	function getSearchHospitalLocation(p, val) {
 		/* 리스트 ajax */
 		console.log(val)
