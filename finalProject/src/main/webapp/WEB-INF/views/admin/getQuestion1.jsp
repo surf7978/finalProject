@@ -122,13 +122,8 @@
                          >
                          -->
                        
-                        
                         </div>
 						<div id="insertAnswer"></div>
-
-					 
-
-
 
 				</td>
 			</tr>

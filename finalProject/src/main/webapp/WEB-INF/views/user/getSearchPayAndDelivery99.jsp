@@ -1,18 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>일반회원의 구매내역 리스트</title>
+<title>관리자의 구매내역 리스트</title>
+<link rel="stylesheet" href="resources/css/style4.css" type="text/css">
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-<table border="1">
+<h3>구매내역 리스트</h3><br>
+<form id="searchFrm" name="searchFrm">
+<input type="hidden" id="page" name="page" value="1">
+</form>
+<table class="table1">
 	<thead>
 	<tr>
 		<th>구매번호</th>
@@ -55,13 +62,18 @@
 		<td><c:out value="${pad.payDate}"/></td>
 		<td><c:out value="${pad.sumPrice}"/></td>
 		<td><c:out value="${pad.memberId}"/></td>
+		<c:if test="${pad.buyState !='환불완료' }">
 		<td><c:out value="${pad.buyState}"/></td>
+		</c:if>
+		<c:if test="${pad.buyState =='환불완료' }">
+		<td style="color:red;"><c:out value="${pad.buyState}"/></td>
+		</c:if>
 		<td><c:out value="${pad.invoiceNumber}"/></td>
 		<c:if test="${pad.category eq '70' }">
 		<td><button type="button" class="getSearchBuy">상세조회</button></td>
 		</c:if>
 		<c:if test="${pad.category != '70' }">
-		<td><button type="button" onclick="window.open('getReservation?pndNumber=${pad.pndNumber}','getReservation','width=400, height=300')">예약확인</button></td>
+		<td><button type="button" class="getReservationBtn" onclick="window.open('getReservation?pndNumber=${pad.pndNumber}','getReservation','width=400, height=300')">예약확인</button></td>
 		</c:if>
 		<c:if test="${pad.category eq '70' }">
 		<c:if test="${pad.buyState !='반품완료' }">
@@ -69,7 +81,12 @@
 		<input type="hidden" id="t_key" name="t_key" value="ooo6aOm5bqvE5wog0VTMGQ">
 		<input type="hidden" name="t_code" id="t_code" value="${pad.courierCompany}">
 		<input type="hidden" name="t_invoice" id="t_invoice" value="${pad.invoiceNumber}">
-		<button type="button" onclick="window.open('updateDelivery?pndNumber=${pad.pndNumber}','updateDelivery','width=400, height=300')">배송입력</button>
+		<c:if test="${empty pad.invoiceNumber}">
+		<button type="button" class=updateReservationBtn onclick="window.open('updateDelivery?pndNumber=${pad.pndNumber}','updateDelivery','width=400, height=300')">배송입력</button>
+		</c:if>
+		<c:if test="${not empty pad.invoiceNumber}">
+		<button type="button" class=updateReservationBtn style="background-color:#ff6347;" onclick="dview()">배송조회</button>
+		</c:if>
 		</td>
 		</c:if>
 		</c:if>
@@ -84,9 +101,14 @@
 	</tbody>
 </table>
 <br/>
-<button type="button" class="getSearchReservation" onclick="location.href='getSearchReservation?memberId=${loginID}'">캘린더조회</button>
-
-		
+<my:paging paging="${paging}" jsFunc="goPage" />
+<script>
+	function goPage(p){
+		page.value=p;
+		console.log(page.value);
+		searchFrm.submit();
+	}
+</script>		
 <script>
 	$(function(){
 		$("#getSearchReservation").on("click", function(){

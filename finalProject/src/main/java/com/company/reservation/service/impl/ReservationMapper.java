@@ -7,6 +7,7 @@ import com.company.reservation.service.ReservationVO;
 
 public interface ReservationMapper {
 	public ReservationVO getReservation(ReservationVO vo);
+	public int getCount(ReservationVO vo);// 레코드 조회
 
 
 	public List<ReservationVO> getSearchReservation(ReservationVO vo); //회원별 예약리스트 조회
@@ -20,7 +21,6 @@ public interface ReservationMapper {
 	public List<Map<String, String>> getSearchReservationCalendar2(ReservationVO vo); //캘린더조회 for 사업자
 	
 	public int insertReview2(ReservationVO vo);	//리뷰등록시 데이터 업데이트
- 
 	// 결제용 insert
 	public int insertPayReservation(ReservationVO vo);
 }

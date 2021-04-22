@@ -11,7 +11,7 @@
 <h3>쇼핑몰 구매평 등록</h3>
 <form action="insertReviewProduct" method="post">
 <input type="hidden" id="memberId" name="memberId" value="${loginID }">
-<input type="text" id="probisNumber" name="probisNumber" value="${buy[0].productNumber }">
+<input type="hidden" id="probisNumber" name="probisNumber" value="${buy[0].productNumber }">
 <select id="buyNumber" name="buyNumber">
 <c:forEach items="${buy }" var="buy">
 	<option value="${buy.buyNumber }">${buy.buyNumber }, ${buy.optionName } </option>

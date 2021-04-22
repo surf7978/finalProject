@@ -19,6 +19,8 @@ public interface PayAndDeliveryService {
 	public int updateDelivery(PayAndDeliveryVO vo); // 관리자의 배송정보 입력
 
 	public int getCount(PayAndDeliveryVO vo);// 레코드 조회
+	
+	public int getCount99(PayAndDeliveryVO vo);// 관리자용 레코드 조회
 
 	// 결제설정
 	public int insertPayAndDelivery2(PayAndDeliveryVO vo); // 결제 및 배송 추가
