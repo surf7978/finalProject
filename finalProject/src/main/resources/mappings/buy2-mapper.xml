@@ -61,18 +61,18 @@
 			,BUYSTATE			
 			)VALUES
 			(
-				(SELECT NVL(MAX(BUYNUMBER),0)+1 FROM BUY)
+				(SELECT NVL(MAX(BUYNUMBER),0)+1+#{index} FROM BUY)
 				,#{vo.category}
 				,#{vo.optionName}
 				,#{vo.count}
-				,${vo.price}
+				,#{vo.price}
 				,#{vo.fromPerson}
 				,#{vo.toPerson}
 				,#{vo.post}
 				,#{vo.address}
 				,#{vo.address2}
 				,#{vo.phone}
-				,${vo.productNumber}
+				,#{vo.productNumber}
 				,#{vo.pndNumber}
 				,'결제완료'
 			)	

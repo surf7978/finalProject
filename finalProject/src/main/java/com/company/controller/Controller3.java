@@ -315,21 +315,20 @@ public class Controller3 {
 	
 	// 쇼핑몰 결제시 다중insert
 	@RequestMapping("/insertCartPayProduct")
-	public String insertCartPayProduct(HttpSession session,PayAndDeliveryVO padvo, BuyVO bvo, ProductVO vo, String category1,CartVO cvo) {
+	public String insertCartPayProduct(HttpSession session,PayAndDeliveryVO padvo,ProductVO vo, String category1,CartVO cvo) {
 		String id = session.getAttribute("loginID").toString();
 		cvo.setMemberId(id);// 조회 후 값 넘김
 		padvo.setCategory(category1);
 		padService.insertPayAndDelivery2(padvo);
-		bvo.setPndNumber(padvo.getPndNumber());
-		List<BuyVO> list = new ArrayList<BuyVO>();
-		list.add(bvo);
-		buyService.insertCartBuy(list);
+		for(BuyVO bvo: padvo.getBuyList()) {
+			bvo.setPndNumber(padvo.getPndNumber());
+		}
+		buyService.insertCartBuy(padvo.getBuyList());
 		//cartService.deleteCart(cvo);
 		return "pay/successPay";
 	}
 	//장바구니 결제form
 	@RequestMapping("/cartPayInfoForm")
-	@ResponseBody
 	public String cartPayInfoForm(MemberVO mvo, Model model, CartVO vo, HttpSession session,String[] cartNumbers, String resultPrice) {
 		// 세션 ID값 조회
 		String id = session.getAttribute("loginID").toString();
@@ -383,11 +382,10 @@ public class Controller3 {
 
 	// 사업체 결제시 insert
 	@RequestMapping("/ReserinsertPayProduct")
-	public String ReserinsertPayProduct(PayAndDeliveryVO padvo, ReservationVO rvo) {
+	public void ReserinsertPayProduct(PayAndDeliveryVO padvo, ReservationVO rvo) {
 		padService.insertPayAndDelivery2(padvo);
 		rvo.setPndNumber(padvo.getPndNumber());
 		rsvService.insertPayReservation(rvo);
-		return "pay/successPay";
 	}
 
 	// 병원 결제form

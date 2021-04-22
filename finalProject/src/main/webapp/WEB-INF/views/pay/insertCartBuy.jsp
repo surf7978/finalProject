@@ -16,7 +16,7 @@
 	$(function() {
 		//productNumber설정
 		var productNumber;
-		var proNo = $("[name=productNumber]").eq(0).val();
+		var proNo = $("#productNumber").eq(0).val();
 		var strpro = proNo.substr(0, 2);
 		$("[name=category1]").val(strpro)
 	})
@@ -55,26 +55,26 @@
 		<input name="memberId" value="${loginID}">  
 		<input name="category1"> 
 	<c:forEach items="${list}" var="list" varStatus="num">
-	<div>
-	<!-- 주소 -->
-	<c:forEach items="${productoption}" var="pro" varStatus="num">
-	<c:if test="${pro.productNumber == list.productNumber}">
-		<input name="category" value="${pro.category }">
-	</c:if>
-	</c:forEach>	
-		<input name="fromPerson" value="${loginID}"> 
-		<input name="toPerson" value="${name }"> 
-		<input name="post" value="${bvo.post }">
-		<input name="address" value="${bvo.address }"> 
-		<input name="address2" value="${bvo.address2 }"> 
-		<input name="phone" value="${bvo.phone }"> 
+		<div>
+		<!-- 주소 -->
+		<c:forEach items="${productoption}" var="pro" varStatus="num2">
+		<c:if test="${pro.productNumber == list.productNumber}">
+			<input name="buyList[${num2.index}].category" value="${pro.category }">
+		</c:if>
+		</c:forEach>	
+		<input name="buyList[${num.index}].fromPerson" value="${loginID}"> 
+		<input name="buyList[${num.index}].toPerson" value="${name }"> 
+		<input name="buyList[${num.index}].post" value="${bvo.post }">
+		<input name="buyList[${num.index}].address" value="${bvo.address }"> 
+		<input name="buyList[${num.index}].address2" value="${bvo.address2 }"> 
+		<input name="buyList[${num.index}].phone" value="${bvo.phone }"> 
 	<!-- 주소 end-->
-		<input name="cartNumbers" value="${list.cartNumber}">
-		<input name="productNumber" value="${list.productNumber}">
-		<input name="optionName" value="${fn:replace(list.optionName,',','/') }">
-		<input name="price" value="${vo.resultPrice }">
+		<input name="buyList[${num.index}].cartNumbers" value="${list.cartNumber}">
+		<input name="buyList[${num.index}].productNumber" id="productNumber" value="${list.productNumber}">
+		<input name="buyList[${num.index}].optionName" value="${fn:replace(list.optionName,',','/') }">
+		<input name="buyList[${num.index}].price" value="${vo.resultPrice }">
 		<%-- <input name="price" value="${fn:replace(list.optionPrice,',','/') }"> --%>
-		<input name="count" value="${fn:replace(list.count.trim(),',','/') }">
+		<input name="buyList[${num.index}].count" value="${fn:replace(list.count.trim(),',','/') }">
 	</div>
 	</c:forEach>
 	<button type="submit">확인</button>

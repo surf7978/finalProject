@@ -161,7 +161,7 @@
 				}
 			} else {
 				location.href = "cartPayInfoForm?productNumber=${product.productNumber}&resultPrice="
-						+ totalResult + "&memberId=${loginID}&cartNumbers=" + cartNumbers;
+					+ totalResult + "&memberId=${loginID}&cartNumbers=" + cartNumbers;
 			}
 		})//end of pay
 	}//end of pay
