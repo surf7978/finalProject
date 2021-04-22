@@ -102,7 +102,7 @@
 					return false;
 				}
 			}else{
-				location.href="PayInfoForm?productNumber=${product.productNumber}&resultPrice="+resultPrice +"&memberId=${loginID}&count=" + count;
+				location.href="ReserPayInfoForm?resultPrice="+resultPrice +"&seq=${vo.seq}&count=" + count;
 			}			
 		});//end of btnEvent
 	}//end of pay

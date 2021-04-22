@@ -60,7 +60,8 @@
 		parameterType="ProductVO">
 		SELECT
 		CATEGORY,
-		PRODUCTNUMBER
+		PRODUCTNUMBER,
+		PRODUCTNAME
 		FROM PRODUCT
 		WHERE PRODUCTNUMBER IN
 		<foreach item='seq' collection='productNumberList' open='(' separator=',' close=')' >
