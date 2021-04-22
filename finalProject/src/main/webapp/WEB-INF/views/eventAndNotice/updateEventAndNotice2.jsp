@@ -123,7 +123,7 @@ table.table2 td {
 								<input class="send" type="submit" value="수정"> <input
 									class="reset" type="reset" value="취소"> <input
 									class="back" type="button" value="뒤로가기"
-									onclick="location.href='getSearchEventAndNotice'">
+									onclick="location.href='getEventAndNotice2?eanNumber=${getEventAndNotice.eanNumber}'">
 
 							</div>
 

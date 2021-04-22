@@ -25,6 +25,7 @@ public interface BoardService {
 	public List<BoardVO> getSearchBoardCategiry1(PagingVOCr4 vo);	
 	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo);	
 	public int getCount(BoardVO vo);// 레코드 조회
+
 	// 게시물 총 갯수
 	public int countBoard();
 	
