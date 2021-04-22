@@ -51,7 +51,7 @@
 		<td><c:out value="${buy.buyState}"/></td>
 	</c:forEach>
 </table>
-	<button type="button" onclick="location.href='getSearchPayAndDelivery'">뒤로가기</button>
+	<button type="button" onclick="window.history.back();">뒤로가기</button>
 </div>
 </body>
 </html>

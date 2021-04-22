@@ -67,6 +67,10 @@
 				<th>상세 이미지</th>
 				<td><input type="file" name="uploadFile" id="image" size="100%" multiple="multiple"></td>
 			</tr>
+			<tr>
+				<th>미리보기</th>
+				<td colspan="2" id="viewImg" style="height: 400px; overflow: scroll;"><img></td>
+			</tr>
 		</table>
 		<br>
 		<button type="submit">수정</button>
@@ -116,7 +120,22 @@
 				$("#category2").append(option1);	
 			}
 		});
-	});
+		
+		//이미지 미리보기
+		$("#image").change(
+				function() {
+					if (this.files && this.files[0]) {
+						var reader = new FileReader;
+						reader.onload = function(data) {
+							$("#viewImg img").attr("src", data.target.result)
+									.width(auto);
+						}
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
+		
+		});
+
 	</script>
 </body>
 </html>
