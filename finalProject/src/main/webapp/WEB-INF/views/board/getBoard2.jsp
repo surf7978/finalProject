@@ -104,10 +104,14 @@ table td {
 				<hr>
 				<div class="image" style="text-align: left; width: 500px;">
 					<c:if test="${board.category eq 1 and board.image ne ' '}">
-						<img id="image" src="resources/images/board1/${board.image }">
+					<c:forTokens items="${board.image }" delims="," var="file">
+						<img id="image" src="resources/images/board1/${file}">
+					</c:forTokens>
 					</c:if>
 					<c:if test="${board.category eq 2 and board.image ne ' '}">
-						<img id="image" src="resources/images/board2/${board.image }">
+					<c:forTokens items="${board.image }" delims="," var="file">
+						<img id="image" src="resources/images/board2/${file}">
+					</c:forTokens>	
 					</c:if>
 				</div>
 				<br> <br>
@@ -122,7 +126,7 @@ table td {
 				<sql:query var="rs1" dataSource="${ds }">
 				 select * from board where boardNumber = '${board.boardNumber}'
 				</sql:query>
-				<c:if test="${rs1.rows[0].writer eq loginID }">
+				<c:if test="${rs1.rows[0].writer eq loginID and loginID ne 'admin' }">
 				<form action="deleteBoard?boardNumber=${board.boardNumber}"
 					method="post" onsubmit="return check()" >
 					<input type="button" class="update"
@@ -131,6 +135,14 @@ table td {
 						value="삭제하기">
 				</form>
 				</c:if>
+				<c:if test="${loginID eq 'admin' }">
+				<form action="deleteBoard?boardNumber=${board.boardNumber}"
+					method="post" onsubmit="return check()" >
+				<input class="delete" type="submit"
+						value="삭제하기">
+				</form>
+				</c:if>
+				
 				<br>
 				<input type="button" class="back" onclick="location.href='getSearchBoardCategiry2Form'" value="목록으로">
 			</div>
@@ -158,7 +170,7 @@ table td {
 				     	<c:if test="${list.writer eq loginID }">
 				     		<button class="deleteComment">삭제</button>
 				     	</c:if>
-				     		<c:if test="${loginID eq 'admin' }">
+				     	<c:if test="${loginID eq 'admin' }">
 				     		<button class="deleteComment">삭제</button>
 				     	</c:if>
 			     	</td>

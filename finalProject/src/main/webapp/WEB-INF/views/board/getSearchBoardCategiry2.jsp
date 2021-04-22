@@ -113,9 +113,7 @@
 </script>
 </head>
 <body>
-			<c:if test="${loginID eq 'admin' }">
-				<button id="btn" class="write">글쓰기</button>
-			</c:if>
+
 	<div id="contents">
 		<h1>자랑하기</h1>
 		<!-- 
