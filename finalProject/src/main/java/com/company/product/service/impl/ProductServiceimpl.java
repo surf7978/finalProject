@@ -48,6 +48,10 @@ public class ProductServiceimpl implements ProductService{
 	public List<ProductVO> getSearchProduct99(ProductVO vo) {
 		return productMapper.getSearchProduct99(vo);
 	}
+	@Override
+	public List<ProductVO> cartGetProduct(ProductVO vo) {
+		return productMapper.cartGetProduct(vo);
+	}
 
 
 }

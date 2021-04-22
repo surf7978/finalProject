@@ -104,6 +104,7 @@ li{list-style:none;}
 #pay_wrap #add_wrap th{border-color:#eaeaea;text-align: center;}
 #pay_wrap #add_wrap{margin-top:0;padding:0;}
 #pay_wrap #add_wrap input{padding:5px;margin:5px 0;border:1px solid #d5d5d5;}
+#pay_wrap table tfoot tr td{padding:20px 10px;}
 /* 제품insert테이블 */
 #contents #pro_tb{width:100%;}
 #contents #pro_tb th{width:20%;}

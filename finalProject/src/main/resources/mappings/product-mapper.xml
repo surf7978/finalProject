@@ -7,6 +7,11 @@
 	<select id="getCount" resultType="int">
 		SELECT COUNT(*)
 		FROM PRODUCT
+		WHERE CATEGORY = #{category}
+		<if test="categoryList != null">
+		AND CATEGORY2 IN
+			 <foreach item="cate" collection="categoryList" open="(" separator="," close=")" >#{cate}</foreach>
+		</if>
 	</select>
 	
 	<select id="getSearchProduct" resultType="ProductVO"
@@ -49,6 +54,18 @@
 		,MEMBERID
 		FROM PRODUCT
 		WHERE PRODUCTNUMBER = #{productNumber}
+	</select>
+	<!-- 장바구니 -->
+	<select id="cartGetProduct" resultType="ProductVO"
+		parameterType="ProductVO">
+		SELECT
+		CATEGORY,
+		PRODUCTNUMBER
+		FROM PRODUCT
+		WHERE PRODUCTNUMBER IN
+		<foreach item='seq' collection='productNumberList' open='(' separator=',' close=')' >
+			 #{seq} 
+		</foreach>
 	</select>
 	<insert id="insertProduct" parameterType="ProductVO">
 		INSERT INTO
