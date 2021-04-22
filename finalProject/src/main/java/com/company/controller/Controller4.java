@@ -164,7 +164,30 @@ public class Controller4 {
 
 	// 자유게시판 수정 처리
 	@PostMapping("/updateBoard")
-	public String updateBoardProc(BoardVO vo) {
+	public String updateBoardProc(BoardVO vo , HttpServletRequest request)  throws IllegalStateException, IOException {
+		System.out.println(vo);
+		// 첨부파일처리
+		// pom , servlet에 추가
+		MultipartFile image = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/board1");
+		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+		System.out.println("경로: " + path);
+		if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			image.transferTo(rename); // transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+			vo.setImage(rename.getName());
+
+		}else {
+			vo.setImage(request.getParameter("image"));
+		}
+		// String path = "resources/images";
 		System.out.println("관리자 게시판관리 수정 updateBoard의 vo2의 " + vo);
 		boardService.updateBoard(vo);
 
@@ -295,18 +318,50 @@ public class Controller4 {
 
 	// 자랑하기 수정 처리
 	@PostMapping("/updateBoard2")
-	public String updateBoard2Proc(BoardVO vo) {
+	public String updateBoard2Proc(BoardVO vo, HttpServletRequest request) throws IllegalStateException, IOException{
+		// 첨부파일처리
+		// pom , servlet에 추가
+		MultipartFile image = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/board2");
+		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+		System.out.println("경로: " + path);
+		if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			image.transferTo(rename); // transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+			vo.setImage(rename.getName());
+
+		}else {
+			vo.setImage(request.getParameter("image"));
+		}
+		if (t_image.getOriginalFilename() != null && !t_image.getOriginalFilename().equals("")
+				&& t_image.getSize() > 0) {
+			String filename = t_image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+			vo.setT_image(rename.getName());
+		} else {
+			// 새로운 파일이 등록되지않았다면
+			// 기존이미지를 그대로 사용
+			vo.setT_image(request.getParameter("t_image"));
+		}
+		// String path = "resources/images";
 		System.out.println("관리자 게시판관리 수정 updateBoard2의 vo2의 " + vo);
 		boardService.updateBoard2(vo);
 		
 		//자유게시판 수정시
-	
-		
-			
-		
-		
-			return "redirect:getBoard2?boardNumber="+vo.getBoardNumber();
-		
+		return "redirect:getBoard2?boardNumber="+vo.getBoardNumber();
 	}
 
 
@@ -411,46 +466,34 @@ public class Controller4 {
 		System.out.println(vo);
 		// 첨부파일처리
 		// pom, servlet에 추가
-		MultipartFile[] images = vo.getUploadFile();
+		MultipartFile image = vo.getUploadFile();
 		MultipartFile t_image = vo.getT_uploadFile();
-		String filenames = "";
-		boolean start = true;
 		String path = request.getSession().getServletContext().getRealPath("/resources/images/eventAndNotice1");
 		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
 		System.out.println("경로: " + path);
-		for (MultipartFile image : images) {
+		
 			if (image != null && !image.isEmpty() && image.getSize() > 0) {
 				String filename = image.getOriginalFilename();
 				// 파일명 중복체크 -> rename
 				File rename = FileRenamePolicy.rename(new File(path, filename));
 				// 업로드된 파일명
+				image.transferTo(rename); // transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+				vo.setImage(rename.getName());
+			}
+		
+
+			if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+				String filename = t_image.getOriginalFilename();
+				// 파일명 중복체크 ->rename
+				File rename = FileRenamePolicy.rename(new File(path, filename));
+				// 업로드된 파일명
 				// rename.getName()
-				if (!start) {
-					filenames += ",";
-				} else {
-					start = false;
-				}
-				filenames += rename.getName();
 				// 파일명을 읽어내는게 getName()
 				// 임시폴더에서 업로드 폴더로 파일이동
-				image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
-
+				t_image.transferTo(rename);// transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+				vo.setT_image(rename.getName());
 			}
-		}
-		vo.setImage(filenames);
-
-		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
-			String filename = t_image.getOriginalFilename();
-			// 파일명 중복체크 -> rename
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			// 업로드된 파일명
-			// rename.getName()
-			// 파일명을 읽어내는게 getName()
-			// 임시폴더에서 업로드 폴더로 파일이동
-			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
-			vo.setT_image(rename.getName());
-		}
-//			String path="resources/images";
+			// String path = "resources/images";
 		eventAndNoticeService.insertEventAndNotice1(vo);
 
 		return "redirect:/getSearchEventAndNoticeSelectForm?category=1";
@@ -481,7 +524,48 @@ public class Controller4 {
 
 	// 이벤트 처리
 	@PostMapping("/updateEventAndNotice1")
-	public String updateEventAndNotice1Proc(EventAndNoticeVO vo) {
+	public String updateEventAndNotice1Proc(EventAndNoticeVO vo, HttpServletRequest request)  throws IllegalStateException, IOException{
+		
+		// 첨부파일처리
+				// pom , servlet에 추가
+				MultipartFile image = vo.getUploadFile();
+				MultipartFile t_image = vo.getT_uploadFile();
+				String path = request.getSession().getServletContext().getRealPath("/resources/images/eventAndNotice1");
+				// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+				System.out.println("경로: " + path);
+				if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
+					String filename = image.getOriginalFilename();
+					// 파일명 중복체크 -> rename
+					File rename = FileRenamePolicy.rename(new File(path, filename));
+					// 업로드된 파일명
+					// rename.getName()
+					// 파일명을 읽어내는게 getName()
+					// 임시폴더에서 업로드 폴더로 파일이동
+					image.transferTo(rename); // transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+					vo.setImage(rename.getName());
+
+				}else {
+					vo.setImage(request.getParameter("image"));
+				}
+				if (t_image.getOriginalFilename() != null && !t_image.getOriginalFilename().equals("")
+						&& t_image.getSize() > 0) {
+					String filename = t_image.getOriginalFilename();
+					// 파일명 중복체크 -> rename
+					File rename = FileRenamePolicy.rename(new File(path, filename));
+					// 업로드된 파일명
+					// rename.getName()
+					// 파일명을 읽어내는게 getName()
+					// 임시폴더에서 업로드 폴더로 파일이동
+					t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+					vo.setT_image(rename.getName());
+				} else {
+					// 새로운 파일이 등록되지않았다면
+					// 기존이미지를 그대로 사용
+					vo.setT_image(request.getParameter("t_image"));
+				}
+				// String path = "resources/images";
+				System.out.println("관리자 게시판관리 수정 eventAndNotice1 vo의 " + vo);
+		
 		System.out.println("updateEventAndNotice1Proc의 vo" + vo);
 		eventAndNoticeService.updateEventAndNotice1(vo);
 		
@@ -524,46 +608,39 @@ public class Controller4 {
 		System.out.println(vo);
 		// 첨부파일처리
 		// pom, servlet에 추가
-		MultipartFile[] images = vo.getUploadFile();
+		MultipartFile image = vo.getUploadFile();
 		MultipartFile t_image = vo.getT_uploadFile();
 		String filenames = "";
 		boolean start = true;
 		String path = request.getSession().getServletContext().getRealPath("/resources/images/eventAndNotice2");
 		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
 		System.out.println("경로: " + path);
-		for (MultipartFile image : images) {
+	
 			if (image != null && !image.isEmpty() && image.getSize() > 0) {
 				String filename = image.getOriginalFilename();
 				// 파일명 중복체크 -> rename
 				File rename = FileRenamePolicy.rename(new File(path, filename));
 				// 업로드된 파일명
 				// rename.getName()
-				if (!start) {
-					filenames += ",";
-				} else {
-					start = false;
-				}
-				filenames += rename.getName();
 				// 파일명을 읽어내는게 getName()
 				// 임시폴더에서 업로드 폴더로 파일이동
-				image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+				image.transferTo(rename); // transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+				vo.setImage(rename.getName());
 
 			}
-		}
-		vo.setImage(filenames);
 
-		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
-			String filename = t_image.getOriginalFilename();
-			// 파일명 중복체크 -> rename
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			// 업로드된 파일명
-			// rename.getName()
-			// 파일명을 읽어내는게 getName()
-			// 임시폴더에서 업로드 폴더로 파일이동
-			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
-			vo.setT_image(rename.getName());
-		}
-//				String path="resources/images";
+			if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+				String filename = t_image.getOriginalFilename();
+				// 파일명 중복체크 ->rename
+				File rename = FileRenamePolicy.rename(new File(path, filename));
+				// 업로드된 파일명
+				// rename.getName()
+				// 파일명을 읽어내는게 getName()
+				// 임시폴더에서 업로드 폴더로 파일이동
+				t_image.transferTo(rename);// transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+				vo.setT_image(rename.getName());
+			}
+			// String path = "resources/images";
 		eventAndNoticeService.insertEventAndNotice2(vo);
 
 		return "redirect:/getSearchEventAndNoticeSelect2";
@@ -593,8 +670,30 @@ public class Controller4 {
 
 	// 공지사항 처리
 	@PostMapping("/updateEventAndNotice2")
-	public String updateEventAndNotice2Proc(EventAndNoticeVO vo) {
-		System.out.println("updateEventAndNotice2Proc의 vo" + vo);
+	public String updateEventAndNotice2Proc(EventAndNoticeVO vo, HttpServletRequest request)  throws IllegalStateException, IOException  {
+		// 첨부파일처리
+		// pom , servlet에 추가
+		MultipartFile image = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/eventAndNotice2");
+		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+		System.out.println("경로: " + path);
+		if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
+			String filename = image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			image.transferTo(rename); // transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+			vo.setImage(rename.getName());
+
+		}else {
+			vo.setImage(request.getParameter("image"));
+		}
+		// String path = "resources/images";
+		System.out.println("관리자 게시판관리 수정 updateEventAndNotice2 vo의 " + vo);
 		eventAndNoticeService.updateEventAndNotice2(vo);
 		return "redirect:getEventAndNotice2?eanNumber="+vo.getEanNumber();
 	}

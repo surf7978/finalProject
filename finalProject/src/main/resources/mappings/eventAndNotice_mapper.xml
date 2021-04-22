@@ -76,6 +76,8 @@
 		<!-- 이벤트 수정  -->
 	<update id="updateEventAndNotice1" parameterType="eventAndNoticeVO">
 		UPDATE eventAndNotice SET
+		IMAGE=#{image},
+		T_IMAGE=#{t_image},
 		TITLE=#{title} ,
 		CONTENT=#{content} 
 		WHERE EANNUMBER= #{eanNumber} 
@@ -84,6 +86,7 @@
 	<!-- 공지사항 수정  -->
 	<update id="updateEventAndNotice2" parameterType="eventAndNoticeVO">
 		UPDATE eventAndNotice SET
+		IMAGE=#{image},
 		TITLE=#{title} ,
 		CONTENT=#{content} 
 		WHERE EANNUMBER= #{eanNumber}

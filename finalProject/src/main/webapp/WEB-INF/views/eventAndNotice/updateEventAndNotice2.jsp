@@ -84,7 +84,7 @@ table.table2 td {
 		<h1>공지사항</h1>
 			<form id="frm" name="frm" onsubmit="return check()"
 				action="updateEventAndNotice2?eanNumber=${getEventAndNotice.eanNumber}"
-				method="post">
+				method="post" encType="multipart/form-data">
 
 
 				<table
@@ -107,7 +107,10 @@ table.table2 td {
 									<td><input type=text id="title" name="title" size="60"
 										value="${getEventAndNotice.title}"></td>
 								</tr>
-
+							    <tr>
+								<td><input value="이 미 지" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+								<td><input type="file" id="image" name="uploadFile" size="100%"  multiple="multiple"></td>		
+								</tr>
 								<tr>
 									<td><input value="내 용"
 										style="font-size: 20px; text-align: center; width: 100px; border: none;"

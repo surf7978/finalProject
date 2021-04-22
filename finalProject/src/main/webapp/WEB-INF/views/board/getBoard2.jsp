@@ -126,7 +126,7 @@ table td {
 				<form action="deleteBoard?boardNumber=${board.boardNumber}"
 					method="post" onsubmit="return check()" >
 					<input type="button" class="update"
-						onclick="location.href='updateBoard?boardNumber=${board.boardNumber}'"
+						onclick="location.href='updateBoard2?boardNumber=${board.boardNumber}'"
 						value="수정하기"> <input class="delete" type="submit"
 						value="삭제하기">
 				</form>

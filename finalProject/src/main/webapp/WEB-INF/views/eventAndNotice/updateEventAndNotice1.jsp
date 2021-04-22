@@ -78,7 +78,7 @@ function check(){
 		<div id="show">
 		<h1>이벤트</h1>
 	<form id="frm" name="frm" onsubmit="return check()"
-		action="updateEventAndNotice1?eanNumber=${getEventAndNotice.eanNumber}" method="post">
+		action="updateEventAndNotice1?eanNumber=${getEventAndNotice.eanNumber}" method="post" encType="multipart/form-data">
 
 	
 		<table
@@ -98,7 +98,14 @@ function check(){
 							<td><input value="제 목" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
 							<td><input type=text id="title" name="title" size="60" value="${getEventAndNotice.title}" ></td>
 						</tr>
-
+				    	<tr>
+							<td><input value="TitleImage" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type="file" id="t_image" name="t_uploadFile" size="100%" multiple="multiple"></td>
+						</tr>
+						<tr>
+							<td><input value="Image" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type="file" id="image" name="uploadFile" size="100%" multiple="multiple"></td>
+						</tr>
 						<tr>
 							<td><input value="내 용" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
 							<td><textarea id="content" name="content" cols="85" rows="15"  >${getEventAndNotice.content}</textarea></td>

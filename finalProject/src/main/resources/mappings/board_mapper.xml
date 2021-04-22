@@ -53,6 +53,7 @@
 	<!-- 자유게시판 수정  -->
 	<update id="updateBoard" parameterType="boardVO">
 		UPDATE BOARD SET
+		IMAGE=#{image},
 		TITLE=#{title} ,
 		CONTENT=#{content} ,
 		CATEGORY= #{category}
@@ -61,6 +62,8 @@
 	<!-- 자랑하기 수정  -->
 	<update id="updateBoard2" parameterType="boardVO">
 		UPDATE BOARD SET
+		IMAGE=#{image},
+		T_IMAGE=#{t_image},
 		TITLE=#{title} ,
 		CONTENT=#{content} ,
 		CATEGORY= #{category}

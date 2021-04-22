@@ -18,7 +18,7 @@ public class EventAndNoticeVO{
 	String views;
 	String category;
 	String memberId;
-	MultipartFile[] uploadFile;
+	MultipartFile uploadFile;
 	MultipartFile t_uploadFile;
 	
 
