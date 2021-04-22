@@ -72,7 +72,7 @@ import com.company.review.service.ReviewVO;
 
 @Controller
 public class Controller1 {
-
+ 
 	@Autowired
 	MemberService memberService;
 	@Autowired
