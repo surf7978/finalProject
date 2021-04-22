@@ -40,7 +40,16 @@
 						$(weighttr).append(weightth, weight);
 						var neuteryntr=$("<tr>");
 						var neuterynth = $("<th>").html("중성화여부");
-						var neuteryn = $("<td>").append($(this).find("neuterYn").text());
+						var neuterYnresult;
+						var neuterYn = $(this).find("neuterYn").text();
+						if(neuterYn == "N"){
+							neuterYnresult ="아니오"
+						}else if(neuterYn == "Y"){
+							neuterYnresult ="예"
+						}else{
+							neuterYnresult ="미상"
+						}
+						var neuteryn = $("<td>").text(neuterYnresult);
 						$(neuteryntr).append(neuterynth, neuteryn);
 						var sexCdtr=$("<tr>");
 						var sexCdth = $("<th>").html("성별");
@@ -73,7 +82,8 @@
 						$(happenPlacetr).append(happenPlaceth, happenPlace);
 						var noticeEdttr=$("<tr>");
 						var noticeEdtth = $("<th>").html("공고종료일");
-						var noticeEdt = $("<td>").append($(this).find("noticeEdt").text());
+						var noticeEdtNum = $(this).find("noticeEdt").text();
+						var noticeEdt = $("<td>").text(YMDFormat(noticeEdtNum));
 						$(noticeEdttr).append(noticeEdtth, noticeEdt);
 						var processStatetr=$("<tr>");
 						var processStateth = $("<th>").html("상태");
@@ -92,6 +102,20 @@
 			}
 		});
 	});
+	function YMDFormat(num){
+		if(!num) return"";
+		var formatNum = "";
+		//공백제거
+		num=num.replace(/\s/gi, "");
+		try{
+			if(num.length==8){
+				formatNum = num.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+			}
+		}catch(e){
+			 formatNum = num;
+		}
+		return formatNum;
+	}
 </script>
 </head>
 <body>
@@ -100,6 +124,7 @@
 		<div id="searchshow">
 			
 		</div>
+		<button onclick="location.href='getAbanList'">목록으로</button>
 	</div>
 </body>
 </html>

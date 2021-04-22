@@ -5,12 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>일반회원의 구매내역 상세리스트 조회</title>
+<title>관리자의 구매내역 상세리스트 조회</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-${buys }
 <table border="1">
 	<thead>
 	<tr>
@@ -26,8 +25,7 @@ ${buys }
 		<th>상세주소</th>
 		<th>전화번호</th>
 		<th>구매상태</th>	
-		<th>구매평</th>	
-		<th>환불하기</th>
+
 		</tr>
 	</thead>
 	<tbody>
@@ -45,8 +43,7 @@ ${buys }
 		<td><c:out value="${buy.address2}"/></td>
 		<td><c:out value="${buy.phone}"/></td>
 		<td><c:out value="${buy.buyState}"/></td>
-		<td><button type="button" class="">구매평쓰기</button></td>
-		<td><button type="button" class="">환불하기</button></td>
+
 	</tr>
 	</c:forEach>
 	</tbody>

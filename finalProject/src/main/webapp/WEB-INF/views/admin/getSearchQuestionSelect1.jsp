@@ -51,7 +51,7 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-	<h3 align="center">상품문의 현황</h3>
+	<h3 align="center">쇼핑몰 문의내역</h3>
 	<br><br>
 <!-- <div id="outter"> -->
 	<div   style=" display: none; float: bottom; ">
@@ -94,7 +94,6 @@
 </tbody>
 </table>
 	
-	<div style="border:1px solid; width:30px; height:30px; display: block; text-align: center;">		
 		<c:if test="${paging.startPage != 1 }">
 			<a href="getSearchQuestionSelect1?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
@@ -111,8 +110,6 @@
 		<c:if test="${paging.endPage != paging.lastPage}">
 			<a href="getSearchQuestionSelect1?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
-	</div>
 </div>
-<!-- </div> -->
 </body>
 </html>

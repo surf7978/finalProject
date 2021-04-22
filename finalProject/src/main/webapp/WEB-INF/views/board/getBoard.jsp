@@ -12,6 +12,21 @@
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function check() {
+	var A = confirm("삭제하시겠습니까?");
+	
+	if (A) {
+		alert("삭제 되었습니다.");
+		return true;
+	
+	} else {
+	
+		return false;
+	}
+
+}
+</script>
 </head>
 <style>
 input.back {
@@ -112,7 +127,7 @@ table td {
 				</sql:query>
 				<c:if test="${rs1.rows[0].writer eq loginID }">
 				<form action="deleteBoard?boardNumber=${board.boardNumber}"
-					method="post">
+					method="post" onsubmit="return check()">
 					<input type="button" class="update"
 						onclick="location.href='updateBoard?boardNumber=${board.boardNumber}'"
 						value="수정하기"> <input class="delete" type="submit"

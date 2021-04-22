@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form id="frm" action="updateNote" method="post">
-	<input type="text" id="noteNumber" name="noteNumber" value="${note.noteNumber }">
+	<input type="hidden" id="noteNumber" name="noteNumber" value="${note.noteNumber }">
 		<table border="1">
 			<tr>
 				<th>유형</th>

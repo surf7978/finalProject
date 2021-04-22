@@ -167,14 +167,11 @@ public class Controller4 {
 	public String updateBoardProc(BoardVO vo) {
 		System.out.println("관리자 게시판관리 수정 updateBoard의 vo2의 " + vo);
 		boardService.updateBoard(vo);
-		
-		//자유게시판 수정시
+
 	
+
 		
-			
-		
-		
-			return "redirect:/getSearchBoardCategiry1";
+		return "redirect:getBoard?boardNumber="+vo.getBoardNumber();
 		
 	}
 
@@ -308,7 +305,7 @@ public class Controller4 {
 			
 		
 		
-			return "redirect:/getSearchBoardCategiry2Form";
+			return "redirect:getBoard2?boardNumber="+vo.getBoardNumber();
 		
 	}
 
@@ -487,7 +484,8 @@ public class Controller4 {
 	public String updateEventAndNotice1Proc(EventAndNoticeVO vo) {
 		System.out.println("updateEventAndNotice1Proc의 vo" + vo);
 		eventAndNoticeService.updateEventAndNotice1(vo);
-		return "redirect:/getSearchEventAndNoticeSelectForm?category=1";
+		
+		return "redirect:getEventAndNotice1?eanNumber="+vo.getEanNumber();
 	}
 	
 	// 공지사항 게시판 선택(전체조회)
@@ -598,7 +596,7 @@ public class Controller4 {
 	public String updateEventAndNotice2Proc(EventAndNoticeVO vo) {
 		System.out.println("updateEventAndNotice2Proc의 vo" + vo);
 		eventAndNoticeService.updateEventAndNotice2(vo);
-		return "redirect:/getSearchEventAndNoticeSelect2";
+		return "redirect:getEventAndNotice2?eanNumber="+vo.getEanNumber();
 	}
 
 	// 공지사항, 이벤트 삭제

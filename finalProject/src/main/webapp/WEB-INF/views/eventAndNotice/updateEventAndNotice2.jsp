@@ -12,6 +12,7 @@
 	function check() {
 		var A = confirm("수정하시겠습니까?");
 		if (A) {
+			alert("수정 되었습니다.");
 			return true;
 		} else {
 			return false;
