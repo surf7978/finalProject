@@ -8,6 +8,7 @@ import com.company.product.service.ProductVO;
 public interface ProductMapper {
 	public int insertProduct(ProductVO vo);
 	public ProductVO getProduct(ProductVO vo);
+	public List<ProductVO> cartGetProduct(ProductVO vo);	//cart단건조회
 	public List<ProductVO> getSearchProduct(ProductSearchVO vo);
 	public int updateProduct(ProductVO vo);
 	public int deleteProduct(ProductVO vo);

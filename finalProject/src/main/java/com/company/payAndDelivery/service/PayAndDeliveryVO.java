@@ -1,5 +1,9 @@
 package com.company.payAndDelivery.service;
 
+import java.util.List;
+
+import com.company.buy.service.BuyVO;
+
 import lombok.Data;
 
 @Data
@@ -26,5 +30,7 @@ public class PayAndDeliveryVO {
 	//null 체크하려면integer이 편함
 	int start = 1;
 	int end = 10;
+	
+	List<BuyVO> buyList;
 	
 }

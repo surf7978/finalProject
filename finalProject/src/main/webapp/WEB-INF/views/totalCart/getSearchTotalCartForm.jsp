@@ -66,7 +66,7 @@
 			tr.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
 		}
 		//제품명
-		tr.append($("<td>").html(item.productName))
+		tr.append($("<td>").html(item.productName +  "<input type='hidden' name='productNumber' value='" + item.productNumber + "'>" +"<input type='hidden' name='cartNumbers' value='" + item.cartNumber + "'>"))
 		//옵션명
 		var td = $("<td>");
 		var td2 = $("<td>");
@@ -145,6 +145,10 @@
 			var count = $("[name=count]").val();
 			//체크박스 값 확인
 			var check = $(".chk:checked");
+			var cartNumbers = [];
+			$("[name=check]:checked").each(function(){				
+				cartNumbers.push($(this).parent().siblings().children("[name=cartNumbers]").val());
+			})
 			//상품선택,로그인 체크
 			if (check.length == 0) {
 				alert("상품을 선택해주세요");
@@ -156,8 +160,8 @@
 					return false;
 				}
 			} else {
-				location.href = "PayInfoForm?productNumber=${product.productNumber}&resultPrice="
-						+ totalResult + "&memberId=${loginID}&count=" + count;
+				location.href = "cartPayInfoForm?productNumber=${product.productNumber}&resultPrice="
+					+ totalResult + "&memberId=${loginID}&cartNumbers=" + cartNumbers;
 			}
 		})//end of pay
 	}//end of pay
