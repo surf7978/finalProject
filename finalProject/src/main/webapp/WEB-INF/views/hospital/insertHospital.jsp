@@ -46,9 +46,7 @@
 		<table border="1">
 			<tr>
 				<th>사업자명</th>
-				<td colspan="2"><input type="text" id="businessCompanyName"
-					name="businessCompanyName" value="${business.businessCompanyName }"
-					readonly="readonly"></td>
+				<td colspan="2"><input type="text" id="businessCompanyName" name="businessCompanyName" value="${business.businessCompanyName }" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th>위치</th>
