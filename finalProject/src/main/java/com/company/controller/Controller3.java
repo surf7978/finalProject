@@ -310,8 +310,7 @@ public class Controller3 {
 		bvo.setProductNumber(vo.getProductNumber());
 		padService.insertPayAndDelivery2(padvo);
 		return "pay/successPay";
-	}
-	
+	}	
 	
 	// 쇼핑몰 결제시 다중insert
 	@RequestMapping("/insertCartPayProduct")
@@ -324,7 +323,7 @@ public class Controller3 {
 			bvo.setPndNumber(padvo.getPndNumber());
 		}
 		buyService.insertCartBuy(padvo.getBuyList());
-		//cartService.deleteCart(cvo);
+		cartService.deleteCart(cvo);
 		return "pay/successPay";
 	}
 	//장바구니 결제form
@@ -359,13 +358,15 @@ public class Controller3 {
 	// 사업체 결제폼
 	@RequestMapping("/ReserPayInfoForm")
 	public String ReserPayInfoForm(Model model, String resultPrice, String count, IntegratedVO vo,
-			HttpSession session) {
+			HttpSession session,String seq) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		// seq값 2자리 잘라서 code값에 넣기
 		vo.setCode(vo.getSeq().substring(0, 2));
 		// 코드값 -> 테이블명 변환
 		seqConversion(vo);
 		map.put("count", count);
 		map.put("resultPrice", resultPrice);
+		vo.setSeq(seq);
 		vo = integratedService.getIntegrated(vo);
 		// 제품 불러오기
 		model.addAttribute("vo", vo);

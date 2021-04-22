@@ -26,18 +26,18 @@
 <!-- start of columnChart -->
 <script>
 	//loading
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages':['corechart'],  language: 'ko'});
     google.charts.setOnLoadCallback(drawColumnChart);
     
     function drawColumnChart() {
     // draws it.
       var data = new google.visualization.DataTable();
       data.addColumn('string', '날짜');
-      data.addColumn('number', '일별합계');
+      data.addColumn('number', '합계');
       var arr = [];
       //ajax
       $.ajax({
-      	url : "getSearchChartData",
+      	url : "getColumnChart",
       	async :false,//동기식
       	data : $("#frm").serialize(),
       	dataType : 'json',
@@ -56,11 +56,11 @@
       //DB데이터로 추가
       data.addRows(arr);
       // Set chart options
-      var options = {'title':'일별 판매내역',
+      var options = {'title':'판매내역',
                      'width':400,
                      'height':300,
-                     colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
-      				 vAxis: {format:"$#,###", gridlines: { count: 10 } }
+                     colors: ['#1E90FF', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+      				 vAxis: {format:"#,###원", gridlines: { count: 10 } }
                      };
       var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
       chart.draw(data, options);
@@ -102,7 +102,7 @@
 	                 'height':300,
 	                 //순서: 예약 = 파란색, 반품 = 주황색, 결제 = 초록색 , 환불 = 빨간색
 	                 colors: ['#1E90FF', '#e6693e', '#00a000', '#FF0000', '#f6c7b6'],
-	  				 vAxis: {format:"$#,###", gridlines: { count: 10 } }
+	  				 vAxis: {format:"#,###", gridlines: { count: 10 } }
 	                 };
 	  var chart = new google.visualization.PieChart(document.getElementById('donutChart'));
 	  chart.draw(data, options);
@@ -132,7 +132,7 @@
 	  		console.log(result)
 	  		for (obj of result){
 	  			//[ {},{} ] -> [ [],[] ]
-	  			arr.push( [obj.BUYSTATE, obj.SUM,obj.SUM] );
+	  			arr.push( [obj.BUYSTATE, obj.SALES,obj.EXPENSES] );
 	  		}//end of for
 	  	}//end of success
 	  })//end of ajax
@@ -145,7 +145,7 @@
 	                 'height':300,
 	                 //순서: 수익 = 파란색, 지출 = 빨간색
 	                 colors: ['#1E90FF',  '#FF0000'],
-	  				 vAxis: {format:"$#,###", gridlines: { count: 10 } }
+	  				 vAxis: {format:"#,###", gridlines: { count: 10 } }
 	                 };//end of options
 	  var chart = new google.visualization.AreaChart(document.getElementById('areaChart'));
 	  //array(data),object(options)
@@ -163,6 +163,7 @@ $(function(){
 function openCalendar(){
 	$("#calBtn").on("click",function(){
 		$("#calendar").toggle();
+		
 	})//end of calBtn
 }//end of openCalendar
 </script>
@@ -176,22 +177,17 @@ function openCalendar(){
 		<!-- start of searchForm -->
 		<div id="searchForm">
 			<form id="frm" name="frm">
-				<button type="button" id="calBtn">캘린더</button>
-				<select name="search">
-					<option value="daily">일별조회</option>
-					<option value="monthly">월별조회</option>
-					<option value="years">년별조회</option>
-				</select>
-				<input type="text" name="searchValue" placeholder="년/월/일">
-				<button type="button" id="searchBtn" onclick="drawChart()">검색</button>
+				<input type="date" id="startDate" name="startDate" size="20">
+				<input type="date" id="endDate" name="endDate" size="20">
+				<button type="button" id="searchBtn" onclick="drawColumnChart()">검색</button>
 			</form>
 				<div id="calendar" style="width: 300px; display: none;"></div>
 		</div>
 		<!-- end of searchForm -->
 		
-		<div id="chart_div" style="width: 30%; display: inline-block;"></div>
-		<div id="donutChart"style="width: 30%; display: inline-block;"></div>
-		<div id="areaChart" style="width: 60%;"></div>
+		<div id="chart_div" style="width: 60%; display: inline-block;"></div>
+		<div id="areaChart" style="width: 40%; display: inline-block;"></div>
+		<div id="donutChart"style="width: 40%; display: inline-block;"></div>
 	</div>
 	<!-- end of wrap -->
 </body>

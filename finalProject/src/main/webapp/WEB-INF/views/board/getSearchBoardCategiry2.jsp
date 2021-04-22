@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <style>
 	button.write {
-			
+		
 	   		padding:10px;
 			width:100px;
 			border-radius:5px;
@@ -126,7 +126,11 @@
 		<div id="paging"></div>
 	</div>
 
-
+					<c:if test="${not empty loginID}">
+					
+						<button id="btn" class="write">글쓰기</button>
+				
+					 </c:if> 
 
 
 </body>

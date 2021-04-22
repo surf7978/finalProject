@@ -160,7 +160,15 @@ tr.th {
 	</div>
 
 	<br>
-	<input class="write" type="button" value="글쓰기"
-		onclick="location.href='insertBoard'">
+	
+						<c:if test="${not empty loginID}">
+					
+					
+						<input class="write" type="button" value="글쓰기"
+							onclick="location.href='insertBoard'">
+				
+					 </c:if> 
+	
+
 </body>
 </html>

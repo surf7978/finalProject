@@ -78,7 +78,9 @@ public class BoardServiceimpl implements BoardService{
 	@Override
 	public int getCount(BoardVO vo) {
 		return boardMapper.getCount(vo);
-	}
+	}	
+	
+
 	
 	@Override
 	public List<BoardVO> getSearchBoardCategory199(BoardVO vo) {
@@ -87,6 +89,11 @@ public class BoardServiceimpl implements BoardService{
 	@Override
 	public int countBoard() {
 		return boardMapper.countBoard();
+	}
+	@Override
+	public int updateViews(BoardVO vo) {
+		
+		return boardMapper.updateViews(vo);
 	}
 
 

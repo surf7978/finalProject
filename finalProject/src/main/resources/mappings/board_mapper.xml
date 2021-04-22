@@ -132,10 +132,13 @@
 	<select id="getCount" resultType="int">
 		SELECT COUNT(*)
 		FROM BOARD
+		WHERE CATEGORY=2
 	</select>
 		<!-- 총 게시글 갯수 출력 -->
 	<select id="countBoard" resultType="int">
-		SELECT COUNT(*) FROM BOARD
+		SELECT COUNT(*) 
+		FROM BOARD
+		WHERE CATEGORY=1
 	</select>
 	<!--  2번 자랑하기 조회 -->
 	<select id="getSearchBoardCategiry2" resultType="boardVO"
@@ -162,5 +165,17 @@
     </select>
 	<!--#################################################################  -->
 	<!--#################################################################  -->
+	
+	<!--조회수 +1  -->
+	<update id="updateViews" >
+	  UPDATE BOARD SET VIEWS = VIEWS + 1 WHERE BOARDNUMBER = #{boardNumber}
+	</update>
+	
+	
+	<!--#################################################################  -->
+	<!--#################################################################  -->
+	
+	
+	
 	
 </mapper>

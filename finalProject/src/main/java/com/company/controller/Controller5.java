@@ -35,6 +35,8 @@ import com.company.common.Paging;
 import com.company.integrated.service.IntegratedSearchVO;
 import com.company.integrated.service.IntegratedService;
 import com.company.integrated.service.IntegratedVO;
+import com.company.member.service.MemberService;
+import com.company.member.service.MemberVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
 import com.company.question.service.QuestionService;
@@ -101,6 +103,8 @@ public class Controller5 {
 	// 결제
 	@Autowired
 	PayAndDeliveryService payAndDeliveryService;
+	@Autowired
+	MemberService memberService;
 
 	// end of beans
 
@@ -324,7 +328,6 @@ public class Controller5 {
 	public String getSearchInfo(IntegratedVO vo, Model model, HttpSession session) {
 		// seq값 2자리 잘라서 code값에 넣기
 		vo.setCode(vo.getSeq().substring(0, 2));
-		System.out.println("코드값" + vo.getSeq().substring(0, 2));
 		// 코드값 -> 테이블명 변환
 		seqConversion(vo);
 		// 조회
@@ -554,32 +557,51 @@ public class Controller5 {
 	}
 
 	// 마이페이지-사업자-통계 데이터
-	@RequestMapping("/getSearchChartData")
+	@RequestMapping("/getColumnChart")
 	@ResponseBody
-	public List<Map<String, Object>> getChartData(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, Object>> getSearchColumnChart(PayAndDeliveryVO vo, BusinessVO bvo, MemberVO mvo,
+			HttpSession session) {
 		// session ID 조회
 		String id = session.getAttribute("loginID").toString();
 		// ID값 분배
 		bvo.setBusinessId(id);
+		// 관리자인 경우
+		if (id.equals("admin")) {
+			mvo.setMemberId(id);
+			mvo = memberService.getMember(mvo);
+			vo.setCategory("70");
+			List<Map<String, Object>> map = payAndDeliveryService.getColumnChart(vo);
+			return map;
+		}
 		// DB 데이터 조회
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
 		vo.setCategory(bvo.getBusinessCode());
+		// 조회 후 사업자 번호 분배
 		vo.setBusinessNumber(bvo.getBusinessNumber());
 		// 쿼리 결과 호출
 		// 일별 합계
-		List<Map<String, Object>> map = payAndDeliveryService.dailyTotal(vo);
+		List<Map<String, Object>> map = payAndDeliveryService.getColumnChart(vo);
 		return map;
 	}
 
 	// 마이페이지-사업자-통계 데이터2(donut)
 	@RequestMapping("/getDonutChart")
 	@ResponseBody
-	public List<Map<String, Object>> getDonutChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, Object>> getDonutChart(PayAndDeliveryVO vo, BusinessVO bvo, MemberVO mvo,
+			HttpSession session) {
 		// session ID 조회
 		String id = session.getAttribute("loginID").toString();
 		// ID값 분배
 		bvo.setBusinessId(id);
+		// 관리자인 경우
+		if (id.equals("admin")) {
+			mvo.setMemberId(id);
+			mvo = memberService.getMember(mvo);
+			vo.setCategory("70");
+			List<Map<String, Object>> map = payAndDeliveryService.getDonutChart(vo);
+			return map;
+		}
 		// DB 데이터 조회
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
@@ -594,11 +616,20 @@ public class Controller5 {
 	// 마이페이지-사업자-통계 데이터3(areaChart)
 	@RequestMapping("/getAreaChart")
 	@ResponseBody
-	public List<Map<String, Object>> getAreaChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, Object>> getAreaChart(PayAndDeliveryVO vo, BusinessVO bvo, MemberVO mvo,
+			HttpSession session) {
 		// session ID 조회
 		String id = session.getAttribute("loginID").toString();
 		// ID값 분배
 		bvo.setBusinessId(id);
+		// 관리자인 경우
+		if (id.equals("admin")) {
+			mvo.setMemberId(id);
+			mvo = memberService.getMember(mvo);
+			vo.setCategory("70");
+			List<Map<String, Object>> map = payAndDeliveryService.getAreaChart(vo);
+			return map;
+		}
 		// DB 데이터 조회
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
