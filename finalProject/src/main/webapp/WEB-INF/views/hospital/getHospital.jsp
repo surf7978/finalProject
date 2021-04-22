@@ -185,7 +185,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 							<div id="pro_show"></div>
 							<div id="pro_result"></div>
 							<div>
-								<button type="button" id="b_btn" style="padding:10px; width:440px; border:none; border-radius:5px;">바로구매</button>
+								<button type="button" id="b_btn" style="padding:10px; width:440px; border:none; border-radius:5px; background-color:#adff2f;">바로구매</button>
 							</div>
 						</li>
 					</ul>

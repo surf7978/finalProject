@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.company.board.service.BoardVO;
 import com.company.common.PagingVOCr4;
+import com.company.eventAndNotice.service.EventAndNoticeVO;
 
 
 public interface BoardMapper {
@@ -24,8 +25,13 @@ public interface BoardMapper {
 	public List<BoardVO> getSearchBoardCategiry1(PagingVOCr4 vo); // 자유게시판 전체조회
 	public List<BoardVO> getSearchBoardCategiry2(BoardVO vo); // 자랑하기 전체조회
 	public int getCount(BoardVO vo);// 레코드 조회
+
 	// 게시물 총 갯수
 	public int countBoard();
 	public List<BoardVO> getSearchBoardCategory199(BoardVO vo); //일반사용자 내가쓴글 조회
+	
+	// 조회수 +1
+	public int updateViews(BoardVO vo);
+	
 }
 

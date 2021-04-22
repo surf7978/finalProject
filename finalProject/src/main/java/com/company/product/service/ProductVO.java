@@ -24,5 +24,5 @@ public class ProductVO {
 	String[] countList;
 	String[] optionNameList;
 	String[] optionPriceList;
-	
+	String[] productNumberList;
 }

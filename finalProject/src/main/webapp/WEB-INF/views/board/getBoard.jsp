@@ -91,10 +91,10 @@ table td {
 				</div>
 				<hr>
 				<div class="image" style="text-align: left; width: 500px;">
-					<c:if test="${board.category eq 1}">
+					<c:if test="${board.category eq 1 and board.image ne ' '}">
 						<img id="image" src="resources/images/board1/${board.image }">
 					</c:if>
-					<c:if test="${board.category eq 2}">
+					<c:if test="${board.category eq 2 and board.image ne ' '}">
 						<img id="image" src="resources/images/board2/${board.image }">
 					</c:if>
 				</div>
@@ -119,16 +119,19 @@ table td {
 						value="삭제하기">
 				</form>
 				</c:if>
+				<br>
+				 <input class="back" type="button" value="목록으로" onclick="location.href='getSearchBoardCategiry1'">
 			</div>
+			
 		</div>
 		
-		
+		<hr>
 		<br>
 		<sql:query var="rs" dataSource="${ds }">
 		 select * from comments where boardNumber = '${board.boardNumber}'
 		</sql:query>
 	    <c:if test="${not empty rs.rows }">
-		<table style="text-align:center;" border="1">
+		<table style="text-align:left; border: none;">
 			<tr>
 				<td>작성자</td>
 				<td>댓글내용</td>
@@ -145,20 +148,25 @@ table td {
 				     	<c:if test="${list.writer eq loginID }">
 				     		<button class="deleteComment">삭제</button>
 				     	</c:if>
+				     	<c:if test="${loginID eq 'admin' }">
+				     		<button class="deleteComment">삭제</button>
+				     	</c:if>
 			     	</td>
 			</tr>
 	     	</c:forEach>
 		</table>
 	    </c:if>
 	    <br>
+	    <div>
 	    <c:if test="${not empty loginID }">
 				<input type="hidden" id="writer" name="writer" value="${loginID }">
 				<input type="hidden" id="boardNumber" name="boardNumber" value="${board.boardNumber}">
 				<input type="hidden" id="memberId" name="memberId" value="${board.writer}">
-				<input type="text" value="댓글" readonly>
-				<input id="content" name="content">
+				<textarea id="content" name="content" style="resize:none; width:770px; height:300px;" placeholder="댓글입력"></textarea>
+				<br>
 				<button id="insertComment">댓글달기</button>
 		</c:if>
+		</div>
 	</div>
 </body>
 <script>
@@ -186,18 +194,21 @@ table td {
 		
 		$(".deleteComment").on("click", function(){
 			console.log($(this).prev().val())
-			$.ajax({
-				url:"deleteComment",
-				type:"post",
-				dataType:"json",
-				data:{
-					"commentNumber":$(this).prev().val()
-					},
-				success:function(data){
-					console.log(data);
-					location.reload();
-				}
-			})
+			let deleteCheck = confirm("댓글을 삭제할까요?");
+			if(deleteCheck){
+				$.ajax({
+					url:"deleteComment",
+					type:"post",
+					dataType:"json",
+					data:{
+						"commentNumber":$(this).prev().val()
+						},
+					success:function(data){
+						console.log(data);
+						location.reload();
+					}
+				})
+			}
 		})
 	})
 </script>

@@ -144,7 +144,7 @@
 						<td style="height:160px; padding-left:10px;">
 							<h6 style="font-size:20px; font-weight:900;">나의 정보</h6>
 							<br>
-							<button onclick="location.href='getBusiness99?businessId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원정보</button><br> 
+							<button onclick="location.href='getBusiness99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원정보</button><br> 
 							<button onclick="checkMembershipCancel()" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;회원탈퇴</button><br>
 						</td>
 					</tr>

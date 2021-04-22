@@ -20,4 +20,6 @@ public interface EventAndNoticeMapper {
 	public int getCount(EventAndNoticeVO vo);// 레코드 조회
 	// 게시물 총 갯수
 	public int countBoard();
+	// 조회수 +1
+	public int updateViews(EventAndNoticeVO vo);
 }

@@ -16,6 +16,12 @@
 		else if(content.value==""){
 			alert("내용 입력 하세요");
 			return false;
+		}else if(startDate.value==""){
+			alert("시작일을 입력 하세요");
+			return false;
+		}else if(endDate.value==""){
+			alert("마감일을 입력 하세요");
+			return false;
 		}
 
 		return true;

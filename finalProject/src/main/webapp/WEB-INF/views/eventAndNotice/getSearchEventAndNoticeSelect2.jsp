@@ -103,89 +103,102 @@ tr.th {
 <script>
 	function selChange() {
 		var sel = document.getElementById('cntPerPage').value;
-		location.href="getSearchEventAndNoticeSelect2?nowPage=${paging.nowPage}&cntPerPage="+sel;
+		location.href = "getSearchEventAndNoticeSelect2?nowPage=${paging.nowPage}&cntPerPage="
+				+ sel;
 	}
 </script>
 <body>
 	<div id="contents">
-	
-	
-		<div style=" display:none; float: right;">
-		<select id="cntPerPage" name="sel" onchange="selChange()">
-			<option value="5"
-				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
-			<option value="10"
-				<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
-			<option value="15"
-				<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
-			<option value="20"
-				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option>
-		</select>
-		</div> <!-- 옵션선택 끝 -->
-	
-	
-	<h1>공지사항</h1>
+
+
+		<div style="display: none; float: right;">
+			<select id="cntPerPage" name="sel" onchange="selChange()">
+				<option value="5"
+					<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄
+					보기</option>
+				<option value="10"
+					<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄
+					보기</option>
+				<option value="15"
+					<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄
+					보기</option>
+				<option value="20"
+					<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄
+					보기</option>
+			</select>
+		</div>
+		<!-- 옵션선택 끝 -->
+
+
+		<h1>공지사항</h1>
 		<div id="aban_location"></div>
 		<div id="show">
-	<!-- <input value="공지사항"
+			<!-- <input value="공지사항"
 		style="font-size: 40px; text-align: center; width: 400px; border: none;"
 		readonly> -->
 
-	<table class="sub_news" border="1" summary="게시판의 글제목 리스트">
+			<table class="sub_news" border="1" summary="게시판의 글제목 리스트">
 
-		<thead>
-			<tr class="th">
-				<th width="60">No</th>
-				<th scope="col">제목</th>
-				<th scope="col">날짜</th>
-				<th scope="col" width="60">조회수</th>
+				<thead>
+					<tr class="th">
+						<th width="60">No</th>
+						<th scope="col">제목</th>
+						<th scope="col">날짜</th>
+						<th scope="col" width="60">조회수</th>
 
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="getSearchEventAndNoticeSelect2"
-				items="${getSearchEventAndNoticeSelect2}">
-				<tr
-					onclick="location.href='getEventAndNotice2?eanNumber=${getSearchEventAndNoticeSelect2.eanNumber}'">
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="getSearchEventAndNoticeSelect2"
+						items="${getSearchEventAndNoticeSelect2}">
+						<tr
+							onclick="location.href='getEventAndNotice2?eanNumber=${getSearchEventAndNoticeSelect2.eanNumber}'">
 
-					<td>${getSearchEventAndNoticeSelect2.eanNumber}</td>
-					<td>${getSearchEventAndNoticeSelect2.title}</td>
-					<td>${getSearchEventAndNoticeSelect2.startDate}</td>
-					<td>${getSearchEventAndNoticeSelect2.views}</td>
-				</tr>
-			</c:forEach>
+							<td>${getSearchEventAndNoticeSelect2.eanNumber}</td>
+							<td>${getSearchEventAndNoticeSelect2.title}</td>
+							<td>${getSearchEventAndNoticeSelect2.startDate}</td>
+							<td>${getSearchEventAndNoticeSelect2.views}</td>
+						</tr>
+					</c:forEach>
 
-		</tbody>
-	</table>
-	<br>
+				</tbody>
+			</table>
+			<br>
 
 
-			</div>
-			<!--  -->
+		</div>
+		<!--  -->
 		<div id="paging">
-					
-		<c:if test="${paging.startPage != 1 }">
-			<a href="getSearchEventAndNoticeSelect2?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-		</c:if>
-		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-			<c:choose>
-				<c:when test="${p == paging.nowPage }">
-					<a href="#">${p }</a>
-				</c:when>
-				<c:when test="${p != paging.nowPage }">
-					<a href="getSearchEventAndNoticeSelect2?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-				</c:when>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${paging.endPage != paging.lastPage}">
-			<a href="getSearchEventAndNoticeSelect2?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-		</c:if>
+
+			<c:if test="${paging.startPage != 1 }">
+				<a
+					href="getSearchEventAndNoticeSelect2?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+			</c:if>
+			<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+				var="p">
+				<c:choose>
+					<c:when test="${p == paging.nowPage }">
+						<a href="#">${p }</a>
+					</c:when>
+					<c:when test="${p != paging.nowPage }">
+						<a
+							href="getSearchEventAndNoticeSelect2?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${paging.endPage != paging.lastPage}">
+				<a
+					href="getSearchEventAndNoticeSelect2?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+			</c:if>
+		</div>
+
 	</div>
-	
-	</div>
-	</div>
-		<input  class="write" type="button" value="글쓰기"
-		onclick="location.href='insertEventAndNotice2'">
+
+	<c:if test="${loginID eq 'admin' }">
+		<input class="write" type="button" value="글쓰기"
+			onclick="location.href='insertEventAndNotice2'">
+	</c:if>
+
 
 </body>
 </html>

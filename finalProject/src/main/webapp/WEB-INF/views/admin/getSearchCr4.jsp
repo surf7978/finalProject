@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>김찬영파트</h3> <br><br>
+<h3>김찬영총괄</h3> <br><br>
 
 
 <a href="getSearchQuestionCr4">활동내역관리</a> <br>

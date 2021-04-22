@@ -129,12 +129,12 @@
 					<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
 					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
 					 user="final" password="a20210409A"/>
-					<sql:query var="rs" dataSource="${ds }">
+					<%-- <sql:query var="rs" dataSource="${ds }">
 					    select COUNT(*) count from cart where memberId = '${loginID}'
 					</sql:query>
 					<sql:query var="rs1" dataSource="${ds }">
 					    select * from cart where memberId = '${loginID}'
-					</sql:query>
+					</sql:query> --%>
 						<ul class="nav-right">
 							<li class="cart-price">장바구니 </li>
 							<!-- 
@@ -306,7 +306,7 @@
 								</c:if>
 							</c:if>
 							<c:if test="${loginAuth eq 'b'}">
-								<a href="getBusiness99?businessId=${loginID}">마이페이지</a>
+								<a href="getBusiness99">마이페이지</a>
 							</c:if>
 						<!-- 
 							<ul class="dropdown">
