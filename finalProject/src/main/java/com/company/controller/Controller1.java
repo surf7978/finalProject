@@ -2,6 +2,7 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.jsoup.Jsoup;
@@ -86,7 +88,9 @@ public class Controller1 {
 	
 	//일반사용자 로그인 처리
 	@PostMapping("/login")
-	public String loginProc(MemberVO vo, HttpSession session) {
+	public String loginProc(MemberVO vo, HttpSession session, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
 		if(memberService.getViewMember(vo) != null) {
 			MemberServiceimpl memberServiceimpl = new MemberServiceimpl();
 			String insertPW = vo.getPassword(); //로그인화면에 입력한 비밀번호
@@ -94,11 +98,19 @@ public class Controller1 {
 			if(memberServiceimpl.matches(insertPW, DBinPW)){ //입력한 비밀번호와 DB의 비밀번호 일치체크
 				session.setAttribute("loginID", memberService.getViewMember(vo).getMemberId()); //세션에 로그인한 아이디 담아줌
 				session.setAttribute("loginAuth", memberService.getViewMember(vo).getAuth()); //권한 확인
-				return "/home";
+				return "redirect:/";
 			} else {
+				writer.println("<script>alert('로그인 실패 : 비밀번호 불일치');");
+				writer.println("location.href='loginForm'");
+				writer.println("</script>");
+				writer.close();
 				return "redirect:/loginForm";
 			}
 		}else {
+			writer.println("<script>alert('로그인 실패 : 아이디가 없습니다.');");
+			writer.println("location.href='loginForm'");
+			writer.println("</script>");
+			writer.close();
 			return "redirect:/loginForm";
 		}
 	}
