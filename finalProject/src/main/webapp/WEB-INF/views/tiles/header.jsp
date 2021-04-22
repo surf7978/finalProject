@@ -134,7 +134,7 @@
 					</sql:query>
 					<sql:query var="rs1" dataSource="${ds }">
 					    select * from cart where memberId = '${loginID}'
-					</sql:query>
+					</sql:query> 
 						<ul class="nav-right">
 							<li class="cart-price">장바구니 </li>
 							<!-- 
