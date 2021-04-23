@@ -23,6 +23,7 @@ $(function(){
 })
 </script>
 <!-- jQuery end -->
+
 <!-- start of btnConnect -->
 <script>
 function connect(){
