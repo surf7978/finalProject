@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>답변 전체 리스트</title>
+<title>답변한 내역</title>
 <style>
 tr {
 	cursor: pointer;
@@ -15,18 +15,25 @@ tr {
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-	<h2>답변 전체 리스트</h2>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
+	<h2>답변한 내역</h2>
 	<table id="tbl">
 		<tr>
+		<!-- 
 			<td>답변번호</td>
 			<td>작성자</td>
-			<td>내용</td>
-			<td>날짜</td>
-			<td>아이디</td>
+		 -->
+			<td width="300">내용</td>
+			<td width="200">답변 날짜</td>
+			<td width="100">받은 사람</td>
+		<!-- 
 			<td>문의번호</td>
+		 -->
 		</tr>
 		<tbody id="tbody"></tbody>
 	</table>
+</div>
 </body>
 <script>
 	//global 변수
@@ -40,12 +47,12 @@ tr {
 			//console.log(response);
 			for(ans of  response){
 				var tr=$("<tr>");
-				td="<td>"+ans.answerNumber+"</td>";
-				td+="<td>"+ans.writer+"</td>";
-				td+="<td>"+ans.content+"</td>";
+				//td="<td>"+ans.answerNumber+"</td>";
+				//td+="<td>"+ans.writer+"</td>";
+				td="<td>"+ans.content+"</td>";
 				td+="<td>"+ans.calendar+"</td>";
 				td+="<td>"+ans.memberId+"</td>";
-				td+="<td>"+ans.questionNumber+"</td>";
+				//td+="<td>"+ans.questionNumber+"</td>";
 				tr.append(td);
 				tbody.append(tr);
 				//tbody에 있는 모든 tr 태그에 answerNumber를 넣어줘야함

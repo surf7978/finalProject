@@ -7,6 +7,11 @@
 	<select id="getCount" resultType="int">
 		SELECT COUNT(*)
 		FROM PRODUCT
+		WHERE CATEGORY = #{category}
+		<if test="categoryList != null">
+		AND CATEGORY2 IN
+			 <foreach item="cate" collection="categoryList" open="(" separator="," close=")" >#{cate}</foreach>
+		</if>
 	</select>
 	
 	<select id="getSearchProduct" resultType="ProductVO"
@@ -26,7 +31,10 @@
 		,MEMBERID
 		FROM PRODUCT
 		WHERE CATEGORY = #{category}
-		<if test="category2">AND CATEGORY2 = #{category2}</if>
+		<if test="categoryList != null">
+		AND CATEGORY2 IN
+			 <foreach item="cate" collection="categoryList" open="(" separator="," close=")" >#{cate}</foreach>
+		</if>
 		ORDER BY PRODUCTNUMBER
 		<!-- end of query -->
 		) A) B WHERE RN BETWEEN #{start} AND #{end}
@@ -47,6 +55,19 @@
 		FROM PRODUCT
 		WHERE PRODUCTNUMBER = #{productNumber}
 	</select>
+	<!-- 장바구니 -->
+	<select id="cartGetProduct" resultType="ProductVO"
+		parameterType="ProductVO">
+		SELECT
+		CATEGORY,
+		PRODUCTNUMBER,
+		PRODUCTNAME
+		FROM PRODUCT
+		WHERE PRODUCTNUMBER IN
+		<foreach item='seq' collection='productNumberList' open='(' separator=',' close=')' >
+			 #{seq} 
+		</foreach>
+	</select>
 	<insert id="insertProduct" parameterType="ProductVO">
 		INSERT INTO
 		PRODUCT(
@@ -61,17 +82,42 @@
 		,PRODUCTSTATE
 		,MEMBERID
 		) VALUES(
-		70 || pro_seq.nextval
+		70 || pro_seq.nextval	
 		,#{category}
 		,#{category2}
 		,#{image}
 		,#{t_image}
 		,#{productName}
-		,#{optionName}
-		,#{optionPrice}
+		<foreach item="opname" collection="optionNameList" open=",'" separator="," close="'" >${opname}</foreach>
+		<foreach item="opprice" collection="optionPriceList" open=",'" separator="," close="'" >${opprice}</foreach>
 		,#{productState}
 		,#{memberId}
 		)
 	</insert>
+	<delete id="deleteProduct">
+		DELETE FROM PRODUCT
+		WHERE PRODUCTNUMBER = #{productNumber}
+	</delete>
+	<update id="updateProduct">
+		UPDATE PRODUCT
+			<set>				
+				<if test="category != null">,CATEGORY = #{category}</if>
+				<if test="category2 != null">,CATEGORY2 = #{category2}</if>
+				<if test="image != null">,IMAGE = #{image}</if>
+				<if test="t_image != null">,T_IMAGE = #{t_image}</if>
+				<if test="productName != null">,PRODUCTNAME = #{productName}</if>
+				<if test="optionName != null">,OPTIONNAME = #{optionName}</if>
+				<if test="optionPrice != null">,OPTIONPRICE = #{optionPrice}</if>
+				<if test="productState != null">,PRODUCTSTATE = #{productState}</if>
+				<if test="memberId != null">,MEMBERID = #{memberId}</if>
+			</set>
+		WHERE PRODUCTNUMBER = #{productNumber}
+	</update>
+	<!-- 홈화면 쇼핑몰 전체 리스트 -->
+	<select id="getSearchProduct99" resultType="ProductVO"
+		parameterType="ProductVO">
+		SELECT *
+		FROM PRODUCT
+	</select>
 </mapper>
 <!-- 스프링 초기설정 오류방지용 -->

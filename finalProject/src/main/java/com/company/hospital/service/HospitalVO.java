@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class HospitalVO {
-	String hospitalNumber;
+	String seq;
 	String category1;
 	String name;
 	String optionName;

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.company.buy.service.impl.BuyMapper">
+	<!-- 결제 insert -->
+	<insert id="insertBuy2" parameterType="BuyVO">
+		INSERT INTO BUY
+			(BUYNUMBER
+			,CATEGORY
+			,OPTIONNAME
+			,COUNT
+			,PRICE
+			,FROMPERSON
+			,TOPERSON
+			,POST
+			,ADDRESS
+			,ADDRESS2
+			,PHONE
+			,PRODUCTNUMBER
+			,PNDNUMBER
+			,BUYSTATE			
+			)VALUES(
+				(SELECT NVL(MAX(BUYNUMBER),0)+1 FROM BUY)
+				,#{category}
+				,<foreach item="opname" collection="optionNameList" open="'" separator="," close="'" >
+				${opname}
+				</foreach>
+				,<foreach item="count" collection="countList" open="'" separator="," close="'" >			
+				${count}
+				</foreach>
+				,#{price}
+				,#{fromPerson}
+				,#{toPerson}
+				,#{post}
+				,#{address}
+				,#{address2}
+				,#{phone}
+				,#{productNumber}
+				,#{pndNumber}
+				,'결제완료'
+			)			
+	</insert>
+	<!-- 장바구니 결제 insert -->
+	<insert id="insertCartBuy" parameterType="java.util.List">
+		<foreach collection="list" index="index" item="vo" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+		 INTO BUY
+			(BUYNUMBER
+			,CATEGORY
+			,OPTIONNAME
+			,COUNT
+			,PRICE
+			,FROMPERSON
+			,TOPERSON
+			,POST
+			,ADDRESS
+			,ADDRESS2
+			,PHONE
+			,PRODUCTNUMBER
+			,PNDNUMBER
+			,BUYSTATE			
+			)VALUES
+			(
+				(SELECT NVL(MAX(BUYNUMBER),0)+1+#{index} FROM BUY)
+				,#{vo.category}
+				,#{vo.optionName}
+				,#{vo.count}
+				,#{vo.price}
+				,#{vo.fromPerson}
+				,#{vo.toPerson}
+				,#{vo.post}
+				,#{vo.address}
+				,#{vo.address2}
+				,#{vo.phone}
+				,#{vo.productNumber}
+				,#{vo.pndNumber}
+				,'결제완료'
+			)	
+		</foreach>	
+	</insert>
+</mapper>

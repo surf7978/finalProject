@@ -1,48 +1,168 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<style> 
-th{
-		color: white;
-		background-color:orange;
-	}
-	table, tr , th {
-		border : 1px solid black
-	}
-</style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>고객센터 신고하기</title>
 </head>
-<body>	
-	<p></p><p></p>
-	<h3 align="center">고객센터 신고하기</h3>
-	<p></p><p></p>
-	<form action="insertQuestion3" method="post">
-	 	<table>
-	 	<tr>
-	 	<th>제목</th>
-	 	<td><input id="title" name="title"></td>
-	 	</tr>
-	 	<tr>
-	 	<th>내용</th>
-	 	<td><input id="content" name="content"></td>
-	 	</tr>
-	 	<tr>
-	 	<th>글쓴이</th>
-	 	<td><input id="writer" name="writer"></td>
-	 	</tr>
-	 	<tr>
-	 	<th>MId</th>
-	 	<td> <input id="memberId" name="memberId"></td>
-	 	</tr>
-		
-	 	</table>
-		 <p></p><p></p>		
-		<button type="submit">신고접수</button>
-	</form>
-	<p></p><p></p>
-	<a href="/finalProject">홈으로</a>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	function formCheck(){
+		if(writer.value==""){
+			alert("작성자 미입력");
+			return false;
+		}
+		else if(memberId.value==""){
+			alert("아이디를 입력 하세요");
+			return false;
+		}
+		else if(title.value==""){
+			alert("제목을 입력 하세요");
+			return false;
+		}
+		else if(content.value==""){
+			alert("내용을 입력 하세요");
+			return false;
+		}
+		alert("정상적으로 접수되었습니다.");
+		return true;
+	}
+</script>
+<style>
+		div.send{
+			
+			text-align: center;
+		}
+		input.send{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#e7ab3c;
+		}
+		input.reset{
+			padding:10px;
+			width:100px;
+		 	border-radius:5px;	
+			border:none;
+			color: white;
+			background-color:#ff6347;
+		}		
+		input.back{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			color: white;
+			background-color:#778899;
+		}
+        table.table2{
+                border-collapse: separate;
+                border-spacing: 1px;
+                text-align: left;
+                line-height: 1.5;
+                border-top: 1px solid #ccc;
+                margin : 20px 10px;
+        }
+        table.table2 tr {
+                 width: 50px;
+                 padding: 10px;
+                font-weight: bold;
+                vertical-align: top;
+                border-bottom: 1px solid #ccc;
+        }
+        table.table2 td {
+                 width: 100px;
+                 padding: 10px;
+                 vertical-align: top;
+                 border-bottom: 1px solid #ccc;
+        }
+ 
+</style>
+
+
+<body>
+	<br>
+	<br>
+	<br>
+	<!-- 추가 해야함. 사진넣는 기능 넣으시오..  -->
+	<input value="고객센터 신고하기"
+		style="font-size: 40px; text-align: center; width: 400px; border: none;"
+		readonly>
+	<br>
+	<br>
+	<form id="frm" name="frm" onsubmit="return formCheck()" encType="multipart/form-data"
+		action="insertQuestion3" method="post">
+
+	
+		<table
+			style="padding-top: 50px; align: center; width: 700; border: 0; cellpadding: 2;">
+			<tr>
+				<td height="20" align="center" bgcolor="#e7ab3c">
+				<font  color="white"> 접수 </font></td>
+			</tr>
+			
+
+			<tr>
+				<td bgcolor=white>
+					<table class="table2">
+<!-- 						<tr>
+							<td><input value="작 성 자" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type=text id="writer" name="writer" size="20"></td>
+						</tr>
+
+						<tr>
+							<td><input value="아 이 디" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type=text id="memberId" name="memberId" size="20"></td>
+						</tr>
+						 -->
+						
+						<tr>
+							<td><input value="제 목" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type=text id="title" name="title" size="60"></td>
+						</tr>
+						<tr>
+							<td><input value="이 미 지" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><input type="file" id="image" name="uploadFile" size="100%" multiple="multiple"></td>
+							
+						</tr>
+						<tr>
+							<td><input value="내 용" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+							<td><textarea id="content" name="content" cols="85" rows="15"></textarea></td>
+						</tr>
+
+
+					</table>
+
+							<input type="hidden" value="작 성 자" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly>
+							<input type="hidden" id="writer" name="writer" size="20" value="${loginID }">
+						
+
+					
+							<input type="hidden" value="아 이 디" style="  font-size:20px; text-align:center; width:100px; border:none;" readonly>
+							<input type="hidden" id="memberId" name="memberId" size="20" value="${loginID }">
+					
+						<div class="send">
+                        <input class="send" type = "submit" value="작성">
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input class="reset" type = "reset" value="취소">
+                       
+                        
+                        </div>
+
+						
+						
+
+
+
+				</td>
+			</tr>
+		</table>
+		</form>
 </body>
 </html>

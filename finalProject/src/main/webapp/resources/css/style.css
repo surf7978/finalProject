@@ -30,11 +30,13 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 ::selection{background:#e7ab3c;}
+
 html,
 body {
 	height: 100%;
-	font-family: "Muli", sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
@@ -48,7 +50,7 @@ h6 {
 	margin: 0;
 	color: #111111;
 	font-weight: 400;
-	font-family: "Muli", sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 h1 {
@@ -77,7 +79,7 @@ h6 {
 
 p {
 	font-size: 16px;
-	font-family: "Muli", sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
 	color: #636363;
 	font-weight: 400;
 	line-height: 26px;
@@ -794,6 +796,7 @@ ol {
 .nav-item .nav-menu li .dropdown li {
 	display: block;
 	margin-left: 0;
+	width:100%;
 }
 
 .nav-item .nav-menu li .dropdown li:hover>a {

@@ -34,6 +34,14 @@
 			alert("패스워드 불일치");
 			return false;
 		}
+		else if(name.value==""){
+			alert("이름 미입력");
+			return false;
+		}
+		else if(document.getElementById('phoneCheckResult').innerHTML==""){
+			alert("휴대폰 미인증");
+			return false;
+		}
 		return true;
 	}
 </script>
@@ -81,7 +89,7 @@
 <!-- 휴대폰인증페이지 출력 -->
 <script>
 	function coolsms(){
-		window.open("coolsms", "본인인증", "width=1000px, height=200px");
+		window.open("coolsms", "본인인증", "width=800px, height=250px");
 	}
 </script>
 <style>
@@ -98,6 +106,14 @@
 		padding-right: 15px;
 	}
 </style>
+<!-- 이메일 문자열 합침 -->
+<script>
+	$(function(){
+		$("#frm").on("click", function(){
+			$("#email").val($("#email1").val()+$("#email2").val());
+		})
+	})
+</script>
 <body>
 	<br><br><br><input value="일반사용자 가입" style="font-size:40px; text-align:center; width:400px; border:none;" readonly><br><br>
 	<form id="frm" name="frm" onsubmit="return formCheck()" action="signUpUser" method="post">
@@ -138,20 +154,33 @@
 			</tr>
 			<tr>
 				<td><input value="연 락 처" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
-				<td><input id="phone" name="phone" style="width:300px;"></td>
+				<td><input id="phone" name="phone" style="width:300px;" readonly></td>
 				<td><input type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="본인인증"></td>
 			</tr>
 			<tr>
+				<td></td>
+				<td colspan="2"><div id="phoneCheckResult" style="color:red; height:30px;"></div></td>
+			</tr>
+			<tr>
 				<td><input value="이 메 일" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
-				<td colspan="2"><input id="email" name="email" style="width:400px;"></td>
+				<td>
+					<input id="email1" name="email1">
+				</td>
+				<td>
+					<select id="email2" name="email2" style="font-size:20px; width:140px; border:none; align:left; padding-bottom:10px;">
+						<option value="@gmail.com">@gmail.com</option>
+						<option value="@naver.com">@naver.com</option>
+					</select>
+				</td>
 			</tr>
 		</table>
+		<input type="hidden" id="email" name="email">
 		<br>
 		<button type="submit" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#e7ab3c;">회원가입</button>
 		&nbsp;
 		<button type="reset" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#ff6347; color:white;">취 소</button>
 		&nbsp;
-		<button type="button" onclick="location.href='loginForm'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
+		<button type="button" onclick="location.href='signUpSelect'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 	</form>
 </body>
 </html>

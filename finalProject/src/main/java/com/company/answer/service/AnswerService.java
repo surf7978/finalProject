@@ -2,6 +2,9 @@ package com.company.answer.service;
 
 import java.util.List;
 
+import com.company.common.PagingVOCr4;
+import com.company.question.service.QuestionVO;
+
 public interface AnswerService {
 
 	public int insertAnswer(AnswerVO vo);	//화원탈퇴
@@ -27,4 +30,15 @@ public interface AnswerService {
 	
 	
 	public int deleteAnswerCr4(AnswerVO vo);	//관리자 답변삭제
+	
+	
+	///페이징 관련 관리자의 답변목록조회
+	// 게시물 총 갯수
+	public int countQuestion();
+	
+	// 페이징 처리 
+	public List<AnswerVO> getSearchAnswerCr4(PagingVOCr4 vo); 
+	
+	public List<AnswerVO> getUserAnswer(AnswerVO vo);	//마이페이지-유저-답변 받은 내역
+	
 }

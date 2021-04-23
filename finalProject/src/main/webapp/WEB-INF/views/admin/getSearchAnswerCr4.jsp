@@ -1,71 +1,130 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(".delete").on("click" , function(){
-	alert(" 답변을 삭제 했습니다.")
-	var answerNumber = $(this).closest()
-	location.href="deleteAnswerCr4?answerNumber="+answerNumber;
-});
-
-
-</script>
- -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>관리자's 답변목록조회</title>
 </head>
- <style> 
+<style>
+	h2 {
+		text-align: center;
+	}
 
- 	th{
- 		background-color: orange;
- 		color : white;
- 	}
- 	
- 	#tabl {
- 		margin-top : 30px;
- 	}
- 	table , tr, th , td {
- 		border: 1px dotted black;
- 	}
- </style>
+	#outter {
+		display: block;
+		width: 100%;
+		margin: auto;
+	}
+	input.back{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			color: white;
+			background-color:#50B4F5;
+		}
 
+    /* 게시판 리스트 목록 */
+.sub_news,.sub_news th,.sub_news td{border:0}
+.sub_news a{color:#383838;text-decoration:none}
+.sub_news{width:50%;border-bottom:1px solid #999;color:#666;font-size:17px;table-layout:fixed}
+.sub_news caption{display:none}
+.sub_news th{padding:5px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color:#e7ab3c;color:white;font-weight:500;line-height:20px;vertical-align:top}
+.sub_news td{padding:20px 0 9px;border-bottom:solid 2px #d2d2d2;text-align:center;line-height:20px;}
+.sub_news .title{text-align:left; padding-left:15px; font-size:13px;}
+.sub_news .title .pic,.sub_news .title .new{margin:0 0 2px;vertical-align:middle}
+.sub_news .title a.comment{padding:0;background:none;color:#f00;font-size:12px;font-weight:bold}
+.sub_news tr.reply .title a{padding-left:16px;background:url(첨부파일/ic_reply.png) 0 1px no-repeat}
+/* //게시판 리스트 목록 */
+
+ tr.th{
+ 	text-align: center;
+ 	font-size: 17px;
+ }
+
+</style>
+<script>
+	function selChange() {
+		var sel = document.getElementById('cntPerPage').value;
+		location.href="getSearchAnswerCr4?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
+</script>
 <body>
-	<p>
-	<h3> 관리자의 답변목록 보기 </h3>
-<table id="tabl"> 
-<tr> 
-<th>답변번호</th> 
-<th>글쓴이</th>
-<th>내용</th> 
-<th>날짜</th> 
-<th>아이디</th>
-<th>질문번호</th> 
-<th>삭제</th>  
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
+<h3 align="center">관리자의 답변 현황</h3>
+<br><br>
+
+<div id="outter">
+	<div  style=" display: none;  float: bottom; ">
+		<select  id="cntPerPage" name="sel" onchange="selChange()">
+	 <option value="5"
+				<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄 보기</option>
+			<option  value="10"
+				<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄 보기</option>
+			<option value="15"
+				<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄 보기</option>
+			<option value="20"
+				<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄 보기</option> 
+		</select>
+	</div> <!-- 옵션선택 끝 -->
+<table class="sub_news" border="1"  summary="게시판의 글제목 리스트">
+
+
+
+<thead>
+<tr class="th">
+<!-- 
+<th width="100">답변번호</th>
+ -->
+<th width="500">내용</th>
+<th scope="col" width="300">날짜</th>
+<!-- 
+<th scope="col" width="60">관리</th>
+ -->
 </tr>
-<c:forEach var="getSearchAnswerCr4" items="${getSearchAnswerCr4}"> 
-
-<tr>
-<td>${getSearchAnswerCr4.answerNumber}</td>
-<td>${getSearchAnswerCr4.writer}</td>
-<td>${getSearchAnswerCr4.content}</td>
-<td>${getSearchAnswerCr4.calendar}</td>
-<td>${getSearchAnswerCr4.memberId}</td>
-<td>${getSearchAnswerCr4.questionNumber}</td>
- <!-- <input type="button" class="delete" value='답변삭제'> 제이쿼리로 삭제해보기-->
-<td>
-<form action="deleteAnswerCr4?answerNumber=${getSearchAnswerCr4.answerNumber}" method="post">
-  <input type="submit"  value="삭제">	
-</form>
+</thead>
+<tbody>
+<c:forEach var="list" items="${viewAll}">
+<tr onclick="location.href='#'">
+<!-- 
+<td >${list.answerNumber}</td>
+ -->
+<td >${list.content}</td>
+<td>${list.calendar}</td>
+<!-- 
+<td><form action="deleteAnswerCr4?answerNumber=${list.answerNumber}" method="post">
+  <input class="delete" type="submit"  value="삭제"></form>
 </td>
- </tr>
+ -->
+</tr>
 </c:forEach>
+
+</tbody>
 </table>
-
-<a href="/finalProject">홈으로</a>
-
+	
+	<div style="display: block; text-align: center;">		
+		<c:if test="${paging.startPage != 1 }">
+			<a href="getSearchAnswerCr4?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="getSearchAnswerCr4?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a href="getSearchAnswerCr4?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
+	</div>
+</div>
+</div>
 </body>
 </html>

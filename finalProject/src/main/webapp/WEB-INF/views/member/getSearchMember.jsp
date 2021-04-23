@@ -6,23 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-table , tr, td{
-		border: 1px dotted black;
-			  }
-</style>
+
 </head>
 <body>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
 <h3 align="center">마이페이지 관리자-회원관리</h3>
+<br><br>
 <div align="center">
-
-<table>
- <thead> <tr id="head"> 
- <td>권한</td>
- <td>아이디</td>
- <td>선택</td>
- <td>관리</td>
- </tr>
+<table border="1" style="text-align:center;">
+ <thead> 
+	 <tr id="head"> 
+		 <th style="width:150px; font-size:30px;">권한</th>
+		 <th style="width:150px; font-size:30px;">아이디</th>
+		 <th style="width:150px; font-size:30px;">조회</th>
+		 <th style="width:150px; font-size:30px;">관리</th>
+	 </tr>
  </thead>
 <c:forEach var="list" items="${list}" >
 <tr>
@@ -41,28 +40,36 @@ table , tr, td{
  	</c:if>
  </td>
  <td>${list.memberId}</td>
- <td> <a href="getMember?memberId=${list.memberId}">선택</a></td>
+ <td> 
+ 	<c:if test="${list.auth eq 'b'}">
+ 		<button onclick="location.href='getBusiness98?businessId=${list.memberId}'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#8fbc8f; color:white;">선택</button>
+ 	</c:if>
+ 	<c:if test="${list.auth eq 'm'}">
+		 <button onclick="location.href='getMember1?memberId=${list.memberId}'" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#8fbc8f; color:white;">선택</button>
+ 	</c:if>
+ </td>
 
 
  <td>
- <form action="membershipCancel?ID=${list.memberId}" method="post">
- <button type="submit">삭제</button>
+ <form onsubmit="return checkMembershipCancel()" action="membershipCancel">
+ <input type="hidden" id="ID" name="ID" value="${list.memberId}">
+ <button type="submit" style="padding:5px; width:60px; border:none; border-radius:5px; background-color:#ff6347; color:white;">삭 제</button>
  </form>
  </td> 
 </tr> 
 </c:forEach>
 </table>
- <h4>페이지 넘기는기능 , 검색기능 추가하십시오.</h4>
-<a href="/finalProject">홈으로 돌아가기</a> <!-- /로 가면 메인화면으로 가진다.  -->
 </div>
-
- <!--페이지 넘기는 기능 , 검색기능 추가해야 합니다. 태현이형 로그인의  for each if 관리자를 받아서
- 관리자로 로그인후 나타나는 페이지    -->
-
-
-
-	
-
-	
+</div>	
 </body>
+<script>
+	//관리자 탈퇴 질척임
+	function checkMembershipCancel(){
+		var YnN = confirm("탈퇴 시키겠습니까?");
+		if(YnN){
+			return true;
+		}
+		return false;
+	}
+</script>
 </html>

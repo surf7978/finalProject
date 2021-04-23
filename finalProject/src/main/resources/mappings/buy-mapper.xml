@@ -2,26 +2,73 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.company.buy.service.impl.BuyMapper">
-	
+<mapper namespace="com.company.buy.service.impl.BuyMapper">
+
 	<!-- 구매내역 상세조회 -->
 	<select id="getSearchBuy" resultType="BuyVO">
-		SELECT * FROM BUY
+		SELECT BUYNUMBER
+		, CATEGORY
+		, OPTIONNAME
+		, COUNT
+		, TO_CHAR(PRICE, '999,999,999') AS PRICE
+		, BUYSTATE
+		, PRODUCTNUMBER
+		, PNDNUMBER
+		, FROMPERSON
+		, TOPERSON
+		, POST
+		, ADDRESS
+		, ADDRESS2
+		, PHONE 
+		, REVIEWNUMBER
+		FROM BUY
 		WHERE PNDNUMBER=#{pndNumber}
+		ORDER BY BUYNUMBER
 	</select>
 
 	<!-- reviewProduct VIEW 한건 조회하기 -->
 	<select id="getViewBuy" parameterType="BuyVO" resultType="BuyVO">
-		SELECT MEMBERID
-			 , NAME
-			 ,BUYNUMBER
-			 ,CATEGORY
-			 ,OPTIONNAME
-			 ,COUNT
-			 ,PRICE
-			 ,PRODUCTNUMBER
-       FROM REVIEWPRODUCT
-	   WHERE BUYNUMBER=#{buyNumber}
+		SELECT
+		MEMBERID
+		, NAME
+		, BUYNUMBER
+		, CATEGORY
+		, OPTIONNAME
+		, COUNT
+		, TO_CHAR(PRICE, '999,999,999') AS PRICE
+		, PRODUCTNUMBER
+		FROM REVIEWPRODUCT
+		WHERE BUYNUMBER=#{buyNumber}
 	</select>
+	
+	<!-- 구매내역 한 건 조회 for구매평등록 -->
+	<select id="getBuy" parameterType="BuyVO" resultType="BuyVO">
+	SELECT BUYNUMBER
+		, CATEGORY
+		, OPTIONNAME
+		, COUNT
+		, PRICE
+		, BUYSTATE
+		, PRODUCTNUMBER
+		, PNDNUMBER
+		, FROMPERSON
+		, TOPERSON
+		 ,POST
+		, ADDRESS
+		, ADDRESS2
+		, PHONE
+		, REVIEWNUMBER
+		FROM BUY
+		WHERE FROMPERSON=#{fromPerson}
+		AND PRODUCTNUMBER=#{productNumber}
+	</select>
+	
+	<!-- 구매평등록시 Buy테이블에 리뷰번호 등록 -->
+	<update id="insertReview3" parameterType="BuyVO">
+		 UPDATE BUY
+		 SET
+		 REVIEWNUMBER='리뷰등록'
+		 WHERE BUYNUMBER = #{buyNumber}
+	</update>
+	
 </mapper>

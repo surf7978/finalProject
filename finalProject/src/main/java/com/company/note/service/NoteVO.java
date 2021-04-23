@@ -5,12 +5,14 @@ import lombok.Data;
 @Data
 public class NoteVO {
 	String noteNumber;
-	String category;
-	String name;
+	String category1;
+	String category2;	//의료명
 	String price;
-	String calendar;
+	String calendar;	//의료일
+	String calendar2;	//등록일
 	String content;
 	String animalNumber;
+	
 
 
 

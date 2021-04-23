@@ -41,7 +41,7 @@
 	<!-- 삭제 -->
 	<delete id="deleteHotel">
 		DELETE FROM HOTEL
-		WHERE hotelNumber = #{hotelNumber}
+		WHERE seq = #{seq}
 	</delete>
 	<!-- 단건조회 -->
 	<select id="getHotel" resultType="hotelVO">

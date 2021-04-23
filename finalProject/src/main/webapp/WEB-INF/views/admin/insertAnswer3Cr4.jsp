@@ -4,28 +4,106 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신고하기 from 관리자 to 유저</title>
+<title>신고하기 답장하기</title>
+
 <style>
-	/* textarea{
-	height: 300px;
-	width : 300px;
-	} */
+		div.send{
+			
+			text-align: center;
+		}
+		input.send{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			background-color:#e7ab3c;
+		}
+		input.reset{
+			padding:10px;
+			width:100px;
+		 	border-radius:5px;	
+			border:none;
+			color: white;
+			background-color:#ff6347;
+		}		
+		input.back{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			color: white;
+			background-color:#778899;
+		}
+        table.table2{
+                border-collapse: separate;
+                border-spacing: 1px;
+                text-align: left;
+                line-height: 1.5;
+                border-top: 1px solid #ccc;
+                margin : 20px 10px;
+        }
+        table.table2 tr {
+                 width: 50px;
+                 padding: 10px;
+                font-weight: bold;
+                vertical-align: top;
+                border-bottom: 1px solid #ccc;
+        }
+        table.table2 td {
+                 width: 20px;
+                 padding: 5px;
+                 vertical-align: top;
+                 border-bottom: 1px solid #ccc;
+        }
+ 
 </style>
 </head>
 <body>
-	<h3>신고하기 from 관리자 to 유저 답장</h3> </p>
-	<h3> 내용 </h3> </p>
+	<br>
+	<br>
+	<br>
+	<input value="신고하기(관리자) 답장하기"
+		style="font-size: 40px; text-align: center; width: 600px; border: none;"
+		readonly>
+	<br>
+	<br>
 <form action="insertAnswer3Cr4" method="post">
+
 	
-	<!-- <textarea id="content" name="content" >정상적으로 신고접수 되었습니다.</textarea> -->
-	<input id="content" name="content" value="정상적으로 신고접수 되었습니다."> <br>
-	<input type="hidden" id="questionNumber" name="questionNumber" value="${getQuestion3Ans.questionNumber}"> <br>
-	</p>
-	<button type="submit">유저에게 답장보내기</button> <p>
+		<table style="padding-top: 50px; align: center; width: 700; border: 0; cellpadding: 2;">
+			<tr>
+				<td height="20" align="center" bgcolor="#e7ab3c">
+				<font  color="white"> ${getQuestion3.writer} 님 께 보내는 답장 </font></td>
+			</tr>
+			
+
+			<tr>
+				<td bgcolor=white>
+					<table class="table2">
+						<tr>
+							<td><input value="내 용" style=" font-size:20px; text-align:center; width:100px; border:none; font-weight:500;"></td>
+							<td colspan="4"><textarea id="content" name="content" cols="70" rows="15" >  </textarea></td>
+						</tr>
+
+
+					</table>
+
+						<input type="hidden" id="questionNumber" name="questionNumber" value="${getQuestion3Ans.questionNumber}"> <br>
+						<!-- 모델을 두개 넘겨준 경우 둘다 되네 -->
+						<div class="send">
+                        <input class="send" type = "submit" value="답장하기" >
+                        
+                    
+                        </div>
+
+					
+
+
+
+				</td>
+			</tr>
+		</table>
 </form>
-	<a href="getSearchAnswerCr4">신고내용으로가기 </a>
-	<h7>해당내용의 단건조회로 넘어가서 신고목록에서 삭제하시오. 이기능은 안된다.</h7>
-
-
+	
 </body>
 </html>

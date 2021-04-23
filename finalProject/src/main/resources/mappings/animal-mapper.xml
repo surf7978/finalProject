@@ -11,6 +11,7 @@
 			, GENDER
 			, KIND
 			, BIRTH
+			, IMAGE
 			, MEMBERID
 			FROM ANIMAL
 			WHERE MEMBERID=#{memberId}
@@ -23,6 +24,7 @@
 			, GENDER
 			, KIND
 			, BIRTH
+			, IMAGE
 			, MEMBERID
 		FROM ANIMAL
 		WHERE ANIMALNUMBER = #{animalNumber}
@@ -37,29 +39,51 @@
 				  , KIND
 				  ,BIRTH
 				  , MEMBERID
+				 , IMAGE
 				  ) VALUES(
 				  ANI_SEQ.NEXTVAL
 				  , #{name}
 				  , #{gender}
 				  , #{kind}
 				  , #{birth}
-				  , #{memberId})
+				  , #{memberId}
+				  , #{image, jdbcType = VARCHAR } )
 	</insert>
 	
 	<!-- 반려동물 정보 수정 -->
 	<update id="updateAnimal" parameterType="AnimalVO">
-		UPDATE ANIMAL SET 
-				NAME = #{name}
-			, GENDER = #{gender}
-			,KIND = #{kind}
-			, BIRTH = #{birth}
-			, MEMBERID = #{memberId}
+		UPDATE ANIMAL 
+		<set> 
+		 <if test="name != null">			 NAME = #{name}</if>
+		 <if test="gender != null">			, GENDER = #{gender}</if>
+		 <if test="kind != null">			, KIND = #{kind}</if>
+		 <if test="birth != null">			, BIRTH = #{birth}</if>
+		 <if test="memberId != null">		, MEMBERID = #{memberId}</if>
+		 <if test="image != null">			, IMAGE = #{image}</if>
+		</set>
 		WHERE ANIMALNUMBER = #{animalNumber}
 	</update>
 	
 	<!-- 반려동물 삭제 -->
 	<delete id="deleteAnimal" parameterType="AnimalVO">
 		DELETE FROM ANIMAL
-		WHERE memberId = #{memberId}
+		WHERE ANIMALNUMBER = #{animalNumber}
+	</delete>
+	
+	<!--관리자용 동물 리스트 조회 -->
+	<select id="getSearchAnimal99" parameterType="AnimalVO" resultType="AnimalVO">
+		SELECT ANIMALNUMBER
+			, NAME
+			, GENDER
+			, KIND
+			, BIRTH
+			, MEMBERID
+			FROM ANIMAL
+	</select>
+	
+	<!-- 반려동물 삭제 -->
+	<delete id="deleteAnimal99" parameterType="AnimalVO">
+		DELETE FROM ANIMAL
+		WHERE MEMBERID=#{memberId}
 	</delete>
 </mapper>

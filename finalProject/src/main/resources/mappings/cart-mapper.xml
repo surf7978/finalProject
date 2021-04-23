@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.cart.service.impl.CartMapper">
+	<!-- 장바구니 등록 -->
+	<insert id="insertCart">
+		INSERT INTO CART
+		(
+			CARTNUMBER,
+			IMAGE,
+			PRODUCTNAME,
+			OPTIONNAME,
+			OPTIONPRICE,
+			COUNT,
+			CARTCOURIER,
+			MEMBERID,
+			PRODUCTNUMBER
+		)VALUES(
+			TOTALCART_SEQ.NEXTVAL
+			,#{image}
+			,#{productName}
+			<if test="optionName != null">,#{optionName}</if>
+			<if test="optionPrice != null">,#{optionPrice}</if>
+			<if test="count != null">,#{count}</if>
+			<if test="optionNameList != null"><foreach item="opname" collection="optionNameList" open=",'" separator="," close="'" >${opname}</foreach></if>
+			<if test="optionPriceList != null"><foreach item="opprice" collection="optionPriceList"  open=",'" separator="," close="'" >${opprice}</foreach></if>
+			<if test="countList != null"><foreach item="count" collection="countList" open=",'" separator="," close="'" >${count}</foreach></if>
+			,#{cartCourier}
+			,#{memberId}
+			,#{productNumber}
+		)
+	</insert>
+	<!-- 장바구니 수정 -->
+	<update id="updateCart">
+		UPDATE CART
+		SET
+		WHERE
+	</update>
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteCart">
+		DELETE FROM CART
+		<where> 
+			MEMBERID = #{memberId}
+			AND CARTNUMBER IN 
+			<foreach item="seq" index="idx" collection="cartNumbers" open="(" close=")" separator="," >
+				#{seq}
+			</foreach>
+		</where>
+	</delete>
+	<!-- 안쓸 예정 -->
+	<!-- 장바구니 상세조회 -->
+	<select id="getCart" resultType="CartVO">
+		SELECT
+		CARTNUMBER,
+		IMAGE,
+		PRODUCTNAME,
+		OPTIONNAME,
+		OPTIONPRICE,
+		COUNT,
+		CARTCOURIER,
+		MEMBERID,
+		PRODUCTNUMBER
+		FROM CART
+		WHERE MEMBERID = #{memberId}
+	</select>
+	<!-- 장바구니 전체조회 -->
+	<select id="getSearchCart" resultType="CartVO">
+		SELECT
+		CARTNUMBER,
+		IMAGE,
+		PRODUCTNAME,
+		OPTIONNAME,
+		OPTIONPRICE,
+		COUNT,
+		CARTCOURIER,
+		MEMBERID,
+		PRODUCTNUMBER
+		FROM CART
+		WHERE MEMBERID = #{memberId}
+	</select>
+</mapper>

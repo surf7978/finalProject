@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,28 @@
     <link rel="stylesheet" href="resources/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 </head>
+<style>
+	#top_btn{position:fixed;right:0;bottom:60px;width:40px;height:40px;background:#e7ab3c;text-align:center;color:#fff;line-height:40px;cursor:pointer;display:none;font-size:13px;}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$(window).scroll(function(){
+			if($(this).scrollTop() > 300){
+				$("#top_btn").fadeIn();
+			}else{
+				$("#top_btn").fadeOut();
+			}
+		});
+		$("#top_btn").click(function(){
+			 $("html, body").animate({
+                 scrollTop : 0
+             }, 500);
+		})
+	})
+</script>
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -31,11 +53,14 @@
 			<div class="container">
 				<div class="ht-left">
 					<div class="mail-service">
-						<i class=" fa fa-envelope"></i> hello.colorlib@gmail.com
+						비지니스 문의 &nbsp;&nbsp;&nbsp;
+						<i class=" fa fa-envelope"></i> admin@naver.com
 					</div>
+					<!-- 
 					<div class="phone-service">
-						<i class=" fa fa-phone"></i> +65 11.188.888
+						<i class=" fa fa-phone"></i> 010-1111-1111
 					</div>
+					 -->
 				</div>
 				<div class="ht-right">
 					<c:if test="${empty loginID }">
@@ -66,12 +91,12 @@
 							</option>
 						</select>
 					</div>
-					 -->
 					<div class="top-social">
 						<a href="#"><i class="ti-facebook"></i></a> <a href="#"><i
 							class="ti-twitter-alt"></i></a> <a href="#"><i
 							class="ti-linkedin"></i></a> <a href="#"><i class="ti-pinterest"></i></a>
 					</div>
+					 -->
 				</div>
 			</div>
 		</div>
@@ -80,7 +105,7 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2">
 						<div class="logo">
-							<a href="/finalProject"> <img src="resources/img/logo.png" alt="">
+							<a href="${pageContext.request.contextPath}"> <img src="resources/img/logo.png" alt="">
 							</a>
 						</div>
 					</div>
@@ -97,59 +122,83 @@
 						</div>
 					</div>
 					<div class="col-lg-3 text-right col-md-3">
+					<c:if test="${not empty loginID}">
+					<c:if test="${loginAuth eq 'm'}">
+					<c:if test="${loginID ne 'admin'}">
+					<!-- 로그인한 사용자의 장바구니 내용 -->
+					<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
+					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
+					 user="final" password="a20210409A"/>
+					<sql:query var="rs" dataSource="${ds }">
+					    select COUNT(*) count from cart where memberId = '${loginID}'
+					</sql:query>
+					<sql:query var="rs1" dataSource="${ds }">
+					    select * from cart where memberId = '${loginID}'
+					</sql:query> 
 						<ul class="nav-right">
+							<li class="cart-price">장바구니 </li>
+							<!-- 
 							<li class="heart-icon"><a href="#"> <i
 									class="icon_heart_alt"></i> <span>1</span>
 							</a></li>
-							<li class="cart-icon"><a href="#"> <i
-									class="icon_bag_alt"></i> <span>3</span>
+							 -->
+							<li class="cart-icon"><a href="getSearchTotalCartForm"> 
+								<i class="icon_bag_alt"></i> 
+							<c:if test="${not empty rs}">
+								<span>${rs.rows[0].count}</span>
+							</c:if>
 							</a>
-								<div class="cart-hover">
+								<div class="cart-hover"  style="width:500px;">
 									<div class="select-items">
 										<table>
 											<tbody>
+											<c:if test="${not empty rs1}">
+											<c:forEach items="${rs1.rows }" var="list">
 												<tr>
-													<td class="si-pic"><img
-														src="resources/img/select-product-1.jpg" alt=""></td>
+													<td class="si-pic"><img style="width:150px; height:100px;"
+														src="resources/images/products/${list.image }" alt=""></td>
 													<td class="si-text">
 														<div class="product-selected">
-															<p>$60.00 x 1</p>
-															<h6>Kabino Bedside Table</h6>
+															<h6>${list.optionName }</h6>
+															<p>${list.optionPrice } 원</p>
 														</div>
 													</td>
+													<!-- 이거 걍 X 표시임 
 													<td class="si-close"><i class="ti-close"></i></td>
+													 -->
 												</tr>
-												<tr>
-													<td class="si-pic"><img
-														src="resources/img/select-product-2.jpg" alt=""></td>
-													<td class="si-text">
-														<div class="product-selected">
-															<p>$60.00 x 1</p>
-															<h6>Kabino Bedside Table</h6>
-														</div>
-													</td>
-													<td class="si-close"><i class="ti-close"></i></td>
-												</tr>
+											</c:forEach>
+											</c:if>
 											</tbody>
 										</table>
 									</div>
+									<!-- 
 									<div class="select-total">
-										<span>total:</span>
-										<h5>$120.00</h5>
+										<span>total :</span>
+										<c:if test="${not empty rs}">
+											<h5>총합계 : 원</h5>
+										</c:if>
 									</div>
+									 -->
 									<div class="select-button">
-										<a href="#" class="primary-btn view-card">VIEW CARD</a> <a
-											href="#" class="primary-btn checkout-btn">CHECK OUT</a>
+										<!-- 
+										<a href="#" class="primary-btn view-card">VIEW CARD</a> 
+										 -->
+										<a href="getSearchTotalCartForm" class="primary-btn checkout-btn" style="font-size:17px;">상 세 보 기</a>
 									</div>
 								</div></li>
-							<li class="cart-price">$150.00</li>
 						</ul>
+					</c:if>
+					</c:if>
+					</c:if>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="nav-item">
 			<div class="container" style=" max-width:100%;display:flex;justify-content: center;">
+			<!-- 
+			
 				<div class="nav-depart">
 					<div class="depart-btn">
 						<i class="ti-menu"></i> <span>메뉴</span>
@@ -161,7 +210,7 @@
 							<li><a href="#">펫택시</a></li>
 							<li><a href="#">교육</a></li>
 							<li><a href="#">미용</a></li>
-							<li><a href="#">보호소</a></li>
+							<li><a href="getAbanList">보호소</a></li>
 							<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>
 							<li><a href="getSearchEventAndNoticeSelect?category=1">이벤트</a></li>
 							<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
@@ -178,7 +227,7 @@
 									<li><a href="getSearchAnswer">답변내역보기</a></li>
 									<c:if test="${loginAuth eq 'm'}">
 										<c:if test="${loginID ne 'admin'}">
-											<li><a href="getMember1">회원정보조회</a></li>
+											<li><a href="getMember1?memberId=${loginID}">회원정보조회</a></li>
 										</c:if>
 										<c:if test="${loginID eq 'admin'}">
 											<li><a href="getSearchViewMember">회원정보조회</a></li>
@@ -186,60 +235,86 @@
 										</c:if>
 									</c:if>
 									<c:if test="${loginAuth eq 'b'}">
-										<li><a href="getBusiness99">회원정보조회</a></li>
+										<li><a href="getBusiness99?businessId=${loginID}">회원정보조회</a></li>
 										<li><a href="#">게시글관리</a></li>
 									</c:if>
-									<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
-									<li><a href="getSearchAnimal">마이펫수첩</a></li>
+									<li><a href="getSearchPayAndDeliveryForm">구매내역조회</a></li>
+									<c:if test="${loginID ne 'admin'}">
+											<li><a href="getSearchAnimal">마이펫수첩</a></li>
+										</c:if>
+										<c:if test="${loginID eq 'admin'}">
+											<li><a href="getSearchAnimal99">반려동물현황</a></li>
+										</c:if>
 									<li><a href="logout">로그아웃</a></li>
 							</c:if>
 						</ul>
 					</div>
 				</div>
+				 -->
 				<nav class="nav-menu mobile-menu">
 					<ul>
 						<!-- 
 						<li class="active"><a href="./index.html">Home</a></li>
 						 -->
 						<li><a href="getSearchProductForm">쇼핑몰</a></li>
-						<li><a href="getSearchHospital">병원</a></li>
-						<li><a href="getSearchListForm">카페/호텔/펫택시</a>
+						<li><a href="getSearchHospitalForm99">병원</a></li>
+						<li><a href="getSearchListForm?menu=1">카페/호텔/펫택시</a>
+						<!-- 
 							<ul class="dropdown">
 								<li><a href="#">카페</a></li>
 								<li><a href="#">호텔</a></li>
 								<li><a href="#">펫택시</a></li>
 							</ul></li>
-						<li><a href="#">교육/미용/보호소</a>
+						 -->
+						<li><a href="getSearchListForm?menu=2">교육/미용</a>
+							<!-- 
 							<ul class="dropdown">
 								<li><a href="#">교육</a></li>
 								<li><a href="#">미용</a></li>
-								<li><a href="#">보호소</a></li>
-							</ul></li>
-						<li><a href="#">커뮤니티</a>
+							</ul>
+							 -->
+						</li>
+						<li><a href="getAbanList">보호소</a></li>	
+						<li><a href="getSearchEventAndNoticeSelect2">커뮤니티</a>
 							<ul class="dropdown">
-								<li><a href="getSearchEventAndNoticeSelect?category=2">공지사항</a></li>
-								<li><a href="getSearchEventAndNoticeSelect?category=1">이벤트</a></li>
+								<li><a href="getSearchEventAndNoticeSelect2">공지사항</a></li>
+								<li><a href="getSearchEventAndNoticeSelectForm?category=1">이벤트</a></li>
 								<li><a href="getSearchBoardCategiry1">자유게시판</a></li>
-								<li><a href="getSearchBoardCategiry2">자랑하기</a></li>
+								<li><a href="getSearchBoardCategiry2Form">자랑하기</a></li>
 							</ul></li>
-						<li><a href="#">고객센터</a>
+						<li><a href="FAQ">고객센터</a>
 							<ul class="dropdown">
-								<li><a href="#">자주하는질문</a></li>
-								<li><a href="getSearchQuestionCr4">문의하기</a></li>
-								<li><a href="#">환불규정</a></li>
-								<li><a href="#">회원혜택</a></li>
-							</ul></li>
-						<li><a href="#">마이페이지</a>
-							<ul class="dropdown">
-								<c:if test="${empty loginID}">
-									<li><a href="loginForm">로그인</a></li>
-								</c:if>
+								<li><a href="FAQ">자주하는질문</a></li>
 								<c:if test="${not empty loginID}">
+								<c:if test="${loginID ne 'admin' }">
+									<li><a href="insertQuestion2">문의하기</a></li>
+									<!-- 
+									<li><a href="insertQuestion3">신고하기</a></li>
+									 -->
+								</c:if>
+								</c:if>
+								<li><a href="buyCancel">환불규정</a></li>
+							</ul></li>
+								<c:if test="${not empty loginID}">
+						<li>
+							<c:if test="${loginAuth eq 'm'}">
+								<c:if test="${loginID eq 'admin'}">	
+									<a href="getSearchViewMember">마이페이지</a>
+								</c:if>
+								<c:if test="${loginID ne 'admin'}">	
+									<a href="getMember1">마이페이지</a>
+								</c:if>
+							</c:if>
+							<c:if test="${loginAuth eq 'b'}">
+								<a href="getBusiness99">마이페이지</a>
+							</c:if>
+						<!-- 
+							<ul class="dropdown">
 										<li><a href="getSearchQuestion">문의내역보기</a></li>
 										<li><a href="getSearchAnswer">답변내역보기</a></li>
 										<c:if test="${loginAuth eq 'm'}">
 											<c:if test="${loginID ne 'admin'}">
-												<li><a href="getMember1">회원정보조회</a></li>
+												<li><a href="getMember1?memberId=${loginID}">회원정보조회</a></li>
 											</c:if>
 											<c:if test="${loginID eq 'admin'}">
 												<li><a href="getSearchViewMember">회원정보조회</a></li>
@@ -247,15 +322,25 @@
 											</c:if>
 										</c:if>
 										<c:if test="${loginAuth eq 'b'}">
-											<li><a href="getBusiness99">회원정보조회</a></li>
+											<li><a href="getBusiness99?businessId=${loginID}">회원정보조회</a></li>
 											<li><a href="#">게시글관리</a></li>
+											<li><a href="getViewReservation2">예약내역조회</a></li>
 										</c:if>
-										<li><a href="getSearchPayAndDelivery">구매내역조회</a></li>
-										<li><a href="getSearchAnimal">마이펫수첩</a></li>
+										<c:if test="${loginAuth eq 'm'}">
+										<li><a href="getSearchPayAndDeliveryForm">구매내역조회</a></li>
+										</c:if>
+										
+										<c:if test="${loginID ne 'admin'}">
+											<li><a href="getSearchAnimal">마이펫수첩</a></li>
+										</c:if>
+										<c:if test="${loginID eq 'admin'}">
+											<li><a href="getSearchAnimal99">반려동물현황</a></li>
+										</c:if>
 										<li><a href="logout">로그아웃</a></li>
-								</c:if>
 							</ul>
+						 -->
 						</li>
+								</c:if>
 					</ul>
 				</nav>
 				<div id="mobile-menu-wrap"></div>
@@ -263,8 +348,6 @@
 		</div>
 	</header>
 	<!-- Header End -->
-
-
 
 	<div align="center" style="min-height:100vh;">
 		<tiles:insertAttribute name="content" />
@@ -348,7 +431,10 @@
 		</div>
 	</footer>
 	<!-- Footer Section End -->
-	
+	<!-- topbutton -->
+	<div id="top_btn">
+		TOP
+	</div>
 
     <!-- Js Plugins -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

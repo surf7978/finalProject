@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import com.company.common.PagingVOCr4;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 
@@ -123,24 +125,12 @@ public class QuestionServiceimpl implements QuestionService {
 	}
 	
 	// 문의하기 항목 하나 전체조회 1 상품문의
-	@Override
-	public List<QuestionVO> getSearchQuestionSelect1(QuestionVO vo) {
-		return QuestionMapper.getSearchQuestionSelect1(vo);
-	}
+	/*
+	 * @Override public List<QuestionVO> getSearchQuestionSelect1(QuestionVO vo) {
+	 * return QuestionMapper.getSearchQuestionSelect1(vo); }
+	 */
 
-	// 문의하기 항목 하나 전체조회 2 고객센터 문의
-	@Override
-	public List<QuestionVO> getSearchQuestionSelect2(QuestionVO vo) {
-		return QuestionMapper.getSearchQuestionSelect2(vo);
-	}
 
-	// 문의하기 항목 하나 전체조회 3 신고하기
-	@Override
-	public List<QuestionVO> getSearchQuestionSelect3(QuestionVO vo) {
-		return QuestionMapper.getSearchQuestionSelect3(vo);
-	}
-
-	
 	
 	
 	// 수정
@@ -155,11 +145,6 @@ public class QuestionServiceimpl implements QuestionService {
 		return QuestionMapper.deleteQuestion(vo);
 	}
 
-	// 레코드
-	@Override
-	public int getCount(QuestionVO vo) {
-		return QuestionMapper.getCount(vo);
-	}
 	
 	
 	//나경
@@ -178,5 +163,62 @@ public class QuestionServiceimpl implements QuestionService {
 	public QuestionVO getQuestionProbis(QuestionVO vo) {
 		return QuestionMapper.getQuestionProbis(vo);	
 	}
+	
+	//쇼핑몰 상품 상세보기에서 상품문의글 상품문의글 등록
+	@Override
+	public int insertQuestionPro(QuestionVO vo) {
+		return QuestionMapper.insertQuestionPro(vo);
+	}
+
+	
+	// 레코드
+	@Override
+	public int getCount(QuestionVO vo) {
+		return QuestionMapper.getCount(vo);
+	}
+	
+	
+
+	//마이페이지-유저-문의내역
+	@Override
+	public List<QuestionVO> getSearchQuestion99(QuestionVO vo) {
+		return QuestionMapper.getSearchQuestion99(vo);
+	}
+
+	
+	//페이징 처리 하는 것.
+	
+	
+	
+	@Override
+	public int countQuestion1() {
+		return QuestionMapper.countQuestion1();
+	}
+	
+	@Override
+	public int countQuestion2() {
+		return QuestionMapper.countQuestion2();
+	}
+	@Override
+	public int countQuestion3() {
+		return QuestionMapper.countQuestion3();
+	}
+
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect1(PagingVOCr4 vo) {
+		return QuestionMapper.getSearchQuestionSelect1(vo);
+	}
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect2(PagingVOCr4 vo) {
+		return QuestionMapper.getSearchQuestionSelect2(vo);
+	}
+	@Override
+	public List<QuestionVO> getSearchQuestionSelect3(PagingVOCr4 vo) {
+		return QuestionMapper.getSearchQuestionSelect3(vo);
+	}
+	
+	
+	
+	
 
 }

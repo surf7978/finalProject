@@ -2,24 +2,156 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.eventAndNotice.service.impl.EventAndNoticeMapper">
-
+	<!--이벤트 등록  -->
+	<insert id="insertEventAndNotice1" parameterType="eventAndNoticeVO">
+		
+	INSERT INTO eventAndNotice 
+     (EANNUMBER
+     ,WRITER 
+     ,TITLE
+	 ,CONTENT
+	 ,STARTDATE
+	 ,ENDDATE
+	 ,IMAGE
+	 ,T_IMAGE
+	 ,VIEWS
+	 ,CATEGORY
+	 ,MEMBERID) VALUES(ean_seq.nextval 
+	 , 'admin' 
+	 , #{title} 
+	 , #{content}
+	 , #{startDate} 
+	 , #{endDate}  
+	 , #{image} 
+	 , #{t_image} 
+	 , 0 
+	 , 1 
+	 , 'admin')
+	</insert>
+	<!--공지사항 등록  -->
+	<insert id="insertEventAndNotice2" parameterType="eventAndNoticeVO">
+		
+	INSERT INTO eventAndNotice 
+     (EANNUMBER
+     ,WRITER 
+     ,IMAGE
+     ,TITLE
+	 ,CONTENT
+	 ,STARTDATE
+	 ,VIEWS
+	 ,CATEGORY
+	 ,MEMBERID) VALUES(ean_seq.nextval 
+	 , 'admin' 
+	 , #{image}
+	 , #{title} 
+	 , #{content}
+	 ,	sysdate 
+	 , 0 
+	 , 2 
+	 , 'admin')
+	</insert>
+	
+	
 	<select id="getSearchEventAndNotice" resultType="eventAndNoticeVO">
-	SELECT * FROM eventAndNotice
+	SELECT * FROM eventAndNotice ORDER BY EANNUMBER DESC
+	
+	</select>
+
+
+	
+	<select id="getEventAndNotice1" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" > 
+	SELECT * 
+	FROM eventAndNotice
+	WHERE EANNUMBER= #{eanNumber} ORDER BY EANNUMBER DESC
 	</select>
 	
+	<select id="getEventAndNotice2" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" > 
+	SELECT * 
+	FROM eventAndNotice
+	WHERE EANNUMBER= #{eanNumber} ORDER BY EANNUMBER DESC
+	</select>
+	
+		<!-- 이벤트 수정  -->
+	<update id="updateEventAndNotice1" parameterType="eventAndNoticeVO">
+		UPDATE eventAndNotice SET
+		TITLE=#{title} ,
+		CONTENT=#{content} 
+		WHERE EANNUMBER= #{eanNumber} 
+	</update>
+	
+	<!-- 공지사항 수정  -->
+	<update id="updateEventAndNotice2" parameterType="eventAndNoticeVO">
+		UPDATE eventAndNotice SET
+		TITLE=#{title} ,
+		CONTENT=#{content} 
+		WHERE EANNUMBER= #{eanNumber}
+	</update>
+	
+	<!-- 게시판 한건 삭제  -->
+	
+	<delete id="deleteEventAndNotice" parameterType="eventAndNoticeVO">
+		DELETE FROM eventAndNotice
+		WHERE EANNUMBER=#{eanNumber}
+	</delete>
+	
+	
+	<!--#################################################################  -->
+	<!--#################################################################  -->
+	<!-- 리스트 갯수 -->
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM EVENTANDNOTICE
+		WHERE CATEGORY=1
+	</select>
+	
+	<!--  이벤트전체조회 -->
 	<select id="getSearchEventAndNoticeSelect" resultType="eventAndNoticeVO"
 									parameterType="eventAndNoticeVO" > 
+	
+	SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+	<!-- start of query -->
 	SELECT * 
 	FROM eventAndNotice
-	WHERE CATEGORY= #{category}
+	WHERE CATEGORY= 1
+	ORDER BY EANNUMBER DESC
+	<!-- end of query -->
+	 ) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
-	<select id="getEventAndNotice" resultType="eventAndNoticeVO"
-									parameterType="eventAndNoticeVO" > 
+		<!-- 2번. 공지사항 -->
+	<select id="getSearchEventAndNoticeSelect2" resultType="eventAndNoticeVO"
+									parameterType="eventAndNoticeVO" >
+	SELECT B.* FROM(SELECT ROWNUM RN, A.* FROM(
+	<!-- start of query --> 
 	SELECT * 
 	FROM eventAndNotice
-	WHERE EANNUMBER= #{eanNumber}
+	WHERE CATEGORY= 2
+	ORDER BY EANNUMBER DESC
+	<!-- end of query -->
+	 ) A) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	
+		<!-- 총 게시글 갯수 출력 -->
+	<select id="countBoard" resultType="int">
+		SELECT COUNT(*) FROM EVENTANDNOTICE
+		WHERE CATEGORY=2
+	</select>
+	
+	
+	<!--#################################################################  -->
+	<!--#################################################################  -->
+
+	<!--조회수 +1  -->
+	<update id="updateViews" >
+	  UPDATE EVENTANDNOTICE SET VIEWS = VIEWS + 1 WHERE EANNUMBER = #{eanNumber}
+	</update>
+	
+	
+	<!--#################################################################  -->
+	<!--#################################################################  -->
+	
 	
 </mapper>
 

@@ -2,21 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.bCart.service.impl.BCartMapper">
+	<!-- 등록 -->
+	<insert id="insertBCart">
+		INSERT INTO BCART(
+			CARTNUMBER,
+			IMAGE1,
+			NAME,
+			OPTIONNAME,
+			PRICE,
+			COUNT,
+			BISNUMBER,
+			MEMBERID
+		)VALUES(
+			TOTALCART_SEQ.NEXTVAL,
+			#{image1},
+			#{name},
+			#{optionName},
+			#{price},
+			#{count},
+			#{bisNumber},<!-- 제품번호를 의미해서 seq값을 가져옴 -->
+			#{memberId}
+		)
+	</insert>
+	<!-- 수정 -->
+	<update id="updateBCart">
+		UPDATE  BCART
+		<set>
+		<if test="price != null and price != ''">
+			PRICE = #{price}
+		</if>
+		<if test="count != null and count != ''">
+			AND COUNT = #{count}
+		</if>
+		</set>
+		WHERE MEMBERID = #{memberId}
+	</update>
+	<!-- 삭제 -->
+	<delete id="deleteBCart">
+	DELETE FROM BCART
+	WHERE MEMBERID = #{memberId}
+	AND CARTNUMBER IN
+		<foreach item="seq" collection="cartNumbers" open="(" separator="," close=")" >
+			 #{seq} 
+		</foreach>
+	</delete>
 	<!-- 장바구니 단건조회 -->
-	<select id="getBCart" resultType="bCartVO">
+	<select id="getBCart" resultType="CartVO">
 		SELECT * FROM BCART
 		WHERE
 		MEMBERID = #{memberId}
 	</select>
 	<!-- 장바구니 리스트조회 -->
-	<select id="getSearchBCart" resultType="bCartVO">
-		SELECT * FROM BCART
+	<select id="getSearchTotalCart" resultType="CartVO">
+		SELECT * FROM TOTALCARTVIEW
 		WHERE
 		MEMBERID = #{memberId}
+		<!-- 결제 리스트조회 -->
+		<if test="cartNumbers != null">
+		AND CARTNUMBER IN
+			<foreach collection="cartNumbers" item="seq" open="(" separator="," close=")">
+				#{seq}
+			</foreach>
+		</if>
 	</select>
-	<!-- 장바구니 리스트삭제 -->
-	<delete id="deleteBCart">
-		DELETE FROM BCART
-		WHERE MEMBERID = #{memberId}
-	</delete>
 </mapper>

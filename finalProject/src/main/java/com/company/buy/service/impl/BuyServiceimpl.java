@@ -30,5 +30,29 @@ public class BuyServiceimpl implements BuyService{
 	public BuyVO getViewBuy(BuyVO vo) {
 		return buyMapper.getViewBuy(vo);
 	}
+	
+	//구매상세정보 추가
+	@Override
+	public int insertBuy2(BuyVO vo) {
+		return buyMapper.insertBuy2(vo);
+	}
+	
+	//쇼핑몰구매내역 단건조회 for 구매평작성
+	@Override
+	public List<BuyVO> getBuy(BuyVO vo) {
+		return buyMapper.getBuy(vo);
+	}
 
+	@Override
+	public int insertReview3(BuyVO vo) {
+		return buyMapper.insertReview3(vo);
+	}
+	
+
+	@Override
+	public int insertCartBuy(List<BuyVO> list) {
+		return buyMapper.insertCartBuy(list);
+	}	
+
+	
 }

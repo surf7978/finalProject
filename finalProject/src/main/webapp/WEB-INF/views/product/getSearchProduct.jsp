@@ -14,15 +14,18 @@
 	function getSearchProduct(p) {
 		/* 리스트 ajax */
 		var category= $("#pro_location ul li a.after").text();
-		var category2= $("input[type=checkbox]:checked").val();
+		var category2 = [];
+		$("input[type=checkbox]:checked").each(function(){
+			category2.push($(this).val());
+		});
 		console.log(category2);
 		$.ajax({
 			url : "getSearchProduct",
-			type : "Get",
+			type : "Post",
 			data : {
 				page : p,
-				category:category,
-				category2:category2
+				category : category,
+				categoryList : category2
 			},
 			dataType : "JSON",
 			success : function(datas) {
@@ -36,15 +39,10 @@
 				$(response).each(
 						function(i) {
 							var productNumber = response[i].productNumber;
-							var productNumber = response[i].productNumber;
 							var t_img = response[i].t_image;
 
 							var li = $("<li>");
-							var input = $("<input>").attr({
-								"value" : productNumber,
-								"type" : "hidden",
-								"name" : "productNumber"
-							});
+							
 							var input = $("<input>").attr({
 								"value" : productNumber,
 								"type" : "hidden",
@@ -119,8 +117,6 @@
 			getSearchProduct(1)
 		})		
 		$("#pro_location ul li").on("click", "input[type=checkbox]", function(){	
-		    $('input[type=checkbox]').prop('checked', false);		
-		    $(this).prop("checked", true);
 			getSearchProduct(1)			
 		});
 	}); //end of getSearchProduct
@@ -128,6 +124,9 @@
 </head>
 <body>
 	<div id="contents">
+			<c:if test="${loginID eq 'admin' }">
+				<button id="btn">상품등록</button>
+			</c:if>
 		<h1>우리몰</h1>
 		<div id="pro_location">
 			<ul>
@@ -211,7 +210,7 @@
 						<input type="checkbox" id="cate07_04" value="노즈워크"><label
 							for="cate07_04">노즈워크</label>
 					</div></li>
-				<li><a>식기/급식수</a>
+				<li><a>식기/급수기</a>
 					<div>
 						<input type="checkbox" id="cate08_01" value="급식기/사료통"><label
 							for="cate08_01">급식기/사료통</label> <input type="checkbox"
@@ -251,7 +250,6 @@
 		</div>
 		<div id="show"></div>
 		<div id="paging"></div>
-		<button id="btn">상품등록</button>
 	</div>
 </body>
 </html>

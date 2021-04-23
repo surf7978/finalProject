@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class BeautyVO {
-	String beautyNumber;
+	String seq;
 	String name;
 	String optionName;
 	String price;

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.company.note.service.impl.NoteMapper">
+	
+	<!-- 한 반려견의 등록한 의료내역 조회 -->
+	<select id="getSearchNote" parameterType="NoteVO" resultType="NoteVO">
+		SELECT NOTENUMBER
+         	  , CATEGORY1
+          	  , CATEGORY2
+              , PRICE
+              , TO_CHAR(CALENDAR, 'yyyy-mm-dd') AS CALENDAR
+              , CONTENT
+              , ANIMALNUMBER
+              , TO_CHAR(CALENDAR2, 'yyyy-mm-dd') AS CALENDAR2
+		FROM NOTE 
+		WHERE ANIMALNUMBER=#{animalNumber}
+		ORDER BY NOTENUMBER
+	</select>
+	
+	<!-- 단건조회 -->
+	<select id="getNote" parameterType="NoteVO" resultType="NoteVO">
+		SELECT NOTENUMBER
+         	  , CATEGORY1
+          	  , CATEGORY2
+              , PRICE
+              , TO_CHAR(CALENDAR, 'yyyy-mm-dd') AS CALENDAR
+              , CONTENT
+              , ANIMALNUMBER
+              , TO_CHAR(CALENDAR2, 'yyyy-mm-dd') AS CALENDAR2
+		FROM NOTE 
+		WHERE NOTENUMBER=#{noteNumber}
+	</select>
+	
+	<!-- 의료내역 입력 -->
+	<insert id="insertNote" parameterType="NoteVO">
+		 insert into NOTE(
+		 		NOTENUMBER
+         	  , CATEGORY1
+          	  , CATEGORY2
+              , PRICE
+              , CALENDAR
+              , CONTENT
+              , ANIMALNUMBER
+              , CALENDAR2
+			) VALUES(
+			NOTE_SEQ.NEXTVAL
+			, #{category1}
+			, #{category2}
+			, #{price}
+			, #{calendar}
+			, #{content}
+			, #{animalNumber}
+            , sysdate
+			)
+	</insert>
+	
+	<!-- 의료내역 수정 -->
+	<update id="updateNote" parameterType="NoteVO">
+	 UPDATE NOTE
+	 <set> 
+		 <if test="category1 != null">			 CATEGORY1 = #{category1}</if>
+		 <if test="category2 != null">			, CATEGORY2 = #{category2}</if>
+		 <if test="price != null">			, PRICE = #{price}</if>
+		 <if test="calendar != null">			, CALENDAR = #{calendar}</if>
+		 <if test="content != null">		, CONTENT = #{content}</if>
+		</set>
+	 WHERE NOTENUMBER = #{noteNumber}
+	</update>
+	
+	<!-- 의료내역 삭제 -->
+	<delete id="deleteNote" parameterType="NoteVO">
+	DELETE FROM NOTE
+	WHERE NOTENUMBER = #{noteNumber}
+	</delete>
+	
+	<!-- 반려동물 삭제시 의료수첩 리스트 삭제 -->
+	<delete id="deleteAnimalNote" parameterType="NoteVO">
+	DELETE FROM NOTE
+	WHERE ANIMALNUMBER = #{animalNumber}
+	</delete>
+	
+	
+	<!-- 의료내역 건수 & 합계 출력 -->
+	<select id="getNoteCount" parameterType="NoteVO" resultType="NoteVO">
+		SELECT COUNT(NOTENUMBER) AS NOTENUMBER
+			, SUM(PRICE) AS PRICE 
+		FROM NOTE 
+		WHERE ANIMALNUMBER=#{animalNumber}
+	</select>
+</mapper>

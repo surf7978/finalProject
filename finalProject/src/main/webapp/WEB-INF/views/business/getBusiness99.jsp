@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,10 +54,10 @@
 					"phone":$("#phone").val()
 					},
 				success:function(data){
-					$("#searchPWResult").append("변경할 비밀번호<br>");
-					$("#searchPWResult").append("<input id='password' name='password' style='width:400px; border:1;'><br><br>");
-					$("#searchPWResult").append("<button onclick='changePW1()'>변 경</button>");
-					$("#searchPWResult").append("<button onclick='changePWCancel()'>취 소</button><br>");
+					$("#searchPWResult").append("<input type='password' id='password' name='password' style='width:400px; border:1;'  placeholder='변경할 비밀번호 입력'>");
+					$("#searchPWResult").append("<input type='password' id='passwordCheck' name='passwordCheck' style='width:400px; border:1;'  placeholder='변경할 비밀번호 확인'>");
+					$("#searchPWResult").append("<button type='button' onclick='changePW1()'>변 경</button>&nbsp;&nbsp;");
+					$("#searchPWResult").append("<button type='button' onclick='changePWCancel()'>취 소</button>");
 				}
 			});	
 		});
@@ -66,7 +66,11 @@
 <!-- 비밀번호 변경 -->
 <script>
 	function changePW1(){
-		location.href="changePW?memberId="+businessId.value+"&password="+password.value;
+		if(password.value==passwordCheck.value){
+			location.href="changePW?memberId="+businessId.value+"&password="+password.value;
+		}else{
+			alert("비밀번호가 일치하지 않습니다.")
+		}
 	}
 	function changePWCancel(){
 		$("#searchPWResult").empty();
@@ -106,13 +110,19 @@
 	}
 </script>
 <body>
-
-<br><br><br><input value="사업자 회원정보" style="font-size:40px; text-align:center; width:400px; border:none;" readonly>가입일 ${business.startDate}<br><br>
+<div style="width:60%;">
+<jsp:include page="../user/myPageSideBar.jsp" />
+<input value="사업자 회원정보" style="font-size:40px; text-align:center; width:400px; border:none;" readonly>가입일 ${business.startDate}<br><br>
 <form id="frm" name="frm" onsubmit="return formCheck()" action="updateBusiness99" method="post">
 		<table style="text-align:center;">
 			<tr>
 				<td><input value="아 이 디" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
 				<td><input id="businessId" name="businessId" value="${business.businessId}" style="width:400px;" readonly></td>
+				<td class="changePW"><input type="button" id="changePW" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="PW변경"></td>
+			</tr>
+			<tr>
+				<td>
+				<td colspan="2"><div id="searchPWResult"></div></td>
 			</tr>
 			<tr>
 				<td><input value="이 름" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
@@ -162,13 +172,25 @@
 		</table>
 		<br>
 		<button type="submit" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#e7ab3c;">수 정</button>
+		<!-- 
 		&nbsp;
 		<button type="reset" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#ff6347; color:white;">취 소</button>
+		 -->
 		&nbsp;
-		<button type="button" onclick="location.href='/finalProject'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
+		<button type="button" onclick="location.href='${pageContext.request.contextPath}'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
+	<br><br>
+	<!-- 
+	<c:if test="${loginID ne 'admin'}">
+		<a href="membershipCancel?ID=${business.businessId}">탈퇴</a>
+	</c:if>
+	<c:if test="${loginID eq 'admin'}">
+		<a href="deleteMember99?ID=${business.businessId}">탈퇴</a>
+	</c:if>
+	 -->
 	</form>
-	<a href="membershipCancel?ID=${business.businessId}">탈퇴</a>
-	<button id="changePW">비밀번호 변경</button>
-	<div id="searchPWResult"></div>
+</div>
 </body>
+<script>
+$("#businessCode").val("${business.businessCode }")
+</script>
 </html>
