@@ -18,16 +18,24 @@
 			locale: 'ko',
 			eventSources: [
 				{
-					url: 'getSearchReservationCalendar'
-				},
+					 url: 'getSearchReservationCalendar2'
+				
+				}
 			]
 		});
 		calendar.render();
 	});
 	
+	//페이징처리
+	function goPage(p){
+		page.value=p;
+		console.log(page.value)
+		searchFrm.submit();
+	}
 </script>
 </head>
 <body>
+<br><h3>예약내역</h3>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <form id="searchFrm" name="searchFrm">
@@ -40,7 +48,7 @@
 			<th>예약날짜</th>
 			<th>예약시간</th>
 			<th>예약상태</th>
-			<th>예약변경</th>
+			<th>예약하기</th>
 		</tr>
 		<c:forEach items="${reservation }" var="res">
 			<tr>
@@ -61,13 +69,6 @@
 		</c:forEach>
 	</table>
 	<my:paging paging="${paging}" jsFunc="goPage" />
-<script>
-	function goPage(p){
-		page.value=p;
-		console.log(page.value)
-		searchFrm.submit();
-	}
-</script>	
 	<br>
 	<div id='calendar' style="width: 800px"></div>
 </div>
