@@ -76,7 +76,6 @@
 </script>
 </head>
 <body>
-${list }
 	<div style="width: 60%;">
 		<div id="contents">
 			<h1>구매하기</h1>
@@ -92,7 +91,7 @@ ${list }
 							</tr>
 						</thead>
 						<c:forEach items="${list }" var="vo">
-						<input name="productNumberList" value="${vo.productNumber }">
+						<input name="productNumberList" type="hidden" value="${vo.productNumber }">
 						<c:set var="optionPrice" value="${fn:split(vo.optionPrice,',') }" />
 						<c:set var="count" value="${fn:split(vo.count,',') }" />
 						<tbody>

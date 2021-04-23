@@ -327,7 +327,7 @@ public class Controller3 {
 		}
 		buyService.insertCartBuy(padvo.getBuyList());
 		cartService.deleteCart(cvo);
-		return "getSearchPayAndDeliveryForm";
+		return "pay/successPay";
 	}
 	//장바구니 결제form
 	@RequestMapping("/cartPayInfoForm")
