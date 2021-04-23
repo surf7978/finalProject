@@ -8,7 +8,6 @@
 <title>Chart</title>
 <link href='resources/css/fullcalendar.css' rel='stylesheet' />
 <script src='resources/js/fullcalendar.js'></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <!-- start of calendar -->
 <script>
