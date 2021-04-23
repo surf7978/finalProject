@@ -12,7 +12,7 @@
 <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="hero-items owl-carousel">
-            <div class="single-hero-items set-bg" data-setbg="resources/img/hero-1.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/img/slider01.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">

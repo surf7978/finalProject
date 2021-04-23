@@ -104,6 +104,8 @@
 		FROM REVIEWRESERVATION
 		WHERE MEMBERID=#{memberId}
 		AND BISNUMBER=#{bisNumber}
+		AND REVIEWNUMBER IS NULL
+		ORDER BY RESERVATIONDATE
 	</select>
 
 	<!-- 예약하기 버튼눌러서 날짜선택시 Reservation DB update -->

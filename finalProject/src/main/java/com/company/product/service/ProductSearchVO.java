@@ -1,11 +1,13 @@
 package com.company.product.service;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ProductSearchVO extends ProductVO {
-	String search;
-	String searchValue;
+	String search; //검색
+	String searchValue; //검색값
 	// paging
 	Integer page = 1;  
 	Integer start = 1;
