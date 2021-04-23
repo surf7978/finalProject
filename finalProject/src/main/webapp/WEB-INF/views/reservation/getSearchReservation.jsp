@@ -19,7 +19,6 @@
 			eventSources: [
 				{
 					 url: 'getSearchReservationCalendar2'
-				
 				}
 			]
 		});
