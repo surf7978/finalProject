@@ -44,7 +44,7 @@
 		FROM RESERVATION
 		where memberid=#{memberId}
 		ORDER BY RESERVATIONNUMBER DESC
-		) A ) B WHERE RN BETWEEN #{start} AND #{end}
+		) A ) B WHERE RN BETWEEN #{start1} AND #{end1}
 	</select>
 
 	<!-- 캘린더 조회 for 회원 -->

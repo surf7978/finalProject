@@ -136,4 +136,12 @@
 		FROM adminView
 		ORDER BY seq DESC
 	</select>
+	
+	<select id="getAdminView" parameterType="cafeVO" resultType="cafeVO">
+		SELECT 
+			*
+		FROM adminView
+		ORDER BY seq DESC
+		WHERE CODE = #{code}
+	</select>
 </mapper>
