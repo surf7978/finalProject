@@ -176,8 +176,8 @@ public class Controller2 {
 		if(vo.getPage() == null) {
 			vo.setPage(1);
 		}
-		vo.setStart(paging.getFirst());
-		vo.setEnd(paging.getLast());
+		vo.setStart1(paging.getFirst());
+		vo.setEnd1(paging.getLast());
 		//전체페이지가 넘어가야 last를 구함
 		paging.setTotalRecord(reservationService.getCount(vo));
 		model.addAttribute("paging", paging);
