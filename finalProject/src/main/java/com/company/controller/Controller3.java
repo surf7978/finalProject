@@ -327,7 +327,7 @@ public class Controller3 {
 		}
 		buyService.insertCartBuy(padvo.getBuyList());
 		cartService.deleteCart(cvo);
-		return "pay/successPay";
+		return "getSearchPayAndDeliveryForm";
 	}
 	//장바구니 결제form
 	@RequestMapping("/cartPayInfoForm")
@@ -394,7 +394,7 @@ public class Controller3 {
 		PrintWriter writer = response.getWriter();
 		writer.println("<script>if(confirm(\"예약하시겠습니까\")==true){location.href=\"getSearchReservation\";"
 				+ "		}else{"
-				+ "	location.href=\"${pageContext.request.contextPath}\";"
+				+ "	location.href=\"getSearchPayAndDeliveryForm\";"
 				+ "		}	</script>");
 		writer.close();
 	}
