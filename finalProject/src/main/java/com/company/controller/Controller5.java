@@ -658,7 +658,16 @@ public class Controller5 {
 
 	// 마이페이지-사업자-실시간화장진료 페이지
 	@RequestMapping("/videoCall")
-	public String videoCall() {
+	public String videoCall(MemberVO mvo, BusinessVO bvo, Model model, HttpSession session) {
+		// ID값 조회 및 등록
+		String id = session.getAttribute("loginID").toString();
+		mvo.setMemberId(id);
+		bvo.setBusinessId(id);
+		// 조회
+		mvo = memberService.getMember(mvo);
+		bvo = businessService.getBusiness(bvo);
+		model.addAttribute("mvo", mvo);
+		model.addAttribute("bvo", bvo);
 		return "video/videoCall";
 	}
 
