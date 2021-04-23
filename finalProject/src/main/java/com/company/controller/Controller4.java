@@ -102,7 +102,41 @@ public class Controller4 {
 	}
 
 	// ###★★게시판에 관한 컨트롤러★★
+	
+	// 마이페이지-일반사용자-내가쓴글 출력
+	
+	@GetMapping("/getSearchBoardCategory199")
+	public String getSearchBoardCategory199(HttpSession session ,PagingVOCr4 vo, Model model ,
+			@RequestParam(value="nowPage", required=false)String nowPage ,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		// 건수
+		vo.setMemberId((String)session.getAttribute("loginID"));
+		int total = boardService.countBoard2(vo);
 
+		// 쿼리실행
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		vo.setMemberId((String)session.getAttribute("loginID"));
+		model.addAttribute("board", boardService.getSearchBoardCategory199(vo));
+		
+		model.addAttribute("paging", vo);	
+		
+		
+
+		return "myPage/getSearchBoardCategory199";
+	}
+	
+	
+	
 	//////////////////////////////////////////////////////////////
 	// 자유게시판 시작 (1번)
 	//////////////////////////////////////////////////////////////
@@ -791,12 +825,16 @@ public class Controller4 {
 			cntPerPage = "5";
 		}
 		
+		
+		// 건수
 		vo.setMemberId((String)session.getAttribute("loginID"));
 		int total = questionService.countQuestion4(vo);
 		
+		// 쿼리실행
 		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		vo.setMemberId((String)session.getAttribute("loginID"));
 		model.addAttribute("question", questionService.getSearchQuestion99(vo));
+		
 		
 		model.addAttribute("paging", vo);	
 		

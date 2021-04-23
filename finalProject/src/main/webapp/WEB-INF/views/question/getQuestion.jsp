@@ -40,9 +40,8 @@
 		
 	</table>
 	
-	<div id="content">
-		<p> <textarea rows="92px" cols="92px" style="border:none;" readonly="readonly">${vo.content} </textarea> </p>
-	</div>
+	<div>
+		<p> <textarea rows="10px" cols="92px" style="border:none;" readonly="readonly">${vo.content} </textarea> </p>
 	<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
 	 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
 	 user="final" password="a20210409A"/>
@@ -59,6 +58,7 @@
      <br><input class="send" type ="button" style="background-color:#ff6347; color:white;"  value="답변완료"><br><br>
      <textarea style="width:800px; height: 100px; resize: none;" readonly>${rs.rows[0].content }</textarea>
     </c:if>
+	</div>
  
 </body>
 <script>

@@ -80,6 +80,7 @@
 <br>
   
 </div>
+<div >
 	<div  style="display: block; text-align: right;">		
 		<c:if test="${paging.startPage != 1 }">
 			<a href="getSearchQuestion99?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
@@ -98,6 +99,7 @@
 			<a href="getSearchQuestion99?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
 		</c:if>
 	</div>  
+</div>
 	</div>
 </body>
 </html>

@@ -122,13 +122,28 @@
 		  			 		,#{memberId})
 	</insert>
 	
-	<!--  일반사용자 내가 쓴 글 조회 -->
+	<!--  일반사용자 내가 쓴 글 조회 페이징 기능 -->
 	<select id="getSearchBoardCategory199" resultType="boardVO"
         parameterType="boardVO">
-        SELECT * FROM BOARD
+      	SELECT *
+		FROM (
+		SELECT ROWNUM RN, A.*
+		FROM (
+        SELECT * 
+        FROM
+        BOARD
         WHERE MEMBERID = #{memberId}
         ORDER BY CALENDAR DESC
+        ) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
     </select>
+    <select id="countBoard2" resultType="int" parameterType="boardVO">
+		SELECT COUNT(*) 
+		FROM BOARD
+		WHERE memberId=#{memberId}
+	</select>
+    	<!--  일반사용자 내가 쓴 글 조회 총 게시글 갯수 출력 -->
     <!--#################################################################  -->
 	<!--#################################################################  -->
 	<!-- 리스트 갯수 -->
