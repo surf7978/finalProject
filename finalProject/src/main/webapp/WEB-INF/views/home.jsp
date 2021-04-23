@@ -123,7 +123,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8">
-                    	<!-- 
+                    	<!-- 버튼별 항목 리스트 출력 (보류 중)
                     <div class="filter-control">
                     	<script>
                     		$(function(){
