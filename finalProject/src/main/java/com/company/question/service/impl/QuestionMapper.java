@@ -60,5 +60,5 @@ public interface QuestionMapper {
 	public QuestionVO getQuestionProbis(QuestionVO vo);		//병원, 카페 등 상품 상세보기에서 상품문의글 단건조회
 
 	
-	public List<QuestionVO> getSearchQuestion99(PagingVOCr4 vo);	//마이페이지-유저-문의내역
+	public List<QuestionVO> getSearchQuestion99(PagingVOCr4 vo);	//마이페이지-유저-문의내역 
 }
