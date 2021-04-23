@@ -469,7 +469,7 @@ public class Controller1 {
 		}
 		hospitalService.updateHospital(vo);
 		
-		return "redirect:/";
+		return "redirect:/getSearchHospitalForm99";
 	}
 	
 	// 병원상품 삭제
