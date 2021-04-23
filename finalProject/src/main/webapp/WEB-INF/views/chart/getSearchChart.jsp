@@ -22,8 +22,6 @@
 </script>
 <!-- end of calendar -->
 
-<!-- end of calendar -->
-
 <!-- start of columnChart -->
 <script>
 	//loading
@@ -154,7 +152,7 @@
 	}//end of drawDonutChart
 </script>
 <!-- end of areaChart -->
-	
+
 <!-- start of pieChart -->
 <script>
 //loading
@@ -246,8 +244,8 @@ function openCalendar(){
 		<!-- end of searchForm -->
 		
 		<div id="columnChart" style="width: 40%; display: inline-block;"></div>
-		<div id="areaChart" style="width: 40%; display: inline-block;"></div>
 		<div id="donutChart"style="width: 40%; display: inline-block;"></div>
+		<div id="areaChart" style="width: 40%; display: inline-block;"></div>
 		<c:if test="${sessionScope.loginID =='admin'}">
 			<div id="pieChart" style="width: 40%; display: inline-block;"></div>
 		</c:if>

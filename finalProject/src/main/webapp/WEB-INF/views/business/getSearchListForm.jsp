@@ -45,7 +45,7 @@ a {
 					var location = idx.location;
 					var input = $("<input>").attr({
 						type : "checkbox",
-						value : location,
+						value : idx.value,
 						id : idx.value,
 						name:"searchLocation",
 						class: "location"
