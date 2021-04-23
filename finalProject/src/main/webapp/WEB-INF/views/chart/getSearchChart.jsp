@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +63,7 @@
                      colors: ['#1E90FF', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
       				 vAxis: {format:"#,###원", gridlines: { count: 10 } }
                      };
-      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      var chart = new google.visualization.ColumnChart(document.getElementById('columnChart'));
       chart.draw(data, options);
     }//end of drawColumnChart
 </script>
@@ -110,7 +111,7 @@
 </script>
 <!-- end of donutChart -->
 
-<!-- start of AreaChart -->
+<!-- start of areaChart -->
 <script>
 	//loading
 	google.charts.load('current', {'packages':['corechart']});
@@ -152,7 +153,66 @@
 	  chart.draw(data, options);
 	}//end of drawDonutChart
 </script>
-<!-- end of AreaChart -->
+<!-- end of areaChart -->
+	
+<!-- start of pieChart -->
+<script>
+//loading
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+// draws it.
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', '날짜');
+  data.addColumn('number', '구매상태');
+  var arr = [];
+  //ajax
+  $.ajax({
+  	url : "getAnimalChart",
+  	async :false,//동기식
+  	dataType : 'json',
+  	success : function(result){
+  		console.log(result)
+  		for (obj of result){//of = array, in = value
+  			//[ {},{} ] -> [ [],[] ]
+  			arr.push( [obj.KIND, obj.COUNT] );
+  		}//end of for
+  	}//end of success
+  })//end of ajax
+  
+  //DB데이터로 추가
+  data.addRows(arr);
+  
+  var rgb = [];
+  //rgb
+  $.ajax({
+	  url:"resources/js/rgb.json",
+	  dataType:"json",
+	  async :false,//동기식
+	  success:function(result){
+		  for(obj of result){
+		  	rgb.push(obj.hex)
+		  }//end of for
+	  }//end of success
+  })//end of ajax
+  console.log(rgb)
+  // Set chart options
+  var options = {'title':'견종 내역',
+                 'width':400,
+                 'height':300,
+                 //json data
+                 //1.json 데이터 호출
+                 //2.반복문으로 obj타입 인덱스 확인
+                 //3.hex값 호출
+                 colors: rgb,
+  				 vAxis: {format:"#,###", gridlines: { count: 10 } }
+                 };
+  var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+  chart.draw(data, options);
+}//end of drawDonutChart
+</script>
+<!-- end of pieChart -->
 
 <!-- start of settingFunction -->
 <script>
@@ -185,9 +245,12 @@ function openCalendar(){
 		</div>
 		<!-- end of searchForm -->
 		
-		<div id="chart_div" style="width: 60%; display: inline-block;"></div>
+		<div id="columnChart" style="width: 40%; display: inline-block;"></div>
 		<div id="areaChart" style="width: 40%; display: inline-block;"></div>
 		<div id="donutChart"style="width: 40%; display: inline-block;"></div>
+		<c:if test="${sessionScope.loginID =='admin'}">
+			<div id="pieChart" style="width: 40%; display: inline-block;"></div>
+		</c:if>
 	</div>
 	<!-- end of wrap -->
 </body>
