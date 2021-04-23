@@ -118,7 +118,7 @@ ul li:hover {
 <body>
 	<br><br><br>
 	<form action="insertReservation" method="post">
-		<input type="text" id="pndNumber" name="pndNumber" value="${reservation.pndNumber}"> 
+		<input type="hidden" id="pndNumber" name="pndNumber" value="${reservation.pndNumber}"> 
 			날짜 선택:<input type="text" id="reservationDate" name="reservationDate">
 		<br> 시간 선택:<input type="text" id="reservationTime" name="reservationTime" readonly="readonly"> <br> <br>
 		<div id="selectTime">

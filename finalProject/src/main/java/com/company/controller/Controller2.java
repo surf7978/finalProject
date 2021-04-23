@@ -162,7 +162,7 @@ public class Controller2 {
 		payAndDeliveryService.updateReservation2(vo1);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('예약되었습니다');opener.opener.location.reload();opener.location.reload();window.close();</script>");
+		writer.println("<script>alert('예약되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
 	// 예약하기 날짜 페이지 호출
@@ -181,7 +181,7 @@ public class Controller2 {
 		payAndDeliveryService.updateReservation2(vo1);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('예약되었습니다');opener.location.reload();window.close();</script>");
+		writer.println("<script>alert('예약되었습니다');opener.opener.location.reload();opener.location.reload();window.close();</script>");
 		writer.close();
 	}
 
@@ -391,6 +391,7 @@ public class Controller2 {
 	@RequestMapping("/getHospital")
 	public String getHospital(HospitalVO vo, Model model, String seq, HttpSession session) {
 		vo.setSeq(seq);
+		System.out.println(vo+"1111111111111111111111111111111111111111111111111");
 		model.addAttribute("hospital", hospitalService.getHospital(vo));
 		if (session.getAttribute("loginID") != null) {
 			ReservationVO vo1 = new ReservationVO();
@@ -449,9 +450,12 @@ public class Controller2 {
 
 	// 상세조회에서 사업자 구매평 등록페이지 이동
 	@GetMapping("/insertReview")
-	public String insertReview(ReservationVO vo, Model model, HttpSession session) {
+	public String insertReview(ReservationVO vo, Model model, HttpSession session, MemberVO mvo) {
+		String loginID = (String) session.getAttribute("loginID");
 		vo.setMemberId((String) session.getAttribute("loginID"));
+		mvo.setMemberId(loginID);
 		model.addAttribute("reservation", reservationService.getViewReservation(vo));
+		model.addAttribute("name", memberService.getMember(mvo).getName());
 		return "empty/reviewAndQuestion/insertReview";
 	}
 
@@ -465,6 +469,8 @@ public class Controller2 {
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
+	 
+	
 	// 상세조회에서 상품문의 등록페이지 이동
 	@GetMapping("/insertQuestionBusi")
 	public String insertQuestionBusi(HospitalVO vo, MemberVO vo1, String seq, String businessNumber, Model model,
