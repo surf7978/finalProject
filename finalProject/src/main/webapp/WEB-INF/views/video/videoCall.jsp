@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,12 +51,20 @@ function disConnect(){
 					<td>${sessionScope.loginID}</td>
 				</tr>
 				<tr>
-					<td>사업체명</td>
-					<td>${vo.businessCompanyName}</td>
+					<td>이름</td>
+					<td>${mvo.name}</td>
+					<c:if test="${sessionScope.loginID == admin}">
+						<td>사업체명</td>
+						<td>${bvo.businessCompanyName}</td>
+					</c:if>
 				</tr>
 				<tr>
-					<td>사업자주소</td>
-					<td>${vo.address}${vo.address2}</td>
+					<td>주소</td>
+					<td>${mvo.address}${mvo.address2}</td>
+					<c:if test="${sessionScope.loginID == admin}">
+						<td>사업자주소</td>
+						<td>${bvo.address}${bvo.address2}</td>
+					</c:if>
 				</tr>
 			</table>
 			<button type="button" id="btnConnect">연결</button>
