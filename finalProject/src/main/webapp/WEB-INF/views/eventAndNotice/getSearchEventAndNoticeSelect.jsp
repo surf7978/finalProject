@@ -17,6 +17,7 @@
 </style>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
 	function getSearchEventAndNoticeSelect(p) {
 		/* 리스트 ajax */
@@ -59,7 +60,7 @@
 							var strong = $("<strong>").text(
 									response[i].title);
 							var p = $("<p>")
-									.text(response[i].startDate );
+									.text(response[i].startDate);
 							$(nav).append(strong, p);
 							$(li).append(input, div, nav);
 							$(ul).append(li);
@@ -113,9 +114,6 @@
 </head>
 <body> <br>
 	<div id="contents">
-			<c:if test="${loginID eq 'admin' }">
-				<button class="write" id="btn">이벤트 등록</button>
-			</c:if>
 		<h1>이벤트</h1>
 		<!-- 
 		<div id="pro_location">
@@ -124,5 +122,8 @@
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>
+			<c:if test="${loginID eq 'admin' }">
+				<button class="write" id="btn">이벤트 등록</button>
+			</c:if>
 </body>
 </html>

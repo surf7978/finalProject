@@ -34,7 +34,7 @@ public class ReservationServiceimpl implements ReservationService{
 		return ReservationMapper.deleteReservation(vo);
 	}
 	@Override
-	public ReservationVO getViewReservation(ReservationVO vo) {
+	public List<ReservationVO> getViewReservation(ReservationVO vo) {
 		return ReservationMapper.getViewReservation(vo);
 	}
 	// 사업자번호로 예약리스트 조회
@@ -61,6 +61,10 @@ public class ReservationServiceimpl implements ReservationService{
 	@Override
 	public int insertReview2(ReservationVO vo) {
 		return ReservationMapper.insertReview2(vo);
+	}
+	@Override
+	public int getCount(ReservationVO vo) {
+		return ReservationMapper.getCount(vo);
 	}
 
 }

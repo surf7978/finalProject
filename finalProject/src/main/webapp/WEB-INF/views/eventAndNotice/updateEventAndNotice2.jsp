@@ -12,6 +12,7 @@
 	function check() {
 		var A = confirm("수정하시겠습니까?");
 		if (A) {
+			alert("수정 되었습니다.");
 			return true;
 		} else {
 			return false;
@@ -83,7 +84,7 @@ table.table2 td {
 		<h1>공지사항</h1>
 			<form id="frm" name="frm" onsubmit="return check()"
 				action="updateEventAndNotice2?eanNumber=${getEventAndNotice.eanNumber}"
-				method="post">
+				method="post" encType="multipart/form-data">
 
 
 				<table
@@ -106,7 +107,10 @@ table.table2 td {
 									<td><input type=text id="title" name="title" size="60"
 										value="${getEventAndNotice.title}"></td>
 								</tr>
-
+							    <tr>
+								<td><input value="이 미 지" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+								<td><input type="file" id="image" name="uploadFile" size="100%"  multiple="multiple"></td>		
+								</tr>
 								<tr>
 									<td><input value="내 용"
 										style="font-size: 20px; text-align: center; width: 100px; border: none;"
@@ -123,7 +127,7 @@ table.table2 td {
 								<input class="send" type="submit" value="수정"> <input
 									class="reset" type="reset" value="취소"> <input
 									class="back" type="button" value="뒤로가기"
-									onclick="location.href='getSearchEventAndNotice'">
+									onclick="location.href='getEventAndNotice2?eanNumber=${getEventAndNotice.eanNumber}'">
 
 							</div>
 

@@ -163,6 +163,12 @@ public class QuestionServiceimpl implements QuestionService {
 	public QuestionVO getQuestionProbis(QuestionVO vo) {
 		return QuestionMapper.getQuestionProbis(vo);	
 	}
+	
+	//쇼핑몰 상품 상세보기에서 상품문의글 상품문의글 등록
+	@Override
+	public int insertQuestionPro(QuestionVO vo) {
+		return QuestionMapper.insertQuestionPro(vo);
+	}
 
 	
 	// 레코드
@@ -175,7 +181,7 @@ public class QuestionServiceimpl implements QuestionService {
 
 	//마이페이지-유저-문의내역
 	@Override
-	public List<QuestionVO> getSearchQuestion99(QuestionVO vo) {
+	public List<QuestionVO> getSearchQuestion99(PagingVOCr4 vo) {
 		return QuestionMapper.getSearchQuestion99(vo);
 	}
 
@@ -197,6 +203,11 @@ public class QuestionServiceimpl implements QuestionService {
 	public int countQuestion3() {
 		return QuestionMapper.countQuestion3();
 	}
+	@Override
+	public int countQuestion4(PagingVOCr4 vo) {
+		return QuestionMapper.countQuestion4(vo);
+	}
+
 
 	@Override
 	public List<QuestionVO> getSearchQuestionSelect1(PagingVOCr4 vo) {
@@ -210,6 +221,7 @@ public class QuestionServiceimpl implements QuestionService {
 	public List<QuestionVO> getSearchQuestionSelect3(PagingVOCr4 vo) {
 		return QuestionMapper.getSearchQuestionSelect3(vo);
 	}
+	
 	
 	
 	

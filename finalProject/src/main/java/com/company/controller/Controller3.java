@@ -2,6 +2,8 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +22,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.abandonment.common.AbandonmentAPI;
+import com.company.bCart.service.BCartService;
 import com.company.business.service.BusinessService;
 import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
+import com.company.cart.service.CartService;
+import com.company.cart.service.CartVO;
 import com.company.common.FileRenamePolicy;
 import com.company.common.Paging;
 import com.company.hospital.service.HospitalService;
@@ -40,7 +44,6 @@ import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
 import com.company.reservation.service.ReservationService;
 import com.company.reservation.service.ReservationVO;
-import com.google.gson.JsonArray;
 
 @Controller
 public class Controller3 {
@@ -63,6 +66,11 @@ public class Controller3 {
 	HospitalService hospitalService;
 	@Autowired
 	BusinessService businessService;
+	@Autowired
+	BCartService bCartService;
+	// 장바구니
+	@Autowired
+	CartService cartService;
 
 	// 유기동물 API
 	@RequestMapping("/getAban")
@@ -106,10 +114,10 @@ public class Controller3 {
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 1. 페이지 설정
 		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
-		paging.setPageSize(10); // 보이는 페이지 번호
+		paging.setPageSize(3); // 보이는 페이지 번호
 		// 2.초기페이지 설정
-		if (paging.getPage() == null)
-			paging.setPage(1);
+		if (vo.getPage() == null)
+			vo.setPage(1);
 		// 3. 값 추가
 		paging.setTotalRecord(productService.getCount(vo));
 		vo.setStart(paging.getFirst());
@@ -122,7 +130,7 @@ public class Controller3 {
 	}// end of getSearchProduct
 
 	// 쇼핑몰 상세보기
-	@RequestMapping("/getProduct")
+	@RequestMapping("/getProduct22")
 	public String getProduct(ProductVO vo, Model model, String productNumber) {
 		model.addAttribute("product", productService.getProduct(vo));
 		return "product/getProduct";
@@ -164,6 +172,7 @@ public class Controller3 {
 			if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
 				String filename = image.getOriginalFilename();
 				// 파일명 중복체크 -> rename
+				new File(path + request.getParameter(filename)).delete();
 				File rename = FileRenamePolicy.rename(new File(path, filename));
 				// 업로드된 파일명
 				// rename.getName()
@@ -304,26 +313,63 @@ public class Controller3 {
 		bvo.setProductNumber(vo.getProductNumber());
 		buyService.insertBuy2(bvo);
 		return "pay/successPay";
+	}	
+	
+	// 쇼핑몰 결제시 다중insert
+	@RequestMapping("/insertCartPayProduct")
+	public String insertCartPayProduct(HttpSession session,PayAndDeliveryVO padvo,ProductVO vo, String category1,CartVO cvo) {
+		String id = session.getAttribute("loginID").toString();
+		cvo.setMemberId(id);// 조회 후 값 넘김
+		padvo.setCategory(category1);
+		padService.insertPayAndDelivery2(padvo);
+		for(BuyVO bvo: padvo.getBuyList()) {	
+			bvo.setPndNumber(padvo.getPndNumber());
+		}
+		buyService.insertCartBuy(padvo.getBuyList());
+		cartService.deleteCart(cvo);
+		return "getSearchPayAndDeliveryForm";
 	}
-	
-	
-	//장바구니 결제시 다중insert
+	//장바구니 결제form
+	@RequestMapping("/cartPayInfoForm")
+	public String cartPayInfoForm(MemberVO mvo, Model model, CartVO vo, HttpSession session,String[] cartNumbers, String resultPrice) {
+		// 세션 ID값 조회
+		String id = session.getAttribute("loginID").toString();
+		vo.setCartNumbers(cartNumbers);
+		// ID값 담음
+		vo.setMemberId(id);// 조회 후 값 넘김
+		List<CartVO> list = bCartService.getSearchTotalCart(vo);
+		model.addAttribute("list",list);	
+		model.addAttribute("resultPrice",resultPrice);
+		model.addAttribute("member", memberService.getMember(mvo));
+		return "pay/cartPayInfoForm";
+	}
+	//장바구니 결제시 다중insert form
 	@RequestMapping("/insertCartBuy")
-	public String insertCartBuy(List<BuyVO> list){
-		buyService.insertCartBuy(list);
-		return "pay/successPay";		
+	public String insertCartBuy(HttpSession session, CartVO cvo,ProductVO vo,BuyVO bvo, Model model,String name){
+		String id = session.getAttribute("loginID").toString();
+		cvo.setMemberId(id);// 조회 후 값 넘김
+		model.addAttribute("bvo", bvo);
+		bvo.setFromPerson(name);
+		model.addAttribute("name", bvo.getFromPerson());
+		List<CartVO> list = bCartService.getSearchTotalCart(cvo);
+		List<ProductVO> prolist = productService.cartGetProduct(vo);
+		model.addAttribute("list",list);	
+		model.addAttribute("prolist", prolist);
+		model.addAttribute("vo", vo);
+		return "pay/insertCartBuy";		
 	}
-	
 	// 사업체 결제폼
 	@RequestMapping("/ReserPayInfoForm")
 	public String ReserPayInfoForm(Model model, String resultPrice, String count, IntegratedVO vo,
-			HttpSession session) {
+			HttpSession session,String seq) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		// seq값 2자리 잘라서 code값에 넣기
 		vo.setCode(vo.getSeq().substring(0, 2));
 		// 코드값 -> 테이블명 변환
 		seqConversion(vo);
 		map.put("count", count);
 		map.put("resultPrice", resultPrice);
+		vo.setSeq(seq);
 		vo = integratedService.getIntegrated(vo);
 		// 제품 불러오기
 		model.addAttribute("vo", vo);
@@ -340,11 +386,17 @@ public class Controller3 {
 
 	// 사업체 결제시 insert
 	@RequestMapping("/ReserinsertPayProduct")
-	public String ReserinsertPayProduct(PayAndDeliveryVO padvo, ReservationVO rvo) {
+	public void ReserinsertPayProduct(PayAndDeliveryVO padvo, ReservationVO rvo, HttpServletResponse response) throws IOException {
 		padService.insertPayAndDelivery2(padvo);
 		rvo.setPndNumber(padvo.getPndNumber());
 		rsvService.insertPayReservation(rvo);
-		return "pay/successPay";
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>if(confirm(\"예약하시겠습니까\")==true){location.href=\"getSearchReservation\";"
+				+ "		}else{"
+				+ "	location.href=\"getSearchPayAndDeliveryForm\";"
+				+ "		}	</script>");
+		writer.close();
 	}
 
 	// 병원 결제form

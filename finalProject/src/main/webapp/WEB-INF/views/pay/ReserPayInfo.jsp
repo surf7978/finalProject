@@ -35,27 +35,19 @@
 		window.history.go(-3);
 	}).done(function(data) {
 		//결제가 정상적으로 완료되면 수행됩니다
-		//payFrm.submit();		
-		if(confirm("예약하시겠습니까")==true){
-			location.href="getSearchReservation?memberId=${loginID}";				
-		}else{
-			location.href="/finalProject";
-		}	
-		$("#frm").submit();
-		window.close();
-		console.log(data);
-		
+		//payFrm.submit();	
+		$("#frm").submit();	
 	});
 </script>
 </head>
 <body>
 	<form name="frm" id="frm" action="ReserinsertPayProduct" method="post">
-		<input value="${pay.bisNumber }" name="bisNumber">
-		<input name="category">
-		<input name="optionName" value="${pay.optionName }">
-		<input name="businessNumber" value="${pay.businessNumber }">
-		<input name="memberId" value="${loginID}"> 
-		<input name="sumPrice" value="${pay.resultPrice }"> 
+		<input value="${pay.bisNumber }" type="" name="bisNumber">
+		<input name="category" type="">
+		<input name="optionName" type="" value="${pay.optionName }">
+		<input name="businessNumber" type="" value="${pay.businessNumber }">
+		<input name="memberId" type="" value="${loginID}"> 
+		<input name="sumPrice" type="" value="${pay.resultPrice }"> 
 	</form>
 </body>
 </html>

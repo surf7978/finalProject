@@ -1,19 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>일반회원의 구매내역 리스트</title>
 <link rel="stylesheet" href="resources/css/style4.css" type="text/css">
+<link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 </head>
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <h3>구매내역 리스트</h3><br>
+<form id="searchFrm" name="searchFrm">
+<input type="hidden" id="page" name="page" value="1">
+</form>
 <table class="table1">
 	<tr>
 		<th>구매번호</th>
@@ -67,7 +72,9 @@
 		<td>
 		<c:if test="${pad.category != '70' }">
 		<c:if test="${pad.buyState !='환불완료' }">
-			<button type="button" class="updateReservationBtn" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','updateReservation','width=550, height=500')">예약하기</button> 
+		<c:if test="${pad.buyState !='예약완료' }">
+			<button type="button" class="insertReservationBtn" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','insertReservation','width=500, height=500')">예약하기</button>
+		</c:if>
 		</c:if>
 		</c:if>
 			<c:if test="${pad.category eq '70' }">
@@ -78,16 +85,18 @@
 				<button type="button" onclick="dview()" class="dviewBtn">배송조회</button>
 		</c:if>
 		</c:if>
-		</td>
-		
-		
+		</td>		
 	</tr>
 	</c:forEach>
 </table>
-<br/>
-<button type="button" class="getSearchReservation" onclick="location.href='getSearchReservation?memberId=${loginID}'">캘린더조회</button>
-
-		
+<my:paging paging="${paging}" jsFunc="goPage" />
+<script>
+	function goPage(p){
+		page.value=p;
+		console.log(page.value)
+		searchFrm.submit();
+	}
+</script>	
 <script>
 	$(function(){
 		$("#getSearchReservation").on("click", function(){

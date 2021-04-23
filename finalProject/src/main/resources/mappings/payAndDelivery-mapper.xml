@@ -7,10 +7,17 @@
 	<select id="getCount" resultType="int">
 		SELECT COUNT(*)
 		FROM PAYANDDELIVERY
+		WHERE MEMBERID=#{memberId}
+	</select>
+	
+	<select id="getCount99" resultType="int">
+		SELECT COUNT(*)
+		FROM PAYANDDELIVERY
 	</select>
 	
 	<!-- 구매내역리스트 조회 -->
 	<select id="getSearchPayAndDelivery" resultType="PayAndDeliveryVO">
+	SELECT B.* FROM ( SELECT ROWNUM RN, A.* FROM (
 	SELECT PNDNUMBER
 	, CATEGORY
 	, COURIERCOMPANY
@@ -21,7 +28,8 @@
 	, BUYSTATE 
 	FROM PAYANDDELIVERY
 	WHERE MEMBERID=#{memberId}
-	ORDER BY PNDNUMBER
+	ORDER BY PNDNUMBER DESC
+	) A ) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 예약하기 버튼눌러서 날짜선택시 PAYANDDELIVERY DB update -->
@@ -33,9 +41,18 @@
 	
 	<!-- 관리자용 구매내역리스트 조회 -->
 	<select id="getSearchPayAndDelivery99" resultType="PayAndDeliveryVO">
-	SELECT *
+	SELECT B.* FROM ( SELECT ROWNUM RN, A.* FROM (
+	SELECT PNDNUMBER
+	, CATEGORY
+	, COURIERCOMPANY
+	, PAYDATE
+	, INVOICENUMBER
+	, TO_CHAR(SUMPRICE, '999,999,999') AS SUMPRICE
+	, MEMBERID
+	, BUYSTATE 
 	FROM PAYANDDELIVERY
-	ORDER BY PNDNUMBER
+	ORDER BY PNDNUMBER DESC
+	) A ) B WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 관리자의 배송정보 입력 -->	
@@ -62,26 +79,23 @@
 	</select>
 
 	<!-- 결제내역 차트용 -->
-	<!-- 일,월,년별합계 -->
-	<select id="dailyTotal" resultType="map">
+	<!-- 컬럼차트 -->
+	<select id="getColumnChart" resultType="map">
+	SELECT PAYDATE,SUM(SUMPRICE) SUM
+	FROM(
 		SELECT
-		TO_CHAR(PAYDATE,
-			<!-- 기본값:일별조회 -->
-			<if test="search == 'daily'">
-				'yyyy-mm-dd'		
-			</if>
-			<!-- 월별조회 -->
-			<if test="search == 'monthly'">
-				'yyyy-mm'		
-			</if>
-			<!-- 년별조회 -->
-			<if test="search == 'years'">
-				'yyyy'		
-			</if>
-		) paydate, sum(SUMPRICE) sumprice
+		TO_CHAR(PAYDATE,'yyyy-mm') paydate, sum(SUMPRICE) sumprice
 		FROM PAYANDDELIVERY
-		WHERE businessNumber = #{businessNumber}
+		<!-- 사업자 -->
+		<if test="businessNumber !=null">
+			WHERE businessNumber = #{businessNumber}
+		</if>
+		<!-- 관리자 -->
+		<if test="category == 70">
+			WHERE CATEGORY = 70
+		</if>
 		
+		<!-- 캘린더용 -->
 		<if test="startDate !=null and startDate !=''">
 			AND PAYDATE BETWEEN TO_DATE(#{startDate},'yyyy-mm-dd')
 		</if>		
@@ -91,25 +105,42 @@
 		AND (BUYSTATE = '결제완료'
 		OR BUYSTATE = '예약완료')
 		GROUP BY PAYDATE
+		)
+		GROUP BY PAYDATE
 		ORDER BY PAYDATE
 	</select>
+	
 	<!-- 도넛차트 -->
 	<select id="getDonutChart" resultType="map">
 	SELECT BUYSTATE ,COUNT(BUYSTATE) COUNT
 	FROM PAYANDDELIVERY
-	WHERE BUSINESSNUMBER = #{businessNumber}
+	<!-- 관리자 -->
+	<if test="businessNumber != null">
+		WHERE BUSINESSNUMBER = #{businessNumber}
+	</if>
+	<!-- 사업자 -->
+	<if test="category ==70">
+   		WHERE CATEGORY = 70
+   	</if>
 	GROUP BY BUYSTATE
 	</select>
+	
 	<!-- 비교차트 -->
 	<select id="getAreaChart" resultType="map">
-	SELECT BUYSTATE,SUM(SUMPRICE) SUM
-	FROM(
-   		SELECT CASE WHEN BUYSTATE = '예약완료' OR BUYSTATE ='결제완료' THEN 'SALL' 
-        WHEN BUYSTATE = '환불완료' OR BUYSTATE ='반품완료' THEN 'EXPENSES' 
-        END BUYSTATE, SUMPRICE
-    	FROM PAYANDDELIVERY
-    	WHERE BUSINESSNUMBER = '206-81-87531'
-    	)
-	GROUP BY BUYSTATE;
+   	SELECT TO_CHAR(PAYDATE,'YYYY-MM') PAYDATE, 
+   	SUM (CASE WHEN BUYSTATE = '예약완료' OR BUYSTATE ='결제완료' THEN SUMPRICE ELSE 0 END) SALES,
+	SUM (CASE WHEN BUYSTATE = '환불완료' OR BUYSTATE ='반품완료' THEN SUMPRICE ELSE 0 END) EXPENSES 
+    FROM PAYANDDELIVERY
+    	<!-- 사업자 -->
+    	<if test="businessNumber != null">
+	    	WHERE BUSINESSNUMBER = #{businessNumber}
+    	</if>
+    	<!-- 관리자 -->
+    	<if test="category == 70">
+    		WHERE CATEGORY = 70
+    	</if>
+	GROUP BY TO_CHAR(PAYDATE,'YYYY-MM')
+	ORDER BY PAYDATE
 	</select>
+	
 </mapper>

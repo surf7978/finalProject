@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.company.animal.service.AnimalService;
+import com.company.animal.service.AnimalVO;
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
 import com.company.bCart.service.BCartService;
@@ -35,6 +37,8 @@ import com.company.common.Paging;
 import com.company.integrated.service.IntegratedSearchVO;
 import com.company.integrated.service.IntegratedService;
 import com.company.integrated.service.IntegratedVO;
+import com.company.member.service.MemberService;
+import com.company.member.service.MemberVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
 import com.company.question.service.QuestionService;
@@ -65,46 +69,47 @@ import com.company.review.service.ReviewVO;
  * 21.04.17 장바구니 5차(하단 총액부분)
  * 21.04.19 장바구니 6차 수정(단건 삭제 ok, 여러건 삭제, 전체합계금액, 데이터 값 정상 출력),결제내역차트 1차 수정
  * 21.04.20 결제내역차트 1차 수정 
- * 
+ * 21.04.22 차트 최종수정
+ * 21.04.23 화상통화 1차 완료
  */
 @Controller
 public class Controller5 {
-
+	// 사업자
 	@Autowired
 	BusinessService businessService;
-
+	// 질문
 	@Autowired
 	QuestionService questionService;
-
+	// 답변
 	@Autowired
 	AnswerService answerService;
-
+	// 카페
 	@Autowired
 	CafeService cafeService;
-
 	// 사업체 통합
 	@Autowired
 	IntegratedService integratedService;
-
 	// 장바구니
 	@Autowired
 	CartService cartService;
-
 	@Autowired
 	BCartService bCartService;
-
+	// 예약
 	@Autowired
 	ReservationService reservationService;
-
+	// 리뷰
 	@Autowired
 	ReviewService reviewService;
 	// 결제
 	@Autowired
 	PayAndDeliveryService payAndDeliveryService;
+	// 맴버
+	@Autowired
+	MemberService memberService;
+	// 동물정보
+	@Autowired
+	AnimalService animalService;
 
-	// end of beans
-
-	// start of business
 	// 마이페이지-사업자-본인정보 페이지
 	@GetMapping("/getBusiness")
 	public String getBusiness() {
@@ -179,7 +184,6 @@ public class Controller5 {
 	}// end of getSearchQuestion
 		// end of business
 
-	// start of question
 	// 마이페이지-사업자-문의내역 단건조회
 	@RequestMapping("/getQuestion")
 	public String getQuestion(QuestionVO vo, Model model) {
@@ -189,9 +193,7 @@ public class Controller5 {
 		model.addAttribute("vo", vo);
 		return "question/getQuestion";
 	}// end of getQuestion
-		// end of question
 
-	// start of answer
 	// 마이페이지-사업자-답변 등록 페이지
 	@GetMapping("/insertAnswer")
 	public String insertAnswer(QuestionVO vo, Model model) {
@@ -295,7 +297,6 @@ public class Controller5 {
 	}
 
 	// 사업자-통합리스트
-	//
 	@GetMapping("/getSearchList1")
 	@ResponseBody
 	public Map<String, Object> getSearchList1(CafeSearchVO vo, Paging paging) {
@@ -352,7 +353,7 @@ public class Controller5 {
 
 		return "business/getSearchInfo";
 	}
-
+	
 	// 사업자-통합 등록 폼
 	@GetMapping("/insertIntegratedForm")
 	public String insertIntegratedForm() {
@@ -403,7 +404,6 @@ public class Controller5 {
 	}// end of insertIntegrated
 
 	// 사업자-게시글 관리 CRUD
-
 	// 사업자-게시글 관리 수정 요청
 	@GetMapping("/updateIntegrated")
 	public void updateIntegrated(IntegratedVO vo, Model model, HttpSession session) {
@@ -420,7 +420,7 @@ public class Controller5 {
 		integratedService.updateIntegrated(vo);
 	}
 
-	// 사업자-게시글 관리 삭제
+	// 삭제기능
 	@RequestMapping("/deleteIntegrated")
 	@ResponseBody
 	public int deleteIntegrated(IntegratedVO vo, BusinessVO bvo, HttpSession session) throws Exception {
@@ -553,32 +553,51 @@ public class Controller5 {
 	}
 
 	// 마이페이지-사업자-통계 데이터
-	@RequestMapping("/getSearchChartData")
+	@RequestMapping("/getColumnChart")
 	@ResponseBody
-	public List<Map<String, Object>> getChartData(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, Object>> getSearchColumnChart(PayAndDeliveryVO vo, BusinessVO bvo, MemberVO mvo,
+			HttpSession session) {
 		// session ID 조회
 		String id = session.getAttribute("loginID").toString();
 		// ID값 분배
 		bvo.setBusinessId(id);
+		// 관리자인 경우
+		if (id.equals("admin")) {
+			mvo.setMemberId(id);
+			mvo = memberService.getMember(mvo);
+			vo.setCategory("70");
+			List<Map<String, Object>> map = payAndDeliveryService.getColumnChart(vo);
+			return map;
+		}
 		// DB 데이터 조회
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
 		vo.setCategory(bvo.getBusinessCode());
+		// 조회 후 사업자 번호 분배
 		vo.setBusinessNumber(bvo.getBusinessNumber());
 		// 쿼리 결과 호출
 		// 일별 합계
-		List<Map<String, Object>> map = payAndDeliveryService.dailyTotal(vo);
+		List<Map<String, Object>> map = payAndDeliveryService.getColumnChart(vo);
 		return map;
 	}
 
 	// 마이페이지-사업자-통계 데이터2(donut)
 	@RequestMapping("/getDonutChart")
 	@ResponseBody
-	public List<Map<String, Object>> getDonutChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, Object>> getDonutChart(PayAndDeliveryVO vo, BusinessVO bvo, MemberVO mvo,
+			HttpSession session) {
 		// session ID 조회
 		String id = session.getAttribute("loginID").toString();
 		// ID값 분배
 		bvo.setBusinessId(id);
+		// 관리자인 경우
+		if (id.equals("admin")) {
+			mvo.setMemberId(id);
+			mvo = memberService.getMember(mvo);
+			vo.setCategory("70");
+			List<Map<String, Object>> map = payAndDeliveryService.getDonutChart(vo);
+			return map;
+		}
 		// DB 데이터 조회
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
@@ -593,11 +612,20 @@ public class Controller5 {
 	// 마이페이지-사업자-통계 데이터3(areaChart)
 	@RequestMapping("/getAreaChart")
 	@ResponseBody
-	public List<Map<String, Object>> getAreaChart(PayAndDeliveryVO vo, BusinessVO bvo, HttpSession session) {
+	public List<Map<String, Object>> getAreaChart(PayAndDeliveryVO vo, BusinessVO bvo, MemberVO mvo,
+			HttpSession session) {
 		// session ID 조회
 		String id = session.getAttribute("loginID").toString();
 		// ID값 분배
 		bvo.setBusinessId(id);
+		// 관리자인 경우
+		if (id.equals("admin")) {
+			mvo.setMemberId(id);
+			mvo = memberService.getMember(mvo);
+			vo.setCategory("70");
+			List<Map<String, Object>> map = payAndDeliveryService.getAreaChart(vo);
+			return map;
+		}
 		// DB 데이터 조회
 		bvo = businessService.getBusiness(bvo);
 		// 조회 후 코드값 분배
@@ -608,7 +636,32 @@ public class Controller5 {
 		List<Map<String, Object>> map = payAndDeliveryService.getAreaChart(vo);
 		return map;
 	}
+
+	// 마이페이지-사업자-통계 데이터4(pieChart)
+	@RequestMapping("/getAnimalChart") // 관리자만
+	@ResponseBody
+	public List<Map<String, Object>> getAnimalChart(PayAndDeliveryVO vo, AnimalVO avo, HttpSession session) {
+		// session ID 조회
+		String id = session.getAttribute("loginID").toString();
+		// ID값 분배
+		List<Map<String, Object>> map = animalService.getAnimalChart(avo);
+		return map;
+	}
+
 	// 마이페이지-사업자-실시간화장진료 페이지
+	@RequestMapping("/videoCall")
+	public String videoCall(MemberVO mvo, BusinessVO bvo, Model model, HttpSession session) {
+		// ID값 조회 및 등록
+		String id = session.getAttribute("loginID").toString();
+		mvo.setMemberId(id);
+		bvo.setBusinessId(id);
+		// 조회
+		mvo = memberService.getMember(mvo);
+		bvo = businessService.getBusiness(bvo);
+		model.addAttribute("mvo", mvo);
+		model.addAttribute("bvo", bvo);
+		return "video/videoCall";
+	}
 
 	// 공통
 	// 세션 및 busCode 변환
@@ -624,6 +677,8 @@ public class Controller5 {
 		// 3. 코드값 변환
 		if (vo.getCode().equals("10"))
 			vo.setCode("HOTEL");
+		else if (vo.getCode().equals("20"))
+			vo.setCode("HOSPITAL");
 		else if (vo.getCode().equals("30"))
 			vo.setCode("CAFE");
 		else if (vo.getCode().equals("40"))
@@ -632,6 +687,8 @@ public class Controller5 {
 			vo.setCode("EDU");
 		else if (vo.getCode().equals("60"))
 			vo.setCode("TAXI");
+		else if (vo.getCode().equals("70"))
+			vo.setCode("SHOP");
 		return vo.getCode();
 	}// end of sessionSelect
 
@@ -639,7 +696,7 @@ public class Controller5 {
 	public void seqConversion(IntegratedVO vo) {
 		if (vo.getCode().equals("10"))
 			vo.setCode("HOTEL");
-		else if (vo.getCode().equals("30"))
+		else if (vo.getCode().equals("20"))
 			vo.setCode("HOSPITAL");
 		else if (vo.getCode().equals("30"))
 			vo.setCode("CAFE");

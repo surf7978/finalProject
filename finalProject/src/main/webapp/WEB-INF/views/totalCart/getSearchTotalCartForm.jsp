@@ -66,7 +66,7 @@
 			tr.append($("<td>").html("<img src=resources/images/business/"+item.image+">").attr("class","cartImage").trigger("create"))
 		}
 		//제품명
-		tr.append($("<td>").html(item.productName))
+		tr.append($("<td>").html(item.productName +  "<input type='hidden' name='productNumber' value='" + item.productNumber + "'>" +"<input type='hidden' name='cartNumbers' value='" + item.cartNumber + "'>"))
 		//옵션명
 		var td = $("<td>");
 		var td2 = $("<td>");
@@ -145,6 +145,10 @@
 			var count = $("[name=count]").val();
 			//체크박스 값 확인
 			var check = $(".chk:checked");
+			var cartNumbers = [];
+			$("[name=check]:checked").each(function(){				
+				cartNumbers.push($(this).parent().siblings().children("[name=cartNumbers]").val());
+			})
 			//상품선택,로그인 체크
 			if (check.length == 0) {
 				alert("상품을 선택해주세요");
@@ -156,8 +160,8 @@
 					return false;
 				}
 			} else {
-				location.href = "PayInfoForm?productNumber=${product.productNumber}&resultPrice="
-						+ totalResult + "&memberId=${loginID}&count=" + count;
+				location.href = "cartPayInfoForm?productNumber=${product.productNumber}&resultPrice="
+					+ totalResult + "&memberId=${loginID}&cartNumbers=" + cartNumbers;
 			}
 		})//end of pay
 	}//end of pay
@@ -214,6 +218,36 @@
 						$("#totalCartTbody").empty();
 						//조회
 						getSearchTotalCart();
+						
+						//다시 총 합계 구하기
+						$("#totalPrice").empty();
+						$("#totalCourier").empty();
+						$("#totalResult").empty();
+						var totalPrice = 0;
+						var totalCourier = 0;
+						for(var i = 0; i < item.length; i++){
+							//배송비
+							if($($("[name=cartCourier]")[i]).html() == '무료'){
+								 item[i].cartCourier = 0;
+							}//end of if
+							//배송비
+							totalCourier += parseInt(item[i].cartCourier)
+						}//end of for
+							
+						//전체주문금액
+						var totalResult = totalPrice + totalCourier;
+						//전체리스트 불러올 때 값을 넣어준다
+						//총상품금액
+						var sum = 0;
+						$("[name=resultPrice]").each(function(){
+								sum += parseInt($(this).text());
+						})
+						$("#totalPrice").html(sum-totalCourier);
+						//배송비
+						$("#totalCourier").html(totalCourier);
+						//전체주문금액
+						$("#totalResult").html(sum);
+							
 					}//end of success
 				})//end of ajax
 			}//end of if
@@ -275,7 +309,7 @@
 					</thead>
 					<tbody id="totalCartTbody"></tbody>
 				</table>
-				<button type="button" id="totalDelete">일괄삭제</button>
+				<button type="button" id="totalDelete">선택삭제</button>
 			</div>
 			<div id="totalValue">
 				<table id="totalTbl">

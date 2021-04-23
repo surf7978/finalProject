@@ -308,7 +308,7 @@
 		SYSDATE
 		, #{content}
 		, #{writer}
-		, #{memberId}
+		, 'admin'
 		, 1
 		, #{memberId}
 		,
@@ -348,13 +348,29 @@
 		WHERE QUESTIONNUMBER=#{questionNumber}
 		ORDER BY CALENDAR DESC
 	</select>
-
-	<!-- 마이페이지 일반사용자 문의내역 -->
+	<!--#################################################################################### -->
+	<!-- 마이페이지 일반사용자 문의내역 with 페이징기능 -->
 	<select id='getSearchQuestion99' resultType="questionVO">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RN, A.*
+		FROM (
 		SELECT *
 		FROM
 		QUESTION
 		WHERE memberId=#{memberId}
 		ORDER BY CALENDAR DESC
+		) A
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+	
+
 	</select>
+	<!--#################################################################################### -->
+	<!--  마이페이지 일반사용자 문의내역 페이징기능 총 게시글 갯수 출력  -->
+	<select id="countQuestion4" resultType="int" parameterType="questionVO">
+	SELECT COUNT(*) FROM QUESTION WHERE memberId=#{memberId}
+	</select>
+	
+	
 </mapper>

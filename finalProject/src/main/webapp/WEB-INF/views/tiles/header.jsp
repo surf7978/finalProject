@@ -105,7 +105,7 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2">
 						<div class="logo">
-							<a href="/finalProject"> <img src="resources/img/logo.png" alt="">
+							<a href="${pageContext.request.contextPath}"> <img src="resources/img/logo.png" alt="">
 							</a>
 						</div>
 					</div>
@@ -134,7 +134,7 @@
 					</sql:query>
 					<sql:query var="rs1" dataSource="${ds }">
 					    select * from cart where memberId = '${loginID}'
-					</sql:query>
+					</sql:query> 
 						<ul class="nav-right">
 							<li class="cart-price">장바구니 </li>
 							<!-- 
@@ -302,11 +302,11 @@
 									<a href="getSearchViewMember">마이페이지</a>
 								</c:if>
 								<c:if test="${loginID ne 'admin'}">	
-									<a href="getMember1?memberId=${loginID}">마이페이지</a>
+									<a href="getMember1">마이페이지</a>
 								</c:if>
 							</c:if>
 							<c:if test="${loginAuth eq 'b'}">
-								<a href="getBusiness99?businessId=${loginID}">마이페이지</a>
+								<a href="getBusiness99">마이페이지</a>
 							</c:if>
 						<!-- 
 							<ul class="dropdown">

@@ -13,23 +13,35 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-	<h2>특정 문의내역조회</h2>
-	<table>
-		<tr>
-			<td>보낸사람</td>
-			<td>제목</td>
-			<td>보낸날짜</td>
-		</tr>
-		<tr>
+</div>
+	<h3>특정 문의내역조회</h3> <br><br><br><br><br>
+	<table style=" position: relative; right:200px;">
+		<tr style="height:20px;">
+			<th style="width: 200px;">보낸사람 :</th>
 			<td>${vo.writer}</td>
+			<td></td>
+
+		</tr>
+		<tr style="height:20px;">
+			<th>제목 :</th>
 			<td>${vo.title}</td>
+			<td></td>
+		</tr>
+		<tr style="height:20px;">
+			<th>보낸날짜 :</th>
 			<td>${vo.calendar}</td>
+			<td></td>
 		</tr>
-		<tr>
-			<td>내용</td>
-			<td>${vo.content}</td>
+		<tr style="height:50px;">
+			<th>내용    </th>
+			<td></td>
+			<td></td>
 		</tr>
+		
 	</table>
+	
+	<div>
+		<p> <textarea rows="10px" cols="92px" style="border:none;" readonly="readonly">${vo.content} </textarea> </p>
 	<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
 	 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
 	 user="final" password="a20210409A"/>
@@ -46,7 +58,8 @@
      <br><input class="send" type ="button" style="background-color:#ff6347; color:white;"  value="답변완료"><br><br>
      <textarea style="width:800px; height: 100px; resize: none;" readonly>${rs.rows[0].content }</textarea>
     </c:if>
-</div> 
+	</div>
+ 
 </body>
 <script>
 	/* $("#insertAnswer").on("click", function() {

@@ -40,8 +40,8 @@
 			getSearchHospitalLocation(1, val);  //여기에 지역별 검색하는 방법 구현
 		})//end of input
 	}//enf of checkbox
-	
-	function getSearchHospitalLocation(p, val) {
+	 
+	 function getSearchHospitalLocation(p, val) {
 		/* 리스트 ajax */
 		console.log(val)
 		var category1= $("#pro_location ul li a.after").text();
@@ -73,6 +73,7 @@
 						function(i) {
 							var hospitalNumber = response[i].seq;
 							var t_img = response[i].t_image;
+
 							var li = $("<li>");
 							
 							var input = $("<input>").attr({
@@ -80,6 +81,7 @@
 								"type" : "hidden",
 								"name" : "hospitalNumber"
 							});
+
 							var div = $("<div>").attr("class", "hospital_img")
 									.append(
 											$("<img>").attr(
@@ -89,9 +91,11 @@
 							var nav = $("<nav>");
 							var strong = $("<strong>").text(
 									response[i].name);
-							var p = $("<p>")
-									.text(response[i].price + "원");
-							$(nav).append(strong, p);
+							var p = $("<p>").css("font-size","15px")
+							.text(response[i].price + "원");
+							var p1 = $("<p>").css("font-size","15px")
+							.text(response[i].location.substring(0, 6));
+							$(nav).append(strong, p, p1);
 							$(li).append(input, div, nav);
 							$(ul).append(li);
 						})
@@ -122,7 +126,7 @@
 				}
 			}//end success
 		}); //end of ajax
-	}
+	} 
 	
 	function getSearchHospital99(p) {
 		/* 리스트 ajax */
@@ -153,6 +157,7 @@
 						function(i) {
 							var hospitalNumber = response[i].seq;
 							var t_img = response[i].t_image;
+
 							var li = $("<li>");
 							
 							var input = $("<input>").attr({
@@ -160,6 +165,7 @@
 								"type" : "hidden",
 								"name" : "hospitalNumber"
 							});
+
 							var div = $("<div>").attr("class", "hospital_img")
 									.append(
 											$("<img>").attr(
@@ -169,9 +175,11 @@
 							var nav = $("<nav>");
 							var strong = $("<strong>").text(
 									response[i].name);
-							var p = $("<p>")
+							var p = $("<p>").css("font-size","15px")
 									.text(response[i].price + "원");
-							$(nav).append(strong, p);
+							var p1 = $("<p>").css("font-size","15px")
+									.text(response[i].location.substring(0, 6));
+							$(nav).append(strong, p, p1);
 							$(li).append(input, div, nav);
 							$(ul).append(li);
 						})
@@ -263,73 +271,79 @@
 			<ul>
 				<li><a class="after">수술/치료</a>
 					<div>
-						<input type="checkbox" id="cate01_01" value="중성화"><label
-							for="cate01_01">중성화</label> <input type="checkbox" id="cate01_02" value="다리수술"><label
-							for="cate01_02">다리수술</label> <input type="checkbox"
-							id="cate01_03" value="한방치료"><label for="cate01_03">한방치료</label>
-						<input type="checkbox" id="cate01_04" value="치과"><label
-							for="cate01_04">치과</label> <input type="checkbox"
-							id="cate01_05" value="안과"><label for="cate01_05">안과</label> <input
-							type="checkbox" id="cate01_06" value="종양수술"><label for="cate01_06">종양수술</label>
-						<input type="checkbox" id="cate01_07" value="결석제거수술"><label
-							for="cate01_07">결석제거수술</label> <input type="checkbox"
-							id="cate01_08" value="탈장수술"><label for="cate01_08">탈장수술</label> <input
-							type="checkbox" id="cate01_09" value="자궁농축수술"><label for="cate01_09">자궁농축수술</label>
-							<input
-							type="checkbox" id="cate01_10" value="기타"><label for="cate01_10">기타</label>
+						<input type="checkbox" id="cate01_01" value="중성화">
+						<label for="cate01_01">중성화</label> 
+						<input type="checkbox" id="cate01_02" value="다리수술">
+						<label for="cate01_02">다리수술</label>
+						<input type="checkbox" id="cate01_03" value="한방치료">
+						<label for="cate01_03">한방치료</label>
+						<input type="checkbox" id="cate01_04" value="치과">
+						<label for="cate01_04">치과</label> 
+						<input type="checkbox" id="cate01_05" value="안과">
+						<label for="cate01_05">안과</label> 
+						<input type="checkbox" id="cate01_06" value="종양수술">
+						<label for="cate01_06">종양수술</label>
+						<input type="checkbox" id="cate01_07" value="결석제거수술">
+						<label for="cate01_07">결석제거수술</label> 
+						<input type="checkbox" id="cate01_08" value="탈장수술">
+						<label for="cate01_08">탈장수술</label>
+						<input type="checkbox" id="cate01_09" value="자궁농축수술">
+						<label for="cate01_09">자궁농축수술</label>
+						<input type="checkbox" id="cate01_10" value="기타">
+						<label for="cate01_10">기타</label>
 					</div></li>
 				<li><a>예방접종</a>
 					<div>
 						<input type="checkbox" id="cate02_01" value="1차 예방접종">
-						<label for="cate02_01">1차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="2차 예방접종">
+						<label for="cate02_01">1차 예방접종</label> 
+						<input type="checkbox" id="cate02_02" value="2차 예방접종">
 						<label for="cate02_02">2차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="3차 예방접종">
+						<input type="checkbox" id="cate02_03" value="3차 예방접종">
 						<label for="cate02_03">3차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="4차 예방접종">
+						<input type="checkbox" id="cate02_04" value="4차 예방접종">
 						<label for="cate02_04">4차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="4차 예방접종">
-						<label for="cate02_04">4차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="5차 예방접종">
+						<input type="checkbox" id="cate02_05" value="5차 예방접종">
 						<label for="cate02_05">5차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="6차 예방접종">
+						<input type="checkbox" id="cate02_06" value="6차 예방접종">
 						<label for="cate02_06">6차 예방접종</label>
-						<input type="checkbox" id="cate02_01" value="추가 예방접종 1차">
+						<input type="checkbox" id="cate02_07" value="추가 예방접종 1차">
 						<label for="cate02_07">추가 예방접종 1차</label>
-						 <input type="checkbox" type="checkbox" id="cate02_03" value="심장사상충 예방주사">
-						 <label for="cate02_09">심장사상충 예방주사</label>
+						<input type="checkbox" id="cate02_08" value="심장사상충 예방주사">
+						<label for="cate02_08">심장사상충 예방주사</label>
 					</div></li>
 				<li><a>검진/검사</a>
 					<div>
-						<input type="checkbox" id="cate03_01" value="건강검진"><label
-							for="cate03_01">건강검진</label> <input type="checkbox"
-							id="cate03_02" value="혈액검사"><label for="cate03_02">혈액검사</label> <input
-							type="checkbox" id="cate03_03" value="안과검진"><label for="cate03_03">안과검진</label>
-						<input type="checkbox" id="cate03_04" value="치과검진"><label
-							for="cate03_04">치과검진</label> <input type="checkbox"
-							id="cate03_05" value="항체기검사"><label for="cate03_05">항체기검사</label> <input
-							type="checkbox" id="cate03_06" value="피부검진"><label for="cate03_06">피부검진</label>
-						<input type="checkbox" id="cate03_07" value="종양검진"><label
-							for="cate03_07">종양검진</label>
-							<input type="checkbox" id="cate03_08" value="쿠싱검사"><label
-							for="cate03_08">쿠싱검사</label>
-							<input type="checkbox" id="cate03_09" value="심장사상충검사"><label
-							for="cate03_09">심장사상충검사</label>
-							<input type="checkbox" id="cate03_10" value="심장검사"><label
-							for="cate03_10">심장검사</label>
-							<input type="checkbox" id="cate03_11" value="내시경검사"><label
-							for="cate03_11">내시경검사</label>
-							<input type="checkbox" id="cate03_12" value="슬개골검사"><label
-							for="cate03_12">슬개골검사</label>
+						<input type="checkbox" id="cate03_01" value="건강검진">
+						<label for="cate03_01">건강검진</label> 
+						<input type="checkbox" id="cate03_02" value="혈액검사">
+						<label for="cate03_02">혈액검사</label> 
+						<input type="checkbox" id="cate03_03" value="안과검진">
+						<label for="cate03_03">안과검진</label>
+						<input type="checkbox" id="cate03_04" value="치과검진">
+						<label for="cate03_04">치과검진</label> 
+						<input type="checkbox" id="cate03_05" value="항체기검사">
+						<label for="cate03_05">항체기검사</label> 
+						<input type="checkbox" id="cate03_06" value="피부검진">
+						<label for="cate03_06">피부검진</label>
+						<input type="checkbox" id="cate03_07" value="종양검진">
+						<label for="cate03_07">종양검진</label>
+						<input type="checkbox" id="cate03_08" value="쿠싱검사">
+						<label for="cate03_08">쿠싱검사</label>
+						<input type="checkbox" id="cate03_09" value="심장사상충검사">
+						<label for="cate03_09">심장사상충검사</label>
+						<input type="checkbox" id="cate03_10" value="심장검사">
+						<label for="cate03_10">심장검사</label>
+						<input type="checkbox" id="cate03_11" value="내시경검사">
+						<label for="cate03_11">내시경검사</label>
 					</div></li>
 				<li><a>기타</a>
 					<div>
-						<input type="checkbox" id="cate04_01" value="구충제"><label
-							for="cate04_01">구충제</label>
-							<input type="checkbox" id="cate04_01" value="심장사상충 예방약"><label
-							for="cate04_02">심장사상충 예방약</label>
-							<input type="checkbox" id="cate04_01" value="기생충 예방약"><label
-							for="cate04_03">기생충 예방약</label>
+						<input type="checkbox" id="cate04_01" value="구충제">
+						<label for="cate04_01">구충제</label>
+						<input type="checkbox" id="cate04_02" value="심장사상충 예방약">
+						<label for="cate04_02">심장사상충 예방약</label>
+						<input type="checkbox" id="cate04_03" value="기생충 예방약">
+						<label for="cate04_03">기생충 예방약</label>
 					</div></li>
 			</ul>
 		</div>
@@ -338,11 +352,12 @@
 					<li style="text-align:left;">지역구분<br><div class="con"></div></li>
 				</ul>
 		 -->
-				 <sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
-					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
-					 user="final" password="a20210409A"/>
+
 				<div id="selectLocation" style="text-align:left;">
-						<sql:query var="rs1" dataSource="${ds }">
+						<sql:setDataSource var="as" driver="oracle.jdbc.OracleDriver"
+						 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
+						 user="final" password="a20210409A"/>
+						<sql:query var="rs1" dataSource="${as }">
 							select location from hospital group by location
 						</sql:query>
 						<c:if test="${not empty rs1.rows }">

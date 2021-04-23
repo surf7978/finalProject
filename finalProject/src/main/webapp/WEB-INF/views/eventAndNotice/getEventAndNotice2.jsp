@@ -10,6 +10,23 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+<script>
+function check() {
+		var A = confirm("삭제하시겠습니까?");
+		
+		if (A) {
+			alert("삭제 되었습니다.");
+			return true;
+		
+		} else {
+		
+			return false;
+		}
+
+	}
+
+</script>
+
 <style>
 input.back {
 	padding: 10px;
@@ -80,8 +97,10 @@ table td {
 				</div>
 				<hr>
 				<div class="image" style=" width: 50%;">
-					<img id="image"
-						src="resources/images/eventAndNotice2/${getEventAndNotice.image}">
+			<c:forTokens items="${getEventAndNotice.image}" delims="," var="file">
+				<img id="image"
+					src="resources/images/eventAndNotice2/${file}">
+			</c:forTokens>		
 				</div>
 			</div>
 			<br> <br>
@@ -96,17 +115,19 @@ table td {
 				<c:if test="${loginID eq 'admin' }">
 				<form
 					action="deleteEventAndNotice?eanNumber=${getEventAndNotice.eanNumber}"
-					method="post">
+					method="post" onsubmit="return check()">
+					<c:if test="${loginID eq 'admin'}">
 					<input type="button" class="update"
 						onclick="location.href='updateEventAndNotice2?eanNumber=${getEventAndNotice.eanNumber}'"
 						value="수정하기"> <input class="delete" type="submit"
 						value="삭제하기">
-
+					</c:if>
 
 				</form>
 				</c:if>
 			</div>
-
+	<br>
+				<input class="back" type="button" value="목록으로" onclick="location.href='getSearchEventAndNoticeSelect2'" > 
 		</div>
 	
 </body>

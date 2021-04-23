@@ -20,6 +20,7 @@
 		,SUMPRICE
 		,MEMBERID
 		,BUYSTATE
+		,BUSINESSNUMBER
 		)VALUES(
 		(SELECT NVL(MAX(PNDNUMBER),0)+1 FROM PAYANDDELIVERY)
 		,#{category}
@@ -27,6 +28,7 @@
 		,#{sumPrice}
 		,#{memberId}
 		,'결제완료'
+		,#{businessNumber}
 		)
 	</insert>
 </mapper>

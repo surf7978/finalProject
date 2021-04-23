@@ -57,5 +57,12 @@
 		SELECT * FROM TOTALCARTVIEW
 		WHERE
 		MEMBERID = #{memberId}
+		<!-- 결제 리스트조회 -->
+		<if test="cartNumbers != null">
+		AND CARTNUMBER IN
+			<foreach collection="cartNumbers" item="seq" open="(" separator="," close=")">
+				#{seq}
+			</foreach>
+		</if>
 	</select>
 </mapper>

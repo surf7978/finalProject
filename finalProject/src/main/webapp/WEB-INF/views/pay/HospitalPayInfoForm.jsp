@@ -31,10 +31,10 @@
 <body>
 	<div id="contents">
 			<h1>바로구매</h1>
-			<input value="${resultPrice }">
+			<input value="${resultPrice }" type="hidden">
 		<form method="post" id="frm" action="ReserPayInfo">
-		<input value="${vo.seq }" name="bisNumber">
-		<input value="${vo.businessNumber }" name="businessNumber">
+		<input value="${vo.seq }" name="bisNumber" type="hidden">
+		<input value="${vo.businessNumber }" name="businessNumber"  type="hidden">
 			<div id="pay_wrap">
 			<table border="1">
 				<thead>

@@ -3,9 +3,10 @@ package com.company.common;
 public class PagingVOCr4 {
 	// 현재페이지, 시작페이지, 끝페이지, 게시글 총 갯수, 페이지당 글 갯수, 마지막페이지, SQL쿼리에 쓸 start, end
 		private int nowPage, startPage, endPage,cntPerPage, total, lastPage, start, end;
+		String memberId;
 		private int cntPage = 5;
-		
-		
+		 
+		 
 		public PagingVOCr4() {
 		}
 		public PagingVOCr4(int total, int nowPage, int cntPerPage) {
@@ -90,6 +91,12 @@ public class PagingVOCr4 {
 		}
 		public void getCntPage(int cntPage) {
 			this.cntPage = cntPage;
+		}
+		public String getMemberId() {
+			return memberId;
+		}
+		public void setMemberId(String memberId) {
+			this.memberId = memberId;
 		}
 		@Override
 		public String toString() {

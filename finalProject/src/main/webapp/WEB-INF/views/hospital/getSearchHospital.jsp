@@ -90,7 +90,7 @@
 							var strong = $("<strong>").text(
 									response[i].name);
 							var p = $("<p>")
-									.text(response[i].price + "원");
+									.text(response[i].price + "원ddd");
 							$(nav).append(strong, p);
 							$(li).append(input, div, nav);
 							$(ul).append(li);

@@ -78,15 +78,26 @@ public class BoardServiceimpl implements BoardService{
 	@Override
 	public int getCount(BoardVO vo) {
 		return boardMapper.getCount(vo);
-	}
+	}	
 	
+
+	//내가 쓴글 전체 조회
 	@Override
-	public List<BoardVO> getSearchBoardCategory199(BoardVO vo) {
+	public List<BoardVO> getSearchBoardCategory199(PagingVOCr4 vo) {
 		return boardMapper.getSearchBoardCategory199(vo);
 	}
 	@Override
 	public int countBoard() {
 		return boardMapper.countBoard();
+	}
+	@Override
+	public int countBoard2(PagingVOCr4 vo) {
+		return boardMapper.countBoard2(vo);
+	}
+	@Override
+	public int updateViews(BoardVO vo) {
+		
+		return boardMapper.updateViews(vo);
 	}
 
 

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +27,7 @@ import com.company.business.service.BusinessVO;
 import com.company.buy.service.BuyService;
 import com.company.buy.service.BuyVO;
 import com.company.common.FileRenamePolicy;
+import com.company.common.Paging;
 import com.company.hospital.service.HospitalService;
 import com.company.hospital.service.HospitalVO;
 import com.company.member.service.MemberService;
@@ -36,6 +36,8 @@ import com.company.note.service.NoteService;
 import com.company.note.service.NoteVO;
 import com.company.payAndDelivery.service.PayAndDeliveryService;
 import com.company.payAndDelivery.service.PayAndDeliveryVO;
+import com.company.product.service.ProductService;
+import com.company.product.service.ProductVO;
 import com.company.question.service.QuestionService;
 import com.company.question.service.QuestionVO;
 import com.company.reservation.service.ReservationService;
@@ -66,18 +68,19 @@ public class Controller2 {
 	QuestionService questionService;
 	@Autowired
 	NoteService noteService;
+	@Autowired
+	ProductService productService;
+	
 
 	////// 마이페이지-유저///////////
 	// 일반회원 본인정보 조회
-	// admin이 로그인해서 회원들의 정보를 볼려고 클릭하면 자신의 정보가 나와서 .equals("admin")추가해서 자기정보가 아닌 회원의
-	////// 정보조회하게 함
+	// admin이 로그인해서 회원들의 정보를 볼려고 클릭하면 자신의 정보가 나와서 .equals("admin")추가해서 자기정보가 아닌 회원의 정보조회하게 함
 	@GetMapping("/getMember1")
 	public String getMember(MemberVO vo1, Model model, HttpSession session) {
 		if (session.getAttribute("loginID").equals("admin")) {
 			model.addAttribute("member", memberService.getMember(vo1));
 		} else {
-			MemberVO vo = new MemberVO();
-			vo.setMemberId((String) session.getAttribute("loginID"));
+			vo1.setMemberId((String) session.getAttribute("loginID"));
 			model.addAttribute("member", memberService.getMember(vo1));
 		}
 		return "user/memberInfo";
@@ -113,15 +116,27 @@ public class Controller2 {
 		return "user/deleteMember";
 	}
 	
-	//////////// 구매내역///////////////
+	////////////구매내역///////////////
 	// 구매내역리스트조회
 	@RequestMapping("/getSearchPayAndDeliveryForm")
-	public String getSearchPayAndDeliveryForm(PayAndDeliveryVO pvo, Model model, HttpSession session) {
-		pvo.setMemberId((String) session.getAttribute("loginID"));
-		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery(pvo));
-		model.addAttribute("memberId", pvo);
-		return "user/getSearchPayAndDeliveryForm";
+	public String getSearchPayAndDeliveryForm(PayAndDeliveryVO vo, Model model, HttpSession session, Paging paging) {
+		vo.setMemberId((String) session.getAttribute("loginID"));
+		paging.setPageUnit(10); //한페이지에 출력되는 레코드 건수
+		paging.setPageSize(3); //페이지번호가 3개씩 보임
+		//페이징
+		if(vo.getPage() == null) {
+			vo.setPage(1);
+		}
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		//전체페이지가 넘어가야 last를 구함
+		paging.setTotalRecord(payAndDeliveryService.getCount(vo));
+		model.addAttribute("paging", paging);
+		model.addAttribute("pads", payAndDeliveryService.getSearchPayAndDelivery(vo));
+		model.addAttribute("memberId", vo);
+	return "user/getSearchPayAndDeliveryForm";
 	}
+
 
 	// 구매내역 상세리스트 조회
 	@RequestMapping("/getSearchBuy")
@@ -131,7 +146,7 @@ public class Controller2 {
 	}
 
 	////////// 예약하기//////////////////
-	// 예약하기 날짜 페이지 호출
+	// 예약변경 날짜 페이지 호출
 	@GetMapping("/updateReservation")
 	public String updateReservation(ReservationVO vo, Model model, String pndNumber) {
 		vo.setPndNumber(pndNumber);
@@ -139,7 +154,7 @@ public class Controller2 {
 		return "empty/reservation/updateReservation";
 	}
 
-	// 예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
+	// 예약변경 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
 	@PostMapping("/updateReservation")
 	public void updateReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, HttpServletResponse response, Model model)
 			throws IOException {
@@ -150,11 +165,41 @@ public class Controller2 {
 		writer.println("<script>alert('예약되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
+	// 예약하기 날짜 페이지 호출
+	@GetMapping("/insertReservation")
+	public String insertReservation(ReservationVO vo, Model model, String pndNumber) {
+		vo.setPndNumber(pndNumber);
+		model.addAttribute("reservation", reservationService.getReservation(vo));
+		return "empty/reservation/insertReservation";
+	}
+
+	// 예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
+	@PostMapping("/insertReservation")
+	public void insertReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, HttpServletResponse response, Model model)
+			throws IOException {
+		reservationService.updateReservation(vo);
+		payAndDeliveryService.updateReservation2(vo1);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('예약되었습니다');opener.opener.location.reload();opener.location.reload();window.close();</script>");
+		writer.close();
+	}
 
 	// 회원의 예약리스트조회
 	@RequestMapping("/getSearchReservation")
-	public String getSearchReservation(ReservationVO vo, Model model, HttpSession session) {
+	public String getSearchReservation(ReservationVO vo, Model model, HttpSession session, Paging paging) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
+		paging.setPageUnit(5); //한페이지에 출력되는 레코드 건수
+		paging.setPageSize(3); //페이지번호가 3개씩 보임
+		//페이징
+		if(vo.getPage() == null) {
+			vo.setPage(1);
+		}
+		vo.setStart1(paging.getFirst());
+		vo.setEnd1(paging.getLast());
+		//전체페이지가 넘어가야 last를 구함
+		paging.setTotalRecord(reservationService.getCount(vo));
+		model.addAttribute("paging", paging);
 		model.addAttribute("reservation", reservationService.getSearchReservation(vo));
 		return "reservation/getSearchReservation";
 	}
@@ -346,6 +391,7 @@ public class Controller2 {
 	@RequestMapping("/getHospital")
 	public String getHospital(HospitalVO vo, Model model, String seq, HttpSession session) {
 		vo.setSeq(seq);
+		System.out.println(vo+"1111111111111111111111111111111111111111111111111");
 		model.addAttribute("hospital", hospitalService.getHospital(vo));
 		if (session.getAttribute("loginID") != null) {
 			ReservationVO vo1 = new ReservationVO();
@@ -404,9 +450,12 @@ public class Controller2 {
 
 	// 상세조회에서 사업자 구매평 등록페이지 이동
 	@GetMapping("/insertReview")
-	public String insertReview(ReservationVO vo, Model model, HttpSession session) {
+	public String insertReview(ReservationVO vo, Model model, HttpSession session, MemberVO mvo) {
+		String loginID = (String) session.getAttribute("loginID");
 		vo.setMemberId((String) session.getAttribute("loginID"));
+		mvo.setMemberId(loginID);
 		model.addAttribute("reservation", reservationService.getViewReservation(vo));
+		model.addAttribute("name", memberService.getMember(mvo).getName());
 		return "empty/reviewAndQuestion/insertReview";
 	}
 
@@ -420,30 +469,8 @@ public class Controller2 {
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
-
-	 //상세조회에서 쇼핑몰 구매평 등록페이지 이동
-	 @GetMapping("/insertReviewProduct") 
-	 public String insertReviewProduct(BuyVO vo, Model model, MemberVO mvo, HttpSession session) { 
-		String loginID = (String) session.getAttribute("loginID");
-		vo.setFromPerson(loginID);
-		mvo.setMemberId(loginID);
-		model.addAttribute("buy", buyService.getBuy(vo));
-		model.addAttribute("name", memberService.getMember(mvo).getName());
-		return "empty/reviewAndQuestion/insertReviewProduct";
-	 }
 	 
-	 //상세조회에서 쇼핑몰 구매평 등록처리
-	 @PostMapping("/insertReviewProduct")
-	 public void insertReviewProduct(ReviewVO rvo, BuyVO bvo, HttpServletResponse response) throws IOException {
-		reviewService.insertReview(rvo);
-		buyService.insertReview3(bvo);
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
-		writer.close();
-	 }
-
-
+	
 	// 상세조회에서 상품문의 등록페이지 이동
 	@GetMapping("/insertQuestionBusi")
 	public String insertQuestionBusi(HospitalVO vo, MemberVO vo1, String seq, String businessNumber, Model model,
@@ -480,12 +507,82 @@ public class Controller2 {
 		return questionService.getQuestionProbis(vo);
 	}
 
+	///////쇼핑몰//////////////
+	// 쇼핑몰 상세보기 + 구매평 출력 + 문의내역 출력
+	@RequestMapping("/getProduct")
+	public String getProduct(ProductVO vo, Model model, String productNumber, HttpSession session) {
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"+productNumber);
+		System.out.println("101010101010"+productNumber);
+		vo.setProductNumber(productNumber);
+		model.addAttribute("product", productService.getProduct(vo));
+		if (session.getAttribute("loginID") != null) {
+			BuyVO vo1 = new BuyVO();
+			vo1.setFromPerson((String) session.getAttribute("loginID"));
+			vo1.setProductNumber(productNumber);
+			model.addAttribute("buy", buyService.getBuy(vo1));	
+		}
+		ReviewVO vo2 = new ReviewVO();
+		vo2.setProbisNumber(productNumber);
+		model.addAttribute("review", reviewService.getSearchReview(vo2));
+		
+		QuestionVO vo3 = new QuestionVO();
+		vo3.setProbisNumber(productNumber);
+		model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
+		return "product/getProduct2";
+	}
+	
+	// 쇼핑몰 상세조회에서 상품문의 등록페이지 이동
+	@GetMapping("/insertQuestionBusi2")
+	public String insertQuestionBusi2(ProductVO vo, MemberVO vo1, String productNumber, Model model, HttpSession session) {
+	// 상품번호 담기
+	vo.setProductNumber(productNumber);
+	model.addAttribute("product", productService.getProduct(vo));
+
+	// 작성자 이름 담기
+	vo1.setMemberId((String) session.getAttribute("loginID"));
+	model.addAttribute("member", memberService.getMember(vo1));
+
+	return "empty/reviewAndQuestion/insertQuestion3";
+	}
+	
+	//쇼핑몰 상세조회에서  상품문의 등록처리
+	@PostMapping("/insertQuestionBusi2")
+	public void insertQuestionBusi2(QuestionVO vo, HttpServletResponse response) throws IOException {
+		questionService.insertQuestionPro(vo);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
+		writer.close();
+	}
+	 //상세조회에서 쇼핑몰 구매평 등록페이지 이동
+	 @GetMapping("/insertReviewProduct") 
+	 public String insertReviewProduct(BuyVO vo, Model model, MemberVO mvo, HttpSession session) { 
+		String loginID = (String) session.getAttribute("loginID");
+		vo.setFromPerson(loginID);
+		mvo.setMemberId(loginID);
+		model.addAttribute("buy", buyService.getBuy(vo));
+		model.addAttribute("name", memberService.getMember(mvo).getName());
+		return "empty/reviewAndQuestion/insertReviewProduct";
+	 }
+	 
+	 //상세조회에서 쇼핑몰 구매평 등록처리
+	 @PostMapping("/insertReviewProduct")
+	 public void insertReviewProduct(ReviewVO rvo, BuyVO bvo, HttpServletResponse response) throws IOException {
+		reviewService.insertReview(rvo);
+		buyService.insertReview3(bvo);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
+		writer.close();
+	 }
+	 
+	//관리자 택배 배송
 	// 관리자의 배송정보 입력페이지 출력
 	@RequestMapping("/updateDelivery")
 	public String updateDelivery(PayAndDeliveryVO vo, String pndNumber, Model model) {
 		vo.setPndNumber(pndNumber);
 		model.addAttribute("pndNumber", vo.getPndNumber());
-		return "user/updateDelivery";
+		return "empty/user/updateDelivery";
 	}
 
 	// 관리자의 배송정보 입력 처리
@@ -497,5 +594,5 @@ public class Controller2 {
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
-
+	
 }

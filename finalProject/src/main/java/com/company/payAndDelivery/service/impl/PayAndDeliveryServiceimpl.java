@@ -62,18 +62,8 @@ public class PayAndDeliveryServiceimpl implements PayAndDeliveryService {
 
 	// 결제 내역 차트
 	@Override
-	public List<Map<String, Object>> dailyTotal(PayAndDeliveryVO vo) {
-		return payAndDeliveryMapper.dailyTotal(vo);
-	}
-
-	@Override
-	public List<Map<String, Object>> monthlyTotal(PayAndDeliveryVO vo) {
-		return payAndDeliveryMapper.monthlyTotal(vo);
-	}
-
-	@Override
-	public List<Map<String, Object>> yearsTotal(PayAndDeliveryVO vo) {
-		return payAndDeliveryMapper.yearsTotal(vo);
+	public List<Map<String, Object>> getColumnChart(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.getColumnChart(vo);
 	}
 
 	// 도넛차트
@@ -89,8 +79,13 @@ public class PayAndDeliveryServiceimpl implements PayAndDeliveryService {
 	}
 
 	@Override
-	public int getCount() {
-		return payAndDeliveryMapper.getCount();
+	public int getCount(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.getCount(vo);
+	}
+
+	@Override
+	public int getCount99(PayAndDeliveryVO vo) {
+		return payAndDeliveryMapper.getCount99(vo);
 	}
 
 }

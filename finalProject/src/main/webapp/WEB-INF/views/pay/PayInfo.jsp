@@ -48,23 +48,23 @@
 <div style="width:60%;">
 	<form name="frm" id="frm" action="insertPayProduct" method="post">
 	<c:forEach items="${count}" var="count">
-		<input value="${count }" name="countList"> 
+		<input value="${count }" name="countList" type="hidden"> 
 		</c:forEach>
-		<input name="category">
-		<input name="sumPrice" value="${resultPrice }"> 
-		<input name="memberId" value="${loginID}"> 
-		<input name="category1" value="${product.category}"> 
-		<input name="fromPerson" value="${loginID}"> 
-		<input name="toPerson" value="${name }"> 
-		<input name="post" value="${post }">
-		<input name="address" value="${address }"> 
-		<input name="address2" value="${address2 }"> 
-		<input name="phone" value="${phone }"> 
-		<input name="productNumber" value="${product.productNumber }">
+		<input name="category" type="hidden">
+		<input name="sumPrice" type="hidden" value="${resultPrice }"> 
+		<input name="memberId" type="hidden" value="${loginID}"> 
+		<input name="category1" type="hidden" value="${product.category}"> 
+		<input name="fromPerson" type="hidden" value="${loginID}"> 
+		<input name="toPerson" type="hidden" value="${name }"> 
+		<input name="post" type="hidden" value="${post }">
+		<input name="address" type="hidden" value="${address }"> 
+		<input name="address2" type="hidden" value="${address2 }"> 
+		<input name="phone" type="hidden" value="${phone }"> 
+		<input name="productNumber" type="hidden" value="${product.productNumber }">
 	<c:forEach items="${optionNameList}" var="optionNameList">
-		<input name="optionNameList" value="${optionNameList }">
+		<input name="optionNameList" type="hidden" value="${optionNameList }">
 		</c:forEach>
-		<input name="price" value="${resultPrice }">
+		<input name="price" type="hidden" value="${resultPrice }">
 	</form>
 </div>
 </body>

@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>조회</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	//시작시 호출
 	$(function() {

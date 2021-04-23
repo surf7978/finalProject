@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,7 +63,6 @@ public class Controller4 {
 
 	}
 
-
 	// ####★★맴버에 관한 컨트롤러★★
 	// 맴버전체조회
 	@RequestMapping("/getSearchMember")
@@ -101,11 +101,44 @@ public class Controller4 {
 		return "redirect:getSearchMember";
 	}
 
-	
 	// ###★★게시판에 관한 컨트롤러★★
+	
+	// 마이페이지-일반사용자-내가쓴글 출력
+	
+	@GetMapping("/getSearchBoardCategory199")
+	public String getSearchBoardCategory199(HttpSession session ,PagingVOCr4 vo, Model model ,
+			@RequestParam(value="nowPage", required=false)String nowPage ,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+		
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		// 건수
+		vo.setMemberId((String)session.getAttribute("loginID"));
+		int total = boardService.countBoard2(vo);
 
+		// 쿼리실행
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		vo.setMemberId((String)session.getAttribute("loginID"));
+		model.addAttribute("board", boardService.getSearchBoardCategory199(vo));
+		
+		model.addAttribute("paging", vo);	
+		
+		
+
+		return "myPage/getSearchBoardCategory199";
+	}
+	
+	
+	
 	//////////////////////////////////////////////////////////////
-	//자유게시판 시작  (1번)
+	// 자유게시판 시작 (1번)
 	//////////////////////////////////////////////////////////////
 
 	// 게시판 전체조회 관리자 -- 삭제확인
@@ -118,38 +151,39 @@ public class Controller4 {
 
 	}
 
-
 	// 1번 자유게시판 조회
 	@GetMapping("/getSearchBoardCategiry1")
-	public String getSearchBoardCategiry1(PagingVOCr4 vo, Model model
-			, @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
-		
+	public String getSearchBoardCategiry1(PagingVOCr4 vo, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
+
 		int total = boardService.countBoard();
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "5";
 		} else if (nowPage == null) {
 			nowPage = "1";
-		} else if (cntPerPage == null) { 
+		} else if (cntPerPage == null) {
 			cntPerPage = "5";
 		}
 		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		model.addAttribute("paging", vo);
 		model.addAttribute("board", boardService.getSearchBoardCategiry1(vo));
-		return  "board/getSearchBoardCategiry1";
+		return "board/getSearchBoardCategiry1";
 	}
-		
 
-	
 	// 1번 자유게시판 단건 조회
 	@GetMapping("/getBoard")
 	public String getBoard(Model model, BoardVO vo) {
 		model.addAttribute("board", boardService.getBoard(vo));
+
+		// 조회수 +1
+		boardService.updateViews(vo);
+
 		return "board/getBoard";
 	}
 
-	// 자유게시판 수정 폼 
+	// 자유게시판 수정 폼
 	@GetMapping("/updateBoard")
 	public String updateBoard(BoardVO vo, Model model) {
 		System.out.println("관리자 게시판관리 수정 updateBoard의 vo " + vo);
@@ -160,35 +194,64 @@ public class Controller4 {
 
 	// 자유게시판 수정 처리
 	@PostMapping("/updateBoard")
-	public String updateBoardProc(BoardVO vo) {
+	public String updateBoardProc(BoardVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		System.out.println(vo);
+		// 첨부파일처리
+		// pom, servlet에 추가
+		MultipartFile[] images = vo.getUploadFile();
+	
+		String filenames = "";
+		boolean start = true;
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/board1");
+		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+		// 새로운 파일이 등록되었는지 확인
+		String category = vo.getCategory();
+		for (MultipartFile image : images) {
+			if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
+				String filename = image.getOriginalFilename();
+				// 파일명 중복체크 -> rename
+				File rename = FileRenamePolicy.rename(new File(path, filename));
+				// 업로드된 파일명
+				// rename.getName()
+				if (!start) {
+					filenames += ",";
+				} else {
+					start = false;
+				}
+				filenames += rename.getName();
+				// 파일명을 읽어내는게 getName()
+				// 임시폴더에서 업로드 폴더로 파일이동
+				image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+
+			} else {
+				// 새로운 파일이 등록되지않았다면
+				// 기존이미지를 그대로 사용
+				vo.setImage(request.getParameter("image"));
+
+			}
+		}
+		vo.setImage(filenames);
 		System.out.println("관리자 게시판관리 수정 updateBoard의 vo2의 " + vo);
 		boardService.updateBoard(vo);
-		
-		//자유게시판 수정시
-	
-		
-			
-		
-		
-			return "redirect:/getSearchBoardCategiry1";
-		
+
+		return "redirect:getBoard?boardNumber=" + vo.getBoardNumber();
+
 	}
 
 	// 게시판 삭제
 	@PostMapping("/deleteBoard")
-	public String deleteBoard(BoardVO vo , HttpServletRequest request) {
+	public String deleteBoard(BoardVO vo, HttpServletRequest request) {
 		System.out.println("삭제 vo " + vo);
 		boardService.deleteBoard(vo);
 		String old_url = request.getHeader("Referer");
-		//이벤트 삭제시
-				if(old_url.contains("getBoard2"))
-				{
-					return "redirect:/getSearchBoardCategiry2Form";
-				//공지사항 삭제시			
-				}else {
-					return "redirect:/getSearchBoardCategiry1";
-					
-				}
+		// 이벤트 삭제시
+		if (old_url.contains("getBoard2")) {
+			return "redirect:/getSearchBoardCategiry2Form";
+			// 공지사항 삭제시
+		} else {
+			return "redirect:/getSearchBoardCategiry1";
+
+		}
 	}
 
 	// 1번 자유게시판 글쓰기
@@ -202,51 +265,48 @@ public class Controller4 {
 	public String insertBoardProc(BoardVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
 		System.out.println(vo);
 		// 첨부파일처리
-		// pom , servlet에 추가
-		MultipartFile image = vo.getUploadFile();
+		// pom, servlet에 추가
+		MultipartFile[] images = vo.getUploadFile();
 		MultipartFile t_image = vo.getT_uploadFile();
+		String filenames = "";
+		boolean start = true;
 		String path = request.getSession().getServletContext().getRealPath("/resources/images/board1");
 		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
-		System.out.println("경로: " + path);
-		if (image != null && !image.isEmpty() && image.getSize() > 0) {
-			String filename = image.getOriginalFilename();
-			// 파일명 중복체크 -> rename
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			// 업로드된 파일명
-			// rename.getName()
-			// 파일명을 읽어내는게 getName()
-			// 임시폴더에서 업로드 폴더로 파일이동
-			image.transferTo(rename); // transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
-			vo.setImage(rename.getName());
+		for (MultipartFile image : images) {
+			if (image != null && !image.isEmpty() && image.getSize() > 0) {
+				String filename = image.getOriginalFilename();
+				// 파일명 중복체크 -> rename
+				File rename = FileRenamePolicy.rename(new File(path, filename));
+				// 업로드된 파일명
+				// rename.getName()
+				if (!start) {
+					filenames += ",";
+				} else {
+					start = false;
+				}
+				filenames += rename.getName();
+				// 파일명을 읽어내는게 getName()
+				// 임시폴더에서 업로드 폴더로 파일이동
+				image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
 
+			}
 		}
+		vo.setImage(filenames);
 
-		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
-			String filename = t_image.getOriginalFilename();
-			// 파일명 중복체크 ->rename
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			// 업로드된 파일명
-			// rename.getName()
-			// 파일명을 읽어내는게 getName()
-			// 임시폴더에서 업로드 폴더로 파일이동
-			t_image.transferTo(rename);// transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
-			vo.setT_image(rename.getName());
-		}
-		// String path = "resources/images";
+//			String path="resources/images";
 		boardService.insertBoard(vo);
 		return "redirect:/getSearchBoardCategiry1";
 	}
-	
-	
+
 	//////////////////////////////////////////////////////////////
 	// 2번 자랑하기게시판으로 가기
-    //////////////////////////////////////////////////////////////
-	//자랑하기게시판으로 가기
+	//////////////////////////////////////////////////////////////
+	// 자랑하기게시판으로 가기
 
 	@RequestMapping("/getSearchBoardCategiry2Form")
 	public String getSearchBoardCategiry2Form(BoardVO vo) {
 		return "board/getSearchBoardCategiry2";
-		
+
 	}
 
 	// 2번 자랑하기게시판리스트(ajax)
@@ -270,16 +330,19 @@ public class Controller4 {
 		//
 		return map;
 	}// end of getSearchBoardCategiry2
-	
 
 	// 2번 자랑하기 단건 조회
 	@GetMapping("/getBoard2")
 	public String getBoard2(Model model, BoardVO vo) {
 		model.addAttribute("board", boardService.getBoard(vo));
+
+		// 조회수 +1
+		boardService.updateViews(vo);
+
 		return "board/getBoard2";
 	}
-	
-	// 자랑하기 수정 폼 
+
+	// 자랑하기 수정 폼
 	@GetMapping("/updateBoard2")
 	public String updateBoard2(BoardVO vo, Model model) {
 		System.out.println("관리자 게시판관리 수정 updateBoard2의 vo " + vo);
@@ -290,20 +353,65 @@ public class Controller4 {
 
 	// 자랑하기 수정 처리
 	@PostMapping("/updateBoard2")
-	public String updateBoard2Proc(BoardVO vo) {
+	public String updateBoard2Proc(BoardVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		// 첨부파일처리
+		// pom, servlet에 추가
+		MultipartFile[] images = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String filenames = "";
+		boolean start = true;
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/board2");
+		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+		// 새로운 파일이 등록되었는지 확인
+		String category = vo.getCategory();
+		for (MultipartFile image : images) {
+			if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
+				String filename = image.getOriginalFilename();
+				// 파일명 중복체크 -> rename
+				File rename = FileRenamePolicy.rename(new File(path, filename));
+				// 업로드된 파일명
+				// rename.getName()
+				if (!start) {
+					filenames += ",";
+				} else {
+					start = false;
+				}
+				filenames += rename.getName();
+				// 파일명을 읽어내는게 getName()
+				// 임시폴더에서 업로드 폴더로 파일이동
+				image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+
+			} else {
+				// 새로운 파일이 등록되지않았다면
+				// 기존이미지를 그대로 사용
+				vo.setImage(request.getParameter("image"));
+
+			}
+		}
+		vo.setImage(filenames);
+		if (t_image.getOriginalFilename() != null && !t_image.getOriginalFilename().equals("")
+				&& t_image.getSize() > 0) {
+			String filename = t_image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+			vo.setT_image(rename.getName());
+		} else {
+			// 새로운 파일이 등록되지않았다면
+			// 기존이미지를 그대로 사용
+			vo.setT_image(request.getParameter("t_image"));
+		}
+//			String path="resources/images";
 		System.out.println("관리자 게시판관리 수정 updateBoard2의 vo2의 " + vo);
 		boardService.updateBoard2(vo);
-		
-		//자유게시판 수정시
-	
-		
-			
-		
-		
-			return "redirect:/getSearchBoardCategiry2Form";
-		
-	}
 
+		// 자유게시판 수정시
+		return "redirect:getBoard2?boardNumber=" + vo.getBoardNumber();
+	}
 
 	// 2번 자랑하기 글쓰기 폼
 	@GetMapping("/insertBoard2")
@@ -317,37 +425,46 @@ public class Controller4 {
 	public String insertBoard2Proc(BoardVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
 		System.out.println(vo);
 		// 첨부파일처리
-		// pom , servlet에 추가
-		MultipartFile image = vo.getUploadFile();
+		// pom, servlet에 추가
+		MultipartFile[] images = vo.getUploadFile();
 		MultipartFile t_image = vo.getT_uploadFile();
+		String filenames = "";
+		boolean start = true;
 		String path = request.getSession().getServletContext().getRealPath("/resources/images/board2");
 		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
-		System.out.println("경로: " + path);
-		if (image != null && !image.isEmpty() && image.getSize() > 0) {
-			String filename = image.getOriginalFilename();
+		for (MultipartFile image : images) {
+			if (image != null && !image.isEmpty() && image.getSize() > 0) {
+				String filename = image.getOriginalFilename();
+				// 파일명 중복체크 -> rename
+				File rename = FileRenamePolicy.rename(new File(path, filename));
+				// 업로드된 파일명
+				// rename.getName()
+				if (!start) {
+					filenames += ",";
+				} else {
+					start = false;
+				}
+				filenames += rename.getName();
+				// 파일명을 읽어내는게 getName()
+				// 임시폴더에서 업로드 폴더로 파일이동
+				image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+
+			}
+		}
+		vo.setImage(filenames);
+
+		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
+			String filename = t_image.getOriginalFilename();
 			// 파일명 중복체크 -> rename
 			File rename = FileRenamePolicy.rename(new File(path, filename));
 			// 업로드된 파일명
 			// rename.getName()
 			// 파일명을 읽어내는게 getName()
 			// 임시폴더에서 업로드 폴더로 파일이동
-			image.transferTo(rename); // transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
-			vo.setImage(rename.getName());
-
-		}
-
-		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
-			String filename = t_image.getOriginalFilename();
-			// 파일명 중복체크 ->rename
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			// 업로드된 파일명
-			// rename.getName()
-			// 파일명을 읽어내는게 getName()
-			// 임시폴더에서 업로드 폴더로 파일이동
-			t_image.transferTo(rename);// transferTo: 이동한다는 뜻 괄호안에 업로드 위치를 정함)
+			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
 			vo.setT_image(rename.getName());
 		}
-		// String path = "resources/images";
+//			String path="resources/images";
 		boardService.insertBoard2(vo);
 		return "redirect:/getSearchBoardCategiry2Form";
 	}
@@ -364,7 +481,7 @@ public class Controller4 {
 	// 1번 이벤트 전체조회로 가기
 
 	@RequestMapping("/getSearchEventAndNoticeSelectForm")
-	public String getSearchEventAndNoticeSelectForm( EventAndNoticeVO vo) {
+	public String getSearchEventAndNoticeSelectForm(EventAndNoticeVO vo) {
 		return "eventAndNotice/getSearchEventAndNoticeSelect";
 
 	}
@@ -372,23 +489,23 @@ public class Controller4 {
 	// 1번 이벤트게시판리스트(ajax)
 	@RequestMapping("/getSearchEventAndNoticeSelect")
 	@ResponseBody
-	public Map<String , Object> getSearchEventAndNoticeSelect(EventAndNoticeSearchVO vo , Paging paging){
-	Map<String , Object> map = new HashMap<String , Object>();
-	// 1.페이지 설정
-	paging.setPageUnit(6);	// 한페이지에 출력되는 레코드 건수
-	paging.setPageSize(10);	// 보이는 페이지 번호
-	// 2.초기페이지 설정
-	if(paging.getPage() == null)
-		paging.setPage(1);
-	// 3.값 추가
-	paging.setTotalRecord(eventAndNoticeService.getCount(vo));
-	vo.setStart(paging.getFirst());
-	vo.setEnd(paging.getLast());
-	List<EventAndNoticeVO> list = eventAndNoticeService.getSearchEventAndNoticeSelect(vo);
-	map.put("paging", paging);
-	map.put("list",list);
-	
-	return map;
+	public Map<String, Object> getSearchEventAndNoticeSelect(EventAndNoticeSearchVO vo, Paging paging) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 1.페이지 설정
+		paging.setPageUnit(6); // 한페이지에 출력되는 레코드 건수
+		paging.setPageSize(10); // 보이는 페이지 번호
+		// 2.초기페이지 설정
+		if (paging.getPage() == null)
+			paging.setPage(1);
+		// 3.값 추가
+		paging.setTotalRecord(eventAndNoticeService.getCount(vo));
+		vo.setStart(paging.getFirst());
+		vo.setEnd(paging.getLast());
+		List<EventAndNoticeVO> list = eventAndNoticeService.getSearchEventAndNoticeSelect(vo);
+		map.put("paging", paging);
+		map.put("list", list);
+
+		return map;
 	}// end of getSearchEventAndNoticeSelect
 
 	// 이벤트 등록
@@ -412,7 +529,6 @@ public class Controller4 {
 		boolean start = true;
 		String path = request.getSession().getServletContext().getRealPath("/resources/images/eventAndNotice1");
 		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
-		System.out.println("경로: " + path);
 		for (MultipartFile image : images) {
 			if (image != null && !image.isEmpty() && image.getSize() > 0) {
 				String filename = image.getOriginalFilename();
@@ -457,6 +573,10 @@ public class Controller4 {
 	public String getEventAndNotice1(EventAndNoticeVO vo, Model model) {
 		eventAndNoticeService.getEventAndNotice1(vo);
 		model.addAttribute("getEventAndNotice", eventAndNoticeService.getEventAndNotice1(vo));
+
+		// 기존의 게시글 자세히 보기에서 추가된 부분.조회수
+		eventAndNoticeService.updateViews(vo);
+
 		return "eventAndNotice/getEventAndNotice1";
 	}
 
@@ -472,25 +592,80 @@ public class Controller4 {
 
 	// 이벤트 처리
 	@PostMapping("/updateEventAndNotice1")
-	public String updateEventAndNotice1Proc(EventAndNoticeVO vo) {
+	public String updateEventAndNotice1Proc(EventAndNoticeVO vo, HttpServletRequest request)
+			throws IllegalStateException, IOException {
+
+		// 첨부파일처리
+		// pom, servlet에 추가
+		MultipartFile[] images = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String filenames = "";
+		boolean start = true;
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/eventAndNotice1");
+		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+		// 새로운 파일이 등록되었는지 확인
+		String category = vo.getCategory();
+		for (MultipartFile image : images) {
+			if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
+				String filename = image.getOriginalFilename();
+				// 파일명 중복체크 -> rename
+				File rename = FileRenamePolicy.rename(new File(path, filename));
+				// 업로드된 파일명
+				// rename.getName()
+				if (!start) {
+					filenames += ",";
+				} else {
+					start = false;
+				}
+				filenames += rename.getName();
+				// 파일명을 읽어내는게 getName()
+				// 임시폴더에서 업로드 폴더로 파일이동
+				image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+
+			} else {
+				// 새로운 파일이 등록되지않았다면
+				// 기존이미지를 그대로 사용
+				vo.setImage(request.getParameter("image"));
+
+			}
+		}
+		vo.setImage(filenames);
+		if (t_image.getOriginalFilename() != null && !t_image.getOriginalFilename().equals("")
+				&& t_image.getSize() > 0) {
+			String filename = t_image.getOriginalFilename();
+			// 파일명 중복체크 -> rename
+			File rename = FileRenamePolicy.rename(new File(path, filename));
+			// 업로드된 파일명
+			// rename.getName()
+			// 파일명을 읽어내는게 getName()
+			// 임시폴더에서 업로드 폴더로 파일이동
+			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+			vo.setT_image(rename.getName());
+		} else {
+			// 새로운 파일이 등록되지않았다면
+			// 기존이미지를 그대로 사용
+			vo.setT_image(request.getParameter("t_image"));
+		}
+//			String path="resources/images";
 		System.out.println("updateEventAndNotice1Proc의 vo" + vo);
 		eventAndNoticeService.updateEventAndNotice1(vo);
-		return "redirect:/getSearchEventAndNoticeSelectForm?category=1";
+
+		return "redirect:getEventAndNotice1?eanNumber=" + vo.getEanNumber();
 	}
-	
+
 	// 공지사항 게시판 선택(전체조회)
 	@GetMapping("getSearchEventAndNoticeSelect2")
-	public String boardList(PagingVOCr4 vo, Model model
-			, @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
-		
+	public String boardList(PagingVOCr4 vo, Model model,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
+
 		int total = eventAndNoticeService.countBoard();
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "5";
 		} else if (nowPage == null) {
 			nowPage = "1";
-		} else if (cntPerPage == null) { 
+		} else if (cntPerPage == null) {
 			cntPerPage = "5";
 		}
 		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
@@ -520,7 +695,6 @@ public class Controller4 {
 		boolean start = true;
 		String path = request.getSession().getServletContext().getRealPath("/resources/images/eventAndNotice2");
 		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
-		System.out.println("경로: " + path);
 		for (MultipartFile image : images) {
 			if (image != null && !image.isEmpty() && image.getSize() > 0) {
 				String filename = image.getOriginalFilename();
@@ -542,18 +716,7 @@ public class Controller4 {
 		}
 		vo.setImage(filenames);
 
-		if (t_image != null && !t_image.isEmpty() && t_image.getSize() > 0) {
-			String filename = t_image.getOriginalFilename();
-			// 파일명 중복체크 -> rename
-			File rename = FileRenamePolicy.rename(new File(path, filename));
-			// 업로드된 파일명
-			// rename.getName()
-			// 파일명을 읽어내는게 getName()
-			// 임시폴더에서 업로드 폴더로 파일이동
-			t_image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
-			vo.setT_image(rename.getName());
-		}
-//				String path="resources/images";
+//			String path="resources/images";
 		eventAndNoticeService.insertEventAndNotice2(vo);
 
 		return "redirect:/getSearchEventAndNoticeSelect2";
@@ -565,6 +728,9 @@ public class Controller4 {
 	public String getEventAndNotice2(EventAndNoticeVO vo, Model model) {
 		eventAndNoticeService.getEventAndNotice2(vo);
 		model.addAttribute("getEventAndNotice", eventAndNoticeService.getEventAndNotice2(vo));
+
+		// 조회수+1
+		eventAndNoticeService.updateViews(vo);
 		return "eventAndNotice/getEventAndNotice2";
 	}
 
@@ -580,35 +746,106 @@ public class Controller4 {
 
 	// 공지사항 처리
 	@PostMapping("/updateEventAndNotice2")
-	public String updateEventAndNotice2Proc(EventAndNoticeVO vo) {
-		System.out.println("updateEventAndNotice2Proc의 vo" + vo);
+	public String updateEventAndNotice2Proc(EventAndNoticeVO vo, HttpServletRequest request)
+			throws IllegalStateException, IOException {
+		// 첨부파일처리
+		// pom, servlet에 추가
+		MultipartFile[] images = vo.getUploadFile();
+		MultipartFile t_image = vo.getT_uploadFile();
+		String filenames = "";
+		boolean start = true;
+		String path = request.getSession().getServletContext().getRealPath("/resources/images/eventAndNotice2");
+		// 내 소스 파일에 바로 업로드(servlet-context.xml에 추가해야함)
+		// 새로운 파일이 등록되었는지 확인
+		String category = vo.getCategory();
+		for (MultipartFile image : images) {
+			if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
+				String filename = image.getOriginalFilename();
+				// 파일명 중복체크 -> rename
+				File rename = FileRenamePolicy.rename(new File(path, filename));
+				// 업로드된 파일명
+				// rename.getName()
+				if (!start) {
+					filenames += ",";
+				} else {
+					start = false;
+				}
+				filenames += rename.getName();
+				// 파일명을 읽어내는게 getName()
+				// 임시폴더에서 업로드 폴더로 파일이동
+				image.transferTo(rename); // transferTo:이동한다는뜻 괄호안에 업로드 위치를 정함)
+
+			} else {
+				// 새로운 파일이 등록되지않았다면
+				// 기존이미지를 그대로 사용
+				vo.setImage(request.getParameter("image"));
+
+			}
+		}
+		vo.setImage(filenames);
+		System.out.println("관리자 게시판관리 수정 updateEventAndNotice2 vo의 " + vo);
 		eventAndNoticeService.updateEventAndNotice2(vo);
-		return "redirect:/getSearchEventAndNoticeSelect2";
+		return "redirect:getEventAndNotice2?eanNumber=" + vo.getEanNumber();
 	}
 
 	// 공지사항, 이벤트 삭제
 	@PostMapping("/deleteEventAndNotice")
-	public String deleteEventAndNoticeProc(EventAndNoticeVO vo ,HttpServletRequest request) {
+	public String deleteEventAndNoticeProc(EventAndNoticeVO vo, HttpServletRequest request) {
 		System.out.println("삭제 vo " + vo);
 		eventAndNoticeService.deleteEventAndNotice(vo);
 		String old_url = request.getHeader("Referer");
-		//System.out.println("================="+old_url);
-		
-		//이벤트 삭제시
-		if(old_url.contains("getEventAndNotice1"))
-		{
+		// System.out.println("================="+old_url);
+
+		// 이벤트 삭제시
+		if (old_url.contains("getEventAndNotice1")) {
 			return "redirect:/getSearchEventAndNoticeSelectForm?category=1";
-		//공지사항 삭제시			
-		}else {
-			
+			// 공지사항 삭제시
+		} else {
+
 			return "redirect:/getSearchEventAndNoticeSelect2";
 		}
-		
-		
+
 	}
 
 	// ####★★문의하기-신고하기 에 관한 컨트롤러 ★★ (question & answer 테이블 함께 사용)
 
+	
+	//마이페이지-일반사용자-문의내역 출력
+	@GetMapping("/getSearchQuestion99")
+	public String getSearchQuestion99(HttpSession session ,PagingVOCr4 vo, Model model ,
+			@RequestParam(value="nowPage", required=false)String nowPage ,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		
+		// 건수
+		vo.setMemberId((String)session.getAttribute("loginID"));
+		int total = questionService.countQuestion4(vo);
+		
+		// 쿼리실행
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		vo.setMemberId((String)session.getAttribute("loginID"));
+		model.addAttribute("question", questionService.getSearchQuestion99(vo));
+		
+		
+		model.addAttribute("paging", vo);	
+		
+		
+		/*
+		 * QuestionVO vo1 =new QuestionVO(); 
+		 * vo1.setMemberId(vo.getMemberId());
+		 * model.addAttribute("question", questionService.getSearchQuestion99(vo1));
+		 */
+		return "myPage/getSearchQuestion99";
+	}
 	// 페이징 처리에 관한것.
 
 	// 상품문의
@@ -696,7 +933,8 @@ public class Controller4 {
 	public String insertQuestion2Proc(QuestionVO vo) {
 		System.out.println(vo);
 		questionService.insertQuestion2(vo);
-		return "redirect:/insertQuestion2";
+		return "admin/question2success";
+		/* "redirect:/insertQuestion2"; */
 	}
 
 	@GetMapping("/insertQuestion3") // 문의하기(유저) 3.신고접수
@@ -782,13 +1020,13 @@ public class Controller4 {
 		answerService.insertAnswer2Cr4(vo);
 		return "redirect:/getSearchQuestionSelect2";
 	}
-	
+
 	@PostMapping("/insertAnswer299Cr4") // 사업자가 문의하기 답장 처리 하는 것
 	public String insertAnswer299Cr4Proc(AnswerVO vo) {
 		answerService.insertAnswer2Cr4(vo);
 		return "redirect:/getSearchQuestion";
 	}
-	
+
 	@GetMapping("/getQuestion3") // 문의하기 상세조회 신고하기
 	public String getQuestion3(QuestionVO vo, Model model) {
 		System.out.println(vo);

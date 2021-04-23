@@ -61,6 +61,7 @@
 		FROM BUY
 		WHERE FROMPERSON=#{fromPerson}
 		AND PRODUCTNUMBER=#{productNumber}
+		AND REVIEWNUMBER IS NULL
 	</select>
 	
 	<!-- 구매평등록시 Buy테이블에 리뷰번호 등록 -->

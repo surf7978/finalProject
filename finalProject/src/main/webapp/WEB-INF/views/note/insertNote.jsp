@@ -31,7 +31,7 @@
 		<table border="1">
 			<tr>
 				<th>유형</th>
-				<td><select id="category1" name="category1">
+				<td width="300px;"><select id="category1" name="category1">
 						<option>선택해주세요</option>
 						<option value="수술/치료">수술/치료</option>
 						<option value="예방접종">예방접종</option>

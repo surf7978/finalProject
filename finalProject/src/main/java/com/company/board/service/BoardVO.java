@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class BoardVO {
 	String boardNumber;
-	String image;
+	String image = " ";
 	String title;
 	String calendar;
 	String content;
@@ -17,7 +17,7 @@ public class BoardVO {
 	String category;
 	String memberId;
 	String t_image;
-	MultipartFile uploadFile;
+	MultipartFile[] uploadFile;
 	MultipartFile t_uploadFile;
 
 }

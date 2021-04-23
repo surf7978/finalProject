@@ -6,8 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <!-- 우편번호 조회 기능 -->
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
@@ -103,6 +101,12 @@
 		});
 	}); 
 </script>
+<!-- 휴대폰인증페이지 출력 -->
+<script>
+	function coolsms(){
+		window.open("coolsms", "본인인증", "width=1000px, height=200px");
+	}
+</script>
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
@@ -138,6 +142,7 @@
 			<tr>
 				<td><input value="연 락 처" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
 				<td><input id="phone" name="phone" style="width:400px;" value="${business.phone}"></td>
+				<td><input type="button" onclick="coolsms()" style="padding:10px; width:100px; border:none; border-radius:5px; background-color:#87ceeb; color:white;" value="본인인증"></td>
 			</tr>
 			<tr>
 				<td><input value="이 메 일" style="font-size:20px; text-align:center; width:120px; border:none;" readonly></td>
@@ -170,7 +175,7 @@
 		<button type="reset" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#ff6347; color:white;">취 소</button>
 		 -->
 		&nbsp;
-		<button type="button" onclick="location.href='/finalProject'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
+		<button type="button" onclick="location.href='${pageContext.request.contextPath}'" style="padding:10px; width:160px; border:none; border-radius:5px; background-color:#778899; color:white;">뒤로가기</button>
 	<br><br>
 	<!-- 
 	<c:if test="${loginID ne 'admin'}">
