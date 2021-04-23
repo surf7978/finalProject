@@ -121,7 +121,7 @@ public class Controller2 {
 	@RequestMapping("/getSearchPayAndDeliveryForm")
 	public String getSearchPayAndDeliveryForm(PayAndDeliveryVO vo, Model model, HttpSession session, Paging paging) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
-		paging.setPageUnit(5); //한페이지에 출력되는 레코드 건수
+		paging.setPageUnit(10); //한페이지에 출력되는 레코드 건수
 		paging.setPageSize(3); //페이지번호가 3개씩 보임
 		//페이징
 		if(vo.getPage() == null) {
@@ -146,7 +146,7 @@ public class Controller2 {
 	}
 
 	////////// 예약하기//////////////////
-	// 예약하기 날짜 페이지 호출
+	// 예약변경 날짜 페이지 호출
 	@GetMapping("/updateReservation")
 	public String updateReservation(ReservationVO vo, Model model, String pndNumber) {
 		vo.setPndNumber(pndNumber);
@@ -154,9 +154,28 @@ public class Controller2 {
 		return "empty/reservation/updateReservation";
 	}
 
-	// 예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
+	// 예약변경 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
 	@PostMapping("/updateReservation")
 	public void updateReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, HttpServletResponse response, Model model)
+			throws IOException {
+		reservationService.updateReservation(vo);
+		payAndDeliveryService.updateReservation2(vo1);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('예약되었습니다');opener.location.reload();window.close();</script>");
+		writer.close();
+	}
+	// 예약하기 날짜 페이지 호출
+	@GetMapping("/insertReservation")
+	public String insertReservation(ReservationVO vo, Model model, String pndNumber) {
+		vo.setPndNumber(pndNumber);
+		model.addAttribute("reservation", reservationService.getReservation(vo));
+		return "empty/reservation/insertReservation";
+	}
+
+	// 예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
+	@PostMapping("/insertReservation")
+	public void insertReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, HttpServletResponse response, Model model)
 			throws IOException {
 		reservationService.updateReservation(vo);
 		payAndDeliveryService.updateReservation2(vo1);
@@ -372,6 +391,7 @@ public class Controller2 {
 	@RequestMapping("/getHospital")
 	public String getHospital(HospitalVO vo, Model model, String seq, HttpSession session) {
 		vo.setSeq(seq);
+		System.out.println(vo+"1111111111111111111111111111111111111111111111111");
 		model.addAttribute("hospital", hospitalService.getHospital(vo));
 		if (session.getAttribute("loginID") != null) {
 			ReservationVO vo1 = new ReservationVO();
@@ -430,9 +450,12 @@ public class Controller2 {
 
 	// 상세조회에서 사업자 구매평 등록페이지 이동
 	@GetMapping("/insertReview")
-	public String insertReview(ReservationVO vo, Model model, HttpSession session) {
+	public String insertReview(ReservationVO vo, Model model, HttpSession session, MemberVO mvo) {
+		String loginID = (String) session.getAttribute("loginID");
 		vo.setMemberId((String) session.getAttribute("loginID"));
+		mvo.setMemberId(loginID);
 		model.addAttribute("reservation", reservationService.getViewReservation(vo));
+		model.addAttribute("name", memberService.getMember(mvo).getName());
 		return "empty/reviewAndQuestion/insertReview";
 	}
 
@@ -446,6 +469,8 @@ public class Controller2 {
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
+	 
+	
 	// 상세조회에서 상품문의 등록페이지 이동
 	@GetMapping("/insertQuestionBusi")
 	public String insertQuestionBusi(HospitalVO vo, MemberVO vo1, String seq, String businessNumber, Model model,

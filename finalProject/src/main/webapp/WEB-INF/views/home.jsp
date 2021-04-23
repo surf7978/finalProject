@@ -133,18 +133,19 @@
                     		})
                     	</script>
                         <ul>
-                            <li name="active" class="active" value="hospital">hospital</li>
-                            <li name="active" value="cafe">cafe</li>
-                            <li name="active" value="hotel">hotel</li>
-                            <li name="active" value="beauty">beauty</li>
+                          <li name="active" class="active" value="hospital">hospital</li>
+                          <li name="active" 				 value="cafe">cafe</li>
+                          <li name="active" 				 value="hotel">hotel</li>
+                          <li name="active" 				 value="beauty">beauty</li>
                         </ul>
                     </div>
+                    <input type="">
                     <sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
 					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
 					 user="final" password="a20210409A"/>
-	                <sql:query var="rs" dataSource="${ds }">
-					    select * from adminView where code = 'hospital'
-					</sql:query>
+		                <sql:query var="rs" dataSource="${ds }">
+						    select * from adminView where code = 'hospital'
+						</sql:query>
                     <div class="product-slider owl-carousel">
                         <c:if test="${not empty rs.rows }">
                     		<c:forEach items="${rs.rows }" var="list">

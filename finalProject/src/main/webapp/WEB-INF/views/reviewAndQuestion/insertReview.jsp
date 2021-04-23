@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,21 +10,21 @@
 <body>
 <h3>상품 구매평 등록</h3>
 <form action="insertReview" method="post">
-<input type="hidden" id="memberId" name="memberId" value="${reservation.memberId }">
-<input type="hidden" id="probisNumber" name="probisNumber" value="${reservation.bisNumber }">
-<input type="text" id="reservationNumber" name="reservationNumber" value="${reservation.reservationNumber }">
+<input type="hidden" id="memberId" name="memberId" value="${loginID }">
+<input type="hidden" id="memberId" name="memberId" value="${loginID }">
+<input type="hidden" id="probisNumber" name="probisNumber" value="${reservation[0].bisNumber }">
+<select id="reservationNumber" name="reservationNumber">
+<c:forEach items="${reservation }" var="res">
+<c:if test="${not empty res.reservationDate }">
+<option value="${res.reservationNumber }">예약번호: ${res.reservationNumber }, 옵션명: ${res.optionName }, 예약날짜: ${res.reservationDate } </option>
+</c:if>
+</c:forEach>
+</select>
+
 <table border="1">
 <tr>
 <th>작성자</th>
-<td><input type="text" id="writer" name="writer" value="${reservation.name }" readonly="readonly"></td>
-</tr>
-<tr>
-<th>옵션명</th>
-<td><input type="text" value="${reservation.optionName }" readonly="readonly"></td>
-</tr>
-<tr>
-<th>예약날짜</th>
-<td><input type="text" value="${reservation.reservationDate }" readonly="readonly"></td>
+<td><input type="text" id="writer" name="writer" value="${name }" readonly="readonly"></td>
 </tr>
 <tr>
 <th>제목</th>
