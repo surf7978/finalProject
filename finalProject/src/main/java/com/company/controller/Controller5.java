@@ -353,7 +353,7 @@ public class Controller5 {
 
 		return "business/getSearchInfo";
 	}
-
+	
 	// 사업자-통합 등록 폼
 	@GetMapping("/insertIntegratedForm")
 	public String insertIntegratedForm() {
