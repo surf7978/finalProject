@@ -510,15 +510,17 @@ public class Controller1 {
 		return "myPage/getReview99";
 	}
 	
-	@Autowired QuestionService questionService;
-	//마이페이지-일반사용자-문의내역 출력
-	@GetMapping("/getSearchQuestion99")
-	public String getSearchQuestion99(MemberVO vo, Model model) {
-		QuestionVO vo1 =new QuestionVO();
-		vo1.setMemberId(vo.getMemberId());
-		model.addAttribute("question", questionService.getSearchQuestion99(vo1));
-		return "myPage/getSearchQuestion99";
-	}
+	
+	  @Autowired QuestionService questionService; //마이페이지-일반사용자-문의내역 출력
+
+//	 @GetMapping("/getSearchQuestion99") 
+//	 public String getSearchQuestion99(MemberVO vo, Model model)  { 
+//	 QuestionVO vo1 =new QuestionVO(); 
+//	 vo1.setMemberId(vo.getMemberId());
+//	 model.addAttribute("question", questionService.getSearchQuestion99(vo1));
+//	  return "myPage/getSearchQuestion99"; 
+//	  }
+	 
 	
 	//로그인화면 이동
 	@GetMapping("/buyCancel")

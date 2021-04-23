@@ -27,15 +27,15 @@
 
     /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}
-.sub_news a{color:#383838;text-decoration:none}
-.sub_news{width:50%;border-bottom:1px solid #999;color:#666;font-size:12px;table-layout:fixed}
-.sub_news caption{display:none}
-.sub_news th{padding:5px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color:#e7ab3c;color:white;font-weight:500;line-height:20px;vertical-align:top}
-.sub_news td{padding:8px 0 9px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
-.sub_news .title{text-align:left; padding-left:15px; font-size:13px;}
-.sub_news .title .pic,.sub_news .title .new{margin:0 0 2px;vertical-align:middle}
-.sub_news .title a.comment{padding:0;background:none;color:#f00;font-size:12px;font-weight:bold}
-.sub_news tr.reply .title a{padding-left:16px;background:url(첨부파일/ic_reply.png) 0 1px no-repeat}
+
+.sub_news{width:700px;border-bottom:1px solid #999;color:black;font-size:12px;table-layout:fixed;}
+
+.sub_news th{padding:10px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
+.sub_news td{padding:20px 0 9px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
+
+
+
+
 /* //게시판 리스트 목록 */
 
  tr.th{
@@ -43,10 +43,18 @@
  	font-size: 17px;
  }
 </style>
+<script>
+	function selChange() {
+		var sel = document.getElementById('cntPerPage').value;
+		location.href="getSearchQuestion99?nowPage=${paging.nowPage}&cntPerPage="+sel;
+	}
+</script>
 <body>
-<div style="width:60%;">
+<div style="width:50%; right: 300px;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-<input value="문의한 내역" style="font-size:40px; text-align:center; width:450px; border:none;" readonly><br><br>
+<div id="contents">
+<h3>문의한 내역</h3><br><br>
+<br>
 <table class="sub_news" border="1">
 
 
@@ -70,7 +78,26 @@
 </tbody>
 </table>
 <br>
-    
+  
 </div>
+	<div  style="display: block; text-align: right;">		
+		<c:if test="${paging.startPage != 1 }">
+			<a href="getSearchQuestion99?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		</c:if>
+		<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<c:choose>
+				<c:when test="${p == paging.nowPage }">
+					<b>${p }</b>
+				</c:when>
+				<c:when test="${p != paging.nowPage }">
+					<a href="getSearchQuestion99?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${paging.endPage != paging.lastPage}">
+			<a href="getSearchQuestion99?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+		</c:if>
+	</div>  
+	</div>
 </body>
 </html>

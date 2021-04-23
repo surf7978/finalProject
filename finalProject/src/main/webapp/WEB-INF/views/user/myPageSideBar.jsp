@@ -92,7 +92,7 @@
 							<br>
 							<button onclick="location.href='getSearchBoardCategory199?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;내가쓴글</button><br> 
 							<button onclick="location.href='getSearchReview98?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기내역</button><br>
-							<button onclick="location.href='getSearchQuestion99?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의한 내역</button><br>
+							<button onclick="location.href='getSearchQuestion99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의한 내역</button><br>
 							<!-- 
 							<button onclick="location.href='userAnswer'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;답변 받은 내역</button><br>
 							 -->

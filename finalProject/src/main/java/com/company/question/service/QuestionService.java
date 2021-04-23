@@ -41,6 +41,7 @@ public interface QuestionService {
 	public int countQuestion1();
 	public int countQuestion2();
 	public int countQuestion3();
+	public int countQuestion4(PagingVOCr4 vo); // 유저 문의내역조회 갯수
 	
 		
 	// 페이징 처리 게시글 조회
@@ -55,6 +56,6 @@ public interface QuestionService {
 	public List<QuestionVO> getSearchQuestionProbis(QuestionVO vo);	//병원, 카페 등 상품 상세보기에서 상품문의글 리스트 조회
 	public QuestionVO getQuestionProbis(QuestionVO vo);		//병원, 카페 등 상품 상세보기에서 상품문의글 단건조회
 	
-	public List<QuestionVO> getSearchQuestion99(QuestionVO vo);	//마이페이지-유저-문의내역
+	public List<QuestionVO> getSearchQuestion99(PagingVOCr4 vo);	//마이페이지-유저-문의내역
 	
 }

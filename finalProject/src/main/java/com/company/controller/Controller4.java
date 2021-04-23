@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -774,6 +775,39 @@ public class Controller4 {
 
 	// ####★★문의하기-신고하기 에 관한 컨트롤러 ★★ (question & answer 테이블 함께 사용)
 
+	
+	//마이페이지-일반사용자-문의내역 출력
+	@GetMapping("/getSearchQuestion99")
+	public String getSearchQuestion99(HttpSession session ,PagingVOCr4 vo, Model model ,
+			@RequestParam(value="nowPage", required=false)String nowPage ,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		vo.setMemberId((String)session.getAttribute("loginID"));
+		int total = questionService.countQuestion4(vo);
+		
+		vo = new PagingVOCr4(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		vo.setMemberId((String)session.getAttribute("loginID"));
+		model.addAttribute("question", questionService.getSearchQuestion99(vo));
+		
+		model.addAttribute("paging", vo);	
+		
+		
+		/*
+		 * QuestionVO vo1 =new QuestionVO(); 
+		 * vo1.setMemberId(vo.getMemberId());
+		 * model.addAttribute("question", questionService.getSearchQuestion99(vo1));
+		 */
+		return "myPage/getSearchQuestion99";
+	}
 	// 페이징 처리에 관한것.
 
 	// 상품문의
@@ -861,7 +895,8 @@ public class Controller4 {
 	public String insertQuestion2Proc(QuestionVO vo) {
 		System.out.println(vo);
 		questionService.insertQuestion2(vo);
-		return "redirect:/insertQuestion2";
+		return "admin/question2success";
+		/* "redirect:/insertQuestion2"; */
 	}
 
 	@GetMapping("/insertQuestion3") // 문의하기(유저) 3.신고접수

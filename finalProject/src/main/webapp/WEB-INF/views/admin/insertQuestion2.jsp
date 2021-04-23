@@ -32,7 +32,7 @@
 </script>
 <style>
 		div.send{
-			
+		
 			text-align: center;
 		}
 		input.send{
