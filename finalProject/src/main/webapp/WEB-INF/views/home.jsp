@@ -123,12 +123,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8">
+                    	<!-- 
                     <div class="filter-control">
                     	<script>
                     		$(function(){
                     			$("[name=active]").on("click",function(){
                     				$("[name=active]").attr("class", "unActive");
                     				$(this).attr("class", "active");
+                    				$("#activeValue").val($(this).html())
                     			})
                     		})
                     	</script>
@@ -138,14 +140,17 @@
                           <li name="active" 				 value="hotel">hotel</li>
                           <li name="active" 				 value="beauty">beauty</li>
                         </ul>
+                    	<input type="hidden" id="activeValue" name="activeValue" value="hospital">
                     </div>
-                    <input type="">
+                    	 -->
+                    <!-- sql문에 줄 업체 항목 -->
+                    <!-- 선택한 항목에 따라 전체리스트 출력 -->
                     <sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
 					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
 					 user="final" password="a20210409A"/>
-		                <sql:query var="rs" dataSource="${ds }">
-						    select * from adminView where code = 'hospital'
-						</sql:query>
+	                <sql:query var="rs" dataSource="${ds }">
+					    select * from adminView
+					</sql:query>
                     <div class="product-slider owl-carousel">
                         <c:if test="${not empty rs.rows }">
                     		<c:forEach items="${rs.rows }" var="list">
