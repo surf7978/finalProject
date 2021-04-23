@@ -42,12 +42,12 @@
 </head>
 <body>
 	<form name="frm" id="frm" action="ReserinsertPayProduct" method="post">
-		<input value="${pay.bisNumber }" name="bisNumber">
-		<input name="category">
-		<input name="optionName" value="${pay.optionName }">
-		<input name="businessNumber" value="${pay.businessNumber }">
-		<input name="memberId" value="${loginID}"> 
-		<input name="sumPrice" value="${pay.resultPrice }"> 
+		<input value="${pay.bisNumber }" type="hidden" name="bisNumber">
+		<input name="category" type="hidden">
+		<input name="optionName" type="hidden" value="${pay.optionName }">
+		<input name="businessNumber" type="hidden" value="${pay.businessNumber }">
+		<input name="memberId" type="hidden" value="${loginID}"> 
+		<input name="sumPrice" type="hidden" value="${pay.resultPrice }"> 
 	</form>
 </body>
 </html>
