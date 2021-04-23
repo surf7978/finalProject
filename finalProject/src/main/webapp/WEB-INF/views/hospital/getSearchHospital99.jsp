@@ -266,7 +266,7 @@
 				<button id="btn">상품등록</button>
 			</c:if>
 		</c:if>
-		<h1>병원 전ㅇㅇ체리스트</h1>
+		<h1>병원 전체리스트</h1>
 		<div id="pro_location">
 			<ul>
 				<li><a class="after">수술/치료</a>
