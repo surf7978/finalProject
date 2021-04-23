@@ -34,7 +34,7 @@ public class ReservationServiceimpl implements ReservationService{
 		return ReservationMapper.deleteReservation(vo);
 	}
 	@Override
-	public ReservationVO getViewReservation(ReservationVO vo) {
+	public List<ReservationVO> getViewReservation(ReservationVO vo) {
 		return ReservationMapper.getViewReservation(vo);
 	}
 	// 사업자번호로 예약리스트 조회

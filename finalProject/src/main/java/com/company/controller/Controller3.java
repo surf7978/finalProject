@@ -2,6 +2,7 @@ package com.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -171,6 +172,7 @@ public class Controller3 {
 			if (image.getOriginalFilename() != null && !image.getOriginalFilename().equals("") && image.getSize() > 0) {
 				String filename = image.getOriginalFilename();
 				// 파일명 중복체크 -> rename
+				new File(path + request.getParameter(filename)).delete();
 				File rename = FileRenamePolicy.rename(new File(path, filename));
 				// 업로드된 파일명
 				// rename.getName()
@@ -384,10 +386,17 @@ public class Controller3 {
 
 	// 사업체 결제시 insert
 	@RequestMapping("/ReserinsertPayProduct")
-	public void ReserinsertPayProduct(PayAndDeliveryVO padvo, ReservationVO rvo) {
+	public void ReserinsertPayProduct(PayAndDeliveryVO padvo, ReservationVO rvo, HttpServletResponse response) throws IOException {
 		padService.insertPayAndDelivery2(padvo);
 		rvo.setPndNumber(padvo.getPndNumber());
 		rsvService.insertPayReservation(rvo);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>if(confirm(\"예약하시겠습니까\")==true){location.href=\"getSearchReservation\";"
+				+ "		}else{"
+				+ "			location.href=\"${pageContext.request.contextPath}\";"
+				+ "		}	</script>");
+		writer.close();
 	}
 
 	// 병원 결제form
