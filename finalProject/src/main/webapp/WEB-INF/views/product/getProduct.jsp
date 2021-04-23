@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +64,14 @@
 			ESCbtn.parent().prev().append("<input type='button' class='getQuestion' value='▼' style='font-size:5px; border-radius:50px; border:none; background-color:#87ceeb;'>")
 			ESCbtn.parent().empty();
 		})
+		//부드럽게 스크롤
+		$(".pro_menu ul li a[href^='#']").on("click", function(e) {
+				e.preventDefault();
+				var position = $($(this).attr("href")).offset().top;
+			   $("html, body").animate({
+				   scrollTop : position
+			   }, 1000);
+		});
 	})
 	
 </script>
@@ -255,7 +264,7 @@ $(document).ready(function() { //function시작
 								<dl>
 									<dt>초대가</dt>
 									<dd>
-										<strong>${optionPrice[0] }원</strong>
+										<strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${optionPrice[0] }"/>원</strong>
 									</dd>
 								</dl>
 							</div>
