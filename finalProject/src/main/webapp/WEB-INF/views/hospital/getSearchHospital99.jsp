@@ -41,7 +41,7 @@
 		})//end of input
 	}//enf of checkbox
 	 
-	function getSearchHospitalLocation(p, val) {
+	 function getSearchHospitalLocation(p, val) {
 		/* 리스트 ajax */
 		console.log(val)
 		var category1= $("#pro_location ul li a.after").text();
@@ -91,9 +91,11 @@
 							var nav = $("<nav>");
 							var strong = $("<strong>").text(
 									response[i].name);
-							var p = $("<p>")
-									.text(response[i].price + "원");
-							$(nav).append(strong, p);
+							var p = $("<p>").css("font-size","15px")
+							.text(response[i].price + "원");
+							var p1 = $("<p>").css("font-size","15px")
+							.text(response[i].location.substring(0, 6));
+							$(nav).append(strong, p, p1);
 							$(li).append(input, div, nav);
 							$(ul).append(li);
 						})
@@ -124,7 +126,7 @@
 				}
 			}//end success
 		}); //end of ajax
-	}
+	} 
 	
 	function getSearchHospital99(p) {
 		/* 리스트 ajax */
@@ -173,9 +175,11 @@
 							var nav = $("<nav>");
 							var strong = $("<strong>").text(
 									response[i].name);
-							var p = $("<p>")
+							var p = $("<p>").css("font-size","15px")
 									.text(response[i].price + "원");
-							$(nav).append(strong, p);
+							var p1 = $("<p>").css("font-size","15px")
+									.text(response[i].location.substring(0, 6));
+							$(nav).append(strong, p, p1);
 							$(li).append(input, div, nav);
 							$(ul).append(li);
 						})
@@ -262,7 +266,7 @@
 				<button id="btn">상품등록</button>
 			</c:if>
 		</c:if>
-		<h1>병원 전체리스트</h1>
+		<h1>병원 전ㅇㅇ체리스트</h1>
 		<div id="pro_location">
 			<ul>
 				<li><a class="after">수술/치료</a>
@@ -331,8 +335,6 @@
 						<label for="cate03_10">심장검사</label>
 						<input type="checkbox" id="cate03_11" value="내시경검사">
 						<label for="cate03_11">내시경검사</label>
-						<input type="checkbox" id="cate03_12" value="슬개골검사">
-						<label for="cate03_12">슬개골검사</label>
 					</div></li>
 				<li><a>기타</a>
 					<div>
