@@ -39,6 +39,7 @@ function connect(){
 function disConnect(){
 	$("#btnDisConnect").on("click",function(){
 		//종료 로직
+		alert("연결이 종료되었습니다.");
 		$("#iframe").attr("src","");
 	})//end of btnConnect
 }//end of disConnect
