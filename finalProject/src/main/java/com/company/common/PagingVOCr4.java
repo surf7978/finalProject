@@ -5,7 +5,7 @@ public class PagingVOCr4 {
 		private int nowPage, startPage, endPage,cntPerPage, total, lastPage, start, end;
 		String memberId;
 		private int cntPage = 5;
-		
+		 
 		 
 		public PagingVOCr4() {
 		}
