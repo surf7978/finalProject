@@ -97,8 +97,10 @@ table td {
 				</div>
 				<hr>
 				<div class="image" style=" width: 50%;">
-					<img id="image"
-						src="resources/images/eventAndNotice2/${getEventAndNotice.image}">
+			<c:forTokens items="${getEventAndNotice.image}" delims="," var="file">
+				<img id="image"
+					src="resources/images/eventAndNotice2/${file}">
+			</c:forTokens>		
 				</div>
 			</div>
 			<br> <br>

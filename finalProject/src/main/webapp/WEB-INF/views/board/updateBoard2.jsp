@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객센터 신고하기</title>
+<title>자랑하기 수정</title>
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -93,7 +93,7 @@ table.table2 td {
 		<div id="aban_location"></div>
 		<div id="show">
 			<form id="frm" name="frm" onsubmit="return check()"
-				action="updateBoard2?boardNumber=${board.boardNumber}" method="post">
+				action="updateBoard2?boardNumber=${board.boardNumber}" method="post" encType="multipart/form-data" >
 
 
 				<table
@@ -116,8 +116,15 @@ table.table2 td {
 									<td><input type=text id="title" name="title" size="60"
 										value="${board.title}"></td>
 								</tr>
-
-								<tr>
+							    	<tr>
+										<td><input value="TitleImage" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+										<td><input type="file" id="t_image" name="t_uploadFile" size="100%" multiple="multiple"></td>
+									</tr>
+									<tr>
+										<td><input value="Image" style=" font-size:20px; text-align:center; width:100px; border:none;" readonly></td>
+										<td><input type="file" id="image" name="uploadFile" size="100%" multiple="multiple"></td>
+									</tr>
+									<tr>
 									<td><input value="내 용"
 										style="font-size: 20px; text-align: center; width: 100px; border: none;"
 										readonly></td>

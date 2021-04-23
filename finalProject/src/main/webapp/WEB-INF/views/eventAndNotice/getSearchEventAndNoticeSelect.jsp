@@ -60,7 +60,7 @@
 							var strong = $("<strong>").text(
 									response[i].title);
 							var p = $("<p>")
-									.text(response[i].startDate );
+									.text(response[i].startDate);
 							$(nav).append(strong, p);
 							$(li).append(input, div, nav);
 							$(ul).append(li);

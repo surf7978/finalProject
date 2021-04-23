@@ -28,11 +28,12 @@ public interface BoardService {
 
 	// 게시물 총 갯수
 	public int countBoard();
+	public int countBoard2(PagingVOCr4 vo);
 	
 	public int insertBoard2(BoardVO vo);	
 	public int insertBoard(BoardVO vo);
 	
-	public List<BoardVO> getSearchBoardCategory199(BoardVO vo); //일반사용자 내가쓴글 조회
+	public List<BoardVO> getSearchBoardCategory199(PagingVOCr4 vo); //일반사용자 내가쓴글 조회
 	
 	// 조회수 +1
 	public int updateViews(BoardVO vo);
