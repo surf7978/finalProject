@@ -10,7 +10,6 @@
 		<property name="URL" value="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" />
 		<!-- <property name="URL" value="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" /> -->
 
-
 		<property name="user" value="final" />
 		<property name="password" value="a20210409A" />
 	</bean>
