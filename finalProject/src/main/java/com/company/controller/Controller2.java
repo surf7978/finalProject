@@ -121,7 +121,7 @@ public class Controller2 {
 	@RequestMapping("/getSearchPayAndDeliveryForm")
 	public String getSearchPayAndDeliveryForm(PayAndDeliveryVO vo, Model model, HttpSession session, Paging paging) {
 		vo.setMemberId((String) session.getAttribute("loginID"));
-		paging.setPageUnit(5); //한페이지에 출력되는 레코드 건수
+		paging.setPageUnit(10); //한페이지에 출력되는 레코드 건수
 		paging.setPageSize(3); //페이지번호가 3개씩 보임
 		//페이징
 		if(vo.getPage() == null) {
@@ -146,7 +146,7 @@ public class Controller2 {
 	}
 
 	////////// 예약하기//////////////////
-	// 예약하기 날짜 페이지 호출
+	// 예약변경 날짜 페이지 호출
 	@GetMapping("/updateReservation")
 	public String updateReservation(ReservationVO vo, Model model, String pndNumber) {
 		vo.setPndNumber(pndNumber);
@@ -154,7 +154,7 @@ public class Controller2 {
 		return "empty/reservation/updateReservation";
 	}
 
-	// 예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
+	// 예약변경 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
 	@PostMapping("/updateReservation")
 	public void updateReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, HttpServletResponse response, Model model)
 			throws IOException {
@@ -163,6 +163,25 @@ public class Controller2 {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		writer.println("<script>alert('예약되었습니다');opener.opener.location.reload();opener.location.reload();window.close();</script>");
+		writer.close();
+	}
+	// 예약하기 날짜 페이지 호출
+	@GetMapping("/insertReservation")
+	public String insertReservation(ReservationVO vo, Model model, String pndNumber) {
+		vo.setPndNumber(pndNumber);
+		model.addAttribute("reservation", reservationService.getReservation(vo));
+		return "empty/reservation/insertReservation";
+	}
+
+	// 예약하기 날짜 시간 등록 ReservationVO&PayAndDeliveryVO update
+	@PostMapping("/insertReservation")
+	public void insertReservationProc(ReservationVO vo, PayAndDeliveryVO vo1, HttpServletResponse response, Model model)
+			throws IOException {
+		reservationService.updateReservation(vo);
+		payAndDeliveryService.updateReservation2(vo1);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+		writer.println("<script>alert('예약되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
 	}
 

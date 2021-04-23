@@ -72,7 +72,9 @@
 		<td>
 		<c:if test="${pad.category != '70' }">
 		<c:if test="${pad.buyState !='환불완료' }">
-			<button type="button" class="updateReservationBtn" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','updateReservation','width=550, height=500')">예약하기</button> 
+		<c:if test="${pad.buyState !='예약완료' }">
+			<button type="button" class="insertReservationBtn" onclick="window.open('insertReservation?pndNumber=${pad.pndNumber}','insertReservation','width=500, height=500')">예약하기</button>
+		</c:if>
 		</c:if>
 		</c:if>
 			<c:if test="${pad.category eq '70' }">
