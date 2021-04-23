@@ -469,7 +469,7 @@ public class Controller1 {
 		}
 		hospitalService.updateHospital(vo);
 		
-		return "redirect:/";
+		return "redirect:/getSearchHospitalForm99";
 	}
 	
 	// 병원상품 삭제
@@ -573,7 +573,7 @@ public class Controller1 {
 	
 	// 병원 리스트로 가기
 	@RequestMapping("/getSearchHospitalForm99")
-	public String getSearchProductForm(ProductVO vo) {
+	public String getSearchHospitalForm99() {
 		return "hospital/getSearchHospital99";
 	}
 	
