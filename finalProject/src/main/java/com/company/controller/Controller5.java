@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.company.animal.service.AnimalService;
+import com.company.animal.service.AnimalVO;
 import com.company.answer.service.AnswerService;
 import com.company.answer.service.AnswerVO;
 import com.company.bCart.service.BCartService;
@@ -105,6 +107,8 @@ public class Controller5 {
 	PayAndDeliveryService payAndDeliveryService;
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	AnimalService animalService;
 
 	// end of beans
 
@@ -638,6 +642,17 @@ public class Controller5 {
 		// 쿼리 결과 호출
 		// 일별 합계
 		List<Map<String, Object>> map = payAndDeliveryService.getAreaChart(vo);
+		return map;
+	}
+
+	// 마이페이지-사업자-통계 데이터4(pieChart)
+	@RequestMapping("/getAnimalChart") // 관리자만
+	@ResponseBody
+	public List<Map<String, Object>> getAnimalChart(PayAndDeliveryVO vo, AnimalVO avo, HttpSession session) {
+		// session ID 조회
+		String id = session.getAttribute("loginID").toString();
+		// ID값 분배
+		List<Map<String, Object>> map = animalService.getAnimalChart(avo);
 		return map;
 	}
 

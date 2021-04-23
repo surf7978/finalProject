@@ -86,4 +86,10 @@
 		DELETE FROM ANIMAL
 		WHERE MEMBERID=#{memberId}
 	</delete>
+	<!-- 관리자 동물차트 -->
+	<select id="getAnimalChart" resultType="map">
+	SELECT KIND, COUNT(KIND) COUNT
+	FROM ANIMAL
+	GROUP BY KIND
+	</select>
 </mapper>
