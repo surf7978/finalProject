@@ -170,7 +170,7 @@ a {
 						<td>
 							<a onclick="getSearchList1(1,'taxi')">택시</a>
 						</td>
-					</c:if>
+					</c:if>s
 					<c:if test="${param.menu == 2}">
 						<td><a onclick="getSearchList1(1,'edu')">교육</a></td>
 						<td><a onclick="getSearchList1(1,'beauty')">미용</a></td>
