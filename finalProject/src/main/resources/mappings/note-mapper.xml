@@ -49,7 +49,7 @@
 			, #{category1}
 			, #{category2}
 			, #{price}
-			, #{calendar}
+			, TO_DATE(#{calendar}, 'YYYY-MM-DD')
 			, #{content}
 			, #{animalNumber}
             , sysdate
@@ -63,7 +63,7 @@
 		 <if test="category1 != null">			 CATEGORY1 = #{category1}</if>
 		 <if test="category2 != null">			, CATEGORY2 = #{category2}</if>
 		 <if test="price != null">			, PRICE = #{price}</if>
-		 <if test="calendar != null">			, CALENDAR = #{calendar}</if>
+		 <if test="calendar != null">			, CALENDAR = , TO_DATE(#{calendar}, 'YYYY-MM-DD')</if>
 		 <if test="content != null">		, CONTENT = #{content}</if>
 		</set>
 	 WHERE NOTENUMBER = #{noteNumber}
