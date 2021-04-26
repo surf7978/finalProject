@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="resources/js/common.js"></script>
 
 <!-- 단건조회 아작스 -->
 <script>
@@ -83,13 +84,13 @@
 										.append("<hr>"));
 						var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count","readonly":"readonly"});
 						var inval = $(input).val();
-						var strong = $("<p>").css("text-align", "right").text("${hospital.price }");
+						var strong = $("<p>").css("text-align", "right").text(moneyComma("${hospital.price }"));
 						$(nav).append(input, strong);		
 						$("#pro_show").empty();							
 						$("#pro_show").append(nav);
 						$("#pro_result").empty();
 						var restrong = $("<dt>").html("총 함계금액");
-						var result = $("<dd>").text("${hospital.price }").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
+						var result = $("<dd>").text(moneyComma("${hospital.price }")).attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
 						$("#pro_result").append(restrong, result);
 					}
 				})

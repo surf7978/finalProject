@@ -10,8 +10,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="resources/js/common.js"></script>
 <script>
 	//라디오 생성
 	function checkbox(){
@@ -92,7 +92,7 @@
 							var strong = $("<strong>").text(
 									response[i].name);
 							var p = $("<p>").css("font-size","15px")
-							.text(response[i].price + "원");
+							.text(moneyComma(response[i].price) + "원");
 							var p1 = $("<p>").css("font-size","15px")
 							.text(response[i].location.substring(0, 6));
 							$(nav).append(strong, p, p1);
@@ -176,7 +176,7 @@
 							var strong = $("<strong>").text(
 									response[i].name);
 							var p = $("<p>").css("font-size","15px")
-									.text(response[i].price + "원");
+									.text(moneyComma(response[i].price) + "원");
 							var p1 = $("<p>").css("font-size","15px")
 									.text(response[i].location.substring(0, 6));
 							$(nav).append(strong, p, p1);
