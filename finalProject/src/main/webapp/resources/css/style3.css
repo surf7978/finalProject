@@ -132,5 +132,5 @@ li{list-style:none;}
 #paybtnwrap{margin-top:20px;}
 #paybtnwrap button {padding:10px; width:220px; border:none; border-radius:5px;margin:5px;background:#ededed;}
 #paybtnwrap button:hover{background:#e5e5e5;transition:0.5s;}
-#paybtnwrap button:nth-child(1) {background:#e7ab3c;}
+#paybtnwrap button:nth-child(1) {background:#e7ab3c;color:#fff;}
 #paybtnwrap button:nth-child(1):hover{background:#e39f20;}

@@ -53,36 +53,35 @@
 	<form name="frm" id="frm" action="insertCartPayProduct" method="post">
 	<c:set var="productoption" value="${prolist }" />
 	<c:forEach items="${productoption }" var="proname">
-		<nav id="productName">${proname.productName }</nav>
+		<nav style="opacity: 0;" id="productName">${proname.productName }</nav>
 	</c:forEach>
 	<!-- 결제 및 배송  -->
-		<input name="sumPrice" value="${vo.resultPrice }"> 
-		<input name="memberId" value="${loginID}">  
-		<input name="category1"> 
+		<input name="sumPrice" value="${vo.resultPrice }" type="hidden"> 
+		<input name="memberId" value="${loginID}" type="hidden">  
+		<input name="category1" type="hidden"> 
 	<c:forEach items="${list}" var="list" varStatus="num">
 		<div>
 		<!-- 주소 -->
 		<c:forEach items="${productoption}" var="pro" varStatus="num2">
 		<c:if test="${pro.productNumber == list.productNumber}">
-			<input name="buyList[${num2.index}].category" value="${pro.category }">
+			<input name="buyList[${num2.index}].category" value="${pro.category }" type="hidden">
 		</c:if>
 		</c:forEach>	
-		<input name="buyList[${num.index}].fromPerson" value="${loginID}"> 
-		<input name="buyList[${num.index}].toPerson" value="${name }"> 
-		<input name="buyList[${num.index}].post" value="${bvo.post }">
-		<input name="buyList[${num.index}].address" value="${bvo.address }"> 
-		<input name="buyList[${num.index}].address2" value="${bvo.address2 }"> 
-		<input name="buyList[${num.index}].phone" value="${bvo.phone }"> 
+		<input name="buyList[${num.index}].fromPerson" value="${loginID}" type="hidden"> 
+		<input name="buyList[${num.index}].toPerson" value="${name }" type="hidden"> 
+		<input name="buyList[${num.index}].post" value="${bvo.post }" type="hidden">
+		<input name="buyList[${num.index}].address" value="${bvo.address }" type="hidden"> 
+		<input name="buyList[${num.index}].address2" value="${bvo.address2 }" type="hidden"> 
+		<input name="buyList[${num.index}].phone" value="${bvo.phone }" type="hidden"> 
 	<!-- 주소 end-->
-		<input name="cartNumbers" value="${list.cartNumber}">
-		<input name="buyList[${num.index}].productNumber" id="productNumber" value="${list.productNumber}">
-		<input name="buyList[${num.index}].optionName" value="${fn:replace(list.optionName,',','/') }">
+		<input name="cartNumbers" value="${list.cartNumber}" type="hidden">
+		<input name="buyList[${num.index}].productNumber" id="productNumber" value="${list.productNumber}" type="hidden">
+		<input name="buyList[${num.index}].optionName" value="${fn:replace(list.optionName,',','/') }" type="hidden">
 		<%-- <input name="buyList[${num.index}].price" value="${vo.resultPrice }"> --%>
-		<input name="buyList[${num.index}].price" value="${fn:replace(list.optionPrice,',','/') }"> 
-		<input name="buyList[${num.index}].count" value="${fn:replace(list.count.trim(),',','/') }">
+		<input name="buyList[${num.index}].price" value="${fn:replace(list.optionPrice,',','/') }" type="hidden"> 
+		<input name="buyList[${num.index}].count" value="${fn:replace(list.count.trim(),',','/') }" type="hidden">
 	</div>
 	</c:forEach>
-	<button type="submit">확인</button>
 	</form>
 </div>
 </body>

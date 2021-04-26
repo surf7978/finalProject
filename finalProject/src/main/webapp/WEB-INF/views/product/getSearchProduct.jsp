@@ -124,9 +124,6 @@
 </head>
 <body>
 	<div id="contents">
-			<c:if test="${loginID eq 'admin' }">
-				<button id="btn" style="padding:10px; width:220px; border:none; border-radius:5px;margin:5px;background:#e39f20;">상품등록</button>
-			</c:if>
 		<h1>우리몰</h1>
 		<div id="pro_location">
 			<ul>
@@ -251,5 +248,8 @@
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>
+			<c:if test="${loginID eq 'admin' }">
+				<button id="btn" style="padding:10px; width:220px; border:none; border-radius:5px;margin:5px;background:#e39f20;color:#fff;">상품등록</button>
+			</c:if>
 </body>
 </html>
