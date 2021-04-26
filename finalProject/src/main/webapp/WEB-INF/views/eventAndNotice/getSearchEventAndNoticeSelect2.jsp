@@ -45,7 +45,7 @@ input.back {
 	width: 100%;
 	border-bottom: 1px solid #999;
 	color: #666;
-	font-size: 12px;
+	font-size: 17px;
 	table-layout: fixed
 }
 
@@ -143,9 +143,7 @@ tr.th {
 					<tr class="th">
 						<th width="60">No</th>
 						<th scope="col">제목</th>
-						<th scope="col">날짜</th>
-						<th scope="col" width="60">조회수</th>
-
+						<th scope="col" width="200">날짜</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -157,7 +155,6 @@ tr.th {
 							<td>${getSearchEventAndNoticeSelect2.eanNumber}</td>
 							<td>${getSearchEventAndNoticeSelect2.title}</td>
 							<td>${getSearchEventAndNoticeSelect2.startDate}</td>
-							<td>${getSearchEventAndNoticeSelect2.views}</td>
 						</tr>
 					</c:forEach>
 

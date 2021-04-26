@@ -38,7 +38,7 @@ input.write {
 	width: 100%;
 	border-bottom: 1px solid #999;
 	color: #666;
-	font-size: 12px;
+	font-size: 17px;
 	table-layout: fixed
 }
 
