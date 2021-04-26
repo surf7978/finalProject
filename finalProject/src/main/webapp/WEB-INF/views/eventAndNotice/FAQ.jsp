@@ -9,12 +9,12 @@
 .accordion {
 	color: #444;
 	cursor: pointer;
-	padding: 18px;
+	padding: 17px;
 	width: 100%;
 	border: none;
 	text-align: left;
 	outline: none;
-	font-size: 15px;
+	font-size: 17px;
 	transition: 0.4s;
 	border-bottom:1px solid #f0f0f0;
 	background:#fff;

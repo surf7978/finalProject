@@ -27,7 +27,7 @@ input.write {
 /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}
 
-.sub_news{width:100%;border-bottom:1px solid #999;color:black;font-size:13px;table-layout:fixed;}
+.sub_news{width:100%;border-bottom:1px solid #999;color:black;font-size:18px;table-layout:fixed;}
 
 
 .sub_news th{padding:0px 0 10px;border-top:solid 0px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
