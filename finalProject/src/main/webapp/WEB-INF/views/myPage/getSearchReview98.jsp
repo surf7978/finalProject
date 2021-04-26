@@ -51,7 +51,7 @@
 
 <thead>
 <tr class="th">
-<th width="col">구매한글번호</th>
+<th width="col">구매한 글번호</th>
 <th scope="col">제목</th>
 <th scope="col">날짜</th>
 
