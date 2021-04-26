@@ -139,25 +139,21 @@ public class Controller3 {
 
 ///////쇼핑몰//////////////
 	// 쇼핑몰 상세보기 + 구매평 출력 + 문의내역 출력
-	@RequestMapping("/getProduct")
-	public String getProduct(ProductVO vo, Model model, String productNumber, HttpSession session) {
-		vo.setProductNumber(productNumber);
-		model.addAttribute("product", productService.getProduct(vo));
-		if (session.getAttribute("loginID") != null) {
-			BuyVO vo1 = new BuyVO();
-			vo1.setFromPerson((String) session.getAttribute("loginID"));
-			vo1.setProductNumber(productNumber);
-			model.addAttribute("buy", buyService.getBuy(vo1));	
-		}
-		ReviewVO vo2 = new ReviewVO();
-		vo2.setProbisNumber(productNumber);
-		model.addAttribute("review", reviewService.getSearchReview(vo2));
-		
-		QuestionVO vo3 = new QuestionVO();
-		vo3.setProbisNumber(productNumber);
-		model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
-		return "product/getProduct2";
-	}
+	/*
+	 * @RequestMapping("/getProduct") public String getProduct(ProductVO vo, Model
+	 * model, String productNumber, HttpSession session) {
+	 * vo.setProductNumber(productNumber); model.addAttribute("product",
+	 * productService.getProduct(vo)); if (session.getAttribute("loginID") != null)
+	 * { BuyVO vo1 = new BuyVO(); vo1.setFromPerson((String)
+	 * session.getAttribute("loginID")); vo1.setProductNumber(productNumber);
+	 * model.addAttribute("buy", buyService.getBuy(vo1)); } ReviewVO vo2 = new
+	 * ReviewVO(); vo2.setProbisNumber(productNumber); model.addAttribute("review",
+	 * reviewService.getSearchReview(vo2));
+	 * 
+	 * QuestionVO vo3 = new QuestionVO(); vo3.setProbisNumber(productNumber);
+	 * model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
+	 * return "product/getProduct2"; }
+	 */
 	
 	// 쇼핑몰 등록하기
 	@GetMapping("/insertProduct")
@@ -297,7 +293,7 @@ public class Controller3 {
 		mvo.setPhone(phone);
 		mvo.setPost(post);
 		mvo.setAddress(address);
-		mvo.setAddress(address2);
+		mvo.setAddress2(address2);
 		model.addAttribute("optionNameList",vo.getOptionNameList());
 		model.addAttribute("resultPrice", vo.getResultPrice());
 		model.addAttribute("count", vo.getCountList());

@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- 단건조회 아작스 -->
 <script>
 	$(function(){
@@ -105,12 +106,25 @@ $(document).ready(function() { //function시작
 						});
 		//삭제버튼 클릭
 		$("#d_btn").on("click",function() {
-							if (confirm("삭제하시겟습니까") == true) {
-								location.href = "deleteProduct?productNumber=${product.productNumber }";
-							} else {
-								return false;
-							}
+								deleteBoard();
 						});
+		function deleteBoard(){
+			Swal.fire({
+			  title: '글을 삭제하시겠습니까?',
+			  text: "삭제하시면 다시 복구시킬 수 없습니다.",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#e7ab3c',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '삭제',
+			  cancelButtonText: '취소'
+			}).then((result) => {
+			  if (result.value) {
+				  location.href = "deleteProduct?productNumber=${product.productNumber }";
+			  }
+			})
+		}
+		
 		$("#u_btn").on("click",function() {
 							location.href = "updateProduct?productNumber=${product.productNumber }"
 						})
@@ -155,6 +169,14 @@ $(document).ready(function() { //function시작
 				result.empty();
 			}
 		})
+		//부드럽게 스크롤
+		$(".pro_menu ul li a[href^='#']").on("click", function(e) {
+				e.preventDefault();
+				var position = $($(this).attr("href")).offset().top;
+			   $("html, body").animate({
+				   scrollTop : position
+			   }, 1000);
+		});
 });//function of end
 	//장바구니에 등록
 	function insertCart() {
@@ -233,7 +255,7 @@ $(document).ready(function() { //function시작
 	<div id="contents">
 		<c:set var="optionPrice" value="${fn:split(product.optionPrice,',') }" />
 		<c:if test="${loginID eq 'admin' }">
-			<div>
+			<div id="paybtnwrap">
 				<button id="u_btn">수정하기</button>
 				<button id="d_btn">삭제하기</button>
 			</div>

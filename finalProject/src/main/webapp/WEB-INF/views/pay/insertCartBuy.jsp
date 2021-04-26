@@ -77,8 +77,8 @@
 		<input name="cartNumbers" value="${list.cartNumber}">
 		<input name="buyList[${num.index}].productNumber" id="productNumber" value="${list.productNumber}">
 		<input name="buyList[${num.index}].optionName" value="${fn:replace(list.optionName,',','/') }">
-		<input name="buyList[${num.index}].price" value="${vo.resultPrice }">
-		<%-- <input name="price" value="${fn:replace(list.optionPrice,',','/') }"> --%>
+		<%-- <input name="buyList[${num.index}].price" value="${vo.resultPrice }"> --%>
+		<input name="buyList[${num.index}].price" value="${fn:replace(list.optionPrice,',','/') }"> 
 		<input name="buyList[${num.index}].count" value="${fn:replace(list.count.trim(),',','/') }">
 	</div>
 	</c:forEach>

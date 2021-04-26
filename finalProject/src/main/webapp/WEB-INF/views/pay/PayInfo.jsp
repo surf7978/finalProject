@@ -61,8 +61,8 @@
 		<input name="address2" type="hidden" value="${address2 }"> 
 		<input name="phone" type="hidden" value="${phone }"> 
 		<input name="productNumber" type="hidden" value="${product.productNumber }">
-	<c:forEach items="${optionNameList}" var="optionNameList">
-		<input name="optionNameList" type="hidden" value="${optionNameList }">
+		<c:forEach items="${optionNameList}" var="optionNameList">
+			<input name="optionNameList" type="hidden" value="${optionNameList }">
 		</c:forEach>
 		<input name="price" type="hidden" value="${resultPrice }">
 	</form>
