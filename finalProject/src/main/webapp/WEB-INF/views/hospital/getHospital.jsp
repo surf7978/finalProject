@@ -82,7 +82,7 @@
 						var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
 								$("<span>").text("${hospital.name }")
 										.append("<hr>"));
-						var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count","readonly":"readonly"});
+						var input = $("<input>").attr({"type":"hidden","min":"1","value":"1","name":"count","readonly":"readonly"});
 						var inval = $(input).val();
 						var strong = $("<p>").css("text-align", "right").text(moneyComma("${hospital.price }"));
 						$(nav).append(input, strong);		
