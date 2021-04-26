@@ -143,8 +143,10 @@
 						</table>
 					</div>
 				</div>
+				<div id="paybtnwrap">
 				<button type="submit">결제하기</button>
 				<button type="button" onclick="location.href='getSearchProductForm'">취소</button>
+				</div>
 			</form>
 		</div>
 	</div>

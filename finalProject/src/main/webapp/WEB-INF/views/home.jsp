@@ -6,7 +6,9 @@
 <html>
 <head>
 <title>Home</title>
-
+<style>
+.pi-pic{width:275px;height:275px;}
+</style>
 </head>
 <body> 
 <!-- Hero Section Begin -->

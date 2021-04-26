@@ -128,3 +128,9 @@ li{list-style:none;}
 #wrap #pay {margin-top:20px;}
 #wrap #pay #add_wrap{margin-top:0;padding:0;}
 #totalDelete{margin-top : 20px; margin-left: -60%}
+/* 버튼 스타일 */
+#paybtnwrap{margin-top:20px;}
+#paybtnwrap button {padding:10px; width:220px; border:none; border-radius:5px;margin:5px;background:#ededed;}
+#paybtnwrap button:hover{background:#e5e5e5;transition:0.5s;}
+#paybtnwrap button:nth-child(1) {background:#e7ab3c;}
+#paybtnwrap button:nth-child(1):hover{background:#e39f20;}

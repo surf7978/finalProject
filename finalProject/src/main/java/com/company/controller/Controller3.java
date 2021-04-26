@@ -158,6 +158,7 @@ public class Controller3 {
 		model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
 		return "product/getProduct2";
 	}
+	
 	// 쇼핑몰 등록하기
 	@GetMapping("/insertProduct")
 	public String insertProductForm() {
