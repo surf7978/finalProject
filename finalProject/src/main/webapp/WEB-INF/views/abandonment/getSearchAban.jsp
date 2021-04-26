@@ -124,7 +124,7 @@
 		<div id="searchshow">
 			
 		</div>
-		<button onclick="location.href='getAbanList'">목록으로</button>
+		<button onclick="location.href='getAbanList'" style="padding:10px; width:220px; border:none; border-radius:5px;margin:5px;background:#e39f20;color:#fff;">목록으로</button>
 	</div>
 </body>
 </html>
