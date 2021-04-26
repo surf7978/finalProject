@@ -16,11 +16,11 @@
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth' ,
 			locale: 'ko',
-			eventSources: [
+			eventSources:
 				{
 					url: 'getSearchReservationCalendar'
 				},
-			]
+			
 		});
 		calendar.render();
 	});
