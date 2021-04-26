@@ -77,7 +77,7 @@ tr.th {
 							onclick="location.href='getBoard?boardNumber=${board.boardNumber}'">
 
 							<td>${board.views}</td>
-							<td>${board.title}</td>
+							<td class="cursor">${board.title}</td>
 							<td>${board.calendar}</td>
 							<td>${board.writer}</td>
 						</tr>

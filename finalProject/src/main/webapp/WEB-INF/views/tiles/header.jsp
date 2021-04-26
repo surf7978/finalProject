@@ -105,11 +105,12 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2">
 						<div class="logo">
-							<a href="${pageContext.request.contextPath}"> <img src="resources/img/logo.png" alt="">
-							</a>
+							<a href="${pageContext.request.contextPath}"> <img src="resources/img/logo2.png" style="width:300px; height:70px;" alt="">
+							</a> 
 						</div>
 					</div>
 					<div class="col-lg-7 col-md-7">
+						<br>
 						<div class="advanced-search">
 							<button type="button" class="category-btn">All
 								Categories</button>
@@ -145,7 +146,7 @@
 							</a></li>
 							 -->
 							<li class="cart-icon"><a href="getSearchTotalCartForm"> 
-								<i class="icon_bag_alt"></i> 
+								<i class="icon_search"></i> 
 							<c:if test="${not empty rs}">
 								<span>${rs.rows[0].count}</span>
 							</c:if>
