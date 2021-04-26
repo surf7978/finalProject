@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="resources/js/common.js"></script>
 <script>
 	function getSearchProduct(p) {
 		/* 리스트 ajax */
@@ -58,7 +59,7 @@
 							var pri = response[i].optionPrice;
 							var price = pri.split(",");
 							var strong = $("<strong>").text(response[i].productName);
-							var p = $("<p>").text(price[0].trim() + "원");
+							var p = $("<p>").text(moneyComma(price[0]) + "원");
 							$(nav).append(strong, p);
 							$(li).append(input, div, nav);
 							$(ul).append(li);
