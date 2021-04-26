@@ -34,20 +34,14 @@ input.back {
 /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}
 
-.sub_news{width:100%;border-bottom:1px solid #999;color:black;font-size:12px;table-layout:fixed;}
+.sub_news{width:100%;border-bottom:1px solid #999;color:black;font-size:13px;table-layout:fixed;}
 
-<<<<<<< HEAD
-.sub_news th{padding:10px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
-.sub_news td{padding:20px 0 9px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
-=======
-.sub_news {
-	width: 100%;
-	border-bottom: 1px solid #999;
-	color: #666;
-	font-size: 17px;
-	table-layout: fixed
-}
->>>>>>> branch 'master' of https://github.com/surf7978/finalProject.git
+
+.sub_news th{padding:0px 0 10px;border-top:solid 0px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
+.sub_news td{padding:10px 10px 10px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
+
+
+
 
 /* //게시판 리스트 목록 */
 tr.th {
@@ -63,7 +57,7 @@ tr.th {
 	}
 </script>
 <body>
-	<div id="contents">
+	<div id="contents"   >
 
 
 		<div style="display: none; float: right;">
@@ -86,8 +80,7 @@ tr.th {
 
 	
 		<h1>공지사항</h1>
-		<br><br>
-		<div id="show">
+		<div id="show" style="cursor:pointer;">
 			<!-- <input value="공지사항"
 		style="font-size: 40px; text-align: center; width: 400px; border: none;"
 		readonly> -->
@@ -96,9 +89,10 @@ tr.th {
 
 				<thead>
 					<tr class="th">
-						<th width="60">No</th>
+						<th width="60">글번호</th>
 						<th scope="col">제목</th>
-						<th scope="col" width="200">날짜</th>
+						<th width="250">날짜</th>
+						<th width="60">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -110,6 +104,7 @@ tr.th {
 							<td>${getSearchEventAndNoticeSelect2.eanNumber}</td>
 							<td>${getSearchEventAndNoticeSelect2.title}</td>
 							<td>${getSearchEventAndNoticeSelect2.startDate}</td>
+							<td>${getSearchEventAndNoticeSelect2.views}</td>
 						</tr>
 					</c:forEach>
 

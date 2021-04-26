@@ -27,20 +27,14 @@ input.write {
 /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}
 
-.sub_news{width:100%;border-bottom:1px solid #999;color:black;font-size:12px;table-layout:fixed;}
+.sub_news{width:100%;border-bottom:1px solid #999;color:black;font-size:13px;table-layout:fixed;}
 
-<<<<<<< HEAD
-.sub_news th{padding:10px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
-.sub_news td{padding:20px 0 9px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
-=======
-.sub_news {
-	width: 100%;
-	border-bottom: 1px solid #999;
-	color: #666;
-	font-size: 17px;
-	table-layout: fixed
-}
->>>>>>> branch 'master' of https://github.com/surf7978/finalProject.git
+
+.sub_news th{padding:0px 0 10px;border-top:solid 0px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
+.sub_news td{padding:10px 10px 10px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
+
+
+
 
 /* //게시판 리스트 목록 */
 tr.th {
@@ -56,18 +50,19 @@ tr.th {
 	}
 </script>
 <body>
-	<div id="contents">
+	<div id="contents" >
 		<h1>자유게시판</h1>
-		<br><br>
-		<div id="show">
+	
+		<div id="show" style="cursor:pointer;">
 
 			<table class="sub_news" border="1" summary="게시판의 글제목 리스트">
 				<thead>
 					<tr class="th">
-						<th width="60">조회수</th>
+						<th width="60">글번호</th>
 						<th scope="col">제목</th>
-						<th scope="col">날짜</th>
-						<th scope="col" width="60">글쓴이</th>
+						<th width="250">날짜</th>
+						<th width="150">글쓴이</th>
+						<th width="60">조회수</th>
 
 					</tr>
 				</thead>
@@ -75,11 +70,11 @@ tr.th {
 					<c:forEach var="board" items="${board}">
 						<tr
 							onclick="location.href='getBoard?boardNumber=${board.boardNumber}'">
-
-							<td>${board.views}</td>
+							<td>${board.boardNumber}</td>
 							<td>${board.title}</td>
 							<td>${board.calendar}</td>
 							<td>${board.writer}</td>
+							<td>${board.views}</td>
 						</tr>
 					</c:forEach>
 

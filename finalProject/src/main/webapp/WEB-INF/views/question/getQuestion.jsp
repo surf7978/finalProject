@@ -32,7 +32,7 @@
 			<td>${vo.calendar}</td>
 			<td></td>
 		</tr>
-		<tr style="height:50px;">
+		<tr style=" height:50px;">
 			<th>내용    </th>
 			<td></td>
 			<td></td>
@@ -41,7 +41,7 @@
 	</table>
 	
 	<div>
-		<p> <textarea rows="10px" cols="92px" style="border:none;" readonly="readonly">${vo.content} </textarea> </p>
+		<p> <textarea rows="10px" cols="92px" style="border:1px solid black;" readonly="readonly">${vo.content} </textarea> </p>
 	<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
 	 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=D:/Wallet_DB202104090913" 
 	 user="final" password="a20210409A"/>
@@ -55,8 +55,14 @@
 		</c:if>
 	</c:if>
     <c:if test="${not empty rs.rows[0].content }">
-     <br><input class="send" type ="button" style="background-color:#ff6347; color:white;"  value="답변완료"><br><br>
-     <textarea style="width:800px; height: 100px; resize: none;" readonly>${rs.rows[0].content }</textarea>
+     <br><input class="send" type ="button" style="background-color:#37b328; color:white;"  value="답변완료"><br><br>
+     <!--경계선 긋는 작업 table td style top border -->
+     <h7>------------------------------------------------------------------답변------------------------------------------------------------------</h7>
+     <br><br><br>
+   
+     
+     <textarea style="width:800px; border: none;  height: 100px;  resize: none;" readonly>     ${rs.rows[0].writer }의 답변: ${rs.rows[0].content }</textarea>
+
     </c:if>
 	</div>
  

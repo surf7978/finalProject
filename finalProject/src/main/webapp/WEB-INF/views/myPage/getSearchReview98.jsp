@@ -27,15 +27,12 @@
 
     /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}
-.sub_news a{color:#383838;text-decoration:none}
-.sub_news{width:50%;border-bottom:1px solid #999;color:#666;font-size:12px;table-layout:fixed}
-.sub_news caption{display:none}
-.sub_news th{padding:5px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color:#e7ab3c;color:white;font-weight:500;line-height:20px;vertical-align:top}
-.sub_news td{padding:8px 0 9px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
-.sub_news .title{text-align:left; padding-left:15px; font-size:13px;}
-.sub_news .title .pic,.sub_news .title .new{margin:0 0 2px;vertical-align:middle}
-.sub_news .title a.comment{padding:0;background:none;color:#f00;font-size:12px;font-weight:bold}
-.sub_news tr.reply .title a{padding-left:16px;background:url(첨부파일/ic_reply.png) 0 1px no-repeat}
+
+.sub_news{width:700px;border-bottom:1px solid #999;color:black;font-size:14px;table-layout:fixed;}
+
+.sub_news th{padding:10px 0 10px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
+.sub_news td{padding:15px 0 15px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
+
 /* //게시판 리스트 목록 */
 
  tr.th{
@@ -44,16 +41,17 @@
  }
 </style>
 <body>
-<div style="width:60%;">
+<div style="width:50%; right: 300px;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-<input value="후기내역" style="font-size:40px; text-align:center; width:450px; border:none;" readonly><br><br>
+<div id="contents">
+<h3>후기 내역</h3><br>
 <table class="sub_news" border="1"  summary="게시판의 글제목 리스트">
 
 
 
 <thead>
 <tr class="th">
-<th width="170">구매한글번호</th>
+<th width="col">구매한글번호</th>
 <th scope="col">제목</th>
 <th scope="col">날짜</th>
 
@@ -72,7 +70,8 @@
 </tbody>
 </table>
 <br>
-    
+
+</div>  
 </div>
 </body>
 </html>

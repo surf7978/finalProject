@@ -113,14 +113,14 @@
 </script>
 </head>
 <body> <br>
-	<div id="contents">
+	<div id="contents" >
 		<h1>이벤트</h1>
 		<!-- 
 		<div id="pro_location">
 		</div>
 		 -->
-		<div id="show"></div>
-		<div id="paging"></div>
+		<div id="show"  style="cursor:pointer;"></div>
+		<div id="paging"  style="cursor:pointer;"></div>
 	</div>
 			<c:if test="${loginID eq 'admin' }">
 				<button class="write" id="btn">이벤트 등록</button>
