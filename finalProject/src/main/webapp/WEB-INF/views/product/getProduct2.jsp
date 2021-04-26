@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -256,7 +257,7 @@ $(document).ready(function() { //function시작
 								<dl>
 									<dt>초대가</dt>
 									<dd>
-										<strong>${optionPrice[0] }원</strong>
+										<strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${optionPrice[0] }"/>원</strong>
 									</dd>
 								</dl>
 							</div>

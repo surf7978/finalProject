@@ -22,9 +22,9 @@
 	<div id="contents">
 			<h1>바로구매</h1>
 		<form method="post" id="frm" action="ReserPayInfo">
-		<input value="${loginID }" name="memberId">
-		<input value="${vo.seq }" name="bisNumber">
-		<input value="${vo.businessNumber }" name="businessNumber">
+		<input value="${loginID }" name="memberId" type="hidden">
+		<input value="${vo.seq }" name="bisNumber" type="hidden">
+		<input value="${vo.businessNumber }" name="businessNumber" type="hidden">
 			<div id="pay_wrap">
 			<table border="1">
 				<thead>

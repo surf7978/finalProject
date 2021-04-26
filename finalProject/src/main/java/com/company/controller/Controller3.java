@@ -42,8 +42,12 @@ import com.company.payAndDelivery.service.PayAndDeliveryVO;
 import com.company.product.service.ProductSearchVO;
 import com.company.product.service.ProductService;
 import com.company.product.service.ProductVO;
+import com.company.question.service.QuestionService;
+import com.company.question.service.QuestionVO;
 import com.company.reservation.service.ReservationService;
 import com.company.reservation.service.ReservationVO;
+import com.company.review.service.ReviewService;
+import com.company.review.service.ReviewVO;
 
 @Controller
 public class Controller3 {
@@ -71,6 +75,10 @@ public class Controller3 {
 	// 장바구니
 	@Autowired
 	CartService cartService;
+	@Autowired
+	ReviewService reviewService;
+	@Autowired
+	QuestionService questionService;
 
 	// 유기동물 API
 	@RequestMapping("/getAban")
@@ -129,13 +137,27 @@ public class Controller3 {
 		return map;
 	}// end of getSearchProduct
 
-	// 쇼핑몰 상세보기
-	@RequestMapping("/getProduct22")
-	public String getProduct(ProductVO vo, Model model, String productNumber) {
+///////쇼핑몰//////////////
+	// 쇼핑몰 상세보기 + 구매평 출력 + 문의내역 출력
+	@RequestMapping("/getProduct")
+	public String getProduct(ProductVO vo, Model model, String productNumber, HttpSession session) {
+		vo.setProductNumber(productNumber);
 		model.addAttribute("product", productService.getProduct(vo));
-		return "product/getProduct";
+		if (session.getAttribute("loginID") != null) {
+			BuyVO vo1 = new BuyVO();
+			vo1.setFromPerson((String) session.getAttribute("loginID"));
+			vo1.setProductNumber(productNumber);
+			model.addAttribute("buy", buyService.getBuy(vo1));	
+		}
+		ReviewVO vo2 = new ReviewVO();
+		vo2.setProbisNumber(productNumber);
+		model.addAttribute("review", reviewService.getSearchReview(vo2));
+		
+		QuestionVO vo3 = new QuestionVO();
+		vo3.setProbisNumber(productNumber);
+		model.addAttribute("question", questionService.getSearchQuestionProbis(vo3));
+		return "product/getProduct2";
 	}
-
 	// 쇼핑몰 등록하기
 	@GetMapping("/insertProduct")
 	public String insertProductForm() {
