@@ -31,7 +31,7 @@ function check() {
 <style>
 input.back {
 	padding: 10px;
-	width: 100px;
+	width: 210px;
 	border-radius: 5px;
 	border: none;
 	background-color: #6EDCDC;
@@ -168,10 +168,10 @@ table td {
 			     	<td style="width:70px;">
 			     	<input type="hidden" id="commentNumber" name="commentNumber" value="${list.commentNumber }">
 				     	<c:if test="${list.writer eq loginID }">
-				     		<button class="deleteComment">삭제</button>
+				     		<button class="deleteComment" style="background-color:#FF6464; color:white;" >삭제</button>
 				     	</c:if>
 				     	<c:if test="${loginID eq 'admin' }">
-				     		<button class="deleteComment">삭제</button>
+				     		<button class="deleteComment" style="background-color:#FF6464; color:white;">삭제</button>
 				     	</c:if>
 			     	</td>
 			</tr>
@@ -183,9 +183,9 @@ table td {
 				<input type="hidden" id="writer" name="writer" value="${loginID }">
 				<input type="hidden" id="boardNumber" name="boardNumber" value="${board.boardNumber}">
 				<input type="hidden" id="memberId" name="memberId" value="${board.writer}">
-				<input style="width:50px; border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" type="text" value="댓글  :" readonly>
-				<input style="width:60%;" id="content" name="content">
-				<button id="insertComment">댓글달기</button>
+				<!-- <input style="width:50px; border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;" type="text" value="댓글  :" readonly> -->
+				<textarea placeholder="댓글입력" style="width:770px; height:150px;" id="content" name="content"></textarea> <br>
+			<br><button id="insertComment" style="background-color:#00a000; color:white;">댓글달기</button>
 		</c:if>
 	</div>
 
