@@ -312,7 +312,7 @@ public class Controller3 {
 		bvo.setCategory(category1);
 		bvo.setProductNumber(vo.getProductNumber());
 		buyService.insertBuy2(bvo);
-		return "pay/successPay";
+		return "redirect:/getSearchProductForm";
 	}	
 	
 	// 쇼핑몰 결제시 다중insert
