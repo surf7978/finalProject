@@ -62,11 +62,17 @@
 	<!-- 자랑하기 수정  -->
 	<update id="updateBoard2" parameterType="boardVO">
 		UPDATE BOARD SET
-		IMAGE=#{image},
-		T_IMAGE=#{t_image},
+		<if test="image != null">
+		IMAGE=#{image}
+		</if>
+		<if test="t_image != null">
+		,T_IMAGE=#{t_image}
+		</if>
+		,
 		TITLE=#{title} ,
 		CONTENT=#{content} ,
 		CATEGORY= #{category}
+		
 		WHERE BOARDNUMBER= #{boardNumber}
 	</update>
 	

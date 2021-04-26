@@ -162,7 +162,7 @@
 			} else {
 				location.href = "cartPayInfoForm?productNumber=${product.productNumber}&resultPrice="
 					+ totalResult + "&memberId=${loginID}&cartNumbers=" + cartNumbers;
-			}
+			} 
 		})//end of pay
 	}//end of pay
 	//4.전체 채크박스

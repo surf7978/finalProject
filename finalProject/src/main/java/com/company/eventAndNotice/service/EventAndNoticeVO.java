@@ -13,8 +13,8 @@ public class EventAndNoticeVO{
 	String content;
 	String startDate;
 	String endDate;
-	String image;
-	String t_image;
+	String image =" ";
+	String t_image =" ";
 	String views;
 	String category;
 	String memberId;

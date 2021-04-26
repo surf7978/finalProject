@@ -24,9 +24,6 @@
 		else if(content.value==""){
 			alert("내용을 입력 하세요");
 			return false;
-		}else if(t_image.value==""){
-			alert("이미지를 등록 하세요");
-			return false;
 		}
 		return true;
 	}

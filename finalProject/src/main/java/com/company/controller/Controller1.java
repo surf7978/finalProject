@@ -373,14 +373,23 @@ public class Controller1 {
 				animalService.deleteAnimal99(voAnimal);
 			}
 			memberService.deleteMember(vo);
-			session.invalidate();
+			if(session.getAttribute("loginID").equals("admin")) {
+				return "redirect:/getSearchViewMember";
+			}else {
+				session.invalidate();
+				return "redirect:/";
+			}
 		} else {
 			BusinessVO vo1 = new BusinessVO();
 			vo1.setBusinessId(ID);
 			businessService.deleteBusiness(vo1);
-			session.invalidate();
+			if(session.getAttribute("loginID").equals("admin")) {
+				return "redirect:/getSearchViewMember";
+			}else {
+				session.invalidate();
+				return "redirect:/";
+			}
 		}
-		return "redirect:/";
 	}
 
 	// 관리자-전체회원 조회

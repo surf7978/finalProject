@@ -28,13 +28,10 @@
     /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}
 
-.sub_news{width:700px;border-bottom:1px solid #999;color:black;font-size:12px;table-layout:fixed;}
+.sub_news{width:700px;border-bottom:1px solid #999;color:black;font-size:14px;table-layout:fixed;}
 
-.sub_news th{padding:10px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
-.sub_news td{padding:20px 0 9px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
-
-
-
+.sub_news th{padding:10px 0 10px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
+.sub_news td{padding:15px 0 15px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
 
 /* //게시판 리스트 목록 */
 
@@ -53,25 +50,28 @@
 <div style="width:50%; right: 300px;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <div id="contents">
-<h3>문의한 내역</h3><br><br>
-<br>
-<table class="sub_news" border="1">
+<h3>문의한 내역</h3><br>
+<table class="sub_news" border="1" style="cursor:pointer;">
 
 
 
 <thead>
 <tr class="th">
+<th width="60">글번호</th>
 <th scope="col">제목</th>
 <th scope="col">문의날짜</th>
+
+
 
 </tr>
 </thead>
 <tbody>
 <c:forEach var="question" items="${question}">
 <tr onclick="location.href='getQuestion?questionNumber=${question.questionNumber}'">
-
+<td >${question.questionNumber}</td>
 <td >${question.title}</td>
 <td>${question.calendar}</td>
+
 </tr>
 </c:forEach>
 

@@ -32,68 +32,17 @@ input.back {
 }
 
 /* 게시판 리스트 목록 */
-.sub_news, .sub_news th, .sub_news td {
-	border: 0
-}
+.sub_news,.sub_news th,.sub_news td{border:0}
 
-.sub_news a {
-	color: #383838;
-	text-decoration: none
-}
+.sub_news{width:100%;border-bottom:1px solid #999;color:black;font-size:13px;table-layout:fixed;}
 
-.sub_news {
-	width: 100%;
-	border-bottom: 1px solid #999;
-	color: #666;
-	font-size: 17px;
-	table-layout: fixed
-}
 
-.sub_news caption {
-	display: none
-}
+.sub_news th{padding:0px 0 10px;border-top:solid 0px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
+.sub_news td{padding:10px 10px 10px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
 
-.sub_news th {
-	padding: 5px 0 6px;
-	border-top: solid 1px #999;
-	border-bottom: solid 1px #b2b2b2;
-	background-color: #e7ab3c;
-	color: white;
-	font-weight: 500;
-	line-height: 20px;
-	vertical-align: top
-}
 
-.sub_news td {
-	padding: 8px 0 9px;
-	border-bottom: solid 1px #d2d2d2;
-	text-align: center;
-	line-height: 18px;
-}
 
-.sub_news .title {
-	text-align: left;
-	padding-left: 15px;
-	font-size: 13px;
-}
 
-.sub_news .title .pic, .sub_news .title .new {
-	margin: 0 0 2px;
-	vertical-align: middle
-}
-
-.sub_news .title a.comment {
-	padding: 0;
-	background: none;
-	color: #f00;
-	font-size: 12px;
-	font-weight: bold
-}
-
-.sub_news tr.reply .title a {
-	padding-left: 16px;
-	background: url(첨부파일/ic_reply.png) 0 1px no-repeat
-}
 /* //게시판 리스트 목록 */
 tr.th {
 	text-align: center;
@@ -108,7 +57,7 @@ tr.th {
 	}
 </script>
 <body>
-	<div id="contents">
+	<div id="contents"   >
 
 
 		<div style="display: none; float: right;">
@@ -129,21 +78,21 @@ tr.th {
 		</div>
 		<!-- 옵션선택 끝 -->
 
-
+	
 		<h1>공지사항</h1>
-		<div id="aban_location"></div>
-		<div id="show">
+		<div id="show" style="cursor:pointer;">
 			<!-- <input value="공지사항"
 		style="font-size: 40px; text-align: center; width: 400px; border: none;"
 		readonly> -->
 
-			<table class="sub_news" border="1" summary="게시판의 글제목 리스트">
+			<table class="sub_news" border="1" >
 
 				<thead>
 					<tr class="th">
-						<th width="60">No</th>
+						<th width="60">글번호</th>
 						<th scope="col">제목</th>
-						<th scope="col" width="200">날짜</th>
+						<th width="250">날짜</th>
+						<th width="60">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -155,6 +104,7 @@ tr.th {
 							<td>${getSearchEventAndNoticeSelect2.eanNumber}</td>
 							<td>${getSearchEventAndNoticeSelect2.title}</td>
 							<td>${getSearchEventAndNoticeSelect2.startDate}</td>
+							<td>${getSearchEventAndNoticeSelect2.views}</td>
 						</tr>
 					</c:forEach>
 
@@ -165,6 +115,7 @@ tr.th {
 
 		</div>
 		<!--  -->
+		<br>
 		<div id="paging">
 
 			<c:if test="${paging.startPage != 1 }">
