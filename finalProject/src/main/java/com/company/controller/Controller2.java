@@ -140,7 +140,9 @@ public class Controller2 {
 
 	// 구매내역 상세리스트 조회
 	@RequestMapping("/getSearchBuy")
-	public String getSearchBuy(BuyVO vo, Model model) {
+	public String getSearchBuy(BuyVO vo, MemberVO mvo, Model model, HttpSession session) {
+		mvo.setMemberId((String) session.getAttribute("loginID"));
+		model.addAttribute("member", memberService.getMember(mvo));
 		model.addAttribute("buys", buyService.getSearchBuy(vo));
 		return "user/getSearchBuy";
 	}

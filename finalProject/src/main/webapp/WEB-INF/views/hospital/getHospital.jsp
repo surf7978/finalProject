@@ -90,7 +90,7 @@
 						$("#pro_show").append(nav);
 						$("#pro_result").empty();
 						var restrong = $("<dt>").html("총 함계금액");
-						var result = $("<dd>").text(moneyComma("${hospital.price }")).attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
+						var result = $("<dd>").text("${hospital.price }").attr("name","resultPrice").css({"text-align":"right","font-size":"37px","color":"#e7ab3c"})
 						$("#pro_result").append(restrong, result);
 					}
 				})
