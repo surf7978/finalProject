@@ -20,6 +20,9 @@
 				{
 					url: 'getSearchReservationCalendar'
 				},
+			eventClick: function(e){
+				alert(e.el.innerText);
+			}
 			
 		});
 		calendar.render();
