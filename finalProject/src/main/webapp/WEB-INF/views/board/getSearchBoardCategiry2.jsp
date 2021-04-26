@@ -129,7 +129,7 @@
 						<button id="btn" class="write">글쓰기</button>
 				
 					 </c:if> 
-
+<br><br>
 
 </body>
 </html>

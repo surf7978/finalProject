@@ -125,5 +125,6 @@
 			<c:if test="${loginID eq 'admin' }">
 				<button class="write" id="btn">이벤트 등록</button>
 			</c:if>
+			<br><br>
 </body>
 </html>

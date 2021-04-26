@@ -20,7 +20,7 @@
 		,SUMPRICE
 		,MEMBERID
 		,BUYSTATE
-		,BUSINESSNUMBER
+		<if test="businessNumber != null"> ,BUSINESSNUMBER</if>
 		)VALUES(
 		(SELECT NVL(MAX(PNDNUMBER),0)+1 FROM PAYANDDELIVERY)
 		,#{category}
@@ -28,7 +28,7 @@
 		,#{sumPrice}
 		,#{memberId}
 		,'결제완료'
-		,#{businessNumber}
+		<if test="businessNumber != null">,#{businessNumber}</if>
 		)
 	</insert>
 </mapper>

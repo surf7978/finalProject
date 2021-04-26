@@ -593,6 +593,6 @@ public class Controller2 {
 		PrintWriter writer = response.getWriter();
 		writer.println("<script>alert('등록되었습니다');opener.location.reload();window.close();</script>");
 		writer.close();
-	}	
-
+	}
+	
 }

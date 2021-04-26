@@ -36,8 +36,18 @@ input.back {
 
 .sub_news{width:100%;border-bottom:1px solid #999;color:black;font-size:12px;table-layout:fixed;}
 
+<<<<<<< HEAD
 .sub_news th{padding:10px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
 .sub_news td{padding:20px 0 9px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
+=======
+.sub_news {
+	width: 100%;
+	border-bottom: 1px solid #999;
+	color: #666;
+	font-size: 17px;
+	table-layout: fixed
+}
+>>>>>>> branch 'master' of https://github.com/surf7978/finalProject.git
 
 /* //게시판 리스트 목록 */
 tr.th {
@@ -88,9 +98,7 @@ tr.th {
 					<tr class="th">
 						<th width="60">No</th>
 						<th scope="col">제목</th>
-						<th scope="col">날짜</th>
-						<th scope="col" width="60">조회수</th>
-
+						<th scope="col" width="200">날짜</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -102,7 +110,6 @@ tr.th {
 							<td>${getSearchEventAndNoticeSelect2.eanNumber}</td>
 							<td>${getSearchEventAndNoticeSelect2.title}</td>
 							<td>${getSearchEventAndNoticeSelect2.startDate}</td>
-							<td>${getSearchEventAndNoticeSelect2.views}</td>
 						</tr>
 					</c:forEach>
 
