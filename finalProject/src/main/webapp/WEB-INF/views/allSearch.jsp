@@ -17,6 +17,9 @@
 	                <sql:query var="rs" dataSource="${ds }">
 					    select * from adminView where optionName like '%${keyWord }%'
 					</sql:query>
+                    	<c:if test="${empty rs.rows }">
+                    		<h1>검색결과 없음</h1>
+                    	</c:if>
                     <div class="product-slider owl-carousel" style="width:75%;">
                         <c:if test="${not empty rs.rows }">
                     		<c:forEach items="${rs.rows }" var="list">

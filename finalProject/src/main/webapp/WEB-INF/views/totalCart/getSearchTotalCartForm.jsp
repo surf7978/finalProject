@@ -332,5 +332,6 @@
 			<button type="button" id="pay" style="padding:10px; width:220px; border:none; border-radius:5px; background-color:#adff2f;">주문결제하기</button>
 		</form>
 	</div>
+	<br><br>
 </body>
 </html>
