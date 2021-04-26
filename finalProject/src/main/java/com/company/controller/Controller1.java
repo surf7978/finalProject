@@ -753,7 +753,14 @@ public class Controller1 {
 		commentService.deleteComment(vo);
 		return vo;
 	}
-
+	
+	//전체검색기능
+	@RequestMapping("/searching")
+	public String searching(String keyWord, Model model) {
+		model.addAttribute("keyWord", keyWord);
+		return "allSearch";
+	}
+	
 	@Autowired
 	ProductService productService;
 	// 홈화면 출력(스프링 기본세팅)

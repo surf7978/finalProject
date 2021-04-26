@@ -209,6 +209,7 @@
         </div>
     </section>
     <!-- Man Banner Section End -->
+    <!-- 
 <hr>    
 <h1>
 	메인화면 입니다. 
@@ -233,6 +234,7 @@
 	<a href="getSearchReservationBusi">예약내역조회</a>
 	<a href="getViewReservation2">사업자용리스트 조회(예비)</a>
 	<a href="getSearchAnimal">마이펫수첩</a> <p></p>
+     -->
 	
 
 
