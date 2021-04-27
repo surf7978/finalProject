@@ -39,6 +39,9 @@
  	text-align: center;
  	font-size: 17px;
  }
+tbody{
+	cursor: pointer;
+}
 </style>
 <body>
 <div style="width:50%; right: 300px;">
