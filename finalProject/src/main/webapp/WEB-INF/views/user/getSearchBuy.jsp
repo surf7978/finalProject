@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<% pageContext.setAttribute("br", "\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +9,15 @@
 <link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		console.log($(".siba").text());
+		
+		
+	});
+
+
+</script>
 <style>
 .backBtn {
 padding: 10px;
@@ -55,9 +62,8 @@ padding: 10px;
 	<tr>
 		<th>구매상태&nbsp;&nbsp; : </th>	
 		<td>${buys[0].buyState}</td>
-	</tr>
-	
-</table><br><c:out value="ssssvd"/>
+	</tr> 
+</table><br>  
 <h4 style="padding: 10px;">주문/결제 금액 정보</h4>
 <table class="table1">
 	<tr>
@@ -66,14 +72,12 @@ padding: 10px;
 		<th>옵션명</th>
 		<th>수량</th>
 		<th>금액</th>
-		
-		</tr>
+	</tr>
 		<c:forEach items="${buys }" var="buy" varStatus="status">
 	<tr>
 		<td><c:out value="${status.count}"/></td>
-		
 		<td><c:out value="${buy.category}"/></td>
-		<td><c:out value="${buy.optionName}"/></td>
+		<td  class="siba"><c:out value="${buy.optionName}"/></td>
 		<td><c:out value="${buy.count}"/></td>
 		<td><c:out value="${buy.price}"/></td>
 		</tr>
