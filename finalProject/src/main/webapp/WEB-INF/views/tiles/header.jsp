@@ -124,7 +124,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 text-right col-md-3">
+					<div class="col-lg-3 text-right col-md-3" style="position:relative;">
 					<c:if test="${not empty loginID}">
 					<c:if test="${loginAuth eq 'm'}">
 					<c:if test="${loginID ne 'admin'}">
@@ -138,15 +138,15 @@
 					<sql:query var="rs1" dataSource="${ds }">
 					    select * from cart where memberId = '${loginID}'
 					</sql:query> 
-						<ul class="nav-right">
+						<ul class="nav-right" style="position:absolute;right:20px;top:57%;transform:translateY(-50%);z-index:900;">
 							<li class="cart-price">장바구니 </li>
 							<!-- 
 							<li class="heart-icon"><a href="#"> <i
 									class="icon_heart_alt"></i> <span>1</span>
 							</a></li>
-							 --> 
+							 -->
 							<li class="cart-icon"><a href="getSearchTotalCartForm"> 
-								<i class="icon_bag_alt"></i> 
+								<i class="icon_search"></i> 
 							<c:if test="${not empty rs}">
 								<span>${rs.rows[0].count}</span>
 							</c:if>
