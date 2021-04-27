@@ -279,7 +279,7 @@ $(document).ready(function() { //function시작
 								<dl>
 									<dt>초대가</dt>
 									<dd>
-										<strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${optionPrice[0] }"/>원</strong>
+										<strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${optionPrice[0].trim() }"/>원</strong>
 									</dd>
 								</dl>
 							</div>
