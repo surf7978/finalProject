@@ -105,19 +105,19 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2">
 						<div class="logo">
-							<a href="${pageContext.request.contextPath}"> <img src="resources/img/logo2.png" style="width:300px; height:70px;" alt="">
+							<a href="${pageContext.request.contextPath}"> <img src="resources/images/test/logo.png" style="width:350px; height:auto;" alt="">
 							</a> 
 						</div>
 					</div>
 					<div class="col-lg-7 col-md-7">
 						<br>
-						<div class="advanced-search">
+						<div class="advanced-search" style="border-radius:15px;">
 							<button type="button" class="category-btn">All
 								Categories</button>
 							<div class="input-group">
 								<form action="searching" method="post">
 								<input type="text" id="keyWord" name="keyWord" placeholder="What do you need?">
-								<button type="submit">
+								<button type="submit" style="border-radius:0 15px 15px 0;">
 									<i class="ti-search"></i>
 								</button>
 								</form>
@@ -199,7 +199,7 @@
 			</div>
 		</div>
 		<div class="nav-item">
-			<div class="container" style=" max-width:100%;display:flex;justify-content: center;">
+			<div class="container" id="navbar" style=" max-width:100%;display:flex;justify-content: center;">
 			<!-- 
 			
 				<div class="nav-depart">

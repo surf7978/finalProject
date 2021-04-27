@@ -14,7 +14,7 @@
 <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="hero-items owl-carousel">
-            <div class="single-hero-items set-bg" data-setbg="resources/img/slider01.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/images/test/slider_01.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
@@ -25,12 +25,12 @@
                             <a href="getSearchProductForm" class="primary-btn">Go Now</a>
                         </div>
                     </div>
-                    <div class="off-card">
+                   <!--  <div class="off-card" >
                         <h2>Sale <span>50%</span></h2>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div class="single-hero-items set-bg" data-setbg="resources/img/hero-2.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/images/test/slider_02.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
@@ -41,9 +41,9 @@
                             <a href="getAbanList" class="primary-btn">Go Now</a>
                         </div>
                     </div>
-                    <div class="off-card">
+                    <!-- <div class="off-card">
                         <h2>Sale <span>50%</span></h2>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="product-large set-bg" data-setbg="resources/img/women-large.jpg">
+                    <div class="product-large set-bg" data-setbg="resources/images/test/slide_menu.jpg">
                         <h2>쇼핑몰</h2>
                         <a href="getSearchProductForm">Discover More</a>
                     </div>
@@ -202,7 +202,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1">
-                    <div class="product-large set-bg m-large" data-setbg="resources/img/women-large.jpg">
+                    <div class="product-large set-bg m-large" data-setbg="resources/images/test/slide_menu02.jpg">
                         <h2>Men’s</h2>
                         <a href="#">Discover More</a>
                     </div>

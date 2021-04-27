@@ -105,8 +105,16 @@
 			var resultPrice = $("[name=resultPrice]").text();
 			var count = $("[name=count]").val();
 			var pro = $("#pro_result").text();
+			var loginId = $("[name=memberId]").val();
 			if(pro == ""){
 				alert("상품을 선택해주세요");
+			}else if (!loginId) {
+				var result = confirm("로그인해주세요");
+				if (result == true) {
+					location.href = "loginForm";
+				} else {
+					return false;
+				}
 			}else{
 				location.href="HospitalPayInfoForm?resultPrice="+resultPrice +"&count=" + count +"&seq=${hospital.seq }";
 			}			

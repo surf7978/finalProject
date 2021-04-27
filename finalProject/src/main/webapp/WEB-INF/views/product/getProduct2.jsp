@@ -105,9 +105,7 @@ $(document).ready(function() { //function시작
 							}
 						});
 		//삭제버튼 클릭
-		$("#d_btn").on("click",function() {
-								deleteBoard();
-						});
+		$("#d_btn").on("click",function() {deleteBoard();});
 		function deleteBoard(){
 			Swal.fire({
 			  title: '글을 삭제하시겠습니까?',
@@ -279,7 +277,7 @@ $(document).ready(function() { //function시작
 								<dl>
 									<dt>초대가</dt>
 									<dd>
-										<strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${optionPrice[0] }"/>원</strong>
+										<strong><fmt:formatNumber type="number" maxFractionDigits="3" value="${optionPrice[0].trim() }"/>원</strong>
 									</dd>
 								</dl>
 							</div>
