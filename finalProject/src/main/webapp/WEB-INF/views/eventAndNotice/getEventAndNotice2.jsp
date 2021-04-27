@@ -30,7 +30,7 @@ function check() {
 <style>
 input.back {
 	padding: 10px;
-	width: 100px;
+	width: 210px;
 	border-radius: 5px;
 	border: none;
 	background-color: #6EDCDC;

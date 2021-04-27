@@ -14,22 +14,21 @@
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth' ,
 			locale: 'ko',
-			eventSources: [
+			eventSources:
 				{
-					 url: 'getSearchReservationCalendar2'
-				
-				}
-			],  
-			eventClick:function(event) {
-                if(event.url) {
-                    alert(event.title + "\n" + event.url, "wicked", "width=700,height=600");
-                    window.open(event.url);
-                    return false;
-                }
-            }
+					url: 'getSearchReservationCalendar'
+				},
+			eventClick: function(e){
+			 	Swal.fire({
+					  title: '예약 조회',
+					  text: e.el.innerText,
+					}) 			
+			}
+			
 		});
 		calendar.render();
 	});
+	
 </script>
 </head>
 <body>

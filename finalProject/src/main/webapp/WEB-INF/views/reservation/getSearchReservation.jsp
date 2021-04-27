@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <link href='resources/css/fullcalendar.css' rel='stylesheet' />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src='resources/js/fullcalendar.js'></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
@@ -21,7 +22,10 @@
 					url: 'getSearchReservationCalendar'
 				},
 			eventClick: function(e){
-				alert(e.el.innerText);
+			 	Swal.fire({
+					  title: '예약 조회',
+					  text: e.el.innerText,
+					}) 			
 			}
 			
 		});
@@ -71,8 +75,7 @@
 		searchFrm.submit();
 	}
 </script>	
-	<br>
-	<div id='calendar' style="width: 800px"></div>
+	<div id='calendar' style="width: 900px;"></div><br>
 </div>
 </body>
 </html>
