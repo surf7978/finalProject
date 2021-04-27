@@ -60,17 +60,21 @@ function disConnect(){
 					<td>${sessionScope.loginID}</td>
 				</tr>
 				<tr>
-					<td>이름</td>
-					<td>${mvo.name}</td>
-					<c:if test="${bvo.category eq '20'}">
+					<c:if test="${bvo.businessCode ne '20'}">
+						<td>이름</td>
+						<td>${mvo.name}</td>
+					</c:if>
+					<c:if test="${bvo.businessCode eq '20'}">
 						<td>병원명</td>
 						<td>${bvo.businessCompanyName}</td>
 					</c:if>
 				</tr>
 				<tr>
-					<td>주소</td>
-					<td>${mvo.address}${mvo.address2}</td>
-					<c:if test="${bvo.category eq '20'}">
+					<c:if test="${bvo.businessCode ne '20'}">
+						<td>주소</td>
+						<td>${mvo.address}${mvo.address2}</td>
+					</c:if>
+					<c:if test="${bvo.businessCode eq '20'}">
 						<td>사업자주소</td>
 						<td>${bvo.address}${bvo.address2}</td>
 					</c:if>

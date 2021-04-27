@@ -12,18 +12,27 @@
 	 ,CONTENT
 	 ,STARTDATE
 	 ,ENDDATE
+	 <if test="image != null">
 	 ,IMAGE
+	 </if>
+	 <if test="t_image != null">
 	 ,T_IMAGE
+	 </if>
 	 ,VIEWS
 	 ,CATEGORY
-	 ,MEMBERID) VALUES(ean_seq.nextval 
+	 ,MEMBERID) VALUES
+	 (ean_seq.nextval 
 	 , 'admin' 
 	 , #{title} 
 	 , #{content}
 	 , #{startDate} 
 	 , #{endDate}  
-	 , #{image} 
-	 , #{t_image} 
+	 <if test="image != null">
+	 , #{image}
+	 </if>
+	 <if test="t_image != null">
+	 , #{t_image}
+	 </if>
 	 , 0 
 	 , 1 
 	 , 'admin')
@@ -76,8 +85,13 @@
 		<!-- 이벤트 수정  -->
 	<update id="updateEventAndNotice1" parameterType="eventAndNoticeVO">
 		UPDATE eventAndNotice SET
-		IMAGE=#{image},
-		T_IMAGE=#{t_image},
+		<if test="image != null">
+		IMAGE=#{image}
+		</if>
+		<if test="t_image != null">
+		,T_IMAGE=#{t_image}
+		</if>
+		,
 		TITLE=#{title} ,
 		CONTENT=#{content} 
 		WHERE EANNUMBER= #{eanNumber} 

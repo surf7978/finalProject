@@ -70,8 +70,7 @@
 			<h1>바로구매</h1>
 			<form method="post" id="frm" action="PayInfo">
 				<input value="${product.memberId }" name="fromPerson" type="hidden">
-				<input value="${product.productNumber }" name="productNumber"
-					type="hidden">
+				<input value="${product.productNumber }" name="productNumber" type="hidden">
 				<div id="pay_wrap">
 					<table border="1">
 						<thead>
@@ -144,8 +143,10 @@
 						</table>
 					</div>
 				</div>
+				<div id="paybtnwrap">
 				<button type="submit">결제하기</button>
 				<button type="button" onclick="location.href='getSearchProductForm'">취소</button>
+				</div>
 			</form>
 		</div>
 	</div>

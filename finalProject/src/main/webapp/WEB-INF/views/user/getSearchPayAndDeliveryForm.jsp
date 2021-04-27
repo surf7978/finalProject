@@ -26,8 +26,10 @@
 		<th>구매날짜</th>
 		<th>구매가격</th>
 		<th>구매상태</th>
+		<c:if test="${pads[0].pndNumber != null }">
+ 		<th></th>
 		<th></th>
-		<th></th>		
+		</c:if>
 	</tr>
 	<c:forEach items="${pads }" var="pad">
 	<tr>
@@ -73,7 +75,7 @@
 		<c:if test="${pad.category != '70' }">
 		<c:if test="${pad.buyState !='환불완료' }">
 		<c:if test="${pad.buyState !='예약완료' }">
-			<button type="button" class="insertReservationBtn" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','insertReservation','width=500, height=500')">예약하기</button>
+			<button type="button" class="insertReservationBtn" onclick="window.open('updateReservation?pndNumber=${pad.pndNumber}','insertReservation','width=550, height=500')">예약하기</button>
 		</c:if>
 		</c:if>
 		</c:if>

@@ -162,7 +162,7 @@
 			} else {
 				location.href = "cartPayInfoForm?productNumber=${product.productNumber}&resultPrice="
 					+ totalResult + "&memberId=${loginID}&cartNumbers=" + cartNumbers;
-			}
+			} 
 		})//end of pay
 	}//end of pay
 	//4.전체 채크박스
@@ -309,7 +309,7 @@
 					</thead>
 					<tbody id="totalCartTbody"></tbody>
 				</table>
-				<button type="button" id="totalDelete">선택삭제</button>
+				<button type="button" id="totalDelete" style="border:none; border-radius:5px;">선택항목삭제</button>
 			</div>
 			<div id="totalValue">
 				<table id="totalTbl">
@@ -328,9 +328,10 @@
 					</tr>
 				</table>
 			</div>
-			<button type="button" id="shopping">쇼핑계속하기</button>
-			<button type="button" id="pay">주문결제하기</button>
+			<button type="button" id="shopping" style="padding:10px; width:220px; border:none; border-radius:5px;">쇼핑계속하기</button>
+			<button type="button" id="pay" style="padding:10px; width:220px; border:none; border-radius:5px; background-color:#adff2f;">주문결제하기</button>
 		</form>
 	</div>
+	<br><br>
 </body>
 </html>

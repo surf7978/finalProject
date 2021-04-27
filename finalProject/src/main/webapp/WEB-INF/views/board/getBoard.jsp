@@ -24,19 +24,17 @@ function check() {
 	
 		return false;
 	}
-
 }
 </script>
 </head>
 <style>
 input.back {
 	padding: 10px;
-	width: 100px;
+	width: 210px;
 	border-radius: 5px;
 	border: none;
 	background-color: #6EDCDC;
 }
-
 input.update {
 	padding: 10px;
 	width: 100px;
@@ -45,7 +43,6 @@ input.update {
 	background-color: #3296D7;
 	color: white;
 }
-
 input.delete {
 	padding: 10px;
 	width: 100px;
@@ -54,12 +51,10 @@ input.delete {
 	background-color: #FF6464;
 	color: white;
 }
-
 #title {
 	font-family: sans-serif;
 	background-color: #e9e9e9;
 }
-
 table td {
 	padding-left: 10px;
 }
@@ -173,10 +168,10 @@ table td {
 			     	<td style="width:70px;">
 			     	<input type="hidden" id="commentNumber" name="commentNumber" value="${list.commentNumber }">
 				     	<c:if test="${list.writer eq loginID }">
-				     		<button class="deleteComment">삭제</button>
+				     		<button class="deleteComment" style="background-color:#FF6464; color:white;">삭제</button>
 				     	</c:if>
 				     	<c:if test="${loginID eq 'admin' }">
-				     		<button class="deleteComment">삭제</button>
+				     		<button class="deleteComment" style="background-color:#FF6464; color:white;">삭제</button>
 				     	</c:if>
 			     	</td>
 			</tr>
@@ -189,9 +184,8 @@ table td {
 				<input type="hidden" id="writer" name="writer" value="${loginID }">
 				<input type="hidden" id="boardNumber" name="boardNumber" value="${board.boardNumber}">
 				<input type="hidden" id="memberId" name="memberId" value="${board.writer}">
-				<textarea id="content" name="content" style="resize:none; width:770px; height:300px;" placeholder="댓글입력"></textarea>
-				<br>
-				<button id="insertComment">댓글달기</button>
+				<textarea id="content" name="content" style="resize:none; width:770px; height:150px;" placeholder="댓글입력"></textarea>
+		<br><button id="insertComment" style="background-color:#00a000; color:white;">댓글달기</button>
 		</c:if>
 		</div>
 	</div>

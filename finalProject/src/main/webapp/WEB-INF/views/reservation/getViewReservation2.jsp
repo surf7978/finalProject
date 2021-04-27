@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>사업자번호로 예약리스트 조회</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <link href='resources/css/fullcalendar.css' rel='stylesheet' />
 <script src='resources/js/fullcalendar.js'></script>
 <script>
@@ -14,31 +16,30 @@
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth' ,
 			locale: 'ko',
-			eventSources: [
+			eventSources:
 				{
-					 url: 'getSearchReservationCalendar2'
-				
-				}
-			],  
-			eventClick:function(event) {
-                if(event.url) {
-                    alert(event.title + "\n" + event.url, "wicked", "width=700,height=600");
-                    window.open(event.url);
-                    return false;
-                }
-            }
+					url: 'getSearchReservationCalendar2'
+				},
+			eventClick: function(e){
+				Swal.fire({
+					  title: '예약 조회',
+					  text: e.el.innerText,
+					}) 			
+			}
+			
 		});
 		calendar.render();
 	});
+	
 </script>
 </head>
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <input type="hidden" id="businessNumber" name="businessNumber" value="${business.businessNumber }">
-<h3>${business.businessCompanyName } 예약 리스트</h3>
+<h3>${business.businessCompanyName }님의 예약 리스트</h3>
 <br>
-<table border="1">
+<table class="table1">
 		<tr>
 			<th>예약번호</th>
 			<th>예약자</th>
@@ -57,7 +58,7 @@
 				<td><c:out value="${res.reservationState}" /></td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table><br>
 		<div id='calendar' style="width: 800px"></div>
 </div>
 </body>

@@ -16,7 +16,7 @@ public class BoardVO {
 	String views;
 	String category;
 	String memberId;
-	String t_image;
+	String t_image = " ";
 	MultipartFile[] uploadFile;
 	MultipartFile t_uploadFile;
 

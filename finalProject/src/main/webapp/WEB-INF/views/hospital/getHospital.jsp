@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="resources/js/common.js"></script>
 
 <!-- 단건조회 아작스 -->
 <script>
@@ -81,9 +82,9 @@
 						var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
 								$("<span>").text("${hospital.name }")
 										.append("<hr>"));
-						var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count","readonly":"readonly"});
+						var input = $("<input>").attr({"type":"hidden","min":"1","value":"1","name":"count","readonly":"readonly"});
 						var inval = $(input).val();
-						var strong = $("<p>").css("text-align", "right").text("${hospital.price }");
+						var strong = $("<p>").css("text-align", "right").text(moneyComma("${hospital.price }"));
 						$(nav).append(input, strong);		
 						$("#pro_show").empty();							
 						$("#pro_show").append(nav);
@@ -104,8 +105,16 @@
 			var resultPrice = $("[name=resultPrice]").text();
 			var count = $("[name=count]").val();
 			var pro = $("#pro_result").text();
+			var loginId = $("[name=memberId]").val();
 			if(pro == ""){
 				alert("상품을 선택해주세요");
+			}else if (!loginId) {
+				var result = confirm("로그인해주세요");
+				if (result == true) {
+					location.href = "loginForm";
+				} else {
+					return false;
+				}
 			}else{
 				location.href="HospitalPayInfoForm?resultPrice="+resultPrice +"&count=" + count +"&seq=${hospital.seq }";
 			}			
@@ -211,7 +220,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 <h4 id="content22">구매평
 <c:if test="${not empty reservation }">
 <c:if test="${not empty reservation[0].reservationDate }">
-<button type="button" id="insertReview" onclick="window.open('insertReview?bisNumber=${hospital.seq }','insertReview','width=800, height=800')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
+<button type="button" id="insertReview" onclick="window.open('insertReview?bisNumber=${hospital.seq }','insertReview','width=800, height=300')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
 </c:if>
 </c:if>
 </h4>
@@ -233,7 +242,7 @@ hospital.businessNumber : ${hospital.businessNumber}
 <h4 id="content33">문의내역
 <c:if test="${not empty loginID }">
 <c:if test="${loginAuth eq 'm' }">
-<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=800')">상품 문의하기</button>
+<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertQuestion" onclick="window.open('insertQuestionBusi?seq=${hospital.seq}&businessNumber=${hospital.businessNumber }','insertQuestion','width=800, height=500')">상품 문의하기</button>
 </c:if>
 </c:if>
 </h4>

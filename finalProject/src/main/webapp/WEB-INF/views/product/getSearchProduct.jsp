@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="resources/js/common.js"></script>
 <script>
 	function getSearchProduct(p) {
 		/* 리스트 ajax */
@@ -56,10 +56,10 @@
 													"resources/images/products/"
 															+ t_img));
 							var nav = $("<nav>");
-							var strong = $("<strong>").text(
-									response[i].productName);
-							var p = $("<p>")
-									.text(response[i].optionPrice + "원");
+							var pri = response[i].optionPrice;
+							var price = pri.split(",");
+							var strong = $("<strong>").text(response[i].productName);
+							var p = $("<p>").text(moneyComma(price[0]) + "원");
 							$(nav).append(strong, p);
 							$(li).append(input, div, nav);
 							$(ul).append(li);
@@ -124,9 +124,6 @@
 </head>
 <body>
 	<div id="contents">
-			<c:if test="${loginID eq 'admin' }">
-				<button id="btn">상품등록</button>
-			</c:if>
 		<h1>우리몰</h1>
 		<div id="pro_location">
 			<ul>
@@ -251,5 +248,8 @@
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>
+			<c:if test="${loginID eq 'admin' }">
+				<button id="btn" style="padding:10px; width:220px; border:none; border-radius:5px;margin:5px;background:#e39f20;color:#fff;">상품등록</button>
+			</c:if>
 </body>
 </html>

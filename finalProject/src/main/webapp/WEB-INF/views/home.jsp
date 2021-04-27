@@ -6,13 +6,15 @@
 <html>
 <head>
 <title>Home</title>
-
+<style>
+.pi-pic{width:275px;height:275px;}
+</style>
 </head>
 <body> 
 <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="hero-items owl-carousel">
-            <div class="single-hero-items set-bg" data-setbg="resources/img/slider01.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/images/test/slider_01.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
@@ -23,12 +25,12 @@
                             <a href="getSearchProductForm" class="primary-btn">Go Now</a>
                         </div>
                     </div>
-                    <div class="off-card">
+                   <!--  <div class="off-card" >
                         <h2>Sale <span>50%</span></h2>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div class="single-hero-items set-bg" data-setbg="resources/img/hero-2.jpg">
+            <div class="single-hero-items set-bg" data-setbg="resources/images/test/slider_02.jpg">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
@@ -39,9 +41,9 @@
                             <a href="getAbanList" class="primary-btn">Go Now</a>
                         </div>
                     </div>
-                    <div class="off-card">
+                    <!-- <div class="off-card">
                         <h2>Sale <span>50%</span></h2>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -53,7 +55,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="product-large set-bg" data-setbg="resources/img/women-large.jpg">
+                    <div class="product-large set-bg" data-setbg="resources/images/test/slide_menu.jpg">
                         <h2>쇼핑몰</h2>
                         <a href="getSearchProductForm">Discover More</a>
                     </div>
@@ -89,7 +91,7 @@
                                 	<!-- 
                                     <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                 	 -->
-                                    <li class="w-icon active"><a href="getProduct?productNumber=${list.productNumber }"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="w-icon active"><a href="getProduct?productNumber=${list.productNumber }"><i class="icon_search"></i></a></li>
                                     <li class="quick-view"><a href="getProduct?productNumber=${list.productNumber }">상세보기</a></li>
                                 </ul>
                             </div>
@@ -149,7 +151,7 @@
 					 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
 					 user="final" password="a20210409A"/>
 	                <sql:query var="rs" dataSource="${ds }">
-					    select * from adminView
+					    select * from adminView where code = 'hospital'
 					</sql:query>
                     <div class="product-slider owl-carousel">
                         <c:if test="${not empty rs.rows }">
@@ -173,11 +175,11 @@
                                     <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                 	 -->
                                 	<c:if test="${list.code eq 'hospital' }">
-                                    <li class="w-icon active"><a href="getHospital?seq=${list.seq }"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="w-icon active"><a href="getHospital?seq=${list.seq }"><i class="icon_search"></i></a></li>
                                     <li class="quick-view"><a href="getHospital?seq=${list.seq }">상세보기</a></li>
                                 	</c:if>
                                 	<c:if test="${list.code ne 'hospital' }">
-                                    <li class="w-icon active"><a href="getSearchInfo?seq=${list.seq }"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="w-icon active"><a href="getSearchInfo?seq=${list.seq }"><i class="icon_search"></i></a></li>
                                     <li class="quick-view"><a href="getSearchInfo?seq=${list.seq }">상세보기</a></li>
                                 	</c:if>
                                 </ul>
@@ -200,7 +202,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 offset-lg-1">
-                    <div class="product-large set-bg m-large" data-setbg="resources/img/women-large.jpg">
+                    <div class="product-large set-bg m-large" data-setbg="resources/images/test/slide_menu02.jpg">
                         <h2>Men’s</h2>
                         <a href="#">Discover More</a>
                     </div>
@@ -209,6 +211,7 @@
         </div>
     </section>
     <!-- Man Banner Section End -->
+    <!-- 
 <hr>    
 <h1>
 	메인화면 입니다. 
@@ -233,6 +236,7 @@
 	<a href="getSearchReservationBusi">예약내역조회</a>
 	<a href="getViewReservation2">사업자용리스트 조회(예비)</a>
 	<a href="getSearchAnimal">마이펫수첩</a> <p></p>
+     -->
 	
 
 

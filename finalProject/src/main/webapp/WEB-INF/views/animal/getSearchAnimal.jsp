@@ -34,8 +34,8 @@
 			<td><input type="button" class="getSearchNoteBtn" value="수첩보기" onclick="location.href='getSearchNote?animalNumber='+${ani.animalNumber}"></td>	
 				<tr>
 		</c:forEach>	
-	</table>
-	<input type="button" value="반려견 추가등록" onclick="location.href='insertAnimal'">
+	</table><br>
+	<input type="button" class="insertNoteBtn" value="반려견 추가등록" onclick="location.href='insertAnimal'">
 </div>
 </body>
 </html>

@@ -18,6 +18,7 @@ a {
 }
 </style>
 <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
+<script src="resources/js/common.js"></script>
 <script>
 	//호출시 첫 화면
 	$(function() {
@@ -105,7 +106,7 @@ a {
 											.attr("src","resources/images/business/"+ image1));
 							var nav = $("<nav>");
 							var strong = $("<strong>").text(response[i].name);
-							var p = $("<p>").text(response[i].price + "원");
+							var p = $("<p>").text(moneyComma(response[i].price) + "원");
 							$(nav).append(strong, p);
 							$(li).append(input, div, nav);
 							$(ul).append(li);
@@ -140,7 +141,7 @@ a {
 	<div id="checkbox"></div>
 	<div id="contents">
 		<c:if test="${loginAuth eq 'b' }">
-			<!-- 로그인한 사업자가 병원일 때 등록 활성화 -->
+			<!-- 로그인한 계정이 사업자인 경우 등록 활성화 -->
 			<sql:setDataSource var="ds" driver="oracle.jdbc.OracleDriver"
 			 url="jdbc:oracle:thin:@db202104090913_high?TNS_ADMIN=/home/ubuntu/Wallet_DB202104090913" 
 			 user="final" password="a20210409A"/>
@@ -151,12 +152,13 @@ a {
 				<button onclick="location.href='insertIntegratedForm'">상품등록</button>
 			</c:if>
 		</c:if>
-		<h2>전체 리스트</h2>
+		<br><h2>전체 리스트</h2><br>
 		<div id="menu">
 			<form id="searchAndInsert">
 				<input type="hidden" name="menu" value="${param.menu}">
 				<input type="hidden" name="category1">
 				<table id="tbl" align="left" width="100%" style="text-align: center;">
+				<tr><td colspan="3"><hr style="border-top:2px solid #e7ab3c;"></td></tr>
 				<tr>
 					<c:if test="${param.menu == 1}">
 						<td>
@@ -176,10 +178,12 @@ a {
 				</tr>
 				</table>
 				<table>
+				<tr><td colspan="2"><hr></td></tr>
 				<tr>
 					<td><strong>지역구분</strong></td>
 						<td class="con"></td>
 				</tr>
+				<tr><td colspan="2"><hr></td></tr>
 				<tr>
 					<td width="100px"><strong>결과 내 재검색</strong></td>
 					<td><div>
@@ -198,6 +202,7 @@ a {
 			</table>
 			</form>
 		</div>
+		<hr>
 		<div id="show"></div>
 		<div id="paging"></div>
 	</div>

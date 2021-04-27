@@ -27,10 +27,10 @@
     /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}
 
-.sub_news{width:700px;border-bottom:1px solid #999;color:black;font-size:12px;table-layout:fixed;}
+.sub_news{width:700px;border-bottom:1px solid #999;color:black;font-size:17px;table-layout:fixed;}
 
-.sub_news th{padding:10px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
-.sub_news td{padding:20px 0 9px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
+.sub_news th{padding:10px 0 10px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
+.sub_news td{padding:15px 0 15px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
 
 /* //게시판 리스트 목록 */
 
@@ -50,26 +50,29 @@
 <div style="width:50%; right: 300px;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <div id="contents">
-<h3>내가 쓴글</h3><br><br>
-<table class="sub_news" border="1">
+<h3>내가 쓴글</h3><br>
+<table class="sub_news" border="1" style="cursor:pointer;">
 
 
 
 <thead>
 <tr class="th">
-<th width="60">조회수</th>
+<th width="60">글번호</th>
 <th scope="col">제목</th>
-<th scope="col">날짜</th>
+<th width="250">날짜</th>
+<th width="100">글쓴이</th>
+<th width="60">조회수</th>
 
 </tr>
 </thead>
 <tbody>
 <c:forEach var="board" items="${board}">
 <tr onclick="location.href='getBoard?boardNumber=${board.boardNumber}'">
-
-<td >${board.views}</td>
+<td>${board.boardNumber}</td>
 <td >${board.title}</td>
 <td>${board.calendar}</td>
+<td>${board.writer}</td>
+<td >${board.views}</td>
 </tr>
 </c:forEach>
 
@@ -81,7 +84,7 @@
 <input class="write" type = "button" value="글쓰기" onclick="location.href='insertBoard'">
  -->
 <div >
-	<div  style="display: block; text-align: right;">		
+	<div  style="display: block; text-align: right; cursor:pointer;" >		
 		<c:if test="${paging.startPage != 1 }">
 			<a href="getSearchBoardCategory199?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>

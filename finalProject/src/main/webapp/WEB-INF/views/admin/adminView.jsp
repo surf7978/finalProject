@@ -21,7 +21,7 @@
 				</c:if>
 				 <th style="width:250px; font-size:30px;">글제목</th>
 				 <th style="width:150px; font-size:30px;">가격</th>
-				 <th style="width:100px; font-size:30px;">지역</th>
+				 <th style="width:400px; font-size:30px;">지역</th>
 				 <th style="width:50px; font-size:30px;">관리</th>
 			 </tr>
 		 </thead>

@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <link href='resources/css/fullcalendar.css' rel='stylesheet' />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src='resources/js/fullcalendar.js'></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
@@ -16,11 +17,17 @@
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth' ,
 			locale: 'ko',
-			eventSources: [
+			eventSources:
 				{
 					url: 'getSearchReservationCalendar'
 				},
-			]
+			eventClick: function(e){
+			 	Swal.fire({
+					  title: '예약 조회',
+					  text: e.el.innerText,
+					}) 			
+			}
+			
 		});
 		calendar.render();
 	});
@@ -51,10 +58,10 @@
 				<td><c:out value="${res.reservationState}" /></td>
 				<td>
 				<c:if test="${res.reservationDate eq null}">
-				<button type="button" class="insertReservationBtn" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=500, height=500')">예약하기</button>
+				<button type="button" class="insertReservationBtn" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=550, height=500')">예약하기</button>
 				</c:if>
 				<c:if test="${res.reservationDate ne null}">
-				<button type="button" class="updateReservationBtn" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=500, height=500')">예약변경</button>
+				<button type="button" class="updateReservationBtn" onclick="window.open('updateReservation?pndNumber=${res.pndNumber}','updateReservation','width=550, height=500')">예약변경</button>
 				</c:if>
 				</td>
 			</tr>
@@ -68,8 +75,7 @@
 		searchFrm.submit();
 	}
 </script>	
-	<br>
-	<div id='calendar' style="width: 800px"></div>
+	<div id='calendar' style="width: 900px;"></div><br>
 </div>
 </body>
 </html>

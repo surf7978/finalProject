@@ -105,23 +105,26 @@
 				<div class="row">
 					<div class="col-lg-2 col-md-2">
 						<div class="logo">
-							<a href="${pageContext.request.contextPath}"> <img src="resources/img/logo.png" alt="">
-							</a>
+							<a href="${pageContext.request.contextPath}"> <img src="resources/images/test/logo.png" style="width:350px; height:auto;" alt="">
+							</a> 
 						</div>
 					</div>
 					<div class="col-lg-7 col-md-7">
-						<div class="advanced-search">
+						<br>
+						<div class="advanced-search" style="border-radius:15px;">
 							<button type="button" class="category-btn">All
 								Categories</button>
 							<div class="input-group">
-								<input type="text" placeholder="What do you need?">
-								<button type="button">
+								<form action="searching" method="post">
+								<input type="text" id="keyWord" name="keyWord" placeholder="What do you need?">
+								<button type="submit" style="border-radius:0 15px 15px 0;">
 									<i class="ti-search"></i>
 								</button>
+								</form>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 text-right col-md-3">
+					<div class="col-lg-3 text-right col-md-3" style="position:relative;">
 					<c:if test="${not empty loginID}">
 					<c:if test="${loginAuth eq 'm'}">
 					<c:if test="${loginID ne 'admin'}">
@@ -135,7 +138,7 @@
 					<sql:query var="rs1" dataSource="${ds }">
 					    select * from cart where memberId = '${loginID}'
 					</sql:query> 
-						<ul class="nav-right">
+						<ul class="nav-right" style="position:absolute;right:20px;top:57%;transform:translateY(-50%);z-index:900;">
 							<li class="cart-price">장바구니 </li>
 							<!-- 
 							<li class="heart-icon"><a href="#"> <i
@@ -196,7 +199,7 @@
 			</div>
 		</div>
 		<div class="nav-item">
-			<div class="container" style=" max-width:100%;display:flex;justify-content: center;">
+			<div class="container" id="navbar" style=" max-width:100%;display:flex;justify-content: center;">
 			<!-- 
 			
 				<div class="nav-depart">

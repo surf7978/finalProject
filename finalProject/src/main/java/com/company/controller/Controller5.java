@@ -353,7 +353,7 @@ public class Controller5 {
 
 		return "business/getSearchInfo";
 	}
-	
+
 	// 사업자-통합 등록 폼
 	@GetMapping("/insertIntegratedForm")
 	public String insertIntegratedForm() {
@@ -426,6 +426,7 @@ public class Controller5 {
 	public int deleteIntegrated(IntegratedVO vo, BusinessVO bvo, HttpSession session) throws Exception {
 		// session method
 		vo.setCode(sessionSelect(session, vo));
+		vo.setSeq(vo.getSeq());
 		// process
 		int r = integratedService.deleteIntegrated(vo);
 		return r;
