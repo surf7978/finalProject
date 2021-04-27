@@ -33,7 +33,7 @@
 				var nav = $("<nav>").css("width","100%").attr("id", "proname").append(
 						$("<span>").text("${vo.name}").append("<hr>"));
 				//수량으로 바꿀 부분
-				var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count"});
+				var input = $("<input>").attr({"type":"number","min":"1","value":"1","name":"count","readonly":"readonly"});
 				var strong = $("<p>").css("text-align", "right").text("${vo.price}");
 				$(nav).append(input, strong);	
 				$("#pro_show").empty();	
