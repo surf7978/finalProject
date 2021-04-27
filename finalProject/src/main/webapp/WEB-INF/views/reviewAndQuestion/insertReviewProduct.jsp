@@ -15,7 +15,7 @@
 <input type="hidden" id="probisNumber" name="probisNumber" value="${buy[0].productNumber }">
 
 <table class="table7">
-<tr>
+<tr> 
 <th>구매상품</th>
 	<td>
 	<select id="buyNumber" name="buyNumber" style="width: 600px;">
