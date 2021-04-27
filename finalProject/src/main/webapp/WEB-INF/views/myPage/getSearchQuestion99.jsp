@@ -58,8 +58,8 @@
 <thead>
 <tr class="th">
 <th width="60">글번호</th>
-<th scope="col">제목</th>
-<th scope="col">문의날짜</th>
+<th  width="600">제목</th>
+<th width="200">문의날짜</th>
 
 
 
