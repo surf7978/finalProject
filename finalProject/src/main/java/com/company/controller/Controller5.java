@@ -426,6 +426,7 @@ public class Controller5 {
 	public int deleteIntegrated(IntegratedVO vo, BusinessVO bvo, HttpSession session) throws Exception {
 		// session method
 		vo.setCode(sessionSelect(session, vo));
+		vo.setSeq(vo.getSeq());
 		// process
 		int r = integratedService.deleteIntegrated(vo);
 		return r;

@@ -142,9 +142,10 @@
 	function deleteIntegrated(){
 		$("#btnDelete").on("click",function(){
 			var seq = frm.seq.value;
+			console.log(seq)
 			$.ajax({
 				url:"deleteIntegrated",
-				data:{seq:seq},
+				data:{"seq":seq},
 				dataType:"json",
 				success:function(r){
 					if(r == 1){
@@ -237,12 +238,12 @@ hospital.businessNumber : ${hospital.businessNumber}
 	</c:if>
 	<!-- loginID부분 바꾸기 -->
 	<c:if test="${loginID eq rs.rows[0].businessId || loginID eq 'admin'}">
-		<button>삭제하기</button>
+		<button id="btnDelete">삭제하기</button>
 	</c:if>
 		<div id="getproduct">
 			<div class="pro_title">
 				<form id="frm" name="frm">
-					<input type="hidden" name="bisNumber" value="${vo.seq}">
+					<input type="hidden" id="seq" name="bisNumber" value="${vo.seq}">
 					<input type="hidden" name="name" value="${vo.name}">
 					<input type="hidden" name="businessNumber" value="${vo.businessNumber}">
 					<input type="hidden" name="image1" value="${vo.image1}">
