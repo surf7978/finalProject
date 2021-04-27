@@ -84,7 +84,7 @@
 <input class="write" type = "button" value="글쓰기" onclick="location.href='insertBoard'">
  -->
 <div >
-	<div  style="display: block; text-align: right; cursor:pointer;" >		
+	<div  style="display: block; text-align: center; cursor:pointer;" >		
 		<c:if test="${paging.startPage != 1 }">
 			<a href="getSearchBoardCategory199?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
