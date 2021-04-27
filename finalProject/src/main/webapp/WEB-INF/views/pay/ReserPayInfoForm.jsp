@@ -43,7 +43,7 @@
 						<td rowspan="2">${map.resultPrice }</td>
 					</tr>
 					<tr>
-						<td><input value="${vo.optionName }" name="optionName"><input type="number" value="${map.count }" name="count" style="width:50px;">${vo.price }</td>
+						<td><input value="${vo.optionName }" name="optionName"><input type="number" readonly="readonly" value="${map.count }" name="count" style="width:50px;">${vo.price }</td>
 					</tr>
 					<tr>
 						<td>합계금액</td>

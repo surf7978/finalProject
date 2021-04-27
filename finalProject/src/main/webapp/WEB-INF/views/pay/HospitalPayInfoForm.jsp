@@ -53,7 +53,7 @@
 						<td rowspan="2">${resultPrice }</td>
 					</tr>
 					<tr>
-						<td><input value="${vo.optionName }" name="optionName"><input type="number" value="${count }" name="count" style="width:50px;">${vo.price }</td>
+						<td><input value="${vo.optionName }" name="optionName"><input type="number" value="${count }" name="count" style="width:50px;" readonly="readonly">${vo.price }</td>
 					</tr>
 					<tr>
 						<td>합계금액</td>

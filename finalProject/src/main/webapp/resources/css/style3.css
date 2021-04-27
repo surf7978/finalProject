@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 body{font-family: 'Noto Sans KR', sans-serif;}
-::selection{background:#e7ab3c;}
+::selection{background:#e7ab3c;color:#fff;}
 a{color:#000;}
 a:hover{color:#e7ab3c;transition:0.3s;}
 textarea{resize:none;}
@@ -106,10 +106,12 @@ li{list-style:none;}
 #pay_wrap #add_wrap input{padding:5px;margin:5px 0;border:1px solid #d5d5d5;}
 #pay_wrap table tfoot tr td{padding:20px 10px;}
 /* 제품insert테이블 */
-#contents #pro_tb{width:100%;}
-#contents #pro_tb th{width:20%;}
+#contents #pro_tb{width:95%;}
+#contents #pro_tb input, select{padding:5px;border:none;width:30%;border:1px solid #c3c3c3;}
+#contents #pro_tb th{width:15%;text-align:center;}
 #contents #pro_tb td{width:80%;position:relative;}
-#contents #pro_tb td #opbtn{position:absolute;right:0;top:0;}
+#contents #pro_tb td #opbtn{position:absolute;right:0;top:5px;background:none;color:#c3c3c3;}
+#contents #pro_tb td #opbtn:hover{color:#e7ab3c}
 /* 제품옵션 */
 #contents #pro_show #proname{background:#fcfcfd;padding:10px;border:#d9dde2 1px solid;}
 /* 장바구니 */
