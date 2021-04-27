@@ -79,7 +79,7 @@ public class Controller1 {
 	BusinessService businessService;
 	@Autowired
 	KakaoAPI kakaoAPI;
-
+ 
 	// 로그인화면 이동
 	@GetMapping("/loginForm")
 	public String loginForm() {
