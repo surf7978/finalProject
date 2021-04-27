@@ -41,7 +41,7 @@
 							<h6 style="font-size:20px; font-weight:900;">활동내역</h6>
 							<br>
 							<button onclick="location.href='adminView'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;업체판매글 현황</button><br> 
-							<button onclick="location.href='getSearchAnimal99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기글 현황</button><br>
+							<button onclick="location.href='getSearchAnimal99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매평 내역</button><br>
 							<button onclick="location.href='getSearchQuestionSelect1'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;쇼핑몰 문의 내역</button><br>
 							<button onclick="location.href='getSearchQuestionSelect2'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;고객센터 문의 내역 </button><br>
 							<!-- 
@@ -89,7 +89,7 @@
 							<h6 style="font-size:20px; font-weight:900;">나의 활동</h6>
 							<br>
 							<button onclick="location.href='getSearchBoardCategory199?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;내가쓴글</button><br> 
-							<button onclick="location.href='getSearchReview98?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;후기내역</button><br>
+							<button onclick="location.href='getSearchReview98?memberId=${loginID}'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매평 내역</button><br>
 							<button onclick="location.href='getSearchQuestion99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;문의한 내역</button><br>
 							<!-- 
 							<button onclick="location.href='userAnswer'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;답변 받은 내역</button><br>

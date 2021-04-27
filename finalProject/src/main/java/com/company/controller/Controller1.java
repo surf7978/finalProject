@@ -72,14 +72,14 @@ import com.company.review.service.ReviewVO;
 
 @Controller
 public class Controller1 {
-
+ 
 	@Autowired
 	MemberService memberService;
 	@Autowired
 	BusinessService businessService;
 	@Autowired
 	KakaoAPI kakaoAPI;
-
+ 
 	// 로그인화면 이동
 	@GetMapping("/loginForm")
 	public String loginForm() {
