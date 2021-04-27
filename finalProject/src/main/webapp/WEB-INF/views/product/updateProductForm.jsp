@@ -243,7 +243,7 @@
 			action="updateProduct">
 			<input type="hidden" name="productNumber"
 				value="${product.productNumber }">
-			<table border="1">
+			<table border="1" id="pro_tb">
 				<tr>
 					<th>작성자</th>
 					<td><input name="memberId" value="admin" readonly="readonly"></td>
