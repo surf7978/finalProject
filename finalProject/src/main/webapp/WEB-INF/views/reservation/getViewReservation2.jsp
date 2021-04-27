@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>사업자번호로 예약리스트 조회</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <link href='resources/css/fullcalendar.css' rel='stylesheet' />
 <script src='resources/js/fullcalendar.js'></script>
 <script>
@@ -16,10 +17,10 @@
 			locale: 'ko',
 			eventSources:
 				{
-					url: 'getSearchReservationCalendar'
+					url: 'getSearchReservationCalendar2'
 				},
 			eventClick: function(e){
-			 	Swal.fire({
+				Swal.fire({
 					  title: '예약 조회',
 					  text: e.el.innerText,
 					}) 			
