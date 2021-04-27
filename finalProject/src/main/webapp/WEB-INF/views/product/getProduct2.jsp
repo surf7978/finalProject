@@ -105,9 +105,7 @@ $(document).ready(function() { //function시작
 							}
 						});
 		//삭제버튼 클릭
-		$("#d_btn").on("click",function() {
-								deleteBoard();
-						});
+		$("#d_btn").on("click",function() {deleteBoard();});
 		function deleteBoard(){
 			Swal.fire({
 			  title: '글을 삭제하시겠습니까?',
