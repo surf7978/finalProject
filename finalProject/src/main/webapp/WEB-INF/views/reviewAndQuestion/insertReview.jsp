@@ -20,7 +20,7 @@
 </c:if>
 </c:forEach>
 </select>
-
+ 
 <table border="1">
 <tr>
 <th>작성자</th>
