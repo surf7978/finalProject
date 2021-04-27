@@ -21,13 +21,13 @@
 	 , #{title} 
 	 , #{content}
 	 , #{startDate} 
-	 , #{endDate}  
-	 <if test="image != null">
-	 ,IMAGE=#{image}
-	 </if>
-	 <if test="t_image != null">
-	 ,T_IMAGE=#{t_image}
-	 </if>
+	 , #{endDate} 
+	<if test="image != null">
+	 , #{image}
+	</if>
+	<if test="t_image != null">
+	 , #{t_image}
+	</if>
 	 , 0 
 	 , 1 
 	 , 'admin')
