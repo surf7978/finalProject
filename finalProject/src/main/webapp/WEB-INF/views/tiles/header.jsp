@@ -138,7 +138,7 @@
 					<sql:query var="rs1" dataSource="${ds }">
 					    select * from cart where memberId = '${loginID}'
 					</sql:query> 
-						<ul class="nav-right" style="position:absolute;right:20px;top:60%;transform:translateY(-50%);z-index:900;">
+						<ul class="nav-right" style="position:absolute;right:20px;top:57%;transform:translateY(-50%);z-index:900;">
 							<li class="cart-price">장바구니 </li>
 							<!-- 
 							<li class="heart-icon"><a href="#"> <i
