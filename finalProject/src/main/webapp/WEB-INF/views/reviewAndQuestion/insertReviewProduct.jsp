@@ -6,34 +6,40 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 </head>
 <body>
 <h3>쇼핑몰 구매평 등록</h3>
 <form action="insertReviewProduct" method="post">
 <input type="hidden" id="memberId" name="memberId" value="${loginID }">
 <input type="hidden" id="probisNumber" name="probisNumber" value="${buy[0].productNumber }">
-<select id="buyNumber" name="buyNumber">
-<c:forEach items="${buy }" var="buy">
-	<option value="${buy.buyNumber }">${buy.buyNumber }, ${buy.optionName } </option>
-</c:forEach>
-</select>
 
-<table border="1">
+<table class="table7">
+<tr>
+<th>구매상품</th>
+	<td>
+	<select id="buyNumber" name="buyNumber" style="width: 600px;">
+		<c:forEach items="${buy }" var="buy">
+		<option value="${buy.buyNumber }">${buy.buyNumber }, ${buy.optionName } </option>
+	</c:forEach>
+	</select>
+	</td>
+</tr>
 <tr>
 <th>작성자</th>
-<td><input type="text" id="writer" name="writer" value="${name }" readonly="readonly"></td>
+<td><input type="text" id="writer" name="writer" value="${name }" readonly="readonly" style="width: 600px;"></td>
 </tr>
 <tr>
 <th>제목</th>
-<td><input type="text" id="title" name="title"></td>
+<td><input type="text" id="title" name="title" style="width: 600px;"></td>
 </tr>
 <tr>
 <th>내용</th>
-<td><input type="text" id="content" name="content"></td>
+<td><input type="text" id="content" name="content" style="width: 600px;"></td>
 </tr>
-</table>
-<button type="submit">등록하기</button>
-<button type="button" onclick="window.close()">취소</button>
+</table><br>
+<button type="submit" class="close">등록하기</button>
+<button type="button" class="close2" onclick="window.close()">취소</button>
 </form>
 </body>
 </html>
