@@ -13,31 +13,29 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-</div>
-	<h3>특정 문의내역조회</h3> <br><br><br><br><br>
+
+	<h3>특정 문의내역조회</h3> <br><br>
 	<table style=" position: relative; right:200px;">
 		<tr style="height:20px;">
-			<th style="width: 200px;">보낸사람 :</th>
+			<th style="width: 200px;">보낸사람</th>
 			<td>${vo.writer}</td>
 			<td></td>
-
 		</tr>
 		<tr style="height:20px;">
-			<th>제목 :</th>
+			<th>제목</th>
 			<td>${vo.title}</td>
 			<td></td>
 		</tr>
 		<tr style="height:20px;">
-			<th>보낸날짜 :</th>
+			<th>보낸날짜</th>
 			<td>${vo.calendar}</td>
 			<td></td>
 		</tr>
-		<tr style=" height:50px;">
-			<th>내용    </th>
+		<tr style="height:50px;">
+			<th>내용</th>
 			<td></td>
 			<td></td>
 		</tr>
-		
 	</table>
 	
 	<div>
@@ -48,24 +46,21 @@
 	<sql:query var="rs" dataSource="${ds }">
 	 select * from answer where questionNumber = '${vo.questionNumber}'
 	</sql:query>
-	<c:if test="${empty rs.rows[0].content }">
-		<c:if test="${loginID eq vo.toPerson }">
+	<c:if test="${empty rs.rows[0].content}">
+		<c:if test="${loginID eq vo.toPerson}">
 			<button type="button" id="sendAnswer">답장하기</button>
 			<div id="insertAnswer"></div>
 		</c:if>
 	</c:if>
-    <c:if test="${not empty rs.rows[0].content }">
+    <c:if test="${not empty rs.rows[0].content}">
      <br><input class="send" type ="button" style="background-color:#37b328; color:white;"  value="답변완료"><br><br>
      <!--경계선 긋는 작업 table td style top border -->
      <h7>------------------------------------------------------------------답변------------------------------------------------------------------</h7>
      <br><br><br>
-   
-     
      <textarea style="width:800px; border: none;  height: 100px;  resize: none;" readonly>     ${rs.rows[0].writer }의 답변: ${rs.rows[0].content }</textarea>
-
     </c:if>
 	</div>
- 
+	</div>
 </body>
 <script>
 	/* $("#insertAnswer").on("click", function() {
