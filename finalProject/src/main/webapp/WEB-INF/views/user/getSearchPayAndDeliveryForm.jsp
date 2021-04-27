@@ -12,17 +12,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 </head>
-<style>
-    /* 게시판 리스트 목록 */
-.sub_news,.sub_news th,.sub_news td{border:0}
-
-.sub_news{width:700px;border-bottom:1px solid #999;color:black;font-size:17px;table-layout:fixed;}
-
-.sub_news th{padding:10px 0 10px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
-.sub_news td{padding:15px 0 15px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
-
-/* //게시판 리스트 목록 */
-</style>
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
@@ -30,15 +19,17 @@
 <form id="searchFrm" name="searchFrm">
 <input type="hidden" id="page" name="page" value="1">
 </form>
-<table class="sub_news">
+<table class="table1">
 	<tr>
 		<th>구매번호</th>
 		<th>분류</th>
 		<th>구매날짜</th>
 		<th>구매가격</th>
 		<th>구매상태</th>
-<!-- 		<th></th>
-		<th></th>	 -->	
+		<c:if test="${pads[0].pndNumber != null }">
+ 		<th></th>
+		<th></th>
+		</c:if>
 	</tr>
 	<c:forEach items="${pads }" var="pad">
 	<tr>
