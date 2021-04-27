@@ -158,3 +158,15 @@
 	background-color: #e7ab3c;
 	color: white;
 }
+
+.table7{
+	border-collapse: collapse;
+	border: 1px solid #444444;
+	text-align: center;
+	padding: 10px;
+	
+}
+
+.table7 th, .table7 td{
+	 border: 1px solid #444444;
+}
