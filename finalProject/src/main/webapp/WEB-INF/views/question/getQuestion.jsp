@@ -53,11 +53,10 @@
 		</c:if>
 	</c:if>
     <c:if test="${not empty rs.rows[0].content}">
-     <br><input class="send" type ="button" style="background-color:#37b328; color:white;"  value="답변완료"><br><br>
+     <br><input class="send" type ="button" style="background-color:#37b328; color:white;"  value="답변완료"> <br>
      <!--경계선 긋는 작업 table td style top border -->
-     <h7>------------------------------------------------------------------답변------------------------------------------------------------------</h7>
-     <br><br><br>
-     <textarea style="width:800px; border: none;  height: 100px;  resize: none;" readonly>     ${rs.rows[0].writer }의 답변: ${rs.rows[0].content }</textarea>
+     
+     <textarea style="width:800px; border: none;  height: 100px;  resize: none;" readonly>     답변:  ${rs.rows[0].content }</textarea>
     </c:if>
 	</div>
 	</div>
