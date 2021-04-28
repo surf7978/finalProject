@@ -477,6 +477,10 @@ public class Controller4 {
 		model.addAttribute("list", eventAndNoticeService.getSearchEventAndNotice(vo));
 		return "eventAndNotice/getSearchEventAndNotice";
 	}
+	
+	
+	
+	
 
 	// 1번 이벤트 전체조회로 가기
 
@@ -486,7 +490,7 @@ public class Controller4 {
 
 	}
 
-	// 1번 이벤트게시판리스트(ajax)
+	// 1번 이벤트게시판리스트 처리(ajax)
 	@RequestMapping("/getSearchEventAndNoticeSelect")
 	@ResponseBody
 	public Map<String, Object> getSearchEventAndNoticeSelect(EventAndNoticeSearchVO vo, Paging paging) {
@@ -508,6 +512,9 @@ public class Controller4 {
 		return map;
 	}// end of getSearchEventAndNoticeSelect
 
+	
+	
+	
 	// 이벤트 등록
 
 	@GetMapping("/insertEventAndNotice1")
@@ -516,7 +523,7 @@ public class Controller4 {
 		return "eventAndNotice/insertEventAndNotice1";
 
 	}
-
+	// 이벤트 등록 처리
 	@PostMapping("/insertEventAndNotice1")
 	public String insertEventAndNotice1Proc(EventAndNoticeVO vo, HttpServletRequest request)
 			throws IllegalStateException, IOException {

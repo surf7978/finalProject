@@ -318,7 +318,7 @@ public class Controller5 {
 		map.put("list", list);
 		// Cafe List
 		return map;
-	}// end of getSearchCafeProc
+	}// end of getSearchList1
 
 	// 사업자-통합상세페이지
 	@GetMapping("/getSearchInfo") // 로그인 하지 않아도 보여야함

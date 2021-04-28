@@ -58,10 +58,10 @@
 <thead>
 <tr class="th">
 <th width="60">글번호</th>
-<th scope="col">제목</th>
-<th width="250">날짜</th>
+<th width="400">제목</th>
+<th width="200">날짜</th>
 <th width="100">글쓴이</th>
-<th width="60">조회수</th>
+<th width="120">조회수</th>
 
 </tr>
 </thead>
@@ -84,7 +84,7 @@
 <input class="write" type = "button" value="글쓰기" onclick="location.href='insertBoard'">
  -->
 <div >
-	<div  style="display: block; text-align: right; cursor:pointer;" >		
+	<div  style="display: block; text-align: center; cursor:pointer;" >		
 		<c:if test="${paging.startPage != 1 }">
 			<a href="getSearchBoardCategory199?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>

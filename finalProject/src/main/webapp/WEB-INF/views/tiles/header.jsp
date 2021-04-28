@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="resources/css/style3.css" type="text/css">
 </head>
 <style>
+.nav-item .nav-menu li a{font-weight:100;}
 	#top_btn{position:fixed;right:0;bottom:60px;width:40px;height:40px;background:#e7ab3c;text-align:center;color:#fff;line-height:40px;cursor:pointer;display:none;font-size:13px;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

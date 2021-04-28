@@ -14,7 +14,7 @@
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 
-	<h3>특정 문의내역조회</h3> <br><br>
+	<h3>문의내역조회</h3> <br><br>
 	<table style=" position: relative; right:200px;">
 		<tr style="height:20px;">
 			<th style="width: 200px;">보낸사람</th>

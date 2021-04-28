@@ -156,9 +156,9 @@
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td><input type="text" name="post">
-								<button type="button" id="addbtn" required>주소검색</button>
-									<br> <input type="text" name="address" readonly required><br>
+								<td><input type="text" name="post" required>
+								<button type="button" id="addbtn">주소검색</button>
+									<br> <input type="text" name="address" required><br>
 									<input type="text" name="address2" required></td>
 							</tr>
 						</table>

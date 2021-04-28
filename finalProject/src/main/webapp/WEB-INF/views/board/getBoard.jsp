@@ -149,6 +149,7 @@ table td {
 		
 		<hr>
 		<br>
+		
 		<sql:query var="rs" dataSource="${ds }">
 		 select * from comments where boardNumber = '${board.boardNumber}'
 		</sql:query>
