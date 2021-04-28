@@ -13,6 +13,7 @@
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
+<h3>마이펫수첩 반려동물 리스트</h3><br>
 	<table class="table2">
 		<tr>
 			<th>마이펫</th>

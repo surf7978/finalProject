@@ -9,38 +9,37 @@
 <title>게시판 목록</title>
 </head>
 <style>
-	h2 {
-		text-align: center;
-	}
-
-
-	input.back{
+	input.write{
 			padding:10px;
 			width:100px;
 			border-radius:5px;
 			border:none;
 			color: white;
-			background-color:#50B4F5;
+			background-color:#3CB4FF;
+		}
+		input.back{
+			padding:10px;
+			width:100px;
+			border-radius:5px;
+			border:none;
+			color: white;
+			background-color:#FFD732;
 		}
 
     /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}
-.sub_news a{color:#383838;text-decoration:none}
-.sub_news{width:50%;border-bottom:1px solid #999;color:#666;font-size:17px;table-layout:fixed}
-.sub_news caption{display:none}
-.sub_news th{padding:5px 0 6px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color:#e7ab3c;color:white;font-weight:500;line-height:20px;vertical-align:top}
-.sub_news td{padding:20px 0 9px;border-bottom:solid 2px #d2d2d2;text-align:center;line-height:20px;}
-.sub_news .title{text-align:left; padding-left:15px; font-size:13px;}
-.sub_news .title .pic,.sub_news .title .new{margin:0 0 2px;vertical-align:middle}
-.sub_news .title a.comment{padding:0;background:none;color:#f00;font-size:12px;font-weight:bold}
-.sub_news tr.reply .title a{padding-left:16px;background:url(첨부파일/ic_reply.png) 0 1px no-repeat}
+
+.sub_news{width:700px;border-bottom:1px solid #999;color:black;font-size:17px;table-layout:fixed;}
+
+.sub_news th{padding:10px 0 10px;border-top:solid 1px #999;border-bottom:solid 1px #b2b2b2;background-color: white ;color:black;font-weight:800;line-height:20px;vertical-align:top}
+.sub_news td{padding:15px 0 15px;border-bottom:solid 1px #d2d2d2;text-align:center;line-height:18px;}
+
 /* //게시판 리스트 목록 */
 
  tr.th{
  	text-align: center;
  	font-size: 17px;
  }
-
 </style>
 <script>
 	function selChange() {
@@ -49,7 +48,7 @@
 	}
 </script>
 <body>
-<div style="width:60%;">
+<div style="width:60%; cursor:pointer;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 	<h3 align="center">쇼핑몰 문의내역</h3>
 	<br><br>
@@ -73,10 +72,10 @@
 <thead>
 <tr class="th">
 <th width="60">번호</th>
-<th width="200">제목</th>
-<th scope="col">날짜</th>
-<th scope="col" width="60">글쓴이</th>
-<th scope="col" width="60">아이디</th>
+<th width="500">제목</th>
+<th width="200">날짜</th>
+<th width="60">글쓴이</th>
+<th width="60">아이디</th>
 </tr>
 </thead>
 <tbody>
@@ -93,7 +92,7 @@
 
 </tbody>
 </table>
-	
+	<br>
 		<c:if test="${paging.startPage != 1 }">
 			<a href="getSearchQuestionSelect1?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
