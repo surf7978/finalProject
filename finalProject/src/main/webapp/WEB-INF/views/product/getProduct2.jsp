@@ -218,7 +218,7 @@ $(document).ready(function() { //function시작
 		var price = optionPrice.replace(/\s/gi, "");
 		var optionName = $("#optionName option:selected").text();
 		var navlen = $("#pro_show").find("nav").length;
-		var area = $("<textarea>").attr({"name":"optionNameList", "readonly":"readonly"}).css({"border":"none","height":"auto","width":"100%","overflow":"hidden"}).text(optionName);
+		var area = $("<textarea>").attr({"name":"optionNameList", "readonly":"readonly"}).css({"border":"none","height":"auto","width":"100%","overflow":"hidden","background":"none"}).text(optionName);
 		var nav = $("<nav>").css({
 			"width" : "100%",
 			"position":"relative",
@@ -234,7 +234,7 @@ $(document).ready(function() { //function시작
 		}).css("width","50px");
 		var a = $("<a>").attr("id","close").css({"position":"absolute","top":"10px", "right":"10px","cursor":"pointer"}).text("x")
 		var inval = $(input).val();
-		var strong = $("<p>").css({"float":"right","display":"inline-block"}).append($("<input>").attr({"name":"optionPriceList","readonly":"readonly"}).css({"border":"none","text-align":"right","width":""}).val(price));
+		var strong = $("<p>").css({"float":"right","display":"inline-block"}).append($("<input>").attr({"name":"optionPriceList","readonly":"readonly"}).css({"border":"none","text-align":"right","background":"none"}).val(price));
 		$(nav).append(input, strong, a);
 		$("#pro_show").append(nav);
 		$("#pro_result").empty();
