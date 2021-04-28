@@ -40,6 +40,7 @@
 <form id="searchFrm" name="searchFrm">
 <input type="hidden" id="page" name="page" value="1">
 </form>
+<h3>예약 내역 조회</h3><br>
 	<table class="table1">
 		<tr>
 			<th>예약번호</th>
