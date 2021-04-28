@@ -86,7 +86,7 @@
 				var tbl = $("<table>");
 				$("#tbody").empty();
 				$("#show").append(tbl);
-				var titles = ['상품명','옵션이름','가격','지역','대표이미지','추가이미지','조회','수정','삭제'];
+				var titles = ['상품명','옵션이름','가격','지역','대표이미지','조회','삭제'];
 				var thead=$("<thead>");
 				//titles
 				var tr = $("<tr>");
@@ -135,19 +135,17 @@
 			.append($("<td>").html(item.price))
 			.append($("<td>").html(item.location))
 			.append($("<td>").html(item.image1))
-			.append($("<td>").html(item.image2))
 			.append($("<td>").html("<button id=\'btnSelect\'>조회</button>"))
-			.append($("<td>").html("<button id=\'btnUpdate\'>수정</button>"))
 			.append($("<td>").html("<button id=\'btnDelete\'>삭제</button>"))
 			.append($('<input type=\'hidden\' id=\'seq\'>').val(item.seq));
 	}//end of makeTr
 </script>
 </head>
 <body>
-<div style="width:60%;">
+<div style="width:60%">
 <jsp:include page="../user/myPageSideBar.jsp" />
 	<div id="content">
-		<h4>게시글 관리 페이지</h4>
+		<h4>게시글 관리 페이지</h4><br>
 		<button type="button" id="btnInsert">등록</button>
 		<form id="frm" name="frm">
 			<input type="hidden" name="page" value="1">			

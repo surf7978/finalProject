@@ -25,6 +25,7 @@
 			color: white;
 			background-color:#FFD732;
 		}
+tbody tr{cursor:pointer;}
 
     /* 게시판 리스트 목록 */
 .sub_news,.sub_news th,.sub_news td{border:0}

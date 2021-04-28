@@ -203,7 +203,7 @@
                 </div>
                 <div class="col-lg-3 offset-lg-1">
                     <div class="product-large set-bg m-large" data-setbg="resources/images/test/slide_menu02.jpg">
-                        <h2>Men’s</h2>
+                        <h2>병원</h2>
                         <a href="#">Discover More</a>
                     </div>
                 </div>
