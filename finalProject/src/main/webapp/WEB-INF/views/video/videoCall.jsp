@@ -29,7 +29,7 @@ $(function(){
 function connect(){
 	$("#btnConnect").on("click",function(){
 		//연결로직
-		window.open("https://192.168.0.70:3000");
+		window.open("https://192.168.0.70:3000","영상통화","width=500px, height=400px,top=200px, left=600px, scrollbars=yes, resizable=no");
 	})//end of btnConnect
 }//end of connect
 </script>
