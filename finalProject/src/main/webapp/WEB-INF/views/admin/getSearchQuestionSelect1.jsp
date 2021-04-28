@@ -40,6 +40,9 @@
  	text-align: center;
  	font-size: 17px;
  }
+
+tbody tr{cursor:pointer;}
+
 </style>
 <script>
 	function selChange() {
