@@ -29,7 +29,7 @@ $(function(){
 function connect(){
 	$("#btnConnect").on("click",function(){
 		//연결로직
-		$("#iframe").attr("src","https://192.168.0.70:3000");
+		window.open("https://192.168.0.70:3000");
 	})//end of btnConnect
 }//end of connect
 </script>
@@ -40,8 +40,10 @@ function connect(){
 function disConnect(){
 	$("#btnDisConnect").on("click",function(){
 		//종료 로직
-		alert("연결이 종료되었습니다.");
-		$("#iframe").attr("src","");
+		var y = confirm("연결을 종료하시겠습니까?");
+		if(y){
+			window.close();
+		}
 	})//end of btnConnect
 }//end of disConnect
 </script>
@@ -53,7 +55,6 @@ function disConnect(){
 	<jsp:include page="../user/myPageSideBar.jsp" />
 		<h2>실시간 화상의료</h2>
 		<div id="tbl" align="center">
-			<iframe id="iframe" src="" width="500px" height="260px" style="margin-top: 30px;"></iframe>
 			<table border="1">
 				<tr>
 					<td>아이디</td>
