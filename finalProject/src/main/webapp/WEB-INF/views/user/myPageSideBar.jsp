@@ -96,6 +96,7 @@
 							<!-- 
 							<button onclick="location.href='userAnswer'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;답변 받은 내역</button><br>
 							 -->
+							<button onclick="location.href='videoCall'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;화상진료</button>
 						</td>
 					</tr>
 					<tr>
@@ -138,6 +139,7 @@
 							<!-- 
 							<button onclick="location.href='getSearchAnswer'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;답변한 내역</button><br>
 							 -->
+							<button onclick="location.href='videoCall'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;화상진료</button>
 						</td>
 					</tr>
 					<tr>
