@@ -144,10 +144,10 @@
 </script>
 </head>
 <body>
-<div style="width:60%;">
+<div style="width:60%">
 <jsp:include page="../user/myPageSideBar.jsp" />
 	<div id="content">
-		<h4>게시글 관리 페이지</h4>
+		<h4>게시글 관리 페이지</h4><br>
 		<button type="button" id="btnInsert">등록</button>
 		<form id="frm" name="frm">
 			<input type="hidden" name="page" value="1">			

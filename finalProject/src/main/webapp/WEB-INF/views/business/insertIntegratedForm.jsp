@@ -66,8 +66,10 @@
 					<td><input type="file" id="image2" name="uploadFile" multiple="multiple" required="required"></td>
 				</tr>
 			</table>
-			<button type="submit">등록</button>
-			<button type="reset">취소</button>
+			<div style="margin: 20px">
+				<button type="submit" style="margin-right: 10px">등록</button>
+				<button type="reset">취소</button>
+			</div>
 		</form>
 	</div>
 </body>
