@@ -33,7 +33,7 @@
 	                        <a href="https://kauth.kakao.com/oauth/authorize
 									?response_type=code
 									&client_id=8b88c20e8232de584d13f04e421f2b48
-									&redirect_uri=http://localhost/finalProject/callback">
+									&redirect_uri=http://13.209.195.48:8080/finalProject/callback">
 							<img src="resources/img/kakao_login_medium_narrow.png"></a>
                         </form>
                         <br>
