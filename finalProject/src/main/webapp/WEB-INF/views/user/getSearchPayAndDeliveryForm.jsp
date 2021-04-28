@@ -26,10 +26,12 @@
 		<th>구매날짜</th>
 		<th>구매가격</th>
 		<th>구매상태</th>
+
 		<c:if test="${pads[0].pndNumber != null }">
  		<th></th>
 		<th></th>
 		</c:if>
+
 	</tr>
 	<c:forEach items="${pads }" var="pad">
 	<tr>

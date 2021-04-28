@@ -58,8 +58,8 @@
 <thead>
 <tr class="th">
 <th width="60">글번호</th>
-<th scope="col">제목</th>
-<th scope="col">문의날짜</th>
+<th  width="600">제목</th>
+<th width="200">문의날짜</th>
 
 
 
@@ -81,7 +81,7 @@
   
 </div>
 <div >
-	<div  style="display: block; text-align: right;">		
+	<div  style="display: block; text-align: center;">		
 		<c:if test="${paging.startPage != 1 }">
 			<a href="getSearchQuestion99?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 		</c:if>
