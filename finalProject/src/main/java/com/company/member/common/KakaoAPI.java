@@ -36,8 +36,9 @@ public class KakaoAPI {
 	            StringBuilder sb = new StringBuilder();
 	            sb.append("grant_type=authorization_code");
 	            sb.append("&client_id=8b88c20e8232de584d13f04e421f2b48");
-	            sb.append("&redirect_uri=http://localhost/finalProject/callback");
-	            // AWS용 주소 sb.append("&redirect_uri=http://13.209.195.48:8080/finalProject/callback");
+	            //sb.append("&redirect_uri=http://localhost/finalProject/callback");
+	            // AWS용 주소 
+	            sb.append("&redirect_uri=http://13.209.195.48:8080/finalProject/callback");
 	            sb.append("&code=" + authorize_code);
 	            bw.write(sb.toString());
 	            bw.flush();
