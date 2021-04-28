@@ -106,8 +106,8 @@ $("#image").change(function(){
 					<td><input type="file" name="uploadFile" id="image" size="100%" multiple="multiple"></td>
 				</tr>
 			</table><br>
-			<button type="submit">등록</button>
-			<button type="reset">초기화</button>
+			<button type="submit" class="updateNoteBtn">등록</button>
+			<button type="reset" class="updateNoteBtn">초기화</button>
 		</form>
 	</div>
 </body>

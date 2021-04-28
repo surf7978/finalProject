@@ -41,7 +41,9 @@
 							<h6 style="font-size:20px; font-weight:900;">활동내역</h6>
 							<br>
 							<button onclick="location.href='adminView'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;업체판매글 현황</button><br> 
+							<!-- 
 							<button onclick="location.href='getSearchAnimal99'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;구매평 내역</button><br>
+							 -->
 							<button onclick="location.href='getSearchQuestionSelect1'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;쇼핑몰 문의 내역</button><br>
 							<button onclick="location.href='getSearchQuestionSelect2'" style="border:none; background-color:#ffffff;">&nbsp;&nbsp;&nbsp;-&nbsp;고객센터 문의 내역 </button><br>
 							<!-- 

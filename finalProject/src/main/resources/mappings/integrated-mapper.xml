@@ -72,7 +72,7 @@
 	<!-- 삭제 -->
 	<delete id="deleteIntegrated">
 		DELETE FROM  ${code}       
-		WHERE SEQ = ${seq} 
+		WHERE SEQ = #{seq} 
 	</delete>
 	<!-- 단건 조회 -->
 	<select id="getIntegrated" resultType="IntegratedVO">

@@ -301,7 +301,7 @@ $(document).ready(function() { //function시작
 							<div id="pro_result"></div>
 							<div>
 								<button type="button" id="btnCart"style="padding:10px; width:220px; border:none; border-radius:5px; ">장바구니 담기</button>
-								<button type="button" id="b_btn" style="padding:10px; width:220px; border:none; border-radius:5px; background-color:#adff2f;">결제하기</button>
+								<button type="button" id="b_btn" style="padding:10px; width:220px; border:none; border-radius:5px; background-color:#e7ab3c;color:#fff;">결제하기</button>
 							</div>
 						</li>
 					</ul>
@@ -327,7 +327,7 @@ $(document).ready(function() { //function시작
 <div style="align:center; width:1140px; text-align:left; padding-left: 20px;position:relative;">
 <h4 id="content22">구매평
 <c:if test="${not empty buy}">
-<button type="button" id="insertReview" onclick="window.open('insertReviewProduct?productNumber=${product.productNumber }','insertReviewProduct','width=800, height=800')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
+<button type="button" id="insertReview" onclick="window.open('insertReviewProduct?productNumber=${product.productNumber }','insertReviewProduct','width=800, height=300')" style="position: absolute;right: 0;bottom: 10px;color: white;font-size: 20px;width: 160px;border: none;border-radius: 5px;background-color: #87ceeb;">구매평 등록하기</button>
 </c:if>
 </h4>
 <hr style="align:center; text-align:left; background-color: black;">
@@ -348,7 +348,7 @@ $(document).ready(function() { //function시작
 <h4 id="content33">문의내역
 <c:if test="${not empty loginID }">
 <c:if test="${loginAuth eq 'm' }">
-<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertQuestionBusi2" onclick="window.open('insertQuestionBusi2?productNumber=${product.productNumber}','insertQuestion','width=800, height=800')">상품 문의하기</button>
+<button type="button" style="position:absolute;right:0; bottom:10px; color:white; font-size:20px; width:160px; border:none; border-radius:5px; background-color:#87ceeb;" id="insertQuestionBusi2" onclick="window.open('insertQuestionBusi2?productNumber=${product.productNumber}','insertQuestion','width=800, height=500')">상품 문의하기</button>
 </c:if>
 </c:if>
 </h4>

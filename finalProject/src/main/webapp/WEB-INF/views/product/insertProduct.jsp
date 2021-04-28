@@ -262,6 +262,12 @@
 		
 	});
 </script>
+<style>
+ #opbtn{border:none;margin-top:5px;}
+ table input, select{margin:5px;}
+ #close{cursor: pointer; padding: 10px;}
+ #close:hover{color:#e39f20;transition:0.3s;}
+</style>
 </head>
 <body>
 	<div id="contents" class="pro_form">
@@ -301,8 +307,7 @@
 					<th>옵션</th>
 					<td style="border: none;"><div>
 							<input type="text" name=optionNameList>&nbsp; <label>옵션가격</label>&nbsp;<input
-								type="number" name="optionPriceList"><span id="close"
-								style="cursor: pointer; padding: 10px; color: #212529;">x</span>
+								type="number" name="optionPriceList"><span id="close">x</span>
 						</div></td>
 					<td style="border: none;"><button type="button" id="opbtn">추가</button></td>
 				</tr>
@@ -332,8 +337,10 @@
 				</tr>
 
 			</table>
+			<div id="paybtnwrap">
 			<button>확인</button>
 			<button type="reset">초기화</button>
+			</div>
 		</form>
 	</div>
 </body>

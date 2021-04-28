@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>     
-<%
-    pageContext.setAttribute("cout", "개행문자테스트\n줄바꿈완료");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,12 +24,7 @@ padding: 10px;
 <body>
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
-<% pageContext.setAttribute("LF", "\n"); %>
-    <c:out escapeXml = "false" value = "${fn:replace(cout, LF, '<br>')}"></c:out>
-    <hr>
-    <c:out escapeXml = "true" value = "${fn:replace(cout, LF, '<br>')}"></c:out>
-    <hr>
-    ${fn:replace(cout, LF, '<br>')}
+
 	<h3>구매내역 상세리스트</h3><br>
 <h4 style="padding: 10px;">배송지 정보</h4>
 <table class="table1">
@@ -81,7 +73,7 @@ padding: 10px;
 		<td><c:out value="${buy.optionName}"/></td>
 		<td><c:out value="${buy.count}"/></td>
 		<td><c:out value="${buy.price}"/></td>
-		</tr>
+	</tr>
 	</c:forEach>
 	</table>	
 	<br><button type="button" class="backBtn" onclick="window.history.back();">뒤로가기</button>

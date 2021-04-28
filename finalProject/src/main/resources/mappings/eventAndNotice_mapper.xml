@@ -12,21 +12,26 @@
 	 ,CONTENT
 	 ,STARTDATE
 	 ,ENDDATE
+	 <if test="image != null">
 	 ,IMAGE
+	 </if>
+	 <if test="t_image != null">
 	 ,T_IMAGE
+	 </if>
 	 ,VIEWS
 	 ,CATEGORY
-	 ,MEMBERID) VALUES(ean_seq.nextval 
+	 ,MEMBERID) VALUES
+	 (ean_seq.nextval 
 	 , 'admin' 
 	 , #{title} 
 	 , #{content}
 	 , #{startDate} 
 	 , #{endDate}  
 	 <if test="image != null">
-	 ,IMAGE=#{image}
+	 , #{image}
 	 </if>
 	 <if test="t_image != null">
-	 ,T_IMAGE=#{t_image}
+	 , #{t_image}
 	 </if>
 	 , 0 
 	 , 1 

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>사업자번호로 예약리스트 조회</title>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 <link href='resources/css/fullcalendar.css' rel='stylesheet' />
 <script src='resources/js/fullcalendar.js'></script>
 <script>
@@ -36,9 +37,9 @@
 <div style="width:60%;">
 <jsp:include page="../user/myPageSideBar.jsp" />
 <input type="hidden" id="businessNumber" name="businessNumber" value="${business.businessNumber }">
-<h3>${business.businessCompanyName } 예약 리스트</h3>
+<h3>${business.businessCompanyName }님의 예약 리스트</h3>
 <br>
-<table border="1">
+<table class="table1">
 		<tr>
 			<th>예약번호</th>
 			<th>예약자</th>
@@ -57,7 +58,7 @@
 				<td><c:out value="${res.reservationState}" /></td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table><br>
 		<div id='calendar' style="width: 800px"></div>
 </div>
 </body>

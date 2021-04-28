@@ -6,16 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/style4.css" type="text/css">
 </head>
 <body>
 <h3>상품문의 등록</h3>
 <c:forEach var="vo" items="${vo }">
 <c:if test="${seq eq vo.seq }">
 <form action="insertQuestionBusi" method="post">
-<input type="text" id="memberId" name="memberId" value="${loginID }">
-<input type="text" id="probisNumber" name="probisNumber" value="${vo.seq }">
-<input type="text" id="toPerson" name="toPerson" value="${business.businessId }">
-	<table border="1">
+<input type="hidden" id="memberId" name="memberId" value="${loginID }">
+<input type="hidden" id="probisNumber" name="probisNumber" value="${vo.seq }">
+<input type="hidden" id="toPerson" name="toPerson" value="${business.businessId }">
+	<table class="table7">
 		<tr>
 		<th>업체 이름</th>
 		<td><input value="${business.businessCompanyName }" readonly="readonly"></td>
@@ -32,9 +33,9 @@
 		<th>내용</th>
 		<td colspan="3"><textarea id="content" name="content" cols="90" rows="10"></textarea></td>
 		</tr>
-	</table>
-	<button type="submit">등록</button>
-	<button type="button" onclick="window.close()">취소</button>
+	</table><br>
+	<button type="submit" class="close2">등록</button>
+	<button type="button" class="close2" onclick="window.close()">취소</button>
 </form>
 </c:if>
 </c:forEach>
