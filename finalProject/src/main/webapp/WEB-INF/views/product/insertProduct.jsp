@@ -244,6 +244,7 @@
 						reader.readAsDataURL(this.files[0]);
 					}
 				});
+		//옵션복사
 		$("#opbtn").on("click", function() {
 			var option = $(this).parent().prev().children("div").first();
 			var newoption = option.clone(true);
