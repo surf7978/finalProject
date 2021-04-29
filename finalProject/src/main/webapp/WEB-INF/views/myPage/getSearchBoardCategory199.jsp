@@ -59,9 +59,9 @@
 <tr class="th">
 <th width="60">글번호</th>
 <th width="400">제목</th>
-<th width="200">날짜</th>
-<th width="100">글쓴이</th>
-<th width="120">조회수</th>
+<th width="150">날짜</th>
+<th width="70">글쓴이</th>
+<th width="70">조회수</th>
 
 </tr>
 </thead>

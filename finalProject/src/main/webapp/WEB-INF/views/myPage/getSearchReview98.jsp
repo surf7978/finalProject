@@ -55,7 +55,7 @@ tbody{
 <thead>
 <tr class="th">
 <th width="80">글번호</th>
-<th width="600">제목</th>
+<th width="400">제목</th>
 <th width="150">날짜</th>
 
 </tr>
