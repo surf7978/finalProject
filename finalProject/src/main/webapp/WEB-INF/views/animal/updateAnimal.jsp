@@ -92,7 +92,7 @@
 	</tr>
 	</table><br>
 	<button type="submit" class="updateNoteBtn">수정</button>
-	<button type="button" class="updateNoteBtn" onclick="location.href='deleteAnimal?animalNumber=${animal.animalNumber }'">삭제</button>
+	<button type="button" class="updateNoteBtn" onclick="location.href='deleteAnimal?animalNumber=${animal.animalNumber }'">삭제</button>
 </form>
 <script>
 $("#kind").val("${animal.kind }")

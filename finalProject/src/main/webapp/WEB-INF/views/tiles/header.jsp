@@ -147,7 +147,7 @@
 							</a></li>
 							 -->
 							<li class="cart-icon"><a href="getSearchTotalCartForm"> 
-								<i class="icon_bag_alt"></i> 
+								<i class="icon_search"></i> 
 							<c:if test="${not empty rs}">
 								<span>${rs.rows[0].count}</span>
 							</c:if>

@@ -107,7 +107,7 @@ $("#image").change(function(){
 				</tr>
 			</table><br>
 			<button type="submit" class="updateNoteBtn">등록</button>
-			<button type="reset" class="updateNoteBtn">초기화</button>
+			<button type="reset" class="updateNoteBtn">초기화</button>
 		</form>
 	</div>
 </body>
